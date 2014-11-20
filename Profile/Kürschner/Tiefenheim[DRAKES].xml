@@ -1,0 +1,102 @@
+<HBProfile>
+<Name>Tiefenheim DRAKES</Name>
+<MinDurability>0.4</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+<MinLevel>1</MinLevel>
+<MaxLevel>86</MaxLevel>
+<Factions>99999</Factions>
+
+<MailGrey>false</MailGrey>
+<MailWhite>false</MailWhite>
+<MailGreen>true</MailGreen>
+<MailBlue>true</MailBlue>
+<MailPurple>true</MailPurple>
+
+<SellGrey>true</SellGrey>
+<SellWhite>false</SellWhite>
+<SellGreen>false</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+</Vendors>
+
+<Mailboxes>
+</Mailboxes>
+
+<AvoidMobs>
+<Mob Name="Shalehide Basilisk" Entry="43181"/>
+<Mob Name="Stone Trogg Beast Tamer" Entry="43598"/>
+<Mob Name="Stone Trogg Earthrager" Entry="43616"/>
+<Mob Name="Opalescent Guardian" Entry="43545"/>
+</AvoidMobs>
+
+<GrindArea>
+<TargetMinLevel>82</TargetMinLevel>
+<TargetMaxLevel>84</TargetMaxLevel>
+<Factions>14</Factions>
+
+<LootRadius>70</LootRadius>
+<RandomizeHotspots>false</RandomizeHotspots>
+
+
+<Blackspots>
+</Blackspots>
+
+<Hotspots>
+<Hotspot X="2232.724" Y="1165.18" Z="156.4785" />
+<Hotspot X="2208.414" Y="1153.504" Z="148.125" />
+<Hotspot X="2180.147" Y="1156.623" Z="141.0087" />
+<Hotspot X="2173.292" Y="1184.366" Z="143.4529" />
+<Hotspot X="2200.663" Y="1185.841" Z="150.0285" />
+<Hotspot X="2209.197" Y="1203.968" Z="153.7378" />
+<Hotspot X="2222.276" Y="1227.916" Z="158.1706" />
+<Hotspot X="2210.145" Y="1251.832" Z="158.2471" />
+<Hotspot X="2183.811" Y="1239.179" Z="150.0563" />
+<Hotspot X="2189.804" Y="1214.802" Z="150.4227" />
+<Hotspot X="2213.617" Y="1195.951" Z="154.2441" />
+<Hotspot X="2221.231" Y="1167.132" Z="152.836" />
+<Hotspot X="2201.97" Y="1144.568" Z="146.0517" />
+<Hotspot X="2174.804" Y="1149.631" Z="138.5109" />
+<Hotspot X="2162.73" Y="1178.133" Z="140.3239" />
+<Hotspot X="2147.688" Y="1205.416" Z="140.6395" />
+<Hotspot X="2124.433" Y="1225.101" Z="137.2434" />
+<Hotspot X="2105.946" Y="1248.144" Z="138.2033" />
+<Hotspot X="2124.715" Y="1268.831" Z="142.4462" />
+<Hotspot X="2154.484" Y="1277.383" Z="146.7128" />
+<Hotspot X="2174.447" Y="1256.998" Z="149.15" />
+<Hotspot X="2177.928" Y="1226.172" Z="148.4786" />
+<Hotspot X="2171.055" Y="1196.03" Z="144.3019" />
+<Hotspot X="2181.459" Y="1174.111" Z="143.4047" />
+<Hotspot X="2211.531" Y="1165.445" Z="150.2951" />
+<Hotspot X="2215.592" Y="1138.13" Z="149.466" />
+<Hotspot X="2190.086" Y="1123.132" Z="141.8869" />
+<Hotspot X="2165.822" Y="1136.523" Z="135.7373" />
+<Hotspot X="2169.508" Y="1166.828" Z="139.7279" />
+<Hotspot X="2183.069" Y="1194.197" Z="147.4042" />
+<Hotspot X="2186.232" Y="1225.121" Z="149.6135" />
+<Hotspot X="2182.005" Y="1255.192" Z="150.9452" />
+<Hotspot X="2165.909" Y="1281.042" Z="150.408" />
+<Hotspot X="2136.705" Y="1277.714" Z="144.2387" />
+<Hotspot X="2109.344" Y="1263.167" Z="139.6637" />
+<Hotspot X="2109.098" Y="1235.316" Z="138.9339" />
+<Hotspot X="2134.964" Y="1218.68" Z="138.5846" />
+<Hotspot X="2154.618" Y="1195.191" Z="139.9513" />
+<Hotspot X="2155.868" Y="1165.774" Z="136.4113" />
+<Hotspot X="2133.043" Y="1146.033" Z="130.1622" />
+<Hotspot X="2120.731" Y="1129.164" Z="125.9943" />
+<Hotspot X="2147.832" Y="1115.689" Z="129.4678" />
+<Hotspot X="2170.671" Y="1130.92" Z="136.1257" />
+<Hotspot X="2175.322" Y="1161.318" Z="139.8846" />
+<Hotspot X="2197.611" Y="1168.933" Z="146.7388" />
+<Hotspot X="2219.434" Y="1156.144" Z="152.4196" />
+<Hotspot X="2212.507" Y="1185.266" Z="151.9432" />
+<Hotspot X="2187.471" Y="1202.456" Z="149.2165" />
+<Hotspot X="2190.314" Y="1227.368" Z="150.0791" />
+<Hotspot X="2218.435" Y="1216.246" Z="155.4602" />
+<Hotspot X="2234.993" Y="1190.601" Z="159.6699" />
+<Hotspot X="2244.224" Y="1161.036" Z="160.4688" />
+</Hotspots>
+</GrindArea>
+</HBProfile>

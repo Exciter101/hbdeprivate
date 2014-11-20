@@ -1,0 +1,81 @@
+<HBProfile>
+	<Name>TWHL Guppy and Sagefish by Y SO SRS</Name>
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>1</MinFreeBagSlots>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+	<ProtectedItems>
+		<Item name="Fishing Pole" entry="6256" />
+		<Item name="Mastercraft Kalu'ak Fishing Pole" entry="44050" />
+		<Item name="Arcanite Fishing Pole" entry="19970" />
+		<Item name="Bone Fishing Pole" entry="45991" />
+		<Item name="Jeweled Fishing Pole" entry="45992" />
+		<Item name="Nat's Lucky Fishing Pole" entry="45858" />
+		<Item name="Seth's Graphite Fishing Pole" entry="25978" />
+		<Item name="Big Iron Fishing Pole" entry="6367" />
+		<Item name="Blump Family Fishing Pole" entry="12225" />
+		<Item name="Darkwood Fishing Pole" entry="6366" />
+		<Item name="Jonathan's Fishing Pole" entry="52678" />
+		<Item name="Strong Fishing Pole" entry="6365" />
+		<Item name="Staats' Fishing Pole" entry="46337" />
+	</ProtectedItems>
+	<SubProfile>
+		<MinLevel>1</MinLevel>
+		<MaxLevel>86</MaxLevel>
+				<Factions>7</Factions>
+			<Hotspots>
+<Hotspot X="-3465.173" Y="-6207.379" Z="23.24074" />
+<Hotspot X="-3539.886" Y="-6213.508" Z="23.24074" />
+<Hotspot X="-3665.169" Y="-6268.464" Z="23.24074" />
+<Hotspot X="-3714.273" Y="-6307.866" Z="23.24074" />
+<Hotspot X="-3936.648" Y="-6133.439" Z="23.24074" />
+<Hotspot X="-3947.295" Y="-6063.602" Z="23.24074" />
+<Hotspot X="-4031.286" Y="-5983.517" Z="23.24074" />
+<Hotspot X="-4144.763" Y="-6011.686" Z="23.24074" />
+<Hotspot X="-4296.487" Y="-6092.041" Z="23.24074" />
+<Hotspot X="-4334.098" Y="-6157.942" Z="23.24074" />
+<Hotspot X="-4358.171" Y="-6247.722" Z="23.24074" />
+<Hotspot X="-4313.606" Y="-6394.158" Z="23.24074" />
+<Hotspot X="-4291.777" Y="-6463.567" Z="23.24074" />
+<Hotspot X="-4325.849" Y="-6534.489" Z="23.24074" />
+<Hotspot X="-4389.956" Y="-6568.89" Z="23.24074" />
+<Hotspot X="-4470.838" Y="-6577.852" Z="23.24074" />
+<Hotspot X="-4493.666" Y="-6632.213" Z="23.24074" />
+<Hotspot X="-4411.004" Y="-6650.38" Z="23.24074" />
+<Hotspot X="-4568.754" Y="-6556.606" Z="23.24074" />
+<Hotspot X="-4608.467" Y="-6534.672" Z="23.24074" />
+<Hotspot X="-4705.869" Y="-6444.385" Z="23.24074" />
+<Hotspot X="-4748.948" Y="-6290.116" Z="23.24074" />
+<Hotspot X="-4808.143" Y="-6261.732" Z="23.24074" />
+<Hotspot X="-4916.425" Y="-6286.847" Z="23.24074" />
+<Hotspot X="-5010.131" Y="-6206.465" Z="23.24074" />
+<Hotspot X="-5017.719" Y="-6147.422" Z="23.24074" />
+<Hotspot X="-5096.615" Y="-6060.073" Z="23.24074" />
+<Hotspot X="-5122.13" Y="-6017.649" Z="23.24074" />
+<Hotspot X="-5171.816" Y="-5941.512" Z="23.24074" />
+<Hotspot X="-5251.817" Y="-5873.691" Z="23.24074" />
+<Hotspot X="-5294.779" Y="-5820.424" Z="23.24074" />
+<Hotspot X="-5313.812" Y="-5746.817" Z="23.24074" />
+<Hotspot X="-5326.793" Y="-5647.516" Z="23.24074" />
+<Hotspot X="-5337.531" Y="-5583.605" Z="23.24074" />
+<Hotspot X="-5319.13" Y="-5424.607" Z="23.24074" />
+<Hotspot X="-5313.436" Y="-5375.402" Z="23.24074" />
+<Hotspot X="-3465.173" Y="-6207.379" Z="23.24074" /> <!--Coast Sagefish Hot Spots, this last hot spot takes u back to the top to start again -->
+
+			</Hotspots>
+		
+		<Blackspots>
+
+		</Blackspots>
+		<AvoidMobs>
+
+		</AvoidMobs>
+		<Mailboxes>
+		</Mailboxes>
+	</SubProfile>
+</HBProfile>

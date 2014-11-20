@@ -1,0 +1,64 @@
+<HBProfile creator="Guest123" version="4.1"> 
+	<Name>Guest123 Skyshard Profile v4.1 Ancient Mogu Spirit</Name>
+  
+	<MinLevel>1</MinLevel> 
+	<MaxLevel>101</MaxLevel> 
+	
+    <TargetElites>False</TargetElites> 
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+   	<SellGrey>True</SellGrey>
+   	<SellWhite>False</SellWhite>
+	<SellGreen>False</SellGreen>
+
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+
+  <Factions>2102</Factions> 
+
+  <Vendors>
+  <Vendor Name="Merchant Tantan" Entry="59341" Type="Repair" X="1172.832" Y="1411.606" Z="342.6643" />
+  </Vendors>
+
+  <Mailboxes> 
+  <Mailbox X="793.264" Y="295.8482" Z="503.4182" />
+  </Mailboxes>
+
+<GrindArea>
+
+  <TargetMinLevel>1</TargetMinLevel> 
+
+  <TargetMaxLevel>101</TargetMaxLevel> 
+
+<Hotspots>
+<Hotspot X="877.7158" Y="1452.192" Z="374.5148" />
+<Hotspot X="901.9225" Y="1421.243" Z="386.3705" />
+<Hotspot X="871.5375" Y="1401.973" Z="404.656" />
+<Hotspot X="835.1336" Y="1392.972" Z="420.075" />
+<Hotspot X="796.7733" Y="1383.426" Z="431.6435" />
+<Hotspot X="756.9609" Y="1382.075" Z="438.7373" />
+<Hotspot X="719.7778" Y="1376.864" Z="452.9852" />
+<Hotspot X="738.3398" Y="1340.933" Z="451.6477" />
+<Hotspot X="725.9207" Y="1303.844" Z="462.7062" />
+<Hotspot X="728.7934" Y="1265.062" Z="473.5239" />
+<Hotspot X="753.3194" Y="1233.95" Z="481.76" />
+<Hotspot X="780.264" Y="1204.634" Z="476.3957" />
+<Hotspot X="819.4258" Y="1202.109" Z="467.5569" />
+<Hotspot X="812.3631" Y="1241.143" Z="474.7556" />
+<Hotspot X="783.3197" Y="1268.342" Z="469.3217" />
+<Hotspot X="788.0385" Y="1307.098" Z="459.2478" />
+<Hotspot X="758.065" Y="1333.075" Z="451.7806" />
+<Hotspot X="720.1965" Y="1345.943" Z="452.6312" />
+<Hotspot X="734.8716" Y="1382.759" Z="446.6479" />
+<Hotspot X="773.425" Y="1388.243" Z="436.2686" />
+<Hotspot X="812.1985" Y="1381.524" Z="428.1565" />
+<Hotspot X="848.056" Y="1394.756" Z="414.1634" />
+<Hotspot X="885.9877" Y="1394.21" Z="399.1138" />
+<Hotspot X="897.5803" Y="1429.273" Z="383.4995" />
+</Hotspots>
+  </GrindArea>
+</HBProfile>

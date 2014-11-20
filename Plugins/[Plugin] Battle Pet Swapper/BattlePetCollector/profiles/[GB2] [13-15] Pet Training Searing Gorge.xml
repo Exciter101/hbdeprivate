@@ -1,0 +1,26 @@
+<HBProfile>
+  <!--Created By Guadah-->
+  <Name>Pet Training</Name>
+
+    <SubProfile>
+     <Name>Searing Gorge 13-15</Name>
+     <MinLevel>1</MinLevel>                                            
+     <MaxLevel>91</MaxLevel>                                          
+ 	 <TargetElites>False</TargetElites>
+
+     <GrindArea>
+     <TargetMinLevel>1</TargetMinLevel> 
+     <TargetMaxLevel>91</TargetMaxLevel> 
+     <Hotspots>      
+		<Hotspot X="-7195.702" Y="-1028.637" Z="291.887" />
+		<Hotspot X="-7120.085" Y="-1410.532" Z="298.8974" />
+		<Hotspot X="-7198.271" Y="-1639.251" Z="310.4805" />
+		<Hotspot X="-7006.953" Y="-1718.917" Z="310.4386" />
+		<Hotspot X="-6844.848" Y="-1425.533" Z="281.9967" />
+		<Hotspot X="-6592.042" Y="-1783.571" Z="331.9699" />
+		<Hotspot X="-6729.144" Y="-965.8501" Z="306.6974" />
+     </Hotspots>
+     </GrindArea>
+    </SubProfile>
+   
+ </HBProfile>

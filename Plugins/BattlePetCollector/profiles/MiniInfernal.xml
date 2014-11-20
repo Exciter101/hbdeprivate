@@ -1,0 +1,37 @@
+<HBProfile >
+
+    <Name>Miniinfernal</Name>
+    <MinLevel>0</MinLevel>
+    <MaxLevel>99</MaxLevel>
+   
+    <MinDurability>0.2</MinDurability>
+    <MinFreeBagSlots>2</MinFreeBagSlots>
+   
+   	<SellGrey>True</SellGrey>
+   	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+        
+	<Factions></Factions>
+	
+    <GrindArea>
+		<TargetMinLevel>0</TargetMinLevel>
+		<TargetMaxLevel>99</TargetMaxLevel>
+		<Factions></Factions>
+		<Hotspots>
+<Hotspot X="5640.18" Y="-994.1395" Z="376.8287" />
+<Hotspot X="5495.399" Y="-908.7269" Z="362.3592" />
+<Hotspot X="5454.617" Y="-767.1414" Z="348.1246" />
+<Hotspot X="5517.803" Y="-658.1012" Z="344.6053" />
+<Hotspot X="5657.969" Y="-754.3675" Z="369.6342" />
+<Hotspot X="5568.87" Y="-807.4086" Z="347.3199" />
+        </Hotspots>
+    </GrindArea>
+
+
+  
+</HBProfile>

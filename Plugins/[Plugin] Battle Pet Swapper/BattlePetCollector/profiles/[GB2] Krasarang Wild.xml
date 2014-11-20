@@ -1,0 +1,51 @@
+<HBProfile>
+///////////////////////////////////////////////////
+//                                               //
+// Profile generated with ZapRecorder2 v1.2.0    //
+// Created by Guadah                             //
+//                                               //
+///////////////////////////////////////////////////
+<Name>[GB2] [21-23] Pet Training Howling Fjord</Name>
+<MinDurability>0.4</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+<MinLevel>1</MinLevel>
+<MaxLevel>91</MaxLevel>
+<Factions>99999</Factions>
+
+<MailGrey>false</MailGrey>
+<MailWhite>false</MailWhite>
+<MailGreen>false</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>false</SellGrey>
+<SellWhite>false</SellWhite>
+<SellGreen>false</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+</Vendors>
+
+<Mailboxes>
+</Mailboxes>
+
+<Blackspots>
+</Blackspots>
+
+<Hotspots>
+<Hotspot X="-695.5312" Y="-1113.037" Z="103.2341" />
+<Hotspot X="-935.3898" Y="-885.7734" Z="68.87361" />
+<Hotspot X="-1178.617" Y="-546.6847" Z="158.8265" />
+<Hotspot X="-1303.448" Y="58.65047" Z="159.4935" />
+<Hotspot X="-1784.852" Y="390.2703" Z="73.39" />
+<Hotspot X="-2328.56" Y="581.1781" Z="71.30273" />
+<Hotspot X="-2473.613" Y="534.0891" Z="73.10055" />
+<Hotspot X="-2919.549" Y="618.744" Z="106.1627" />
+<Hotspot X="-2933.288" Y="943.5289" Z="68.77934" />
+<Hotspot X="-2683.79" Y="1113.795" Z="138.4401" />
+<Hotspot X="-1873.407" Y="1308.32" Z="156.1185" />
+<Hotspot X="-1238.94" Y="1665.846" Z="167.9637" />
+</Hotspots>
+</HBProfile>

@@ -1,0 +1,52 @@
+<HBProfile>
+	<Name>Glassfin Minnow at Crystalsong Forest from Makelio</Name>
+	<MinDurability>0.4</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+	<ProtectedItems>
+		<Item name="Fishing Pole" entry="6256" />
+	</ProtectedItems>
+	<SubProfile>
+		<Name>Glassfin Minnow Schools</Name>
+		<MinLevel>1</MinLevel>
+		<MaxLevel>87</MaxLevel>
+		<TargetMinLevel>87</TargetMinLevel>
+		<Factions>7 </Factions>
+		<Hotspots>
+<Hotspot X="6186.015" Y="855.9263" Z="148.6772" />
+<Hotspot X="6089.408" Y="928.708" Z="158.3261" />
+<Hotspot X="5957.934" Y="845.3771" Z="157.6311" />
+<Hotspot X="5734.408" Y="723.0582" Z="165.6458" />
+<Hotspot X="5695.891" Y="544.4415" Z="154.9271" />
+<Hotspot X="5538.877" Y="373.8138" Z="156.6812" />
+<Hotspot X="5506.103" Y="208.6332" Z="160.312" />
+<Hotspot X="5500.865" Y="81.26231" Z="160.6824" />
+<Hotspot X="5425.071" Y="158.19" Z="158.3056" />
+<Hotspot X="5479.398" Y="276.3965" Z="172.1156" />
+<Hotspot X="5518.073" Y="403.4813" Z="168.6623" />
+<Hotspot X="5651.009" Y="538.9128" Z="162.01" />
+<Hotspot X="5702.359" Y="754.4447" Z="158.943" />
+<Hotspot X="5895.361" Y="855.881" Z="166.1672" />
+<Hotspot X="6093.345" Y="979.3787" Z="162.4325" />
+<Hotspot X="6145.685" Y="1067.898" Z="163.531" />
+<Hotspot X="6192.61" Y="859.2085" Z="158.5376" />
+		</Hotspots>
+		<Vendors>
+			
+		</Vendors>
+		<Blackspots>
+			
+		</Blackspots>
+		<AvoidMobs>
+			
+		</AvoidMobs>
+		<Mailboxes>
+		</Mailboxes>
+	</SubProfile>
+</HBProfile>

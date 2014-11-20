@@ -1,0 +1,44 @@
+<HBProfile>
+<Name>Seaturtle/Darkherring</Name>
+<MinDurability>1.4</MinDurability>
+<MinFreeBagSlots>2</MinFreeBagSlots>
+<SellGrey>True</SellGrey>
+<SellWhite>False</SellWhite>
+<SellGreen>False</SellGreen>
+<MinLevel>1</MinLevel>
+<MaxLevel>85</MaxLevel>
+<ProtectedItems>
+<Item name="Fishing Pole" entry="6256" />
+
+</ProtectedItems>
+<SubProfile>
+<MinLevel>1</MinLevel>
+<MaxLevel>85</MaxLevel>
+<Factions>7</Factions>
+<Hotspots>
+<Hotspot X="2043.281" Y="-3386.188" Z="159.4011" />
+<Hotspot X="2077.583" Y="-3459.241" Z="167.9798" />
+<Hotspot X="2184.583" Y="-3534.55" Z="182.0332" />
+<Hotspot X="2177.091" Y="-3650.685" Z="186.6463" />
+<Hotspot X="2144.936" Y="-3737.25" Z="249.1202" />
+<Hotspot X="2176.698" Y="-3844.539" Z="248.4123" />
+<Hotspot X="2260.751" Y="-3831.873" Z="239.3731" />
+<Hotspot X="2355.706" Y="-3777.401" Z="234.3959" />
+<Hotspot X="2400.87" Y="-3861.651" Z="232.9383" />
+<Hotspot X="2397.267" Y="-3982.247" Z="248.0476" />
+<Hotspot X="2363.946" Y="-4120.142" Z="237.5605" />
+<Hotspot X="2317.962" Y="-4204.052" Z="238.2483" />
+<Hotspot X="2234.628" Y="-4142.754" Z="246.3035" />
+<Hotspot X="2136.837" Y="-4167.291" Z="235.8568" />
+<Hotspot X="2176.726" Y="-4053.809" Z="243.7293" />
+<Hotspot X="2161.664" Y="-3951.197" Z="234.0359" />
+<Hotspot X="2179.948" Y="-3887.947" Z="232.0183" />
+</Hotspots>
+<Vendors>
+<Vendor Name="Talu Frosthoof" Entry="24028" Type="Ammo" X="2672.532" Y="-4306.23" Z="290.9645" />
+</Vendors>
+<Mailboxes>
+<Mailbox X="2676.61" Y="-4381.53" Z="283.961" />
+</Mailboxes>
+</SubProfile>
+</HBProfile>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HBProfile>
+  <Name>Test fishing Porfile</Name>
+  <SellGrey>false</SellGrey>
+  <SellWhite>false</SellWhite>
+  <SellGreen>false</SellGreen>
+  <MailBlue>false</MailBlue>
+  <MailPurple>false</MailPurple>
+  <MinDurability>0.4</MinDurability>
+  <MinFreeBagSlots>2</MinFreeBagSlots>
+  <MinLevel>78</MinLevel>
+  <MaxLevel>81</MaxLevel>
+  <TargetMinLevel>83</TargetMinLevel>
+  <Factions>7</Factions>
+  <Hotspots> 
+      <Hotspot X="5391.747" Y="4859.23" Z="-199.7363" />
+      <Hotspot X="5381.73" Y="4831.738" Z="-199.9871" />
+      <Hotspot X="5376.088" Y="4781.639" Z="-198.6804" />
+      <Hotspot X="5480.969" Y="4764.116" Z="-198.1694" />
+      <Hotspot X="5508.814" Y="4878.909" Z="-198.2723" />
+  </Hotspots>
+     <AvoidMobs>
+    <AvoidMob Entry="38559" Name="Bushwhacker" />
+    <AvoidMob Entry="38559" Name="Buschräuber" />
+    <AvoidMob Entry="28010" Name="Gestrandeter Drescher" />
+    <AvoidMob Entry="28010" Name="Stranded Thresher" />
+    </AvoidMobs>
+</HBProfile>

@@ -1,0 +1,43 @@
+<HBProfile>
+///////////////////////////////////////////////////
+//                                               //
+// Profile generated with ZapRecorder2 v1.2.0    //
+// Created by BadWolf                            //
+//                                               //
+///////////////////////////////////////////////////
+<Name>[GB2] [15-17]Flayer Yougling</Name>
+<MinDurability></MinDurability>
+<MinFreeBagSlots></MinFreeBagSlots>
+
+<MinLevel>1</MinLevel>
+<MaxLevel>91</MaxLevel>
+<Factions>99999</Factions>
+
+<MailGrey>false</MailGrey>
+<MailWhite>false</MailWhite>
+<MailGreen>false</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>false</SellGrey>
+<SellWhite>false</SellWhite>
+<SellGreen>false</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+</Vendors>
+
+<Mailboxes>
+</Mailboxes>
+
+<Blackspots>
+</Blackspots>
+
+<Hotspots>
+<Hotspot X="-1147.319" Y="4632.061" Z="254.6266" />
+<Hotspot X="-1482.533" Y="4226.467" Z="270.806" />
+<Hotspot X="-1523.199" Y="4019.757" Z="269.7293" />
+<Hotspot X="-1378.758" Y="3859.382" Z="277.5576" />
+</Hotspots>
+</HBProfile>
