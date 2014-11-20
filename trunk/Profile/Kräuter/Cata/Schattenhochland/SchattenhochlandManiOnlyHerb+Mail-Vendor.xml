@@ -1,0 +1,112 @@
+<HBProfile>
+  <Name>Twilight Highland herbing</Name>
+  <MinDurability>0.3</MinDurability>
+  <MinFreeBagSlots>3</MinFreeBagSlots>
+  
+  <MinLevel>1</MinLevel>
+  <MaxLevel>86</MaxLevel>
+  <Factions>99999</Factions>
+  
+  <MailGrey>False</MailGrey>
+  <MailWhite>True</MailWhite>
+  <MailGreen>True</MailGreen>
+  <MailBlue>True</MailBlue>
+  <MailPurple>True</MailPurple>
+ 
+  <SellGrey>True</SellGrey>
+  <SellWhite>False</SellWhite>
+  <SellGreen>False</SellGreen>
+  <SellBlue>False</SellBlue>
+  <SellPurple>False</SellPurple>
+  
+  <Mailboxes>
+    /*Highbank*/
+    <Mailbox X="-4015.924" Y="-6427.263" Z="39.80313" />
+  </Mailboxes>
+
+  <Blackspots>
+<Blackspot X="-2884.284" Y="-3671.557" Z="198.1597" Radius="8.834804" />
+<Blackspot X="-3218.027" Y="-5935.094" Z="102.903" Radius="7.5649" />
+<Blackspot X="-3209.569" Y="-5935.585" Z="123.0741" Radius="7.850525" />
+  </Blackspots>
+
+<Hotspots>
+<Hotspot X="-3658.965" Y="-6080.728" Z="56.42822" />
+<Hotspot X="-3524.13" Y="-6004.533" Z="53.50325" />
+<Hotspot X="-3457.942" Y="-5883.767" Z="64.19609" />
+<Hotspot X="-3393.381" Y="-5718.831" Z="77.99155" />
+<Hotspot X="-3291.678" Y="-5601.982" Z="85.94353" />
+<Hotspot X="-3157.452" Y="-5497.24" Z="98.20323" />
+<Hotspot X="-3093.674" Y="-5361.63" Z="112.0174" />
+<Hotspot X="-3033.141" Y="-5137.727" Z="137.0835" />
+<Hotspot X="-2980.661" Y="-5001.515" Z="172.0611" />
+<Hotspot X="-2984.365" Y="-4847.103" Z="179.8702" />
+<Hotspot X="-3099.389" Y="-4872.066" Z="184.4349" />
+<Hotspot X="-3231.536" Y="-5091.65" Z="193.4809" />
+<Hotspot X="-3322.445" Y="-4951.237" Z="218.9862" />
+<Hotspot X="-3167.112" Y="-4821.887" Z="241.3327" />
+<Hotspot X="-3319.295" Y="-4788.208" Z="253.9348" />
+<Hotspot X="-3472.728" Y="-4715.121" Z="279.4009" />
+<Hotspot X="-3570.693" Y="-4566.56" Z="240.7631" />
+<Hotspot X="-3560.764" Y="-4743.118" Z="199.659" />
+<Hotspot X="-3606.085" Y="-4880.818" Z="157.5855" />
+<Hotspot X="-3749.99" Y="-4754.725" Z="115.8731" />
+<Hotspot X="-3914.027" Y="-4677.587" Z="175.608" />
+<Hotspot X="-3973.234" Y="-4478.956" Z="187.7377" />
+<Hotspot X="-3903.859" Y="-4324.854" Z="238.2714" />
+<Hotspot X="-3929.113" Y="-4026.932" Z="234.7406" />
+<Hotspot X="-3620.279" Y="-3996.231" Z="203.394" />
+<Hotspot X="-3485.615" Y="-3785.683" Z="170.5112" />
+<Hotspot X="-3611.938" Y="-4004.487" Z="174.8676" />
+<Hotspot X="-3918.647" Y="-4039.536" Z="208.3621" />
+<Hotspot X="-4066.122" Y="-3792.606" Z="241.1457" />
+<Hotspot X="-4123.051" Y="-3862.685" Z="237.1595" />
+<Hotspot X="-4057.878" Y="-4007.006" Z="263.6305" />
+<Hotspot X="-3908.387" Y="-4333.229" Z="272.7457" />
+<Hotspot X="-4013.145" Y="-4473.581" Z="252.6021" />
+<Hotspot X="-4265.111" Y="-4684.586" Z="197.8187" />
+<Hotspot X="-4414.581" Y="-4751.896" Z="163.0198" />
+<Hotspot X="-4388.844" Y="-4892.007" Z="151.0638" />
+<Hotspot X="-4629.232" Y="-4811.469" Z="211.9544" />
+<Hotspot X="-4772.898" Y="-4791.447" Z="209.6823" />
+<Hotspot X="-4717.052" Y="-4985.249" Z="210.4554" />
+<Hotspot X="-4799.495" Y="-5150.511" Z="188.7682" />
+<Hotspot X="-4804.076" Y="-5355.679" Z="160.0729" />
+<Hotspot X="-4440.412" Y="-5274.766" Z="180.7104" />
+<Hotspot X="-4175.155" Y="-5357.305" Z="126.1278" />
+<Hotspot X="-4397.341" Y="-5626.529" Z="110.5023" />
+<Hotspot X="-4202.955" Y="-5693.97" Z="101.1773" />
+<Hotspot X="-4388.043" Y="-5975.308" Z="83.78841" />
+<Hotspot X="-4522.874" Y="-6184.487" Z="57.0708" />
+<Hotspot X="-4649.661" Y="-6301.277" Z="50.01915" />
+<Hotspot X="-4481.246" Y="-6287.151" Z="97.1039" />
+<Hotspot X="-4377.89" Y="-6047.237" Z="102.5387" />
+<Hotspot X="-4201.082" Y="-5922.958" Z="115.9877" />
+<Hotspot X="-3958.158" Y="-5867.828" Z="117.446" />
+<Hotspot X="-3884.167" Y="-5743.3" Z="71.86575" />
+<Hotspot X="-3654.619" Y="-5599.484" Z="93.87121" />
+<Hotspot X="-3673.462" Y="-5452.852" Z="105.985" />
+<Hotspot X="-3747.419" Y="-5557.185" Z="106.0313" />
+<Hotspot X="-3736.525" Y="-5208.704" Z="119.3113" />
+<Hotspot X="-4037.012" Y="-4949.713" Z="148.3082" />
+<Hotspot X="-4224.817" Y="-4750.527" Z="168.284" />
+<Hotspot X="-4487.772" Y="-5263.725" Z="138.9359" />
+<Hotspot X="-4237.728" Y="-5370.302" Z="121.4227" />
+<Hotspot X="-4209.279" Y="-5802.829" Z="101.1406" />
+<Hotspot X="-3764.789" Y="-6164.558" Z="88.26776" />
+</Hotspots>
+
+/* Dont mail my mining picks please */
+  <ProtectedItems>
+    <Item Name="Brann's Trusty Pick" Entry="20723" />
+    <Item Name="Cold Iron Pick" Entry="1959" />
+    <Item Name="Digmaster 5000" Entry="9465" />
+    <Item Name="Gouging Pick" Entry="1819" />
+    <Item Name="Kobold Excavation Pick" Entry="778" />
+    <Item Name="Mining Pick" Entry="2901" />
+    <Item Name="Tunnel Pick" Entry="756" />
+    <Item Name="Bladed Pickaxe" Entry="40893" />
+    <Item Name="Hammer Pick" Entry="40892" />
+  </ProtectedItems>
+
+</HBProfile>

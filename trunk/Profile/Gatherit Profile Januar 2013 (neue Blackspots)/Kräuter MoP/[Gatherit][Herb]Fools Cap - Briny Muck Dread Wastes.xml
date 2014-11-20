@@ -1,0 +1,60 @@
+<HBProfile>
+<Name>Gatherit - Fool's Cap - Briny Muck - Check out my blog at gatherit.blogspot.com for more awesome profiles!</Name>
+<MinDurability>0.3</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+<MinLevel>1</MinLevel>
+<MaxLevel>99</MaxLevel>
+<Factions>99999</Factions>
+
+<MailGrey>true</MailGrey>
+<MailWhite>true</MailWhite>
+<MailGreen>true</MailGreen>
+<MailBlue>true</MailBlue>
+<MailPurple>true</MailPurple>
+
+<SellGrey>true</SellGrey>
+<SellWhite>false</SellWhite>
+<SellGreen>false</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+<Vendor Name="Zit'tix" Entry="65220" Type="Food" X="263.1545" Y="3146.569" Z="214.501" />
+</Vendors>
+
+<Mailboxes>
+<Mailbox X="267.2006" Y="3153.307" Z="214.5015" />
+</Mailboxes>
+
+<Blackspots>
+<Blackspot X="-1034.13" Y="4467.119" Z="73.87851" Radius="0" />
+</Blackspots>
+
+<Hotspots>
+<Hotspot X="-1069.422" Y="4194.389" Z="47.2764" />
+<Hotspot X="-1004.909" Y="4286.055" Z="37.84273" />
+<Hotspot X="-989.9447" Y="4345.517" Z="35.69423" />
+<Hotspot X="-924.289" Y="4476.516" Z="26.64224" />
+<Hotspot X="-874.9798" Y="4523.047" Z="38.32214" />
+<Hotspot X="-659.3329" Y="4512.778" Z="35.9396" />
+<Hotspot X="-589.8252" Y="4487.136" Z="44.76103" />
+<Hotspot X="-489.117" Y="4611.534" Z="38.90622" />
+<Hotspot X="-524.3457" Y="4332.922" Z="45.40564" />
+<Hotspot X="-550.4821" Y="4067.878" Z="27.28307" />
+<Hotspot X="-624.4516" Y="3875.026" Z="37.15447" />
+<Hotspot X="-832.0742" Y="3646.726" Z="29.01417" />
+<Hotspot X="-851.8888" Y="3606.729" Z="34.32649" />
+<Hotspot X="-869.1368" Y="3728.836" Z="55.75933" />
+<Hotspot X="-955.7344" Y="3804.405" Z="79.34318" />
+<Hotspot X="-921.0523" Y="3860.655" Z="81.07551" />
+<Hotspot X="-1075.98" Y="3924.467" Z="75.03028" />
+<Hotspot X="-1127.893" Y="3998.246" Z="84.62482" />
+<Hotspot X="-588.0195" Y="3814.614" Z="106.1034" />
+<Hotspot X="-1009.935" Y="4312.82" Z="97.8569" />
+<Hotspot X="-485.3749" Y="4209.081" Z="159.5055" />
+<Hotspot X="-818.1625" Y="4483.379" Z="117.4817" />
+<Hotspot X="-789.1467" Y="4224.404" Z="156.8447" />
+<Hotspot X="-971.212" Y="3818.7" Z="144.3868" />
+</Hotspots>
+</HBProfile>

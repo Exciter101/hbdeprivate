@@ -1,0 +1,121 @@
+﻿<HBProfile>
+  <Name>Horde Gao-Lai Ruins Farm (Shards and Keys) V1.1</Name>
+  
+  <MinLevel>1</MinLevel>
+  <MaxLevel>91</MaxLevel>
+
+  <TargetElites>True</TargetElites>
+
+  <SellGray>True</SellGray>
+  <SellWhite>True</SellWhite>
+  <SellGreen>False</SellGreen>
+  <SellPurple>False</SellPurple>
+  <MailWhite>False</MailWhite>
+  <MailGreen>True</MailGreen>
+  <MailPurple>True</MailPurple>
+
+  <AvoidMobs>
+  </AvoidMobs>
+
+  <Mailboxes>
+    <Mailbox X="1697.53" Y="913.0843" Z="470.9351" />
+  </Mailboxes>
+
+  <Vendors>
+    <Vendor Name="Joan Tremblay" Entry="64114" Type="Repair" X="1700.556" Y="919.2535" Z="470.9465" />
+  </Vendors>
+
+  <QuestOrder>
+    <SetGrindArea>
+      <GrindArea>
+        <TargetMinLevel>85</TargetMinLevel>
+        <TargetMaxLevel>91</TargetMaxLevel>
+        <Factions>1712 2578 2480 2479</Factions>
+        <MaxDistance>30</MaxDistance>
+        <Hotspots>
+          <Hotspot X="1330.246" Y="1727.356" Z="347.244" />
+          <Hotspot X="1337.38" Y="1686.919" Z="344.7714" />
+          <Hotspot X="1377.063" Y="1676.879" Z="340.6508" />
+          <Hotspot X="1417.296" Y="1679.117" Z="344.237" />
+          <Hotspot X="1453.443" Y="1696.411" Z="347.6475" />
+          <Hotspot X="1494.172" Y="1695.186" Z="356.4737" />
+          <Hotspot X="1527.714" Y="1748.893" Z="372.1522" />
+          <Hotspot X="1491.043" Y="1756.026" Z="357.3575" />
+          <Hotspot X="1456.266" Y="1736.229" Z="349.973" />
+          <Hotspot X="1417.667" Y="1732.772" Z="339.053" />
+          <Hotspot X="1385.289" Y="1756.857" Z="329.8209" />
+          <Hotspot X="1372.294" Y="1718.759" Z="340.6264" />
+          <Hotspot X="1383.694" Y="1679.605" Z="340.6506" />
+          <Hotspot X="1418.22" Y="1701.875" Z="344.2367" />
+          <Hotspot X="1408.925" Y="1740.601" Z="336.0264" />
+          <Hotspot X="1379.773" Y="1768.261" Z="325.7113" />
+          <Hotspot X="1366.609" Y="1805.205" Z="313.8864" />
+          <Hotspot X="1380.623" Y="1842.72" Z="308.0562" />
+          <Hotspot X="1405.745" Y="1873.374" Z="299.9618" />
+          <Hotspot X="1434.194" Y="1901.513" Z="294.8795" />
+          <Hotspot X="1435.349" Y="1942.271" Z="300.232" />
+          <Hotspot X="1459.026" Y="1908.406" Z="295.6519" />
+          <Hotspot X="1477.548" Y="1873.076" Z="301.1083" />
+          <Hotspot X="1477.324" Y="1832.962" Z="304.6168" />
+          <Hotspot X="1449.86" Y="1803.047" Z="301.83" />
+          <Hotspot X="1412.646" Y="1817.674" Z="296.7684" />
+          <Hotspot X="1420.39" Y="1857.198" Z="294.9296" />
+          <Hotspot X="1382.312" Y="1847.459" Z="307.2671" />
+          <Hotspot X="1366.091" Y="1811.083" Z="312.4009" />
+          <Hotspot X="1369.244" Y="1772.475" Z="323.2261" />
+          <Hotspot X="1373.244" Y="1734.303" Z="339.0267" />
+          <Hotspot X="1376.124" Y="1693.882" Z="340.6508" />
+          <Hotspot X="1336.278" Y="1692.034" Z="344.584" />
+          <Hotspot X="1309.729" Y="1723.993" Z="345.3609" />
+          <Hotspot X="1287.98" Y="1757.984" Z="346.1901" />
+          <Hotspot X="1259.499" Y="1786.169" Z="345.3646" />
+          <Hotspot X="1230.67" Y="1814.122" Z="344.778" />
+          <Hotspot X="1233.088" Y="1855.776" Z="347.5887" />
+          <Hotspot X="1264.564" Y="1882.236" Z="344.7853" />
+          <Hotspot X="1296.56" Y="1857.434" Z="346.6926" />
+          <Hotspot X="1321.347" Y="1825.687" Z="347.6966" />
+          <Hotspot X="1329.526" Y="1784.97" Z="344.4234" />
+          <Hotspot X="1344.703" Y="1746.279" Z="345.3517" />
+          <Hotspot X="1336.489" Y="1706.795" Z="344.8167" />
+        </Hotspots>
+      </GrindArea>
+    </SetGrindArea>
+
+    <While Condition="(Me.Level &gt; 1)" >
+     
+      
+      <!-- Flying to Grind spot. (Need to be in Pandaria) -->
+      <CustomBehavior File="FlyTo" X="1330.246" Y="1727.356" Z="347.244" DestName="Guo-Lai Ruins" />
+      <CustomBehavior File="Message" Text="Grind Hard. Profit." LogColor="Red" />
+      <CustomBehavior File="ForcedDismount" />
+
+
+      <!--Tells the profile to keep going as long as this is true-->
+      <GrindTo Condition="(Me.FreeBagSlots &lt;= 2) || (Me.DurabilityPercent &lt;= 0.2)" />
+
+      <!-- Trigger on need to repair -->
+      <If Condition="(Me.DurabilityPercent &lt;= 0.2) || (Me.FreeBagSlots &lt;= 2)" /> 
+      <CustomBehavior File="Message" LogColor="Red" Text="Going to Repair, We will be back." />
+      <CustomBehavior File="FlyTo" DestName="Joan Tremblay" X="1614.314" Y="922.448" Z="471.146" />
+      <CustomBehavior File="ForcedDismount" />
+      <CustomBehavior File="MyCTM" DestName="HUMAN TO REPAIR" X="1654.767" Y="927.2577" Z="470.9266" />
+      <CustomBehavior File="MyCTM" DestName="HUMAN TO REPAIR" X="1673.426" Y="920.2464" Z="471.3003" />
+      <CustomBehavior File="MyCTM" DestName="HUMAN TO REPAIR" X="1690.456" Y="909.0677" Z="470.9339" />
+      <CustomBehavior File="MyCTM" DestName="HUMAN TO REPAIR" X="1701.302" Y="912.467" Z="470.9339" />  
+      <CustomBehavior File="ForceSetVendor" DoRepair="true" DoSell="true" DoMail="True" />
+      
+      <!-- Fly's back to the grind Area-->
+      <CustomBehavior File="MyCTM" DestName="Return to flight" X="1704.517" Y="912.2394" Z="470.9329" />
+      <!--
+      <CustomBehavior File="MyCTM" DestName="Return to flight" X="1690.456" Y="909.0677" Z="470.9339" />
+      <CustomBehavior File="MyCTM" DestName="Return to flight" X="1673.426" Y="920.2464" Z="471.3003" />
+      <CustomBehavior File="MyCTM" DestName="Return to flight" X="1626.41" Y="924.3986" Z="471.1837" />
+      <CustomBehavior File="MyCTM" DestName="Fly point" X="1614.314" Y="922.448" Z="471.146" />
+      -->
+      <RunTo DestName="Flight point" X="1614.314" Y="922.448" Z="471.146" />
+      <CustomBehavior File="FlyTo" DestName="GRIND START" X="1330.246" Y="1727.356" Z="347.244" />
+      
+     
+    </While>
+  </QuestOrder>
+</HBProfile>

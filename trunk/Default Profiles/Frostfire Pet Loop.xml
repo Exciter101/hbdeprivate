@@ -1,0 +1,54 @@
+<HBProfile>
+///////////////////////////////////////////////////
+//                                               //
+// Profile generated with ZapRecorder2 v1.2.0    //
+// Created by BadWolf                            //
+//                                               //
+///////////////////////////////////////////////////
+<Name>Frostfire Ridge</Name>
+<MinDurability>0.4</MinDurability>
+<MinFreeBagSlots>3</MinFreeBagSlots>
+
+<MinLevel>90</MinLevel>
+<MaxLevel>100</MaxLevel>
+<Factions>99999</Factions>
+
+<MailGrey>false</MailGrey>
+<MailWhite>false</MailWhite>
+<MailGreen>false</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>true</SellGrey>
+<SellWhite>true</SellWhite>
+<SellGreen>false</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+</Vendors>
+
+<Mailboxes>
+</Mailboxes>
+
+<Blackspots>
+<Blackspot X="7083.324" Y="4322.586" Z="56.39233" Radius="20" />
+</Blackspots>
+
+<Hotspots>
+<Hotspot X="6568.953" Y="4334.424" Z="92.50887" />
+<Hotspot X="6552.815" Y="4385.284" Z="92.71673" />
+<Hotspot X="6561.612" Y="4425.03" Z="97.43089" />
+<Hotspot X="6570.542" Y="4497.318" Z="119.8207" />
+<Hotspot X="6320.069" Y="3899.946" Z="104.2787" />
+<Hotspot X="6378.513" Y="3803.618" Z="92.86837" />
+<Hotspot X="6421.515" Y="3794.06" Z="92.48707" />
+<Hotspot X="6748.552" Y="3635.026" Z="106.8398" />
+<Hotspot X="6779.588" Y="3522.807" Z="96.12634" />
+<Hotspot X="6978.989" Y="3546.611" Z="148.1361" />
+<Hotspot X="6999.102" Y="3713.001" Z="102.9676" />
+<Hotspot X="6995.515" Y="3757.046" Z="95.25019" />
+<Hotspot X="7037.466" Y="3935.45" Z="92.13588" />
+<Hotspot X="7003.914" Y="3990.012" Z="92.6929" />
+</Hotspots>
+</HBProfile>

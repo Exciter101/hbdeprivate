@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HBProfile>
+  <Name>Gatherbuddy - [PET] Bullseye Loque'nahak+King Krush taming.xml</Name>
+  <MinDurability>0.4</MinDurability>
+  <MinFreeBagSlots>1</MinFreeBagSlots>
+  <MinLevel>1</MinLevel>
+  <MaxLevel>99</MaxLevel>
+  <Factions>99999</Factions>
+  <MailGrey>False</MailGrey>
+  <MailWhite>True</MailWhite>
+  <MailGreen>True</MailGreen>
+  <MailBlue>True</MailBlue>
+  <MailPurple>True</MailPurple>
+  <SellGrey>True</SellGrey>
+  <SellWhite>True</SellWhite>
+  <SellGreen>False</SellGreen>
+  <SellBlue>False</SellBlue>
+  <SellPurple>False</SellPurple>
+  <SellPurple>False</SellPurple>
+	<Vendors>
+<Vendor Name="Mardan Thunderhoof" Entry="28040" Type="Repair" X="5552.257" Y="5738.877" Z="-76.21767" />
+	</Vendors>
+	
+	<Mailboxes>
+<Mailbox X="5564.006" Y="5756.301" Z="-75.46794" />
+	</Mailboxes>
+  <Hotspots>
+    <Hotspot X="4911.837" Y="4764.136" Z="-33.30809" />
+    <Hotspot X="5194.188" Y="5990.893" Z="-3.316471" />
+    <Hotspot X="5375.269" Y="5610.074" Z="-30.12647" />
+    <Hotspot X="5793.114" Y="5778.817" Z="4.406891" />
+    <Hotspot X="6103.948" Y="5493.218" Z="-24.15635" />
+    <Hotspot X="6448.509" Y="5356.336" Z="1.5082" />
+    <Hotspot X="6057.51" Y="4914.04" Z="-48.59622" />
+    <Hotspot X="6054.863" Y="4684.405" Z="-38.22221" />
+    <Hotspot X="6586.84" Y="4401.592" Z="37.60369" />
+    <Hotspot X="5266.191" Y="3809.482" Z="20.87423" />
+    <Hotspot X="5050.504" Y="4080.733" Z="-1.163135" />
+    <Hotspot X="4912.768" Y="4379.835" Z="-36.45793" />
+    <Hotspot X="4738.767" Y="4616.878" Z="-21.73771" />
+  </Hotspots>
+</HBProfile>

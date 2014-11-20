@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Professionbuddy>
+  <ChangeBotAction BotName="Combat Bot" />
+  <Settings Type="String" DefaultValue="" Name="EnchanterName" Summary="Name of your Enchanter" Category="Misc" Global="False" Hidden="False" />
+  <Settings Type="String" DefaultValue="" Name="AlchemistName" Summary="Name of your Alchemist" Category="Misc" Global="False" Hidden="False" />
+  <Settings Type="Boolean" DefaultValue="false" Name="ConvertBlackfallow" Summary="Converts all Blackfallow Ink into Inferno Ink" Category="Inscription" Global="False" Hidden="False" />
+  <Settings Type="Boolean" DefaultValue="true" Name="InfernoDE" Summary="Uses Inferno Ink to craft BoEs for DE'ing" Category="Inscription" Global="False" Hidden="False" />
+  <Settings Type="Boolean" DefaultValue="false" Name="FlipFortune" Summary="Flips all Mysterious Fortune Cards and sells the results" Category="Inscription" Global="False" Hidden="False" />
+  <Settings Type="Boolean" DefaultValue="false" Name="BuyHeartblossom" Summary="Buys Heartblossom from the AH for transmuting Inferno Rubies" Category="Alchemy" Global="False" Hidden="False" />
+  <While Condition="true" IgnoreCanRun="True">
+    <StackItemsAction />
+    <CallSubRoutine SubRoutineName="SendMail" />
+    <CallSubRoutine SubRoutineName="GetMail" />
+    <CallSubRoutine SubRoutineName="SendMail" />
+    <StackItemsAction />
+    <!-- START Jewelcrafting -->
+    <If Condition="Jewelcrafting.Level &gt;= 500" IgnoreCanRun="True">
+      <StackItemsAction />
+      <CallSubRoutine SubRoutineName="SendMail" />
+      <!-- Prospect pyrite ore -->
+      <If Condition="InbagCount(52183) &gt; 5" IgnoreCanRun="True">
+        <CustomAction Code="Log(&quot;[PB] Starting with prospecting pyrite.&quot;);" />
+        <DisenchantAction ActionType="Prospect" ItemTarget="Specific" ItemQuality="Uncommon" ItemId="52183" />
+      </If>
+      <!-- Prospect elementium ore -->
+      <If Condition="InbagCount(52185) &gt; 5" IgnoreCanRun="True">
+        <CustomAction Code="Log(&quot;[PB] Starting with prospecting elementium.&quot;);" />
+        <DisenchantAction ActionType="Prospect" ItemTarget="Specific" ItemQuality="Uncommon" ItemId="52185" />
+      </If>
+      <!-- Prospect obsidium ore -->
+      <If Condition="InbagCount(53038) &gt; 5" IgnoreCanRun="True">
+        <CustomAction Code="Log(&quot;[PB] Starting with prospecting obsidium.&quot;);" />
+        <DisenchantAction ActionType="Prospect" ItemTarget="Specific" ItemQuality="Uncommon" ItemId="53038" />
+      </If>
+      <!-- Craft Alicite Pendant -->
+      <While Condition="InbagCount(52179) &gt;= 2 &amp;&amp; Me.FreeBagSlots &gt;= 5" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="CheckJewelersSetting" />
+        <CastSpellAction Entry="73496" Repeat="1" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      </While>
+      <!-- Craft Hessonite Band -->
+      <While Condition="InbagCount(52181) &gt;= 2 &amp;&amp; Me.FreeBagSlots &gt;= 5" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="CheckJewelersSetting" />
+        <CastSpellAction Entry="73495" Repeat="1" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      </While>
+      <!-- Craft Nightstone Choker -->
+      <While Condition="InbagCount(52180) &gt;= 2 &amp;&amp; Me.FreeBagSlots &gt;= 5" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="CheckJewelersSetting" />
+        <CastSpellAction Entry="73497" Repeat="1" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      </While>
+      <!-- Craft Jasper Ring -->
+      <While Condition="InbagCount(52182) &gt;= 1 &amp;&amp; Me.FreeBagSlots &gt;= 5" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="CheckJewelersSetting" />
+        <CastSpellAction Entry="73494" Repeat="1" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      </While>
+      <!-- Vendor Zephyrite -->
+      <While Condition="InbagCount(52178) &gt;= 1" IgnoreCanRun="True">
+        <SellItemAction NpcEntry="0" X="0" Y="0" Z="0" ItemID="52178" Count="99" SellItemType="Specific" />
+        <WaitAction Condition="false" Timeout="2000" />
+      </While>
+      <!-- Vendor Ocean Sapphire -->
+      <While Condition="InbagCount(52191) &gt;= 1" IgnoreCanRun="True">
+        <SellItemAction NpcEntry="0" X="0" Y="0" Z="0" ItemID="52191" Count="99" SellItemType="Specific" />
+        <WaitAction Condition="false" Timeout="2000" />
+      </While>
+      <CallSubRoutine SubRoutineName="SendMail" />
+    </If>
+    <!-- END Jewelcrafting -->
+    <!-- START Alchemy -->
+    <If Condition="Alchemy.Level &gt;= 525" IgnoreCanRun="True">
+      <StackItemsAction />
+      <!-- Transmute Inferno Rubies -->
+      <CustomAction Code="Log(&quot;[PB] Transmuting Inferno Rubies.&quot;);" />
+      <If Condition="(bool)Settings[&quot;BuyHeartblossom&quot;]" IgnoreCanRun="True">
+        <BuyItemFromAhAction ItemID="52986" MaxBuyout="5g0s0c" Amount="100" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" BuyAdditively="False" />
+      </If>
+      <While Condition="InbagCount(52177) &gt; 2 &amp;&amp; InbagCount(52986) &gt; 2" IgnoreCanRun="True">
+        <CastSpellAction Entry="80245" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      </While>
+      <CallSubRoutine SubRoutineName="SendMail" />
+    </If>
+    <!-- END Alchemy -->
+    <!-- START Inscription -->
+    <If Condition="Inscription.Level &gt;= 525" IgnoreCanRun="True">
+      <StackItemsAction />
+      <CallSubRoutine SubRoutineName="SendMail" />
+      <!--Grind up Cinderbloom-->
+      <If Condition="InbagCount(52983) &gt;5" IgnoreCanRun="True">
+        <DisenchantAction ActionType="Mill" ItemTarget="All" ItemQuality="Uncommon" ItemId="52983" />
+      </If>
+      <!--Grind up Stormvine-->
+      <If Condition="InbagCount(52984) &gt; 5" IgnoreCanRun="True">
+        <DisenchantAction ActionType="Mill" ItemTarget="Specific" ItemQuality="Uncommon" ItemId="52984" />
+      </If>
+      <!--Grind up Azshara's Veil-->
+      <If Condition="InbagCount(52985) &gt; 5" IgnoreCanRun="True">
+        <DisenchantAction ActionType="Mill" ItemTarget="Specific" ItemQuality="Uncommon" ItemId="52985" />
+      </If>
+      <!--Grind up Heartblossom-->
+      <If Condition="InbagCount(52986) &gt; 5" IgnoreCanRun="True">
+        <DisenchantAction ActionType="Mill" ItemTarget="Specific" ItemQuality="Uncommon" ItemId="52986" />
+      </If>
+      <!--Grind up Twilight Jasmine-->
+      <If Condition="InbagCount(52987) &gt; 5" IgnoreCanRun="True">
+        <DisenchantAction ActionType="Mill" ItemTarget="Specific" ItemQuality="Uncommon" ItemId="52987" />
+      </If>
+      <!--Grind up Whiptail-->
+      <If Condition="InbagCount(52988) &gt; 5" IgnoreCanRun="True">
+        <DisenchantAction ActionType="Mill" ItemTarget="Specific" ItemQuality="Uncommon" ItemId="52988" />
+      </If>
+      <StackItemsAction />
+      <!--Craft up the Inferno Ink-->
+      <CustomAction Code="Log(&quot;[ProfessionBuddy] Crafting Inferno Ink.&quot;);" />
+      <While Condition="InbagCount(61980) &gt;= 2" IgnoreCanRun="True">
+        <CastSpellAction Entry="86005" Repeat="1" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      </While>
+      <!--Craft up the Blackfallow Ink-->
+      <CustomAction Code="Log(&quot;[ProfessionBuddy] Crafting Blackfallow Ink.&quot;);" />
+      <While Condition="InbagCount(61979) &gt;= 2" IgnoreCanRun="True">
+        <CastSpellAction Entry="86004" Repeat="1" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      </While>
+      <!-- Convert Blackfallow Ink to Inferno Ink -->
+      <If Condition="(bool)Settings[&quot;ConvertBlackfallow&quot;]" IgnoreCanRun="True">
+        <CustomAction Code="Log(&quot;[ProfessionBuddy] Trading Blackfallow for Inferno.&quot;);" />
+        <While Condition="InbagCount(61978) &gt;= 10" IgnoreCanRun="True">
+          <CustomAction Code="Log(&quot;[ProfessionBuddy] Buying Inferno Ink.&quot;);" />
+          <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+            <BuyItemAction NpcEntry="30730" X="-8863.968" Y="861.5417" Z="99.60993" ItemID="61981" Count="1" BuyItemType="SpecificItem" BuyAdditively="True" />
+          </If>
+          <If Condition="Me.IsHorde" IgnoreCanRun="True">
+            <BuyItemAction NpcEntry="46718" X="1843.92" Y="-4469.069" Z="47.66559" ItemID="61981" Count="1" BuyItemType="SpecificItem" BuyAdditively="True" />
+          </If>
+        </While>
+      </If>
+      <!-- Craft Inscription BoEs -->
+      <If Condition="(bool)Settings[&quot;InfernoDE&quot;]" IgnoreCanRun="True">
+        <CustomAction Code="Log(&quot;[ProfessionBuddy] Crafting Etched Horn.&quot;);" />
+        <While Condition="InbagCount(61981) &gt;= 4 &amp;&amp; InbagCount(68047) &gt;= 1" IgnoreCanRun="True">
+          <If Condition="Me.FreeBagSlots == 0" IgnoreCanRun="True">
+            <CallSubRoutine SubRoutineName="SendMail" />
+          </If>
+          <CastSpellAction Entry="86647" Repeat="1" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+        </While>
+        <CustomAction Code="Log(&quot;[ProfessionBuddy] Crafting Book of Blood.&quot;);" />
+        <While Condition="InbagCount(61981) &gt;= 3 &amp;&amp; InbagCount(52329) &gt;= 6" IgnoreCanRun="True">
+          <If Condition="Me.FreeBagSlots == 0" IgnoreCanRun="True">
+            <CallSubRoutine SubRoutineName="SendMail" />
+          </If>
+          <CallSubRoutine SubRoutineName="BuyParchment" />
+          <CastSpellAction Entry="86616" Repeat="1" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+        </While>
+        <CustomAction Code="Log(&quot;[ProfessionBuddy] Crafting Lord Rottington's Pressed Wisp Book.&quot;);" />
+        <While Condition="InbagCount(52329) &gt;= 20" IgnoreCanRun="True">
+          <If Condition="Me.FreeBagSlots == 0" IgnoreCanRun="True">
+            <CallSubRoutine SubRoutineName="SendMail" />
+          </If>
+          <CallSubRoutine SubRoutineName="BuyParchment" />
+          <CastSpellAction Entry="86640" Repeat="1" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+        </While>
+        <CallSubRoutine SubRoutineName="SendMail" />
+      </If>
+      <!-- Darkmoon Card of Destruction -->
+      <While Condition="InbagCount(61981) &gt; 9  &amp;&amp; InbagCount(52329) &gt; 29" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="BuyParchment" />
+        <CastSpellAction Entry="86615" Repeat="1" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      </While>
+      <!-- Mysterious Fortune Card -->
+      <While Condition="InbagCount(61978) &gt; 0" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="BuyParchment" />
+        <CastSpellAction Entry="86609" Repeat="1" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      </While>
+      <!-- Flip the fortune cards -->
+      <If Condition="(bool)Settings[&quot;FlipFortune&quot;]" IgnoreCanRun="True">
+        <While Condition="InbagCount(60838) &gt; 0" IgnoreCanRun="True">
+          <If Condition="Me.FreeBagSlots == 0" IgnoreCanRun="True">
+            <CallSubRoutine SubRoutineName="SellFortuneCards" />
+          </If>
+          <CustomAction Code="ObjectManager.GetObjectsOfType&lt;WoWItem&gt;().FirstOrDefault(item =&gt; item.Entry == 60838).Use();" />
+        </While>
+        <CallSubRoutine SubRoutineName="SellFortuneCards" />
+      </If>
+      <StackItemsAction />
+      <CallSubRoutine SubRoutineName="SendMail" />
+    </If>
+    <!-- END Inscription -->
+    <!-- START Enchanting -->
+    <If Condition="Enchanting.Level &gt;= 450" IgnoreCanRun="True">
+      <StackItemsAction />
+      <CallSubRoutine SubRoutineName="SendMail" />
+      <DisenchantAction ActionType="Disenchant" ItemTarget="All" ItemQuality="Uncommon" ItemId="0" />
+      <DisenchantAction ActionType="Disenchant" ItemTarget="All" ItemQuality="Rare" ItemId="0" />
+      <While Condition="InbagCount(52718) &gt;= 3" IgnoreCanRun="True">
+        <CustomAction Code="Log(&quot;[PB] Using Lesser Celestial Essence.&quot;);" />
+        <CustomAction Code="Lua.DoString(&quot;UseItemByName(52718)&quot;);" />
+      </While>
+      <While Condition="InbagCount(52720) &gt;= 3" IgnoreCanRun="True">
+        <CustomAction Code="Log(&quot;[PB] Using Small Heavenly Shard.&quot;);" />
+        <CustomAction Code="Lua.DoString(&quot;UseItemByName(52720)&quot;);" />
+      </While>
+      <CallSubRoutine SubRoutineName="SendMail" />
+    </If>
+    <!-- END Enchanting -->
+    <CustomAction Code="Log(&quot;[ProfessionBuddy] Done with batch, taking a 2 minute break.&quot;);" />
+    <WaitAction Condition="false" Timeout="120000" />
+  </While>
+  <CustomAction Code="Log(&quot;[ProfessionBuddy] Profile completed!&quot;);" />
+  <!-- START Subroutines -->
+  <SubRoutine SubRoutineName="SendMail">
+    <!-- Mail rare gems -->
+    <If Condition="InbagCount(52190) &gt;= 1 || InbagCount(52193) &gt;= 1 || InbagCount(52192) &gt;= 1 || InbagCount(52194) &gt;= 1 || InbagCount(52195) &gt;= 1 || InbagCount(52191) &gt;= 1" IgnoreCanRun="True">
+      <CustomAction Code="Log(&quot;[PB] Mailing Gems to banker.&quot;);" />
+      <MailItemAction Entry="52190" AutoFindMailBox="True" UseCategory="False" Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" X="0" Y="0" Z="0" />
+      <MailItemAction Entry="52193" AutoFindMailBox="True" UseCategory="False" Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" X="0" Y="0" Z="0" />
+      <MailItemAction Entry="52192" AutoFindMailBox="True" UseCategory="False" Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" X="0" Y="0" Z="0" />
+      <MailItemAction Entry="52194" AutoFindMailBox="True" UseCategory="False" Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" X="0" Y="0" Z="0" />
+      <MailItemAction Entry="52195" AutoFindMailBox="True" UseCategory="False" Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" X="0" Y="0" Z="0" />
+    </If>
+    <!-- Mail alchemy mats -->
+    <If Condition="Me.Name != (string)Settings[&quot;AlchemistName&quot;] &amp;&amp; !string.IsNullOrEmpty((string)Settings[&quot;AlchemistName&quot;])" IgnoreCanRun="True">
+      <CustomAction Code="var1 = CharacterSettings.Instance.MailRecipient;" />
+      <CustomAction Code="CharacterSettings.Instance.MailRecipient = (string)Settings[&quot;AlchemistName&quot;];" />
+      <MailItemAction Entry="52177" AutoFindMailBox="True" UseCategory="False" Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" X="0" Y="0" Z="0" />
+      <MailItemAction Entry="52986" AutoFindMailBox="True" UseCategory="False" Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" X="0" Y="0" Z="0" />
+      <CustomAction Code="CharacterSettings.Instance.MailRecipient = (string)var1;" />
+    </If>
+    <!-- Mail DE items -->
+    <If Condition="Me.Name != (string)Settings[&quot;EnchanterName&quot;] &amp;&amp; !string.IsNullOrEmpty((string)Settings[&quot;EnchanterName&quot;])" IgnoreCanRun="True">
+      <CustomAction Code="var1 = CharacterSettings.Instance.MailRecipient;" />
+      <CustomAction Code="CharacterSettings.Instance.MailRecipient = (string)Settings[&quot;EnchanterName&quot;];" />
+      <!-- Alicite Pendant -->
+      <If Condition="InbagCount(52307) &gt; 0" IgnoreCanRun="True">
+        <MailItemAction Entry="52307" AutoFindMailBox="True" UseCategory="False" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" X="0" Y="0" Z="0" />
+        <WaitAction Condition="false" Timeout="3200" />
+      </If>
+      <If Condition="InbagCount(52312) &gt; 0" IgnoreCanRun="True">
+        <MailItemAction Entry="52312" AutoFindMailBox="True" UseCategory="False" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" X="0" Y="0" Z="0" />
+        <WaitAction Condition="false" Timeout="5400" />
+      </If>
+      <!-- Hessonite Band -->
+      <If Condition="InbagCount(52308) &gt; 0" IgnoreCanRun="True">
+        <MailItemAction Entry="52308" AutoFindMailBox="True" UseCategory="False" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" X="0" Y="0" Z="0" />
+        <WaitAction Condition="false" Timeout="7100" />
+      </If>
+      <If Condition="InbagCount(52316) &gt; 0" IgnoreCanRun="True">
+        <MailItemAction Entry="52316" AutoFindMailBox="True" UseCategory="False" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" X="0" Y="0" Z="0" />
+        <WaitAction Condition="false" Timeout="6300" />
+      </If>
+      <If Condition="InbagCount(52317) &gt; 0" IgnoreCanRun="True">
+        <MailItemAction Entry="52317" AutoFindMailBox="True" UseCategory="False" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" X="0" Y="0" Z="0" />
+        <WaitAction Condition="false" Timeout="4700" />
+      </If>
+      <!-- Nightstone Choker -->
+      <If Condition="InbagCount(52309) &gt; 0" IgnoreCanRun="True">
+        <MailItemAction Entry="52309" AutoFindMailBox="True" UseCategory="False" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" X="0" Y="0" Z="0" />
+        <WaitAction Condition="false" Timeout="3200" />
+      </If>
+      <If Condition="InbagCount(52314) &gt; 0" IgnoreCanRun="True">
+        <MailItemAction Entry="52314" AutoFindMailBox="True" UseCategory="False" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" X="0" Y="0" Z="0" />
+        <WaitAction Condition="false" Timeout="5900" />
+      </If>
+      <!-- Jasper Ring -->
+      <If Condition="InbagCount(52306) &gt; 0" IgnoreCanRun="True">
+        <MailItemAction Entry="52306" AutoFindMailBox="True" UseCategory="False" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" X="0" Y="0" Z="0" />
+        <WaitAction Condition="false" Timeout="5200" />
+      </If>
+      <If Condition="InbagCount(52310) &gt; 0" IgnoreCanRun="True">
+        <MailItemAction Entry="52310" AutoFindMailBox="True" UseCategory="False" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" X="0" Y="0" Z="0" />
+        <WaitAction Condition="false" Timeout="6300" />
+      </If>
+      <If Condition="InbagCount(52311) &gt; 0" IgnoreCanRun="True">
+        <MailItemAction Entry="52311" AutoFindMailBox="True" UseCategory="False" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" X="0" Y="0" Z="0" />
+        <WaitAction Condition="false" Timeout="6900" />
+      </If>
+      <!-- Mail inscription BoEs to enchanter -->
+      <If Condition="InbagCount(62240) &gt; 0" IgnoreCanRun="True">
+        <MailItemAction Entry="62240" AutoFindMailBox="True" UseCategory="False" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="Other" X="0" Y="0" Z="0" />
+      </If>
+      <If Condition="InbagCount(62231) &gt; 0" IgnoreCanRun="True">
+        <MailItemAction Entry="62231" AutoFindMailBox="True" UseCategory="False" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="Other" X="0" Y="0" Z="0" />
+      </If>
+      <If Condition="InbagCount(62233) &gt; 0" IgnoreCanRun="True">
+        <MailItemAction Entry="62233" AutoFindMailBox="True" UseCategory="False" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="Other" X="0" Y="0" Z="0" />
+      </If>
+      <CustomAction Code="CharacterSettings.Instance.MailRecipient = (string)var1;" />
+    </If>
+    <!-- Mail inscription items to banker -->
+    <If Condition="InbagCount(60840) &gt; 0" IgnoreCanRun="True">
+      <MailItemAction Entry="60840" AutoFindMailBox="True" UseCategory="False" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="Other" X="0" Y="0" Z="0" />
+    </If>
+    <If Condition="InbagCount(60844) &gt; 0" IgnoreCanRun="True">
+      <MailItemAction Entry="60844" AutoFindMailBox="True" UseCategory="False" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="Other" X="0" Y="0" Z="0" />
+    </If>
+    <!-- Mail darkmoon cards -->
+    <MailItemAction Entry="0" AutoFindMailBox="True" UseCategory="True" Category="Quest" SubCategoryType="SubCategoryType" SubCategory="None" X="0" Y="0" Z="0" />
+    <!-- Mail DE mats -->
+    <MailItemAction Entry="52308" AutoFindMailBox="True" UseCategory="True" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="Enchanting" X="0" Y="0" Z="0" />
+  </SubRoutine>
+  <SubRoutine SubRoutineName="GetMail">
+    <If Condition="HasNewMail" IgnoreCanRun="True">
+      <CustomAction Code="Log(&quot;[PB] Getting new Mail.&quot;);" />
+      <GetMailAction ItemID="0" CheckNewMail="True" GetMailType="AllItems" AutoFindMailBox="True" X="0" Y="0" Z="0" MinFreeBagSlots="13" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="CheckJewelersSetting">
+    <If Condition="InbagCount(52188) &lt; 5 &amp;&amp; Me.FreeBagSlots &gt; 0" IgnoreCanRun="True">
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+        <BuyItemAction NpcEntry="44583" X="-8710.41" Y="624.899" Z="100.9289" ItemID="52188" Count="20" BuyItemType="SpecificItem" BuyAdditively="True" />
+      </If>
+      <If Condition="Me.IsHorde" IgnoreCanRun="True">
+        <BuyItemAction NpcEntry="50482" X="2087.52" Y="-4769.45" Z="27.92898" ItemID="52188" Count="20" BuyItemType="SpecificItem" BuyAdditively="True" />
+      </If>
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="OrgToUldum">
+    <If Condition="Me.ZoneText == &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+      <CustomAction Code="Log(&quot;[ProfessionBuddy] Heading to Uldum.&quot;);" />
+      <FlyToAction Dismount="True" X="2037.242" Y="-4360.549" Z="99.06744" />
+      <InteractionAction Entry="207687" InteractDelay="500" InteractType="GameObject" GameObjectType="Mailbox" SpellFocus="Anvil" />
+      <WaitAction Condition="false" Timeout="2000" />
+      <WaitAction Condition="ObjectManager.IsInGame == true" Timeout="30000" />
+      <WaitAction Condition="false" Timeout="2000" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="UldumToOrg">
+    <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+      <CustomAction Code="Log(&quot;[ProfessionBuddy] Hearthing to Org.&quot;);" />
+      <FlyToAction Dismount="True" X="-9417.764" Y="-934.4053" Z="112.5402" />
+      <WaitAction Condition="false" Timeout="5000" />
+      <CustomAction Code="Lua.DoString(&quot;UseItemByName('Hearthstone')&quot;);" />
+      <WaitAction Condition="false" Timeout="2000" />
+      <WaitAction Condition="ObjectManager.IsInGame == true" Timeout="30000" />
+      <WaitAction Condition="false" Timeout="2000" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="GoToScribeShop">
+    <CustomAction Code="Log(&quot;[ProfessionBuddy] Heading the the scribe shop and milling.&quot;);" />
+    <FlyToAction Dismount="False" X="1775.027" Y="-4364.89" Z="112.3232" />
+    <FlyToAction Dismount="False" X="1860.348" Y="-4514.902" Z="94.17958" />
+    <FlyToAction Dismount="True" X="1846.763" Y="-4484.362" Z="46.66845" />
+  </SubRoutine>
+  <SubRoutine SubRoutineName="BuyParchment">
+    <If Condition="InbagCount(39502) &lt; 10 " IgnoreCanRun="True">
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+        <BuyItemAction NpcEntry="30730" X="-8863.968" Y="861.5417" Z="99.61036" ItemID="39502" Count="40" BuyItemType="SpecificItem" BuyAdditively="False" />
+      </If>
+      <If Condition="Me.IsHorde" IgnoreCanRun="True">
+        <BuyItemAction NpcEntry="46718" X="1843.92" Y="-4469.069" Z="47.66559" ItemID="39502" Count="40" BuyItemType="SpecificItem" BuyAdditively="False" />
+      </If>
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="SellFortuneCards">
+    <If Condition="InbagCount(60843) &gt; 0 || InbagCount(62606) &gt; 0 || InbagCount(60845) &gt; 0 || InbagCount(60842) &gt; 0 || InbagCount(62559) &gt; 0 || InbagCount(62558) &gt; 0 || InbagCount(62562) &gt; 0 || InbagCount(62557) &gt; 0 || InbagCount(62561) &gt; 0 || InbagCount(62560) &gt; 0 || InbagCount(62554) &gt; 0 || InbagCount(62552) &gt; 0 || InbagCount(62553) &gt; 0 || InbagCount(62563) &gt; 0 || InbagCount(62555) &gt; 0 || InbagCount(62556) &gt; 0 || InbagCount(62567) &gt; 0 || InbagCount(62573) &gt; 0 || InbagCount(62572) &gt; 0 || InbagCount(62574) &gt; 0 || InbagCount(62575) &gt; 0 || InbagCount(62576) &gt; 0 || InbagCount(62571) &gt; 0 || InbagCount(62570) &gt; 0 || InbagCount(62566) &gt; 0 || InbagCount(62565) &gt; 0 || InbagCount(62247) &gt; 0 || InbagCount(62568) &gt; 0 || InbagCount(62569) &gt; 0 || InbagCount(62564) &gt; 0 || InbagCount(62588) &gt; 0 || InbagCount(62580) &gt; 0 || InbagCount(62581) &gt; 0 || InbagCount(62579) &gt; 0 || InbagCount(62591) &gt; 0 || InbagCount(62246) &gt; 0 || InbagCount(62577) &gt; 0 || InbagCount(62582) &gt; 0 || InbagCount(62578) &gt; 0 || InbagCount(62590) &gt; 0 || InbagCount(62583) &gt; 0 || InbagCount(62589) &gt; 0 || InbagCount(62587) &gt; 0 || InbagCount(62584) &gt; 0 || InbagCount(62585) &gt; 0 || InbagCount(62586) &gt; 0 || InbagCount(60839) &gt; 0 || InbagCount(62598) &gt; 0 || InbagCount(62600) &gt; 0 || InbagCount(62599) &gt; 0 || InbagCount(62601) &gt; 0 || InbagCount(62602) &gt; 0 || InbagCount(60841) &gt; 0 || InbagCount(62604) &gt; 0 || InbagCount(62603) &gt; 0 || InbagCount(62605) &gt; 0" IgnoreCanRun="True">
+      <SellItemAction NpcEntry="0" X="0" Y="0" Z="0" ItemID="60843,62606,60845,60842,62559,62558,62562,62557,62561,62560,62554,62552,62553,62563,62555,62556,62567,62573,62572,62574,62575,62576,62571,62570,62566,62565,62247,62568,62569,62564,62588,62580,62581,62579,62591,62246,62577,62582,62578,62590,62583,62589,62587,62584,62585,62586,60839,62598,62600,62599,62601,62602,60841,62604,62603,62605" Count="0" SellItemType="Specific" />
+      <WaitAction Condition="false" Timeout="23500" />
+    </If>
+  </SubRoutine>
+</Professionbuddy>

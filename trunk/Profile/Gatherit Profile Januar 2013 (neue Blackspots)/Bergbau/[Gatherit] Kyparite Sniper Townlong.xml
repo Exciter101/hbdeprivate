@@ -1,0 +1,51 @@
+<HBProfile>
+<Name>Kyparite Sniper Townlong by Gatherit</Name>
+<MinDurability>0.4</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+<MinLevel>1</MinLevel>
+<MaxLevel>91</MaxLevel>
+<Factions>99999</Factions>
+
+<MailGrey>false</MailGrey>
+<MailWhite>true</MailWhite>
+<MailGreen>true</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>true</SellGrey>
+<SellWhite>false</SellWhite>
+<SellGreen>false</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+<Vendor Name="Alin the Finder" Entry="65171" Type="Repair" X="2363.516" Y="2973.526" Z="417.2339" />
+</Vendors>
+
+<Mailboxes>
+<Mailbox X="2353.41" Y="2994.422" Z="421.1479" />
+</Mailboxes>
+
+<Blackspots>
+</Blackspots>
+
+<Hotspots>
+<Hotspot X="1628.963" Y="4436.231" Z="193.581" />
+<Hotspot X="1651.035" Y="4528.797" Z="182.4233" />
+<Hotspot X="1626.232" Y="4670.007" Z="213.9273" />
+<Hotspot X="1546.325" Y="4700.729" Z="205.4352" />
+<Hotspot X="1511.121" Y="4708.425" Z="184.0385" />
+<Hotspot X="1451.932" Y="4786.999" Z="194.3704" />
+<Hotspot X="1573.448" Y="4687.452" Z="215.4205" />
+<Hotspot X="1642.845" Y="4536.039" Z="195.6161" />
+<Hotspot X="1633.965" Y="4471.519" Z="185.5877" />
+<Hotspot X="1448.211" Y="4280.075" Z="199.3098" />
+<Hotspot X="1366.798" Y="4312.062" Z="232.6469" />
+<Hotspot X="1458.932" Y="4403.051" Z="234.7528" />
+<Hotspot X="1600.375" Y="4442.031" Z="164.576" />
+<Hotspot X="1647.337" Y="4514.111" Z="190.8962" />
+<Hotspot X="1561.276" Y="4671.593" Z="203.0991" />
+<Hotspot X="1455.649" Y="4780.634" Z="187.4413" />
+</Hotspots>
+</HBProfile>

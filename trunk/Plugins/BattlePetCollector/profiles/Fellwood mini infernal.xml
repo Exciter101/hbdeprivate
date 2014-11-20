@@ -1,0 +1,25 @@
+<HBProfile>
+  <Name>Fellwood mini infernal</Name>
+
+    <SubProfile>
+     <Name>Fellwood mini infernal</Name>
+     <MinLevel>1</MinLevel>                                            
+     <MaxLevel>91</MaxLevel>                                          
+ 	 <TargetElites>False</TargetElites>
+
+     <GrindArea>
+     <TargetMinLevel>1</TargetMinLevel> 
+     <TargetMaxLevel>91</TargetMaxLevel> 
+     <Hotspots>      
+		<Hotspot X="5571.657" Y="-671.0886" Z="422.0141" />
+		<Hotspot X="5762.97" Y="-770.8913" Z="428.9035" />
+		<Hotspot X="5657.255" Y="-905.5463" Z="464.5744" />
+		<Hotspot X="5503.032" Y="-902.5385" Z="457.4002" />
+		<Hotspot X="5439.358" Y="-772.6394" Z="421.4329" />
+		<Hotspot X="5589.984" Y="-719.2303" Z="429.0326" />
+		<Hotspot X="5666.336" Y="-658.4958" Z="429.1262" />
+     </Hotspots>
+     </GrindArea>
+    </SubProfile>
+   
+ </HBProfile>

@@ -1,0 +1,91 @@
+<HBProfile>
+<Name>Gatherit's Silkweed only.  Sit back and enjoy the ride.</Name>
+<MinDurability>0.4</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+<MinLevel>85</MinLevel>
+<MaxLevel>91</MaxLevel>
+<Factions>99999</Factions>
+
+<MailGrey>false</MailGrey>
+<MailWhite>true</MailWhite>
+<MailGreen>false</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>false</SellGrey>
+<SellWhite>false</SellWhite>
+<SellGreen>false</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+<Vendor Z="257.0843" Y="-652.0018" X="528.3212" Type="Repair" Entry="61215" Name="Claretta"/>
+</Vendors>
+
+<Mailboxes>
+<Mailbox X="-209.1621" Y="496.0837" Z="187.2185" />
+</Mailboxes>
+
+<Blackspots>
+<Blackspot X="-1006.865" Y="1284.551" Z="167.829" Radius="20" />
+<Blackspot X="-424.8192" Y="120.4241" Z="156.949" Radius="2" />
+<Blackspot X="-417.9694" Y="-293.6783" Z="157.6366" Radius="10" />
+<Blackspot X="-1045.372" Y="1458.259" Z="28.20935" Radius="10" />
+<Blackspot X="-1153.922" Y="1533.849" Z="14.04111" Radius="10" />
+<Blackspot X="-1031.204" Y="1450.206" Z="29.1227" Radius="10" />
+<Blackspot X="-1009.146" Y="1361.821" Z="30.17258" Radius="10" />
+<Blackspot X="-1034.626" Y="1287.69" Z="23.35221" Radius="10" />
+<Blackspot X="-945.2429" Y="1051.18" Z="155.3161" Radius="10" />
+<Blackspot X="-938.1888" Y="972.3804" Z="24.497" Radius="10" />
+<Blackspot X="-952.8995" Y="824.5647" Z="24.96732" Radius="10" />
+<Blackspot X="-908.687" Y="754.9594" Z="165.0737" Radius="5" />
+<Blackspot X="-921.9959" Y="663.9385" Z="158.0129" Radius="10" />
+<Blackspot X="-896.6384" Y="284.0582" Z="157.28" Radius="22" />
+<Blackspot X="-802.2433" Y="39.62486" Z="18.17844" Radius="122" />
+<Blackspot X="-760.9365" Y="-77.7401" Z="16.80011" Radius="22" />
+<Blackspot X="-686.8863" Y="-148.7782" Z="79.79109" Radius="5" />
+<Blackspot X="-667.6349" Y="-252.9277" Z="72.71446" Radius="5" />
+<Blackspot X="-689.3658" Y="-336.7431" Z="72.12975" Radius="5" />
+<Blackspot X="-370.9822" Y="-410.021" Z="100.462" Radius="5" />
+<Blackspot X="-391.9328" Y="-239.3663" Z="136.1284" Radius="22" />
+<Blackspot X="-340.7345" Y="-316.6538" Z="115.6472" Radius="22" />
+<Blackspot X="-378.9612" Y="-330.4961" Z="109.6409" Radius="22" />
+</Blackspots>
+
+<Hotspots>
+<Hotspot X="-663.1821" Y="1052.182" Z="150.4063" />
+<Hotspot X="-714.8663" Y="998.1168" Z="159.9909" />
+<Hotspot X="-782.1777" Y="984.3893" Z="154.7035" />
+<Hotspot X="-732.2722" Y="804.5547" Z="150.1214" />
+<Hotspot X="-745.6259" Y="654.5334" Z="140.3405" />
+<Hotspot X="-791.2861" Y="474.3836" Z="141.0323" />
+<Hotspot X="-802.8845" Y="405.3997" Z="140.4739" />
+<Hotspot X="-724.038" Y="271.0407" Z="142.3479" />
+<Hotspot X="-544.2914" Y="52.34465" Z="142.287" />
+<Hotspot X="-444.8235" Y="-32.09894" Z="144.7682" />
+<Hotspot X="-360.2717" Y="-153.5126" Z="150.6569" />
+<Hotspot X="-274.6839" Y="-129.0292" Z="150.3071" />
+<Hotspot X="-200.7756" Y="-222.9221" Z="159.0143" />
+<Hotspot X="-9.009402" Y="-311.331" Z="199.456" />
+<Hotspot X="74.3688" Y="-498.9941" Z="207.5666" />
+<Hotspot X="169.3316" Y="-596.848" Z="221.0196" />
+<Hotspot X="253.7041" Y="-650.0644" Z="236.7281" />
+<Hotspot X="245.1924" Y="-737.0099" Z="233.8182" />
+<Hotspot X="394.5379" Y="-753.5898" Z="231.5252" />
+<Hotspot X="474.7171" Y="-751.394" Z="234.3508" />
+<Hotspot X="241.1531" Y="-734.3965" Z="234.6397" />
+<Hotspot X="45.28162" Y="-397.0316" Z="198.8245" />
+<Hotspot X="-96.53191" Y="-255.2852" Z="158.9976" />
+<Hotspot X="-538.0101" Y="20.36964" Z="142.2289" />
+<Hotspot X="-803.842" Y="412.7983" Z="144.3842" />
+<Hotspot X="-722.5579" Y="769.171" Z="142.1369" />
+<Hotspot X="-757.2374" Y="1009.57" Z="141.8928" />
+<Hotspot X="-691.7869" Y="1054.116" Z="142.9202" />
+<Hotspot X="-827.1205" Y="1122.795" Z="145.7613" />
+<Hotspot X="-911.4562" Y="1322.73" Z="147.1864" />
+<Hotspot X="-951.6714" Y="1424.384" Z="141.1101" />
+<Hotspot X="-940.5648" Y="1349.37" Z="151.8629" />
+<Hotspot X="-763.2613" Y="1024.195" Z="150.7787" />
+</Hotspots>
+</HBProfile>
