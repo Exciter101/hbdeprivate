@@ -1,5 +1,5 @@
 <HBProfile> <!-- Honorbuddy Blank QO by Kick -->
-	<Name>Blank QO ($Rev: 3581 $)</Name>
+	<Name>Blank QO ($Rev: 3640 $)</Name>
 	<MinLevel>1</MinLevel>
 	<MaxLevel>200</MaxLevel>
 	
@@ -205,6 +205,12 @@ Log("Is Complete: {0}", result);
 			 // scenarios
 			Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.GetStep(1).IsComplete
 				- GetStep() is the Objective Number
+				
+				<CustomBehavior File="Hooks\Avoid" AvoidName="" Command="Remove" />
+				
+				<CustomBehavior File="Hooks\Avoid" AvoidName="" Command="Add" ObjectType="AreaTrigger" ObjectId="" Radius="" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="" Command="Add" AvoidWhen="UNIT.HasAura()" ObjectId="" Radius="" 
+											AvoidLocationProducer="WoWMathHelper.GetNearestPointOnLineSegment(Me.Location, UNIT.Location, UNIT.Location.RayCast(UNIT.Rotation, 10))" />
 			
 				<CustomBehavior File="FlyTo" DestName="" 
 				<CustomBehavior File="ForcedDismount" />
