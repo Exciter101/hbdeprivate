@@ -1093,7 +1093,7 @@
                 <!-- If we're trying to heal, it won't skip -->
                 <CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for cutscene {TimeRemaining}" />
                 <CustomBehavior File="Misc\RunLua" Lua="if MovieFrame:IsVisible() then MovieFrame:StopMovie() else CinematicFrame_CancelCinematic() end" WaitTime="10000" />
-				<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for cutscene to end {TimeRemaining}" />
+				<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Waiting for cutscene to end {TimeRemaining}" />
             </If>
         <TurnIn QuestName="Keli'dan the Breaker" QuestId="34436" TurnInName="Archmage Khadgar" TurnInId="78562" X="4610.563" Y="-2246.493" Z="15.40344" /> <!-- New NPC Id -->
             <!-- End Kargathar Proving Grounds -->
@@ -2074,16 +2074,26 @@
              <While Condition="(!IsObjectiveComplete(3, 33837))">
                 <!-- 76650 - Risen Spirit, but we need to switch to this other guy when main guy is at like 10-15%
                 <CustomBehavior File="InteractWith" QuestId="33837" MobId="76172" NonCompeteDistance="0" X="599.1702" Y="-1209.141" Z="-21.4232" />
+				
                 <Vendor Name="Void Horror" Entry="76818" Type="Repair" X="586.387" Y="-1193.257" Z="-21.42324" />
-
+				<Vendor Name="Ner'zhul" Entry="76172" Type="Repair" X="599.1701" Y="-1209.141" Z="-21.42319" />
                 // Yrel NpcId is a guess! get correct id when running!
-                -->
+				
                 <CustomBehavior File="EscortGroup" QuestId="33837" EscortCompleteWhen="QuestObjectiveComplete" QuestObjectiveIndex="3" EscortCountMax="2"
                                             EscortNpcId="73395" PriorityTargetId="76818" PriorityTargetId2="76650" EscortMaxFightDistance="60" SearchForNpcsRadius="75" >
                     <SearchPath>
                         <Hotspot X="599.1702" Y="-1209.141" Z="-21.4232" />
                     </SearchPath>
                 </CustomBehavior>
+                -->
+				<CustomBehavior File="KillUntilComplete" MobId1="76650" MobId2="76818" ImmediatelySwitchToHighestPriorityTarget="True"
+											TerminateWhen="IsObjectiveComplete(3, 33837)" X="599.1701" Y="-1209.141" Z="-21.42319" >
+					<PursuitList>
+						<PursueUnit Id="76650" Priority="9999" /> <!-- Risen Spirit x3 -->
+						<PursueUnit Id="76818" Priority="8888" /> <!-- Void Horror -->
+						<PursueUnit Id="76172" Priority="-9999" /> <!-- Ner'zhul -->
+					</PursuitList>
+				</CustomBehavior>
              </While>
                 <CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for Cinematic {TimeRemaining}" />
                 <CustomBehavior File="Misc\RunLua" Lua="if MovieFrame:IsVisible() then MovieFrame:StopMovie() else CinematicFrame_CancelCinematic() end" WaitTime="2000" />
@@ -2108,17 +2118,24 @@
         <TurnIn QuestName="The Righteous March" QuestId="33255" TurnInName="Exarch Akama" TurnInId="72413" X="980.2604" Y="-2921.111" Z="99.33604" />
         <PickUp QuestName="The Defense of Karabor" QuestId="33256" GiverName="Exarch Akama" GiverId="72413" X="980.2604" Y="-2921.111" Z="99.33604" />
             <If Condition="HasQuest(33256) &amp;&amp; !IsQuestCompleted(33256)" > <!-- The Defense of Karabor -->
-				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerSphere" Command="Add" ObjectType="AreaTrigger" ObjectId="5805" Radius="4" />
-				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerPoly" Command="Add" ObjectType="AreaTrigger" ObjectId="5633" Radius="14" />
-				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerPolyFieryBlast" Command="Add" AvoidWhen="UNIT.HasAura(151731)" ObjectId="75358" Radius="4" 
+				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerSphere" Command="Add" ObjectType="AreaTrigger" ObjectId="5805" Radius="5" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerPoly" Command="Add" ObjectType="AreaTrigger" ObjectId="5633" Radius="15" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerPolyFieryBlast" Command="Add" AvoidWhen="UNIT.HasAura(151731)" ObjectId="75358" Radius="5" 
 											AvoidLocationProducer="WoWMathHelper.GetNearestPointOnLineSegment(Me.Location, UNIT.Location, UNIT.Location.RayCast(UNIT.Rotation, 10))" />
-				<CustomBehavior File="Hooks\Avoid" AvoidName="BlazingShot" Command="Add" ObjectType="AreaTrigger" ObjectId="5797" Radius="4" />
-				<!-- still have to add a couple more -->
+											
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlazingShot" Command="Add" ObjectType="AreaTrigger" ObjectId="5797" Radius="10" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlackestSkiesMissileLIne" Command="Add" ObjectType="Missile" ObjectId="150274" Radius="5" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlackestSkiesMissile" Command="Add" ObjectType="Missile" ObjectId="151661" Radius="5" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaGrapeshotBlast" Command="Add" ObjectType="Missile" ObjectId="152248" Radius="5" />
              <While Condition="(!IsObjectiveComplete(1, 33256))">
+                <If Condition="Me.MapId != 1277" > <!-- 1277 = DefenseOfKaraborScenario -->
+                    <MoveTo X="830.7855" Y="-2869.874" Z="100.4185" />
+				</If>
                 <While Condition="Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.StageNumber == 1">
                     <MoveTo X="830.7855" Y="-2869.874" Z="100.4185" />
-                    <CustomBehavior File="InteractWith" QuestId="33256" MobId="75358" X="830.7855" Y="-2869.874" Z="100.4185" /> <!-- Kill Arnokk -->
-                    <!-- need a get out of fire behavior or something -->
+					<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Waiting for Arnokk {TimeRemaining}" />
+                    <CustomBehavior File="InteractWith" QuestId="33256" MobId="75358" WaitForNpcs="False" MobState="Alive" X="830.7855" Y="-2869.874" Z="100.4185" /> <!-- Kill Arnokk -->
+                    <!-- Need to tweak his Avoid hooks some -->
                 </While>
                 <While Condition="Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.StageNumber == 2">
 				 <While Condition="!Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.GetStep(1).IsComplete">
@@ -2130,17 +2147,17 @@
 					  </HuntingGrounds>
 					</CustomBehavior>
 				 </While>
-					<!-- need a get out of fire behavior or something or hook - Spell: Iron Fleet Black Skies -->
 					<MoveTo X="578.7453" Y="-3074.575" Z="59.6398" />
                 </While>
                 <While Condition="Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.StageNumber == 3">
                     <!-- Defend K'ara <Vendor Name="K'ara" Entry="79664" Type="Repair" X="579.4202" Y="-3076.38" Z="57.27955" /> -->
                     <MoveTo X="578.7453" Y="-3074.575" Z="59.6398" />
-                </While>
+ 					<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Waiting for Kara {TimeRemaining}" />
+               </While>
                 <While Condition="Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.StageNumber == 4">
-                    <!-- Defeat Commander Vorka <Vendor Name="Commander Vorka" Entry="74715" Type="Repair" X="579.946" Y="-3127.99" Z="58.4295" /> -->
-                    <CustomBehavior File="InteractWith" QuestId="33256" MobId="74715" X="579.946" Y="-3127.99" Z="58.4295" /> <!-- Kill Vorka -->
-                    <!-- Need a behavior to gtfo of the Black Skies spell and Blazing Shot spell :( and Grapeshot Blast too -->
+                    <MoveTo X="579.946" Y="-3127.99" Z="58.4295" /> <!-- Kill Vorka -->
+					<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Waiting for Vorka {TimeRemaining}" />
+                    <CustomBehavior File="InteractWith" QuestId="33256" MobId="74715" WaitForNpcs="False" MobState="Alive" X="579.946" Y="-3127.99" Z="58.4295" /> <!-- Kill Vorka -->
                 </While>
                 <CustomBehavior File="WaitTimer" WaitTime="20000" GoalText="Waiting for quest to complete {TimeRemaining}" />
              </While>
@@ -2154,8 +2171,11 @@
 				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerPolyFieryBlast" Command="Remove" />
 				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerSphere" Command="Remove" />
 				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerPoly" Command="Remove" />
-				<CustomBehavior File="Hooks\Avoid" AvoidName="BlazingShot" Command="Remove" />
-            </If>
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlazingShot" Command="Remove" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlackestSkiesMissileLIne" Command="Remove" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlackestSkiesMissile" Command="Remove" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaGrapeshotBlast" Command="Remove" />
+			</If>
             <If Condition="HasQuest(33256) &amp;&amp; IsQuestCompleted(33256)" > <!-- The Defense of Karabor -->
                 <If Condition="Me.MapId == 1277" > <!-- 1277 = DefenseOfKaraborScenario -->
                     <CustomBehavior File="InteractWith" MobId="80300" X="561.997" Y="-3124.99" Z="58.29057" /> <!-- Raindash -->
@@ -2288,6 +2308,7 @@
                 <MoveTo X="3767.985" Y="-3954.955" Z="27.79601" />
                 <CustomBehavior File="InteractWith" MobId="86084" WaitTime="3000" X="3767.985" Y="-3954.955" Z="27.79601" />
                 <CustomBehavior File="Misc\RunLua" Lua="QuestFrameCompleteQuestButton:Click()" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for quest to complete {TimeRemaining}" />
 
                 <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:110560&quot;)" WaitTime="15000" /> <!-- Garrison Hearthstone -->
             </If>
