@@ -206,8 +206,8 @@ namespace Druid
                         && (Me.CurrentTarget.IsFriendly || Me.CurrentTarget.IsDead), new Action(ret => { Me.ClearTarget(); return RunStatus.Failure; })),
                     new Decorator(ret => Me.GotTarget && IsBalance && M.AllowMovement && Me.CurrentTarget.Distance > 39, M.CreateRangeMovement()),
                     new Decorator(ret => Me.GotTarget && IsBalance && M.AllowMovement && Me.CurrentTarget.Distance <= 39, M.CreateStopRangeMovement()),
-                    new Decorator(ret => Me.GotTarget && (IsFeral || IsGuardian) && M.AllowMovement && Me.CurrentTarget.Distance > 4.5f, M.CreateMeleeMovement()),
-                    new Decorator(ret => Me.GotTarget && (IsFeral || IsGuardian) && M.AllowMovement && Me.CurrentTarget.Distance <= 4.5f, M.CreateStopMeleeMovement()),
+                    new Decorator(ret => Me.GotTarget && (IsFeral || IsGuardian) && M.AllowMovement && Me.CurrentTarget.Distance > 4f, M.CreateMeleeMovement()),
+                    new Decorator(ret => Me.GotTarget && (IsFeral || IsGuardian) && M.AllowMovement && Me.CurrentTarget.Distance <= 4f, M.CreateStopMeleeMovement()),
                     new Decorator(ret => Me.GotTarget && M.AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget) && !Me.IsMoving, M.FacingTarget()),
                     new Decorator(ret => S.gotTarget && IsGuardian,
                         new S.FrameLockSelector(
@@ -240,16 +240,6 @@ namespace Druid
             {
                 return new PrioritySelector(
                     new Decorator(ret => ((Me.Mounted && !AutoBot) || HKM.pauseRoutineOn || HKM.manualOn), Hold()),
-                    new Decorator(ret => Me.GotTarget && IsBalance && M.AllowMovement && Me.CurrentTarget.Distance > 39, M.CreateRangeMovement()),
-                    new Decorator(ret => Me.GotTarget && IsBalance && M.AllowMovement && Me.CurrentTarget.Distance <= 39, M.CreateStopRangeMovement()),
-                    new Decorator(ret => Me.GotTarget && (IsFeral || IsGuardian) && M.AllowMovement && Me.CurrentTarget.Distance > 4.5f, M.CreateMeleeMovement()),
-                    new Decorator(ret => Me.GotTarget && (IsFeral || IsGuardian) && M.AllowMovement && Me.CurrentTarget.Distance <= 4.5f, M.CreateStopMeleeMovement()),
-                    new Decorator(ret => Me.GotTarget && M.AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget) && !Me.IsMoving, M.FacingTarget()),
-                    //S.castSurvInt(),
-                    S.castBarkskin(),
-                    S.castFrenziedReg(),
-                    S.castSavageDefense(),
-                    S.castCenarionWard(),
                     new Decorator(ret => Me.CurrentTarget == null && M.AllowTargeting, T.FindTarget()),
                     new Decorator(ret => S.gotTarget
                         && M.AllowTargeting
@@ -258,6 +248,16 @@ namespace Druid
                     new Decorator(ret => Me.CurrentTarget != null
                         && AutoBot
                         && (Me.CurrentTarget.IsFriendly || Me.CurrentTarget.IsDead), new Action(ret => { Me.ClearTarget(); return RunStatus.Failure; })),
+                    new Decorator(ret => Me.GotTarget && IsBalance && M.AllowMovement && Me.CurrentTarget.Distance > 39, M.CreateRangeMovement()),
+                    new Decorator(ret => Me.GotTarget && IsBalance && M.AllowMovement && Me.CurrentTarget.Distance <= 39, M.CreateStopRangeMovement()),
+                    new Decorator(ret => Me.GotTarget && (IsFeral || IsGuardian) && M.AllowMovement && Me.CurrentTarget.Distance > 3.5f, M.CreateMeleeMovement()),
+                    new Decorator(ret => Me.GotTarget && (IsFeral || IsGuardian) && M.AllowMovement && Me.CurrentTarget.Distance <= 3.5f, M.CreateStopMeleeMovement()),
+                    new Decorator(ret => Me.GotTarget && M.AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget) && !Me.IsMoving, M.FacingTarget()),
+                    //S.castSurvInt(),
+                    //S.castBarkskin(),
+                    //S.castFrenziedReg(),
+                    //S.castSavageDefense(),
+                    //S.castCenarionWard(),
                     new Decorator(ret => Me.Specialization == WoWSpec.DruidRestoration, RESTO.HealRotation()),
                     new Decorator(ret => S.gotTarget && IsBalance, BAL.BalanceRot()),
                     new Decorator(ret => S.gotTarget && IsGuardian, FRG.GuardianRot()),

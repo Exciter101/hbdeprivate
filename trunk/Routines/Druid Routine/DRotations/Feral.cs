@@ -128,8 +128,7 @@ namespace Druid.DRotations
         public static int HEALING_TOUCHI = 5185;
         public static Composite feral2rot()
         {
-            return new S.FrameLockSelector(
-                new Decorator(ret => Me.Combat && S.gotTarget && Me.CurrentTarget.IsWithinMeleeRange,
+            return 
                     new Action(ret =>
                     {
                         _loop = true;
@@ -140,6 +139,9 @@ namespace Druid.DRotations
                                 #region aoe
                                 if (S.needAoe)
                                 {
+                                    
+                                    if (Me.Rooted) { Lua.DoString("RunMacroText(\"/cancelaura Cat Form\")"); }
+
                                     if (SpellManager.HasSpell(CAT_FORM)
                                         && Me.Shapeshift != ShapeshiftForm.Cat)
                                     {
@@ -346,6 +348,9 @@ namespace Druid.DRotations
                                 #region noAoe
                                 else if (!S.needAoe)
                                 {
+                                    
+                                    if (Me.Rooted) { Lua.DoString("RunMacroText(\"/cancelaura Cat Form\")"); }
+
                                     if (SpellManager.HasSpell(CAT_FORM)
                                         && Me.Shapeshift != ShapeshiftForm.Cat)
                                     {
@@ -576,7 +581,7 @@ namespace Druid.DRotations
                                         lastSpell = FEROCIOUS_BITE;
                                     }
                                     else if (SpellManager.HasSpell(SHRED)
-                                        && Me.EnergyPercent >= 50
+                                        && Me.EnergyPercent >= P.myPrefs.ShredEnergy
                                         && SpellManager.CanCast(SHRED))
                                     {
                                         SpellManager.Cast(SHRED);
@@ -595,7 +600,7 @@ namespace Druid.DRotations
                             _loop = false;
                         }
                     }
-                    )));
+                    );
         }
         public static int FAERIE_SWARM = 106707;
         public static int FAERIE_FIRE = 770;
@@ -608,15 +613,25 @@ namespace Druid.DRotations
                 {
                     try
                     {
+
                         if (SpellManager.HasSpell(RAKE)
                             && Me.HasAura(PROWL)
                             && P.myPrefs.PullPref
-                            && Me.CurrentTarget.IsWithinMeleeRange
+                            && InMeleeRange(Me.CurrentTarget)
                             && SpellManager.CanCast(RAKE))
                         {
                             SpellManager.Cast(RAKE);
-                            Logging.Write(RAKE);
+                            Logging.Write(Colors.LightBlue, RAKE);
                             lastSpell = RAKE;
+                        }
+                        else if (SpellManager.HasSpell(SHRED)
+                            && InMeleeRange(Me.CurrentTarget)
+                            && Me.EnergyPercent >= P.myPrefs.ShredEnergy
+                            && SpellManager.CanCast(SHRED))
+                        {
+                            SpellManager.Cast(SHRED);
+                            Logging.Write(Colors.LightBlue, SHRED);
+                            lastSpell = SHRED;
                         }
                         else if (SpellManager.HasSpell(FAERIE_SWARM)
                             && !U.spellOnCooldown(FAERIE_SWARM)
@@ -625,7 +640,7 @@ namespace Druid.DRotations
                             && SpellManager.CanCast(FAERIE_SWARM))
                         {
                             SpellManager.Cast(FAERIE_SWARM);
-                            Logging.Write(WoWSpell.FromId(FAERIE_SWARM).Name);
+                            Logging.Write(Colors.LightBlue, WoWSpell.FromId(FAERIE_SWARM).Name);
                         }
                         else if (SpellManager.HasSpell(FAERIE_FIRE)
                             && !U.spellOnCooldown(FAERIE_FIRE)
@@ -634,9 +649,8 @@ namespace Druid.DRotations
                             && SpellManager.CanCast(FAERIE_FIRE))
                         {
                             SpellManager.Cast(FAERIE_FIRE);
-                            Logging.Write(WoWSpell.FromId(FAERIE_FIRE).Name);
+                            Logging.Write(Colors.LightBlue, WoWSpell.FromId(FAERIE_FIRE).Name);
                         }
-                        Thread.Sleep(10);
                     }
                     catch (Exception e)
                     {
@@ -669,6 +683,10 @@ namespace Druid.DRotations
                 if (s == "1") return true;
                 return false;
             }
+        }
+        public static bool InMeleeRange(WoWUnit unit)
+        {
+            return unit.Distance <= 3.5f;
         }
     }
 }
