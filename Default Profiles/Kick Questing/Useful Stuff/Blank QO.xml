@@ -1,5 +1,5 @@
 <HBProfile> <!-- Honorbuddy Blank QO by Kick -->
-	<Name>Blank QO ($Rev: 3651 $)</Name>
+	<Name>Blank QO ($Rev: 3663 $)</Name>
 	<MinLevel>1</MinLevel>
 	<MaxLevel>200</MaxLevel>
 	
@@ -489,7 +489,7 @@ Log("Is Complete: {0}", result);
 				/script GetQuestReward(3)
 				/script GetQuestReward()	
 	
-				<CustomBehavior File="RunMacro" Macro="/click StaticPopup1Button1" />
+				<CustomBehavior File="Misc\RunLua" Lua="StaticPopup1Button1:Click()" />
 	
 				<CustomBehavior File="InteractWith" MobId="" Range="8" />
 				<CustomBehavior File="Misc\RunLua" Lua="CompleteQuest();"/>

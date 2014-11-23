@@ -139,9 +139,9 @@
   <WildGrowthUnit>3</WildGrowthUnit>
   <WildGrowthHP>80</WildGrowthHP>
   <WildMushroomPlacementKeys>D6</WildMushroomPlacementKeys>
-  <WildMushroomPlacement>True</WildMushroomPlacement>
+  <WildMushroomPlacement>False</WildMushroomPlacement>
   <WildMushroomBalance>False</WildMushroomBalance>
-  <Wrath>False</Wrath>
+  <Wrath>True</Wrath>
   <WrathBalance>True</WrathBalance>
   <AttackASAP>True</AttackASAP>
   <AttackOOC>True</AttackOOC>
@@ -154,7 +154,7 @@
   <AutoRacial>True</AutoRacial>
   <AutoRez>True</AutoRez>
   <AutoSetFocus>False</AutoSetFocus>
-  <AutoTarget>False</AutoTarget>
+  <AutoTarget>True</AutoTarget>
   <AutoWriteLog>True</AutoWriteLog>
   <BurstString>ControlKey+B</BurstString>
   <BurstKey>7</BurstKey>
@@ -172,7 +172,7 @@
   <LastSavedSpec>Restoration</LastSavedSpec>
   <LastSavedMode></LastSavedMode>
   <NaturesCureASAP>True</NaturesCureASAP>
-  <NaturesCureDebuff>True</NaturesCureDebuff>
+  <NaturesCureDebuff>False</NaturesCureDebuff>
   <NaturesCureDebuffNumber>1</NaturesCureDebuffNumber>
   <NaturesVigil>True</NaturesVigil>
   <NaturesVigilCD>False</NaturesVigilCD>
@@ -182,7 +182,7 @@
   <PounceInterrupt>True</PounceInterrupt>
   <PriorityHeal>70</PriorityHeal>
   <RemoveCorruption>False</RemoveCorruption>
-  <StartEating>60</StartEating>
+  <StartEating>70</StartEating>
   <Trinket1>5</Trinket1>
   <Trinket1HP>40</Trinket1HP>
   <Trinket2>4</Trinket2>

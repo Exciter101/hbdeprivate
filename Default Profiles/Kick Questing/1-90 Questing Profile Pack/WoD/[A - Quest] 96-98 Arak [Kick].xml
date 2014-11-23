@@ -44,8 +44,11 @@
 		<Vendor Name="Ruuan the Seer" Entry="87775" Type="Repair" X="-432.757" Y="1850.8" Z="41.62031" /> <!-- Veil Terokk -->
 		<Vendor Name="Alex Johnson" Entry="84132" Type="Repair" X="-1097.946" Y="2239.363" Z="9.030098" /> <!-- Southport -->
 		<Vendor Name="Tickle Bubblefizz" Entry="82156" Type="Sell" X="-671.5364" Y="2419.594" Z="34.98823" /> <!-- Admiral Taylor G -->
-		<Vendor Name="Nozwik Charbroil" Entry="82568" Type="Food" X="-1575.559" Y="958.059" Z="10.61832" /> <!-- Pinchwhistle -->
-		<Vendor Name="Twizix Copperbomb" Entry="82183" Type="Repair" X="-1483.905" Y="981.5174" Z="8.025555" /> <!-- Pinchwhistle -->
+		<Vendor Name="Nozwik Charbroil" Entry="82568" Type="Food" X="-1575.559" Y="958.059" Z="10.61832" /> <!-- Pinchwhistle GW -->
+		<Vendor Name="Twizix Copperbomb" Entry="82183" Type="Repair" X="-1483.905" Y="981.5174" Z="8.025555" /> <!-- Pinchwhistle GW -->
+		<Vendor Name="Q2-MLT Fabricator" Entry="82182" Type="Repair" X="-2332.87" Y="1117.309" Z="28.32723" /> <!-- Pinchwhistle Point -->
+		<Vendor Name="Akana" Entry="80777" Type="Sell" X="-337.4931" Y="909.0139" Z="75.39072" /> <!-- Talon Watch -->
+		<Vendor Name="Zektar" Entry="88045" Type="Repair" X="-656.007" Y="1524.108" Z="36.65781" /> <!-- Nest of the Raven Speakers -->
 	</Vendors>
 
    <!-- BEGIN: Quest Overrides -->
@@ -264,7 +267,7 @@
 	<Quest Id="36048" Name="We Have Him Now">
 		<Objective Type="CollectItem" ItemId="113635" CollectCount="1">
 			<CollectFrom>
-				<Vendor Name="Gardul Venomshiv" Entry="83923" />
+				<Mob Name="Gardul Venomshiv" Entry="83923" />
 			</CollectFrom>
 			<Hotspots>
 				<Hotspot X="36.91667" Y="1156.618" Z="81.2579" />
@@ -556,7 +559,341 @@
 			</Hotspots>
 		</Objective>
 	</Quest>
-
+	<Quest Id="36179" Name="Unwanted Pests">
+		<Objective Type="KillMob" MobId="81138" KillCount="10">
+			<Hotspots>
+				<Hotspot X="-1604.332" Y="851.1205" Z="-0.4872626" />
+				<Hotspot X="-1600.164" Y="806.2952" Z="-0.4238685" />
+				<Hotspot X="-1614.659" Y="762.5458" Z="-0.4238685" />
+				<Hotspot X="-1657.677" Y="765.3026" Z="-0.4245892" />
+				<Hotspot X="-1644.141" Y="801.1216" Z="-0.4253615" />
+				<Hotspot X="-1689.368" Y="808.1972" Z="-0.4253615" />
+				<Hotspot X="-1726.857" Y="792.0009" Z="-0.4234226" />
+				<Hotspot X="-1750.757" Y="831.7019" Z="-0.4234226" />
+				<Hotspot X="-1758.856" Y="865.8684" Z="-0.4234226" />
+				<Hotspot X="-1718.799" Y="886.0528" Z="-0.4460075" />
+				<Hotspot X="-1682.275" Y="847.3385" Z="-0.3765833" />
+				<Hotspot X="-1642.742" Y="847.0034" Z="-0.4245796" />					
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="35081" Name="Clearing Out Before Cleaning Up">
+		<Objective Type="KillMob" MobId="81168" KillCount="8">
+			<Hotspots>
+				<Hotspot X="-1816.954" Y="1064.35" Z="45.51908" />
+				<Hotspot X="-1856.54" Y="1031.238" Z="31.97829" />
+				<Hotspot X="-1881.631" Y="1023.957" Z="24.29954" />
+				<Hotspot X="-1910.246" Y="1045.958" Z="15.47091" />
+				<Hotspot X="-1923.125" Y="998.3656" Z="2.56913" />
+				<Hotspot X="-1961.641" Y="1010.616" Z="1.141552" />
+				<Hotspot X="-1927.394" Y="1059.815" Z="14.72297" />
+				<Hotspot X="-1880.283" Y="1057.16" Z="25.90328" />
+				<Hotspot X="-1860.532" Y="1083.996" Z="36.41133" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="35089" Name="Skimming Off The Top">
+		<Objective Type="CollectItem" ItemId="112906" CollectCount="4">
+			<CollectFrom>
+				<Mob Name="Volatile Sludge" Entry="81524" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-2263.903" Y="1171.967" Z="-0.2572724" />
+				<Hotspot X="-2231.095" Y="1134.978" Z="0.350518" />
+				<Hotspot X="-2199.621" Y="1131.532" Z="-0.3725877" />
+				<Hotspot X="-2186.395" Y="1080.79" Z="0.1696689" />
+				<Hotspot X="-2217.412" Y="1024.968" Z="1.466331" />
+				<Hotspot X="-2260.89" Y="1105.806" Z="4.144553" />
+				<Hotspot X="-2284.434" Y="1148.213" Z="3.703195" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="35091" Name="Sporicide">
+		<Objective Type="KillMob" MobId="82265" KillCount="6">
+			<Hotspots>
+				<Hotspot X="-2364.877" Y="1274.396" Z="1.787102" />
+				<Hotspot X="-2419.657" Y="1304.86" Z="1.16413" />
+				<Hotspot X="-2416.047" Y="1232.551" Z="-0.01177222" />
+				<Hotspot X="-2457.358" Y="1204.69" Z="1.473691" />
+				<Hotspot X="-2416.297" Y="1181.962" Z="2.513079" />
+				<Hotspot X="-2379.523" Y="1224.751" Z="2.572313" />
+				<Hotspot X="-2331.29" Y="1208.664" Z="2.873555" />
+				<Hotspot X="-2253.927" Y="1223.162" Z="3.893528" />
+				<Hotspot X="-2157.354" Y="1261.577" Z="0.4167216" />
+				<Hotspot X="-2121.472" Y="1320.776" Z="1.586205" />
+				<Hotspot X="-2129.358" Y="1390.734" Z="1.489211" />
+				<Hotspot X="-2168.939" Y="1357.542" Z="-0.3811572" />
+				<Hotspot X="-2216.881" Y="1402.747" Z="1.268318" />
+				<Hotspot X="-2229.428" Y="1348.802" Z="4.099442" />
+				<Hotspot X="-2190.149" Y="1304.945" Z="-0.4282792" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="34999" Name="Hatred Undying">
+		<Objective Type="CollectItem" ItemId="112335" CollectCount="15">
+			<CollectFrom>
+				<Mob Name="Hateful Animate" Entry="81581" Type="Repair" X="-345.1076" Y="808.3854" Z="57.86882" />
+				<Mob Name="Spiteful Animate" Entry="80637" Type="Repair" X="-321.2825" Y="806.187" Z="58.40017" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-147.7247" Y="902.5806" Z="60.85202" />
+				<Hotspot X="-191.1163" Y="879.2216" Z="60.49025" />
+				<Hotspot X="-249.7109" Y="841.0596" Z="59.77825" />
+				<Hotspot X="-290.1035" Y="823.2723" Z="60.09053" />
+				<Hotspot X="-369.4971" Y="807.5696" Z="57.86902" />
+				<Hotspot X="-365.929" Y="765.3323" Z="57.86897" />
+				<Hotspot X="-319.1087" Y="758.8677" Z="59.25875" />
+				<Hotspot X="-274.9754" Y="771.1031" Z="59.45232" />
+				<Hotspot X="-232.666" Y="789.4077" Z="60.09918" />
+				<Hotspot X="-206.0423" Y="799.6288" Z="60.45219" />
+				<Hotspot X="-164.3391" Y="803.6706" Z="60.32344" />
+				<Hotspot X="-175.1101" Y="848.3254" Z="60.51262" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="35002" Name="Sons of Sethe">
+		<Objective Type="CollectItem" ItemId="112336" CollectCount="6">
+			<CollectFrom>
+				<Mob Name="Sethekk Wind Serpent" Entry="80643" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-376.2773" Y="686.0993" Z="57.38932" />
+				<Hotspot X="-327.6167" Y="679.2394" Z="59.08909" />
+				<Hotspot X="-404.3497" Y="594.2618" Z="59.86661" />
+				<Hotspot X="-501.1875" Y="551.5073" Z="59.35879" />
+				<Hotspot X="-558.3753" Y="558.2567" Z="59.54944" />
+				<Hotspot X="-596.416" Y="621.1949" Z="61.46921" />
+				<Hotspot X="-546.089" Y="659.5353" Z="59.69955" />
+				<Hotspot X="-454.26" Y="651.7822" Z="57.36592" />
+				<Hotspot X="-406.2958" Y="654.0605" Z="57.44847" />
+				<Hotspot X="-422.9536" Y="730.1544" Z="58.88049" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="35011" Name="The False Talon King">
+		<Objective Type="CollectItem" ItemId="112444" CollectCount="1">
+			<CollectFrom>
+				<Mob Name="Talon King Ikiss" Entry="80815" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-269.9531" Y="436.8299" Z="88.43587" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="35004" Name="Servants of a Dead God">
+		<Objective Type="KillMob" MobId="80640" KillCount="6">
+			<Hotspots>
+				<Hotspot X="-423.0508" Y="519.6782" Z="68.41383" />
+				<Hotspot X="-351.1665" Y="552.316" Z="66.25443" />
+				<Hotspot X="-317.5255" Y="538.6537" Z="70.43296" />
+				<Hotspot X="-306.5576" Y="505.5507" Z="74.47693" />
+				<Hotspot X="-328.5191" Y="500.0419" Z="75.44213" />
+				<Hotspot X="-287.5024" Y="557.6703" Z="70.43287" />
+				<Hotspot X="-297.6753" Y="584.6857" Z="70.43291" />
+				<Hotspot X="-257.1923" Y="594.1154" Z="74.9436" />
+				<Hotspot X="-270.3024" Y="630.6442" Z="67.83002" />
+				<Hotspot X="-241.7352" Y="656.4263" Z="71.36479" />
+				<Hotspot X="-180.4273" Y="609.1095" Z="79.46375" />
+				<Hotspot X="-157.4494" Y="602.8386" Z="86.3801" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="KillMob" MobId="80638" KillCount="6">
+			<Hotspots>
+				<Hotspot X="-423.0508" Y="519.6782" Z="68.41383" />
+				<Hotspot X="-351.1665" Y="552.316" Z="66.25443" />
+				<Hotspot X="-317.5255" Y="538.6537" Z="70.43296" />
+				<Hotspot X="-306.5576" Y="505.5507" Z="74.47693" />
+				<Hotspot X="-328.5191" Y="500.0419" Z="75.44213" />
+				<Hotspot X="-287.5024" Y="557.6703" Z="70.43287" />
+				<Hotspot X="-297.6753" Y="584.6857" Z="70.43291" />
+				<Hotspot X="-257.1923" Y="594.1154" Z="74.9436" />
+				<Hotspot X="-270.3024" Y="630.6442" Z="67.83002" />
+				<Hotspot X="-241.7352" Y="656.4263" Z="71.36479" />
+				<Hotspot X="-180.4273" Y="609.1095" Z="79.46375" />
+				<Hotspot X="-157.4494" Y="602.8386" Z="86.3801" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="35895" Name="Terokk's Fall">
+		<Objective Type="KillMob" MobId="83600" KillCount="20">
+			<Hotspots>
+				<Hotspot X="-378.1016" Y="786.4291" Z="57.86756" />
+				<Hotspot X="-390.7406" Y="726.0061" Z="57.505" />
+				<Hotspot X="-412.3598" Y="679.6833" Z="57.77292" />
+				<Hotspot X="-450.5966" Y="644.9413" Z="58.18137" />
+				<Hotspot X="-415.559" Y="637.0883" Z="57.36303" />
+				<Hotspot X="-380.206" Y="652.3433" Z="58.68639" />
+				<Hotspot X="-352.2305" Y="673.3245" Z="58.06981" />
+				<Hotspot X="-322.5179" Y="707.6718" Z="57.76895" />
+				<Hotspot X="-307.1196" Y="748.8934" Z="59.37311" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="UseObject" ObjectId="233382" UseCount="1">
+			<Hotspots>
+				<Hotspot X="-445.4514" Y="624.0938" Z="56.17257" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="35896" Name="The Avatar of Terokk">
+		<Objective Type="KillMob" MobId="84120" KillCount="25">
+			<Hotspots>
+				<Hotspot X="244.7857" Y="2785.814" Z="81.79545" />
+				<Hotspot X="245.8828" Y="2876.74" Z="81.48783" />
+				<Hotspot X="264.5667" Y="2860.198" Z="78.09652" />
+				<Hotspot X="253.7711" Y="2814.63" Z="78.09652" />
+				<Hotspot X="272.9863" Y="2813.075" Z="78.09652" />
+				<Hotspot X="291.424" Y="2830.129" Z="78.09652" />
+				<Hotspot X="291.3038" Y="2848.514" Z="78.09652" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="KillMob" MobId="84058" KillCount="4">
+			<Hotspots>
+				<Hotspot X="244.7857" Y="2785.814" Z="81.79545" />
+				<Hotspot X="245.8828" Y="2876.74" Z="81.48783" />
+				<Hotspot X="264.5667" Y="2860.198" Z="78.09652" />
+				<Hotspot X="253.7711" Y="2814.63" Z="78.09652" />
+				<Hotspot X="272.9863" Y="2813.075" Z="78.09652" />
+				<Hotspot X="291.424" Y="2830.129" Z="78.09652" />
+				<Hotspot X="291.3038" Y="2848.514" Z="78.09652" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="KillMob" MobId="84053" KillCount="1">
+			<Hotspots>
+				<Hotspot X="288.0416" Y="2842.927" Z="78.09621" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="34991" Name="To the... Rescue?">
+		<Objective Type="CollectItem" ItemId="112331" CollectCount="1">
+			<CollectFrom>
+				<Mob Name="Stonescale" Entry="80694" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-696.1719" Y="1730.241" Z="50.82384" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="34923" Name="The Bloodmane">
+		<Objective Type="KillMob" MobId="80455" KillCount="10">
+			<Hotspots>
+				<Hotspot X="-760.5724" Y="1402.09" Z="50.1965" />
+				<Hotspot X="-773.9874" Y="1329.481" Z="52.9171" />
+				<Hotspot X="-848.0751" Y="1292.195" Z="58.42992" />
+				<Hotspot X="-917.3284" Y="1231.325" Z="56.5889" />
+				<Hotspot X="-988.2839" Y="1209.375" Z="58.79036" />
+				<Hotspot X="-898.7664" Y="1268.498" Z="59.5662" />
+				<Hotspot X="-873.2071" Y="1332.471" Z="59.56413" />
+				<Hotspot X="-754.7179" Y="1403.429" Z="49.54923" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="KillMob" MobId="83896" KillCount="1">
+			<Hotspots>
+				<Hotspot X="-936.2846" Y="1209.518" Z="56.76194" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="34922" Name="Words of the Raven Mother">
+		<Objective Type="CollectItem" ItemId="112199" CollectCount="8">
+			<CollectFrom>
+				<GameObject Name="Ravenspeaker Scroll" Entry="231065" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-760.5724" Y="1402.09" Z="50.1965" />
+				<Hotspot X="-773.9874" Y="1329.481" Z="52.9171" />
+				<Hotspot X="-848.0751" Y="1292.195" Z="58.42992" />
+				<Hotspot X="-917.3284" Y="1231.325" Z="56.5889" />
+				<Hotspot X="-988.2839" Y="1209.375" Z="58.79036" />
+				<Hotspot X="-898.7664" Y="1268.498" Z="59.5662" />
+				<Hotspot X="-873.2071" Y="1332.471" Z="59.56413" />
+				<Hotspot X="-754.7179" Y="1403.429" Z="49.54923" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="34938" Name="Ralshiara's Demise">
+		<Objective Type="KillMob" MobId="80502" KillCount="1">
+			<Hotspots>
+				<Hotspot X="-1031.734" Y="1648.759" Z="67.42218" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="34939" Name="Declawing The Bloodmane">
+		<Objective Type="CollectItem" ItemId="112204" CollectCount="6">
+			<CollectFrom>
+				<Mob Name="Bloodmane Earthbinder" Entry="80448" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-789.6996" Y="1629.553" Z="33.83214" />
+				<Hotspot X="-826.7191" Y="1582.872" Z="49.17596" />
+				<Hotspot X="-898.572" Y="1587.871" Z="60.26632" />
+				<Hotspot X="-891.0818" Y="1626.803" Z="58.84449" />
+				<Hotspot X="-928.5219" Y="1725.055" Z="61.22646" />
+				<Hotspot X="-973.5197" Y="1773.95" Z="60.63454" />
+				<Hotspot X="-993.2849" Y="1712.243" Z="56.40988" />
+				<Hotspot X="-1034.234" Y="1732.24" Z="55.42236" />
+				<Hotspot X="-1099.027" Y="1729.252" Z="44.78939" />
+				<Hotspot X="-1136.806" Y="1679.61" Z="60.17478" />
+				<Hotspot X="-1186.486" Y="1666.454" Z="55.48008" />
+				<Hotspot X="-1216.098" Y="1621.933" Z="57.27089" />
+				<Hotspot X="-1298.468" Y="1595.833" Z="49.94181" />
+				<Hotspot X="-1284.713" Y="1537.446" Z="83.38582" />
+				<Hotspot X="-1154.43" Y="1613.268" Z="65.35221" />
+				<Hotspot X="-1174.513" Y="1578.008" Z="70.06256" />
+				<Hotspot X="-1086.484" Y="1622.2" Z="68.01069" />
+				<Hotspot X="-1037.197" Y="1510.764" Z="106.4777" />
+				<Hotspot X="-960.5408" Y="1566.69" Z="77.25571" />
+				<Hotspot X="-943.2982" Y="1513.699" Z="78.04998" />
+				<Hotspot X="-871.5611" Y="1533.546" Z="72.38506" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="34924" Name="The Egg Thieves">
+		<Objective Type="CollectItem" ItemId="112135" CollectCount="8">
+			<CollectFrom>
+				<GameObject Name="Dread Raven Egg" Entry="231016" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-789.6996" Y="1629.553" Z="33.83214" />
+				<Hotspot X="-826.7191" Y="1582.872" Z="49.17596" />
+				<Hotspot X="-898.572" Y="1587.871" Z="60.26632" />
+				<Hotspot X="-891.0818" Y="1626.803" Z="58.84449" />
+				<Hotspot X="-928.5219" Y="1725.055" Z="61.22646" />
+				<Hotspot X="-973.5197" Y="1773.95" Z="60.63454" />
+				<Hotspot X="-993.2849" Y="1712.243" Z="56.40988" />
+				<Hotspot X="-1034.234" Y="1732.24" Z="55.42236" />
+				<Hotspot X="-1099.027" Y="1729.252" Z="44.78939" />
+				<Hotspot X="-1136.806" Y="1679.61" Z="60.17478" />
+				<Hotspot X="-1186.486" Y="1666.454" Z="55.48008" />
+				<Hotspot X="-1216.098" Y="1621.933" Z="57.27089" />
+				<Hotspot X="-1298.468" Y="1595.833" Z="49.94181" />
+				<Hotspot X="-1284.713" Y="1537.446" Z="83.38582" />
+				<Hotspot X="-1154.43" Y="1613.268" Z="65.35221" />
+				<Hotspot X="-1174.513" Y="1578.008" Z="70.06256" />
+				<Hotspot X="-1086.484" Y="1622.2" Z="68.01069" />
+				<Hotspot X="-1037.197" Y="1510.764" Z="106.4777" />
+				<Hotspot X="-960.5408" Y="1566.69" Z="77.25571" />
+				<Hotspot X="-943.2982" Y="1513.699" Z="78.04998" />
+				<Hotspot X="-871.5611" Y="1533.546" Z="72.38506" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="36085" Name="On Ebon Wings">
+		<Objective Type="KillMob" MobId="84111" KillCount="8">
+			<Hotspots>
+				<Hotspot X="-800.7252" Y="1855.113" Z="473.1218" />
+				<Hotspot X="-843.5554" Y="1905.205" Z="473.1222" />
+				<Hotspot X="-810.9416" Y="1940.41" Z="472.161" />
+				<Hotspot X="-763.2657" Y="1932.833" Z="472.4158" />
+				<Hotspot X="-756.1738" Y="1897.665" Z="472.1607" />
+				<Hotspot X="-779.73" Y="1885.327" Z="472.1607" />		
+			</Hotspots>
+		</Objective>
+		<Objective Type="KillMob" MobId="84001" KillCount="1">
+			<Hotspots>
+				<Hotspot X="-768.6839" Y="1916.341" Z="472.1605" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	
 
 
 
@@ -590,12 +927,36 @@
 
         <CustomBehavior File="Message" Text="Compiling Arik Quests" LogColor="CornflowerBlue" />
 		
+			<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="3" ExpiryTime="9" ExpiryAction="InputEnabled_Continue" 
+			Text="We are now accepting bug reports against the 90-100 portion of this pack.  Please do NOT open new threads in the forum regarding bugs with these profiles--such threads will be deleted!  Use Kick's Profiles thread!" />
+		
+		
 			<!-- Our Garrison, SMV -->
-			<If Condition="HasQuest(34655)" > <!-- Arak - The Shadows of Skettis -->
-				<If Condition="Me.ZoneId != 6722"> <!-- Arakkoa Exodus -->
-					<CustomBehavior File="InteractWith" MobId="81103" GossipOptions="1" Range="5" WaitTime="5000" X="1864.33" Y="217.8108" Z="76.63776" /> <!-- Dungar @ Garrison Flies us to Arik -->
+			<!-- If I'm less than level 96 -->
+			<If Condition="Me.Level &lt; 96">
+				<CustomBehavior File="UserDialog" AllowBotStop="True" StopOnContinue="True" SoundCue="Exclamation" SoundCueInterval="1" Text="You must be level 96 or higher to run this profile." />
+			</If>
+
+			<!-- If I'm not in Lunarfall -->
+			<If Condition="Me.ZoneId != 7078 &amp;&amp; !HasQuest(34655) &amp;&amp; !IsQuestCompleted(34655)" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(item:110560)" /><!-- Use Garrison Hearthstone -->
+				<CustomBehavior File="WaitTimer" WaitTime="20000" GoalText="Waiting for port {TimeRemaining}" />
+			</If>
+
+			<!-- If I'm in Lunarfall -->
+			<If Condition="Me.ZoneId == 7078" >
+				<If Condition="!HasQuest(36951) &amp;&amp; !IsQuestCompleted(36951)" > <!-- Bulletin Board's Arakkoa Exodus -->
+					<If Condition="(IsQuestCompleted(34586)) &amp;&amp; (!IsQuestCompleted(36592))" > <!-- If I have a level 1 Garrison -->
+						<!-- Pick up the Bulletin Board's Arakkoa Exodus -->
+		<PickUp QuestName="Arakkoa Exodus" QuestId="36951" GiverName="Bulletin Board" GiverId="232397" X="1889.443" Y="252.7309" Z="76.62231" />
+					</If>
+					<If Condition="IsQuestCompleted(36592)" > <!-- If I have a level 2 or 3 Garrison -->
+		<PickUp QuestName="Arakkoa Exodus" QuestId="36951" GiverName="Bulletin Board" GiverId="232400" X="1888.486" Y="254.5486" Z="76.64058" />
+					</If>
+					<CustomBehavior File="InteractWith" MobId="81103" GossipOptions="2" WaitForNpcs="False" X="1864.33" Y="217.8108" Z="76.6386" /> <!-- Fly to Spires of Arak -->
+		<TurnIn QuestName="Arakkoa Exodus" QuestId="36951" TurnInName="Azik" TurnInId="79539" X="655.0746" Y="2384.804" Z="203.7571" />
+		<PickUp QuestName="The Shadows of Skettis" QuestId="34655" GiverName="Azik" GiverId="79539" X="655.0746" Y="2384.804" Z="203.7571" />
 				</If>
-		<TurnIn QuestName="Arakkoa Exodus" QuestId="34653" TurnInName="Azik" TurnInId="79539" X="655.0746" Y="2384.804" Z="203.7571" />
 			</If>
 			<!-- End of Garrison -->
 			
@@ -694,7 +1055,7 @@
 			</If>
 
 			 <!-- BREWERY -->
-			 <If Condition="(HasQuest(37327) || IsQuestCompleted(37327)" > <!-- BREWERY CHAIN -->
+			 <If Condition="(HasQuest(37327) || IsQuestCompleted(37327))" > <!-- BREWERY CHAIN -->
 		<TurnIn QuestName="Befriending the Locals" QuestId="37327" TurnInName="Dusk-Seer Irizzar" TurnInId="83463" X="-592.6059" Y="2020.816" Z="15.62265" />
 		<PickUp QuestName="A Lack of Wasps" QuestId="37296" GiverName="Dusk-Seer Irizzar" GiverId="83463" X="-592.6059" Y="2020.816" Z="15.62265" />
 			<Objective QuestName="A Lack of Wasps" QuestId="37296" Type="KillMob" MobId="84866" KillCount="8" />
@@ -768,7 +1129,7 @@
 		<TurnIn QuestName="No Time to Waste" QuestId="36165" TurnInName="Kolrigg Stoktron" TurnInId="84261" WaitTime="3000" X="-1075.696" Y="2277.028" Z="6.380687" />
              <If Condition="!HasQuest(37281) &amp;&amp; !IsQuestCompleted(37281)" > <!-- Hulda Shadowblade / Follower -->
                 <MoveTo X="-1076.943" Y="2273.585" Z="6.489576" />
-                <CustomBehavior File="InteractWith" MobId="88195" WaitForNpcs="False" WaitTime="3000" X="-1076.943" Y="2273.585" Z="6.489576" />
+                <CustomBehavior File="InteractWith" MobId="88195" WaitTime="3000" X="-1076.943" Y="2273.585" Z="6.489576" />
                 <CustomBehavior File="Misc\RunLua" Lua="QuestFrameCompleteQuestButton:Click()" />
 				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for quest to complete {TimeRemaining}" />
              </If>
@@ -882,7 +1243,7 @@
 			</While>
 		<TurnIn QuestName="Ikky's Egg" QuestId="34838" TurnInName="Ikky" TurnInId="80469" X="-100.8576" Y="1930.196" Z="32.01377" />
 		<PickUp QuestName="Baby Bird" QuestId="34886" GiverName="Ikky" GiverId="80469" X="-100.8576" Y="1930.196" Z="32.01377" />
-			<While Condition="HasQuest(34886) &amp;&amp; !IsQuestCompleted(34886)" >
+			<While Condition="HasQuest(34886) &amp;&amp; !IsQuestCompleted(34886)" > <!-- Baby Bird -->
 				<CustomBehavior File="InteractWith" QuestId="34886" MobId="80472" NumOfTimes="20" Range="4" TerminateWhen="IsObjectiveComplete(1, 34886)" 
 											CollectionDistance="1000" PreInteractMountStrategy="DismountOrCancelShapeshift" >
 				  <HuntingGrounds>
@@ -977,8 +1338,12 @@
 				</CustomBehavior>
 			</While>
 			<Objective QuestName="Legacy of the Apexis" QuestId="35258" Type="CollectItem" ItemId="113081" CollectCount="5" />
-			<Objective QuestName="Sol Sisters" QuestId="35259" Type="KillMob" MobId="81933" KillCount="1" />
-			<Objective QuestName="Sol Sisters" QuestId="35259" Type="KillMob" MobId="81934" KillCount="1" />
+			<If Condition="HasQuest(35259)" >
+				<Objective QuestName="Sol Sisters" QuestId="35259" Type="KillMob" MobId="81933" KillCount="1" />
+				<Objective QuestName="Sol Sisters" QuestId="35259" Type="KillMob" MobId="81934" KillCount="1" />
+				<MoveTo X="348.2197" Y="2741.416" Z="70.95568" />
+				<MoveTo X="353.5365" Y="2747.607" Z="71.85035" />
+			</If>
 		<TurnIn QuestName="Sol Sisters" QuestId="35259" TurnInName="Inactive Apexis Destroyer" TurnInId="82123" X="353.5365" Y="2747.607" Z="71.85035" />
 		<PickUp QuestName="Shot-Caller" QuestId="35261" GiverName="Inactive Apexis Destroyer" GiverId="82123" X="353.5365" Y="2747.607" Z="71.85035" />
 			<Objective QuestName="Shot-Caller" QuestId="35261" Type="CollectItem" ItemId="113121" CollectCount="1" />
@@ -995,7 +1360,7 @@
 					<CustomBehavior File="SpecificQuests\35273-Arak-HotSeat" />
 					
 					Logic: Fire button 2 (1s CD - aoe spread), fire button 1 - laser beam for 4s
-					<Vendor Name="Apexis Destroyer" Entry="82229" Type="Repair" X="198.3438" Y="2595.892" Z="27.42141" />
+					<Mob Name="Apexis Destroyer" Entry="82229" Type="Repair" X="198.3438" Y="2595.892" Z="27.42141" />
 					<WoWUnit Name="Adherent Sol-Shaper" Entry="82245" X="130.2309" Y="2539.313" Z="91.61228" />
 					our vehicle can 'die' and you have to get back in it
 				</If>
@@ -1009,7 +1374,7 @@
 
 			<!-- Veil Terrok -->
 		<TurnIn QuestName="Control is King" QuestId="35634" TurnInName="Darkscryer Raastok" TurnInId="82509" X="-468.8924" Y="1825.566" Z="44.58598" />
-            <If Condition="!HasQuest(36353) &amp;&amp; !IsQuestCompleted(36353)" > <!-- Ikky / Companion -->
+            <If Condition="!HasQuest(34898) &amp;&amp; !IsQuestCompleted(34898)" > <!-- Ikky / Companion -->
                 <MoveTo X="-462.592" Y="1881.333" Z="46.13694" />
                 <CustomBehavior File="InteractWith" MobId="85320" WaitTime="3000" X="-462.592" Y="1881.333" Z="46.13694" />
                 <CustomBehavior File="Misc\RunLua" Lua="QuestFrameCompleteQuestButton:Click()" />
@@ -1021,8 +1386,8 @@
 		<PickUp QuestName="Rites of the Talonpriests" QuestId="35733" GiverName="Reshad" GiverId="81770" X="-501.684" Y="1863.557" Z="44.78222" />
 		<TurnIn QuestName="Rites of the Talonpriests" QuestId="35733" TurnInName="Effigy of Terokk" TurnInId="82813" X="-504.9809" Y="1855.319" Z="44.78154" />
 		<PickUp QuestName="The Talon King" QuestId="35734" GiverName="Effigy of Terokk" GiverId="82813" X="-504.9809" Y="1855.319" Z="44.78154" />
-			<While Condition="HasQuest(35734) &amp;&amp; !IsQuestCompleted(35734)" >
-				<CustomBehavior File="UserDialog" QuestId="35734" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Talk to The Effify and Kill stuff" />
+			<While Condition="HasQuest(35734) &amp;&amp; !IsQuestCompleted(35734)" > <!-- The Talon King -->
+				<CustomBehavior File="UserDialog" QuestId="35734" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Talk to The Effigy and Kill stuff" />
 				<!--
 				<If Condition="!Me.IsOnTransport">
 					<CustomBehavior File="InteractWith" QuestId="35734" MobId="82813" Range="4" NonCompeteDistance="0" GossipOptions="1" WaitTime="5000" TerminateWhen="Me.IsOnTransport" X="-504.9809" Y="1855.319" Z="44.78154" />
@@ -1046,107 +1411,472 @@
 		<PickUp QuestName="Defungination" QuestId="35077" GiverName="Kimzee Pinchwhistle" GiverId="81109" X="-1562.99" Y="955.6893" Z="8.192728" />
 		<PickUp QuestName="Spore-be-Gone" QuestId="35079" GiverName="Engineer Gazwitz" GiverId="81128" X="-1563.87" Y="956.9653" Z="7.993487" />
 		<PickUp QuestName="Unwanted Pests" QuestId="36179" GiverName="Exterminator Lemmy" GiverId="85062" X="-1602.04" Y="889.6702" Z="0.1901077" />
-
-		
-		
-		
-		<!--
-
-			<Objective QuestName="Defungination" QuestId="35077" Type="KillMob" MobId="81288" KillCount="20" />
-		<TurnIn QuestName="Defungination" QuestId="35077" TurnInName="Kimzee Pinchwhistle" TurnInId="81109" X="-1562.99" Y="955.6893" Z="8.192728" />
-
-			<Objective QuestName="Spore-be-Gone" QuestId="35079" Type="KillMob" MobId="81135" KillCount="6" />
-		<TurnIn QuestName="Spore-be-Gone" QuestId="35079" TurnInName="Engineer Gazwitz" TurnInId="81128" X="-1563.87" Y="956.9653" Z="7.993487" />
-
-			<Objective QuestName="Unwanted Pests" QuestId="36179" Type="KillMob" MobId="81138" KillCount="10" />
-		<TurnIn QuestName="Unwanted Pests" QuestId="36179" TurnInName="Engineer Gazwitz" TurnInId="81128" X="-1563.87" Y="956.9653" Z="7.993487" />
-
-
-		
-
-		
-		
-
-
-
-
-		<TurnIn QuestName="Talon Watch" QuestId="34998" TurnInName="Talon Guard Kurekk" TurnInId="80758" />
-
-
-
-		
-		-->
-
-		<!--
-			<While Condition="HasQuest() &amp;&amp; !IsQuestCompleted()" >
+			<While Condition="HasQuest(35077) &amp;&amp; !IsQuestCompleted(35077)" > <!-- Defungination -->
+				<CustomBehavior File="InteractWith" QuestId="35077" MobId="81288" NumOfTimes="20" Range="4" TerminateWhen="IsObjectiveComplete(1, 35077)" WaitTime="0"
+											InteractByUsingItemId="112683" CollectionDistance="1000" PreInteractMountStrategy="DismountOrCancelShapeshift" >
+				  <HuntingGrounds>
+					<Hotspot X="-1604.332" Y="851.1205" Z="-0.4872626" />
+					<Hotspot X="-1600.164" Y="806.2952" Z="-0.4238685" />
+					<Hotspot X="-1614.659" Y="762.5458" Z="-0.4238685" />
+					<Hotspot X="-1657.677" Y="765.3026" Z="-0.4245892" />
+					<Hotspot X="-1644.141" Y="801.1216" Z="-0.4253615" />
+					<Hotspot X="-1689.368" Y="808.1972" Z="-0.4253615" />
+					<Hotspot X="-1726.857" Y="792.0009" Z="-0.4234226" />
+					<Hotspot X="-1750.757" Y="831.7019" Z="-0.4234226" />
+					<Hotspot X="-1758.856" Y="865.8684" Z="-0.4234226" />
+					<Hotspot X="-1718.799" Y="886.0528" Z="-0.4460075" />
+					<Hotspot X="-1682.275" Y="847.3385" Z="-0.3765833" />
+					<Hotspot X="-1642.742" Y="847.0034" Z="-0.4245796" />					
+				  </HuntingGrounds>
+				</CustomBehavior>
 			</While>
-				<CustomBehavior File="InteractWith" QuestId="" MobId="" Range="4" NonCompeteDistance="0" TerminateWhen="IsObjectiveComplete(1, )" 
-				<CustomBehavior File="InteractWith" QuestId="" MobId="" GossipOptions="1" NonCompeteDistance="0" Range="4" TerminateWhen="IsObjectiveComplete(1, )" 
-				<CustomBehavior File="InteractWith" QuestId="" MobId="" MobType="GameObject" NonCompeteDistance="0" Range="8" TerminateWhen="" 
-		
-			 <If Condition="!IsObjectiveComplete(1, )">
-			 </If>
-			<If Condition="HasQuest() &amp;&amp; !IsQuestCompleted()" >
-			</If>
-			 <While Condition="!IsObjectiveComplete(1, 00000)"> 
-			 </While>
-				<CustomBehavior File="InteractWith" QuestId="" MobId="" Range="5" 
-				<CustomBehavior File="InteractWith" QuestId="" MobId="" ObjectType="GameObject" WaitTime="2000" Range="3" 
-
-			<If Condition="HasQuest() &amp;&amp; !HasItem()" >
-			</If>
-			
-			<While Condition="HasQuest() &amp;&amp; !IsQuestCompleted()" >
-				<CustomBehavior File="InteractWith" QuestId="" MobId="" NumOfTimes="20" Range="4" TerminateWhen="IsObjectiveComplete(1, )" 
+			<While Condition="HasQuest(35079) &amp;&amp; !IsQuestCompleted(35079)" > <!-- Spore-be-Gone -->
+				<CustomBehavior File="InteractWith" QuestId="35079" MobId="81135" NumOfTimes="20" Range="4" TerminateWhen="IsObjectiveComplete(1, 35079)" 
 											CollectionDistance="1000" PreInteractMountStrategy="DismountOrCancelShapeshift" >
 				  <HuntingGrounds>
-					
+					<Hotspot X="-1604.332" Y="851.1205" Z="-0.4872626" />
+					<Hotspot X="-1600.164" Y="806.2952" Z="-0.4238685" />
+					<Hotspot X="-1614.659" Y="762.5458" Z="-0.4238685" />
+					<Hotspot X="-1657.677" Y="765.3026" Z="-0.4245892" />
+					<Hotspot X="-1644.141" Y="801.1216" Z="-0.4253615" />
+					<Hotspot X="-1689.368" Y="808.1972" Z="-0.4253615" />
+					<Hotspot X="-1726.857" Y="792.0009" Z="-0.4234226" />
+					<Hotspot X="-1750.757" Y="831.7019" Z="-0.4234226" />
+					<Hotspot X="-1758.856" Y="865.8684" Z="-0.4234226" />
+					<Hotspot X="-1718.799" Y="886.0528" Z="-0.4460075" />
+					<Hotspot X="-1682.275" Y="847.3385" Z="-0.3765833" />
+					<Hotspot X="-1642.742" Y="847.0034" Z="-0.4245796" />					
 				  </HuntingGrounds>
 				</CustomBehavior>
 			</While>
-			
-			<While Condition="HasQuest() &amp;&amp; !IsQuestCompleted()" >
-				<CustomBehavior File="InteractWith" QuestId="" MobId="" MobType="GameObject" NumOfTimes="20" Range="8" 
-											TerminateWhen="IsObjectiveComplete(1, )" CollectionDistance="1000" PreInteractMountStrategy="DismountOrCancelShapeshift" >
+			<Objective QuestName="Unwanted Pests" QuestId="36179" Type="KillMob" MobId="81138" KillCount="10" />
+		<TurnIn QuestName="Spore-be-Gone" QuestId="35079" TurnInName="Engineer Gazwitz" TurnInId="81128" X="-1563.87" Y="956.9653" Z="7.993487" />
+		<TurnIn QuestName="Unwanted Pests" QuestId="36179" TurnInName="Engineer Gazwitz" TurnInId="81128" X="-1563.87" Y="956.9653" Z="7.993487" />
+		<TurnIn QuestName="Defungination" QuestId="35077" TurnInName="Kimzee Pinchwhistle" TurnInId="81109" X="-1562.99" Y="955.6893" Z="8.192728" />
+		<PickUp QuestName="The Mother Lode" QuestId="35080" GiverName="Kimzee Pinchwhistle" GiverId="81109" X="-1562.99" Y="955.6893" Z="8.192728" />
+			<!-- End of Pinchwhistle Gearworks -->
+
+			<!-- Mother Lode -->
+		<TurnIn QuestName="The Mother Lode" QuestId="35080" TurnInName="Kimzee Pinchwhistle" TurnInId="81773" X="-1814.984" Y="1098.438" Z="45.30277" />
+		<PickUp QuestName="Getting the Crew Back Together" QuestId="35082" GiverName="Kimzee Pinchwhistle" GiverId="81773" X="-1814.984" Y="1098.438" Z="45.30277" />
+		<PickUp QuestName="Clearing Out Before Cleaning Up" QuestId="35081" GiverName="Engineer Gazwitz" GiverId="81784" X="-1817" Y="1099.8" Z="45.33994" />
+			<While Condition="HasQuest(35082) &amp;&amp; !IsQuestCompleted(35082)" > <!-- Getting the Crew Back Together -->
+				<CustomBehavior File="InteractWith" QuestId="35082" MobId="89209" NumOfTimes="20" Range="4" TerminateWhen="IsObjectiveComplete(1, 35082)" 
+											CollectionDistance="1000" PreInteractMountStrategy="DismountOrCancelShapeshift" >
 				  <HuntingGrounds>
-					
+					<Hotspot X="-1816.954" Y="1064.35" Z="45.51908" />
+					<Hotspot X="-1856.54" Y="1031.238" Z="31.97829" />
+					<Hotspot X="-1881.631" Y="1023.957" Z="24.29954" />
+					<Hotspot X="-1910.246" Y="1045.958" Z="15.47091" />
+					<Hotspot X="-1923.125" Y="998.3656" Z="2.56913" />
+					<Hotspot X="-1961.641" Y="1010.616" Z="1.141552" />
+					<Hotspot X="-1927.394" Y="1059.815" Z="14.72297" />
+					<Hotspot X="-1880.283" Y="1057.16" Z="25.90328" />
+					<Hotspot X="-1860.532" Y="1083.996" Z="36.41133" />
 				  </HuntingGrounds>
 				</CustomBehavior>
 			</While>
+			<Objective QuestName="Clearing Out Before Cleaning Up" QuestId="35081" Type="KillMob" MobId="81168" KillCount="8" />
+		<TurnIn QuestName="Getting the Crew Back Together" QuestId="35082" TurnInName="Kimzee Pinchwhistle" TurnInId="81773" X="-1814.984" Y="1098.438" Z="45.30277" />
+		<TurnIn QuestName="Clearing Out Before Cleaning Up" QuestId="35081" TurnInName="Engineer Gazwitz" TurnInId="81784" X="-1817" Y="1099.8" Z="45.33994" />
+		<PickUp QuestName="Follow that Hotrod!" QuestId="35285" GiverName="Engineer Gazwitz" GiverId="81784" X="-1817" Y="1099.8" Z="45.33994" />
+			<!-- End of Mother Lode -->
 			
-			// bonus objectives quick copy
-			<If Condition="!HasQuest() &amp;&amp; !IsQuestCompleted()" >
-				<MoveTo 
-			</If>
-			<If Condition="HasQuest() &amp;&amp; !IsQuestCompleted()" >
-				<CustomBehavior File="InteractWith" QuestId="" MobId="" NumOfTimes="20" Range="8" CollectionDistance="1000" TerminateWhen="IsObjectiveComplete(1, )" >
+			<!-- Pinchwhistle Point -->
+		<TurnIn QuestName="Follow that Hotrod!" QuestId="35285" TurnInName="Kimzee Pinchwhistle" TurnInId="81972" X="-2346.366" Y="1136.964" Z="20.84277" />
+		<PickUp QuestName="The Right Parts for the Job" QuestId="35090" GiverName="Kimzee Pinchwhistle" GiverId="81972" X="-2346.366" Y="1136.964" Z="20.84277" />
+		<PickUp QuestName="Skimming Off The Top" QuestId="35089" GiverName="Kimzee Pinchwhistle" GiverId="81972" X="-2346.366" Y="1136.964" Z="20.84277" />
+		<PickUp QuestName="Field Trial" QuestId="36384" GiverName="Krixel Pinchwhistle" GiverId="81443" X="-2341.3" Y="1136.79" Z="21.8068" />
+			<While Condition="HasQuest(36384) &amp;&amp; !IsQuestCompleted(36384)" > <!-- Field Trial -->
+				<CustomBehavior File="CombatUseItemOnV2" QuestId="36384" ItemId="115475" MobId="81183" MobId2="85325" MobId3="81184" MobState="Alive" 
+											UseWhenMobHasHealthPercent="90" MaxRangeToUseItem="8" UseItemStrategy="UseItemOncePerTarget" CollectionDistance="200">
+                    <HuntingGrounds>
+						<Hotspot X="-2279.1" Y="1214.195" Z="3.354768" />
+						<Hotspot X="-2301.588" Y="1254.532" Z="13.04299" />
+						<Hotspot X="-2274.938" Y="1283.896" Z="19.49092" />
+						<Hotspot X="-2232.697" Y="1243.463" Z="3.44435" />
+						<Hotspot X="-2205.318" Y="1170.669" Z="7.088608" />
+						<Hotspot X="-2154.514" Y="1202.135" Z="15.15297" />
+                   </HuntingGrounds>
+                </CustomBehavior>
+			</While>
+			<While Condition="HasQuest(35090) &amp;&amp; !IsQuestCompleted(35090)" > <!-- The Right Parts for the Job -->
+				<CustomBehavior File="InteractWith" QuestId="35090" MobId="81370" NumOfTimes="20" Range="4" TerminateWhen="Object(231811) != null || IsObjectiveComplete(1, 35090) || IsQuestCompleted(35090)" 
+											InteractByUsingItemId="112698" WaitTime="5000" CollectionDistance="1000" NonCompeteDistance="0" PreInteractMountStrategy="DismountOrCancelShapeshift" >
 				  <HuntingGrounds>
+					<Hotspot X="-2263.903" Y="1171.967" Z="-0.2572724" />
+					<Hotspot X="-2231.095" Y="1134.978" Z="0.350518" />
+					<Hotspot X="-2199.621" Y="1131.532" Z="-0.3725877" />
+					<Hotspot X="-2186.395" Y="1080.79" Z="0.1696689" />
+					<Hotspot X="-2217.412" Y="1024.968" Z="1.466331" />
+					<Hotspot X="-2260.89" Y="1105.806" Z="4.144553" />
+					<Hotspot X="-2284.434" Y="1148.213" Z="3.703195" />
 				  </HuntingGrounds>
 				</CustomBehavior>
-				<CustomBehavior File="InteractWith" QuestId="" MobId="" NumOfTimes="20" Range="8" CollectionDistance="1000" TerminateWhen="IsObjectiveComplete(2, )" >
+				<CustomBehavior File="InteractWith" QuestId="35090" MobId="231811" NumOfTimes="20" Range="4" TerminateWhen="Object(231811) == null || IsObjectiveComplete(1, 35090) || IsQuestCompleted(35090)" 
+											MobType="GameObject" CollectionDistance="1000" NonCompeteDistance="0" PreInteractMountStrategy="DismountOrCancelShapeshift" >
 				  <HuntingGrounds>
+					<Hotspot X="-2263.903" Y="1171.967" Z="-0.2572724" />
+					<Hotspot X="-2231.095" Y="1134.978" Z="0.350518" />
+					<Hotspot X="-2199.621" Y="1131.532" Z="-0.3725877" />
+					<Hotspot X="-2186.395" Y="1080.79" Z="0.1696689" />
+					<Hotspot X="-2217.412" Y="1024.968" Z="1.466331" />
+					<Hotspot X="-2260.89" Y="1105.806" Z="4.144553" />
+					<Hotspot X="-2284.434" Y="1148.213" Z="3.703195" />
 				  </HuntingGrounds>
 				</CustomBehavior>
-				<CustomBehavior File="WaitTimer" WaitTime="3000" GoalText="Waiting for quest to complete {TimeRemaining}" />
+			</While>
+			<Objective QuestName="Skimming Off The Top" QuestId="35089" Type="CollectItem" ItemId="112906" CollectCount="4" />
+		<TurnIn QuestName="Field Trial" QuestId="36384" TurnInName="Krixel Pinchwhistle" TurnInId="81443" X="-2341.3" Y="1136.79" Z="21.8068" />
+		<TurnIn QuestName="The Right Parts for the Job" QuestId="35090" TurnInName="Kimzee Pinchwhistle" TurnInId="81978" X="-2367.021" Y="1116.33" Z="27.62927" />
+		<TurnIn QuestName="Skimming Off The Top" QuestId="35089" TurnInName="Kimzee Pinchwhistle" TurnInId="81978" X="-2367.021" Y="1116.33" Z="27.62927" />
+		<PickUp QuestName="Sporicide" QuestId="35091" GiverName="Kimzee Pinchwhistle" GiverId="81978" X="-2367.021" Y="1116.33" Z="27.62927" />
+		<PickUp QuestName="Preventing the Worst" QuestId="35211" GiverName="Krixel Pinchwhistle" GiverId="81443" X="-2341.3" Y="1136.79" Z="21.8068" />
+		<PickUp QuestName="Curing With Force" QuestId="36428" GiverName="Krixel Pinchwhistle" GiverId="81443" X="-2341.3" Y="1136.79" Z="21.8068" />
+			<While Condition="HasQuest(36428) &amp;&amp; !IsQuestCompleted(36428)" > <!-- Curing With Force -->
+				<CustomBehavior File="CombatUseItemOnV2" QuestId="36428" ItemId="115533" MobId="81183" MobId2="85325" MobId3="81184" MobState="Alive" 
+											UseWhenMobHasHealthPercent="30" MaxRangeToUseItem="8" UseItemStrategy="UseItemOncePerTarget" CollectionDistance="200">
+                    <HuntingGrounds>
+						<Hotspot X="-2279.1" Y="1214.195" Z="3.354768" />
+						<Hotspot X="-2301.588" Y="1254.532" Z="13.04299" />
+						<Hotspot X="-2274.938" Y="1283.896" Z="19.49092" />
+						<Hotspot X="-2232.697" Y="1243.463" Z="3.44435" />
+						<Hotspot X="-2205.318" Y="1170.669" Z="7.088608" />
+						<Hotspot X="-2154.514" Y="1202.135" Z="15.15297" />
+                   </HuntingGrounds>
+                </CustomBehavior>
+			</While>
+			<While Condition="HasQuest(35211) &amp;&amp; !IsQuestCompleted(35211)" > <!-- Preventing the Worst -->
+				<CustomBehavior File="InteractWith" QuestId="35211" MobId="81632" NumOfTimes="20" Range="4" TerminateWhen="IsObjectiveComplete(1, 35211)" 
+											CollectionDistance="10" PreInteractMountStrategy="DismountOrCancelShapeshift" >
+				  <HuntingGrounds>
+					<Hotspot X="-2292.892" Y="1307.835" Z="35.16553" />			
+					<Hotspot X="-2317.288" Y="1269.922" Z="15.82663" />
+					<Hotspot X="-2315.899" Y="1242.097" Z="13.20854" />
+					<Hotspot X="-2251.422" Y="1249.72" Z="5.053756" />
+					<Hotspot X="-2230.278" Y="1259.519" Z="3.48419" />
+				  </HuntingGrounds>
+				</CustomBehavior>
+			</While>
+			<Objective QuestName="Sporicide" QuestId="35091" Type="KillMob" MobId="82265" KillCount="6" />
+		<TurnIn QuestName="Sporicide" QuestId="35091" TurnInName="Kimzee Pinchwhistle" TurnInId="81978" X="-2367.021" Y="1116.33" Z="27.62927" />
+		<TurnIn QuestName="Preventing the Worst" QuestId="35211" TurnInName="Krixel Pinchwhistle" TurnInId="81443" X="-2341.3" Y="1136.79" Z="21.8068" />
+		<TurnIn QuestName="Curing With Force" QuestId="36428" TurnInName="Krixel Pinchwhistle" TurnInId="81443" X="-2341.3" Y="1136.79" Z="21.8068" />
+		<PickUp QuestName="Flame On" QuestId="35298" GiverName="Krixel Pinchwhistle" GiverId="81443" X="-2341.3" Y="1136.79" Z="21.8068" />
+			<While Condition="HasQuest(35298) &amp;&amp; !IsQuestCompleted(35298)" > <!-- Flame On -->
+				<CustomBehavior File="InteractWith" QuestId="35298" MobId="231910" MobType="GameObject" NonCompeteDistance="0" Range="8" TerminateWhen="IsObjectiveComplete(1, 35298)" X="-2342.531" Y="1135.33" Z="21.87789" />
+				<CustomBehavior File="InteractWith" QuestId="35298" MobId="81567" Range="4" NonCompeteDistance="0" TerminateWhen="IsObjectiveComplete(2, 35298)" X="-2368.689" Y="1112.681" Z="27.7645" />
+				<CustomBehavior File="WaitTimer" WaitTime="45000" GoalText="Waiting for flight {TimeRemaining}" />
+			</While>
+		<TurnIn QuestName="Flame On" QuestId="35298" TurnInName="Kimzee Pinchwhistle" TurnInId="82468" X="-1559.517" Y="948.3993" Z="7.99075" />
+            <If Condition="!HasQuest(36062) &amp;&amp; !IsQuestCompleted(36062)" > <!-- Kimzee Pinchwhistle / Follower -->
+                <MoveTo X="-1559.517" Y="948.3993" Z="7.99075" />
+                <CustomBehavior File="InteractWith" MobId="82468" WaitTime="3000" X="-1559.517" Y="948.3993" Z="7.99075" />
+                <CustomBehavior File="Misc\RunLua" Lua="QuestFrameCompleteQuestButton:Click()" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for quest to complete {TimeRemaining}" />
+            </If>
+			<!-- End Pinchwhistle Point & PW GW -->
+
+			<!-- Talon Watch -->
+		<TurnIn QuestName="Talon Watch" QuestId="34998" TurnInName="Talon Guard Kurekk" TurnInId="80758" X="-340.4063" Y="909.9462" Z="75.37679" />
+		<PickUp QuestName="Banished From the Sky" QuestId="35000" GiverName="Talon Guard Kurekk" GiverId="80758" X="-340.4063" Y="909.9462" Z="75.37679" />
+		<PickUp QuestName="Hatred Undying" QuestId="34999" GiverName="Kazu" GiverId="81514" X="-322.1528" Y="929.6268" Z="75.24941" />
+			<While Condition="HasQuest(35000) &amp;&amp; !IsQuestCompleted(35000)" > <!-- Banished From the Sky -->
+				<CustomBehavior File="InteractWith" QuestId="35000" MobId="80759" MobId2="80750" MobState="Alive" NumOfTimes="20" Range="4" TerminateWhen="IsObjectiveComplete(1, 35000)" 
+											InteractByUsingItemId="116977" CollectionDistance="1000" PreInteractMountStrategy="DismountOrCancelShapeshift" >
+				  <HuntingGrounds>
+					<Hotspot X="-147.7247" Y="902.5806" Z="60.85202" />
+					<Hotspot X="-191.1163" Y="879.2216" Z="60.49025" />
+					<Hotspot X="-249.7109" Y="841.0596" Z="59.77825" />
+					<Hotspot X="-290.1035" Y="823.2723" Z="60.09053" />
+					<Hotspot X="-369.4971" Y="807.5696" Z="57.86902" />
+					<Hotspot X="-365.929" Y="765.3323" Z="57.86897" />
+					<Hotspot X="-319.1087" Y="758.8677" Z="59.25875" />
+					<Hotspot X="-274.9754" Y="771.1031" Z="59.45232" />
+					<Hotspot X="-232.666" Y="789.4077" Z="60.09918" />
+					<Hotspot X="-206.0423" Y="799.6288" Z="60.45219" />
+					<Hotspot X="-164.3391" Y="803.6706" Z="60.32344" />
+					<Hotspot X="-175.1101" Y="848.3254" Z="60.51262" />
+				  </HuntingGrounds>
+				</CustomBehavior>
+			</While>
+			<Objective QuestName="Hatred Undying" QuestId="34999" Type="CollectItem" ItemId="112335" CollectCount="15" />
+		<TurnIn QuestName="Hatred Undying" QuestId="34999" TurnInName="Kazu" TurnInId="81514" X="-322.1528" Y="929.6268" Z="75.24941" />
+		<TurnIn QuestName="Banished From the Sky" QuestId="35000" TurnInName="Talon Guard Kurekk" TurnInId="80758" X="-340.4063" Y="909.9462" Z="75.37679" />
+		<PickUp QuestName="Gaze of the Raven God" QuestId="35001" GiverName="Talon Guard Kurekk" GiverId="80758" X="-340.4063" Y="909.9462" Z="75.37679" />
+		<PickUp QuestName="Sons of Sethe" QuestId="35002" GiverName="Talon Guard Kurekk" GiverId="80758" X="-340.4063" Y="909.9462" Z="75.37679" />
+			<While Condition="HasQuest(35001) &amp;&amp; !IsQuestCompleted(35001)" > <!-- Gaze of the Raven God -->
+				<CustomBehavior File="InteractWith" QuestId="35001" MobId="86435" NumOfTimes="20" Range="4" TerminateWhen="IsObjectiveComplete(1, 35001)" 
+											InteractByUsingItemId="117396" CollectionDistance="1000" WaitTime="2000" PreInteractMountStrategy="DismountOrCancelShapeshift" >
+				  <HuntingGrounds>
+					<Hotspot X="-376.2773" Y="686.0993" Z="57.38932" />
+					<Hotspot X="-327.6167" Y="679.2394" Z="59.08909" />
+					<Hotspot X="-404.3497" Y="594.2618" Z="59.86661" />
+					<Hotspot X="-501.1875" Y="551.5073" Z="59.35879" />
+					<Hotspot X="-558.3753" Y="558.2567" Z="59.54944" />
+					<Hotspot X="-596.416" Y="621.1949" Z="61.46921" />
+					<Hotspot X="-546.089" Y="659.5353" Z="59.69955" />
+					<Hotspot X="-454.26" Y="651.7822" Z="57.36592" />
+					<Hotspot X="-406.2958" Y="654.0605" Z="57.44847" />
+					<Hotspot X="-422.9536" Y="730.1544" Z="58.88049" />
+				  </HuntingGrounds>
+				</CustomBehavior>
+			</While>
+			<Objective QuestName="Sons of Sethe" QuestId="35002" Type="CollectItem" ItemId="112336" CollectCount="6" />
+		<TurnIn QuestName="Sons of Sethe" QuestId="35002" TurnInName="Offering Bowl" TurnInId="231184" TurnInType="GameObject" X="-693.1579" Y="636.1571" Z="71.12197" />
+		<TurnIn QuestName="Gaze of the Raven God" QuestId="35001" TurnInName="Place Eye of Anzu" TurnInId="231183" TurnInType="GameObject" X="-702.8916" Y="644.679" Z="71.12056" />
+		<PickUp QuestName="The False Talon King" QuestId="35011" GiverName="Talon Guard Kurekk" GiverId="86475" X="-700.0899" Y="635.7661" Z="71.12189" />
+			<!-- These 2 pickups may bug out until main fixes the interact range for pickup / turnins -->
+		<PickUp QuestName="Ritual Severance" QuestId="35003" GiverName="Anzu" GiverId="80648" X="-707.4323" Y="628.4236" Z="80.09872" />
+		<PickUp QuestName="Servants of a Dead God" QuestId="35004" GiverName="Anzu" GiverId="80648" X="-707.4323" Y="628.4236" Z="80.09872" />
+			<While Condition="HasQuest(35003) &amp;&amp; !IsQuestCompleted(35003)" > <!-- Ritual Severance -->
+			 <While Condition="!IsObjectiveComplete(1, 35003)"> <!-- South -->
+				<MoveTo X="-298.827" Y="502.2569" Z="74.51005" />
+				<MoveTo X="-305.1045" Y="495.5247" Z="74.68217" />
+				<MoveTo X="-314.8975" Y="500.1879" Z="74.46211" />
+				<MoveTo X="-308.7792" Y="508.4653" Z="74.02866" />
+				<MoveTo X="-299.4967" Y="503.4933" Z="74.49133" />
+				<MoveTo X="-307.1436" Y="501.3085" Z="74.47687" />
+			 </While>
+			 <While Condition="!IsObjectiveComplete(2, 35003)"> <!-- Central -->
+				<MoveTo X="-260.0925" Y="588.0868" Z="74.92296" />
+				<MoveTo X="-254.6516" Y="592.6397" Z="74.97564" />
+				<MoveTo X="-249.1338" Y="587.2943" Z="74.95708" />
+				<MoveTo X="-253.2941" Y="581.9844" Z="74.95496" />
+				<MoveTo X="-261.3671" Y="585.3033" Z="74.9186" />
+				<MoveTo X="-260.0925" Y="588.0868" Z="74.92296" />
+				<MoveTo X="-254.5577" Y="587.2178" Z="74.95715" />
+			 </While>
+			 <While Condition="!IsObjectiveComplete(3, 35003)"> <!-- North -->
+				<MoveTo X="-166.8487" Y="615.7782" Z="86.19635" />
+				<MoveTo X="-164.9285" Y="624.7982" Z="86.28423" />
+				<MoveTo X="-156.1659" Y="622.5986" Z="86.29033" />
+				<MoveTo X="-159.3589" Y="615.153" Z="86.29033" />
+				<MoveTo X="-166.9981" Y="617.8109" Z="86.19656" />
+				<MoveTo X="-166.8487" Y="615.7782" Z="86.19635" />
+				<MoveTo X="-157.9763" Y="622.7756" Z="86.29029" />
+			 </While>
+			</While>
+			<Objective QuestName="The False Talon King" QuestId="35011" Type="CollectItem" ItemId="112444" CollectCount="1" />
+			<Objective QuestName="Servants of a Dead God" QuestId="35004" Type="KillMob" MobId="80640" KillCount="6" />
+			<Objective QuestName="Servants of a Dead God" QuestId="35004" Type="KillMob" MobId="80638" KillCount="6" />
+		<TurnIn QuestName="Ritual Severance" QuestId="35003" TurnInName="Anzu" TurnInId="86355" X="-114.467" Y="784.0226" Z="73.35169" />
+		<TurnIn QuestName="Servants of a Dead God" QuestId="35004" TurnInName="Anzu" TurnInId="86355" X="-114.467" Y="784.0226" Z="73.35169" />
+		<TurnIn QuestName="The False Talon King" QuestId="35011" TurnInName="Talon Guard Kurekk" TurnInId="86475" X="-111.0868" Y="796.4149" Z="73.49425" />
+		<PickUp QuestName="Lithic's Gift" QuestId="35013" GiverName="Talon Guard Kurekk" GiverId="86475" X="-111.0868" Y="796.4149" Z="73.49425" />
+		<PickUp QuestName="Sethe, the Dead God" QuestId="35012" GiverName="Anzu" GiverId="86355" X="-114.467" Y="784.0226" Z="73.35169" />
+			<While Condition="HasQuest(35012) &amp;&amp; !IsQuestCompleted(35012)" >
+			 <If Condition="Unit(80644) == null">
+				<CustomBehavior File="InteractWith" QuestId="35012" MobId="85614" Range="4" GossipOptions="1"	NonCompeteDistance="0" WaitTime="2000" X="-68.40972" Y="891.6563" Z="99.79018" />
+				<CustomBehavior File="Misc\RunLua" Lua="StaticPopup1Button1:Click()" WaitTime="4000" />
+			 </If>
+				<CustomBehavior File="KillUntilComplete" QuestId="35012" ImmediatelySwitchToHighestPriorityTarget="True"
+											TerminateWhen="IsObjectiveComplete(1, 33837) || Unit(85614) == null" >
+					<PursuitList>
+					  <PursueUnit Id="85570" Priority="0" />
+					  <PursueUnit Id="85617" Priority="0" />
+					  <PursueUnit Id="85570" Priority="9999" /> <!-- Supplicant -->
+					  <PursueUnit Id="85617" Priority="8888" /> <!-- Sething Blood -->
+					  <!-- <PursueUnit Id="80644" Priority="-9999" /> Sethe -->
+					</PursuitList>
+					<HuntingGrounds>
+						<Hotspot X="-21.46655" Y="944.9423" Z="88.30015" />
+						<Hotspot X="-29.30426" Y="882.1987" Z="86.22703" />
+						<Hotspot X="-45.97005" Y="900.6168" Z="90.2084" />
+					</HuntingGrounds>
+				</CustomBehavior>
+			</While>
+		<TurnIn QuestName="Sethe, the Dead God" QuestId="35012" TurnInName="Anzu" TurnInId="80648" X="-192.026" Y="1016.16" Z="75.67942" />
+		<TurnIn QuestName="Lithic's Gift" QuestId="35013" TurnInName="Memory of Lithic" TurnInId="80834" X="-181.6389" Y="1016.467" Z="75.48669" />
+		<PickUp QuestName="A Sentimental Relic" QuestId="35245" GiverName="Memory of Lithic" GiverId="80834" X="-181.6389" Y="1016.467" Z="75.48669" />
+			<!-- End of Talon Watch / Lithic's Rest -->
+
+			<!-- Veil Terrok -->
+		<TurnIn QuestName="A Sentimental Relic" QuestId="35245" TurnInName="Reshad" TurnInId="81770" X="-501.684" Y="1863.557" Z="44.7822" />
+		<PickUp QuestName="Cult of the Ravenspeakers" QuestId="34921" GiverName="Anzu" GiverId="80648" X="-477.7083" Y="1839.83" Z="42.48521" />
+		<PickUp QuestName="The Missing Piece" QuestId="35897" GiverName="Reshad" GiverId="81770" X="-501.684" Y="1863.557" Z="44.7822" />
+		<TurnIn QuestName="The Missing Piece" QuestId="35897" TurnInName="Effigy of Terokk" TurnInId="82813" X="-504.9809" Y="1855.319" Z="44.78154" />
+		<PickUp QuestName="Terokk's Fall" QuestId="35895" GiverName="Effigy of Terokk" GiverId="82813" X="-504.9809" Y="1855.319" Z="44.78154" />
+			<While Condition="HasQuest(35895) &amp;&amp; !IsQuestCompleted(35895)" > <!-- Terokk's Fall -->
+				<CustomBehavior File="UserDialog" QuestId="35895" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Talk to The Effigy and Kill stuff
+											\nDon't go anywhere, there's another one soon" />
+				<!--
+				<If Condition="!Me.IsOnTransport">
+					<CustomBehavior File="InteractWith" QuestId="35895" MobId="82813" Range="4" NonCompeteDistance="0" GossipOptions="1" WaitTime="10000" TerminateWhen="Me.IsOnTransport" X="-504.9809" Y="1855.319" Z="44.78154" />
+				</If>
+			 <If Condition="!IsObjectiveComplete(1, 35895)">
+				<MoveTo X="-256.8004" Y="797.2864" Z="59.57238" />
+				// wait 20s
+			 </If>
+			 <If Condition="!IsObjectiveComplete(2, 35895)">
+				// Rally guys (go up to them and then press button 2
+				<Mob Name="Outcast Talon Guard" Entry="83647" Type="Repair" X="-365.434" Y="819.1563" Z="58.25806" />
+				<Hotspot X="-286.1645" Y="807.0132" Z="58.7384" />
+				<Hotspot X="-362.8764" Y="816.6022" Z="57.87015" />
+				<Hotspot X="-378.1016" Y="786.4291" Z="57.86756" />
+				<Hotspot X="-390.7406" Y="726.0061" Z="57.505" />
+				<Hotspot X="-412.3598" Y="679.6833" Z="57.77292" />
+				<Hotspot X="-450.5966" Y="644.9413" Z="58.18137" />
+				<Hotspot X="-415.559" Y="637.0883" Z="57.36303" />
+				<Hotspot X="-380.206" Y="652.3433" Z="58.68639" />
+				<Hotspot X="-352.2305" Y="673.3245" Z="58.06981" />
+				<Hotspot X="-322.5179" Y="707.6718" Z="57.76895" />
+				<Hotspot X="-307.1196" Y="748.8934" Z="59.37311" />				
+			 </If>
+			 <If Condition="!IsObjectiveComplete(3, 35895)">
+				<Objective QuestName="Terokk's Fall" QuestId="35895" Type="KillMob" MobId="83600" KillCount="20" />
+			 </If>
+			 <If Condition="!IsObjectiveComplete(4, 35895)">
+				<Objective QuestName="Terokk's Fall" QuestId="35895" Type="UseObject" ObjectId="233382" UseCount="1" />
+				<GameObject Name="The Eye of Anzu" Entry="233382" X="-445.4514" Y="624.0938" Z="56.17257" />
+			 </If>
+			 
+			 
+				dev a behavior that moves around and presses 1 to defend itself.  Hotspots are in the override for this quest - above in profile 
+				// after quest is complete, wait about 20s for stuff to happen and get ported back
+				-->
+			</While>
+		<TurnIn QuestName="Terokk's Fall" QuestId="35895" TurnInName="Reshad" TurnInId="81770" X="-501.684" Y="1863.557" Z="44.7822" />
+		<PickUp QuestName="A Worthy Vessel" QuestId="36059" GiverName="Shadow-Sage Iskar" GiverId="80153" X="-496.2379" Y="1857.922" Z="44.78153" />
+			<While Condition="HasQuest(36059) &amp;&amp; !IsQuestCompleted(36059)" > <!-- A Worthy Vessel -->
+				<!-- we get aura <Aura Name="A Worthy Vessel: Phase Aura" SpellId="167934" if the TW has issues -->
+				<CustomBehavior File="InteractWith" QuestId="36059" MobId="82813" Range="4" NonCompeteDistance="0" GossipOptions="1" WaitTime="5000" TerminateWhen="Unit(83960) != null" X="-504.9809" Y="1855.319" Z="44.78154" />
+				<CustomBehavior File="InteractWith" QuestId="36059" MobId="83960" Range="4" NonCompeteDistance="0" TerminateWhen="IsObjectiveComplete(1, 36059) || Unit(83960) == null" X="-505.2639" Y="1855.267" Z="44.78154" />
+			</While>
+		<TurnIn QuestName="A Worthy Vessel" QuestId="36059" TurnInName="Shade of Terokk" TurnInId="84122" X="-504.9809" Y="1855.319" Z="44.78153" />
+		<PickUp QuestName="The Avatar of Terokk" QuestId="35896" GiverName="Shade of Terokk" GiverId="84122" X="-504.9809" Y="1855.319" Z="44.78153" />
+			<While Condition="HasQuest(35896) &amp;&amp; !IsQuestCompleted(35896)" > <!-- The Avatar of Terokk -->
+				<CustomBehavior File="UserDialog" QuestId="35895" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Talk to The Avatar and Kill stuff" />
+				<!-- we get aura <Aura Name="Avatar of Terokk" SpellId="168131"  after interacting 
+				<CustomBehavior File="InteractWith" QuestId="35896" MobId="84122" GossipOptions="1" NonCompeteDistance="0" Range="4" WaitTime="4000" X="-504.9809" Y="1855.319" Z="44.78153" />
+				// wait about 30s after we get kicked out of the vehicle.  hotspots are above in the override
+				<Objective QuestName="The Avatar of Terokk" QuestId="35896" Type="KillMob" MobId="84120" KillCount="25" />
+				<Objective QuestName="The Avatar of Terokk" QuestId="35896" Type="KillMob" MobId="84058" KillCount="4" />
+				<Objective QuestName="The Avatar of Terokk" QuestId="35896" Type="KillMob" MobId="84053" KillCount="1" />
+				-->
+			</While>
+		<TurnIn QuestName="The Avatar of Terokk" QuestId="35896" TurnInName="Reshad" TurnInId="81770" X="-501.684" Y="1863.557" Z="44.7822" />
+			<While Condition="HasQuest(34921) &amp;&amp; !IsQuestCompleted(34921)" > <!-- Cult of the Ravenspeakers -->
+				<CustomBehavior File="InteractWith" QuestId="34921" MobId="231118" MobType="GameObject" NonCompeteDistance="0" Range="5" TerminateWhen="IsObjectiveComplete(1, 34921)" X="-592.1771" Y="1715.129" Z="23.99322" />
+			</While>
+			<!-- End of Veil Terrok -->
+			
+			<!-- Gnarlwood Pass / Nest of the Ravenspeakers / Ravenskar -->
+		<TurnIn QuestName="Cult of the Ravenspeakers" QuestId="34921" TurnInName="Iktis of the Flock" TurnInId="80639" X="-594.8143" Y="1712.438" Z="23.2849" />
+		<PickUp QuestName="To the... Rescue?" QuestId="34991" GiverName="Iktis of the Flock" GiverId="80639" X="-594.8143" Y="1712.438" Z="23.2849" />
+			<Objective QuestName="To the... Rescue?" QuestId="34991" Type="CollectItem" ItemId="112331" CollectCount="1" />
+		<TurnIn QuestName="To the... Rescue?" QuestId="34991" TurnInName="Iktis of the Flock" TurnInId="80639" X="-594.8143" Y="1712.438" Z="23.2849" />
+		<PickUp QuestName="The High Ravenspeaker" QuestId="35010" GiverName="Iktis of the Flock" GiverId="80639" X="-594.8143" Y="1712.438" Z="23.2849" />
+		<TurnIn QuestName="The High Ravenspeaker" QuestId="35010" TurnInName="High Ravenspeaker Krikka" TurnInId="80481" X="-633.1424" Y="1522.276" Z="36.65506" />
+		<PickUp QuestName="Rendezvous with the Ritualists" QuestId="35007" GiverName="High Ravenspeaker Krikka" GiverId="80481" X="-633.1424" Y="1522.276" Z="36.65506" />
+		<TurnIn QuestName="Rendezvous with the Ritualists" QuestId="35007" TurnInName="Ravenspeaker Sekara" TurnInId="80740" X="-807.6059" Y="1355.799" Z="54.69335" />
+		<PickUp QuestName="The Bloodmane" QuestId="34923" GiverName="Ravenspeaker Sekara" GiverId="80740" X="-807.6059" Y="1355.799" Z="54.69335" />
+		<PickUp QuestName="Words of the Raven Mother" QuestId="34922" GiverName="Ravenspeaker Sekara" GiverId="80740" X="-807.6059" Y="1355.799" Z="54.69335" />
+			<Objective QuestName="Words of the Raven Mother" QuestId="34922" Type="CollectItem" ItemId="112199" CollectCount="8" />
+			<Objective QuestName="The Bloodmane" QuestId="34923" Type="KillMob" MobId="80455" KillCount="10" />
+			<Objective QuestName="The Bloodmane" QuestId="34923" Type="KillMob" MobId="83896" KillCount="1" />
+		<TurnIn QuestName="The Bloodmane" QuestId="34923" TurnInName="Ravenspeaker Sekara" TurnInId="80740" X="-807.6059" Y="1355.799" Z="54.69335" />
+		<TurnIn QuestName="Words of the Raven Mother" QuestId="34922" TurnInName="Ravenspeaker Sekara" TurnInId="80740" X="-807.6059" Y="1355.799" Z="54.69335" />
+		<PickUp QuestName="Ralshiara's Demise" QuestId="34938" GiverName="Ravenspeaker Sekara" GiverId="80740" X="-807.6059" Y="1355.799" Z="54.69335" />
+		<PickUp QuestName="Declawing The Bloodmane" QuestId="34939" GiverName="High Ravenspeaker Krikka" GiverId="80860" X="-811.2327" Y="1356.465" Z="54.74408" />
+		<PickUp QuestName="The Egg Thieves" QuestId="34924" GiverName="Vakora of the Flock" GiverId="80863" X="-803.6788" Y="1357.649" Z="54.64557" />
+		<PickUp QuestName="The Initiate's Revenge" QuestId="36790" GiverName="Mortally Wounded Initiate" GiverId="86381" X="-876.9202" Y="1593.054" Z="56.9739" />
+			<While Condition="HasQuest(34938) &amp;&amp; !IsQuestCompleted(34938)" > <!-- Ralshiara's Demise -->
+				<CustomBehavior File="CombatUseItemOnV2" QuestId="34938" ItemId="112681" MobId="80502" MobState="Alive" UseWhenMobHasHealthPercent="100" 
+											MaxRangeToUseItem="6" UseItemStrategy="UseItemContinuouslyOnTarget" CollectionDistance="40" X="-1031.734" Y="1648.759" Z="67.42218" />
+			</While>
+			<Objective QuestName="The Egg Thieves" QuestId="34924" Type="CollectItem" ItemId="112135" CollectCount="8" />
+			<Objective QuestName="Ralshiara's Demise" QuestId="34938" Type="KillMob" MobId="80502" KillCount="1" />
+			<Objective QuestName="Declawing The Bloodmane" QuestId="34939" Type="CollectItem" ItemId="112204" CollectCount="6" />
+			<Objective QuestName="The Initiate's Revenge" QuestId="36790" Type="KillMob" MobId="80447" KillCount="18" />
+		<TurnIn QuestName="The Egg Thieves" QuestId="34924" TurnInName="Vakora of the Flock" TurnInId="80746" X="-612.5868" Y="1524.309" Z="36.53194" />
+		<TurnIn QuestName="The Initiate's Revenge" QuestId="36790" TurnInName="Vakora of the Flock" TurnInId="80746" X="-612.5868" Y="1524.309" Z="36.53194" />
+		<TurnIn QuestName="Ralshiara's Demise" QuestId="34938" TurnInName="High Ravenspeaker Krikka" TurnInId="80481" X="-633.1424" Y="1522.276" Z="36.65496" />
+		<TurnIn QuestName="Declawing The Bloodmane" QuestId="34939" TurnInName="High Ravenspeaker Krikka" TurnInId="80481" X="-633.1424" Y="1522.276" Z="36.65496" />
+		<PickUp QuestName="Call of the Raven Mother" QuestId="35009" GiverName="High Ravenspeaker Krikka" GiverId="80481" X="-633.1424" Y="1522.276" Z="36.65496" />
+			<While Condition="HasQuest(35009) &amp;&amp; !IsQuestCompleted(35009)" > <!-- Call of the Raven Mother -->
+			 <If Condition="!IsObjectiveComplete(2, 35009)">
+				<CustomBehavior File="InteractWith" QuestId="35009" MobId="80481" Range="4" NonCompeteDistance="0" GossipOptions="1" TerminateWhen="IsObjectiveComplete(1, 35009)" X="-633.1424" Y="1522.276" Z="36.65496" />
+				<MoveTo X="-651.8298" Y="1549.763" Z="36.42992" />
+			 </If>
+			 <While Condition="!IsObjectiveComplete(2, 35009)">
+                <If Condition="!Me.HasAura(167507)"> <!-- Krikka / Summon Krikka -->
+					<CustomBehavior File="InteractWith" QuestId="35009" MobId="80481" Range="4" NonCompeteDistance="0" GossipOptions="1" X="-633.1424" Y="1522.276" Z="36.65496" />
+					<MoveTo X="-651.8298" Y="1549.763" Z="36.42992" />
+					<CustomBehavior File="WaitTimer" WaitTime="8000" GoalText="Waiting for Krikka {TimeRemaining}" />
+                </If>
+
+                <CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for Krikka {TimeRemaining}" />
+
+                <If Condition="Me.HasAura(167507)"> <!-- Krikka / Summon Krikka -->
+                    <If Condition="Me.HasAura(167496)"> <!--Blessed Waters -->
+                        <CustomBehavior File="InteractWith" QuestId="35009" MobId="233388" MobType="GameObject" Range="5" NonCompeteDistance="0" X="-651.8298" Y="1549.763" Z="36.42992" />
+                    </If>
+                    <If Condition="Me.HasAura(167490)"> <!-- Sacred Feathers -->
+                        <CustomBehavior File="InteractWith" QuestId="35009" MobId="233383" MobType="GameObject" Range="5" NonCompeteDistance="0" X="-651.8298" Y="1549.763" Z="36.42992" />
+                    </If>
+                    <If Condition="Me.HasAura(167481)"> <!-- Scroll of the Ravens -->
+                        <CustomBehavior File="InteractWith" QuestId="35009" MobId="233385" MobType="GameObject" Range="5" NonCompeteDistance="0" X="-651.8298" Y="1549.763" Z="36.42992" />
+                    </If>
+                </If>
+             </While>
+			</While>
+		<TurnIn QuestName="Call of the Raven Mother" QuestId="35009" TurnInName="Kaalu" TurnInId="77857" X="-659.2118" Y="1579.463" Z="36.22345" />
+		<PickUp QuestName="On Ebon Wings" QuestId="36085" GiverName="Reshad" GiverId="84276" X="-647.717" Y="1569.469" Z="33.98867" />
+			<While Condition="HasQuest(36085) &amp;&amp; !IsQuestCompleted(36085)" > <!-- On Ebon Wings -->
+				<CustomBehavior File="InteractWith" QuestId="36085" MobId="77857" GossipOptions="1" NonCompeteDistance="0" Range="4" WaitTime="30000" TerminateWhen="Me.Z &gt; 450" X="-659.2118" Y="1579.463" Z="36.22345" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="EbonWings" Command="Add" ObjectType="AreaTrigger" ObjectId="7302" Radius="5" />
+				<Objective QuestName="On Ebon Wings" QuestId="36085" Type="KillMob" MobId="84001" KillCount="1" />
+				<Objective QuestName="On Ebon Wings" QuestId="36085" Type="KillMob" MobId="84111" KillCount="8" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="EbonWings" Command="Remove" />
+				<!-- we may have to code this with interacts if ppl fall - hotspots are in the override -->
+			</While>
+		<TurnIn QuestName="On Ebon Wings" QuestId="36085" TurnInName="Reshad" TurnInId="84262" X="-809.8212" Y="1862.688" Z="472.9334" />
+		<PickUp QuestName="When All Is Aligned" QuestId="35704" GiverName="Reshad" GiverId="84262" X="-809.8212" Y="1862.688" Z="472.9334" />
+			<While Condition="HasQuest(35704) &amp;&amp; !IsQuestCompleted(35704)" > <!-- When All Is Aligned -->
+				<CustomBehavior File="UserDialog" QuestId="35704" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Jump Ka'alu and kill stuff" />
+					<!-- 
+				<If Condition="!Me.IsOnTransport">
+					<CustomBehavior File="InteractWith" QuestId="35704" MobId="86254" NonCompeteDistance="0" Range="5" WaitTime="25000" X="-821.1736" Y="1859.384" Z="473.1219" />
+				</If>
+				<If Condition="Me.IsOnTransport">
+					<WoWUnit Name="Adherent Wind-Thrasher" Entry="82817" X="-467.5799" Y="1514.819" Z="381.0627" />
+					<WoWUnit Name="Adherent Razorwing" Entry="82803" X="-453.5434" Y="1488.366" Z="361.9187" />
+					<WoWUnit Name="Adherent Colossus" Entry="83487" X="-435.398" Y="1488.043" Z="361.9258" />
+					<WoWUnit Name="Adherent Radiant Blade" Entry="82806" X="-419.8542" Y="1570.974" Z="361.9618" />
+
+					<Objective QuestName="When All Is Aligned" QuestId="35704" Type="KillMob" MobId="82806" KillCount="80" />
+					
+				</If>
+				
+				when done with quest, it will do a cinematic, kill it
+				<CustomBehavior File="Misc\RunLua" Lua="if MovieFrame and MovieFrame:IsVisible() then MovieFrame:StopMovie() elseif CinematicFrame and CinematicFrame:IsVisible() then CinematicFrame_CancelCinematic() end" WaitTime="2000" />
+				-->
+			</While>
+		<TurnIn QuestName="When All Is Aligned" QuestId="35704" TurnInName="Reshad" TurnInId="81770" X="-501.684" Y="1863.557" Z="44.78233" />
+		<!--<PickUp QuestName="Victory is Within Reach" QuestId="36316" GiverName="Reshad" GiverId="81770" X="-501.684" Y="1863.557" Z="44.78233" /> Dungeon quest -->
+            <If Condition="!HasQuest(37141) &amp;&amp; !IsQuestCompleted(37141)" > <!-- Talonpriest Ishaal / Follower -->
+                <MoveTo X="-507.8021" Y="1862.358" Z="44.78172" />
+                <CustomBehavior File="InteractWith" MobId="83959" WaitTime="3000" X="-507.8021" Y="1862.358" Z="44.78172" />
+                <CustomBehavior File="Misc\RunLua" Lua="QuestFrameCompleteQuestButton:Click()" />
+            </If>
+			<!-- End of Gnarlwood Pass / Nest of the Ravenspeakers / Ravenskar -->
+
+			<!-- DO BONUSES / GRIND HERE TO 98 -->
+		
+			<!-- GoTo Nagrand -->
+		<PickUp QuestName="News from Nagrand" QuestId="36601" GiverName="Shadow-Sage Iskar" GiverId="80153" X="-496.2379" Y="1857.922" Z="44.78159" />
+		<TurnIn QuestName="News from Nagrand" QuestId="36601" TurnInName="Bodrick Grey" TurnInId="81492" X="1941.726" Y="330.4358" Z="88.96597" />
+		<PickUp QuestName="Taking the Fight to Nagrand" QuestId="37184" GiverName="Bodrick Grey" GiverId="81492" X="1941.726" Y="330.4358" Z="88.96597" />
+			<If Condition="HasQuest(37184) &amp;&amp; Me.ZoneId == 7078"> <!-- Taking the Fight to Nagrand -  SMV -->
+				<CustomBehavior File="InteractWith" MobId="81103" GossipOptions="1" WaitTime="2000" X="1864.33" Y="217.8108" Z="76.63772" />
 			</If>
-			
-
-			-->
+		<TurnIn QuestName="Taking the Fight to Nagrand" QuestId="37184" TurnInName="Lieutenant Balfor" TurnInId="79263" />
+		<PickUp QuestName="The Might of the Warsong" QuestId="34675" GiverName="Lieutenant Balfor" GiverId="79263" X="2418.406" Y="4406.2" Z="208.7408" />
+		<TurnIn QuestName="The Might of the Warsong" QuestId="34675" TurnInName="Rangari Dkaan" TurnInId="79576" X="2581.239" Y="5703.557" Z="101.3146" />
+			<!-- End of GoTo Nagrand -->
 		
-			
-			
-			
-			
-			<CustomBehavior File="UserDialog" SoundCue="Exclamation" SoundCueInterval="1" AllowBotStop="True" StopOnContinue="True"
-										Text="End of Dev Profile. Development from here. 
-										\nYes, you read correctly.  There are no more quests after this message. 
-										\n\nDon't post on forums and ask." />
-
-			<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="I'm serious, there's no more quests." />
-
-
-		
-
+		<CustomBehavior File="LoadProfile" ProfileName="[A - Quest] 98-100 Nagrand [Kick]" />
 		
     </QuestOrder>
 
