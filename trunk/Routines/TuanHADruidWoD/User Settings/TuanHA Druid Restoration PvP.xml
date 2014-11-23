@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <THSettings>
-  <AoE>False</AoE>
+  <AutoAoE>False</AutoAoE>
   <AstralCommunion>False</AstralCommunion>
   <Barkskin>True</Barkskin>
   <BarkskinHP>70</BarkskinHP>
@@ -40,7 +40,7 @@
   <GrowlTank>False</GrowlTank>
   <HealingTouchNonResto>True</HealingTouchNonResto>
   <HealingTouchResto>True</HealingTouchResto>
-  <HealingTouchRestoHP>70</HealingTouchRestoHP>
+  <HealingTouchRestoHP>80</HealingTouchRestoHP>
   <HealingTouchNS>True</HealingTouchNS>
   <HealingTouchNSHP>40</HealingTouchNSHP>
   <HealMe>False</HealMe>
@@ -49,7 +49,6 @@
   <HealFriendHP>50</HealFriendHP>
   <Hibernate>False</Hibernate>
   <Hurricane>False</Hurricane>
-  <Lacerate>True</Lacerate>
   <IncarnationCatBear>False</IncarnationCatBear>
   <IncarnationBalance>True</IncarnationBalance>
   <IncarnationBalanceCD>False</IncarnationBalanceCD>
@@ -68,11 +67,9 @@
   <InterruptMinChannelSpells>300</InterruptMinChannelSpells>
   <InterruptMinPercent>30</InterruptMinPercent>
   <InterruptMaxPercent>70</InterruptMaxPercent>
-  <IsEnemyCheck>False</IsEnemyCheck>
   <Lifebloom>True</Lifebloom>
-  <LifebloomRenewMinTime>3000</LifebloomRenewMinTime>
-  <LifebloomRenewMaxTime>7000</LifebloomRenewMaxTime>
-  <LifebloomExpire>60</LifebloomExpire>
+  <Lacerate>True</Lacerate>
+  <Maul>True</Maul>
   <MaimInterrupt>True</MaimInterrupt>
   <Maim>False</Maim>
   <MaimComboPoints>4</MaimComboPoints>
@@ -89,10 +86,12 @@
   <MoonkinForm>True</MoonkinForm>
   <Moonfire>True</Moonfire>
   <MoonfireBalance>True</MoonfireBalance>
+  <MoonfireFeral>True</MoonfireFeral>
   <NaturesGrasp>True</NaturesGrasp>
   <NaturesSwiftnessHealingTouchBalance>True</NaturesSwiftnessHealingTouchBalance>
   <Nourish>True</Nourish>
   <Pounce>True</Pounce>
+  <Pulverize>True</Pulverize>
   <PredatorSwiftness>False</PredatorSwiftness>
   <Prowl>False</Prowl>
   <ProwlAlways>False</ProwlAlways>
@@ -123,6 +122,7 @@
   <StarfallBurst>False</StarfallBurst>
   <Starfire>True</Starfire>
   <Starsurge>True</Starsurge>
+  <StellarFlare>True</StellarFlare>
   <SunfireBalance>True</SunfireBalance>
   <SurvivalInstincts>False</SurvivalInstincts>
   <SurvivalInstinctsHP>40</SurvivalInstinctsHP>
@@ -130,7 +130,6 @@
   <SwiftmendHP>80</SwiftmendHP>
   <SwipeBear>True</SwipeBear>
   <SwipeCat>True</SwipeCat>
-  <Symbiosis>True</Symbiosis>
   <ThrashCat>True</ThrashCat>
   <ThrashBear>True</ThrashBear>
   <TigerFury>True</TigerFury>
@@ -159,12 +158,12 @@
   <AutoWriteLog>True</AutoWriteLog>
   <BurstString>ControlKey+B</BurstString>
   <BurstKey>7</BurstKey>
-  <BurstHP>50</BurstHP>
+  <BurstHP>60</BurstHP>
   <CycloneHealerString>ShiftKey+D5</CycloneHealerString>
   <CycloneAnyUnitString>D5</CycloneAnyUnitString>
   <DoNotHealAbove>95</DoNotHealAbove>
+  <FileandSettingCheckLast>0</FileandSettingCheckLast>
   <FlagReturnorPickup>True</FlagReturnorPickup>
-  <HotkeyPrintChat>True</HotkeyPrintChat>
   <HealBalancing>0</HealBalancing>
   <HealthStone>True</HealthStone>
   <HeartoftheWildCD>False</HeartoftheWildCD>
@@ -182,8 +181,6 @@
   <PauseToggleKeys>Pause</PauseToggleKeys>
   <PounceInterrupt>True</PounceInterrupt>
   <PriorityHeal>70</PriorityHeal>
-  <ProfBuff>6</ProfBuff>
-  <ProfBuffHP>80</ProfBuffHP>
   <RemoveCorruption>False</RemoveCorruption>
   <StartEating>60</StartEating>
   <Trinket1>5</Trinket1>

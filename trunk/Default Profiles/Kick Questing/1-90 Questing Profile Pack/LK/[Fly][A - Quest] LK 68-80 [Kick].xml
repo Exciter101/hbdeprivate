@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <HBProfile xsi:noNamespaceSchemaLocation="../Schemas/QuestProfileSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <!-- Developed by Kickazz006 -->
-    <Name>[Fly][A - Quest] 68-80 [Kick] ($Rev: 3627 $)</Name>
+    <Name>[Fly][A - Quest] 68-80 [Kick] ($Rev: 3675 $)</Name>
 
     <MinLevel>68</MinLevel>
     <MaxLevel>1001</MaxLevel>
@@ -274,8 +274,12 @@
         <!-- NO MAILBOX @ Zim'Torga -->
     </Mailboxes>
 
+	<Blackspots>
+		<Blackspot X="5057.455" Y="-4826.749" Z="215.9247" Radius="8" /> <!-- Underground Mob - Thor Modan -->
+	</Blackspots>
 
     <AvoidMobs>
+		<Mob Name="Gymer" Entry="29884" />
         <Mob Name="Blightguard" Id="28603" />
         <!--<Mob Name="Carrion Condor" Id="26174" />-->
         <!--<Mob Name="Corrupted Rager" Id="21223" />-->
@@ -9969,14 +9973,14 @@
                 <CustomBehavior File="ForceSetVendor" DoSell="true" DoRepair="true" DoMail="true" />
             </If>
             <While Condition="HasQuest(11993) &amp;&amp; !IsQuestCompleted(11993)">
-                <CustomBehavior File="InteractWith" QuestId="11993" QuestObjectiveIndex="3"
-                                MobId="188289" CollectionDistance="10"
+                <CustomBehavior File="InteractWith" QuestId="11993" QuestObjectiveIndex="3" PreInteractMountStrategy="DismountOrCancelShapeshift" 
+                                MobId="188289" CollectionDistance="10" Range="6"
                                 X="4952.656" Y="-4705.741" Z="219.8488" />
-                <CustomBehavior File="InteractWith" QuestId="11993" QuestObjectiveIndex="1"
-                                MobId="188264" CollectionDistance="10"
+                <CustomBehavior File="InteractWith" QuestId="11993" QuestObjectiveIndex="1" PreInteractMountStrategy="DismountOrCancelShapeshift" 
+                                MobId="188264" CollectionDistance="10" Range="6"
                                 X="5007.675" Y="-4734.232" Z="219.4391" />
-                <CustomBehavior File="InteractWith" QuestId="11993" QuestObjectiveIndex="2"
-                                MobId="188288" CollectionDistance="10"
+                <CustomBehavior File="InteractWith" QuestId="11993" QuestObjectiveIndex="2" PreInteractMountStrategy="DismountOrCancelShapeshift" 
+                                MobId="188288" CollectionDistance="10" Range="6"
                                 X="5006.924" Y="-4790.667" Z="219.4593" />
                 <CustomBehavior File="WaitTimer" QuestId="11993" WaitTime="10000"
                                 GoalText="Waiting for quest to complete {TimeRemaining}" />
@@ -13686,7 +13690,7 @@
         </If>
         <While Condition="HasQuest(12906) &amp;&amp; !IsQuestCompleted(12906)">
             <CustomBehavior File="InteractWith" QuestId="12906" MobId="30146" InteractByUsingItemId="42837"
-                            NumOfTimes="6" WaitTime="6000" CollectionDistance="200" X="6929.614" Y="-1316.467"
+                            NumOfTimes="6" Range="4" WaitTime="6000" CollectionDistance="200" X="6929.614" Y="-1316.467"
                             Z="831.2584" />
         </While>
         <If Condition="HasQuest(12906) &amp;&amp; IsQuestCompleted(12906)">
