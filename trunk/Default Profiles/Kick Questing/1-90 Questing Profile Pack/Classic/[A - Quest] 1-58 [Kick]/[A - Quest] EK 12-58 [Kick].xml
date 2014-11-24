@@ -2,7 +2,7 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <!-- Originally contributed by Kickazz006 -->
-    <Name>[A - Quest] EK 12-58 [Kick] ($Rev: 3586 $)</Name>
+    <Name>[A - Quest] EK 12-58 [Kick] ($Rev: 3679 $)</Name>
     <MinLevel>5</MinLevel>
     <MaxLevel>1001</MaxLevel>
 
@@ -31,6 +31,7 @@
     </Blackspots>
 
     <AvoidMobs>
+		<Mob Name="Se'Jib" Entry="7871" />
         <Mob Name="Garginox" Id="45681" />
         <Mob Name="Gorn" Id="1068" />
         <Mob Name="Gringer" Id="2858" />
@@ -6948,7 +6949,7 @@
         </If>
         <SetGrindArea>
             <GrindArea>
-                <Name>Grind to Level 40($Rev: 3586 $)</Name>
+                <Name>Grind to Level 40($Rev: 3679 $)</Name>
                 <Factions>7 14 21</Factions>
                 <!-- [Grub, Bat, Gargolye, Hound] -->
                 <TargetMinLevel>38</TargetMinLevel>
