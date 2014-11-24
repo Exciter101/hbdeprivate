@@ -2,7 +2,7 @@
 <HBProfile xsi:noNamespaceSchemaLocation="../Schemas/QuestProfileSchema.xsd"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <Name>[Fly][N - Quest] Hyjal 80-82 [Kick]($Rev: 3585 $)</Name>
+    <Name>[Fly][N - Quest] Hyjal 80-82 [Kick]($Rev: 3678 $)</Name>
 
     <MinLevel>80</MinLevel>
     <MaxLevel>1001</MaxLevel>
@@ -1040,7 +1040,7 @@
                 <CustomBehavior File="FlyTo" DestName="get Lightning" Land="true" X="5064.553" Y="-2116.217"
                                 Z="1373.668" />
                 <While Condition="!HasItem(52834)">
-                    <CustomBehavior File="InteractWith" QuestId="25353" MobId="202731" PreInteractMountStrategy="Dismount">
+                    <CustomBehavior File="InteractWith" QuestId="25353" MobId="202731" Range="5" PreInteractMountStrategy="Dismount">
                         <HuntingGrounds>
                             <Hotspot X="5126.147" Y="-2049.125" Z="1366.189" />
                             <Hotspot X="5040.643" Y="-2163.276" Z="1386.981" />
@@ -1709,11 +1709,15 @@
             <MoveTo X="4582.165" Y="-2701.421" Z="1140.713" />
             <MoveTo X="4608.294" Y="-2707.581" Z="1146.11" />
             <CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for agro to clear {TimeRemaining}" />
-            <CustomBehavior File="InteractWith" MobId="202928" Range="10" />
+            <CustomBehavior File="InteractWith" MobId="202928" Range="8" X="4608.294" Y="-2707.581" Z="1146.11" />
             <CustomBehavior File="WaitTimer" WaitTime="8000" GoalText="Waiting for event {TimeRemaining}" />
-
-            <CustomBehavior File="InteractWith" MobId="46925" Range="15" MobState="Alive" NumOfTimes="5"
-                            WaitForNpcs="false" />
+			
+			<CustomBehavior File="KillUntilComplete" QuestId="25502" ImmediatelySwitchToHighestPriorityTarget="True"
+											TerminateWhen="IsObjectiveComplete(2, 25502) || Object(202928) == null || !Me.HasAura(75470)" X="4608.294" Y="-2707.581" Z="1146.11" >
+					<PursuitList>
+					  <PursueUnit Id="46925" Priority="9999" /> <!-- Flameward -->
+					</PursuitList>
+				</CustomBehavior>
 
             <CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for lewts {TimeRemaining}" />
         </While>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <HBProfile xsi:noNamespaceSchemaLocation="../Schemas/QuestProfileSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <!-- Developed by Kickazz006 -->
-    <Name>[A - Quest] 85-86 The Jade Forest [Kick] ($Rev: 3579 $)</Name>
+    <Name>[A - Quest] 85-86 The Jade Forest [Kick] ($Rev: 3678 $)</Name>
 
     <MinLevel>85</MinLevel>
     <MaxLevel>1001</MaxLevel>
@@ -975,7 +975,7 @@
 
         <UseMount Value="true" />
 
-        <CustomBehavior File="InteractWith" QuestId="29552" MobId="61492"
+        <CustomBehavior File="InteractWith" QuestId="29552" MobId="61492" Range="3"
             NumOfTimes="100" CollectionDistance="1000" >
             <HuntingGrounds>
                 <Hotspot X="-443.1266" Y="-1563.94" Z="28.27024" />
