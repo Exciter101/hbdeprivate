@@ -1,6 +1,6 @@
 <HBProfile xsi:noNamespaceSchemaLocation="../../../Schemas/QuestProfileSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <!-- Original contribution by Kickazz006 -->
-    <Name>[A - Quest] 90-92 SMV [Kick] ($Rev: 3405 $)</Name>
+    <Name>[A - Quest] 90-92 SMV [Kick] ($Rev: 3719 $)</Name>
 
     <MinLevel>90</MinLevel>
     <MaxLevel>1001</MaxLevel>
@@ -885,7 +885,7 @@
              block after each checkpoint, and the at the start of the <QuestOrder>, also.
         -->
         <CustomBehavior File="Misc\RunLua" Lua="SetCVar('AutoLootDefault', 1)" />
-        <CustomBehavior File="UserSettings" AutoEquip="true" />
+        <!--<CustomBehavior File="UserSettings" AutoEquip="true" />-->
 
         <CustomBehavior File="EnablePlugin" Names="Anti Drown" />
         <CustomBehavior File="EnablePlugin" Names="Refreshment Detection" />
@@ -1095,6 +1095,7 @@
                 <CustomBehavior File="Misc\RunLua" Lua="if MovieFrame and MovieFrame:IsVisible() then MovieFrame:StopMovie() elseif CinematicFrame and CinematicFrame:IsVisible() then CinematicFrame_CancelCinematic() end" WaitTime="10000" />
 				<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Waiting for cutscene to end {TimeRemaining}" />
 				<CustomBehavior File="RunCode" Code="Navigator.Clear()" />
+				<CustomBehavior File="LoadProfile" ProfileName="[A - Quest] 90-92 SMV [Kick]" RememberProfile="true"/> <!-- Remove this when nav is fixed -->
 			</If>
         <TurnIn QuestName="Keli'dan the Breaker" QuestId="34436" TurnInName="Archmage Khadgar" TurnInId="78562" X="4610.563" Y="-2246.493" Z="15.40344" /> <!-- New NPC Id -->
             <!-- End Kargathar Proving Grounds -->
@@ -1176,7 +1177,7 @@
         <PickUp QuestName="A Taste of Iron" QuestId="34445" GiverName="Thaelin Darkanvil" GiverId="80521" X="4062.665" Y="-2019.338" Z="74.87279" />
             <If Condition="HasQuest(34445) &amp;&amp; !IsQuestCompleted(34445)" > <!-- A Taste of Iron - Vehicle Quest -->
              <If Condition="!IsObjectiveComplete(1, 34445)"> <!-- Mount Turret -->
-                <CustomBehavior File="InteractWith" MobId="231261" MobType="GameObject" NonCompeteDistance="0" Range="5" X="4054.708" Y="-2019.128" Z="73.14471" />
+                <CustomBehavior File="InteractWith" MobId="231261" ObjectType="GameObject" NonCompeteDistance="0" Range="5" X="4054.708" Y="-2019.128" Z="73.14471" />
              </If>
              <While Condition="!IsObjectiveComplete(2, 34445)"> <!-- Kill Mobs -->
                 <CustomBehavior File="Misc\RunLua" Lua="OverrideActionBarButton1:Click()" WaitTime="100" />
@@ -1516,7 +1517,7 @@
                 <TargetingDistance Value="10" />
                 <If Condition="!Me.HasAura(165892) &amp;&amp; !IsQuestCompleted(34784)" > <!-- Missing Shimmershroom Aura -->
                     <CustomBehavior File="ForcedMount" MountType="Ground" />
-                    <CustomBehavior File="InteractWith" QuestId="34784" MobId="232533" MobType="GameObject" NonCompeteDistance="0" Range="4" TerminateWhen="Me.HasAura(165892)" WaitTime="100" >
+                    <CustomBehavior File="InteractWith" QuestId="34784" MobId="232533" ObjectType="GameObject" NonCompeteDistance="0" Range="4" TerminateWhen="Me.HasAura(165892)" WaitTime="100" >
                         <HuntingGrounds>
                             <Hotspot X="1601.425" Y="-1580.819" Z="-0.2653325" />
                             <Hotspot X="1634.604" Y="-1604.08" Z="-0.3766119" />
@@ -1693,16 +1694,16 @@
 
                 <If Condition="Me.HasAura(153951)"> <!-- Fiona / Summon Susanna -->
                     <If Condition="Me.HasAura(153960)"> <!-- Glow / Moonlit Herb -->
-                        <CustomBehavior File="InteractWith" QuestId="33788" MobId="226001" MobType="GameObject" Range="5" NonCompeteDistance="0" X="101.9437" Y="-1315.782" Z="-2.788486" />
+                        <CustomBehavior File="InteractWith" QuestId="33788" MobId="226001" ObjectType="GameObject" Range="5" NonCompeteDistance="0" X="101.9437" Y="-1315.782" Z="-2.788486" />
                     </If>
                     <If Condition="Me.HasAura(153957)"> <!-- Wriggle / Riotvine -->
-                        <CustomBehavior File="InteractWith" QuestId="33788" MobId="225943" MobType="GameObject" Range="5" NonCompeteDistance="0" X="98.76878" Y="-1323.637" Z="-2.118969" />
+                        <CustomBehavior File="InteractWith" QuestId="33788" MobId="225943" ObjectType="GameObject" Range="5" NonCompeteDistance="0" X="98.76878" Y="-1323.637" Z="-2.118969" />
                     </If>
                     <If Condition="Me.HasAura(153969)"> <!-- Meaty / Riverbeast Heart -->
-                        <CustomBehavior File="InteractWith" QuestId="33788" MobId="225941" MobType="GameObject" Range="5" NonCompeteDistance="0" X="99.1808" Y="-1320.524" Z="-3.078955" />
+                        <CustomBehavior File="InteractWith" QuestId="33788" MobId="225941" ObjectType="GameObject" Range="5" NonCompeteDistance="0" X="99.1808" Y="-1320.524" Z="-3.078955" />
                     </If>
                     <If Condition="Me.HasAura(153959)"> <!-- Toxic / Swamplighter Venom -->
-                        <CustomBehavior File="InteractWith" QuestId="33788" MobId="225942" MobType="GameObject" Range="5" NonCompeteDistance="0" X="99.02686" Y="-1325.867" Z="-2.635684" />
+                        <CustomBehavior File="InteractWith" QuestId="33788" MobId="225942" ObjectType="GameObject" Range="5" NonCompeteDistance="0" X="99.02686" Y="-1325.867" Z="-2.635684" />
                     </If>
                 </If>
              </While>
@@ -1882,7 +1883,7 @@
                 </CustomBehavior>
             </While>
             <While Condition="HasQuest(34876) &amp;&amp; !IsQuestCompleted(34876)" > <!-- Loola's Lost Love -->
-                <CustomBehavior File="InteractWith" QuestId="34876" MobId="230952" MobType="GameObject" NumOfTimes="50" IgnoreMobsInBlackspots="True" Range="5" NonCompeteDistance="0" CollectionDistance="1000" PreInteractMountStrategy="DismountOrCancelShapeshift" >
+                <CustomBehavior File="InteractWith" QuestId="34876" MobId="230952" ObjectType="GameObject" NumOfTimes="50" IgnoreMobsInBlackspots="True" Range="5" NonCompeteDistance="0" CollectionDistance="1000" PreInteractMountStrategy="DismountOrCancelShapeshift" >
                   <HuntingGrounds WaypointVisitStrategy="Random" >
                     <Hotspot X="387.7489" Y="-603.658" Z="-26.33479" />
                     <Hotspot X="324.3137" Y="-617.5988" Z="-19.62048" />
@@ -1916,7 +1917,7 @@
             </While>
             <Objective QuestName="Loola's Lost Love" QuestId="34876" Type="UseObject" ObjectId="230952" UseCount="5" /> <!-- In Water, we may need to use water behavior. hotspots are in override -->
 			<If Condition="HasQuest(33076) &amp;&amp; !IsQuestCompleted(33076)" >
-                <CustomBehavior File="InteractWith" QuestId="33076" MobId="223824" MobType="GameObject" NonCompeteDistance="0" TerminateWhen="IsObjectiveComplete(3, 33076)" X="333.797" Y="-901.3214" Z="-22.13148" />
+                <CustomBehavior File="InteractWith" QuestId="33076" MobId="223824" ObjectType="GameObject" NonCompeteDistance="0" TerminateWhen="IsObjectiveComplete(3, 33076)" X="333.797" Y="-901.3214" Z="-22.13148" />
 				<!--<Objective QuestName="The Clarity Elixir" QuestId="33076" Type="CollectItem" ItemId="111024" CollectCount="1" />-->
 				<Objective QuestName="The Clarity Elixir" QuestId="33076" Type="CollectItem" ItemId="105716" CollectCount="3" />
 				<Objective QuestName="The Clarity Elixir" QuestId="33076" Type="CollectItem" ItemId="104350" CollectCount="6" />
@@ -1933,24 +1934,40 @@
 				<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Waiting for port {TimeRemaining}" />
              </If>
              <If Condition="(!IsObjectiveComplete(2, 33059))">
-				<If Condition="Me.MapId != 1227"> <!-- Fate of Karabor instance -->
+				<If Condition="Me.MapId != 1277"> <!-- Fate of Karabor instance -->
 					<MoveTo X="464.4299" Y="-96.27913" Z="92.55475" />
 					<UseItem QuestId="33059" ItemId="111591" X="464.4299" Y="-96.27913" Z="92.55475" />
 					<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Waiting for port {TimeRemaining}" />
 				</If>
                 <DisableBehavior Name="Pull" />
                 <While Condition="Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.StageNumber == 1">
-                    <MoveTo X="576.3542" Y="-3031.415" Z="69.39679" />
+                    <MoveTo X="577.1495" Y="-3077.012" Z="59.58014" />
                     <CustomBehavior File="WaitTimer" WaitTime="20000" GoalText="Waiting for Krull to come out {TimeRemaining}" />
                 </While>
                 <While Condition="Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.StageNumber == 2">
-				 <If Condition="Me.MapId != 1227"> <!-- Fate of Karabor instance -->
+				 <If Condition="Me.MapId != 1277"> <!-- Fate of Karabor instance -->
 					<MoveTo X="464.4299" Y="-96.27913" Z="92.55475" />
 					<UseItem QuestId="33059" ItemId="111591" X="464.4299" Y="-96.27913" Z="92.55475" />
 					<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Waiting for port {TimeRemaining}" />
 				 </If>
                     <MoveTo X="578.1978" Y="-3081.296" Z="59.73512" />
-                    <CustomBehavior File="InteractWith" QuestId="33059" WaitForNpcs="False" MobId="79560" X="578.1978" Y="-3081.296" Z="59.73512" /> <!-- Kill Krull -->
+                    <CustomBehavior File="InteractWith" QuestId="33059" WaitForNpcs="False" MobId="79560" Range="4" CollectionDistance="200" X="578.5238" Y="-3076.904" Z="59.72013" /> <!-- Kill Krull -->
+					<!--
+					ADD HOOK: STAND HERE AT ALL TIMES WHILE FIGHTING KRULL
+					Radiant Light - Id: 6640, Shape: AreaTriggerSphere - Radius: 3, RadiusTarget: 3, Flags: Unknown2
+					
+					<CustomBehavior File="KillUntilComplete" QuestId="33059" ImmediatelySwitchToHighestPriorityTarget="True" CollectionDistance="200" 
+												TerminateWhen="Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.StageNumber > 2" >
+						<PursuitList>
+						  <PursueUnit Id="79560" Priority="5000" />
+						</PursuitList>
+						<HuntingGrounds>
+							<Hotspot X="580.9465" Y="-3153.998" Z="59.52285" />
+							<Hotspot X="578.5238" Y="-3076.904" Z="59.72013" />
+						</HuntingGrounds>
+					</CustomBehavior>
+					-->
+				 
                 </While>
                 <While Condition="Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.StageNumber == 3">
                     <MoveTo X="578.1978" Y="-3081.296" Z="59.73512" />
@@ -1978,7 +1995,7 @@
         <PickUp QuestName="Forbidden Love" QuestId="34847" GiverName="Dulga" GiverId="77211" X="1522.646" Y="-820.6805" Z="41.98731" />
         <PickUp QuestName="Lunarblossom" QuestId="34836" GiverName="Zukaza" GiverId="80248" X="1533.552" Y="-840.6754" Z="44.58467" />
             <If Condition="HasQuest(33082) &amp;&amp; !IsQuestCompleted(33082)" > <!-- Ancestor's Memory -->
-                <CustomBehavior File="InteractWith" QuestId="33082" MobId="225918" MobType="GameObject" Range="4" WaitTime="20000" NonCompeteDistance="0" X="1525.192" Y="-794.9803" Z="-18.48633" />
+                <CustomBehavior File="InteractWith" QuestId="33082" MobId="225918" ObjectType="GameObject" Range="4" WaitTime="20000" NonCompeteDistance="0" X="1525.192" Y="-794.9803" Z="-18.48633" />
             </If>
         <TurnIn QuestName="Ancestor's Memory" QuestId="33082" TurnInName="Rulkan" TurnInId="75884" X="1517.859" Y="-802.7396" Z="-20.035" />
         <PickUp QuestName="Darkest Night" QuestId="34043" GiverName="Rulkan" GiverId="75884" X="1517.859" Y="-802.7396" Z="-20.035" />
@@ -2028,7 +2045,7 @@
                 <CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for CLQ {TimeRemaining}" />
             </While>
             <While Condition="HasQuest(33794) &amp;&amp; !IsQuestCompleted(33794)" > <!-- The Great Salvation -->
-                <CustomBehavior File="InteractWith" QuestId="33794" MobId="225924" MobType="GameObject" NumOfTimes="50" IgnoreMobsInBlackspots="True" Range="7" NonCompeteDistance="0" CollectionDistance="1000" PreInteractMountStrategy="DismountOrCancelShapeshift" >
+                <CustomBehavior File="InteractWith" QuestId="33794" MobId="225924" ObjectType="GameObject" NumOfTimes="50" IgnoreMobsInBlackspots="True" Range="7" NonCompeteDistance="0" CollectionDistance="1000" PreInteractMountStrategy="DismountOrCancelShapeshift" >
                   <HuntingGrounds WaypointVisitStrategy="Random" >
                     <Hotspot X="896.0571" Y="-11.18123" Z="20.2538" />
                     <Hotspot X="921.4739" Y="61.10225" Z="20.2538" />
@@ -2105,7 +2122,8 @@
         <PickUp QuestName="The Righteous March" QuestId="33255" GiverName="Vindicator Maraad" GiverId="77312" X="603.873" Y="-1230.87" Z="-21.42327" />
             <While Condition="HasQuest(33255) &amp;&amp; !IsQuestCompleted(33255)" > <!-- The Righteous March -->
              <While Condition="(!IsObjectiveComplete(1, 33255))">
-				<MoveTo X="603.873" Y="-1230.87" Z="-21.42327" />
+				<MoveTo QuestId="33255" X="603.873" Y="-1230.87" Z="-21.42327" />
+				<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Waiting for  {TimeRemaining}" />				
                <If Condition="Unit(73395) != null &amp;&amp; !IsQuestCompleted(33255)"> <!-- Yrel / Get on Transport -->
                 <CustomBehavior File="InteractWith" QuestId="33255" MobId="77312" MobId2="75145" WaitForNpcs="False" WaitTime="40000" PreInteractMountStrategy="DismountOrCancelShapeshift" NonCompeteDistance="0" GossipOptions="1" X="603.873" Y="-1230.87" Z="-21.42327" /> <!-- Maraad -->
                </If>
@@ -2326,24 +2344,37 @@
         <TurnIn QuestName="The Righteous March" QuestId="33255" TurnInName="Exarch Akama" TurnInId="72413" X="980.2604" Y="-2921.111" Z="99.33604" />
         <PickUp QuestName="The Defense of Karabor" QuestId="33256" GiverName="Exarch Akama" GiverId="72413" X="980.2604" Y="-2921.111" Z="99.33604" />
             <If Condition="HasQuest(33256) &amp;&amp; !IsQuestCompleted(33256)" > <!-- The Defense of Karabor -->
-				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerSphere" Command="Add" ObjectType="AreaTrigger" ObjectId="5805" Radius="5" />
-				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerPoly" Command="Add" ObjectType="AreaTrigger" ObjectId="5633" Radius="15" />
-				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerPolyFieryBlast" Command="Add" AvoidWhen="UNIT.HasAura(151731)" ObjectId="75358" Radius="5" 
-											AvoidLocationProducer="WoWMathHelper.GetNearestPointOnLineSegment(Me.Location, UNIT.Location, UNIT.Location.RayCast(UNIT.Rotation, 10))" />
-											
+				<UseMount Value="False" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerSphere" Command="Add" ObjectType="AreaTrigger" ObjectId="5805" Radius="8" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerPoly" Command="Add" ObjectType="AreaTrigger" ObjectId="5633" Radius="12" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerPolyFieryBlast" Command="Add" ObjectId="75358" Radius="16" 
+				AvoidWhen="UNIT.CastingSpellId == 151732 || UNIT.CastingSpellId == 149378 || UNIT.CastingSpellId == 151766 || UNIT.HasAura(151731) || UNIT.HasAura(161320) || UNIT.HasAura(151766)" 
+				AvoidLocationProducer="WoWMathHelper.GetNearestPointOnLineSegment(Me.Location, UNIT.Location, UNIT.Location.RayCast(UNIT.Rotation, 20))" />
+
+				<!-- vorka - add the 'periodic' missiles to avoid. add the circle on ground to avoid too -->
 				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlazingShot" Command="Add" ObjectType="AreaTrigger" ObjectId="5797" Radius="10" />
-				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlackestSkiesMissileLIne" Command="Add" ObjectType="Missile" ObjectId="150274" Radius="5" />
-				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlackestSkiesMissile" Command="Add" ObjectType="Missile" ObjectId="151661" Radius="5" />
-				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaGrapeshotBlast" Command="Add" ObjectType="Missile" ObjectId="152248" Radius="5" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlackestSkiesMissileLine" Command="Add" ObjectType="Missile" ObjectId="150274" Radius="7" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlackestSkiesMissile" Command="Add" ObjectType="Missile" ObjectId="151661" Radius="7" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaGrapeshotBlast" Command="Add" ObjectType="Missile" ObjectId="152248" Radius="7" />
              <While Condition="(!IsObjectiveComplete(1, 33256))">
                 <If Condition="Me.MapId != 1277" > <!-- 1277 = DefenseOfKaraborScenario -->
                     <MoveTo X="830.7855" Y="-2869.874" Z="100.4185" />
 				</If>
                 <While Condition="Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.StageNumber == 1">
-                    <MoveTo X="830.7855" Y="-2869.874" Z="100.4185" />
+                    <!--<MoveTo X="830.7855" Y="-2869.874" Z="100.4185" />
 					<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Waiting for Arnokk {TimeRemaining}" />
-                    <CustomBehavior File="InteractWith" QuestId="33256" MobId="75358" WaitForNpcs="False" MobState="Alive" X="830.7855" Y="-2869.874" Z="100.4185" /> <!-- Kill Arnokk -->
+                    <CustomBehavior File="InteractWith" QuestId="33256" MobId="75358" WaitForNpcs="False" MobState="Alive" X="830.7855" Y="-2869.874" Z="100.4185" />  Kill Arnokk -->
                     <!-- Need to tweak his Avoid hooks some -->
+				<CustomBehavior File="KillUntilComplete" QuestId="33256" ImmediatelySwitchToHighestPriorityTarget="True" Range="7" CollectionDistance="30" 
+											TerminateWhen="Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.StageNumber > 1" >
+					<PursuitList>
+						<PursueUnit Id="79557" Priority="8000" />
+						<PursueUnit Id="75358" Priority="-5000" />
+					</PursuitList>
+					<HuntingGrounds>
+						<Hotspot X="830.7855" Y="-2869.874" Z="100.4185" />
+					</HuntingGrounds>
+				</CustomBehavior>
                 </While>
                 <While Condition="Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.StageNumber == 2">
 				 <While Condition="!Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.GetStep(1).IsComplete">
@@ -2380,7 +2411,7 @@
 				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerSphere" Command="Remove" />
 				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerPoly" Command="Remove" />
 				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlazingShot" Command="Remove" />
-				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlackestSkiesMissileLIne" Command="Remove" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlackestSkiesMissileLine" Command="Remove" />
 				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlackestSkiesMissile" Command="Remove" />
 				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaGrapeshotBlast" Command="Remove" />
 			</If>
@@ -2391,6 +2422,7 @@
                     <CustomBehavior File="Misc\RunLua" Lua="if MovieFrame and MovieFrame:IsVisible() then MovieFrame:StopMovie() elseif CinematicFrame and CinematicFrame:IsVisible() then CinematicFrame_CancelCinematic() end" WaitTime="2000" />
 					<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for cutscene to end {TimeRemaining}" />
                 </If>
+				<UseMount Value="true" />
             </If>
         <TurnIn QuestName="The Defense of Karabor" QuestId="33256" TurnInName="Yrel" TurnInId="73395" X="935.5781" Y="-838.8489" Z="-28.83364" />
             <If Condition="!HasQuest(35556) &amp;&amp; !IsQuestCompleted(35556)" > <!-- The Secrets of Gorgrond - a diff goto -->
@@ -2410,9 +2442,9 @@
                 <MoveTo X="1515.269" Y="-363.6183" Z="5.303165" />
              </While>
                 <CustomBehavior File="InteractWith" QuestId="33263" MobId="74667" TerminateWhen="IsObjectiveComplete(2, 33263)" X="1515.519" Y="-362.8733" Z="5.298625" /> <!-- Phlox -->
-                <CustomBehavior File="InteractWith" QuestId="33263" MobId="224229" TerminateWhen="IsObjectiveComplete(3, 33263)" MobType="GameObject" X="1649.759" Y="-379.3993" Z="12.45454" /> <!-- Alliance Sword -->
+                <CustomBehavior File="InteractWith" QuestId="33263" MobId="224229" TerminateWhen="IsObjectiveComplete(3, 33263)" ObjectType="GameObject" X="1649.759" Y="-379.3993" Z="12.45454" /> <!-- Alliance Sword -->
                 <CustomBehavior File="InteractWith" QuestId="33263" MobId="74681" TerminateWhen="IsObjectiveComplete(4, 33263)" X="1642.342" Y="-381.7274" Z="11.02501" /> <!-- Phlox -->
-                <CustomBehavior File="InteractWith" QuestId="33263" MobId="223720" TerminateWhen="IsObjectiveComplete(5, 33263)" MobType="GameObject" X="1770.597" Y="-400.8646" Z="23.89392" /> <!-- Alliance Shield -->
+                <CustomBehavior File="InteractWith" QuestId="33263" MobId="223720" TerminateWhen="IsObjectiveComplete(5, 33263)" ObjectType="GameObject" X="1770.597" Y="-400.8646" Z="23.89392" /> <!-- Alliance Shield -->
                 <CustomBehavior File="InteractWith" QuestId="33263" MobId="74686" TerminateWhen="IsObjectiveComplete(6, 33263)" X="1767.479" Y="-401.9965" Z="23.95442" /> <!-- Phlox -->
                 <CustomBehavior File="InteractWith" QuestId="33263" MobId="74193" TerminateWhen="IsObjectiveComplete(7, 33263)" X="1856.429" Y="-533.7899" Z="2.341996" /> <!-- Dead Packmule -->
                 <CustomBehavior File="InteractWith" QuestId="33263" MobId="74687" TerminateWhen="IsObjectiveComplete(8, 33263)" X="1856.161" Y="-540.6371" Z="1.812772" /> <!-- Phlox -->
