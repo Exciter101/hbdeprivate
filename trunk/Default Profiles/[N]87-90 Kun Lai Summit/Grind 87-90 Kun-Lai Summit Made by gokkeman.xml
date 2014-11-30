@@ -1,0 +1,58 @@
+<HBProfile creator="gokkeman">
+
+    <Name>gokkeman Grind 87-90 + skinning </Name>
+    <MinLevel>1</MinLevel>
+    <MaxLevel>91</MaxLevel>
+   
+    <MinDurability>0.2</MinDurability>
+    <MinFreeBagSlots>1</MinFreeBagSlots>
+   
+   	<SellGrey>True</SellGrey>
+   	<SellWhite>False</SellWhite>
+	<SellGreen>False</SellGreen>
+
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+        
+	
+	
+    <Vendors>
+	<!-- Neutral -->
+	<Vendor Name="Clover Keeper" Entry="60420" Type="Food" X="2708.001" Y="2169.304" Z="588.7467" />
+    <Vendor Name="Cousin Copperfinder" Entry="60423" Type="Food" X="2742.298" Y="2186.517" Z="591.4346" />
+	<Vendor Name="Supplier Xin" Entry="62737" Type="Repair" X="2419.361" Y="3007.01" Z="417.3719" />
+	<Vendor Name="Alin the Finder" Entry="65171" Type="Repair" X="2363.516" Y="2973.526" Z="417.2332" />
+	<!-- Horde -->
+	</Vendors>
+   
+    <Mailboxes> 
+	<Mailbox X="2353.08" Y="2994.912" Z="421.2084" />
+	</Mailboxes>
+   
+    <GrindArea>
+		<TargetMinLevel>87</TargetMinLevel>
+		<TargetMaxLevel>89</TargetMaxLevel>
+		<Factions>16</Factions> <!-- Yeti, Monster -->
+		<Hotspots>
+	<Hotspot X="2787.119" Y="2507.311" Z="701.2945" />
+	<Hotspot X="2761.131" Y="2582.395" Z="699.7167" />
+	<Hotspot X="2740.318" Y="2591.094" Z="700.9617" />
+	<Hotspot X="2672.011" Y="2623.137" Z="685.6296" />
+	<Hotspot X="2700.011" Y="2638.887" Z="683.2977" />
+	<Hotspot X="2717.244" Y="2628.683" Z="681.5173" />
+
+        </Hotspots>
+    </GrindArea>
+	
+	<Blackspots>
+	<Blackspot X="2694.984" Y="2582.311" Z="692.3884" /> <!-- yay, blackspot for Taurens -->
+  </Blackspots>
+  
+  <AvoidMobs> 
+  <!-- Don't Attack/Engage!-->
+  <Mob Name="Kafa-Crazed Mountain Goat" Entry="60493"/>
+  </AvoidMobs>
+  
+</HBProfile>
