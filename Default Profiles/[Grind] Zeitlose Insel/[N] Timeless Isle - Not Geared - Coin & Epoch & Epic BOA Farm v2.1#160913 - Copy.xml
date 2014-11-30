@@ -1,0 +1,107 @@
+<HBProfile>
+<Name>Timeless Isle Rev: 1.1#150913 - GIVEMEANAME</Name>
+<MinDurability>0.3</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+<MailGrey>false</MailGrey>
+<MailWhite>true</MailWhite>
+<MailGreen>true</MailGreen>
+<MailBlue>true</MailBlue>
+<MailPurple>true</MailPurple>
+
+<SellGrey>true</SellGrey>
+<SellWhite>true</SellWhite>
+<SellGreen>false</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+<Vendor Name="Crafter Kwon" Entry="73656" Type="Repair" X="-511.3785" Y="-5008.741" Z="2.056449" />
+</Vendors>
+
+<Mailboxes>
+<Mailbox X="-516.4636" Y="-4969.116" Z="2.056987" />
+</Mailboxes>
+
+<Blackspots>
+<Blackspot X="-475.1418" Y="-5010.931" Z="5.240516" Radius="20" />
+<Blackspot X="-568.0515" Y="-4797.986" Z="5.837235" Radius="20" />
+<Blackspot X="-415.1175" Y="-4896.616" Z="5.941898" Radius="20" />
+</Blackspots>
+
+<AvoidMobs>
+<Mob Name="Ancient Spineclaw" Entry="72766" />
+<Mob Name="Great Turtle" Entry="72764" />
+<Mob Name="Eternal Kilnmaster" Entry="72896" />
+<Mob Name="Molten Guardian" Entry="72888" />
+<Mob Name="High Priest of Ordos" Entry="72898" /> 
+<Mob Name="Blazebound Chanter" Entry="72897" />
+<Mob Name="Eroded Cliffdweller" Entry="72809" />
+</AvoidMobs>
+
+<GrindArea>
+<MinLevel>89</MinLevel>
+<MaxLevel>91</MaxLevel>
+<Factions>16 2136</Factions>
+<MaxDistance>30</MaxDistance>
+
+<Hotspots>
+<Hotspot X="-891.0485" Y="-4792.072" Z="2.190494" />
+<Hotspot X="-931.1459" Y="-4802.968" Z="3.594318" />
+<Hotspot X="-964.2507" Y="-4827.801" Z="3.881917" />
+<Hotspot X="-1001.033" Y="-4844.613" Z="4.261779" />
+<Hotspot X="-1037.159" Y="-4862.664" Z="4.87848" />
+<Hotspot X="-1028.421" Y="-4902.409" Z="4.318712" />
+<Hotspot X="-989.045" Y="-4910.361" Z="3.606432" />
+<Hotspot X="-954.0076" Y="-4890.313" Z="2.159579" />
+<Hotspot X="-922.9074" Y="-4864.687" Z="5.43712" />
+<Hotspot X="-891.9164" Y="-4838.737" Z="2.127414" />
+<Hotspot X="-857.9227" Y="-4814.618" Z="2.884209" />
+<Hotspot X="-816.2498" Y="-4814.228" Z="3.222333" />
+<Hotspot X="-778.4152" Y="-4827.917" Z="4.27798" />
+<Hotspot X="-755.7495" Y="-4861.885" Z="3.982532" />
+<Hotspot X="-722.5484" Y="-4838.533" Z="4.835671" />
+<Hotspot X="-721.4385" Y="-4796.933" Z="5.307872" />
+<Hotspot X="-703.2698" Y="-4760.26" Z="4.121494" />
+<Hotspot X="-662.9149" Y="-4768.956" Z="2.06061" />
+<Hotspot X="-640.1392" Y="-4803.416" Z="2.057606" />
+<Hotspot X="-603.809" Y="-4821.002" Z="4.003987" />
+<Hotspot X="-579.7177" Y="-4788.738" Z="3.11945" />
+<Hotspot X="-553.236" Y="-4757.056" Z="3.406682" />
+<Hotspot X="-511.853" Y="-4756.707" Z="2.084662" />
+<Hotspot X="-515.7161" Y="-4797.314" Z="3.411018" />
+<Hotspot X="-531.8074" Y="-4835.424" Z="3.632864" />
+<Hotspot X="-502.4464" Y="-4862.992" Z="5.824463" />
+<Hotspot X="-465.9392" Y="-4845.313" Z="4.906587" />
+<Hotspot X="-427.0291" Y="-4834.75" Z="3.363482" />
+<Hotspot X="-418.0423" Y="-4874.429" Z="4.210855" />
+<Hotspot X="-440.8427" Y="-4907.906" Z="2.69926" />
+<Hotspot X="-464.3216" Y="-4940.527" Z="3.699091" />
+<Hotspot X="-477.6635" Y="-4978.444" Z="3.475195" />
+<Hotspot X="-471.3985" Y="-5018.107" Z="3.311203" />
+<Hotspot X="-448.8858" Y="-5052.498" Z="4.903588" />
+<Hotspot X="-408.9667" Y="-5060.795" Z="5.649548" />
+<Hotspot X="-407.6188" Y="-5020" Z="3.471333" />
+<Hotspot X="-435.0228" Y="-4988.179" Z="2.544289" />
+<Hotspot X="-432.9938" Y="-4948.154" Z="4.436347" />
+<Hotspot X="-431.2123" Y="-4907.46" Z="3.42994" />
+<Hotspot X="-441.6194" Y="-4867.555" Z="3.006415" />
+<Hotspot X="-441.6756" Y="-4826.47" Z="6.524558" />
+<Hotspot X="-464.3921" Y="-4792.627" Z="3.029563" />
+<Hotspot X="-502.0771" Y="-4808.422" Z="1.740541" />
+<Hotspot X="-525.4965" Y="-4842.464" Z="4.377053" />
+<Hotspot X="-557.5938" Y="-4818.101" Z="4.001813" />
+<Hotspot X="-592.431" Y="-4798.313" Z="4.392972" />
+<Hotspot X="-618.4573" Y="-4829.184" Z="0.498595" />
+<Hotspot X="-651.8978" Y="-4805.633" Z="2.056526" />
+<Hotspot X="-682.7163" Y="-4780.064" Z="3.521856" />
+<Hotspot X="-715.4562" Y="-4803.699" Z="5.952389" />
+<Hotspot X="-748.4352" Y="-4827.008" Z="5.138181" />
+<Hotspot X="-788.9014" Y="-4817.736" Z="3.472944" />
+<Hotspot X="-828.4927" Y="-4828.61" Z="2.326739" />
+<Hotspot X="-864.2089" Y="-4807.638" Z="2.173457" />
+<Hotspot X="-897.8871" Y="-4786.012" Z="2.339301" />
+</Hotspots>
+</GrindArea>
+
+</HBProfile>
