@@ -1,6 +1,6 @@
 <HBProfile xsi:noNamespaceSchemaLocation="../../../Schemas/QuestProfileSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <!-- Original contribution by Kickazz006 -->
-    <Name>[A - Quest] 90-92 SMV [Kick] ($Rev: 3719 $)</Name>
+    <Name>[A - Quest] 90-92 SMV [Kick] ($Rev: 3753 $)</Name>
 
     <MinLevel>90</MinLevel>
     <MaxLevel>1001</MaxLevel>
@@ -903,21 +903,37 @@
 			Text="We are now accepting bug reports against the 90-100 portion of this pack.  Please do NOT open new threads in the forum regarding bugs with these profiles--such threads will be deleted!  Use Kick's Profiles thread!" />
 
 
-            <!-- Callboard if deleted quest - SW 
-            <If Condition="(!HasQuest(34398) &amp;&amp; !IsQuestCompleted(34398)) &amp;&amp; Me.ZoneId == 1519 &amp;&amp; (!HasQuest(35933) &amp;&amp; !IsQuestCompleted(35933))" >
+            <!-- Callboard if deleted quest - SW -->
+            <If Condition="(!HasQuest(34398) &amp;&amp; !IsQuestCompleted(34398)) &amp;&amp; Me.ZoneId == 1519 &amp;&amp; 
+			(!HasQuest(35933) &amp;&amp; !IsQuestCompleted(35933)) &amp;&amp; (!HasQuest(36881) &amp;&amp; !IsQuestCompleted(36881))" >
                 <CustomBehavior File="FlyTo" DestName="Callboard quest" X="-8830.302" Y="626.3619" Z="94.23802" />
         <PickUp QuestName="The Dark Portal" QuestId="34398" GiverName="Hero's Call Board" GiverId="206111" GiverType="Object" X="-8823.851" Y="630.5729" Z="94.136" />
             </If>
-			-->
             <If Condition="(HasQuest(34398) &amp;&amp; !IsQuestCompleted(34398)) || (HasQuest(36881) &amp;&amp; !IsQuestCompleted(36881))" >
 			 <If Condition="Me.ZoneId == 1519"> <!-- SW -->
+				<ClearVendor />
+				<SetVendor>
+					<Vendors>
+						 <Vendor Name="Gunther Weller" Entry="1289" Type="Repair" X="-8790.421" Y="607.3484" Z="96.77347" />
+					</Vendors>
+				</SetVendor>
+				<ClearMailbox />
+				<SetMailbox>
+					<Mailboxes>
+						<Mailbox X="-8873.934" Y="649.8683" Z="96.02056" />
+					</Mailboxes>
+				</SetMailbox>
+				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True" DoMail="True" />
+				<ClearVendor />
+				<ClearMailbox />
+			 
                 <CustomBehavior File="FlyTo" DestName="Khadgar port to Tanaan" X="-8836.918" Y="621.7521" Z="93.56944" />
                 <CustomBehavior File="ForcedDismount" />
                 <MoveTo X="-8836.918" Y="621.7521" Z="93.56944" />
 				<CustomBehavior File="InteractWith" MobId="78423" ProactiveCombatStrategy="ClearMobsTargetingUs" GossipOptions="1" NonCompeteDistance="0" KeepTargetSelected="True" Range="10" X="-8831.111" Y="623.9757" Z="94.09922" /> <!-- Khadgar -->
 			 </If>
 			 <If Condition="Me.ZoneId == 4"> <!-- Blasted Lands -->
-                <MoveTo DestName="near Khadgar." X="-11806.83" Y="-3203.989" Z="-28.92494" />
+                <MoveTo DestName="near Khadgar" X="-11806.83" Y="-3203.989" Z="-28.92494" />
 				<CustomBehavior File="InteractWith" MobId="78423" GossipOptions="1" ProactiveCombatStrategy="ClearMobsTargetingUs" NonCompeteDistance="0" KeepTargetSelected="True" Range="6" X="-11812.26" Y="-3205.597" Z="-29.56283" /> <!-- Khadgar -->
 			 </If>
 				<CustomBehavior File="Misc\RunLua" Lua="StaticPopup1Button1:Click()" WaitTime="1000" />
@@ -943,7 +959,7 @@
             <While Condition="HasQuest(35933) &amp;&amp; !IsQuestCompleted(35933)"> <!-- Azeroth's Last Stand -->
                 <!--<Objective QuestName="Azeroth's Last Stand" QuestId="35933" Type="CollectItem" ItemId="113579" CollectCount="1" />-->
 				<MoveTo X="4065.393" Y="-2333.173" Z="69.03096" />
-                <CustomBehavior File="InteractWith" QuestId="35933" MobId="78883" MobState="Alive" IgnoreLOS="False" X="4066.309" Y="-2304.655" Z="64.92082" />
+                <CustomBehavior File="InteractWith" QuestId="35933" MobId="78883" MobState="Alive" Range="2" NonCompeteDistance="0" IgnoreLOS="False" X="4066.309" Y="-2304.655" Z="64.92082" />
             </While>
             <While Condition="HasQuest(35933) &amp;&amp; IsQuestCompleted(35933)"> <!-- Turnin Azeroth's Last Stand, Pickup Onslaught's End -->
                 <TurnIn QuestId="35933" /> <!-- Get 34392 -->
@@ -985,6 +1001,10 @@
                 <TargetingDistance Value="40" />
             </If>
         <!-- End of Dark Portal -->
+		
+		<!-- ADD IN A FORCE VENDOR HERE SOMEWHERE IF POSSIBLE
+				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True" DoMail="True" />
+		-->
 
         <!-- Heartblood -->
             <If Condition="HasQuest(34420)" > <!-- The Cost of War - Turnin -->
@@ -1575,19 +1595,23 @@
         <PickUp QuestName="Warning the Exarchs" QuestId="34791" GiverName="Shadow Council Tome of Curses" GiverId="233229" GiverType="Object" X="1569.264" Y="-1812.804" Z="50.40388" />
         <TurnIn QuestName="Warning the Exarchs" QuestId="34791" TurnInName="Exarch Maladaar" TurnInId="80073" X="1486.394" Y="-1915" Z="67.46745" />
         <PickUp QuestName="Speaker for the Dead" QuestId="34789" GiverName="Exarch Maladaar" GiverId="80073" X="1486.394" Y="-1915" Z="67.46745" />
-            <If Condition="HasQuest(34789) &amp;&amp; !IsQuestCompleted(34789)" > <!-- Speaker for the Dead -->
-             <While Condition="!IsObjectiveComplete(1, 34789)">
-                <CustomBehavior File="InteractWith" QuestId="34789" MobId1="80073" MobId2="88972" Range="5" WaitTime="25000" GossipOptions="1" CollectionDistance="10" X="1491.712" Y="-2182.271" Z="88.80327" />
-             </While>
-             <While Condition="!IsObjectiveComplete(2, 34789)"> <!-- Defend Ritual - code this -->
-                <CustomBehavior File="InteractWith" QuestId="34789" MobId="82543" MobId2="82544" Range="5" X="1492.721" Y="-2185.581" Z="90.42973" />
-             </While>
-                <!-- move out of spew
-                    <Vendor Name="Shrakun" Entry="82543" Type="Repair" X="1492.721" Y="-2185.581" Z="90.42973" />
-                    // lots of imps next
-                    <Vendor Name="Tormentor Imp" Entry="82544" Type="Repair" X="1490.019" Y="-2186.103" Z="88.80363" />
-                -->
-            </If>
+            <While Condition="HasQuest(34789) &amp;&amp; !IsQuestCompleted(34789)" > <!-- Speaker for the Dead -->
+				<CustomBehavior File="Hooks\Avoid" AvoidName="Spew" Command="Add" ObjectId="82543" Radius="12" 
+				AvoidWhen="UNIT.CastingSpellId == 166308|| UNIT.HasAura(166309)" 
+				AvoidLocationProducer="WoWMathHelper.GetNearestPointOnLineSegment(Me.Location, UNIT.Location, UNIT.Location.RayCast(UNIT.Rotation, 12))" />
+				
+				<MoveTo X="1490.019" Y="-2186.103" Z="88.80363" />
+                <CustomBehavior File="InteractWith" QuestId="34789" MobId1="80073" MobId2="88972" WaitTime="5000" Range="5" TerminateWhen="IsObjectiveComplete(1, 34789) &amp;&amp; Unit(88972) != null" GossipOptions="1" CollectionDistance="10" X="1491.712" Y="-2182.271" Z="88.80327" />
+ 				<CustomBehavior File="KillUntilComplete" QuestId="34789" TerminateWhen="IsObjectiveComplete(2, 34789) || Unit(88972) == null"
+											ImmediatelySwitchToHighestPriorityTarget="True" X="1490.019" Y="-2186.103" Z="88.80363" > <!-- add a 20 yard leash here -->
+					<PursuitList>
+					  <PursueUnit Id="82544" Priority="1000" />
+					  <PursueUnit Id="82543" Priority="-1000" />
+					  <PursueUnit Id="82548" Priority="-5000" />
+					</PursuitList>
+				</CustomBehavior>
+ 				<CustomBehavior File="Hooks\Avoid" AvoidName="Spew" Command="Remove" />
+           </While>
         <TurnIn QuestName="Speaker for the Dead" QuestId="34789" TurnInName="Exarch Maladaar" TurnInId="88972" X="1491.712" Y="-2182.271" Z="88.80315" />
         <PickUp QuestName="The Traitor's True Name" QuestId="34792" GiverName="Exarch Maladaar" GiverId="88972" X="1491.712" Y="-2182.271" Z="88.80315" />
             <If Condition="HasQuest(34792) &amp;&amp; !IsQuestCompleted(34792)" > <!-- The Traitor's True Name -->
@@ -1956,7 +1980,7 @@
 					ADD HOOK: STAND HERE AT ALL TIMES WHILE FIGHTING KRULL
 					Radiant Light - Id: 6640, Shape: AreaTriggerSphere - Radius: 3, RadiusTarget: 3, Flags: Unknown2
 					
-					<CustomBehavior File="KillUntilComplete" QuestId="33059" ImmediatelySwitchToHighestPriorityTarget="True" CollectionDistance="200" 
+					<CustomBehavior File="KillUntilComplete" QuestId="33059" ImmediatelySwitchToHighestPriorityTarget="True" 
 												TerminateWhen="Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.StageNumber > 2" >
 						<PursuitList>
 						  <PursueUnit Id="79560" Priority="5000" />
@@ -2344,21 +2368,29 @@
         <TurnIn QuestName="The Righteous March" QuestId="33255" TurnInName="Exarch Akama" TurnInId="72413" X="980.2604" Y="-2921.111" Z="99.33604" />
         <PickUp QuestName="The Defense of Karabor" QuestId="33256" GiverName="Exarch Akama" GiverId="72413" X="980.2604" Y="-2921.111" Z="99.33604" />
             <If Condition="HasQuest(33256) &amp;&amp; !IsQuestCompleted(33256)" > <!-- The Defense of Karabor -->
+                <If Condition="Me.MapId != 1277" > <!-- 1277 = DefenseOfKaraborScenario -->
+                    <MoveTo X="606.9452" Y="-2386.603" Z="96.24855" />
+				</If>
 				<UseMount Value="False" />
 				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerSphere" Command="Add" ObjectType="AreaTrigger" ObjectId="5805" Radius="8" />
-				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerPoly" Command="Add" ObjectType="AreaTrigger" ObjectId="5633" Radius="12" />
-				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerPolyFieryBlast" Command="Add" ObjectId="75358" Radius="16" 
+				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerPoly" Command="Add" ObjectType="AreaTrigger" ObjectId="5633" Radius="15" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerPolyFieryBlast" Command="Add" ObjectId="75358" Radius="16" LeashRadius="25" 
 				AvoidWhen="UNIT.CastingSpellId == 151732 || UNIT.CastingSpellId == 149378 || UNIT.CastingSpellId == 151766 || UNIT.HasAura(151731) || UNIT.HasAura(161320) || UNIT.HasAura(151766)" 
-				AvoidLocationProducer="WoWMathHelper.GetNearestPointOnLineSegment(Me.Location, UNIT.Location, UNIT.Location.RayCast(UNIT.Rotation, 20))" />
-
-				<!-- vorka - add the 'periodic' missiles to avoid. add the circle on ground to avoid too -->
-				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlazingShot" Command="Add" ObjectType="AreaTrigger" ObjectId="5797" Radius="10" />
-				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlackestSkiesMissileLine" Command="Add" ObjectType="Missile" ObjectId="150274" Radius="7" />
-				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlackestSkiesMissile" Command="Add" ObjectType="Missile" ObjectId="151661" Radius="7" />
-				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaGrapeshotBlast" Command="Add" ObjectType="Missile" ObjectId="152248" Radius="7" />
+				AvoidLocationProducer="WoWMathHelper.GetNearestPointOnLineSegment(Me.Location, UNIT.Location, UNIT.Location.RayCast(UNIT.Rotation, 20))" X="830.7855" Y="-2869.874" Z="100.4185" />
+				
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlazingShot" Command="Add" ObjectType="AreaTrigger" ObjectId="5797" DoWhen="Me.HasAura(151630)" Radius="7" />
+				<!--
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlazingShotRun" Command="Add" ObjectId="74715" Radius="12" 
+											AvoidWhen="UNIT.CastingSpellId == 150279 || UNIT.HasAura(151630)" 
+				AvoidLocationProducer="WoWMathHelper.GetNearestPointOnLineSegment(Me.Location, UNIT.Location, UNIT.Location.RayCast(UNIT.Rotation, 12))" />
+				-->
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlackestSkiesMissileLine" Command="Add" ObjectType="Missile" ObjectId="150274" Radius="10" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlackestSkiesMissile" Command="Add" ObjectType="Missile" ObjectId="151661" Radius="10" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaGrapeshotBlast" Command="Add" ObjectType="Missile" ObjectId="152248" Radius="8" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaGrapeshotBlastGround" Command="Add" ObjectType="AreaTrigger" ObjectId="152248" Radius="8" />
              <While Condition="(!IsObjectiveComplete(1, 33256))">
                 <If Condition="Me.MapId != 1277" > <!-- 1277 = DefenseOfKaraborScenario -->
-                    <MoveTo X="830.7855" Y="-2869.874" Z="100.4185" />
+                    <MoveTo X="606.9452" Y="-2386.603" Z="96.24855" />
 				</If>
                 <While Condition="Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.StageNumber == 1">
                     <!--<MoveTo X="830.7855" Y="-2869.874" Z="100.4185" />
@@ -2386,6 +2418,7 @@
 					  </HuntingGrounds>
 					</CustomBehavior>
 				 </While>
+					<CustomBehavior File="NoCombatMoveTo" X="579.8438" Y="-3004.25" Z="76.73641" />
 					<MoveTo X="578.7453" Y="-3074.575" Z="59.6398" />
                 </While>
                 <While Condition="Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.StageNumber == 3">
@@ -2411,9 +2444,11 @@
 				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerSphere" Command="Remove" />
 				<CustomBehavior File="Hooks\Avoid" AvoidName="ArnokkTheBurnerPoly" Command="Remove" />
 				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlazingShot" Command="Remove" />
+				<!--<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlazingShotRun" Command="Remove" />-->
 				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlackestSkiesMissileLine" Command="Remove" />
 				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaBlackestSkiesMissile" Command="Remove" />
 				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaGrapeshotBlast" Command="Remove" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="VorkaGrapeshotBlastGround" Command="Remove" />
 			</If>
             <If Condition="HasQuest(33256) &amp;&amp; IsQuestCompleted(33256)" > <!-- The Defense of Karabor -->
                 <If Condition="Me.MapId == 1277" > <!-- 1277 = DefenseOfKaraborScenario -->
