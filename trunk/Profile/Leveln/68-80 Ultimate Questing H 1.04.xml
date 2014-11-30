@@ -1,0 +1,1477 @@
+<HBProfile>
+	<Name>68-80 Ultimate Questing Horde</Name>
+	<MinDurability>0.4</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	<SellGrey>True</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>False</SellBlue>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>85</MaxLevel>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+
+	<SubProfile>
+		<Name>Borean Tundra</Name>
+		<MinLevel>68</MinLevel>
+		<MaxLevel>73</MaxLevel>
+		<Vendors>
+			<Vendor Name="Tewah Chillmane" Entry="26697" Type="Repair" X="3468.827" Y="4154.3" Z="17.19306" />
+			<Vendor Name="Armorer Orkuruk" Entry="25274" Type="Repair" X="2768.55" Y="6211.2" Z="83.4649" />
+		</Vendors>
+		<Mailboxes>
+			<Mailbox X="3459.186" Y="4130.619" Z="15.28576" />
+		</Mailboxes>
+		<BlacklistedQuestgivers>
+			<BlacklistedQuestgiver Name="Ozzie Togglevolt" Entry="1268" />
+			<BlacklistedQuestgiver Name="Razzle Sprysprocket" Entry="1269" />
+			<BlacklistedQuestgiver Name="Mistina Steelshield" Entry="14723" />
+			<BlacklistedQuestgiver Name="Overlord Razgor" Entry="25279" />
+			<BlacklistedQuestgiver Name="Egg-O-Matic" Entry="142071" />
+			<BlacklistedQuestgiver Name="Elder Atkanok" Entry="187565" />
+		</BlacklistedQuestgivers>
+		<ForcedQuestList>
+			<Quest Id="11560" Name="Oh Noes, the Tadpoles!" />
+			<Quest Id="11561" Name="Them!" />
+			<Quest Id="11562" Name="I'm Being Blackmailed By My Cleaner" />
+			<Quest Id="11563" Name="Grmmurggll Mrllggrl Glrggl!!!" />
+			<Quest Id="11564" Name="Succulent Orca Stew" />
+			<Quest Id="11565" Name="The Spare Suit" />
+			<Quest Id="11566" Name="Surrender... Not!" />
+			<Quest Id="11569" Name="Keymaster Urmgrgl" />
+			<Quest Id="11570" Name="Escape from the Winterfin Caverns" />
+			<Quest Id="11574" Name="Too Close For Comfort" />
+			<Quest Id="11585" Name="Hellscream's Vigil" />
+			<Quest Id="11586" Name="Hellscream's Vigil" />
+			<Quest Id="11590" Name="Abduction" />
+			<Quest Id="11591" Name="Report to Steeljaw's Caravan" />
+			<Quest Id="11594" Name="Put Them to Rest" />
+			<Quest Id="11595" Name="The Defense of Warsong Hold" />
+			<Quest Id="11596" Name="The Defense of Warsong Hold" />
+			<Quest Id="11597" Name="The Defense of Warsong Hold" />
+			<Quest Id="11598" Name="Taking Back Mightstone Quarry" />
+			<Quest Id="11602" Name="Cutting Off the Source" />
+			<Quest Id="11606" Name="Patience is a Virtue that We Don't Need" />
+			<Quest Id="11607" Name="The Lost Spirits" />
+			<Quest Id="11609" Name="Picking Up the Pieces" />
+			<Quest Id="11610" Name="Leading the Ancestors Home" />
+			<Quest Id="11612" Name="Reclaiming the Quarry" />
+			<Quest Id="11613" Name="Karuk's Oath" />
+			<Quest Id="11615" Name="Nerub'ar Secrets" />
+			<Quest Id="11616" Name="Message to Hellscream" />
+			<Quest Id="11618" Name="Reinforcements Incoming..." />
+			<Quest Id="11619" Name="Gamel the Cruel" />
+			<Quest Id="11620" Name="A Father's Words" />
+			<Quest Id="11623" Name="A Visit to the Curator" />
+			<Quest Id="11624" Name="The Sky Will Know" />
+			<Quest Id="11625" Name="The Trident of Naz'jan" />
+			<Quest Id="11627" Name="Boiling Point" />
+			<Quest Id="11628" Name="Shrouds of the Scourge" />
+			<Quest Id="11629" Name="Return to the Spirit Talker" />
+			<Quest Id="11630" Name="The Bad Earth" />
+			<Quest Id="11632" Name="What the Cold Wind Brings..." />
+			<Quest Id="11633" Name="Blending In" />
+			<Quest Id="11635" Name="Farseer Grimwalker's Spirit" />
+			<Quest Id="11636" Name="Magic Carpet Ride" />
+			<Quest Id="11637" Name="Kaganishu" />
+			<Quest Id="11638" Name="Return My Remains" />
+			<Quest Id="11639" Name="Revenge Upon Magmoth" />
+			<Quest Id="11640" Name="Words of Power" />
+			<Quest Id="11641" Name="A Courageous Strike" />
+			<Quest Id="11642" Name="Tank Ain't Gonna Fix Itself" />
+			<Quest Id="11643" Name="Mobu's Pneumatic Tank Transjigamarig" />
+			<Quest Id="11644" Name="Super Strong Metal Plates!" />
+			<Quest Id="11646" Name="The Borean Inquisition" />
+			<Quest Id="11647" Name="Neutralizing the Cauldrons" />
+			<Quest Id="11648" Name="The Art of Persuasion" />
+			<Quest Id="11649" Name="Motes of the Enraged" />
+			<Quest Id="11651" Name="Tanks a lot..." />
+			<Quest Id="11652" Name="The Plains of Nasam" />
+			<Quest Id="11654" Name="The Spire of Blood" />
+			<Quest Id="11655" Name="Into the Mist" />
+			<Quest Id="11656" Name="Burn in Effigy" />
+			<Quest Id="11659" Name="Shatter the Orbs!" />
+			<Quest Id="11660" Name="Horn of the Ancient Mariner" />
+			<Quest Id="11662" Name="Seek Out Karuk!" />
+			<Quest Id="11663" Name="Sharing Intelligence" />
+			<Quest Id="11664" Name="Escaping the Mist" />
+			<Quest Id="11674" Name="Sage Highmesa is Missing" />
+			<Quest Id="11675" Name="A Proper Death" />
+			<Quest Id="11676" Name="Merciful Freedom" />
+			<Quest Id="11678" Name="Find Bristlehorn" />
+			<Quest Id="11682" Name="Dragonspeak" />
+			<Quest Id="11683" Name="Fallen Necropolis" />
+			<Quest Id="11685" Name="The Heart of the Elements" />
+			<Quest Id="11686" Name="The Warsong Farms" />
+			<Quest Id="11687" Name="The Doctor and the Lich-Lord" />
+			<Quest Id="11688" Name="Damned Filthy Swine" />
+			<Quest Id="11689" Name="Return with the Bad News" />
+			<Quest Id="11695" Name="The Horn of Elemental Fury" />
+			<Quest Id="11702" Name="King Mrgl-Mrgl" />
+			<Quest Id="11703" Name="Get to Getry" />
+			<Quest Id="11705" Name="Foolish Endeavors" />
+			<Quest Id="11706" Name="The Collapse" />
+			<Quest Id="11709" Name="Nork Bloodfrenzy's Charge" />
+			<Quest Id="11711" Name="Coward Delivery... Under 30 Minutes or it's Free" />
+			<Quest Id="11714" Name="Vermin Extermination" />
+			<Quest Id="11716" Name="The Wondrous Bloodspore" />
+			<Quest Id="11717" Name="Pollen from the Source" />
+			<Quest Id="11719" Name="A Suitable Test Subject" />
+			<Quest Id="11720" Name="The Invasion of Gammoth" />
+			<Quest Id="11721" Name="Gammothra the Tormentor" />
+			<Quest Id="11722" Name="Trophies of Gammoth" />
+			<Quest Id="11724" Name="Massive Moth Omelet?" />
+			<Quest Id="11733" Name="Traversing the Rift" />
+			<Quest Id="11864" Name="A Mission Statement" />
+			<Quest Id="11866" Name="Ears of Our Enemies" />
+			<Quest Id="11867" Name="Can't Get Ear-nough..." />
+			<Quest Id="11869" Name="Happy as a Clam" />
+			<Quest Id="11870" Name="The Abandoned Reach" />
+			<Quest Id="11871" Name="Not On Our Watch" />
+			<Quest Id="11872" Name="The Nefarious Clam Master..." />
+			<Quest Id="11878" Name="Khu'nok Will Know" />
+			<Quest Id="11888" Name="Ride to Taunka'le Village" />
+			<Quest Id="11890" Name="What Are They Up To?" />
+			<Quest Id="11893" Name="The Power of the Elements" />
+			<Quest Id="11894" Name="Patching Up" />
+			<Quest Id="11895" Name="Master the Storm" />
+			<Quest Id="11896" Name="Weakness to Lightning" />
+			<Quest Id="11899" Name="Souls of the Decursed" />
+			<Quest Id="11900" Name="Reading the Meters" />
+			<Quest Id="11906" Name="Cleaning Up the Pools" />
+			<Quest Id="11907" Name="The Sub-Chieftains" />
+			<Quest Id="11909" Name="Defeat the Gearmaster" />
+			<Quest Id="11910" Name="Secrets of the Ancients" />
+			<Quest Id="11912" Name="Nuts for Berries" />
+			<Quest Id="11914" Name="Keep the Secret Safe" />
+			<Quest Id="11916" Name="Hellscream's Champion" />
+			<Quest Id="11918" Name="Basic Training" />
+			<Quest Id="11919" Name="Drake Hunt" />
+			<Quest Id="11929" Name="The Fall of Taunka'le Village" />
+			<Quest Id="11931" Name="Cracking the Code" />
+			<Quest Id="11936" Name="Hatching a Plan" />
+			<Quest Id="11941" Name="Puzzling..." />
+			<Quest Id="11943" Name="The Cell" />
+			<Quest Id="11946" Name="Keristrasza" />
+			<Quest Id="11949" Name="Not Without a Fight!" />
+			<Quest Id="11950" Name="Muahit's Wisdom" />
+			<Quest Id="11951" Name="Bait and Switch" />
+			<Quest Id="11957" Name="Saragosa's End" />
+			<Quest Id="11967" Name="Mustering the Reds" />
+			<Quest Id="11968" Name="The Tides Turn" />
+			<Quest Id="11969" Name="Springing the Trap" />
+			<Quest Id="12471" Name="Cruelty of the Kvaldir" />
+			<Quest Id="12486" Name="To Bor'gorok Outpost, Quickly!" />
+			<Quest Id="13257" Name="Herald of War" />
+			<Quest Id="13412" Name="Corastrasza" />
+			<Quest Id="13413" Name="Aces High!" />
+		</ForcedQuestList>
+		<GrindArea>
+		<Factions>14 15 16 18 21 188 1917 1953 1985</Factions>
+		<TargetMinLevel>67</TargetMinLevel>
+		<MaximumHotspotTime>600000</MaximumHotspotTime>
+		<RandomizeHotspots>true</RandomizeHotspots>
+		<Hotspots>
+			<Hotspot X="2697.769" Y="5583.972" Z="42.09004" />
+			<Hotspot X="2589.805" Y="5618.846" Z="40.85039" />
+			<Hotspot X="2435.28" Y="5625.192" Z="47.05745" />
+			<Hotspot X="2281.967" Y="5722.827" Z="64.43855" />
+			<Hotspot X="2166.81" Y="5869.358" Z="61.40957" />
+			<Hotspot X="2023.089" Y="6056.157" Z="41.70353" />
+			<Hotspot X="2077.003" Y="5750.477" Z="50.06208" />
+			<Hotspot X="2661.902" Y="5012.104" Z="35.07608" />
+			<Hotspot X="2829.956" Y="5059.046" Z="27.54402" />
+			<Hotspot X="3064.3" Y="5106.809" Z="36.28328" />
+			<Hotspot X="3181.025" Y="5028.956" Z="30.6778" />
+			<Hotspot X="3364.102" Y="5113.486" Z="13.03775" />
+			<Hotspot X="3621.427" Y="5067.883" Z="13.00738" />
+			<Hotspot X="3806.587" Y="5070.586" Z="-1.509908" />
+			<Hotspot X="3551.75" Y="4990.452" Z="-1.511034" />
+			<Hotspot X="3555.556" Y="4836.99" Z="-1.510172" />
+			<Hotspot X="3458.807" Y="4891.385" Z="12.71529" />
+			<Hotspot X="3338.56" Y="4777.189" Z="32.05944" />
+			<Hotspot X="3319.127" Y="4646.653" Z="31.57854" />
+			<Hotspot X="3241.101" Y="4518.894" Z="29.70398" />
+			<Hotspot X="3149.876" Y="4400.496" Z="27.14281" />
+			<Hotspot X="3183.857" Y="4292.272" Z="26.60497" />
+			<Hotspot X="3229.074" Y="4070.622" Z="28.02847" />
+			<Hotspot X="3276.506" Y="3958.433" Z="26.5466" />
+			<Hotspot X="3543.146" Y="3929.406" Z="26.95075" />
+			<Hotspot X="3736.173" Y="3826.431" Z="41.47564" />
+			<Hotspot X="3857.468" Y="3902.325" Z="50.1018" />
+			<Hotspot X="3978.099" Y="4000.492" Z="62.32522" />
+			<Hotspot X="4086.411" Y="4075.196" Z="88.87439" />
+			<Hotspot X="4185.954" Y="4165.442" Z="92.46499" />
+			<Hotspot X="4093.882" Y="4244.314" Z="42.27523" />
+			<Hotspot X="3961.86" Y="4154.506" Z="46.69664" />
+			<Hotspot X="3904.157" Y="4038.157" Z="37.32817" />
+			<Hotspot X="3791.127" Y="4030.041" Z="26.59468" />  
+		</Hotspots>
+		</GrindArea>
+		<Blackspots>
+		<Blackspot X="3965.739" Y="5513.636" Z="33.55941" Radius="36.16645" />
+			<Blackspot X="3182.55" Y="5286.892" Z="48.66724" radius="75"/>
+			<Blackspot X="3229.008" Y="5272.384" Z="46.53914" radius="75"/>
+			<Blackspot X="2666.501" Y="5350.315" Z="32.86302" radius="100"/>
+			<Blackspot X="4003.755" Y="4869.521" Z="-12.72118" radius="100"/>
+			<Blackspot X="4216.793" Y="4546.444" Z="26.85306" radius="100"/>
+			<Blackspot X="4107.842" Y="4476.3" Z="25.17169" radius="100"/>
+			<Blackspot X="3975.673" Y="4796.837" Z="-12.99512" radius="100"/>
+			<Blackspot X="4068.981" Y="4855.889" Z="-11.78667" radius="100"/>
+			<Blackspot X="4208.53" Y="4798.972" Z="-12.99528" radius="100"/>
+			<Blackspot X="4076.219" Y="4956.55" Z="-13.55879" radius="100"/>
+			<Blackspot X="3673.39" Y="4761.829" Z="-12.98339" radius="100"/>
+			<Blackspot X="3615.135" Y="4558.682" Z="-12.78017" radius="100"/>
+			<Blackspot X="3509.157" Y="4522.917" Z="-12.52746" radius="100"/>
+			<Blackspot X="2496.519" Y="5241.115" Z="30.68242" radius="100"/>
+			<Blackspot X="2459.613" Y="5417.859" Z="24.80945" radius="100"/>
+			<Blackspot X="2407.277" Y="5482.777" Z="19.24642" radius="100"/>
+			<Blackspot X="2313.643" Y="5527.022" Z="15.47714" radius="100"/>
+			<Blackspot X="2149.97" Y="5631.916" Z="31.87768" radius="100"/>
+			<Blackspot X="2258.843" Y="5401.027" Z="1.579548" radius="100"/>
+			<Blackspot X="2656.094" Y="5288.256" Z="33.7751" radius="100"/>
+			<Blackspot X="4032.244" Y="5286.569" Z="27.15821" radius="100"/>
+			<Blackspot X="4123.76" Y="5235.747" Z="24.92472" radius="100"/>
+			<Blackspot X="4187.262" Y="5231.541" Z="24.72873" radius="100"/>
+			<Blackspot X="4217.9" Y="5319.109" Z="32.7213" radius="100"/>
+			<Blackspot X="4220.791" Y="5431.667" Z="26.17538" radius="100"/>
+			<Blackspot X="4101.4" Y="5353.745" Z="29.63405" radius="100"/>
+			<Blackspot X="3001.478" Y="5205.168" Z="61.0586" radius="50"/>
+			<Blackspot X="2926.693" Y="5211.938" Z="57.80163" radius="50"/>
+			<Blackspot X="2838.507" Y="5205.294" Z="64.7263" radius="50"/>
+			<Blackspot X="2823.749" Y="5257.754" Z="65.15585" radius="50"/>
+			<Blackspot X="3095.486" Y="5269.629" Z="59.34896" radius="100"/>
+			<Blackspot X="3122.266" Y="5321.332" Z="53.53844" radius="100"/>
+			<Blackspot X="3078.425" Y="5338.943" Z="58.11235" radius="100"/>
+			<Blackspot X="3017.648" Y="5341.498" Z="64.52409" radius="100"/>
+			<Blackspot X="2956.243" Y="5344.079" Z="62.64373" radius="100"/>
+			<Blackspot X="2920.868" Y="5345.565" Z="61.22584" radius="100"/>
+			<Blackspot X="2875.741" Y="5363.114" Z="64.8933" radius="100"/>
+			<Blackspot X="2839.765" Y="5380.337" Z="62.9005" radius="100"/>
+			<Blackspot X="2790.15" Y="5404.089" Z="62.89928" radius="100"/>
+			<Blackspot X="2735.081" Y="5275.92" Z="71.15342" radius="100"/>
+			<Blackspot X="2736.298" Y="5180.7" Z="29.22474" Radius="42.52258" />
+			<Blackspot X="2671.223" Y="5111.059" Z="21.14072" Radius="8.750207" />
+		</Blackspots>
+		<AvoidMobs>
+			<AvoidMob Name="Marsh Fawn" Entry="25829" />
+		</AvoidMobs>
+	</SubProfile>
+
+ 	<SubProfile>
+		<Name>Grizzly Hills Dragonblight</Name>
+		<MinLevel>73</MinLevel>
+		<MaxLevel>74</MaxLevel>
+		<Vendors>
+			<Vendor Name="Smith Prigka" Entry="27134" Type="Repair" X="3309.34" Y="-2338.63" Z="110.8464" />
+			<Vendor Name="Litoko Icetotem" Entry="26707" Type="Repair" X="3835.855" Y="-4541.889" Z="209.2765" />
+			<Vendor Name="Siegesmith Gulda" Entry="27019" Type="Repair" X="3845.488" Y="1572.724" Z="86.6988" />
+			<Vendor Name="Troz" Entry="26898" Type="Repair" X="4694.366" Y="540.1309" Z="118.9997" />
+		</Vendors>
+		<Mailboxes>
+			<Mailbox X="3239.966" Y="-2237.445" Z="115.0869" />
+			<Mailbox X="3861.375" Y="-4548.474" Z="209.5882" />
+		</Mailboxes>
+		<BlacklistedQuestgivers>
+			<BlacklistedQuestgiver Name="Ozzie Togglevolt" Entry="1268" />
+			<BlacklistedQuestgiver Name="Razzle Sprysprocket" Entry="1269" />
+			<BlacklistedQuestgiver Name="Mistina Steelshield" Entry="14723" />
+			<BlacklistedQuestgiver Name="Overlord Razgor" Entry="25279" />
+			<BlacklistedQuestgiver Name="Egg-O-Matic" Entry="142071" />
+			<BlacklistedQuestgiver Name="Krasus" Entry="27575" />
+			<BlacklistedQuestgiver Name="Nalice" Entry="27765" />
+			<BlacklistedQuestgiver Name="Chromie" Entry="27856" />
+			<BlacklistedQuestgiver Name="Krasus" Entry="27990" />
+			<BlacklistedQuestgiver Name="Lord Itharius" Entry="27785" />
+			<BlacklistedQuestgiver Name="Elder Atkanok" Entry="187565" />
+		</BlacklistedQuestgivers>
+		<ForcedQuestList>
+			<Quest Id="11981" Name="Find Kurun!" />
+			<Quest Id="11985" Name="Into the Breach" />
+			<Quest Id="11989" Name="Truce?" />
+			<Quest Id="11990" Name="Vial of Visions" />
+			<Quest Id="11991" Name="Subject to Interpretation" />
+			<Quest Id="12007" Name="Sacrifices Must be Made" />
+			<Quest Id="12026" Name="The Damaged Journal" />
+			<Quest Id="12029" Name="Seared Scourge" />
+			<Quest Id="12042" Name="Heart of the Ancients" />
+			<Quest Id="12054" Name="Deciphering the Journal" />
+			<Quest Id="12058" Name="The Runic Prophecies" />
+			<Quest Id="12068" Name="Voices From the Dust" />
+			<Quest Id="12073" Name="Pounding the Iron" />
+			<Quest Id="12081" Name="Gavrock" />
+			<Quest Id="12093" Name="Runes of Compulsion" />
+			<Quest Id="12094" Name="Latent Power" />
+			<Quest Id="12113" Name="Nice to Meat You" />
+			<Quest Id="12114" Name="Therapy" />
+			<Quest Id="12116" Name="It Takes Guts...." />
+			<Quest Id="12120" Name="Drak'aguul's Mallet" />
+			<Quest Id="12121" Name="See You on the Other Side" />
+			<Quest Id="12134" Name="Sasha's Hunt" />
+			<Quest Id="12175" Name="Gray Worg Hides" />
+			<Quest Id="12176" Name="A Minor Substitution" />
+			<Quest Id="12177" Name="Jun'ik's Coverup" />
+			<Quest Id="12178" Name="Delivery to Krenna" />
+			<Quest Id="12190" Name="Say Hello to My Little Friend" />
+			<Quest Id="12195" Name="The Unexpected 'Guest'" />
+			<Quest Id="12196" Name="From the Ground Up" />
+			<Quest Id="12197" Name="We Have the Power" />
+			<Quest Id="12201" Name="The Overseer's Shadow" />
+			<Quest Id="12203" Name="Loken's Orders" />
+			<Quest Id="12204" Name="In the Name of Loken" />
+			<Quest Id="12207" Name="Vordrassil's Fall" />
+			<Quest Id="12208" Name="Good Troll Hunting" />
+			<Quest Id="12213" Name="The Darkness Beneath" />
+			<Quest Id="12229" Name="A Possible Link" />
+			<Quest Id="12231" Name="The Bear God's Offspring" />
+			<Quest Id="12242" Name="Vordrassil's Seeds" />
+			<Quest Id="12256" Name="The Flamebinders' Secrets" />
+			<Quest Id="12257" Name="A Show of Strength" />
+			<Quest Id="12279" Name="A Bear of an Appetite" />
+			<Quest Id="12328" Name="Ruuna's Request" />
+			<Quest Id="12329" Name="Fate and Coincidence" />
+			<Quest Id="12411" Name="A Sister's Pledge" />
+			<Quest Id="12412" Name="My Enemy's Friend" />
+			<Quest Id="12413" Name="Attack on Silverbrook" />
+			<Quest Id="12423" Name="Mikhail's Journal" />
+			<Quest Id="12424" Name="Gorgonna" />
+			<Quest Id="12425" Name="Ruuna the Blind" />
+			<Quest Id="12433" Name="Seeking Solvent" />
+			<Quest Id="12436" Name="Supplemental Income" />
+			<Quest Id="12451" Name="Onward to Camp Oneqwah" />
+			<Quest Id="12468" Name="The Conqueror's Task" />
+			<Quest Id="12483" Name="Shimmercap Stew" />
+			<Quest Id="12484" Name="Scourgekabob" />
+			<Quest Id="12487" Name="To Conquest Hold, But Be Careful!" />
+			<Quest Id="12763" Name="Shifting Priorities" />
+			
+			<Quest Id="11958" Name="Let Nothing Go To Waste" />
+			<Quest Id="11959" Name="Slay Loguhn" />
+			<Quest Id="11977" Name="A Tauren Among Taunka" />
+			<Quest Id="11978" Name="Into the Fold" />
+			<Quest Id="11979" Name="The Taunka and the Tauren" />
+			<Quest Id="11980" Name="Pride of the Horde" />
+			<Quest Id="11996" Name="Your Presence is Required at Agmar's Hammer" />
+			<Quest Id="12005" Name="Prevent the Accord" />
+			<Quest Id="12006" Name="Avenge this Atrocity!" />
+			<Quest Id="12008" Name="Agmar's Hammer" />
+			<Quest Id="12009" Name="Tua'kea's Crab Traps" />
+			<Quest Id="12011" Name="Signs of Big Watery Trouble" />
+			<Quest Id="12013" Name="End Arcanimus" />
+			<Quest Id="12016" Name="The Bait" />
+			<Quest Id="12017" Name="Meat on the Hook" />
+			<Quest Id="12028" Name="Spiritual Insight" />
+			<Quest Id="12030" Name="Elder Mana'loa" />
+			<Quest Id="12031" Name="Freedom for the Lingering" />
+			<Quest Id="12032" Name="Conversing With the Depths" />
+			<Quest Id="12033" Name="Message from the West" />
+			<Quest Id="12034" Name="Victory Nears..." />
+			<Quest Id="12036" Name="From the Depths of Azjol-Nerub" />
+			<Quest Id="12039" Name="Black Blood of Yogg-Saron" />
+			<Quest Id="12040" Name="An Enemy in Arthas" />
+			<Quest Id="12041" Name="The Lost Empire" />
+			<Quest Id="12043" Name="Nozzlerust Defense" />
+			<Quest Id="12044" Name="Stocking Up" />
+			<Quest Id="12045" Name="Shaved Ice" />
+			<Quest Id="12046" Name="Soft Packaging" />
+			<Quest Id="12047" Name="Something That Doesn't Melt" />
+			<Quest Id="12048" Name="Scourge Armaments" />
+			<Quest Id="12053" Name="The Might of the Horde" />
+			<Quest Id="12056" Name="Marked for Death: High Cultist Zangus" />
+			<Quest Id="12057" Name="The Flesh-Bound Tome" />
+			<Quest Id="12059" Name="A Strange Device" />
+			<Quest Id="12061" Name="Projections and Plans" />
+			<Quest Id="12063" Name="Strength of Icemist" />
+			<Quest Id="12064" Name="Chains of the Anub'ar" />
+			<Quest Id="12066" Name="The Focus on the Beach" />
+			<Quest Id="12069" Name="Return of the High Chief" />
+			<Quest Id="12071" Name="Attack by Air! " />
+			<Quest Id="12075" Name="Slim Pickings" />
+			<Quest Id="12076" Name="Messy Business" />
+			<Quest Id="12077" Name="Apply This Twice A Day" />
+			<Quest Id="12078" Name="Worm Wrangler" />
+			<Quest Id="12079" Name="Stomping Grounds" />
+			<Quest Id="12085" Name="A Letter for Home" />
+			<Quest Id="12096" Name="Strengthen the Ancients" />
+			<Quest Id="12100" Name="Containing the Rot" />
+			<Quest Id="12101" Name="The Good Doctor..." />
+			<Quest Id="12102" Name="In Search of the Ruby Lilac" />
+			<Quest Id="12104" Name="Return to Soar" />
+			<Quest Id="12106" Name="Search Indu'le Village" />
+			<Quest Id="12110" Name="The End of the Line" />
+			<Quest Id="12111" Name="Where the Wild Things Roam" />
+			<Quest Id="12112" Name="Stiff Negotiations" />
+			<Quest Id="12115" Name="Koltira and the Language of Death" />
+			<Quest Id="12117" Name="Travel to Moa'ki Harbor" />
+			<Quest Id="12118" Name="Travel to Moa'ki Harbor" />
+			<Quest Id="12122" Name="Gaining an Audience" />
+			<Quest Id="12124" Name="Informing the Queen" />
+			<Quest Id="12125" Name="In Service of Blood" />
+			<Quest Id="12126" Name="In Service of the Unholy" />
+			<Quest Id="12127" Name="In Service of Frost" />
+			<Quest Id="12132" Name="The Power to Destroy" />
+			<Quest Id="12136" Name="The Translated Tome" />
+			<Quest Id="12140" Name="All Hail Roanauk!" />
+			<Quest Id="12144" Name="Pest Control" />
+			<Quest Id="12145" Name="Canyon Chase" />
+			<Quest Id="12147" Name="Disturbing Implications" />
+			<Quest Id="12182" Name="To Venomspite!" />
+			<Quest Id="12188" Name="The Forsaken Blight and You: How Not to Die" />
+			<Quest Id="12189" Name="Imbeciles Abound!" />
+			<Quest Id="12200" Name="Emerald Dragon Tears" />
+			<Quest Id="12205" Name="Wanted: The Scarlet Onslaught" />
+			<Quest Id="12209" Name="Materiel Plunder" />
+			<Quest Id="12211" Name="Let Them Not Rise!" />
+			<Quest Id="12221" Name="The Forsaken Blight" />
+			<Quest Id="12224" Name="The Kor'kron Vanguard!" /> 
+			<Quest Id="12230" Name="Stealing from the Siegesmiths" />
+			<Quest Id="12234" Name="Need to Know" />
+			<Quest Id="12239" Name="The Spy in New Hearthglen" />
+			<Quest Id="12245" Name="No Mercy for the Captured" />
+			<Quest Id="12252" Name="Torture the Torturer" />
+			<Quest Id="12254" Name="Without a Prayer" />
+			<Quest Id="12260" Name="The Perfect Dissemblance" />
+			<Quest Id="12261" Name="No Place to Run" />
+			<Quest Id="12262" Name="No One to Save You" />
+			<Quest Id="12263" Name="The Best of Intentions" />
+			<Quest Id="12264" Name="Culling the Damned" />
+			<Quest Id="12265" Name="Defiling the Defilers" />
+			<Quest Id="12266" Name="Tales of Destruction" />
+			<Quest Id="12267" Name="Neltharion's Flame" />
+			<Quest Id="12271" Name="The Rod of Compulsion" />
+			<Quest Id="12273" Name="The Denouncement" />
+			<Quest Id="12274" Name="A Fall From Grace" />
+			<Quest Id="12283" Name="The Truth Will Out" />
+			<Quest Id="12303" Name="Funding the War Effort" />
+			<Quest Id="12304" Name="Beachfront Property" />
+			<Quest Id="12419" Name="The Fate of the Ruby Dragonshrine" />
+			<Quest Id="12435" Name="Report to Lord Afrasastrasz" />
+			<Quest Id="12447" Name="The Obsidian Dragonshrine" />
+			<Quest Id="12448" Name="Heated Battle" />
+			<Quest Id="12449" Name="Return to the Earth" />
+			<Quest Id="12450" Name="Through Fields of Flame" />
+			<Quest Id="12454" Name="Cycle of Life" />
+			<Quest Id="12458" Name="Seeds of the Lashers" />
+			<Quest Id="12459" Name="That Which Creates Can Also Destroy" />
+			<Quest Id="12461" Name="Report to the Ruby Dragonshrine" />
+			<Quest Id="12469" Name="Return to Sender" />
+			<Quest Id="12470" Name="Mystery of the Infinite" />
+			<Quest Id="12488" Name="The High Executor Needs You" />
+			<Quest Id="12496" Name="Audience With The Dragon Queen" />
+			<Quest Id="12497" Name="Galakrond and the Scourge" />
+			<Quest Id="12498" Name="On Ruby Wings" />
+			<Quest Id="12500" Name="Return To Angrathar" />
+			<Quest Id="12542" Name="The Call Of The Crusade" />
+			<Quest Id="12545" Name="The Cleansing Of Jintha'kalar" />
+			<Quest Id="12767" Name="Speak with your Ambassador" />
+			<Quest Id="12769" Name="The Steward of Wyrmrest Temple" />
+			<Quest Id="13078" Name="Dahlia's Tears" />
+			<Quest Id="13242" Name="Darkness Stirs" />
+			<Quest Id="13343" Name="Mystery of the Infinite, Redux" />
+			<Quest Id="13372" Name="The Key to the Focusing Iris" />
+			<Quest Id="13375" Name="The Heroic Key to the Focusing Iris" />
+		</ForcedQuestList>
+		<GrindArea>
+		<Factions>7 14 15 16 18 21 188 1990 1917 1953 1985 2000 2030</Factions>
+		<TargetMinLevel>67</TargetMinLevel>
+		<MaximumHotspotTime>600000</MaximumHotspotTime>
+		<RandomizeHotspots>false</RandomizeHotspots>
+		<Hotspots>
+			<Hotspot X="3489.762" Y="-2300.408" Z="124.6306" />
+			<Hotspot X="3538.536" Y="-2394.123" Z="134.7159" />
+			<Hotspot X="3523.905" Y="-2512.474" Z="126.6914" />
+			<Hotspot X="3609.261" Y="-2497.231" Z="145.3017" />
+			<Hotspot X="3649.779" Y="-2572.458" Z="152.5335" />
+			<Hotspot X="3717.792" Y="-2386.16" Z="164.3592" />
+			<Hotspot X="3801.168" Y="-2418.989" Z="181.4977" />
+			<Hotspot X="3891.118" Y="-2501.615" Z="194.2151" />
+			<Hotspot X="3986.534" Y="-2538.343" Z="219.1224" />
+			<Hotspot X="4022.114" Y="-2627.623" Z="219.4595" />
+			<Hotspot X="4007.901" Y="-2413.585" Z="217.2536" />
+			<Hotspot X="3955.271" Y="-2219.267" Z="212.0591" />
+			<Hotspot X="3947.183" Y="-2145.968" Z="214.8494" />
+			<Hotspot X="3664.722" Y="-1967.793" Z="188.8896" />
+			<Hotspot X="3491.13" Y="-2179.219" Z="127.2438" />
+			<Hotspot X="3307.639" Y="-2041.606" Z="97.55067" />
+			<Hotspot X="3085.698" Y="-1846.084" Z="67.28687" />
+			<Hotspot X="3088.893" Y="-1742.838" Z="42.4337" />
+			<Hotspot X="3052.301" Y="-1932.832" Z="78.57122" />
+			<Hotspot X="3022.261" Y="-2087.165" Z="80.27011" />
+			<Hotspot X="2960.086" Y="-2181.525" Z="61.73851" />
+			<Hotspot X="2982.641" Y="-2250.737" Z="70.31801" />
+			<Hotspot X="3032.21" Y="-2310.54" Z="77.23693" />
+			<Hotspot X="3169.441" Y="-2429.012" Z="76.25512" />
+			<Hotspot X="3415.846" Y="-2483.946" Z="116.2081" />
+			<Hotspot X="3362.111" Y="-3370.093" Z="258.2957" />
+			<Hotspot X="3436.71" Y="-3399.033" Z="253.4641" />
+			<Hotspot X="3492.623" Y="-3396.288" Z="253.5755" />
+			<Hotspot X="3558.835" Y="-3433.523" Z="248.1161" />
+			<Hotspot X="3597.151" Y="-3478.87" Z="239.6853" />
+			<Hotspot X="3629.583" Y="-3541.155" Z="228.7569" />
+			<Hotspot X="3669.141" Y="-3592.454" Z="219.6997" />
+			<Hotspot X="3665.208" Y="-3644.404" Z="211.4376" />
+			<Hotspot X="3647.634" Y="-3699.671" Z="203.5871" />
+			<Hotspot X="3658.076" Y="-3741.905" Z="200.6738" />
+			<Hotspot X="3830.901" Y="-4059.736" Z="198.8775" />
+			<Hotspot X="3841.549" Y="-4110.212" Z="208.7971" />
+			<Hotspot X="3818.75" Y="-4154.05" Z="205.7571" />
+			<Hotspot X="3847.204" Y="-4436.537" Z="199.3548" />
+			<Hotspot X="3771.825" Y="-4616.991" Z="174.9323" />
+			<Hotspot X="3824.013" Y="-4624.723" Z="172.2602" />
+			<Hotspot X="3901.524" Y="-4620.728" Z="175.0298" />
+			<Hotspot X="4485.519" Y="1107.762" Z="136.9061" />
+			<Hotspot X="4679.211" Y="914.4451" Z="124.0856" />
+			<Hotspot X="4674.817" Y="862.593" Z="119.8546" />
+			<Hotspot X="4718.892" Y="779.9545" Z="124.5544" />
+			<Hotspot X="4676.308" Y="754.695" Z="111.6779" />
+			<Hotspot X="4609.239" Y="734.0367" Z="99.126" />
+			<Hotspot X="4570.533" Y="662.554" Z="95.81562" />
+			<Hotspot X="4596.096" Y="617.2504" Z="98.52077" />
+			<Hotspot X="4682.993" Y="581.2157" Z="116.2528" />
+			<Hotspot X="4772.639" Y="684.116" Z="120.5642" />
+		</Hotspots>
+		</GrindArea>
+		<Blackspots>
+		<Blackspot X="3965.739" Y="5513.636" Z="33.55941" Radius="36.16645" />
+		<Blackspot X="6246.117" Y="-2622.157" Z="302.6586" Radius="41.30385" />
+		<Blackspot X="5921.048" Y="-2512.126" Z="291.9598" Radius="11.7563" />
+		<Blackspot X="5657.586" Y="-2425.175" Z="285.4421" Radius="11.04555" />
+		<Blackspot X="5657.616" Y="-2447.999" Z="285.4207" Radius="11.77771" />
+			<Blackspot X="4542.936" Y="4.658112" Z="83.61938" Radius="68.82054" />
+			<Blackspot X="4270.325" Y="-1809.722" Z="205.1484" Radius="19.51427" />
+			<Blackspot X="4279.664" Y="327.4831" Z="69.57013" Radius="136.2847" />
+			<Blackspot X="4163.58" Y="502.0914" Z="66.85869" Radius="137.6753" />
+			<Blackspot X="4433.728" Y="449.0026" Z="50.78642" Radius="72.99897" />
+			<Blackspot X="4338.177" Y="644.2426" Z="52.1884" Radius="64.36577" />
+			<Blackspot X="4227.106" Y="641.9754" Z="57.26416" Radius="78.89367" />
+			<Blackspot X="4368.597" Y="352.5692" Z="54.91973" Radius="71.52786" />
+			<Blackspot X="3637.374" Y="1210.179" Z="141.3574" Radius="35.81468" />
+			<Blackspot X="3883.345" Y="1191.664" Z="62.23512" Radius="20.33627" />
+			<Blackspot X="3655.284" Y="848.9412" Z="59.88136" Radius="27.70342" />
+			<Blackspot X="3579.372" Y="964.9398" Z="61.70833" Radius="15.98146" />
+			<Blackspot X="3911.032" Y="845.5939" Z="61.78607" Radius="21.88695" />
+			<Blackspot X="3750.609" Y="832.8548" Z="67.8915" Radius="8.580496" />
+			<Blackspot X="4023.989" Y="994.9319" Z="55.31815" Radius="10.05383" />
+			<Blackspot X="3786.096" Y="1177.059" Z="147.996" Radius="14.77243" />
+			<Blackspot X="3618.452" Y="1207.469" Z="139.0235" Radius="15.46807" />
+			<Blackspot X="3592.981" Y="1436.705" Z="90.28347" Radius="33.62007" />
+			<Blackspot X="3643.548" Y="1640.188" Z="82.63427" Radius="56.60066" Height="14.59827" />
+			<Blackspot X="3541.491" Y="1812.719" Z="84.57138" Radius="43.23131" Height="15.34496" />
+			<Blackspot X="2957.494" Y="440.4253" Z="86.153" Radius="81.62627" />
+			<Blackspot X="3063.976" Y="378.4551" Z="85.92059" Radius="77.58948" />
+			<Blackspot X="3157.791" Y="383.9559" Z="82.33338" Radius="64.82452" />
+			<Blackspot X="3232.986" Y="401.6813" Z="80.0121" Radius="38.4367" />
+			<Blackspot X="3431.378" Y="-2690.971" Z="78.19284" Radius="32.30468" />
+			<Blackspot X="3285.166" Y="-2738.186" Z="133.977" Radius="16.12897" />
+			<Blackspot X="3302.198" Y="-2327.885" Z="107.9396" Radius="2.473055" />
+			<Blackspot X="3270.283" Y="-2303.75" Z="109.0735" Radius="13.40793" />
+			<Blackspot X="3221.243" Y="-2283.985" Z="108.0019" Radius="3.772241" />
+			<Blackspot X="3289.594" Y="-2292.736" Z="109.6248" Radius="2.708167" />
+			<Blackspot X="3278.057" Y="-2285.68" Z="107.1999" Radius="6.295485" />
+			<Blackspot X="3237.967" Y="-2275.055" Z="108.6003" Radius="3.00994" />
+			<Blackspot X="3248.811" Y="-2273.803" Z="109.0483" Radius="2.029893" />
+			<Blackspot X="3257.817" Y="-2274.071" Z="108.7471" Radius="2.691336" />
+			<Blackspot X="3326.649" Y="-2274.333" Z="113.1332" Radius="9.62116" />
+			<Blackspot X="3347.771" Y="-2239.958" Z="118.0755" Radius="5.240395" />
+			<Blackspot X="3278.387" Y="-2243.335" Z="114.9744" Radius="5.062265" />
+			<Blackspot X="3599.723" Y="-2829.347" Z="202.7348" Radius="66.23201" Height="18.36376" />
+			<Blackspot X="3600.515" Y="-2868.541" Z="209.5588" Radius="40.5524" Height="14.30872" />
+			<Blackspot X="3599.723" Y="-2829.347" Z="202.7348" Radius="66.23201" Height="18.36376" />
+			<Blackspot X="4481.903" Y="-2105.496" Z="165.4731" Radius="89.21381" />
+			<Blackspot X="4484.231" Y="-1966.062" Z="161.998" Radius="87.1091" />
+			<Blackspot X="3625.547" Y="-2892.551" Z="222.0701" Radius="16.07624" />
+			<Blackspot X="3426.545" Y="-2866.678" Z="201.8039" Radius="62.99723" />
+			<Blackspot X="3367.701" Y="-2822.551" Z="197.0991" Radius="49.27901" />
+			<Blackspot X="3431.05" Y="-2773.414" Z="194.0792" Radius="65.40547" />
+			<Blackspot X="3530.975" Y="-2810.803" Z="196.686" Radius="50.81598" />
+			<Blackspot X="3182.55" Y="5286.892" Z="48.66724" radius="75"/>
+			<Blackspot X="3229.008" Y="5272.384" Z="46.53914" radius="75"/>
+			<Blackspot X="2666.501" Y="5350.315" Z="32.86302" radius="100"/>
+			<Blackspot X="4003.755" Y="4869.521" Z="-12.72118" radius="100"/>
+			<Blackspot X="4216.793" Y="4546.444" Z="26.85306" radius="100"/>
+			<Blackspot X="4107.842" Y="4476.3" Z="25.17169" radius="100"/>
+			<Blackspot X="3975.673" Y="4796.837" Z="-12.99512" radius="100"/>
+			<Blackspot X="4068.981" Y="4855.889" Z="-11.78667" radius="100"/>
+			<Blackspot X="4208.53" Y="4798.972" Z="-12.99528" radius="100"/>
+			<Blackspot X="4076.219" Y="4956.55" Z="-13.55879" radius="100"/>
+			<Blackspot X="3673.39" Y="4761.829" Z="-12.98339" radius="100"/>
+			<Blackspot X="3615.135" Y="4558.682" Z="-12.78017" radius="100"/>
+			<Blackspot X="3509.157" Y="4522.917" Z="-12.52746" radius="100"/>
+			<Blackspot X="2496.519" Y="5241.115" Z="30.68242" radius="100"/>
+			<Blackspot X="2459.613" Y="5417.859" Z="24.80945" radius="100"/>
+			<Blackspot X="2407.277" Y="5482.777" Z="19.24642" radius="100"/>
+			<Blackspot X="2313.643" Y="5527.022" Z="15.47714" radius="100"/>
+			<Blackspot X="2149.97" Y="5631.916" Z="31.87768" radius="100"/>
+			<Blackspot X="2258.843" Y="5401.027" Z="1.579548" radius="100"/>
+			<Blackspot X="2656.094" Y="5288.256" Z="33.7751" radius="100"/>
+			<Blackspot X="4032.244" Y="5286.569" Z="27.15821" radius="100"/>
+			<Blackspot X="4123.76" Y="5235.747" Z="24.92472" radius="100"/>
+			<Blackspot X="4187.262" Y="5231.541" Z="24.72873" radius="100"/>
+			<Blackspot X="4217.9" Y="5319.109" Z="32.7213" radius="100"/>
+			<Blackspot X="4220.791" Y="5431.667" Z="26.17538" radius="100"/>
+			<Blackspot X="4101.4" Y="5353.745" Z="29.63405" radius="100"/>
+			<Blackspot X="3001.478" Y="5205.168" Z="61.0586" radius="50"/>
+			<Blackspot X="2926.693" Y="5211.938" Z="57.80163" radius="50"/>
+			<Blackspot X="2838.507" Y="5205.294" Z="64.7263" radius="50"/>
+			<Blackspot X="2823.749" Y="5257.754" Z="65.15585" radius="50"/>
+			<Blackspot X="3095.486" Y="5269.629" Z="59.34896" radius="100"/>
+			<Blackspot X="3122.266" Y="5321.332" Z="53.53844" radius="100"/>
+			<Blackspot X="3078.425" Y="5338.943" Z="58.11235" radius="100"/>
+			<Blackspot X="3017.648" Y="5341.498" Z="64.52409" radius="100"/>
+			<Blackspot X="2956.243" Y="5344.079" Z="62.64373" radius="100"/>
+			<Blackspot X="2920.868" Y="5345.565" Z="61.22584" radius="100"/>
+			<Blackspot X="2875.741" Y="5363.114" Z="64.8933" radius="100"/>
+			<Blackspot X="2839.765" Y="5380.337" Z="62.9005" radius="100"/>
+			<Blackspot X="2790.15" Y="5404.089" Z="62.89928" radius="100"/>
+			<Blackspot X="2735.081" Y="5275.92" Z="71.15342" radius="100"/>
+			<Blackspot X="2736.298" Y="5180.7" Z="29.22474" Radius="42.52258" />
+			<Blackspot X="2671.223" Y="5111.059" Z="21.14072" Radius="8.750207" />
+			<Blackspot X="3785.444" Y="-5057.824" Z="114.9243" Radius="90.28134" Height="22.22519" />
+			<Blackspot X="3877.947" Y="-5026.593" Z="94.2245" Radius="66.65108" Height="16.29943" />
+			<Blackspot X="3921.822" Y="-4941.427" Z="85.53867" Radius="47.65843" />
+		</Blackspots>
+		<AvoidMobs>
+			<AvoidMob Name="Runed Giant" Entry="26417" />
+			<AvoidMob Name="Marsh Fawn" Entry="25829" />
+			<AvoidMob Name="Corrupted Nova Totem" Entry="18179" />
+			<AvoidMob Name="Torgg Thundertotem" Entry="27716" />
+		</AvoidMobs>
+	</SubProfile>
+		
+	<SubProfile>
+		<Name>Zuldrak</Name>
+		<MinLevel>74</MinLevel>
+		<MaxLevel>77</MaxLevel>
+		<Vendors>
+			<Vendor Name="Smith Prigka" Entry="27134" Type="Repair" X="3309.34" Y="-2338.63" Z="110.8464" />
+			<Vendor Name="Litoko Icetotem" Entry="26707" Type="Repair" X="3835.855" Y="-4541.889" Z="209.2765" />
+			<Vendor Name="Siegesmith Gulda" Entry="27019" Type="Repair" X="3845.488" Y="1572.724" Z="86.6988" />
+			<Vendor Name="Troz" Entry="26898" Type="Repair" X="4694.366" Y="540.1309" Z="118.9997" />
+			<Vendor Name="Elizabeth Hollingsworth" Entry="28813" Type="Repair" X="5134.82" Y="-2188.9" Z="236.5896" />
+			<Vendor Name="Arlen Brighthammer" Entry="28796" Type="Repair" X="5410.7" Y="-2658.25" Z="303.954" />
+			<Vendor Name="Ba'kari" Entry="28855" Type="Repair" X="5769.66" Y="-3572.95" Z="387.2387" />
+			<Vendor Name="Scabbard" Entry="28871" Type="Repair" X="5198.62" Y="-1314.16" Z="243.1401" />
+		</Vendors>
+		<Mailboxes>
+			<Mailbox X="3239.966" Y="-2237.445" Z="115.0869" />
+			<Mailbox X="3861.375" Y="-4548.474" Z="209.5882" />
+			<Mailbox X="5460.459" Y="-2600.215" Z="306.847" />
+		</Mailboxes>
+		<BlacklistedQuestgivers>
+			<BlacklistedQuestgiver Name="Ozzie Togglevolt" Entry="1268" />
+			<BlacklistedQuestgiver Name="Razzle Sprysprocket" Entry="1269" />
+			<BlacklistedQuestgiver Name="Mistina Steelshield" Entry="14723" />
+			<BlacklistedQuestgiver Name="Overlord Razgor" Entry="25279" />
+			<BlacklistedQuestgiver Name="Egg-O-Matic" Entry="142071" />
+			<BlacklistedQuestgiver Name="Krasus" Entry="27575" />
+			<BlacklistedQuestgiver Name="Nalice" Entry="27765" />
+			<BlacklistedQuestgiver Name="Chromie" Entry="27856" />
+			<BlacklistedQuestgiver Name="Krasus" Entry="27990" />
+			<BlacklistedQuestgiver Name="Lord Itharius" Entry="27785" />
+			<BlacklistedQuestgiver Name="Gymer" Entry="29647" />
+			<BlacklistedQuestgiver Name="Zim'Abwa" Entry="190535" />
+			<BlacklistedQuestgiver Name="Elder Atkanok" Entry="187565" />
+		</BlacklistedQuestgivers>
+		<ForcedQuestList>
+			<Quest Id="12503" Name="Defend the Stand" />
+			<Quest Id="12504" Name="Argent Crusade, We Are Leaving!" />
+			<Quest Id="12505" Name="New Orders for Sergeant Stackhammer" />
+			<Quest Id="12506" Name="Trouble at the Altar of Sseratus" />
+			<Quest Id="12507" Name="Strange Mojo" />
+			<Quest Id="12508" Name="Mopping Up" />
+			<Quest Id="12514" Name="Mushroom Mixer" />
+			<Quest Id="12516" Name="Too Much of a Good Thing" />
+			<Quest Id="12527" Name="Gluttonous Lurkers" />
+			<Quest Id="12552" Name="Death to the Necromagi" />
+			<Quest Id="12553" Name="Skimmer Spinnerets" />
+			<Quest Id="12557" Name="Lab Work" />
+			<Quest Id="12562" Name="The Drakkari Do Not Need Water Elementals!" />
+			<Quest Id="12567" Name="Blessing of Zim'Abwa" />
+			<Quest Id="12583" Name="Crashed Sprayer" />
+			<Quest Id="12584" Name="Pure Evil" />
+			<Quest Id="12596" Name="Pa'Troll" />
+			<Quest Id="12597" Name="Something for the Pain" />
+			<Quest Id="12598" Name="Throwing Down" />
+			<Quest Id="12599" Name="Creature Comforts" />
+			<Quest Id="12606" Name="Cocooned!" />
+			<Quest Id="12609" Name="Stocking the Shelves" />
+			<Quest Id="12610" Name="Clipping Their Wings" />
+			<Quest Id="12618" Name="Blessing of Zim'Torga" />
+			<Quest Id="12622" Name="The Leaders at Jin'Alai" />
+			<Quest Id="12623" Name="To the Witch Doctor" />
+			<Quest Id="12627" Name="Breaking Through Jin'Alai" />
+			<Quest Id="12628" Name="To Speak With Har'koa" />
+			<Quest Id="12629" Name="You Can Run, But You Can't Hide" />
+			<Quest Id="12632" Name="But First My Offspring" />
+			<Quest Id="12633" Name="Darkness Calling" />
+			<Quest Id="12635" Name="Relics of the Snow Leopard Goddess" />
+			<Quest Id="12638" Name="Close Call" />
+			<Quest Id="12639" Name="The Frozen Earth" />
+			<Quest Id="12640" Name="Sealing the Rifts" />
+			<Quest Id="12642" Name="Spirit of Rhunok" />
+			<Quest Id="12643" Name="Silver Lining" />
+			<Quest Id="12646" Name="My Prophet, My Enemy" />
+			<Quest Id="12647" Name="An End to the Suffering" />
+			<Quest Id="12650" Name="Plundering Their Own" />
+			<Quest Id="12652" Name="Feedin' Da Goolz" />
+			<Quest Id="12653" Name="Back to Har'koa" />
+			<Quest Id="12656" Name="Blessing of Zim'Rhuk" />
+			<Quest Id="12662" Name="Bringing Down Heb'Jin" />
+			<Quest Id="12665" Name="I Sense a Disturbance" />
+			<Quest Id="12666" Name="Preparations for the Underworld" />
+			<Quest Id="12667" Name="Seek the Wind Serpent Goddess" />
+			<Quest Id="12668" Name="Foundation for Revenge" />
+			<Quest Id="12672" Name="Setting the Stage" />
+			<Quest Id="12674" Name="Hell Hath a Fury" />
+			<Quest Id="12675" Name="One Last Thing" />
+			<Quest Id="12684" Name="Blood of a Dead God" />
+			<Quest Id="12685" Name="You Reap What You Sow" />
+			<Quest Id="12707" Name="Wooly Justice" />
+			<Quest Id="12708" Name="Enchanted Tiki Warriors" />
+			<Quest Id="12709" Name="Hexed Caches" />
+			<Quest Id="12712" Name="The Key of Warlord Zol'Maz" />
+			<Quest Id="12713" Name="Betrayal" />
+			<Quest Id="12721" Name="Rampage" />
+			<Quest Id="12789" Name="Into the Breach!" />
+			<Quest Id="12792" Name="First Things First" />
+			<Quest Id="12793" Name="Smoke on the Horizon" />
+			<Quest Id="12795" Name="Taking a Stand" />
+			<Quest Id="12799" Name="Siphoning the Spirits" />
+			<Quest Id="12883" Name="Orders From Drakuru" />
+			<Quest Id="12884" Name="The Ebon Watch" />
+			<Quest Id="12894" Name="Crusader Forward Camp" />
+			<Quest Id="12901" Name="Making Something Out Of Nothing" />
+			<Quest Id="12902" Name="In Search Of Answers" />
+			<Quest Id="12903" Name="That's What Friends Are For..." />
+			<Quest Id="12904" Name="Light Won't Grant Me Vengeance" />
+			<Quest Id="12912" Name="A Great Storm Approaches" />
+			<Quest Id="12914" Name="Gymer's Salvation" />
+			<Quest Id="13097" Name="Unfinished Business" />
+			<Quest Id="13099" Name="Just Checkin'" />
+			<Quest Id="13556" Name="Eggs for Dubra'Jin" />
+			<Quest Id="12740" Name="Parachutes for the Argent Crusade" />
+		</ForcedQuestList>
+		<GrindArea>
+		<Factions>7 14 15 16 18 21 91 188 190 634 834 1771 1885 1990 1917 1953 1985 2000 2030 2068 2069</Factions>
+		<TargetMinLevel>73</TargetMinLevel>
+		<MaximumHotspotTime>600000</MaximumHotspotTime>
+		<RandomizeHotspots>false</RandomizeHotspots>
+		<Hotspots>
+			<Hotspot X="5207.5" Y="-1418.159" Z="235.9115" />
+			<Hotspot X="5166.335" Y="-1245.326" Z="250.4726" />
+			<Hotspot X="5260.517" Y="-1235.878" Z="240.7663" />
+			<Hotspot X="5363.292" Y="-1238.555" Z="245.493" />
+			<Hotspot X="5458.351" Y="-1253.538" Z="248.7494" />
+			<Hotspot X="5602.591" Y="-1305.901" Z="234.1212" />
+			<Hotspot X="5593.345" Y="-1443.244" Z="231.0876" />
+			<Hotspot X="5596.473" Y="-1586.344" Z="235.2277" />
+			<Hotspot X="5617.382" Y="-1700.509" Z="241.1696" />
+			<Hotspot X="5547.049" Y="-1865.842" Z="238.2422" />
+			<Hotspot X="5549.12" Y="-1943.719" Z="241.5796" />
+			<Hotspot X="5565.845" Y="-2034.893" Z="237.7333" />
+			<Hotspot X="5507.826" Y="-2152.527" Z="239.8803" />
+			<Hotspot X="5597.19" Y="-2329.151" Z="287.5265" />
+			<Hotspot X="5683.699" Y="-2372.223" Z="287.5265" />
+			<Hotspot X="5746.126" Y="-2404.621" Z="291.0125" />
+			<Hotspot X="5792.632" Y="-2335.766" Z="290.9073" />
+			<Hotspot X="5867.838" Y="-2401.354" Z="292.8333" />
+			<Hotspot X="5945.046" Y="-2430.349" Z="292.6719" />
+			<Hotspot X="6006.135" Y="-2386.628" Z="291.4266" />
+			<Hotspot X="6058.341" Y="-2333.266" Z="292.4319" />
+			<Hotspot X="6143.069" Y="-2313.25" Z="292.8834" />
+			<Hotspot X="6222.441" Y="-2307.47" Z="292.278" />
+			<Hotspot X="6074.277" Y="-2403.028" Z="290.6844" />
+			<Hotspot X="6011.468" Y="-2441.744" Z="291.7234" />
+			<Hotspot X="5979.449" Y="-2517.945" Z="293.1267" />
+			<Hotspot X="5995.407" Y="-2678.43" Z="289.9029" />
+			<Hotspot X="6000.619" Y="-2758.137" Z="291.4396" />
+			<Hotspot X="6067.71" Y="-2815.806" Z="291.7016" />
+			<Hotspot X="6144.352" Y="-2809.484" Z="296.1191" />
+			<Hotspot X="6226.303" Y="-2821.196" Z="292.0372" />
+			<Hotspot X="6299.85" Y="-2801.29" Z="291.1534" />
+			<Hotspot X="6370.857" Y="-2797.565" Z="293.901" />
+			<Hotspot X="6453.63" Y="-2802.224" Z="291.6917" />
+			<Hotspot X="6463.571" Y="-2898.391" Z="295.4617" />
+			<Hotspot X="6404.032" Y="-2901.369" Z="297.8306" />
+			<Hotspot X="6316.261" Y="-2892.217" Z="297.8041" />
+			<Hotspot X="6240.354" Y="-2894.303" Z="298.4478" />
+			<Hotspot X="6151.373" Y="-2899.59" Z="292.2101" />
+			<Hotspot X="6081.449" Y="-2896.16" Z="297.8669" />
+			<Hotspot X="6003.372" Y="-2893.791" Z="292.0511" />
+			<Hotspot X="6124.698" Y="-2870.886" Z="294.8128" />
+			<Hotspot X="6022.122" Y="-2781.984" Z="290.7946" />
+			<Hotspot X="5976.765" Y="-2704.367" Z="290.0498" />
+			<Hotspot X="5909.809" Y="-2586.269" Z="290.6502" />
+			<Hotspot X="5879.709" Y="-2522.631" Z="292.4337" />
+			<Hotspot X="5804.04" Y="-2518.616" Z="293.0117" />
+			<Hotspot X="5741.299" Y="-2544.896" Z="292.5382" />
+			<Hotspot X="5661.744" Y="-2561.478" Z="287.5264" />
+			<Hotspot X="5731.021" Y="-2666.988" Z="280.7679" />
+			<Hotspot X="5787.818" Y="-2681.44" Z="276.584" />
+			<Hotspot X="5831.283" Y="-2744.924" Z="276.584" />
+			<Hotspot X="5817.409" Y="-2834.49" Z="274.4706" />
+			<Hotspot X="5770.733" Y="-2821.341" Z="274.4854" />
+			<Hotspot X="5664.461" Y="-2816.304" Z="274.3787" />
+			<Hotspot X="5688.351" Y="-2744.082" Z="276.5836" />
+			<Hotspot X="5732.036" Y="-2663.889" Z="280.7679" />
+			<Hotspot X="5620.641" Y="-2615.329" Z="292.4196" />
+			<Hotspot X="5446.764" Y="-2627.719" Z="306.2535" />
+			<Hotspot X="5221.051" Y="-2680.224" Z="288.1402" />
+			<Hotspot X="5182.476" Y="-2715.885" Z="289.8338" />
+			<Hotspot X="5137.933" Y="-2751.682" Z="287.9561" />
+			<Hotspot X="5067.291" Y="-2804.928" Z="287.8221" />
+			<Hotspot X="5009.401" Y="-2863.384" Z="287.6419" />
+			<Hotspot X="4990.574" Y="-2918.576" Z="289.9217" />
+			<Hotspot X="5090.792" Y="-3023.634" Z="288.1698" />
+			<Hotspot X="5152.748" Y="-3095.142" Z="273.817" />
+			<Hotspot X="5251.148" Y="-3095.581" Z="278.555" />
+			<Hotspot X="5152.125" Y="-3195.482" Z="273.8167" />
+			<Hotspot X="5119.642" Y="-3311.353" Z="278.5542" />
+			<Hotspot X="5174.661" Y="-3410.89" Z="289.0959" />
+			<Hotspot X="5242.604" Y="-3483.158" Z="289.0958" />
+			<Hotspot X="5243.021" Y="-3393.004" Z="289.0961" />
+			<Hotspot X="5253.997" Y="-3288.57" Z="281.0851" />
+			<Hotspot X="5263.521" Y="-3117.448" Z="278.5555" />
+			<Hotspot X="5340.726" Y="-3083.671" Z="288.1706" />
+			<Hotspot X="5498.708" Y="-3143.944" Z="317.8173" />
+			<Hotspot X="5565.471" Y="-3206.645" Z="371.7262" />
+			<Hotspot X="5764.449" Y="-3304.391" Z="364.5078" />
+			<Hotspot X="5867.634" Y="-3299.786" Z="365.2134" />
+			<Hotspot X="5936.125" Y="-3283.907" Z="362.7615" />
+			<Hotspot X="5974.258" Y="-3192.708" Z="364.4064" />
+			<Hotspot X="6051.976" Y="-3132.245" Z="364.3562" />
+			<Hotspot X="6148.773" Y="-3138.522" Z="363.6218" />
+			<Hotspot X="6216.648" Y="-3201.217" Z="361.7483" />
+			<Hotspot X="6217.503" Y="-3273.614" Z="366.8031" />
+			<Hotspot X="6217.652" Y="-3352.049" Z="363.8316" />
+			<Hotspot X="6202.337" Y="-3422.187" Z="363.7116" />
+			<Hotspot X="6127.424" Y="-3444.151" Z="368.3199" />
+			<Hotspot X="6040.665" Y="-3465.264" Z="363.0354" />
+			<Hotspot X="5955.299" Y="-3503.852" Z="360.6571" />
+			<Hotspot X="5857.73" Y="-3622.675" Z="378.2651" />
+			<Hotspot X="5790.501" Y="-3690.803" Z="375.2791" />
+			<Hotspot X="5751.678" Y="-3564.552" Z="386.6182" />
+			<Hotspot X="5682.145" Y="-3498.433" Z="366.8137" />
+			<Hotspot X="5619.775" Y="-3576.57" Z="361.9614" />
+			<Hotspot X="5517.597" Y="-3592.599" Z="363.4999" />
+			<Hotspot X="5464.564" Y="-3545.819" Z="364.0545" />
+			<Hotspot X="5402.326" Y="-3520.888" Z="366.4113" />
+			<Hotspot X="5352.795" Y="-3637.531" Z="361.9608" />
+			<Hotspot X="5266.797" Y="-3672.847" Z="361.9651" />
+			<Hotspot X="5199.639" Y="-3720.998" Z="362.0911" />
+			<Hotspot X="5134.303" Y="-3801.318" Z="360.153" />
+			<Hotspot X="5103.123" Y="-3890.486" Z="362.4502" />
+			<Hotspot X="5097.898" Y="-3990.908" Z="356.155" />
+			<Hotspot X="5224.772" Y="-3982.274" Z="367.2219" />
+			<Hotspot X="5355.466" Y="-3911.033" Z="364.666" />
+			<Hotspot X="5437.496" Y="-3843.395" Z="361.9677" />
+			<Hotspot X="5525.354" Y="-3761.545" Z="361.9774" />
+			<Hotspot X="5632.898" Y="-3639.884" Z="361.9602" />
+			<Hotspot X="5677.25" Y="-3489.81" Z="364.9263" />
+			<Hotspot X="5763.491" Y="-3446.157" Z="372.0919" />
+			<Hotspot X="5868.826" Y="-3438.482" Z="368.9796" />
+			<Hotspot X="5719.076" Y="-3342.171" Z="371.9868" />
+			<Hotspot X="5617.239" Y="-3253.566" Z="372.684" />
+			<Hotspot X="5579.162" Y="-3218.916" Z="372.3607" />
+			<Hotspot X="5433.595" Y="-3089.403" Z="291.9261" />
+			<Hotspot X="5334.19" Y="-2981.723" Z="292.4187" />
+			<Hotspot X="5213.568" Y="-2851.713" Z="292.4188" />
+			<Hotspot X="5251.581" Y="-2783.589" Z="292.4186" />
+			<Hotspot X="5294.608" Y="-2736.306" Z="292.4186" />
+			<Hotspot X="5324.31" Y="-2615.142" Z="291.4619" />
+			<Hotspot X="5323.618" Y="-2556.166" Z="287.7286" />
+			<Hotspot X="5333.444" Y="-2484.205" Z="287.8698" />
+			<Hotspot X="5326.469" Y="-2346.971" Z="287.5334" />
+			<Hotspot X="5450.639" Y="-2292.651" Z="297.2364" />
+			<Hotspot X="5416.206" Y="-2173.165" Z="249.3762" />
+			<Hotspot X="5368.962" Y="-2141.5" Z="243.2186" />
+			<Hotspot X="5349.923" Y="-2133.68" Z="240.3944" />
+			<Hotspot X="5278.766" Y="-2139.309" Z="245.6368" />
+			<Hotspot X="5200.645" Y="-2148.376" Z="242.3585" />
+			<Hotspot X="5153.104" Y="-2191.808" Z="236.5392" />
+			<Hotspot X="5159.313" Y="-2096.346" Z="241.2585" />
+			<Hotspot X="5181.42" Y="-1959.423" Z="237.8282" />
+			<Hotspot X="5186.428" Y="-1858.288" Z="245.7495" />
+			<Hotspot X="5254.195" Y="-1763.23" Z="237.4345" />
+			<Hotspot X="5302.525" Y="-1655.71" Z="232.8559" />
+			<Hotspot X="5301.658" Y="-1602.675" Z="230.9108" />
+			<Hotspot X="5264.025" Y="-1487.782" Z="239.2589" />
+		</Hotspots>
+		</GrindArea>
+		<Blackspots>
+			<Blackspot X="5599.117" Y="-1839.603" Z="237.5117" Radius="13.96052" />
+			<Blackspot X="3965.739" Y="5513.636" Z="33.55941" Radius="36.16645" />
+			<Blackspot X="5784.527" Y="-1410.611" Z="231.3822" Radius="28.65539" />
+			<Blackspot X="5777.034" Y="-1414.193" Z="231.7226" Radius="32.61591" />
+			<Blackspot X="4542.936" Y="4.658112" Z="83.61938" Radius="68.82054" />
+			<Blackspot X="4270.325" Y="-1809.722" Z="205.1484" Radius="19.51427" />
+			<Blackspot X="4279.664" Y="327.4831" Z="69.57013" Radius="136.2847" />
+			<Blackspot X="4163.58" Y="502.0914" Z="66.85869" Radius="137.6753" />
+			<Blackspot X="4433.728" Y="449.0026" Z="50.78642" Radius="72.99897" />
+			<Blackspot X="4338.177" Y="644.2426" Z="52.1884" Radius="64.36577" />
+			<Blackspot X="4227.106" Y="641.9754" Z="57.26416" Radius="78.89367" />
+			<Blackspot X="4368.597" Y="352.5692" Z="54.91973" Radius="71.52786" />
+			<Blackspot X="3637.374" Y="1210.179" Z="141.3574" Radius="35.81468" />
+			<Blackspot X="3883.345" Y="1191.664" Z="62.23512" Radius="20.33627" />
+			<Blackspot X="3655.284" Y="848.9412" Z="59.88136" Radius="27.70342" />
+			<Blackspot X="3579.372" Y="964.9398" Z="61.70833" Radius="15.98146" />
+			<Blackspot X="3911.032" Y="845.5939" Z="61.78607" Radius="21.88695" />
+			<Blackspot X="3750.609" Y="832.8548" Z="67.8915" Radius="8.580496" />
+			<Blackspot X="4023.989" Y="994.9319" Z="55.31815" Radius="10.05383" />
+			<Blackspot X="3786.096" Y="1177.059" Z="147.996" Radius="14.77243" />
+			<Blackspot X="3618.452" Y="1207.469" Z="139.0235" Radius="15.46807" />
+			<Blackspot X="3592.981" Y="1436.705" Z="90.28347" Radius="33.62007" />
+			<Blackspot X="3643.548" Y="1640.188" Z="82.63427" Radius="56.60066" Height="14.59827" />
+			<Blackspot X="3541.491" Y="1812.719" Z="84.57138" Radius="43.23131" Height="15.34496" />
+			<Blackspot X="2957.494" Y="440.4253" Z="86.153" Radius="81.62627" />
+			<Blackspot X="3063.976" Y="378.4551" Z="85.92059" Radius="77.58948" />
+			<Blackspot X="3157.791" Y="383.9559" Z="82.33338" Radius="64.82452" />
+			<Blackspot X="3232.986" Y="401.6813" Z="80.0121" Radius="38.4367" />
+			<Blackspot X="3431.378" Y="-2690.971" Z="78.19284" Radius="32.30468" />
+			<Blackspot X="3285.166" Y="-2738.186" Z="133.977" Radius="16.12897" />
+			<Blackspot X="3302.198" Y="-2327.885" Z="107.9396" Radius="2.473055" />
+			<Blackspot X="3270.283" Y="-2303.75" Z="109.0735" Radius="13.40793" />
+			<Blackspot X="3221.243" Y="-2283.985" Z="108.0019" Radius="3.772241" />
+			<Blackspot X="3289.594" Y="-2292.736" Z="109.6248" Radius="2.708167" />
+			<Blackspot X="3278.057" Y="-2285.68" Z="107.1999" Radius="6.295485" />
+			<Blackspot X="3237.967" Y="-2275.055" Z="108.6003" Radius="3.00994" />
+			<Blackspot X="3248.811" Y="-2273.803" Z="109.0483" Radius="2.029893" />
+			<Blackspot X="3257.817" Y="-2274.071" Z="108.7471" Radius="2.691336" />
+			<Blackspot X="3326.649" Y="-2274.333" Z="113.1332" Radius="9.62116" />
+			<Blackspot X="3347.771" Y="-2239.958" Z="118.0755" Radius="5.240395" />
+			<Blackspot X="3278.387" Y="-2243.335" Z="114.9744" Radius="5.062265" />
+			<Blackspot X="3599.723" Y="-2829.347" Z="202.7348" Radius="66.23201" Height="18.36376" />
+			<Blackspot X="3600.515" Y="-2868.541" Z="209.5588" Radius="40.5524" Height="14.30872" />
+			<Blackspot X="3599.723" Y="-2829.347" Z="202.7348" Radius="66.23201" Height="18.36376" />
+			<Blackspot X="4481.903" Y="-2105.496" Z="165.4731" Radius="89.21381" />
+			<Blackspot X="4484.231" Y="-1966.062" Z="161.998" Radius="87.1091" />
+			<Blackspot X="3625.547" Y="-2892.551" Z="222.0701" Radius="16.07624" />
+			<Blackspot X="3426.545" Y="-2866.678" Z="201.8039" Radius="62.99723" />
+			<Blackspot X="3367.701" Y="-2822.551" Z="197.0991" Radius="49.27901" />
+			<Blackspot X="3431.05" Y="-2773.414" Z="194.0792" Radius="65.40547" />
+			<Blackspot X="3530.975" Y="-2810.803" Z="196.686" Radius="50.81598" />
+			<Blackspot X="3182.55" Y="5286.892" Z="48.66724" radius="75"/>
+			<Blackspot X="3229.008" Y="5272.384" Z="46.53914" radius="75"/>
+			<Blackspot X="2666.501" Y="5350.315" Z="32.86302" radius="100"/>
+			<Blackspot X="4003.755" Y="4869.521" Z="-12.72118" radius="100"/>
+			<Blackspot X="4216.793" Y="4546.444" Z="26.85306" radius="100"/>
+			<Blackspot X="4107.842" Y="4476.3" Z="25.17169" radius="100"/>
+			<Blackspot X="3975.673" Y="4796.837" Z="-12.99512" radius="100"/>
+			<Blackspot X="4068.981" Y="4855.889" Z="-11.78667" radius="100"/>
+			<Blackspot X="4208.53" Y="4798.972" Z="-12.99528" radius="100"/>
+			<Blackspot X="4076.219" Y="4956.55" Z="-13.55879" radius="100"/>
+			<Blackspot X="3673.39" Y="4761.829" Z="-12.98339" radius="100"/>
+			<Blackspot X="3615.135" Y="4558.682" Z="-12.78017" radius="100"/>
+			<Blackspot X="3509.157" Y="4522.917" Z="-12.52746" radius="100"/>
+			<Blackspot X="2496.519" Y="5241.115" Z="30.68242" radius="100"/>
+			<Blackspot X="2459.613" Y="5417.859" Z="24.80945" radius="100"/>
+			<Blackspot X="2407.277" Y="5482.777" Z="19.24642" radius="100"/>
+			<Blackspot X="2313.643" Y="5527.022" Z="15.47714" radius="100"/>
+			<Blackspot X="2149.97" Y="5631.916" Z="31.87768" radius="100"/>
+			<Blackspot X="2258.843" Y="5401.027" Z="1.579548" radius="100"/>
+			<Blackspot X="2656.094" Y="5288.256" Z="33.7751" radius="100"/>
+			<Blackspot X="4032.244" Y="5286.569" Z="27.15821" radius="100"/>
+			<Blackspot X="4123.76" Y="5235.747" Z="24.92472" radius="100"/>
+			<Blackspot X="4187.262" Y="5231.541" Z="24.72873" radius="100"/>
+			<Blackspot X="4217.9" Y="5319.109" Z="32.7213" radius="100"/>
+			<Blackspot X="4220.791" Y="5431.667" Z="26.17538" radius="100"/>
+			<Blackspot X="4101.4" Y="5353.745" Z="29.63405" radius="100"/>
+			<Blackspot X="3001.478" Y="5205.168" Z="61.0586" radius="50"/>
+			<Blackspot X="2926.693" Y="5211.938" Z="57.80163" radius="50"/>
+			<Blackspot X="2838.507" Y="5205.294" Z="64.7263" radius="50"/>
+			<Blackspot X="2823.749" Y="5257.754" Z="65.15585" radius="50"/>
+			<Blackspot X="3095.486" Y="5269.629" Z="59.34896" radius="100"/>
+			<Blackspot X="3122.266" Y="5321.332" Z="53.53844" radius="100"/>
+			<Blackspot X="3078.425" Y="5338.943" Z="58.11235" radius="100"/>
+			<Blackspot X="3017.648" Y="5341.498" Z="64.52409" radius="100"/>
+			<Blackspot X="2956.243" Y="5344.079" Z="62.64373" radius="100"/>
+			<Blackspot X="2920.868" Y="5345.565" Z="61.22584" radius="100"/>
+			<Blackspot X="2875.741" Y="5363.114" Z="64.8933" radius="100"/>
+			<Blackspot X="2839.765" Y="5380.337" Z="62.9005" radius="100"/>
+			<Blackspot X="2790.15" Y="5404.089" Z="62.89928" radius="100"/>
+			<Blackspot X="2735.081" Y="5275.92" Z="71.15342" radius="100"/>
+			<Blackspot X="2736.298" Y="5180.7" Z="29.22474" Radius="42.52258" />
+			<Blackspot X="2671.223" Y="5111.059" Z="21.14072" Radius="8.750207" />
+			<Blackspot X="3785.444" Y="-5057.824" Z="114.9243" Radius="90.28134" Height="22.22519" />
+			<Blackspot X="3877.947" Y="-5026.593" Z="94.2245" Radius="66.65108" Height="16.29943" />
+			<Blackspot X="3921.822" Y="-4941.427" Z="85.53867" Radius="47.65843" />
+			<Blackspot X="5284.461" Y="-2121.372" Z="244.6478" Radius="15.30031" />
+			<Blackspot X="5798.271" Y="-3582.804" Z="389.4708" Radius="5.817489" />
+		</Blackspots>
+		<AvoidMobs>
+			<AvoidMob Name="Runed Giant" Entry="26417" />
+			<AvoidMob Name="Marsh Fawn" Entry="25829" />
+			<AvoidMob Name="Corrupted Nova Totem" Entry="18179" />
+			<AvoidMob Name="Torgg Thundertotem" Entry="27716" />
+			<AvoidMob Name="Thrym" Entry="28243" />
+		</AvoidMobs>
+	</SubProfile>
+	
+	  <SubProfile>
+		<Name>Sholazar Basin</Name>
+		<MinLevel>77</MinLevel>
+		<MaxLevel>81</MaxLevel>
+		<Vendors>
+			<Vendor Name="Mardan Thunderhoof" Entry="28040" Type="Repair" X="5552.257" Y="5738.877" Z="-76.21694" />
+		</Vendors>
+		<Mailboxes>
+			<Mailbox X="5562.393" Y="5757.779" Z="-75.35441" />
+		</Mailboxes>
+		<BlacklistedQuestgivers>
+			<BlacklistedQuestgiver Name="Ozzie Togglevolt" Entry="1268" />
+			<BlacklistedQuestgiver Name="Razzle Sprysprocket" Entry="1269" />
+			<BlacklistedQuestgiver Name="Mistina Steelshield" Entry="14723" />
+			<BlacklistedQuestgiver Name="Overlord Razgor" Entry="25279" />
+			<BlacklistedQuestgiver Name="Egg-O-Matic" Entry="142071" />
+			<BlacklistedQuestgiver Name="Krasus" Entry="27575" />
+			<BlacklistedQuestgiver Name="Nalice" Entry="27765" />
+			<BlacklistedQuestgiver Name="Chromie" Entry="27856" />
+			<BlacklistedQuestgiver Name="Krasus" Entry="27990" />
+			<BlacklistedQuestgiver Name="Lord Itharius" Entry="27785" />
+			<BlacklistedQuestgiver Name="Gymer" Entry="29647" />
+			<BlacklistedQuestgiver Name="Zim'Abwa" Entry="190535" />
+			<BlacklistedQuestgiver Name="Elder Atkanok" Entry="187565" />
+			<BlacklistedQuestgiver Name="Engineer Helice" Entry="28787" />
+		</BlacklistedQuestgivers>
+		<ForcedQuestList>
+			<Quest Id="12489" Name="Welcome to Sholazar Basin" />
+			<Quest Id="12520" Name="Rhino Mastery: The Test" />
+			<Quest Id="12521" Name="Where in the World is Hemet Nesingwary?" />
+			<Quest Id="12522" Name="Need an Engine, Take an Engine" />
+			<Quest Id="12523" Name="Have a Part, Give a Part" />
+			<Quest Id="12524" Name="Venture Co. Misadventure" />
+			<Quest Id="12525" Name="Wipe That Grin Off His Face" />
+			<Quest Id="12526" Name="Rhino Mastery: The Chase" />
+			<Quest Id="12537" Name="Lightning Definitely Strikes Twice" />
+			<Quest Id="12538" Name="The Mist Isn't Listening" />
+			<Quest Id="12539" Name="Hoofing It" />
+			<Quest Id="12540" Name="Just Following Orders" />
+			<Quest Id="12543" Name="An Offering for Soo-rahm" />
+			<Quest Id="12546" Name="Reclamation" />
+			<Quest Id="12548" Name="The Etymidian" />
+			<Quest Id="12549" Name="Dreadsaber Mastery: Becoming a Predator" />
+			<Quest Id="12550" Name="Dreadsaber Mastery: Stalking the Prey" />
+			<Quest Id="12551" Name="Crocolisk Mastery: The Trial" />
+			<Quest Id="12556" Name="Rhino Mastery: The Kill" />
+			<Quest Id="12558" Name="Dreadsaber Mastery: Ready to Pounce" />
+			<Quest Id="12559" Name="Powering the Waygate - The Maker's Perch" />
+			<Quest Id="12560" Name="Crocolisk Mastery: The Plan" />
+			<Quest Id="12561" Name="An Issue of Trust" />
+			<Quest Id="12570" Name="Fortunate Misunderstandings" />
+			<Quest Id="12571" Name="Make the Bad Snake Go Away" />
+			<Quest Id="12572" Name="Gods like Shiny Things" />
+			<Quest Id="12573" Name="Making Peace" />
+			<Quest Id="12574" Name="Back So Soon?" />
+			<Quest Id="12575" Name="The Lost Mistwhisper Treasure" />
+			<Quest Id="12576" Name="Forced Hand" />
+			<Quest Id="12577" Name="Home Time!" />
+			<Quest Id="12578" Name="The Angry Gorloc" />
+			<Quest Id="12579" Name="Lifeblood of the Mosswalker Shrine" />
+			<Quest Id="12580" Name="The Mosswalker Savior" />
+			<Quest Id="12592" Name="The Great Hunter's Challenge" />
+			<Quest Id="12595" Name="In Search of Bigger Game" />
+			<Quest Id="12603" Name="Sharpening Your Talons" />
+			<Quest Id="12605" Name="Securing the Bait" />
+			<Quest Id="12608" Name="Cultist Incursion" />
+			<Quest Id="12611" Name="Returned Sevenfold" />
+			<Quest Id="12612" Name="The Fallen Pillar" />
+			<Quest Id="12613" Name="Powering the Waygate - The Maker's Overlook" />
+			<Quest Id="12614" Name="Post-partum Aggression" />
+			<Quest Id="12617" Name="Exterminate the Intruders" />
+			<Quest Id="12620" Name="The Lifewarden's Wrath" />
+			<Quest Id="12621" Name="Freya's Pact" />
+			<Quest Id="12624" Name="It Could Be Anywhere!" />
+			<Quest Id="12644" Name="Still At It" />
+			<Quest Id="12645" Name="The Taste Test" />
+			<Quest Id="12651" Name="Lakeside Landing" />
+			<Quest Id="12654" Name="The Part-time Hunter" />
+			<Quest Id="12658" Name="My Pet Roc" />
+			<Quest Id="12660" Name="Weapons of Destruction" />
+			<Quest Id="12681" Name="Reagent Agent" />
+			<Quest Id="12691" Name="A Timeworn Coffer" />
+			<Quest Id="12692" Name="Return of the Lich Hunter" />
+			<Quest Id="12695" Name="Return of the Friendly Dryskin" />
+			<Quest Id="12696" Name="Aerial Surveillance" />
+			<Quest Id="12699" Name="An Embarassing Incident" />
+			<Quest Id="12797" Name="Back Through the Waygate" />
+			<Quest Id="12803" Name="Force of Nature" />
+			<Quest Id="12804" Name="A Steak Fit for a Hunter" />
+			<Quest Id="12805" Name="Salvaging Life's Strength" />
+		</ForcedQuestList>
+		<Quest Id="12549" Name="Dreadsaber Mastery: Becoming a Predator">
+		<Objective Type="Grind" MobId="28001" KillCount="15"> <!--cats -->
+		  <Hotspots>
+			<Hotspot X="5389.169" Y="5857.283" Z="-68.86337" />
+			<Hotspot X="5417.538" Y="5799.226" Z="-73.91022" />
+			<Hotspot X="5391.529" Y="5702.116" Z="-83.50047" />
+			<Hotspot X="5355.432" Y="5603.802" Z="-89.62726" />
+			<Hotspot X="5296.291" Y="5632.268" Z="-91.89773" />
+			<Hotspot X="5229.935" Y="5717.929" Z="-83.51984" />
+			<Hotspot X="5195.399" Y="5749.567" Z="-84.05414" />
+			<Hotspot X="5119.95" Y="5778.85" Z="-84.5139" />
+			<Hotspot X="5170.506" Y="5968.021" Z="-60.32451" />
+			<Hotspot X="5254.36" Y="5973.563" Z="-46.07903" />
+		  </Hotspots>
+		</Objective>
+		</Quest>
+		<GrindArea>
+		<Factions>14 189 190 2018 2030 2080</Factions>
+		<TargetMinLevel>73</TargetMinLevel>
+		<MaximumHotspotTime>600000</MaximumHotspotTime>
+		<RandomizeHotspots>true</RandomizeHotspots>
+		<Hotspots>
+			<Hotspot X="5118.743" Y="5967.895" Z="-58.92916" />
+			<Hotspot X="5328.5" Y="5978.953" Z="-40.27991" />
+			<Hotspot X="5628.317" Y="5962.169" Z="-46.73529" />
+			<Hotspot X="5928.733" Y="5771.46" Z="-48.52062" />
+			<Hotspot X="5771.881" Y="5734.315" Z="-73.2296" />
+			<Hotspot X="5913.752" Y="5611.346" Z="-69.94082" />
+			<Hotspot X="6067.315" Y="5650.855" Z="-50.78289" />
+			<Hotspot X="6172.523" Y="5530.909" Z="-57.29809" />
+			<Hotspot X="5997.834" Y="5287.049" Z="-100.5742" />
+			<Hotspot X="5893.362" Y="5164.164" Z="-105.9795" />
+			<Hotspot X="5702.086" Y="5068.473" Z="-134.2419" />
+			<Hotspot X="5868.438" Y="4632.601" Z="-134.5257" />
+			<Hotspot X="5617.533" Y="4978.673" Z="-135.0942" />
+			<Hotspot X="5610.001" Y="5213.792" Z="-133.1382" />
+			<Hotspot X="5377.462" Y="5322.505" Z="-133.2396" />
+			<Hotspot X="5307.874" Y="5135.662" Z="-135.3393" />
+			<Hotspot X="5192.108" Y="5060.29" Z="-133.1598" />
+			<Hotspot X="5123.439" Y="4746.061" Z="-134.0222" />
+			<Hotspot X="5339.423" Y="4623.737" Z="-132.5336" />
+			<Hotspot X="5235.725" Y="4286.063" Z="-96.98249" />
+			<Hotspot X="5504.738" Y="3855.653" Z="-67.50684" />
+			<Hotspot X="5738.095" Y="3896.696" Z="-69.86442" />
+			<Hotspot X="5834.089" Y="4031.995" Z="-86.58312" />
+			<Hotspot X="6261.294" Y="4506.307" Z="-78.01686" />
+			<Hotspot X="6411.737" Y="4759.021" Z="-74.74799" />
+			<Hotspot X="6397.708" Y="5008.827" Z="-70.59933" />
+		</Hotspots>
+		</GrindArea>
+		<Blackspots>
+			<Blackspot X="6426.295" Y="4728.811" Z="-67.76497" Radius="97.30687" />
+			<Blackspot X="5871.077" Y="4157.672" Z="-103.1535" Radius="9.456753" />
+			<Blackspot X="5731.328" Y="4155.764" Z="-89.80634" Radius="26.12617" />
+			<Blackspot X="5847.841" Y="4138.172" Z="-100.0426" Radius="11.38965" />
+			<Blackspot X="5870.274" Y="5558.883" Z="-70.69893" Radius="23.75945" />
+			<Blackspot X="5795.733" Y="4050.366" Z="-83.32027" Radius="33.09167" />
+			<Blackspot X="5818.578" Y="4021.821" Z="-75.90816" Radius="35.23233" />
+			<Blackspot X="5302.093" Y="-277.7791" Z="166.3455" Radius="107.0561" />
+			<Blackspot X="3965.739" Y="5513.636" Z="33.55941" Radius="36.16645" />
+			<Blackspot X="5833.538" Y="4041.195" Z="-72.58208" Radius="55.31457" />
+			<Blackspot X="5942.028" Y="4135.129" Z="-78.00981" Radius="39.61928" />
+			<Blackspot X="5854.58" Y="4135.039" Z="-97.34302" Radius="11.42142" />
+			<Blackspot X="5884.11" Y="4160.178" Z="-102.5192" Radius="6.248604" />
+			<Blackspot X="5769.447" Y="4933.582" Z="-134.5639" Radius="9.737474" />
+			<Blackspot X="5747.564" Y="5952.383" Z="-41.6876" Radius="8.226097" />
+		</Blackspots>
+		<AvoidMobs>
+			<AvoidMob Name="Perch Guardian" Entry="29013" />
+			<AvoidMob Name="Thalgran Blightbringer" Entry="28443" />
+			<AvoidMob Name="Frostbitten Corpse" Entry="28220" />
+			<AvoidMob Name="Snowblind Ghoul" Entry="28218" />
+		</AvoidMobs>
+	</SubProfile>
+ 
+ 
+ 
+  <ProtectedItems>
+    <!-- Instant Poison -->
+    <Item>6497</Item>
+    <Item>6949</Item>
+    <Item>6950</Item>
+    <Item>8926</Item>
+    <Item>8927</Item>
+    <Item>8928</Item>
+    <Item>21927</Item>
+    <Item>43230</Item>
+    <Item>43231</Item>
+
+    <!--Rune of Teleportation-->
+    <Item>17031</Item>
+
+    <!--Potions-->
+    <!--Healing Potions-->
+    <Item>118</Item>
+    <Item>858</Item>
+    <Item>929</Item>
+    <Item>1710</Item>
+    <Item>3928</Item>
+    <Item>13446</Item>
+    <Item>17556</Item>
+    <Item>28551</Item>
+    <Item>33447</Item>
+
+    <!--Hunter Ammo-->
+    <Item>30319</Item>
+    <Item>34581</Item>
+    <Item>34582</Item>
+    <Item>32760</Item>
+    <Item>32761</Item>
+    <Item>31737</Item>
+    <Item>31735</Item>
+    <Item>23773</Item>
+    <Item>33803</Item>
+    <Item>12654</Item>
+    <Item>10579</Item>
+    <Item>32883</Item>
+    <Item>30612</Item>
+    <Item>30611</Item>
+    <Item>32882</Item>
+    <Item>41164</Item>
+    <Item>13377</Item>
+    <Item>11630</Item>
+    <Item>41165</Item>
+    <Item>31949</Item>
+    <Item>3465</Item>
+    <Item>3464</Item>
+    <Item>23772</Item>
+    <Item>10512</Item>
+    <Item>19316</Item>
+    <Item>19317</Item>
+    <Item>10513</Item>
+    <Item>9399</Item>
+    <Item>24417</Item>
+    <Item>18042</Item>
+    <Item>15997</Item>
+    <Item>11284</Item>
+    <Item>28056</Item>
+    <Item>8068</Item>
+    <Item>8067</Item>
+    <Item>8069</Item>
+    <Item>4960</Item>
+    <Item>41584</Item>
+    <Item>2519</Item>
+    <Item>28060</Item>
+    <Item>28061</Item>
+    <Item>11285</Item>
+    <Item>2516</Item>
+    <Item>3030</Item>
+    <Item>2512</Item>
+    <Item>2515</Item>
+    <Item>5568</Item>
+    <Item>3033</Item>
+    <Item>41586</Item>
+    <Item>28053</Item>
+
+
+    <Item>17556</Item>
+    <!--Major Healing Potion-->
+    <!--Freshly Baked Bread-->
+    <Item>4541</Item>
+    <!--Mutton Chop-->
+    <Item>3770</Item>
+    <!--Moonberry Juice-->
+    <Item>1645</Item>
+    <!--Morning Glory Dew-->
+    <Item>8766</Item>
+    <!--Lowbie Bags-->
+    <Item>4496</Item>
+    <Item>5571</Item>
+    <Item>828</Item>
+    <Item>5572</Item>
+    <Item>805</Item>
+	<!--Bars, from copper to titansteel!!! Thanks to Cittidel for this and apologies for vendoring his bars. -->
+	<Item>17771</Item>
+	<Item>12360</Item>
+	<Item>23447</Item>
+	<Item>23448</Item>
+	<Item>3577</Item>
+	<Item>23449</Item>
+	<Item>2842</Item>
+	<Item>41163</Item>
+	<Item>37663</Item>
+	<Item>6037</Item>
+	<Item>23446</Item>
+	<Item>2841</Item>
+	<Item>36916</Item>
+	<Item>2840</Item>
+	<Item>11371</Item>
+	<Item>12655</Item>
+	<Item>23445</Item>
+	<Item>23573</Item>
+	<Item>3575</Item>
+	<Item>3860</Item>
+	<Item>36913</Item>
+	<Item>3859</Item>
+	<Item>12359</Item>
+	<Item>3576</Item>
+	
+  </ProtectedItems>
+  <ForceMail>
+    <Item>2589</Item>
+    <!--Linen Cloth-->
+    <Item>2934</Item>
+    <!--Ruined Leather Scraps-->
+    <Item>2592</Item>
+    <!--Wool Cloth-->
+    <Item>4306</Item>
+    <!--Silk cloth-->
+    <Item>4338</Item>
+    <!--Mageweave Cloth-->
+    <Item>14047</Item>
+    <!--Runecloth-->
+    <Item>21877</Item>
+    <!--Netherweave Cloth-->
+    <Item>22470</Item>
+    <!--Frostweave Cloth-->
+    <Item>2318</Item>
+    <!--Light Leather-->
+    <Item>2319</Item>
+    <!--Medium Leather-->
+    <Item>4304</Item>
+    <!--Heavy Leather-->
+    <Item>4234</Item>
+    <!--Thick Leather-->
+    <Item>8170</Item>
+    <!--Rugged Leather-->
+    <Item>21887</Item>
+    <!--Knothide Leathter-->
+    <Item>33568</Item>
+    <!--Borean Leather-->
+    <Item>181166</Item>
+    <!--Bloodthistle-->
+    <Item>2447</Item>
+    <!--Peacebloom-->
+    <Item>765</Item>
+    <!--Silverleaf-->
+    <Item>2449</Item>
+    <!--Earthroot-->
+    <Item>785</Item>
+    <!--Mageroyal-->
+    <Item>2450</Item>
+    <!--Briarthorn-->
+    <Item>2452</Item>
+    <!--Swiftthistle-->
+    <Item>2453</Item>
+    <!--Bruiseweed-->
+    <Item>3355</Item>
+    <!--Wild Steelbloom-->
+    <Item>3356</Item>
+    <!--Kingsblood-->
+    <Item>3357</Item>
+    <!--Liferoot-->
+    <Item>3821</Item>
+    <!--Goldthorn-->
+    <Item>3818</Item>
+    <!--Fadeleaf-->
+    <Item>3358</Item>
+    <!--Khadgar's Whisker-->
+    <Item>3819</Item>
+    <!--Wintersbite-->
+    <Item>8831</Item>
+    <!--Purple Lotus-->
+    <Item>8836</Item>
+    <!--Arthas' Tears-->
+    <Item>8839</Item>
+    <!--Blindweed-->
+    <Item>4625</Item>
+    <!--Firebloom-->
+    <Item>8846</Item>
+    <!--Gromsblood-->
+    <Item>8838</Item>
+    <!--Sungrass-->
+    <Item>13464</Item>
+    <!--Golden Sansam-->
+    <Item>13466</Item>
+    <!--Plaguebloom-->
+    <Item>13465</Item>
+    <!--Mountain Silversage-->
+    <Item>13467</Item>
+    <!--Icecap-->
+    <Item>13463</Item>
+    <!--Dreamfoil-->
+    <Item>13468</Item>
+    <!--Black Lotus-->
+    <Item>22793</Item>
+    <!--Mana Thistle-->
+    <Item>22792</Item>
+    <!--Nightmare Vine-->
+    <Item>22791</Item>
+    <!--Netherbloom-->
+    <Item>22786</Item>
+    <!--Dreaming Glory-->
+    <Item>22787</Item>
+    <!--Ragveil-->
+    <Item>22788</Item>
+    <!--Flame Cap-->
+    <Item>22785</Item>
+    <!--Felweed-->
+    <Item>22789</Item>
+    <!--Terocone-->
+    <Item>22794</Item>
+    <!--Fel Lotus-->
+    <Item>36901</Item>
+    <!--Goldclover-->
+    <Item>191303</Item>
+    <!--Firethorn-->
+    <Item>37921</Item>
+    <!--Deadnettle-->
+    <Item>36904</Item>
+    <!--Tiger Lily-->
+    <Item>36907</Item>
+    <!--Talandra's Rose-->
+    <Item>36903</Item>
+    <!--Adder's Tongue-->
+    <Item>36906</Item>
+    <!--Icethorn-->
+    <Item>36905</Item>
+    <!--Lichbloom-->
+    <Item>36908</Item>
+    <!--Frost Lotus-->
+    <Item>2770</Item>
+    <!--Copper Vein-->
+    <Item>2771</Item>
+    <!--Tin Vein-->
+    <Item>2775</Item>
+    <!--Silver Vein-->
+    <Item>2776</Item>
+    <!--Gold Vein-->
+    <Item>2772</Item>
+    <!--Iron Deposit-->
+    <Item>3858</Item>
+    <!--Mithril Deposit-->
+    <Item>7911</Item>
+    <!--Truesilver Deposit-->
+    <Item>10620</Item>
+    <!--Thorium Vein-->
+    <Item>23425</Item>
+    <!--Adamatite Deposit-->
+    <Item>23424</Item>
+    <!--Fel Iron Deposit-->
+    <Item>23426</Item>
+    <!--Khorium Vein-->
+    <Item>23447</Item>
+    <!--Eternium Vein-->
+    <Item>36909</Item>
+    <!--Cobalt Deposit-->
+    <Item>36912</Item>
+    <!--Saronite Deposit-->
+    <Item>36910</Item>
+    <!--Titanium Vein-->
+    <Item>37705</Item>
+    <!--Crystallized Water-->
+    <Item>17407</Item>
+    <!--Felmist <Mote of Shadow> -->
+    <Item>17378</Item>
+    <!--Swamp Gas <Mote of Water> -->
+    <Item>17408</Item>
+    <!--Arcane Vortex <Mote of Mana> -->
+    <Item>24222</Item>
+    <!--Windy Cloud <Mote of Air>  -->
+    <Item>32544</Item>
+    <!--Steam Cloud <Crystalized Fire> and <Crystalized Water> -->
+    <Item>32522</Item>
+    <!--Cinder Cloud <Crystalized Fire> -->
+    <Item>24879</Item>
+    <!--Arctic Cloud <Crystalized Air> and <Crystalized Water> -->
+    <Item>8499</Item>
+    <!--Tiny Crimson Whelpling-->
+  </ForceMail>
+</HBProfile>
+
+
+
+

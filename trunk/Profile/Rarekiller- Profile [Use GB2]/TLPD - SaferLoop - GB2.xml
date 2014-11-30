@@ -1,0 +1,41 @@
+<HBProfile>
+  <Name>Timelost Protodrake</Name>
+  <MinDurability>0.2</MinDurability>
+  <MinFreeBagSlots>2</MinFreeBagSlots>
+  
+  <MinLevel>1</MinLevel>
+  <MaxLevel>86</MaxLevel>
+  <Factions>99999</Factions>
+  
+  <MailGrey>False</MailGrey>
+  <MailWhite>False</MailWhite>
+  <MailGreen>False</MailGreen>
+  <MailBlue>False</MailBlue>
+  <MailPurple>False</MailPurple>
+ 
+  <SellGrey>False</SellGrey>
+  <SellWhite>False</SellWhite>
+  <SellGreen>False</SellGreen>
+  <SellBlue>False</SellBlue>
+  <SellPurple>False</SellPurple>
+  
+	<Hotspots>
+		<Hotspot X="6969.798" Y="-250.8343" Z="854.9675" />
+		<Hotspot X="7074.206" Y="-655.0214" Z="902.6478" />
+<Hotspot X="7310.753" Y="-914.7726" Z="965.4956" />
+<Hotspot X="7553.955" Y="-1464.439" Z="1169.529" />
+<Hotspot X="7832.427" Y="-1744.092" Z="1320.963" />
+<Hotspot X="8239.017" Y="-1505.449" Z="1283.787" />
+<Hotspot X="7946.735" Y="-534.2439" Z="1030.433" />
+<Hotspot X="7778.783" Y="-193.7896" Z="951.0095" />
+<Hotspot X="7413.675" Y="-70.56071" Z="885.6207" />
+<Hotspot X="6870.92" Y="-163.4137" Z="797.7512" />
+<Hotspot X="6733.441" Y="16.88799" Z="782.1691" />
+<Hotspot X="6475.903" Y="21.05643" Z="633.9208" />
+<Hotspot X="6288.425" Y="-209.0641" Z="621.0246" />
+<Hotspot X="6325.088" Y="-800.8505" Z="453.7225" />
+<Hotspot X="6640.902" Y="-765.8877" Z="766.4723" />
+<Hotspot X="7032.775" Y="-661.8281" Z="824.341" />
+
+	</Hotspots>
+</HBProfile>

@@ -1,0 +1,54 @@
+<HBProfile creator="Gatherit" version="1.0">
+ 
+<Name>[Gatherit][Grind] Isle of Reckoning - For more awesome profiles visit gatherit.blogspot.com</Name>
+  
+	<MinLevel>1</MinLevel> 
+	<MaxLevel>101</MaxLevel> 
+	
+    <TargetElites>False</TargetElites> 
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+   	<SellGrey>True</SellGrey>
+   	<SellWhite>False</SellWhite>
+	<SellGreen>False</SellGreen>
+
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+
+  <Factions>2057 16</Factions> 
+
+  <Vendors>
+  </Vendors>
+
+  <Mailboxes> 
+
+  </Mailboxes>
+
+<GrindArea>
+
+  <TargetMinLevel>1</TargetMinLevel> 
+
+  <TargetMaxLevel>101</TargetMaxLevel> 
+
+<Hotspots>
+<Hotspot X="4835.057" Y="51.92089" Z="4.597315" />
+<Hotspot X="4899.69" Y="57.47089" Z="4.413771" />
+<Hotspot X="4908.589" Y="94.12984" Z="4.42491" />
+<Hotspot X="4944.717" Y="130.3414" Z="6.099781" />
+<Hotspot X="4999.063" Y="147.2213" Z="6.52367" />
+<Hotspot X="5052.639" Y="162.6468" Z="2.6132" />
+<Hotspot X="5119.612" Y="151.9828" Z="8.627532" />
+<Hotspot X="5193.722" Y="179.0438" Z="6.908562" />
+<Hotspot X="5148.312" Y="94.15311" Z="11.10775" />
+<Hotspot X="5106.461" Y="72.34009" Z="6.74481" />
+<Hotspot X="5119.338" Y="26.17498" Z="7.923647" />
+<Hotspot X="5078.417" Y="42.66004" Z="7.980249" />
+<Hotspot X="5002.599" Y="38.35734" Z="3.223177" />
+<Hotspot X="4848.248" Y="55.17627" Z="5.932847" />
+</Hotspots>
+  </GrindArea>
+</HBProfile>

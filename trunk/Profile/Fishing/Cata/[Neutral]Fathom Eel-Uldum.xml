@@ -1,0 +1,41 @@
+<HBProfile>
+	<!-- By HighVoltz-->
+	<!-- Requires AutoAngler2 or PoolFishingBuddy -->
+	<!-- Requires Navigation Mode to be set to: Bounce . AutoAngler Does this automatically-->
+	<Name>Fathom Eel</Name>
+	<FishingSchool Entry="202780" Name="Fathom Eel"/>
+	<Pathing Type="Bounce" />
+	<Hotspots>
+		<Hotspot X="-9917.745" Y="-2894.616" Z="21.09963" />
+		<Hotspot X="-10268.28" Y="-2892.93" Z="52.74145" />
+		<Hotspot X="-10315.78" Y="-2717.926" Z="59.76443" />
+		<Hotspot X="-10385.43" Y="-2838.455" Z="29.05827" />
+		<Hotspot X="-10453.1" Y="-2730.288" Z="26.0379" />
+		<Hotspot X="-10590.65" Y="-2853.262" Z="29.44419" />
+		<Hotspot X="-10845.41" Y="-2565.668" Z="61.96783" />
+		<Hotspot X="-10895.33" Y="-2308.81" Z="78.76227" />
+		<Hotspot X="-11062.38" Y="-2272.886" Z="80.21649" />
+		<Hotspot X="-11187.86" Y="-2154.492" Z="62.88959" />
+		<Hotspot X="-11459.19" Y="-1471.361" Z="65.87819" />
+		<Hotspot X="-11461.49" Y="-1272.449" Z="66.92667" />
+		<Hotspot X="-11750.65" Y="-667.596" Z="35.11753" />
+		<Hotspot X="-11736.5" Y="-427.0837" Z="51.76449" />
+		<Hotspot X="-11220.06" Y="-157.3464" Z="41.74224" />
+		<Hotspot X="-11090.23" Y="-42.77578" Z="19.2334" />
+		<Hotspot X="-10943" Y="450.9526" Z="32.89132" />
+		<Hotspot X="-10762.37" Y="855.3428" Z="52.60435" />
+		<Hotspot X="-10716.21" Y="1187.204" Z="60.95126" />
+		<Hotspot X="-10749.53" Y="1450.015" Z="37.25125" />
+		<Hotspot X="-10538.44" Y="1654.27" Z="41.6086" />
+   </Hotspots>
+
+   <Vendors>
+		<Vendor Name="Blacksmith Abasi" Entry="48617" Type="Repair" X="-9404.68" Y="-906.438" Z="112.5411" />
+	</Vendors>
+	<Blackspots>
+		<Blackspot X="-10857.16" Y="851.1167" Z="-1.842221" Radius="3.367712" />
+	</Blackspots>
+	<Mailboxes>
+		<Mailbox X="-9415.896" Y="-934.7455" Z="112.5409" />
+	</Mailboxes>
+</HBProfile>

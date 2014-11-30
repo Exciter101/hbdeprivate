@@ -1,0 +1,50 @@
+<HBProfile creator="Gatherit" version="1.0">
+ 
+<Name>[Gatherit][Grind] Firebough Nook 86-88 - For more awesome profiles visit gatherit.blogspot.com</Name>
+  
+	<MinLevel>1</MinLevel> 
+	<MaxLevel>101</MaxLevel> 
+	
+    <TargetElites>False</TargetElites> 
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>1</MinFreeBagSlots>
+	
+   	<SellGrey>True</SellGrey>
+   	<SellWhite>False</SellWhite>
+	<SellGreen>False</SellGreen>
+
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+
+  <Factions>14 16 1983</Factions> 
+
+  <Vendors>
+<Vendor Name="The Metal Paw" Entry="61749" Type="Repair" X="1771.343" Y="367.7458" Z="478.2336" />
+  </Vendors>
+
+  <Mailboxes> 
+<Mailbox X="1776.635" Y="316.8966" Z="478.0654" />
+  </Mailboxes>
+
+<GrindArea>
+
+  <TargetMinLevel>1</TargetMinLevel> 
+
+  <TargetMaxLevel>101</TargetMaxLevel> 
+
+<Hotspots>
+<Hotspot X="2036.288" Y="2286.959" Z="451.127" />
+<Hotspot X="2002.878" Y="2233.686" Z="450.8903" />
+<Hotspot X="1964.703" Y="2201.444" Z="451.3722" />
+<Hotspot X="2026.066" Y="2163.535" Z="453.0208" />
+<Hotspot X="1999.467" Y="2125.718" Z="452.4493" />
+<Hotspot X="1942.315" Y="2120.427" Z="452.7646" />
+<Hotspot X="1927.078" Y="2059.484" Z="451.7607" />
+<Hotspot X="2010.449" Y="2036.06" Z="451.7535" />
+<Hotspot X="2001.22" Y="1983.003" Z="455.2357" />
+</Hotspots>
+  </GrindArea>
+</HBProfile>

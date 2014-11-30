@@ -1,0 +1,64 @@
+<HBProfile>
+<Name>Kyparite Gold Mine by Gatherit</Name>
+<MinDurability>0.4</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+<MinLevel>1</MinLevel>
+<MaxLevel>91</MaxLevel>
+<Factions>99999</Factions>
+
+<MailGrey>false</MailGrey>
+<MailWhite>true</MailWhite>
+<MailGreen>true</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>true</SellGrey>
+<SellWhite>false</SellWhite>
+<SellGreen>false</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+<Vendor Name="Alin the Finder" Entry="65171" Type="Repair" X="2363.516" Y="2973.526" Z="417.2339" />
+</Vendors>
+
+<Mailboxes>
+<Mailbox X="2353.41" Y="2994.422" Z="421.1479" />
+</Mailboxes>
+
+<Blackspots>
+<Blackspot X="1761.708" Y="3394.008" Z="295.0871" Radius="0" />
+</Blackspots>
+
+<Hotspots>
+<Hotspot X="1380.211" Y="4422.993" Z="227.8804" />
+<Hotspot X="1458.722" Y="4271.836" Z="183.3413" />
+<Hotspot X="1617.849" Y="4446.94" Z="150.4772" />
+<Hotspot X="1647.167" Y="4529.827" Z="174.4684" />
+<Hotspot X="1539.548" Y="4693.537" Z="177.4217" />
+<Hotspot X="1469.862" Y="4759.669" Z="171.002" />
+<Hotspot X="1345.763" Y="4820.995" Z="178.6376" />
+<Hotspot X="1183.161" Y="4732.087" Z="199.2619" />
+<Hotspot X="1114.562" Y="4561.907" Z="215.2471" />
+<Hotspot X="1080.77" Y="4440.375" Z="206.1905" />
+<Hotspot X="1205.472" Y="4440.297" Z="241.5064" />
+<Hotspot X="1370.619" Y="4354.523" Z="242.7037" />
+<Hotspot X="1614.645" Y="4445.091" Z="181.9485" />
+<Hotspot X="1646.291" Y="4548.349" Z="177.7047" />
+<Hotspot X="1474.872" Y="4033.761" Z="225.3588" />
+<Hotspot X="1677.217" Y="3547.104" Z="254.9495" />
+<Hotspot X="1761.239" Y="3559.243" Z="274.2881" />
+<Hotspot X="1838.35" Y="3545.394" Z="294.5674" />
+<Hotspot X="1999.045" Y="3630.416" Z="292.2604" />
+<Hotspot X="2078.304" Y="3554.67" Z="305.2807" />
+<Hotspot X="2128.66" Y="3557.023" Z="289.9898" />
+<Hotspot X="2222.641" Y="3496.805" Z="293.7155" />
+<Hotspot X="2087.438" Y="3565.738" Z="300.0552" />
+<Hotspot X="1952.581" Y="3625.574" Z="311.3235" />
+<Hotspot X="1722.201" Y="3527.706" Z="301.8556" />
+<Hotspot X="1622.629" Y="3516.411" Z="282.7117" />
+<Hotspot X="1434.072" Y="3861.411" Z="238.194" />
+<Hotspot X="1373.065" Y="4408.221" Z="271.8895" />
+</Hotspots>
+</HBProfile>

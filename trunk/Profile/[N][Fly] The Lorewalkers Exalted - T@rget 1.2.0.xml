@@ -1,0 +1,310 @@
+<HBProfile>
+	<Name>[N][Rep] The Lorewalkers Exalted - T@rget</Name>
+	<MinLevel>90</MinLevel>
+	<MaxLevel>91</MaxLevel>
+	
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<SellGrey>True</SellGrey>
+	<SellWhite>False</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>False</MailBlue>
+	<MailPurple>False</MailPurple>  
+		
+		
+	<Vendors>
+
+	</Vendors>
+	
+	<Mailboxes>
+
+	</Mailboxes>
+	
+	<Blackspots>
+
+	</Blackspots>
+	
+	<AvoidMobs>
+		<Mob Name="Haunt of Despair" Entry="59558" />
+	</AvoidMobs>
+
+	<QuestOrder>
+		<CustomBehavior File="UserSettings" PullDistance="1" UseMount="True" LootMobs="False" HarvestHerbs="False" HarvestMinerals="False" LootChests="False"/>
+	
+		<!-- Vale of Eternal Blossoms -->
+		<If Condition="!IsAchievementCompleted(6855, 8)">
+			<CustomBehavior File="FlyTo" DestName="The Emperor's Burden - P8 (Vale)" X="1201.493" Y="739.7849" Z="378.7489" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213456" ObjectType="Gameobject" Range="4" X="1201.493" Y="739.7849" Z="378.7489" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6858, 2)">
+			<CustomBehavior File="FlyTo" DestName="Always Remember (Vale)" X="791.4109" Y="1141.617" Z="486.1236" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213414" ObjectType="Gameobject" Range="4" X="791.4109" Y="1141.617" Z="486.1236" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6754, 4)">
+			<CustomBehavior File="FlyTo" DestName="The Thunder King (Vale)" X="642.8238" Y="1486.466" Z="415.8187" />
+			<CustomBehavior File="FlyTo" DestName="The Thunder King (Vale)" X="639.8663" Y="1464.485" Z="410.7496" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213334" ObjectType="Gameobject" Range="4" X="639.8663" Y="1464.485" Z="410.7496" />
+		</If>
+	
+		<If Condition="!IsAchievementCompleted(6858, 4)">
+			<CustomBehavior File="FlyTo" DestName="Together, We Are Strong (Vale)" X="1587.984" Y="1821.842" Z="428.5747" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213416" ObjectType="Gameobject" Range="4" X="1583.466" Y="1805.2" Z="428.7458" />
+		</If>
+		
+		<!-- Townlong Steppes -->
+		<If Condition="!IsAchievementCompleted(6847, 4)">
+			<CustomBehavior File="FlyTo" DestName="Trapped in a Strange Land (Townlong)" X="1773.538" Y="2253.719" Z="389.3354" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213420" ObjectType="Gameobject" Range="4" X="1773.538" Y="2253.719" Z="389.3354" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6847, 2)">
+			<CustomBehavior File="FlyTo" DestName="Dominance (Townlong)" X="2641.216" Y="3322.104" Z="429.1635" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213418" ObjectType="Gameobject" Range="4" X="2641.216" Y="3322.104" Z="429.1635" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6855, 5)">
+			<CustomBehavior File="FlyTo" DestName="The Emperor's Burden - P5 (Townlong)" X="2134.559" Y="4929.344" Z="198.5026" />
+			<CustomBehavior File="FlyTo" DestName="The Emperor's Burden - P5 (Townlong)" X="2148.99" Y="4912.641" Z="198.5025" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213445" ObjectType="Gameobject" Range="4" X="2148.99" Y="4912.641" Z="198.5025" />
+		</If>
+		
+		<!-- Dread Wastes -->
+		<If Condition="!IsAchievementCompleted(6857, 3)">
+			<CustomBehavior File="FlyTo" DestName="Amber (Dread Wastes)" X="809.1164" Y="3259.095" Z="223.3049" />
+			<CustomBehavior File="FlyTo" DestName="Amber (Dread Wastes)" X="852.6108" Y="3269.019" Z="218.388" />
+			<CustomBehavior File="ForcedDismount" />
+			<RunTo X="1056.191" Y="3329.818" Z="187.0019" />
+			<CustomBehavior File="InteractWith" MobId="213411" ObjectType="Gameobject" Range="4" X="1056.191" Y="3329.818" Z="187.0019" />
+		</If>
+
+		<If Condition="!IsAchievementCompleted(6857, 4)">
+			<CustomBehavior File="FlyTo" DestName="The Empress (Dread Wastes)" X="255.0205" Y="4239.111" Z="269.5895" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213412" ObjectType="Gameobject" Range="4" X="255.0205" Y="4239.111" Z="269.5895" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6857, 1)">
+			<CustomBehavior File="FlyTo" DestName="Cycle of the Mantid (Dread Wastes)" X="242.5508" Y="3548.405" Z="243.4436" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213409" ObjectType="Gameobject" Range="4" X="242.5508" Y="3548.405" Z="243.4436" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6857, 2)">
+			<CustomBehavior File="FlyTo" DestName="Mantid Society (Dread Wastes)" X="-547.1913" Y="2934.753" Z="166.2879" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213410" ObjectType="Gameobject" Range="4" X="-547.1913" Y="2934.753" Z="166.2879" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6716, 3)">
+			<CustomBehavior File="FlyTo" DestName="The Deserters (Dread Wastes)" X="-754.8097" Y="2532.43" Z="131.9455" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213329" ObjectType="Gameobject" Range="4" X="-754.8097" Y="2532.43" Z="131.9455" />
+		</If>
+		
+		<!-- Valley of the Four Winds Part 1 -->
+		<If Condition="!IsAchievementCompleted(6858, 1)">
+			<CustomBehavior File="FlyTo" DestName="Pandaren Fighting Tactics (Valley)" X="259.4941" Y="1941.396" Z="164.0339" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213413" ObjectType="Gameobject" Range="4" X="264.8105" Y="1940.688" Z="164.2249" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6856, 3)">
+			<CustomBehavior File="FlyTo" DestName="The Wandering Widow (Valley)" X="-583.3109" Y="1313.883" Z="148.4495" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213461" ObjectType="Gameobject" Range="4" X="-576.5651" Y="1320.634" Z="148.7419" />
+		</If>
+		
+		<!-- Krasarang Wilds -->
+		<If Condition="!IsAchievementCompleted(6716, 4)">
+			<CustomBehavior File="FlyTo" DestName="The Last Stand (Wilds)" X="-1116.29" Y="1424.492" Z="27.00398" />
+			<CustomBehavior File="FlyTo" DestName="The Last Stand (Wilds)" X="-1034.679" Y="1412.105" Z="24.91917" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213330" ObjectType="Gameobject" Range="4" X="-1034.679" Y="1412.105" Z="24.91917" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6846, 3)">
+			<CustomBehavior File="FlyTo" DestName="Origins (Wilds)" X="-1293.239" Y="1514.506" Z="14.25847" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="215782" ObjectType="Gameobject" Range="4" X="-1314.976" Y="1515.644" Z="14.7451" /> -->
+			<RunTo X="-1293.239" Y="1514.506" Z="14.25847" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6855, 4)">
+			<CustomBehavior File="FlyTo" DestName="The Emperor's Burden P4 (Wilds)" X="-1838.783" Y="1118.863" Z="60.45892" />
+			<CustomBehavior File="FlyTo" DestName="The Emperor's Burden P4 (Wilds)" X="-1839.844" Y="1096.235" Z="47.11836" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213422" ObjectType="Gameobject" Range="4" X="-1878.109" Y="1050.496" Z="46.9899" />
+			<RunTo X="-1839.141" Y="1105.384" Z="47.14159" />
+			<CustomBehavior File="ForcedMount" MountType="Flying" />
+			<CustomBehavior File="FlyTo" DestName="Outside" X="-1838.783" Y="1118.863" Z="60.45892" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6850, 2)">
+			<CustomBehavior File="FlyTo" DestName="Hozen Maturity (Wilds)" X="-2793.158" Y="499.7945" Z="4.571414" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="211993" ObjectType="Gameobject" Range="4" X="-2848.851" Y="492.1773" Z="7.521766" />
+			<RunTo X="-2793.158" Y="499.7945" Z="4.571414" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6754, 2)">
+			<CustomBehavior File="FlyTo" DestName="The Lost Dynasty (Valley)" X="-1100.772" Y="558.7792" Z="61.28318" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213332" ObjectType="Gameobject" Range="4" X="-1100.772" Y="558.7792" Z="61.28318" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6856, 4)">
+			<CustomBehavior File="FlyTo" DestName="Waiting for the Turtle (Valley)" X="-1081.445" Y="-436.1306" Z="0.426625" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="215765" ObjectType="Gameobject" Range="4" X="-1081.445" Y="-436.1306" Z="0.426625" />
+		</If>
+		
+		<!-- Valley of the Four Winds Part 2 -->
+		<If Condition="!IsAchievementCompleted(6856, 2)">
+			<CustomBehavior File="FlyTo" DestName="A Most Famous Bill of Sale (Valley)" X="-154.0811" Y="515.6887" Z="207.0015" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213460" ObjectType="Gameobject" Range="4" X="-139.0351" Y="518.4887" Z="214.2149" />
+			<RunTo X="-146.3223" Y="521.5707" Z="213.1381" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6846, 2)">
+			<CustomBehavior File="FlyTo" DestName="Waterspeakers (Valley)" X="187.442" Y="267.0631" Z="153.8239" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="215780" ObjectType="Gameobject" Range="4" X="187.2673" Y="273.594" Z="154.3332" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6850, 3)">
+			<CustomBehavior File="FlyTo" DestName="Embracing the Passions (Valley)" X="540.5535" Y="-583.6547" Z="258.3879" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="215785" ObjectType="Gameobject" Range="4" X="540.5535" Y="-583.6547" Z="258.3879" />
+		</If>
+		
+		<!-- The Jade Forest -->
+		<If Condition="!IsAchievementCompleted(6846, 1)">
+			<CustomBehavior File="FlyTo" DestName="Watersmithing (Jade Forest)" X="-420.9273" Y="-3158.483" Z="31.4699" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="215779" ObjectType="Gameobject" Range="4" X="-420.9273" Y="-3158.483" Z="31.4699" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6855, 3)">
+			<CustomBehavior File="FlyTo" DestName="The Emperor's Burden P3 (Jade Forest)" X="1006.62" Y="-2447.019" Z="168.599" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213421" ObjectType="Gameobject" Range="4" X="1006.62" Y="-2447.019" Z="168.599" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6855, 1)">
+			<CustomBehavior File="FlyTo" DestName="The Emperor's Burden P1 (Jade Forest)" X="1547.397" Y="-1828.145" Z="247.059" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="215799" ObjectType="Gameobject" Range="4" X="1549.152" Y="-1834.764" Z="245.2585" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6716, 1)">
+			<CustomBehavior File="FlyTo" DestName="The Saurok (Jade Forest)" X="2284.636" Y="-3280.83" Z="4.836085" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213327" ObjectType="Gameobject" Range="4" X="2284.636" Y="-3280.83" Z="4.836085" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6754, 3)">
+			<CustomBehavior File="FlyTo" DestName="Spirit Binders (Jade Forest)" X="2840.95" Y="-1495.608" Z="278.4817" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213333" ObjectType="Gameobject" Range="4" X="2840.95" Y="-1495.608" Z="278.4817" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6858, 3)">
+			<CustomBehavior File="FlyTo" DestName="The First Monks (Jade Forest)" X="2231.906" Y="-1042.966" Z="450.7708" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213415" ObjectType="Gameobject" Range="4" X="2231.906" Y="-1042.966" Z="450.7708" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6850, 1)">
+			<CustomBehavior File="FlyTo" DestName="Hozen Speech (Jade Forest)" X="2333.704" Y="-394.1196" Z="341.0183" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="211990" ObjectType="Gameobject" Range="4" X="2333.704" Y="-394.1196" Z="341.0183" />
+		</If>
+		
+		<!-- Kun-Lai Summit -->
+		<If Condition="!IsAchievementCompleted(6846, 4)">
+			<CustomBehavior File="FlyTo" DestName="Role Call (Summit)" X="2155.582" Y="182.726" Z="478.7323" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="215783" ObjectType="Gameobject" Range="4" X="2133.944" Y="178.4399" Z="479.2194" />
+			<RunTo X="2155.582" Y="182.726" Z="478.7323" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6847, 3)">
+			<CustomBehavior File="FlyTo" DestName="Yaungoil (Summit)" X="2988.335" Y="352.0921" Z="500.0352" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="215798" ObjectType="Gameobject" Range="4" X="2988.335" Y="352.0921" Z="500.0352" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6855, 6)">
+			<CustomBehavior File="FlyTo" DestName="The Emperor's Burden P6 (Summit)" X="3602.061" Y="595.022" Z="615.04" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213443" ObjectType="Gameobject" Range="4" X="3602.061" Y="595.022" Z="615.04" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6858, 5)">
+			<CustomBehavior File="FlyTo" DestName="Victory in Kun-Lai (Summit)" X="3915.673" Y="891.0784" Z="417.7715" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213511" ObjectType="Gameobject" Range="4" X="3915.673" Y="891.0784" Z="417.7715" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6754, 1)">
+			<CustomBehavior File="FlyTo" DestName="Valley of the Emperors (Summit)" X="3683.192" Y="1518.754" Z="782.5215" />
+			<CustomBehavior File="ForcedDismount" />
+			<RunTo X="3604.423" Y="1610.825" Z="742.6664" />
+			<CustomBehavior File="MyCTM" X="3614.033" Y="1610.352" Z="742.9735" />
+			<CustomBehavior File="MyCTM" X="3616.564" Y="1639.411" Z="742.666" />
+			<RunTo X="3619.162" Y="1639.282" Z="742.6661" />
+			<RunTo X="3621.968" Y="1668.421" Z="742.9731" />
+			<CustomBehavior File="InteractWith" MobId="213331" ObjectType="Gameobject" Range="4" X="3621.968" Y="1668.421" Z="742.9731" />
+			<RunTo X="3621.968" Y="1668.421" Z="742.9731" />
+			<RunTo X="3619.162" Y="1639.282" Z="742.6661" />
+			<CustomBehavior File="MyCTM" X="3616.564" Y="1639.411" Z="742.666" />
+			<CustomBehavior File="MyCTM" X="3614.033" Y="1610.352" Z="742.9735" />
+			<RunTo X="3683.192" Y="1518.754" Z="782.5215" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6855, 7)">
+			<CustomBehavior File="FlyTo" DestName="The Emperor's Burden P7 (Summit)" X="3855.882" Y="2270.868" Z="753.916" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213455" ObjectType="Gameobject" Range="4" X="3853.922" Y="2272.451" Z="754.5828" />
+		</If>
+
+		<If Condition="!IsAchievementCompleted(6855, 2)">		
+			<CustomBehavior File="FlyTo" DestName="The Emperor's Burden P2 (Summit)" X="3484.525" Y="2099.187" Z="1084.038" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="215797" ObjectType="Gameobject" Range="4" X="3484.525" Y="2099.187" Z="1084.038" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6850, 4)">
+			<CustomBehavior File="FlyTo" DestName="The Hozen Ravage (Summit)" X="3009.427" Y="1995.381" Z="652.4515" />
+			<CustomBehavior File="FlyTo" DestName="The Hozen Ravage (Summit)" X="3033.404" Y="1977.868" Z="642.7764" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="211994" ObjectType="Gameobject" Range="4" X="3033.404" Y="1977.868" Z="642.7764" />
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(6847, 1)">
+			<CustomBehavior File="FlyTo" DestName="Yaungol Tactics (Summit)" X="2312.677" Y="1688.963" Z="506.8157" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="InteractWith" MobId="213417" ObjectType="Gameobject" Range="4" X="3484.525" Y="2099.187" Z="1084.038" />
+			<CustomBehavior File="FlyTo" DestName="Finish" X="2312.373" Y="1690.915" Z="516.2944" />
+		</If>
+		
+		<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Done!\n\nFor the last two I couldn't do for you, check the forum post at http://www.thebuddyforum.com/honorbuddy-forum/submitted-profiles/neutral/74165-n-fly-lorewalkers-exalted.html" />
+	</QuestOrder>
+
+</HBProfile>
