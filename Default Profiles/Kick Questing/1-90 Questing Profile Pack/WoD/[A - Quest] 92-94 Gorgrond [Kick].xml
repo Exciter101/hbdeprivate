@@ -1,6 +1,6 @@
 <HBProfile xsi:noNamespaceSchemaLocation="../../../Schemas/QuestProfileSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <!-- Original contribution by Kickazz006 -->
-    <Name>[A - Quest] 92-94 Gorgrond [Kick] ($Rev: 3710 $)</Name>
+    <Name>[A - Quest] 92-94 Gorgrond [Kick] ($Rev: 3751 $)</Name>
 
     <MinLevel>92</MinLevel>
     <MaxLevel>1001</MaxLevel>
@@ -46,6 +46,8 @@
 		<Blackspot X="6340.329" Y="738.9749" Z="116.6805" Radius="3" />
 		<Blackspot X="6338.973" Y="740.0145" Z="116.7196" Radius="3" />
 		<!-- End Highpass Sparring -->
+		
+		<Blackspot X="1440.788" Y="549.9026" Z="85.38272" Radius="14.15243" /> <!-- Cursed Woods -->
     </Blackspots>
 
     <Mailboxes> <!-- Need to add Mailboxes and Vendors! -->
@@ -499,7 +501,7 @@
 		<Objective Type="KillMob" MobId="73101" KillCount="10">
 			<Hotspots>
 				<Hotspot X="1380.547" Y="606.5489" Z="95.01306" />
-				<Hotspot X="1436.913" Y="555.4584" Z="88.90386" />
+				<!--<Hotspot X="1436.913" Y="555.4584" Z="88.90386" />-->
 				<Hotspot X="1442.645" Y="593.6103" Z="89.07989" />
 				<Hotspot X="1475.978" Y="655.9108" Z="88.11404" />
 				<Hotspot X="1508.283" Y="691.1295" Z="72.87344" />
@@ -1068,8 +1070,9 @@
 		<TurnIn QuestName="Getting Gladiators" QuestId="34699" TurnInName="Bruto" TurnInId="77014" X="5889.095" Y="2053.071" Z="72.36064" />		
 		<PickUp QuestName="The Axe of Kor'gall" QuestId="34703" GiverName="Bruto" GiverId="77014" X="5889.095" Y="2053.071" Z="72.36064" />	
 			<If Condition="HasQuest(34703) &amp;&amp; !IsQuestCompleted(34703)" > <!-- The Axe of Kor'gall -->
+				<MoveTo X="5878.697" Y="2061.201" Z="69.80282" />
 			 <If Condition="Object(227114) != null"> <!-- Barricade -->
-				<CustomBehavior File="InteractWith" MobId="227114" ObjectType="GameObject" NonCompeteDistance="0" WaitTime="3000" Range="8" X="5878.697" Y="2061.201" Z="69.80282" />
+				<CustomBehavior File="InteractWith" MobId="227114" ObjectType="GameObject" NonCompeteDistance="0" WaitTime="3000" Range="5" X="5878.697" Y="2061.201" Z="69.80282" />
 			 </If>
 				<Objective QuestName="The Axe of Kor'gall" QuestId="34703" Type="CollectItem" ItemId="109023" CollectCount="1" />
 			</If>
@@ -1100,8 +1103,9 @@
 		<PickUp QuestName="Strike While the Iron is Hot" QuestId="36576" GiverName="Vindicator Maraad" GiverId="75127" X="6337.186" Y="745.6736" Z="116.6775" />
 			<While Condition="HasQuest(36576) &amp;&amp; !IsQuestCompleted(36576)" > <!-- Strike While the Iron is Hot - Arena -->
 				<If Condition="((Unit(81074) != null) &amp;&amp; (Unit(81222) != null))"> <!-- FP - Highpass - Rajess -->
-					<CustomBehavior File="InteractWith" MobId="81074" GossipOptions="1" WaitTime="5000" X="6356.173" Y="747.1268" Z="116.6614" />
-					<!-- wait for taxi's to get fixed - then verify if i need a 45s waittimer or not -->
+					<MoveTo X="6356.173" Y="747.1268" Z="116.6614" />
+					<!--<CustomBehavior File="InteractWith" MobId="81074" GossipOptions="1" WaitTime="5000" X="6356.173" Y="747.1268" Z="116.6614" />
+					 wait for taxi's to get fixed - then verify if i need a 45s waittimer or not -->
 					<CustomBehavior File="WaitTimer" WaitTime="50000" GoalText="Waiting for  {TimeRemaining}" />
 				</If>
 				<While Condition="Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.StageNumber == 1">
@@ -1129,12 +1133,14 @@
 					<CustomBehavior File="InteractWith" QuestId="36576" MobId="85571" TerminateWhen="Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.StageNumber != 5" X="6356.173" Y="747.1268" Z="116.6612" /> <!-- Goc -->
 				</While>
 				<If Condition="HasQuest(36576) &amp;&amp; IsQuestCompleted(36576) &amp;&amp; Me.MapId == 1402" > <!-- Strike While the Iron is Hot - GorgrondFinaleScenario -->
-					<CustomBehavior File="InteractWith" MobId="84700" X="8487.958" Y="1546.837" Z="79.16023" /> <!-- FP - Nisha -->
+					<!--<CustomBehavior File="InteractWith" MobId="84700" X="8487.958" Y="1546.837" Z="79.16023" />  FP - Nisha -->
+					<MoveTo X="8487.958" Y="1546.837" Z="79.16023" />
 					<MoveTo X="6337.186" Y="745.6736" Z="116.6775" />
 				</If>
 			</While>
 			<If Condition="HasQuest(36576) &amp;&amp; IsQuestCompleted(36576) &amp;&amp; Me.MapId == 1402" > <!-- Strike While the Iron is Hot - GorgrondFinaleScenario -->
-				<CustomBehavior File="InteractWith" MobId="84700" X="8487.958" Y="1546.837" Z="79.16023" /> <!-- FP - Nisha -->
+				<!--<CustomBehavior File="InteractWith" MobId="84700" X="8487.958" Y="1546.837" Z="79.16023" />  FP - Nisha -->
+				<MoveTo X="8487.958" Y="1546.837" Z="79.16023" />
 				<MoveTo X="6337.186" Y="745.6736" Z="116.6775" />
 			</If>
 			<If Condition="HasQuest(36576) &amp;&amp; IsQuestCompleted(36576)" > <!-- Strike While the Iron is Hot -->
@@ -1620,9 +1626,9 @@
 		<TurnIn QuestName="Catching His Eye" QuestId="33062" TurnInName="Archmage Khadgar" TurnInId="77184" X="1510.826" Y="312.0347" Z="66.69157" />
 		<PickUp QuestName="Shrouding Stones" QuestId="33115" GiverName="Archmage Khadgar" GiverId="77184" X="1510.826" Y="312.0347" Z="66.69157" />
 			<If Condition="HasQuest(33115) &amp;&amp; !IsQuestCompleted(33115)" > <!-- Shrouding Stones -->
-				<CustomBehavior File="InteractWith" QuestId="33115" MobId="227271" ObjectType="GameObject" Range="8" TerminateWhen="IsObjectiveComplete(3, 33115)" X="1373.582" Y="672.4375" Z="100.1952" /> <!-- Southern -->
-				<CustomBehavior File="InteractWith" QuestId="33115" MobId="222690" ObjectType="GameObject" Range="8" TerminateWhen="IsObjectiveComplete(1, 33115)" X="1565.097" Y="726.1684" Z="55.23597" /> <!-- Central -->
-				<CustomBehavior File="InteractWith" QuestId="33115" MobId="227272" ObjectType="GameObject" Range="8" TerminateWhen="IsObjectiveComplete(2, 33115)" X="1953.625" Y="524.3333" Z="14.86616" /> <!-- Northern -->
+				<CustomBehavior File="InteractWith" QuestId="33115" MobId="227271" ObjectType="GameObject" Range="5" TerminateWhen="IsObjectiveComplete(3, 33115)" X="1373.582" Y="672.4375" Z="100.1952" /> <!-- Southern -->
+				<CustomBehavior File="InteractWith" QuestId="33115" MobId="222690" ObjectType="GameObject" Range="5" TerminateWhen="IsObjectiveComplete(1, 33115)" X="1565.097" Y="726.1684" Z="55.23597" /> <!-- Central -->
+				<CustomBehavior File="InteractWith" QuestId="33115" MobId="227272" ObjectType="GameObject" Range="5" TerminateWhen="IsObjectiveComplete(2, 33115)" X="1953.625" Y="524.3333" Z="14.86616" /> <!-- Northern -->
 			</If>
 			<Objective QuestName="A Curse Upon the Woods" QuestId="33120" Type="KillMob" MobId="73101" KillCount="10" />
 		<TurnIn QuestName="A Curse Upon the Woods" QuestId="33120" TurnInName="Delas Moonfang" TurnInId="72623" X="1564.929" Y="293.6667" Z="63.66102" />
