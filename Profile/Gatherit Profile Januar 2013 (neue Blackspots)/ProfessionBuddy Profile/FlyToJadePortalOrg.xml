@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Professionbuddy>
-    <While Condition="Me.MapId == 1 &amp;&amp; Me.IsHorde" IgnoreCanRun="False">
-      <FlyToAction Dismount="True" Location="2014.819, -4700.274, 28.62439" />
-      <InteractionAction InteractType="GameObject" Entry="215424" InteractDelay="0" GameObjectType="WorldObject" SpellFocus="Anvil" />
-      <WaitAction Condition="false" Timeout="3000" />
-    </While>
-</Professionbuddy>
