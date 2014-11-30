@@ -1,0 +1,72 @@
+<HBProfile>
+  <Name>Badlands Iron and Mithril ||</Name>
+  <MinFreeBagSlots>1</MinFreeBagSlots>
+  <MinLevel>1</MinLevel>
+  <MaxLevel>92</MaxLevel>
+  <SubProfile>
+    <MinLevel>1</MinLevel>
+    <MaxLevel>92</MaxLevel>
+    <Factions>9999999 </Factions>
+    <Vendors>
+      <Vendor Name="Jazzrik" Entry="9179" Type="Repair" X="-6760.187" Y="-3135.554" Z="241.1648" />
+    </Vendors>
+	
+	<Mailboxes>
+<Mailbox X="-6739.146" Y="-2459.504" Z="272.8226" />
+<Mailbox X="-6599.58" Y="-3928.624" Z="379.4075" />
+</Mailboxes>
+
+    <Name>Iron and Mirthril Full Map</Name>
+    <MinLevel>1</MinLevel>
+    <MaxLevel>92</MaxLevel>
+    <Factions>9999999 </Factions>
+    <Hotspots>
+<Hotspot X="-7196.247" Y="-2713.041" Z="269.0084" />
+<Hotspot X="-7119.188" Y="-2666.702" Z="241.9979" />
+<Hotspot X="-6993.369" Y="-2761.805" Z="241.8016" />
+<Hotspot X="-7100.709" Y="-2865.865" Z="241.9356" />
+<Hotspot X="-7151.385" Y="-2998.404" Z="265.3096" />
+<Hotspot X="-7127.946" Y="-3154.469" Z="244.2518" />
+<Hotspot X="-7254.609" Y="-3124.622" Z="315.9823" />
+<Hotspot X="-7111.557" Y="-3614.44" Z="257.1186" />
+<Hotspot X="-6954.761" Y="-3644.085" Z="242.9289" />
+<Hotspot X="-6780.128" Y="-3645.245" Z="244.2985" />
+<Hotspot X="-6753.877" Y="-3802.398" Z="264.2235" />
+<Hotspot X="-6874.012" Y="-3893.035" Z="265.6506" />
+<Hotspot X="-6972.227" Y="-3978.788" Z="267.8343" />
+<Hotspot X="-6857.027" Y="-4081.63" Z="264.545" />
+<Hotspot X="-6611.121" Y="-4102.802" Z="264.3351" />
+<Hotspot X="-6497.369" Y="-4013.845" Z="264.2498" />
+<Hotspot X="-6445.647" Y="-3888.516" Z="305.7985" />
+<Hotspot X="-6485.252" Y="-3644.888" Z="244.5153" />
+<Hotspot X="-6587.368" Y="-3663.171" Z="258.0598" />
+<Hotspot X="-6665.374" Y="-3548.351" Z="241.71" />
+<Hotspot X="-6659.126" Y="-3401.754" Z="257.1212" />
+<Hotspot X="-6812.955" Y="-3322.46" Z="241.7685" />
+<Hotspot X="-6769.412" Y="-3147.867" Z="240.6413" />
+<Hotspot X="-6793.783" Y="-2995.595" Z="241.6745" />
+<Hotspot X="-6621.03" Y="-2880.979" Z="254.9135" />
+<Hotspot X="-6658.052" Y="-2693.325" Z="242.5444" />
+<Hotspot X="-6727.814" Y="-2491.496" Z="253.3924" />
+<Hotspot X="-6864.544" Y="-2339.795" Z="244.903" />
+<Hotspot X="-6919.197" Y="-2551.037" Z="242.5741" />
+<Hotspot X="-6887.115" Y="-2690" Z="241.7773" />
+<Hotspot X="-6896.211" Y="-2795.248" Z="242.3075" />
+<Hotspot X="-7005.74" Y="-2760.707" Z="241.8069" />
+<Hotspot X="-7097.22" Y="-2614.421" Z="266.3549" />
+<Hotspot X="-7403.428" Y="-2463.749" Z="323.3874" />
+<Hotspot X="-7191.911" Y="-2711.887" Z="267.6044" />
+<Hotspot X="-7102.276" Y="-2864.208" Z="241.9233" />
+
+
+
+
+
+
+    </Hotspots>
+    <Blackspots>
+<Blackspot X="-6745.165" Y="-4080.735" Z="264.1687" Radius="100" />
+<Blackspot X="-6890.449" Y="-2480.328" Z="247.2097" Radius="30"/>
+    </Blackspots>
+  </SubProfile>
+</HBProfile>

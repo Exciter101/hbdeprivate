@@ -1,0 +1,62 @@
+<HBProfile creator="Mirabis" version="1.2">
+
+    <Name>Mirabis 85-87</Name>
+    <MinLevel>85</MinLevel>
+    <MaxLevel>88</MaxLevel>
+   
+    <MinDurability>0.2</MinDurability>
+    <MinFreeBagSlots>2</MinFreeBagSlots>
+   
+   	<SellGrey>True</SellGrey>
+   	<SellWhite>False</SellWhite>
+	<SellGreen>False</SellGreen>
+
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+        
+	
+	
+    <Vendors>
+		<!-- Alliance -->
+		<Vendor Name="Jadori Ironeye" Entry="65900" Type="Repair" X="-308.9132" Y="-1659.717" Z="53.10683" />
+		<Vendor Name="Jiayi Applebloom" Entry="65907" Type="Food" X="-273.0538" Y="-1681.813" Z="54.34397" />
+		<!-- Horde -->
+	</Vendors>
+   
+    <Mailboxes> 
+		<!-- Alliance -->
+		<Mailbox X="-286.6761" Y="-1677.868" Z="53.10696" />
+	</Mailboxes>
+   
+    <GrindArea>
+		<TargetMinLevel>80</TargetMinLevel>
+		<TargetMaxLevel>89</TargetMaxLevel>
+		<Factions>2000 188</Factions> <!-- Silverhorn Stag, Silverhorn Calf -->
+			<Hotspots>
+				<Hotspot X="-3.025859" Y="-1849.237" Z="50.74968" />
+				<Hotspot X="-58.16506" Y="-1918.902" Z="47.50759" />
+				<Hotspot X="-93.43216" Y="-1976.113" Z="51.23096" />
+				<Hotspot X="-119.9468" Y="-1932.278" Z="57.64876" />
+				<Hotspot X="-149.8646" Y="-1870.129" Z="66.06532" />
+				<Hotspot X="-127.7469" Y="-2003.266" Z="57.21001" />
+				<Hotspot X="59.51422" Y="-1821.485" Z="46.70603" />
+        </Hotspots>
+    </GrindArea>
+	
+	<Blackspots>
+		<Blackspot X="-4.420891" Y="-1912.777" Z="42.79047" Radius="25.35568" /> <!-- Huge fallen tree -->
+		<Blackspot X="-87.93845" Y="-1881.995" Z="59.92104" Radius="13.78888" /> <!-- wall next to path -->
+		<Blackspot X="61.03928" Y="-1893.066" Z="26.18673" Radius="7.159264" /> <!-- wall next to path -->
+		<Blackspot X="50.50073" Y="-1895.845" Z="29.64741" Radius="6.145147" /> <!-- water -->
+		<Blackspot X="53.1791" Y="-1881.88" Z="33.79881" Radius="14.21267" /> <!-- water -->
+		<Blackspot X="66.82825" Y="-1875.405" Z="29.88973" Radius="7.343522" /> <!-- water -->
+  </Blackspots>
+  
+  <AvoidMobs> 
+	<!-- Critter(s) -->
+	<Mob Name="Grove Viper" Entry="63004" />
+  </AvoidMobs>
+  
+</HBProfile>

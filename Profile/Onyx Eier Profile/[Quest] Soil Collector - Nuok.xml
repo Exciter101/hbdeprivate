@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HBProfile creator="Nuok">
+  <Name>Dark Soil Collector - Nuok</Name>
+  <SellGrey>true</SellGrey>
+  <SellWhite>false</SellWhite>
+  <SellGreen>false</SellGreen>
+  <MailBlue>false</MailBlue>
+  <MailPurple>false</MailPurple>
+  <MinFreeBagSlots>1</MinFreeBagSlots>
+
+  <AvoidMobs>
+  </AvoidMobs>
+
+  <BlackSpots>
+  </BlackSpots>
+
+  <ProtectedItems>
+
+  </ProtectedItems>
+
+  <Mailboxes>
+
+  </Mailboxes>
+
+  <Vendors>
+
+  </Vendors>
+
+
+  <QuestOrder>
+    <CustomBehavior File="UserSettings" PullDistance="1" />
+    <While Condition="Me.IsAlive">
+      <CustomBehavior File="FlyCollect" ObjectId="210565" X="-288.4437" Y="842.9719" Z="197.0765" />
+      <CustomBehavior File="FlyCollect" ObjectId="210565" X="-295.7744" Y="981.6003" Z="186.5798" />
+      <CustomBehavior File="FlyCollect" ObjectId="210565" X="-228.7794" Y="1129.592" Z="186.0135" />
+      <CustomBehavior File="FlyCollect" ObjectId="210565" X="-215.8632" Y="1359.326" Z="241.5794" />
+      <CustomBehavior File="FlyCollect" ObjectId="210565" X="25.47521" Y="1303.599" Z="240.0876" />
+      <CustomBehavior File="FlyCollect" ObjectId="210565" X="-65.62936" Y="1144.572" Z="212.5365" />
+      <CustomBehavior File="FlyCollect" ObjectId="210565" X="140.245" Y="1027.255" Z="201.9485" />
+      <CustomBehavior File="FlyCollect" ObjectId="210565" X="110.84" Y="871.3048" Z="196.5599" />
+      <CustomBehavior File="FlyCollect" ObjectId="210565" X="306.7166" Y="725.0268" Z="219.8033" />
+	  <CustomBehavior File="FlyCollect" ObjectId="210565" X="-12.44646" Y="955.6287" Z="201.3584" />
+    </While>
+  </QuestOrder>
+
+</HBProfile>

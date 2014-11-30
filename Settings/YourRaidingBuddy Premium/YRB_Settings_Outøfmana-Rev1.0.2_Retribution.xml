@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<YbSettingsRE>
+  <HolyAvenger>Always</HolyAvenger>
+  <ExecutionSentence>Always</ExecutionSentence>
+  <LightsHammer>Always</LightsHammer>
+  <Seraphim>Always</Seraphim>
+  <AvengingWrath>Always</AvengingWrath>
+  <ClassRacials>OnBoss</ClassRacials>
+  <Lifeblood>Offensive</Lifeblood>
+  <LifebloodOffensive>OnBoss</LifebloodOffensive>
+  <SealofRighteousnessCount>4</SealofRighteousnessCount>
+  <EnableAutoCleave>False</EnableAutoCleave>
+  <UseSealSwapping>False</UseSealSwapping>
+  <EnableFacing>False</EnableFacing>
+  <UseLightsHammerHotkey>False</UseLightsHammerHotkey>
+  <LightHammerLocation>OnMe</LightHammerLocation>
+  <AoENumber>2</AoENumber>
+  <EnableDefensive>False</EnableDefensive>
+  <EnableCleanse>False</EnableCleanse>
+  <DivineProtectionHP>85</DivineProtectionHP>
+  <DivineShieldHP>85</DivineShieldHP>
+  <WorldofGloryHP>5</WorldofGloryHP>
+  <FlashOfLightHP>85</FlashOfLightHP>
+  <LohHPSetting>10</LohHPSetting>
+  <WoGHP>99</WoGHP>
+  <SacredShieldEnable>True</SacredShieldEnable>
+  <SelflessHealingStacks>3</SelflessHealingStacks>
+  <CheckInterruptsList>True</CheckInterruptsList>
+  <EnableEmancipate>False</EnableEmancipate>
+  <EnableHandofFreedom>False</EnableHandofFreedom>
+  <CheckHealthStone>False</CheckHealthStone>
+  <CheckHealthStoneNum>20</CheckHealthStoneNum>
+  <Trinket1>OnBoss</Trinket1>
+  <Trinket2>OnBoss</Trinket2>
+  <CheckInterrupts>True</CheckInterrupts>
+  <CheckLifebloodNum>10</CheckLifebloodNum>
+</YbSettingsRE>

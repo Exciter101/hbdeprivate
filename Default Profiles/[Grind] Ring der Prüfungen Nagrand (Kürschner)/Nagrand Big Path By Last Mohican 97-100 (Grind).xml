@@ -1,0 +1,84 @@
+<HBProfile>
+<Name>Nagrand Big Path By Last Mohican</Name>
+<MinDurability>0.3</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+<MinLevel>92</MinLevel>
+<MaxLevel>101</MaxLevel>
+<Factions>99999</Factions>
+
+<MailGrey>False</MailGrey>
+<MailWhite>True</MailWhite>
+<MailGreen>False</MailGreen>
+<MailBlue>True</MailBlue>
+<MailPurple>True</MailPurple>
+
+<SellGrey>True</SellGrey>
+<SellWhite>false</SellWhite>
+<SellGreen>True</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+	<Vendor Nav="Fly" Name="Pyxni Pennypocket" Entry="58414" Type="Repair" X="3085.32" Y="4849.04" Z="128.33" />
+</Vendors>
+
+<Mailboxes>
+</Mailboxes>
+
+<AvoidMobs>
+<Mob Name="Wor'var Guardian" Entry="89190" />
+<Mob Name="Warsong Marauder" Entry="79708" />
+<Mob Name="Highmaul Arcanist" Entry="79223" />
+</AvoidMobs>
+
+
+<Blackspots>
+<Blackspot Name="Wor'Var" X="3229.455" Y="4602.967" Z="142.5436" Radius="72.40962" />
+</Blackspots>
+
+<TargetMinLevel>85</TargetMinLevel> // Target minimum level mob
+<TargetMaxLevel>101</TargetMaxLevel> // Target maximum level mob
+
+   <GrindArea>
+
+       <Factions>16,2000,2753,1999,189</Factions>
+<Hotspots>
+<Hotspot X="3401.375" Y="4666.383" Z="135.097" />
+<Hotspot X="3339.654" Y="4626.236" Z="138.0714" />
+<Hotspot X="3358.94" Y="4716.19" Z="129.7303" />
+<Hotspot X="3309.006" Y="4754.698" Z="123.9397" />
+<Hotspot X="3271.243" Y="4755.655" Z="119.6621" />
+<Hotspot X="3276" Y="4827.612" Z="112.3778" />
+<Hotspot X="3212.202" Y="4799.209" Z="121.8717" />
+<Hotspot X="3178.935" Y="4754.546" Z="126.1234" />
+<Hotspot X="3157.891" Y="4717.232" Z="126.5353" />
+<Hotspot X="3137.374" Y="4669.43" Z="133.229" />
+<Hotspot X="3084.612" Y="4602.68" Z="141.773" />
+<Hotspot X="3093.412" Y="4529.15" Z="135.3932" />
+<Hotspot X="3034.884" Y="4474.43" Z="144.5187" />
+<Hotspot X="3045.041" Y="4445.235" Z="148.3727" />
+<Hotspot X="2971.293" Y="4472.364" Z="145.712" />
+<Hotspot X="2959.986" Y="4536.97" Z="157.4907" />
+<Hotspot X="2915.993" Y="4569.183" Z="164.9243" />
+<Hotspot X="2879.29" Y="4589.86" Z="164.9943" />
+<Hotspot X="2833.186" Y="4585.763" Z="156.014" />
+<Hotspot X="2861.636" Y="4644.957" Z="151.8259" />
+<Hotspot X="2876.479" Y="4715.208" Z="146.8774" />
+<Hotspot X="2807.504" Y="4748.127" Z="161.6012" />
+<Hotspot X="2805.807" Y="4834.544" Z="159.8541" />
+<Hotspot X="2821.859" Y="4931.894" Z="155.4348" />
+<Hotspot X="2870.397" Y="4991.169" Z="141.8778" />
+<Hotspot X="2914.001" Y="5007.674" Z="130.2522" />
+<Hotspot X="2968.461" Y="5094.949" Z="116.1422" />
+<Hotspot X="3013.474" Y="5140.743" Z="105.418" />
+<Hotspot X="3088.355" Y="5149.628" Z="92.96337" />
+<Hotspot X="3138.711" Y="5078.597" Z="86.10612" />
+<Hotspot X="3175.921" Y="5003.873" Z="90.77986" />
+<Hotspot X="3213.794" Y="4950.45" Z="94.04034" />
+<Hotspot X="3271.146" Y="4904.012" Z="113.6158" />
+<Hotspot X="3334.165" Y="4905.198" Z="114.1062" />
+<Hotspot X="3403.65" Y="4867.899" Z="105.8698" />
+</Hotspots>
+   </GrindArea>
+</HBProfile>

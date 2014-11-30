@@ -1,0 +1,140 @@
+<!-- This profile was created by AndyMeps - 3rd April 2011 -->
+<!-- Version 0.3 -->
+<!-- Last Updated: 22:00 - 6th April 2011 -->
+
+<HBProfile>
+   <Name>[A] AndyMeps Deepholm Herbing</Name>
+   <MinDurability>0.4</MinDurability>
+   <MinFreeBagSlots>1</MinFreeBagSlots>
+  
+   <MinLevel>83</MinLevel>
+   <MaxLevel>86</MaxLevel>
+   <Factions>99999</Factions>
+  
+   <MailGrey>False</MailGrey>
+   <MailWhite>True</MailWhite>
+   <MailGreen>True</MailGreen>
+   <MailBlue>True</MailBlue>
+   <MailPurple>True</MailPurple>
+  
+   <SellGrey>True</SellGrey>
+   <SellWhite>True</SellWhite>
+   <SellGreen>False</SellGreen>
+   <SellBlue>False</SellBlue>
+   <SellPurple>False</SellPurple>
+    
+   <Vendors>
+
+	<!-- A Working vendor?! In Deepholm?! HOLY CRAP! -->
+	<Vendor Name="Rocky Cliffedge" Entry="44972" Type="Repair" X="666.938" Y="1779.79" Z="341" />
+		
+	<!-- These vendors don't work at the moment!
+	<Vendor Name="Ibdil the Mender" Entry="45407" Type="Repair" X="2330.45" Y="154.217" Z="179.1465" />
+	<Vendor Name="Hegrid Blazewing" Entry="45361" Type="Food" X="21.7257" Y="-280.523" Z="201.2802" />
+	<Vendor Name="Earthmender Doros" Entry="45363" Type="Repair" X="54.92382" Y="-274.9449" Z="208.611" />
+	-->
+
+   </Vendors>
+
+   <Mailboxes>
+	  <!-- Horde Side, doesn't work <Mailbox X="1091.139" Y="434.032" Z="-45.92949" /> -->
+	  <!-- Alliance Side, doesn't work <Mailbox X="1051.93" Y="637.3112" Z="-45.93304" /> -->
+   </Mailboxes> 
+
+   <Blackspots>
+	  <Blackspot X="2149.426" Y="-170.8259" Z="55.34034" Radius="20.108893" />
+	  <Blackspot X="329.3202" Y="1039.551" Z="57.44652" Radius="20.630019" />
+   </Blackspots>
+
+   <Hotspots>
+	<!-- The Pale Roost (48,14) -->
+	  <Hotspot X="2316.698" Y="584.7933" Z="219.8695" />
+	  <Hotspot X="2354.152" Y="835.5449" Z="198.8356" />
+	  <Hotspot X="2214.518" Y="997.4781" Z="184.9709" />
+	  <Hotspot X="2220.985" Y="1143.543" Z="186.4354" />
+	  <Hotspot X="2165.838" Y="1224.184" Z="185.1367" />
+	  <Hotspot X="2034.267" Y="1409.621" Z="194.5237" />
+	<!-- Needlerock Chasm (29,29) -->
+	  <Hotspot X="1804.639" Y="1595.275" Z="204.0767" />
+	  <Hotspot X="1496.293" Y="1733.861" Z="204.8995" />
+	<!-- Shuddering Spires (32, 44) -->
+	  <Hotspot X="1298.472" Y="1425.047" Z="171.2191" />
+	  <Hotspot X="908.788" Y="1462.096" Z="102.4137" />
+	<!-- Going Up! -->
+	  <Hotspot X="847.3677" Y="1553.95" Z="169.0656" />
+	  <Hotspot X="835.8608" Y="1578.424" Z="207.7351" />
+	  <Hotspot X="808.9666" Y="1639.597" Z="291.6282" />
+	<!-- Fractured Front (27, 59) -->
+	  <Hotspot X="788.3082" Y="1679.248" Z="325.5538" />
+	  <Hotspot X="745.8798" Y="1767.407" Z="348.8749" />
+	  <Hotspot X="693.8016" Y="1798.195" Z="347.4805" />
+	<!-- Stonehearth (28, 69) -->
+	  <Hotspot X="490.3083" Y="1647.297" Z="367.6615" />
+	  <Hotspot X="267.5366" Y="1442.988" Z="362.7109" />
+	<!-- The Quaking Fields (34, 76) -->
+	  <Hotspot X="197.5103" Y="1293.447" Z="339.8303" />
+	  <Hotspot X="349.6413" Y="1257.621" Z="320.3444" />
+	<!-- Shuddering Spires (35, 60) -->
+	  <Hotspot X="707.4203" Y="1286.193" Z="348.7721" />
+	  <Hotspot X="945.3536" Y="1134.66" Z="335.0172" />
+	  <Hotspot X="1444.697" Y="1183.466" Z="277.0764" />
+	  <Hotspot X="1691.954" Y="1018.2" Z="286.1806" />
+	  <Hotspot X="1505.419" Y="875.7133" Z="268.2651" />
+	<!-- Jagged Wastes (50, 34) -->
+	  <Hotspot X="1628.099" Y="484.5513" Z="147.1352" />
+	  <Hotspot X="1461.814" Y="175.3368" Z="71.69781" />
+	  <Hotspot X="1021.063" Y="-57.80577" Z="27.46724" />
+	  <Hotspot X="685.3518" Y="-266.705" Z="23.97392" />
+	  <Hotspot X="563.8004" Y="-93.61175" Z="28.92117" />
+	  <Hotspot X="592.7125" Y="72.37757" Z="58.89526" />
+	  <Hotspot X="559.662" Y="288.674" Z="34.9748" />
+	  <Hotspot X="505.9038" Y="584.3751" Z="39.2935" />
+	  <Hotspot X="628.4647" Y="714.3485" Z="54.95354" />
+	  <Hotspot X="775.0869" Y="1029.45" Z="71.66903" />
+	<!-- Masters' Gate (40, 72) -->
+	  <Hotspot X="357.1264" Y="1020.227" Z="120.8484" />
+	<!-- Avalanchion's Vault (44, 81) -->
+	  <Hotspot X="54.70851" Y="800.1859" Z="257.9104" />
+	  <Hotspot X="-82.10881" Y="652.6568" Z="254.3349" />
+	  <Hotspot X="-84.00346" Y="201.5238" Z="226.4491" />
+	  <Hotspot X="-30.3069" Y="-76.14023" Z="240.872" />
+	<!-- Twilight Overlook (63, 83) -->
+	  <Hotspot X="-17.30942" Y="-100.1887" Z="240.1407" />
+	  <Hotspot X="36.1064" Y="-239.244" Z="236.4128" />
+	<!-- Abyssion's Lair (70, 76) -->
+	  <Hotspot X="205.9345" Y="-536.7075" Z="210.3614" />
+	  <Hotspot X="281.3314" Y="-598.0139" Z="214.275" />
+	<!-- Lower Silvermarsh (71, 69) -->
+	  <Hotspot X="421.6039" Y="-570.517" Z="208.0041" />
+	  <Hotspot X="526.9894" Y="-581.6693" Z="194.8652" />
+	<!-- Upper Silvermarsh (72, 64) -->
+	  <Hotspot X="635.4594" Y="-641.4644" Z="187.0394" />
+	  <Hotspot X="791.1332" Y="-635.4374" Z="204.865" />
+	  <Hotspot X="920.366" Y="-634.9447" Z="302.6575" />
+	<!-- Crimson Expanse (72, 53) -->
+	  <Hotspot X="988.2189" Y="-617.3072" Z="316.7232" />
+	  <Hotspot X="1292.288" Y="-542.2165" Z="325.4378" />
+	  <Hotspot X="1323.237" Y="-833.1007" Z="329.373" />
+	  <Hotspot X="1602.004" Y="-729.168" Z="325.8169" />
+	  <Hotspot X="1793.457" Y="-674.3329" Z="300.1293" />
+	<!-- Verlok Stand (68, 23) -->
+	  <Hotspot X="1998.933" Y="-390.8835" Z="269.3126" />
+	  <Hotspot X="2019.227" Y="-309.9312" Z="253.2174" />
+	<!-- Halcyon Egress (64, 25) -->
+	  <Hotspot X="1958.166" Y="-198.9481" Z="226.8753" />
+	<!-- Twilight Precipice (63, 32) -->
+	  <Hotspot X="1710.813" Y="-179.9037" Z="181.8657" />
+	  <Hotspot X="1565.838" Y="118.1059" Z="153.3938" />
+	  <Hotspot X="1541.323" Y="162.6775" Z="143.4442" />
+	<!-- Scoured Reach (53, 34) -->
+	  <Hotspot X="1645.282" Y="341.2594" Z="123.146" />
+	  <Hotspot X="1876.932" Y="289.2059" Z="159.9717" />
+	  <Hotspot X="2051.348" Y="430.9563" Z="171.7509" />
+	<!-- Shuddering Spires (47, 27) -->
+	  <Hotspot X="1880.644" Y="664.7419" Z="165.011" />
+	  <Hotspot X="1866.072" Y="745.6938" Z="151.4544" />
+	  <Hotspot X="1900.301" Y="834.8989" Z="144.5992" />
+	  <Hotspot X="2087.401" Y="713.5599" Z="160.2618" />
+	<!-- Back to top! -->
+   </Hotspots>
+</HBProfile>

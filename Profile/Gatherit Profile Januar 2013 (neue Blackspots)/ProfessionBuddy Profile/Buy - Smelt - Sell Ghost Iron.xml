@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Professionbuddy>
+  <SubRoutine SubRoutineName="MoveToForge">
+    <MoveToAction Location="2055.922, -4825.065, 27.47281" MoveType="Location" Pathing="Navigator" Entry="0" />
+  </SubRoutine>
+  <SubRoutine SubRoutineName="Smelt">
+    <CallSubRoutine SubRoutineName="MoveToForge" />
+    <While Condition="HasMats(102165)" IgnoreCanRun="True">
+      <CastSpellAction RepeatType="Specific" Repeat="1" Entry="102165" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </While>
+  </SubRoutine>
+  <BuyItemFromAhAction ItemListType="Item" ItemID="72092" MaxBuyout="3g5s0c" Amount="1000" BuyAdditively="True" AutoFindAh="True" BidOnItem="False" Location="0, 0, 0" />
+  <While Condition="HasNewMail" IgnoreCanRun="True">
+    <GetMailAction GetMailType="AllItems" ItemID="" CheckNewMail="True" MinFreeBagSlots="3" AutoFindMailBox="True" Location="0, 0, 0" />
+    <CallSubRoutine SubRoutineName="MoveToForge" />
+    <CallSubRoutine SubRoutineName="Smelt" />
+    <SellItemOnAhAction Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" UseCategory="False" RunTime="_12_Hours" AmountType="Amount" ItemID="72096" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" StackSize="20" IgnoreStackSizeBelow="1" Amount="10" BidPrecent="95" UndercutPrecent="0.1" AutoFindAh="True" PostIfBelowMinBuyout="True" Location="0,0,0" />
+  </While>
+</Professionbuddy>

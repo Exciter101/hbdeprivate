@@ -1,0 +1,66 @@
+<HBProfile>
+<Name>Onyx Egg</Name>
+  <MinDurability>0.4</MinDurability>
+  <MinFreeBagSlots>1</MinFreeBagSlots>
+
+  <MinLevel>80</MinLevel>
+  <MaxLevel>95</MaxLevel>
+  <MinMobLevel>70</MinMobLevel>
+  <MaxMobLevel>71</MaxMobLevel>
+
+  <MailGrey>false</MailGrey>
+  <MailWhite>false</MailWhite>
+  <MailGreen>true</MailGreen>
+  <MailBlue>true</MailBlue>
+  <MailPurple>true</MailPurple>
+
+  <SellGrey>True</SellGrey>
+  <SellWhite>True</SellWhite>
+  <SellGreen>false</SellGreen>
+  <SellBlue>false</SellBlue>
+  <SellPurple>false</SellPurple>
+
+  <Protecteditems>
+   
+</Protecteditems>
+
+  <Vendors>
+   
+  </Vendors>
+
+  <Mailboxes>
+  </Mailboxes>
+  <Grindarea>
+
+    <Blackspots>
+    </Blackspots>
+
+    <Factions> </Factions>
+    <AvoidMobs>
+     
+    </AvoidMobs>
+<Mailboxes>
+</Mailboxes>
+
+<Blackspots>
+</Blackspots>
+    
+<Hotspots>
+<Hotspot X="2619.712" Y="-2948.718" Z="152.699" />
+<Hotspot X="2578.186" Y="-3009.173" Z="105.2109" />
+<Hotspot X="2561.662" Y="-3142.652" Z="207.9642" />
+<Hotspot X="2416.697" Y="-3134.216" Z="89.81554" />
+<Hotspot X="2327.235" Y="-3275.7" Z="56.47048" />
+<Hotspot X="2224.849" Y="-3373.059" Z="45.38587" />
+<Hotspot X="2261.845" Y="-3221.384" Z="198.5012" />
+<Hotspot X="2070.277" Y="-3195.101" Z="238.6103" />
+<Hotspot X="2125.622" Y="-3109.341" Z="90.43952" />
+<Hotspot X="2393.091" Y="-3116.861" Z="89.2148" />
+<Hotspot X="2398.671" Y="-3002.363" Z="65.15819" />
+<Hotspot X="2133.472" Y="-2976.165" Z="78.74273" />
+<Hotspot X="2094.948" Y="-2886.264" Z="141.9125" />
+<Hotspot X="2302.779" Y="-2898.976" Z="325.2379" />
+<Hotspot X="2501.366" Y="-2923.527" Z="77.85715" />
+</Hotspots>
+</Grindarea>
+</HBProfile>

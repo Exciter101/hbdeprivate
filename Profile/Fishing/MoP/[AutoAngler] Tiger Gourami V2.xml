@@ -1,0 +1,85 @@
+<HBProfile>
+
+<Name>Tiger Gourami - Gatherit</Name>
+<MinDurability>0.4</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+<MinLevel>1</MinLevel>
+<MaxLevel>91</MaxLevel>
+<Factions>99999</Factions>
+
+<MailGrey>false</MailGrey>
+<MailWhite>false</MailWhite>
+<MailGreen>false</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>false</SellGrey>
+<SellWhite>false</SellWhite>
+<SellGreen>false</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+</Vendors>
+
+<Mailboxes>
+<Mailbox X="4378.692" Y="922.5245" Z="107.4981" />
+</Mailboxes>
+
+<Blackspots>
+<Blackspot X="4430.758" Y="1367.277" Z="383.3853" Radius="30" />
+<Blackspot X="4434.107" Y="1360.93" Z="385.4907" Radius="30" />
+<Blackspot X="4427.816" Y="1372.853" Z="381.5359" Radius="30" />
+<Blackspot X="4423.758" Y="1380.542" Z="378.9854" Radius="30" />
+<Blackspot X="4407.063" Y="1381.881" Z="373.8753" Radius="30" />
+<Blackspot X="4397.583" Y="1360.335" Z="382.3298" Radius="30" />
+<Blackspot X="4420.81" Y="1381.476" Z="379.8723" Radius="30" />
+</Blackspots>
+
+<Hotspots>
+<Hotspot X="4441.209" Y="1098.925" Z="121.1863" />
+<Hotspot X="4407.056" Y="1094.084" Z="143.4571" />
+<Hotspot X="4373.482" Y="1086.099" Z="164.3095" />
+<Hotspot X="4369.002" Y="1097.121" Z="222.553" />
+<Hotspot X="4362.825" Y="1113.811" Z="278.3497" />
+<Hotspot X="4337.33" Y="1150.378" Z="323.0183" />
+<Hotspot X="4303.215" Y="1182.108" Z="315.0823" />
+<Hotspot X="4345.122" Y="1209.862" Z="324.5933" />
+<Hotspot X="4388.737" Y="1243.622" Z="306.7458" />
+<Hotspot X="4434.001" Y="1274.927" Z="302.55" />
+<Hotspot X="4466.776" Y="1313.394" Z="318.9513" />
+<Hotspot X="4460.999" Y="1338.195" Z="370.2814" />
+<Hotspot X="4445.809" Y="1387.29" Z="384.728" />
+<Hotspot X="4403.3" Y="1402.554" Z="418.6315" />
+<Hotspot X="4356.579" Y="1407.243" Z="413.4472" />
+<Hotspot X="4394.725" Y="1421.57" Z="419.968" />
+<Hotspot X="4445.051" Y="1432.176" Z="390.9553" />
+<Hotspot X="4477.992" Y="1407.921" Z="388.0612" />
+<Hotspot X="4495.608" Y="1383.409" Z="350.328" />
+<Hotspot X="4523.767" Y="1357.025" Z="302.4126" />
+<Hotspot X="4496.027" Y="1308.717" Z="291.2888" />
+<Hotspot X="4204.307" Y="343.5922" Z="68.97691" />
+<Hotspot X="4024.828" Y="284.8972" Z="210.1911" />
+<Hotspot X="3637.752" Y="117.2894" Z="416.3409" />
+<Hotspot X="3567.04" Y="329.1126" Z="496.3021" />
+<Hotspot X="3556.503" Y="452.1563" Z="536.9586" />
+<Hotspot X="3529.477" Y="748.2691" Z="534.7062" />
+<Hotspot X="3351.65" Y="619.0142" Z="538.1498" />
+<Hotspot X="3645.954" Y="167.8879" Z="416.9116" />
+<Hotspot X="3849.52" Y="294.144" Z="403.1898" />
+<Hotspot X="4006.019" Y="278.5762" Z="239.2232" />
+<Hotspot X="4295.974" Y="1176.535" Z="336.2527" />
+<Hotspot X="4238.258" Y="1277.602" Z="446.9893" />
+<Hotspot X="4218.501" Y="370.9334" Z="39.46349" />
+<Hotspot X="4159.079" Y="92.13892" Z="23.40023" />
+<Hotspot X="4360.317" Y="91.80642" Z="19.52204" />
+<Hotspot X="4455.181" Y="263.4107" Z="12.467" />
+<Hotspot X="4561.696" Y="299.277" Z="32.01853" />
+<Hotspot X="4549.825" Y="213.695" Z="26.67163" />
+<Hotspot X="4456.962" Y="103.8879" Z="12.45322" />
+<Hotspot X="4529.061" Y="79.21933" Z="16.00725" />
+<Hotspot X="4605.04" Y="42.38981" Z="14.84618" />
+<Hotspot X="4680.56" Y="57.29989" Z="18.07864" />
+</Hotspots>
+</HBProfile>
