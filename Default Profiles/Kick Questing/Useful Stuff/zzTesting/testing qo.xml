@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <HBProfile>
-	<Name>testing qo ($Rev: 3769 $)</Name>
+	<Name>testing qo ($Rev: 3774 $)</Name>
 	<MinLevel>1</MinLevel>
 	<MaxLevel>200</MaxLevel>
 	
@@ -12,9 +12,6 @@
 	
 	
 
-	
-	
-	
 
 	<QuestOrder>
 
