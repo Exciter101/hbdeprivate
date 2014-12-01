@@ -1,6 +1,6 @@
 <HBProfile xsi:noNamespaceSchemaLocation="../Schemas/QuestProfileSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <!-- Developed by Mordd and Kickazz006 / Revised by Nesox/Bambam922  -->
-    <Name>Death Knight Starting Zone ($Rev: 3604 $)</Name>
+    <Name>Death Knight Starting Zone ($Rev: 3778 $)</Name>
     <MinLevel>55</MinLevel>
     <MaxLevel>1001</MaxLevel>
     <MinDurability>0.3</MinDurability>
@@ -24,8 +24,8 @@
     <TargetingDistance>25</TargetingDistance>
 
     <!-- File Version Info
-       ($Rev: 3604 $)
-       ($Date: 2014-11-17 23:17:27 +0100 (Mo, 17 Nov 2014) $)
+       ($Rev: 3778 $)
+       ($Date: 2014-12-01 09:10:11 +0100 (Mo, 01 Dez 2014) $)
   -->
 
     <!-- Profile Testing Info
@@ -901,7 +901,7 @@
         </If>
         <If Condition="HasQuest(13189)" >
             <CustomBehavior File="NoCombatMoveTo" X="1669.178" Y="-4343.229" Z="28.36206" />
-            <TurnIn QuestName="Warchief's Blessing" QuestId="13189" TurnInName="Garrosh Hellscream" TurnInId="39605" X="1669.178" Y="-4343.229" Z="28.36206" />
+            <TurnIn QuestName="Warchief's Blessing" QuestId="13189" TurnInName="Vol'jin" TurnInId="86832" X="1669.178" Y="-4343.229" Z="28.36206" />
             <CustomBehavior File="InteractWith" MobId="6929" InteractByGossipOptions="1"
                 X="1573.266" Y="-4439.158" Z="16.05683" NonCompeteDistance="0" />
             <CustomBehavior File="RunMacro" Macro="/click StaticPopup1Button1" WaitTime="5000"/>
