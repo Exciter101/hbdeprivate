@@ -36,7 +36,7 @@ namespace Loader
                 FileInfo f = new FileInfo(SpecialEditionRuntimeRoot);
                 long s1 = f.Length;
 
-                if (s1 != 663552)//Version 3.68 647168
+                if (s1 != 647168)//Version 3.68 647168
                 {
                     try
                     {

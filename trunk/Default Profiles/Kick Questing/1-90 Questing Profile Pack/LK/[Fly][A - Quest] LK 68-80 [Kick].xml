@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <HBProfile xsi:noNamespaceSchemaLocation="../Schemas/QuestProfileSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <!-- Developed by Kickazz006 -->
-    <Name>[Fly][A - Quest] 68-80 [Kick] ($Rev: 3675 $)</Name>
+    <Name>[Fly][A - Quest] 68-80 [Kick] ($Rev: 3793 $)</Name>
 
     <MinLevel>68</MinLevel>
     <MaxLevel>1001</MaxLevel>
@@ -3915,7 +3915,7 @@
             <If Condition="HasQuest(11571) &amp;&amp; !IsQuestCompleted(11571)">
                 <CustomBehavior File="FlyTo" DestName="Objective" X="4234.489" Y="6116.239" Z="0.1433038" />
                 <CustomBehavior File="ForcedDismount" />
-                <While Condition="!HasItem(34623)">
+                <While Condition="!HasItem(34623) &amp;&amp; !IsQuestCompleted(11571)">
                     <CustomBehavior File="InteractWith" QuestId="11571" MobId="25226" Range="1" CollectionDistance="500"
                                     MovementBy="ClickToMoveOnly" X="4221.599" Y="6097.662" Z="-120.861" />
                     <CustomBehavior QuestId="11571" File="WaitTimer" WaitTime="2000" />
