@@ -9,30 +9,15 @@ using Styx.TreeSharp;
 using Styx.WoWInternals.WoWObjects;
 using System.Windows.Forms;
 
-#region methods
-using Form1 = Druid.DGUI.Form1;
-using HKM = Druid.Helpers.HotkeyManager;
-using S = Druid.DSpells.SpellCasts;
-using CL = Druid.Handlers.CombatLogEventArgs;
-using EH = Druid.Handlers.EventHandlers;
-using L = Druid.Helpers.Logs;
-using T = Druid.Helpers.targets;
-using U = Druid.Helpers.Unit;
-using UI = Druid.Helpers.UseItems;
-using P = Druid.DSettings.DruidPrefs;
-using M = Druid.Helpers.Movement;
-using I = Druid.Helpers.Interrupts;
-#endregion
-
-namespace Druid.DSettings
+namespace Kitty
 {
-    class DruidPrefs : Styx.Helpers.Settings
+    class KittySettings : Settings
     {
         private static LocalPlayer Me { get { return StyxWoW.Me; } }
-        public static readonly DruidPrefs myPrefs = new DruidPrefs();
+        public static readonly KittySettings myPrefs = new KittySettings();
         
-        public DruidPrefs() 
-            :base(Path.Combine(Utilities.AssemblyDirectory, string.Format(@"Routines/Settings/Druid/{0}-DruidSettings-{1}.xml", StyxWoW.Me.RealmName, StyxWoW.Me.Name)))
+        public KittySettings() 
+            :base(Path.Combine(Utilities.AssemblyDirectory, string.Format(@"Routines/Settings/Druid/{0}-KittySettings-{1}.xml", StyxWoW.Me.RealmName, StyxWoW.Me.Name)))
         {
         }
 
@@ -91,6 +76,30 @@ namespace Druid.DSettings
             Z
         }
 
+        public enum KeyModifier
+        {
+            Alt,
+            Control,
+            Shift,
+            Windows
+        }
+
+        [Setting, DefaultValue(KeyModifier.Alt)]
+        public Keys Modkey { get; set; }
+
+        [Setting, DefaultValue("Alt")]
+        public string ModifkeyPause { get; set; }
+
+        [Setting, DefaultValue("Alt")]
+        public string ModifkeyCooldowns { get; set; }
+
+        [Setting, DefaultValue("Alt")]
+        public string ModifkeyStopAoe { get; set; }
+
+        [Setting, DefaultValue("Alt")]
+        public string ModifkeyPlayManual { get; set; }
+
+
         [Setting, DefaultValue(KeyPress.None)]
         public Keys KeyStopAoe { get; set; }
 
@@ -124,8 +133,14 @@ namespace Druid.DSettings
         [Setting, DefaultValue(1)]
         public int Trinket1 { get; set; }
 
+        [Setting, DefaultValue(false)]
+        public bool Trinket1Use { get; set; }
+
         [Setting, DefaultValue(1)]
         public int Trinket2 { get; set; }
+
+        [Setting, DefaultValue(false)]
+        public bool Trinket2Use { get; set; }
 
         [Setting, DefaultValue(45)]
         public int PercentTrinket1HP { get; set; }
@@ -133,20 +148,23 @@ namespace Druid.DSettings
         [Setting, DefaultValue(45)]
         public int PercentTrinket1Mana { get; set; }
 
+        [Setting, DefaultValue(25)]
+        public int PercentTrinket1Energy { get; set; }
+
         [Setting, DefaultValue(45)]
         public int PercentTrinket2HP { get; set; }
 
         [Setting, DefaultValue(45)]
         public int PercentTrinket2Mana { get; set; }
 
+        [Setting, DefaultValue(25)]
+        public int PercentTrinket2Energy { get; set; }
+
         [Setting, DefaultValue(0)]
         public int PercentCenarionWard { get; set; }
 
-        [Setting, DefaultValue(0)]
+        [Setting, DefaultValue(35)]
         public int PercentSwitchBearForm { get; set; }
-
-        [Setting, DefaultValue(1)]
-        public int Gloves { get; set; }
 
         [Setting, DefaultValue(3)]
         public int Racial { get; set; }
@@ -157,7 +175,7 @@ namespace Druid.DSettings
         [Setting, DefaultValue(76084)]
         public int RaidFlaskKind { get; set; }
 
-        [Setting, DefaultValue(0)]
+        [Setting, DefaultValue(95)]
         public int PercentRejuCombat { get; set; }
 
         [Setting, DefaultValue(0)]
@@ -181,7 +199,7 @@ namespace Druid.DSettings
         [Setting, DefaultValue(50)]
         public int PercentDavageDefense { get; set; }
 
-        [Setting, DefaultValue(85)]
+        [Setting, DefaultValue(40)]
         public int PercentFrenziedRegeneration { get; set; }
 
         [Setting, DefaultValue(false)]
@@ -198,6 +216,9 @@ namespace Druid.DSettings
 
         [Setting, DefaultValue(false)]
         public bool FlaskAlchemy { get; set; }
+
+        [Setting, DefaultValue(false)]
+        public bool FlaskOraliusCrystal { get; set; }
 
         [Setting, DefaultValue(false)]
         public bool GoLowbieCat { get; set; }
@@ -223,6 +244,10 @@ namespace Druid.DSettings
         [Setting, DefaultValue(60)]
         public int ShredEnergy { get; set; }
 
+        [Setting, DefaultValue(false)]
+        public bool PullProwlAndRake { get; set; }
 
+        [Setting, DefaultValue(false)]
+        public bool PullProwlAndShred { get; set; }
     }
 }

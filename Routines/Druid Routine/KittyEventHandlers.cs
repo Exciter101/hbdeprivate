@@ -11,24 +11,11 @@ using System.Collections.Generic;
 using System.Windows.Media;
 
 
-#region methods
-using Form1 = Druid.DGUI.Form1;
-using HKM = Druid.Helpers.HotkeyManager;
-using S = Druid.DSpells.SpellCasts;
-using CL = Druid.Handlers.CombatLogEventArgs;
-using EH = Druid.Handlers.EventHandlers;
-using L = Druid.Helpers.Logs;
-using T = Druid.Helpers.targets;
-using U = Druid.Helpers.Unit;
-using UI = Druid.Helpers.UseItems;
-using P = Druid.DSettings.DruidPrefs;
-using M = Druid.Helpers.Movement;
-using I = Druid.Helpers.Interrupts;
-#endregion
+
 
 #endregion
 
-namespace Druid.Handlers
+namespace Kitty
 {
     public static class EventHandlers
     {

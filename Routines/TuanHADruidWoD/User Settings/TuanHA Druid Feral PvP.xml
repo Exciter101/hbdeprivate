@@ -5,12 +5,12 @@
   <Barkskin>True</Barkskin>
   <BarkskinHP>70</BarkskinHP>
   <BearForm>True</BearForm>
-  <BearFormAlways>30</BearFormAlways>
+  <BearFormAlways>50</BearFormAlways>
   <Berserk>True</Berserk>
   <BerserkCD>False</BerserkCD>
   <BerserkBurst>True</BerserkBurst>
   <CatForm>True</CatForm>
-  <CatFormAlways>40</CatFormAlways>
+  <CatFormAlways>70</CatFormAlways>
   <CelestialAlignment>True</CelestialAlignment>
   <CelestialAlignmentCD>False</CelestialAlignmentCD>
   <CelestialAlignmentBurst>False</CelestialAlignmentBurst>
@@ -44,9 +44,9 @@
   <HealingTouchNS>False</HealingTouchNS>
   <HealingTouchNSHP>40</HealingTouchNSHP>
   <HealMe>True</HealMe>
-  <HealMeHP>80</HealMeHP>
+  <HealMeHP>90</HealMeHP>
   <HealFriend>True</HealFriend>
-  <HealFriendHP>70</HealFriendHP>
+  <HealFriendHP>80</HealFriendHP>
   <Hibernate>False</Hibernate>
   <Hurricane>False</Hurricane>
   <IncarnationCatBear>True</IncarnationCatBear>

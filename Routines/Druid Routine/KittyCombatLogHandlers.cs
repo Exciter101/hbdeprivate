@@ -1,40 +1,17 @@
-﻿#region Revision Info
-
-// This file is part of Singular - A community driven Honorbuddy CC
-// $Author: apoc $
-// $Date: 2012-09-05 16:16:37 +0000 (Mi, 05 Sep 2012) $
-// $HeadURL: https://subversion.assembla.com/svn/singular_v3/trunk/Singular/Utilities/CombatLog.cs $
-// $LastChangedBy: apoc $
-// $LastChangedDate: 2012-09-05 16:16:37 +0000 (Mi, 05 Sep 2012) $
-// $LastChangedRevision: 653 $
-// $Revision: 653 $
-
-#endregion
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Styx.WoWInternals;
 using Styx.WoWInternals.WoWObjects;
 using Styx.Common;
 using System.Windows.Media;
+using Styx;
+using Styx.CommonBot;
+using System;
 
-#region methods
-using Form1 = Druid.DGUI.Form1;
-using HKM = Druid.Helpers.HotkeyManager;
-using S = Druid.DSpells.SpellCasts;
-using CL = Druid.Handlers.CombatLogEventArgs;
-using EH = Druid.Handlers.EventHandlers;
-using L = Druid.Helpers.Logs;
-using T = Druid.Helpers.targets;
-using U = Druid.Helpers.Unit;
-using UI = Druid.Helpers.UseItems;
-using P = Druid.DSettings.DruidPrefs;
-using M = Druid.Helpers.Movement;
-using I = Druid.Helpers.Interrupts;
-#endregion
 
-namespace Druid.Handlers
+
+namespace Kitty
 {
     internal class CombatLogEventArgs : LuaEventArgs
     {
@@ -57,6 +34,13 @@ namespace Druid.Handlers
                     IsNotInLineOfSight = true;
                 }
                 else { IsNotInLineOfSight = false; }
+                if (errorLog == "YOUR TARGET IS DEAD" && StyxWoW.Me.CurrentTarget != null)
+                {
+                    
+                    Blacklist.Add(StyxWoW.Me.CurrentTarget, BlacklistFlags.All, TimeSpan.FromMinutes(3));
+                    StyxWoW.Me.ClearTarget();
+                }
+
             }
         }
         #endregion

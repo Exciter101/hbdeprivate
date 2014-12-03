@@ -1,379 +1,17 @@
-﻿using System;
+﻿using Styx;
+using Styx.WoWInternals;
+using Styx.WoWInternals.WoWObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Styx;
-using Styx.CommonBot;
-using Styx.CommonBot.Routines;
-using Styx.Helpers;
-using Styx.TreeSharp;
-using Styx.WoWInternals;
-using Styx.WoWInternals.WoWObjects;
-using Action = Styx.TreeSharp.Action;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
-using Styx.Pathing;
-using Styx.Common;
-using System.Windows.Media;
-using Styx.CommonBot.Frames;
-using System.Diagnostics;
 
-#region methods
-using Form1 = Druid.DGUI.Form1;
-using HKM = Druid.Helpers.HotkeyManager;
-using S = Druid.DSpells.SpellCasts;
-using CL = Druid.Handlers.CombatLogEventArgs;
-using EH = Druid.Handlers.EventHandlers;
-using L = Druid.Helpers.Logs;
-using T = Druid.Helpers.targets;
-using U = Druid.Helpers.Unit;
-using UI = Druid.Helpers.UseItems;
-using P = Druid.DSettings.DruidPrefs;
-using M = Druid.Helpers.Movement;
-using I = Druid.Helpers.Interrupts;
-#endregion
-
-namespace Druid.Helpers
+namespace Kitty
 {
-    class targets
+    public class Targets
     {
-        private static LocalPlayer Me { get { return StyxWoW.Me; } }
-
-        #region FindTarget
-
-        private static List<WoWUnit> healMembers = new List<WoWUnit>();
-
-        #region REBIRTH
-        private static DateTime nextREBIRTHAllowed;
-
-        public static void SetNextREBIRTHAllowed()
-        {
-            nextREBIRTHAllowed = DateTime.Now + new TimeSpan(0, 0, 0, 0, 15000);
-        }
-        public static List<WoWPlayer> All
-        {
-            get
-            {
-                if (!StyxWoW.Me.GroupInfo.IsInParty)
-                    return new List<WoWPlayer>(); ;
-
-                return StyxWoW.Me.GroupInfo.RaidMembers.Where(p => p.HasRole(WoWPartyMember.GroupRole.Damage))
-                    .Select(p => p.ToPlayer())
-                    .Union(new[] { RaFHelper.Leader })
-                    .Where(p => p != null && p.IsDead)
-                    .Distinct()
-                    .ToList();
-            }
-        }
-        
-        public static List<WoWPlayer> Tanks
-        {
-            get
-            {
-                if (!StyxWoW.Me.GroupInfo.IsInParty)
-                    return new List<WoWPlayer>(); ;
-
-                return StyxWoW.Me.GroupInfo.RaidMembers.Where(p => p.HasRole(WoWPartyMember.GroupRole.Tank))
-                    .Select(p => p.ToPlayer())
-                    .Union(new[] { RaFHelper.Leader })
-                    .Where(p => p != null && p.IsDead)
-                    .Distinct()
-                    .ToList();
-            }
-        }
-
-        public static List<WoWPlayer> Healers
-        {
-            get
-            {
-                if (!StyxWoW.Me.GroupInfo.IsInParty)
-                    return new List<WoWPlayer>(); ;
-
-                return StyxWoW.Me.GroupInfo.RaidMembers.Where(p => p.HasRole(WoWPartyMember.GroupRole.Healer))
-                    .Select(p => p.ToPlayer()).Where(p => p != null && p.IsDead).ToList();
-
-            }
-        }
-        public static bool AnyTankNearby
-        {
-            get
-            {
-                return Tanks.Any(h => h.IsDead && h.Distance < 40);
-            }
-        }
-        public static bool AnyFocusNearby
-        {
-            get
-            {
-                return Me.FocusedUnit.IsDead && Me.FocusedUnit.Distance <= 39;
-            }
-        }
-        public static bool AnyHealersNearby
-        {
-            get
-            {
-                return Healers.Any(h => h.IsDead && h.Distance < 40);
-            }
-        }
-        public static bool AnyOneNearby
-        {
-            get
-            {
-                return All.Any(h => h.IsDead && h.Distance < 40);
-            }
-        }
-        public static Composite ResTank()
-        {
-            return
-                new Action(ret =>
-                {
-                    var ResTankTarget = Tanks.FirstOrDefault();
-                    string msg = StyxWoW.Me + " is ressing " + ResTankTarget;
-                    if (ResTankTarget != null && SpellManager.CanCast(S.REBIRTH))
-                    {
-                        SpellManager.Cast(S.REBIRTH, ResTankTarget);
-                        Logging.Write(Colors.Red, "Ressing Tank " + ResTankTarget.SafeName);
-                        Lua.DoString("RunMacroText(\"/s \"" + msg + "\"");
-                        SetNextREBIRTHAllowed();
-                        return RunStatus.Success;
-                    }
-                    return RunStatus.Failure;
-
-                });
-        }
-        public static Composite ResHealer()
-        {
-            return
-                new Action(ret =>
-                {
-
-                    var ResHealTarget = Healers.FirstOrDefault();
-                    string msg = StyxWoW.Me + " is ressing " + ResHealTarget;
-                    if (ResHealTarget != null && SpellManager.CanCast(S.REBIRTH))
-                    {
-                        SpellManager.Cast(S.REBIRTH, ResHealTarget);
-                        Logging.Write(Colors.Red, "Ressing Healer " + ResHealTarget.SafeName);
-                        Lua.DoString("RunMacroText(\"/s \"" + msg + "\"");
-                        SetNextREBIRTHAllowed();
-                        return RunStatus.Success;
-                    }
-                    return RunStatus.Failure;
-                });
-        }
-        public static Composite ResAll()
-        {
-            return
-                new Action(ret =>
-                {
-
-                    var ResAll = All.FirstOrDefault();
-                    string msg = StyxWoW.Me + " is ressing " + ResAll;
-                    if (ResAll != null && SpellManager.CanCast(S.REBIRTH))
-                    {
-                        SpellManager.Cast(S.REBIRTH, ResAll);
-                        Logging.Write(Colors.Red, "Ressing Healer " + ResAll.SafeName);
-                        Lua.DoString("RunMacroText(\"/s \"" + msg + "\"");
-                        SetNextREBIRTHAllowed();
-                        return RunStatus.Success;
-                    }
-                    return RunStatus.Failure;
-                });
-        }
-        public static Composite LookToRes()
-        {
-            return new Decorator(ret => P.myPrefs.ResPeople != 1 && !U.spellOnCooldown(S.REBIRTH) && nextREBIRTHAllowed <= DateTime.Now,
-                new Action(ret =>
-                {
-                    if (P.myPrefs.ResPeople == 2 && AnyTankNearby)
-                    {
-                        ResTank();
-                    }
-                    if (P.myPrefs.ResPeople == 3 && (AnyTankNearby || AnyHealersNearby))
-                    {
-                        if (AnyTankNearby)
-                        {
-                            ResTank();
-                        }
-                        if (AnyHealersNearby)
-                        {
-                            ResHealer();
-                        }
-                    }
-                    if (P.myPrefs.ResPeople == 4 && AnyFocusNearby)
-                    {
-                        ResFocus();
-                    }
-                    if (P.myPrefs.ResPeople == 5 && (AnyTankNearby || AnyHealersNearby || AnyOneNearby || AnyFocusNearby))
-                    {
-                        if (AnyTankNearby)
-                        {
-                            ResTank();
-                        }
-                        if (AnyHealersNearby)
-                        {
-                            ResHealer();
-                        }
-                        if (AnyFocusNearby)
-                        {
-                            ResFocus();
-                        }
-                        if (AnyOneNearby)
-                        {
-                            ResAll();
-                        }
-                    }
-                }));
-        }
-        public static Composite ResFocus()
-        {
-            return
-                new Action(ret =>
-                {
-
-                    var ResFocus = Me.FocusedUnit;
-                    string msg = StyxWoW.Me + " is ressing " + ResFocus;
-                    if (ResFocus != null && SpellManager.CanCast(S.REBIRTH))
-                    {
-                        SpellManager.Cast(S.REBIRTH, ResFocus);
-                        Logging.Write(Colors.Red, "Ressing Healer " + ResFocus.SafeName);
-                        Lua.DoString("RunMacroText(\"/s \"" + msg + "\"");
-                        SetNextREBIRTHAllowed();
-                        return RunStatus.Success;
-                    }
-                    return RunStatus.Failure;
-                });
-        }
-        #endregion
-
-        #region heal members
-        public static IEnumerable<WoWPlayer> HealMembers
-        {
-            get
-            {
-                WoWGuid[] guids =
-                    StyxWoW.Me.GroupInfo.RaidMemberGuids.Union(StyxWoW.Me.GroupInfo.PartyMemberGuids)
-                        .Union(new[] { StyxWoW.Me.Guid })
-                        .Distinct()
-                        .ToArray();
-
-                return (
-                    from p in ObjectManager.GetObjectsOfType<WoWPlayer>(true, true)
-                    where p.IsFriendly && guids.Any(g => g == p.Guid)
-                    select p).ToList();
-            }
-        }
-        public static IEnumerable<WoWPlayer> NearbyHealMembers
-        {
-            get
-            {
-                return HealMembers.Where(p => p.DistanceSqr <= 35 * 35)
-                    .OrderBy(p => p.HealthPercent)
-                    .ThenBy(p => p.Distance)
-                    .ToList();
-            }
-        }
-        public static WoWPlayer HealTarget
-        {
-            get
-            {
-                return NearbyHealMembers.FirstOrDefault();
-            }
-        }
-        #endregion members to heal
-
-
-        public static Composite FindTarget()
-        {
-            return
-                new Action(ret =>
-                {
-                    WoWUnit myTarget = ObjectManager.GetObjectsOfTypeFast<WoWUnit>().Where(u => u != null
-                        && u.IsAlive
-                        && u.Attackable
-                        && u.CanSelect
-                        && !u.IsFriendly
-                        && !u.IsCritter
-                        && !u.IsNonCombatPet
-                        && u.DistanceSqr <= 40 * 40)
-                        .OrderBy(u => u.IsPlayer)
-                        .ThenBy(u => u.Distance).FirstOrDefault();
-
-                    if (myTarget != null)
-                    {
-                        myTarget.Target();
-                        Logging.Write(Colors.PaleGreen, "Found new Target " + myTarget.Name);
-                    }
-                    return RunStatus.Failure;
-                });
-        }
-
-        public static WoWUnit RakeLessUnit
-        {
-            get
-            {
-                WoWUnit myTarget = ObjectManager.GetObjectsOfTypeFast<WoWUnit>().Where(u => u != null
-                        && !u.IsDead
-                        && !U.buffExists("Rake", u)
-                        && u.Combat && (u.IsTargetingMeOrPet || u.IsTargetingMyPartyMember || u.IsTargetingMyRaidMember || u.IsTargetingAnyMinion)
-                        && u.IsWithinMeleeRange)
-                        .OrderBy(u => u.Distance).FirstOrDefault();
-                if (myTarget != null)
-                {
-                    return myTarget;
-                }
-                return null;
-            }
-        }
-        #endregion
-
-        #region addCount
-        public static int MeleeAddCount
-        {
-            get
-            {
-                IEnumerable<WoWUnit> myTarget = ObjectManager.GetObjectsOfTypeFast<WoWUnit>().Where(p => U.ValidUnit(p) && p.Distance2D <= 10).ToList();
-                return myTarget.Count();
-            }
-        }
-        public static int RangeAddCount
-        {
-            get
-            {
-                IEnumerable<WoWUnit> myTarget = ObjectManager.GetObjectsOfTypeFast<WoWUnit>().Where(p => U.ValidUnit(p) && p.DistanceSqr <= 40 * 40).ToList();
-                return myTarget.Count();
-            }
-        }
-        public static int MeleeAttackersCount
-        {
-            get
-            {
-                IEnumerable<WoWUnit> myTarget = ObjectManager.GetObjectsOfTypeFast<WoWUnit>().Where(p => p.DistanceSqr <= 9 * 9
-                    && p.Combat && (p.IsTargetingMeOrPet || p.IsTargetingMyPartyMember || p.IsTargetingMyRaidMember || p.IsTargetingAnyMinion)).ToList();
-                return myTarget.Count();
-            }
-        }
-        public static int unitsWithoutThrashCount
-        {
-            get
-            {
-                IEnumerable<WoWUnit> myTarget = ObjectManager.GetObjectsOfTypeFast<WoWUnit>().Where(p => p.IsWithinMeleeRange
-                    && p.Combat && (p.IsTargetingMeOrPet || p.IsTargetingMyPartyMember || p.IsTargetingMyRaidMember || p.IsTargetingAnyMinion)
-                    && !U.debuffExists("Thrash", p)).ToList();
-                return myTarget.Count();
-            }
-        }
-        public static int unitsWithoutRakeCount
-        {
-            get
-            {
-                IEnumerable<WoWUnit> myTarget = ObjectManager.GetObjectsOfTypeFast<WoWUnit>().Where(p => p.IsWithinMeleeRange
-                    && !U.debuffExists("Rake", p)
-                    && p.Combat && (p.IsTargetingMeOrPet || p.IsTargetingMyPartyMember || p.IsTargetingMyRaidMember || p.IsTargetingAnyMinion)).ToList();
-                return myTarget.Count();
-            }
-        }
-        #endregion
+        public static LocalPlayer Me { get { return StyxWoW.Me; } }
 
         #region Kind of target
         public static bool CanAttackCurrentTarget
@@ -404,7 +42,7 @@ namespace Druid.Helpers
             }
             return false;
         }
-        public static bool IsWoWBoss(WoWUnit mytarget)
+        public static bool IsWoWBoss(WoWUnit myTarget)
         {
             if (StyxWoW.Me.CurrentTarget != null)
             {
@@ -412,11 +50,12 @@ namespace Druid.Helpers
                 {
                     return true;
                 }
-                else if (IsBoss(mytarget))
+                else if (myTarget.IsBoss) return true;
+                else if (IsBoss(myTarget))
                 {
                     return true;
                 }
-                else if (Me.CurrentTarget.MaxHealth > Me.MaxHealth * 3
+                else if (myTarget.MaxHealth > Me.MaxHealth * 3
                     && !Me.CurrentMap.IsDungeon
                     && !Me.CurrentMap.IsRaid
                     && !Me.CurrentMap.IsInstance
@@ -425,11 +64,11 @@ namespace Druid.Helpers
                 {
                     return true;
                 }
-                else if (Me.CurrentTarget.Name.Contains("Dummy"))
+                else if (myTarget.Name.Contains("Dummy"))
                 {
                     return true;
                 }
-                else if (EnemyPlayer(Me.CurrentTarget))
+                else if (EnemyPlayer(myTarget))
                 {
                     return true;
                 }
@@ -1842,53 +1481,5 @@ namespace Druid.Helpers
             return _bosses.Contains(unit.Entry);
         }
 
-        #region checktargets
-        public static Composite CheckBGTarget()
-        {
-            return
-                new Action(ret =>
-                {
-                    if (Me.GotTarget &&
-                        Me.CurrentTarget.IsPet)
-                    {
-                        Blacklist.Add(Me.CurrentTarget, BlacklistFlags.All, TimeSpan.FromDays(1));
-                        Me.ClearTarget();
-                        return RunStatus.Success;
-                    }
-
-                    if (Me.GotTarget && Me.CurrentTarget.Mounted)
-                    {
-                        Blacklist.Add(Me.CurrentTarget, BlacklistFlags.All, TimeSpan.FromSeconds(15));
-                        Me.ClearTarget();
-                        return RunStatus.Success;
-                    }
-                    return RunStatus.Failure;
-                });
-        }
-        public static WoWGuid lastGuid;
-        public static DateTime pullCheck;
-        public static void setNextTargetSwitch()
-        {
-            pullCheck = DateTime.Now + new TimeSpan(0, 0, 0, 30, 0);
-        }
-        public static void CheckTarget()
-        {
-            if (Me.CurrentTarget.Guid != lastGuid)
-            {
-                lastGuid = Me.CurrentTarget.Guid;
-                Logging.Write(Colors.SeaGreen, "New Target " + Me.CurrentTarget.Name);
-                setNextTargetSwitch();
-                return;
-            }
-            if (pullCheck <= DateTime.Now && !Me.Combat)
-            {
-                Logging.Write(Colors.Firebrick, "Cannot pull " + Me.CurrentTarget.Name + " now.  Blacklist for 15 sec.");
-                Styx.CommonBot.Blacklist.Add(Me.CurrentTarget.Guid, BlacklistFlags.All, TimeSpan.FromSeconds(15));
-                lastGuid = WoWGuid.Empty;
-                Me.ClearTarget();
-                return;
-            }
-        }
-        #endregion
     }
 }
