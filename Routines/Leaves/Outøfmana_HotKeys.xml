@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MyHotkeys>
+  <DpsKeys>None</DpsKeys>
+  <TankKeys>None</TankKeys>
+  <HealToggle>None</HealToggle>
+  <Profile_1_Hotkey>None</Profile_1_Hotkey>
+  <Profile_2_Hotkey>None</Profile_2_Hotkey>
+  <Profile_3_Hotkey>None</Profile_3_Hotkey>
+  <CycloneFocus>None</CycloneFocus>
+  <CycloneTarget>None</CycloneTarget>
+  <TyphoonTarget>None</TyphoonTarget>
+  <TyphoonFocus>None</TyphoonFocus>
+  <RootFocus>None</RootFocus>
+  <RootTarget>None</RootTarget>
+  <MushroomOnmouse>None</MushroomOnmouse>
+  <BlanketRejuv>None</BlanketRejuv>
+  <OnlyRejuv>False</OnlyRejuv>
+  <MKeyForward>None</MKeyForward>
+  <MKeyBackward>None</MKeyBackward>
+  <MKeyLeft>None</MKeyLeft>
+  <MKeyRight>None</MKeyRight>
+</MyHotkeys>

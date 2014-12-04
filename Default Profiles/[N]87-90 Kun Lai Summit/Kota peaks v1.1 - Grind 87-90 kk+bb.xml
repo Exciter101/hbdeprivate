@@ -1,0 +1,58 @@
+<HBProfile creator="xsilverdicex" version="1.1">
+<Name>Kota peaks - Large cave - xsilverdicex</Name>
+<MinDurability>0.4</MinDurability>
+<MinFreeBagSlots>2</MinFreeBagSlots>
+
+<MinLevel>1</MinLevel>
+<MaxLevel>91</MaxLevel>
+<Factions>16</Factions>
+
+<MailGrey>false</MailGrey>
+<MailWhite>true</MailWhite>
+<MailGreen>true</MailGreen>
+<MailBlue>true</MailBlue>
+<MailPurple>true</MailPurple>
+
+<SellGrey>true</SellGrey>
+<SellWhite>false</SellWhite>
+<SellGreen>false</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+           <Vendor Name="Cousin Copperfinder" Entry="60423" Type="Food" X="2742.298" Y="2186.517" Z="591.4346" />       
+           <Vendor Name="Clover Keeper" Entry="60420" Type="Food" X="2708.001" Y="2169.304" Z="588.7467" />
+           <Vendor Name="Ironshaper Shou" Entry="59827" Type="Repair" X="3042.047" Y="1245.347" Z="654.3098" />
+</Vendors>
+
+<Mailboxes>
+<Mailbox X="3106.095" Y="1236.09" Z="654.0688" />
+</Mailboxes>
+
+<Blackspots>
+<Blackspot X="2491.924" Y="2544.82" Z="671.4749" />
+</Blackspots>
+
+<GrindArea>
+<Hotspots>
+<Hotspot X="2548.695" Y="2439.656" Z="686.0726" />
+<Hotspot X="2585.048" Y="2456.245" Z="689.4025" />
+<Hotspot X="2559.802" Y="2487.482" Z="690.8845" />
+<Hotspot X="2577.565" Y="2523.451" Z="687.1376" />
+<Hotspot X="2549.258" Y="2552.359" Z="685.1273" />
+<Hotspot X="2510.576" Y="2550.07" Z="672.0827" />
+<Hotspot X="2512.247" Y="2510.103" Z="672.0951" />
+<Hotspot X="2493.552" Y="2545.615" Z="671.0474" />
+<Hotspot X="2469.414" Y="2513.619" Z="676.911" />
+<Hotspot X="2463.417" Y="2473.648" Z="681.2961" />
+<Hotspot X="2502.56" Y="2465.833" Z="685.1326" />
+<Hotspot X="2513.291" Y="2427.267" Z="686.6596" />
+</Hotspots>
+
+</GrindArea>
+
+<AvoidMobs> 
+  <Mob Name="Kafa-Crazed Mountain Goat" Entry="60493"/>
+  </AvoidMobs>
+
+</HBProfile>

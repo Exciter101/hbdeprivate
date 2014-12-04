@@ -1,0 +1,53 @@
+ <HBProfile>
+   <Name>Lizards in Valley of the Four Winds</Name>
+   <MinLevel>85</MinLevel>
+   <MaxLevel>100</MaxLevel>
+   
+   <MinDurability>0.3</MinDurability>
+   <MinFreeBagSlots>2</MinFreeBagSlots>
+   
+   <MailGrey>False</MailGrey>
+   <MailWhite>False</MailWhite>
+   <MailGreen>True</MailGreen>
+   <MailBlue>True</MailBlue>
+   <MailPurple>True</MailPurple>
+   
+   <SellGrey>True</SellGrey>
+   <SellWhite>True</SellWhite>
+   <SellGreen>False</SellGreen>
+   <SellBlue>False</SellBlue>
+   <SellPurple>False</SellPurple>
+   
+   <TargetElites>False</TargetElites>	
+   
+   <AvoidMobs>
+		<Mob Name="Monstrous Plainshawk" Entry="59641" />
+   </AvoidMobs>
+   
+   <Blackspots>
+
+   </Blackspots>
+   
+   <Mailboxes>
+		<Mailbox X="-209.1147" Y="495.5237" Z="187.1771" />
+   </Mailboxes>
+   
+   <Vendors>
+       <Vendor Name="Trader Jambeezi" Entry="59583" Type="Repair" X="-153.4221" Y="493.6198" Z="202.5165" />
+   </Vendors>
+   <ProtectedItems>
+	   
+   </ProtectedItems>
+   <GrindArea>
+	   <Factions>2588, 14</Factions>
+       <Hotspots>
+			<Hotspot X="272.6778" Y="-68.78244" Z="178.9696" />
+			<Hotspot X="230.5799" Y="-137.4993" Z="208.7684" />
+			<Hotspot X="310.263" Y="-176.8046" Z="201.5194" />
+			<Hotspot X="331.1465" Y="-102.7915" Z="182.3401" />
+			<Hotspot X="422.1555" Y="-82.70424" Z="177.1822" />
+			<Hotspot X="442.1899" Y="-131.609" Z="182.0796" />
+       </Hotspots>
+   </GrindArea>
+   
+</HBProfile>

@@ -1,0 +1,21 @@
+Api Changes:
+--------------
+    - Fixed possible overflows where WoWClient.PerformanceCounter was being used, this could cause WoWAura.TimeLeft to return zero. (HB-1601)
+
+Bug fixes:
+--------------
+  * Core
+    - Fixed a bug where the bot might get stuck in an infinite loop after the toon is ported or bot is started after some delay then it was stopped/first launched (HB-1602)
+
+  * DungeonBuddy
+    - Fixed a problem where Dungeonbuddy was unable to navigate to Lost City of the Tol'vir entrance during a corpse run. (HB-1487)
+
+  * No Subsystem
+    - Some WoD gems and potions has been added to the protected items list. (HB-1591)
+
+  * Other
+    - Npc database has been updated with WoD npcs (HB-1599)
+
+  * ProfessionBuddy
+    - 'Sell Item' action will nolonger try to sell equipped items (HB-1600)
+
