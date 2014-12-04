@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<AntiAFKSettings>
-  <AntiAfkKey>Space</AntiAfkKey>
-  <AntiAfkTimeValue>5</AntiAfkTimeValue>
-  <AntiAfkRandomValue>20</AntiAfkRandomValue>
-  <AntiAfkPlugins>True</AntiAfkPlugins>
-  <LastStatCounted>331</LastStatCounted>
-</AntiAFKSettings>
