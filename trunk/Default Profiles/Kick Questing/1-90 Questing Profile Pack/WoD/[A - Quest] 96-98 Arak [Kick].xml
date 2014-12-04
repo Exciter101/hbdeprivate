@@ -931,7 +931,7 @@
         <UseMount Value="true" />
         <!-- END: Checkpoint Block -->
 
-        <CustomBehavior File="Message" Text="Compiling Arik Quests" LogColor="CornflowerBlue" />
+        <CustomBehavior File="Message" Text="Compiling Arak Quests" LogColor="CornflowerBlue" />
 		
 			<!-- Our Garrison, SMV -->
 			<!-- If I'm less than level 96 -->
@@ -1010,11 +1010,13 @@
 			<Objective QuestName="Echo Hunters" QuestId="34805" Type="KillMob" MobId="79895" KillCount="10" />
 		<TurnIn QuestName="A Charming Deception" QuestId="34756" TurnInName="Reshad" TurnInId="81770" X="-413.4514" Y="1737.877" Z="45.62154" />
 		<TurnIn QuestName="Echo Hunters" QuestId="34805" TurnInName="Reshad" TurnInId="81770" X="-413.4514" Y="1737.877" Z="45.62154" />
-			<!-- add hook
-			Electrified Chakram - Id: 6580, Shape: AreaTriggerSphere - Radius: 5, RadiusTarget: 5, Flags: Unknown2, Unknown40, Unknown200, Unknown1000, Unknown2000
-			Electrified Chakram - Id: 6580, Shape: AreaTriggerSphere - Radius: 5, RadiusTarget: 5, Flags: Unknown2, Unknown40, Unknown400, Unknown800, Unknown1000, Unknown2000, Unknown8000
-			-->
-			<Objective QuestName="Syth's Secret" QuestId="35668" Type="CollectItem" ItemId="113282" CollectCount="1" />
+			<While Condition="HasQuest(35668) &amp;&amp; !IsQuestCompleted(35668)" > <!-- Syth's Secret -->
+				<CustomBehavior File="Hooks\Avoid" AvoidName="Chakram" Command="Add" ObjectType="AreaTrigger" ObjectId="165358" Radius="10" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="Whirl" Command="Add" ObjectType="AreaTrigger" ObjectId="6580" Radius="8" />
+				<Objective QuestName="Syth's Secret" QuestId="35668" Type="CollectItem" ItemId="113282" CollectCount="1" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="Chakram" Command="Remove" />
+				<CustomBehavior File="Hooks\Avoid" AvoidName="Whirl" Command="Remove" />
+			</While>
 		<TurnIn QuestName="Syth's Secret" QuestId="35668" TurnInName="Reshad" TurnInId="81770" X="-413.4514" Y="1737.877" Z="45.62154" />
 		<PickUp QuestName="A Gathering of Shadows" QuestId="35671" GiverName="Reshad" GiverId="81770" X="-413.4514" Y="1737.877" Z="45.62154" />
 			<While Condition="HasQuest(35671) &amp;&amp; !IsQuestCompleted(35671)" >
@@ -1221,7 +1223,7 @@
 			<While Condition="HasQuest(35482) &amp;&amp; !IsQuestCompleted(35482)" > <!-- Admiral Taylor -->
 				<MoveTo X="-911.7457" Y="2449.228" Z="31.1776" />
 				<CustomBehavior File="WaitTimer" WaitTime="20000" GoalText="Waiting for objective to complete {TimeRemaining}" />
-				<CustomBehavior File="InteractWith" QuestId="35482" MobId="82314" Range="5" WaitForNpcs="False" MobState="Alive" TerminateWhen="IsObjectiveComplete(2, 35482)" X="-911.7457" Y="2449.228" Z="31.1776" />
+				<CustomBehavior File="InteractWith" QuestId="35482" MobId="82314" Range="6" WaitForNpcs="False" MobState="Alive" TerminateWhen="IsObjectiveComplete(2, 35482)" X="-911.7457" Y="2449.228" Z="31.1776" />
 				<CustomBehavior File="InteractWith" QuestId="35482" MobId="82320" Range="5" WaitForNpcs="False" MobState="Alive" TerminateWhen="IsObjectiveComplete(3, 35482)" X="-933.2177" Y="2449.947" Z="31.59137" />
 			</While>
 		<TurnIn QuestName="Admiral Taylor" QuestId="35482" TurnInName="Admiral Taylor" TurnInId="82375" X="-916.9323" Y="2449.837" Z="31.1835" />
@@ -1245,7 +1247,17 @@
 				<CustomBehavior File="InteractWith" QuestId="34884" MobId="80233" Range="4" NonCompeteDistance="0" GossipOptions="1" TerminateWhen="IsObjectiveComplete(1, 34884)" X="-83.36806" Y="1928.299" Z="28.7319" />
 			</While>
 		<PickUp QuestName="Mother of Thorns" QuestId="34885" GiverName="Skizzik" GiverId="80233" X="-83.36806" Y="1928.299" Z="28.7319" />
+		
+			<While Condition="!HasQuest(34838) &amp;&amp; !IsQuestCompleted(34838)" > <!-- Pickup Ikky's Egg -->
+                <CustomBehavior File="InteractWith" MobId="80470" Range="6" NonCompeteDistance="0" WaitTime="2000" X="-100.6736" Y="1930.181" Z="31.21564" />
+                <CustomBehavior File="Misc\RunLua" Lua="QuestFrameAcceptButton:Click()" WaitTime="2000" />
+			</While>
+			<!--
+			<If Condition="!HasQuest(34838) &amp;&amp; !IsQuestCompleted(34838)" >  Pickup Ikky's Egg 
+				<MoveTo X="-99.24571" Y="1930.973" Z="28.8145" />
 		<PickUp QuestName="Ikky's Egg" QuestId="34838" GiverName="Kaliri Egg" GiverId="80470" X="-100.6736" Y="1930.181" Z="31.21564" />	
+			</If>
+			-->
 			<While Condition="HasQuest(34838) &amp;&amp; !IsQuestCompleted(34838)" >
 				<CustomBehavior File="InteractWith" QuestId="34838" MobId="80477" Range="4" NonCompeteDistance="0" TerminateWhen="IsObjectiveComplete(1, 34838)" X="-100.6736" Y="1930.181" Z="31.28452" />
 			</While>

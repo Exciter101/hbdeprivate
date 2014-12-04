@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <HBProfile xsi:noNamespaceSchemaLocation="../Schemas/QuestProfileSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <!-- Developed by Kickazz006 -->
-    <Name>[Fly][A - Quest] 68-80 [Kick] ($Rev: 3812 $)</Name>
+    <Name>[Fly][A - Quest] 68-80 [Kick] ($Rev: 3819 $)</Name>
 
     <MinLevel>68</MinLevel>
     <MaxLevel>1001</MaxLevel>
@@ -296,7 +296,6 @@
         <Mob Name="Mildred the Cruel" Id="29885" />
         <!-- <Mob Name="Nexus Drake Hatchling" Id="26127" />  -->
         <Mob Name="Overseer Deathgaze" Id="27122" />
-        <Mob Name="Perch Guardian" Id="29013" />
         <Mob Name="Plagueroach" Id="28599" />
         <Mob Name="Prophet of Sseratus" Id="28068" />
         <Mob Name="Redfang Hunter" Id="26356" />
@@ -13056,9 +13055,7 @@
             <If Condition="HasQuest(12559) &amp;&amp; !IsQuestCompleted(12559)" >
                 <CustomBehavior File="FlyTo" DestName="Objective" X="6116.741" Y="5663.464" Z="17.99642" />
                 <CustomBehavior File="ForcedDismount" />
-                <MoveTo X="6254.906" Y="5785.817" Z="-6.130185" />
-                <CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
-                <Objective QuestName="Powering the Waygate - The Makers' Perch" QuestId="12559" Type="UseObject" ObjectId="190508" UseCount="1" />
+				<CustomBehavior File="InteractWith" QuestId="12559" MobId="190508" ObjectType="GameObject" NonCompeteDistance="0" Range="5" TerminateWhen="IsObjectiveComplete(1, 12559)" X="6254.906" Y="5785.817" Z="-6.130185" />
                 <MoveTo X="6116.741" Y="5663.464" Z="17.99642" />
             </If>
             <If Condition="HasQuest(12559) &amp;&amp; IsQuestCompleted(12559)" >
@@ -13079,9 +13076,7 @@
                 <CustomBehavior File="FlyTo" DestName="Objective" X="5649.105" Y="3425.17" Z="332.4856" />
                 <CustomBehavior File="ForcedDismount" />
         <PickUp QuestName="A Timeworn Coffer" QuestId="12691" GiverName="Timeworn Coffer" GiverId="190768" GiverType="GameObject" X="5669.654" Y="3429.74" Z="300.8429" />
-                <MoveTo X="5751.252" Y="3048.935" Z="287.9865" />
-                <CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
-                <Objective QuestName="Powering the Waygate - The Makers' Overlook" QuestId="12613" Type="UseObject" ObjectId="190509" UseCount="1" />
+ 				<CustomBehavior File="InteractWith" QuestId="12613" MobId="190509" ObjectType="GameObject" NonCompeteDistance="0" Range="5" TerminateWhen="IsObjectiveComplete(1, 12613)" X="5751.252" Y="3048.935" Z="287.9865" />
              <If Condition="HasQuest(12691) &amp;&amp; !IsQuestCompleted(12691)" >
                 <Objective QuestName="A Timeworn Coffer" QuestId="12691" Type="CollectItem" ItemId="39227" CollectCount="1" />
              </If>
@@ -13094,7 +13089,7 @@
             </If>
             <If Condition="HasQuest(12691) &amp;&amp; !IsQuestCompleted(12691)" >
                 <Objective QuestName="A Timeworn Coffer" QuestId="12691" Type="CollectItem" ItemId="39227" CollectCount="1" />
-                 <MoveTo X="6116.741" Y="5663.464" Z="17.99642" />
+                <MoveTo X="6116.741" Y="5663.464" Z="17.99642" />
            </If>
             <If Condition="HasQuest(12691) &amp;&amp; IsQuestCompleted(12691)" >
                 <If Condition="Object(190509) != null" >
@@ -13386,7 +13381,8 @@
         <TurnIn QuestName="It Could Kill Us All" QuestId="13135" TurnInName="Crusade Engineer Spitzpatrick" TurnInId="30714" Nav="Fly" />
         <PickUp QuestName="The Restless Dead" QuestId="13110" GiverName="Father Gustav" GiverId="30683" Nav="Fly" />
             <While Condition="HasQuest(13110) &amp;&amp; !IsQuestCompleted(13110)" >
-                <CustomBehavior File="InteractWith" QuestId="13110" InteractByUsingItemId="43153" MobId="30202" MobState="Dead" NumOfTimes="30" CollectionDistance="500" >
+                <UseMount Value="false" />
+                <CustomBehavior File="InteractWith" QuestId="13110" InteractByUsingItemId="43153" MobId="30202" MobState="Dead" NumOfTimes="30" CollectionDistance="500" PreInteractMountStrategy="DismountOrCancelShapeshift" >
                     <HuntingGrounds>
                         <Hotspot X="6510.505" Y="522.025" Z="416.4586" />
                         <Hotspot X="6616.604" Y="532.3381" Z="397.8749" />
@@ -13394,10 +13390,11 @@
                         <Hotspot X="6698.07" Y="353.6881" Z="418.4744" />
                         <Hotspot X="6629.683" Y="426.1842" Z="403.2233" />
                         <Hotspot X="6601.311" Y="490.9769" Z="398.8555" />
-                        <Hotspot X="6493.644" Y="480.9878" Z="424.1723" />               
+                        <Hotspot X="6493.644" Y="480.9878" Z="424.1723" />
                     </HuntingGrounds>
                 </CustomBehavior>
-            </While>
+                <UseMount Value="true" />
+           </While>
             <Objective QuestName="The Purging Of Scourgeholme" QuestId="13118" Type="KillMob" MobId="30543" KillCount="3" />
             <Objective QuestName="The Purging Of Scourgeholme" QuestId="13118" Type="KillMob" MobId="30541" KillCount="3" />
             <Objective QuestName="The Purging Of Scourgeholme" QuestId="13118" Type="KillMob" MobId="30202" KillCount="8" />
