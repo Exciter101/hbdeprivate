@@ -1,0 +1,56 @@
+<HBProfile>
+<Name>Timeless Isle Rev: 1.0#281113 - NAG</Name>
+<MinDurability>0.3</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+<MailGrey>false</MailGrey>
+<MailWhite>true</MailWhite>
+<MailGreen>true</MailGreen>
+<MailBlue>true</MailBlue>
+<MailPurple>true</MailPurple>
+
+<SellGrey>true</SellGrey>
+<SellWhite>true</SellWhite>
+<SellGreen>false</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+<Vendor Name="Crafter Kwon" Entry="0" Type="Repair" X="-511.3785" Y="-5008.741" Z="2.056449" />
+</Vendors>
+
+<Blackspots>
+<Blackspot X="-475.1418" Y="-5010.931" Z="5.240516" Radius="20" />
+<Blackspot X="-568.0515" Y="-4797.986" Z="5.837235" Radius="20" />
+<Blackspot X="-415.1175" Y="-4896.616" Z="5.941898" Radius="20" />
+</Blackspots>
+
+<AvoidMobs>
+<Mob Name="Great Turtle" Entry="72764" />
+<Mob Name="Eternal Kilnmaster" Entry="72896" />
+<Mob Name="Molten Guardian" Entry="72888" />
+<Mob Name="High Priest of Ordos" Entry="72898" /> 
+<Mob Name="Blazebound Chanter" Entry="72897" />
+<Mob Name="Eroded Cliffdweller" Entry="72809" />
+</AvoidMobs>
+
+<GrindArea>
+<MinLevel>89</MinLevel>
+<MaxLevel>91</MaxLevel>
+<Factions>16 2136</Factions>
+<MaxDistance>30</MaxDistance>
+
+<Hotspots>
+    <Hotspot X="-224.3261" Y="-4769.2725" Z="1.0794"  />
+    <Hotspot X="-222.1507" Y="-4738.2729" Z="1.5829"  />
+    <Hotspot X="-232.4579" Y="-4689.0713" Z="3.2183"  />
+    <Hotspot X="-248.0729" Y="-4658.4209" Z="5.9565"  />
+    <Hotspot X="-272.9263" Y="-4668.1011" Z="4.1143"  />
+    <Hotspot X="-286.3394" Y="-4698.1499" Z="7.0560"  />
+    <Hotspot X="-264.0293" Y="-4716.0869" Z="7.1319"  />
+    <Hotspot X="-255.8990" Y="-4731.7446" Z="6.0557"  />
+    <Hotspot X="-255.2009" Y="-4753.0054" Z="5.0146"  />
+</Hotspots>
+</GrindArea>
+
+</HBProfile>

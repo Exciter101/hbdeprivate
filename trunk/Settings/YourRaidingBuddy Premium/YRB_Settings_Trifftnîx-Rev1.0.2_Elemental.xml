@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<YbSettingsES>
+  <PrebuffPet>True</PrebuffPet>
+  <Earthquake>False</Earthquake>
+  <EarthquakeAoE>False</EarthquakeAoE>
+  <UseSpiritWalkAutoEBLB>False</UseSpiritWalkAutoEBLB>
+  <UseThunderstorm>False</UseThunderstorm>
+  <Lifeblood>Offensive</Lifeblood>
+  <LifebloodOffensive>OnBoss</LifebloodOffensive>
+  <ClassRacials>OnBoss</ClassRacials>
+  <Ascendance>OnBoss</Ascendance>
+  <AncestralSwiftness>OnBoss</AncestralSwiftness>
+  <ElementalMastery>OnBoss</ElementalMastery>
+  <FireElemental>OnBoss</FireElemental>
+  <LiquidMagma>OnBoss</LiquidMagma>
+  <StormElementalTotem>OnBoss</StormElementalTotem>
+  <EarthElemental>OnBoss</EarthElemental>
+  <AoENumber>2</AoENumber>
+  <EnableFacing>False</EnableFacing>
+  <HealingRainOnMe>False</HealingRainOnMe>
+  <OnFocusTarget>False</OnFocusTarget>
+  <CheckHealthStone>True</CheckHealthStone>
+  <CheckHealthStoneNum>40</CheckHealthStoneNum>
+  <Trinket1>OnBoss</Trinket1>
+  <Trinket2>OnBoss</Trinket2>
+  <EnableDefensive>False</EnableDefensive>
+  <CheckInterruptsList>True</CheckInterruptsList>
+  <UseWindwalkTotem>False</UseWindwalkTotem>
+  <UseSpiritWalkAuto>True</UseSpiritWalkAuto>
+  <EnableShamanisticRage>True</EnableShamanisticRage>
+  <EnableAncestralGuidance>False</EnableAncestralGuidance>
+  <EnableStoneBulwarkTotem>True</EnableStoneBulwarkTotem>
+  <EnableGiftOfTheNaaru>False</EnableGiftOfTheNaaru>
+  <EnableHealingStreamTotem>False</EnableHealingStreamTotem>
+  <ShamanisticRageHP>70</ShamanisticRageHP>
+  <HealingStreamHP>50</HealingStreamHP>
+  <AncestralGuidanceHP>60</AncestralGuidanceHP>
+  <StoneBulwarkTotemHP>40</StoneBulwarkTotemHP>
+  <GiftOfTheNaaruHP>10</GiftOfTheNaaruHP>
+  <HealingSurgeHP>80</HealingSurgeHP>
+  <CheckInterrupts>True</CheckInterrupts>
+  <CheckLifebloodNum>10</CheckLifebloodNum>
+</YbSettingsES>
