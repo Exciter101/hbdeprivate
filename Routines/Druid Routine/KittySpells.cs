@@ -332,7 +332,7 @@ namespace Kitty
                 {
                     return true;
                 }
-                if(Me.CurrentTarget.MaxHealth <= Me.MaxHealth * 1.5
+                if(!needRip
                     && Me.EnergyPercent >= 25
                     && Me.ComboPoints >= 3)
                 {
@@ -341,11 +341,12 @@ namespace Kitty
                 return false;
             }
         }
+        public static bool needRip { get { return SpellManager.HasSpell(RIP) && Me.CurrentTarget.MaxHealth > Me.MaxHealth * 1.5; } }
         public static bool RipConditions
         {
             get
             {
-                if(Me.CurrentTarget.MaxHealth > Me.MaxHealth * 1.5
+                if(needRip
                     && (!debuffExists(RIP, Me.CurrentTarget)
                     || (debuffExists(RIP, Me.CurrentTarget) && debuffTimeLeft(RIP, Me.CurrentTarget) <= 6000))
                     && Me.EnergyPercent >= 30
@@ -363,7 +364,7 @@ namespace Kitty
                 if((!debuffExists(RAKE, Me.CurrentTarget)
                     || (debuffExists(RAKE, Me.CurrentTarget) && debuffTimeLeft(RAKE, Me.CurrentTarget) <= 5000))
                     && Me.EnergyPercent >= 35
-                    && addCount < 2)
+                    && (addCount < 2 || !SpellManager.HasSpell(THRASH)))
                 {
                     return true;
                 }
@@ -375,7 +376,8 @@ namespace Kitty
             get
             {
                 if (!debuffExists(THRASH, Me.CurrentTarget)
-                    && addCount > 1
+                    && addCount > 1 
+                    && SpellManager.HasSpell(THRASH)
                     && Me.EnergyPercent >= 50 || buffExists(CLEARCASTING, Me))
                 {
                     return true;
@@ -387,8 +389,7 @@ namespace Kitty
         {
             get
             {
-                if (!SR_BUFF_UP && Me.EnergyPercent >= 40 && addCount < 4) { return true; }
-                if (SR_BUFF_UP && Me.EnergyPercent >= 50 && addCount < 4) { return true; }
+                if (Me.EnergyPercent >= 50 && (addCount < 4 || !SpellManager.HasSpell(SWIPE))) { return true; }
                 return false;
             }
         }
@@ -396,7 +397,8 @@ namespace Kitty
         {
             get
             {
-                if(addCount >= 4
+                if(SpellManager.HasSpell(SWIPE)
+                    && addCount >= 4
                     && Me.EnergyPercent >= 45)
                 {
                     return true;
