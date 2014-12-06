@@ -8,7 +8,6 @@ namespace Eclipse.WoWDatabase.Models
 {
     public class Unit
     {
-        public uint id { get { return Entry; } set { Entry = value; } }
         public string Name { get; set; }
         public uint Zone { get; set; }
         public uint Entry { get; set; }

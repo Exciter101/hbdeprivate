@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Eclipse.EclipsePlugins.Models
 {
-    public class EclipseVendor : EclipseMob
+    public class EclipseVendor : NPC
     {
         public string Type { get; set; }
     }

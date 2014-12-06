@@ -54,6 +54,7 @@ namespace Eclipse.WoWDatabase
         public static List<Mob> IgnoreList = new List<Mob>();
         public static List<Location> KillLocations = new List<Location>();
         public static List<uint> NewQuests = new List<uint>();
+        public static List<EclipseVendor> Vendors = new List<EclipseVendor>();
         #endregion
 
         #region Cache Helpers
@@ -169,6 +170,7 @@ namespace Eclipse.WoWDatabase
             //DataLoader.loadQuests();
             DataLoader.loadLocations();
             DataLoader.loadFavorites();
+            DataLoader.loadVendors();
             init = true;
             iLog("Finished init.");
         }
@@ -191,7 +193,7 @@ namespace Eclipse.WoWDatabase
             {
                 try
                 {
-                    UpdateQuests();
+                    //UpdateQuests();
                     InventoryChangeCheck();
                     if (StyxWoW.Me.CurrentTarget != null)
                     {
@@ -219,7 +221,6 @@ namespace Eclipse.WoWDatabase
             }
             return true;
         }
-
         private static void UpdateQuests()
         {
             var quests = StyxWoW.Me.QuestLog.GetAllQuests();
@@ -228,11 +229,23 @@ namespace Eclipse.WoWDatabase
                 if (CurrentQuests.Where(qe => qe.Id == q.Id).Count() == 0) 
                 {
                     Quest quest = new Quest() { Id = q.Id, Description = q.Description, Level = q.Level, Name = q.Name, RecievedFrom = QuestContextId, Money = q.RewardMoney };
-                    List<QuestOrder> questorders = ORM.convertDataTabletoObject<QuestOrder>(DAL.LoadSL3Data(string.Format("select * from questorders where questid = '{0}'", quest.Id)), "");
-                    quest.QuestOrders = questorders;
-                    EC.log(String.Format("Loaded {0} for Quest named {1}", quest.QuestOrders.Count(), quest.Name));
-                    CurrentQuests.Add(quest);
-                    QuestContextId = 0;
+                    var dt = DAL.LoadSL3Data(string.Format("select * from questorders where questid = '{0}'", quest.Id));
+                    if (dt == null) Core.log("Did not find any quest orders for this quest");
+                    else
+                    {
+                        try
+                        {
+                            List<QuestOrder> questorders = ORM.convertDataTabletoObject<QuestOrder>(dt, "");
+                            quest.QuestOrders = questorders;
+                            EC.log(String.Format("Loaded {0} for Quest named {1}", quest.QuestOrders.Count(), quest.Name));
+                            CurrentQuests.Add(quest);
+                            QuestContextId = 0;
+                        }
+                        catch (Exception err)
+                        {
+                            Core.log(err.ToString());
+                        }
+                    }
                 }
             }
         }
@@ -253,6 +266,7 @@ namespace Eclipse.WoWDatabase
                 if (savedloc == null)
                 {
                     //ToDo: see if these are close to another hotspot (with 20 yards) and dont add them - probably best on a new thread...
+
                     log(string.Format("Adding {4}({0}) to database at Hotspot ({1}, {2}, {3})", loc.Entry, loc.X, loc.Y, loc.Z, Target.Name));
                     DAL.ExecuteSL3Query(ORM.Insert(loc, "Locations", "", false, DAL.getTableStructure("Locations")));
                     Locations.Add(loc);
@@ -270,9 +284,9 @@ namespace Eclipse.WoWDatabase
                     {
                         Core.log("Updating npc.");
                         NPCs.Remove(npc);
-                        DAL.ExecuteSL3Query(ORM.Update(npc, "NPC", "", DAL.getTableStructure("NPC")));
                         npc.Level = Target.Level;
                         npc.isVendor = Target.IsVendor;
+                        DAL.ExecuteSL3Query(ORM.Update(npc, "NPC", "", DAL.getTableStructure("NPC")));
                         NPCs.Add(npc);
                     }
                 }
@@ -340,8 +354,9 @@ namespace Eclipse.WoWDatabase
             try
             {
                 //Core.log(StyxWoW.Me.Inventory.FreeSlots.ToString());
-                if (StyxWoW.Me.Inventory.FreeSlots < 2)
+                if (StyxWoW.Me.Inventory.FreeSlots < 16)
                 {
+                    Core.log("Bags are full we should go find a vendor.");
                     Core.BagsFull = true;
                 }
                 var count = 0;
@@ -411,6 +426,14 @@ namespace Eclipse.WoWDatabase
                 responseReader = null;
             }
             return responseData;
+        }
+        public static void ProcessUnit(WoWUnit unit){
+            var npc = NPCs.Where(n => n.Entry == unit.Entry).FirstOrDefault();
+            if (npc == null) DAL.Insert(npc,"NPC");
+            if (npc != null)
+            {
+                if (!npc.isVendor && unit.IsVendor) DAL.ExecuteSL3Query(ORM.Update(npc, "NPC"));
+            }
         }
         #endregion
 

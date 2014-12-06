@@ -39,16 +39,16 @@ namespace Eclipse
         public static bool IsUnitBlackListed(WoWUnit mob)
         {
 
-            if (BlackList.Where(m => m.Guid == mob.Guid).Count() > 0 || Blacklist.Contains(mob.Guid, BlacklistFlags.All) || BlackList.Where(m => m.Name == mob.Name).Count() > 0)
+            if (BlackList.Where(m => m.Guid == mob.Guid).Count() > 0 || Blacklist.Contains(mob.Guid, BlacklistFlags.All))
             {
-                log("mob is in blacklist - ignoring" + mob.Name);
+                log(string.Format("{0} with (guid:{1}) is in blacklist - ignoring" ,mob.Name, mob.Guid));
                 return true;
             }
             else return false;
         }
         public static void AddMobToBlackList(WoWUnit mob)
         {
-            EC.log(string.Format("Adding {0} to blacklist", mob.Name));
+            EC.log(string.Format("Adding {0} to blacklist", mob.Guid));
             BlackList.Add(mob);
         }
     }

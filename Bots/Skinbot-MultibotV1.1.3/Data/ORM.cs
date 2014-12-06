@@ -112,7 +112,7 @@ namespace ArachnidCreations.DevTools
         /// <param name="fieldprefix"></param>
         /// <param name="dt"></param>
         /// <returns></returns>
-        public static string Update(object userClass, string tablename, string fieldprefix = "", DataTable dt = null)
+        public static string Update(object userClass, string tablename, string primarykey = "", DataTable dt = null)
         {
             List<string> cols = new List<string>();
             if (dt != null)
@@ -132,7 +132,6 @@ namespace ArachnidCreations.DevTools
                 {
                     matchedProps.Add(propMatch);
                 }
-
             }
             sql.Append(string.Format("update  {0} set ", tablename));
             int propcount = 0;
@@ -170,14 +169,21 @@ namespace ArachnidCreations.DevTools
             }
 
             //This is horrible and stupid way to do this - already fixed this in later versions of this class...
-            var property = userClass.GetType().GetProperty("id");
-            if (property == null) property = userClass.GetType().GetProperty("Entry");
+            string key = string.Empty;
+            if (primarykey != null && primarykey != string.Empty) key = primarykey;
+            var property = userClass.GetType().GetProperty("Entry");
+            if (property != null && key == string.Empty) key = "Entry";
+            if (property == null)
+            {
+                property = userClass.GetType().GetProperty("id");
+                if (property != null && key == string.Empty) key = "id";
+            }
             if (property == null)
             {
                 property = userClass.GetType().GetProperty("QuestId");
                 sql.Append(string.Format(" where questid='{0}';", property.GetValue(userClass)));
             }
-            else sql.Append(string.Format(" where id='{0}';", property.GetValue(userClass)));
+            else sql.Append(string.Format(" where {1}='{0}';", property.GetValue(userClass), key));
             return sql.ToString();
         }
         /// <summary>

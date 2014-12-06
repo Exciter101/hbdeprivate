@@ -38,7 +38,8 @@ namespace Eclipse.Bots.MultiBot
         private bool _isInit = false;
         private Composite _root;
         private static Location loc;
-
+        private static WoWGuid targetGuid; //For Blacklisting things that stick around...
+        private static int SkinningAttempts;
         public override string Name
         {
             get { return "Eclipse - MultiBot 1.1"; }
@@ -120,7 +121,7 @@ namespace Eclipse.Bots.MultiBot
         private Composite CreateQuestBehavior()
         {
             return new PrioritySelector(
-                new Decorator(ret => GetQuestGiver(),
+                new Decorator(ret => GetQuestGiver() && Me.CurrentTarget != null,
                    new Decorator(ret => Me.CurrentTarget.IsAlive,
                        new PrioritySelector(
                            new Decorator(ret => Me.CurrentTarget.Distance <= Me.InteractRange,                    
@@ -223,10 +224,17 @@ namespace Eclipse.Bots.MultiBot
         {
             var mobs = ObjectManager.ObjectList.Where(n => n.Type == WoWObjectType.Unit && !EC.IsUnitBlackListed((WoWUnit)n)).OrderBy(m => m.Distance).ToList();
             if (Core.SkinList.Count > 0) mobs = ObjectManager.ObjectList.Where(n => n.Type == WoWObjectType.Unit && !EC.IsUnitBlackListed((WoWUnit)n) && IsUnitOnSkinList((WoWUnit)n)).OrderBy(m => m.Distance).ToList();
+            else mobs = ObjectManager.ObjectList.Where(n => n.Type == WoWObjectType.Unit && !EC.IsUnitBlackListed((WoWUnit)n)).OrderBy(m => m.Distance).ToList();
             if (mobs.Count > 0)
             {
                 foreach (WoWUnit mob in mobs)
                 {
+                    if (mob.Guid == targetGuid && SkinningAttempts > 3)
+                    {
+                        EC.log("Adding mob to blacklist.");
+                        EC.AddMobToBlackList(mob);
+                        continue;
+                    }
                     //this could be done better - but i dont feel like it
                     var skinMob = false;
                     if (Core.NinjaSkin && !mob.TaggedByMe) skinMob = true;
@@ -235,19 +243,21 @@ namespace Eclipse.Bots.MultiBot
 
                     if (skinMob && mob.CanSkin && mob.Skinnable )
                     {
+                        targetGuid = mob.Guid;
                         EC.log(string.Format("Targeting dead skinnable mob {0}", mob.Name));
                         mob.Target();
                         return true;
                     }
 
-                    var m = Core.MOBs.Where(cm => cm.isSkinnable && cm.Entry == mob.Entry && Core.IgnoreList.Where(i=>i.Entry == cm.Entry).FirstOrDefault() == null).FirstOrDefault();
-                    
+                    var m = Core.MOBs.Where(cm => cm.isSkinnable && cm.Entry == mob.Entry && Core.IgnoreList.Where(i => i.Entry == cm.Entry).FirstOrDefault() == null).FirstOrDefault();
                     if (m != null)
                     {
-
-                            EC.log(string.Format("Found a mob that can be killed/skinned/looted: {0}", m.Name));
-                            mob.Target();
-                            return true;
+                        if (mob.Guid == targetGuid) Core.log("We recognize thisone." + SkinningAttempts.ToString());
+                        targetGuid = mob.Guid;    
+                        EC.log(string.Format("Found a mob that can be killed/skinned/looted: {0}", m.Name));
+                        SkinningAttempts = 0;
+                        mob.Target();
+                        return true;
                     }
                 }
             }
@@ -394,7 +404,7 @@ namespace Eclipse.Bots.MultiBot
         private static bool AtMyDestination()
         {
             var distance = Core.Distance(new float[3] { Me.X, Me.Y, Me.Z }, new float[3] { Core.ForceNavLocation.X, Core.ForceNavLocation.Y, Core.ForceNavLocation.Z });
-            if (distance > 10)
+            if (distance > 5)
             {
                 TreeRoot.StatusText = string.Format("within {0} of my distination.", distance);
                 return false;
@@ -410,19 +420,20 @@ namespace Eclipse.Bots.MultiBot
         public static Location GetNextLocation()
         {
             //ToDo: dont revisit recently visited places.
-            var _locList = Core.Locations.Where(l => l.Zone == Me.ZoneId && !Core.RecentlyVisitedLocations.Contains(l)).OrderBy(d => Core.Distance(new float[3] { d.X, d.Y, d.Z }, new float[3] { Me.X, Me.Y, Me.Z }));
-            var skinnablemobs = Core.MOBs.Where(m=>m.isSkinnable).ToList();
+            List<Location> _locList = Core.Locations.Where(l => l.Zone == Me.ZoneId && !Core.RecentlyVisitedLocations.Contains(l)).OrderBy(d => Core.Distance(new float[3] { d.X, d.Y, d.Z }, new float[3] { Me.X, Me.Y, Me.Z })).ToList();
+            if (Core.SkinMode)
+            {
+                foreach (Mob mob in Core.MOBs.Where(m=>m.isSkinnable)){
+                    var locs = Core.Locations.Where(l => l.Entry == mob.Entry && l.Zone == Me.ZoneId).ToList();
+                    if (locs != null)
+                    {
+                        if (locs.Count > 0) _locList.AddRange(locs);
+                    }
+
+                }
+            }
             foreach (var _loc in _locList)
             {
-                if (Core.SkinMode)
-                {
-                    var mobtype = skinnablemobs.Where(e=>e.Entry == _loc.Entry).FirstOrDefault();
-                    if (mobtype != null)
-                    {
-                        if (!mobtype.isSkinnable) continue;
-                    }
-                    else continue;
-                }
                 var distance = Core.Distance(new float[3] { _loc.X, _loc.Y, _loc.Z }, new float[3] { Me.X, Me.Y, Me.Z });
                 //if (_loc != null) EC.log("Found a location!");
                 if (distance < 40)
@@ -460,12 +471,27 @@ namespace Eclipse.Bots.MultiBot
                 Core.ForceNavLocation = loc;
                 return true;
             }
+            else if (npc == null){
+                var nearbyvendors = ObjectManager.ObjectList.Where(w => w.Type == WoWObjectType.Unit).ToList().Where(m => ((WoWUnit)m).IsFriendly && ((WoWUnit)m).IsVendor).OrderBy(d => d.Distance).ToList();
+                foreach (var vendor in nearbyvendors){
+                    Core.ProcessUnit((WoWUnit)vendor);
+                }
+                if (nearbyvendors.Count > 0)
+                {
+                    var closestVendor = nearbyvendors.FirstOrDefault();
+                    TreeRoot.StatusText = "(FullBags) Navigating to Vendor...";
+                    var loc = new Location { Entry = closestVendor.Entry, Name = closestVendor.Name, X = closestVendor.X, Y = closestVendor.Y, Z = closestVendor.Z };
+                    Core.ForceNav = true;
+                    Core.ForceNavLocation = loc;
+                    return true;
+                }
+            }
             else
             {
                 EC.log("Bags are full and there is no Vendor!");
                 return false;
             }
-            
+            return false;
         }
         #endregion
 
@@ -540,53 +566,66 @@ namespace Eclipse.Bots.MultiBot
         private static Composite CreateSkinningBehavior()
         {
             return new PrioritySelector(
-               new Decorator(ret => Me.CurrentTarget.IsAlive,
-                   new PrioritySelector(
-                       new Decorator(ret => Me.CurrentTarget.Distance <= 40 && RoutineManager.Current.PullBehavior != null, RoutineManager.Current.CombatBehavior),
-                       new Decorator(ret => Me.CurrentTarget.Distance > 40 && RoutineManager.Current.PullBehavior != null,
-                           new Sequence(
-                               new Action(r => EC.log("MoveToUnit")),
-                               new Action(r => TreeRoot.StatusText = String.Format("Moving to {0} to kill it and wear it's skin.", Me.CurrentTarget.Name)),
-                               new Decorator(ret => SpellManager.HasSpell("Flight Master's License"),
-                                   new Action(r => Flightor.MoveTo(Me.CurrentTarget.Location))),
-                               new Decorator(ret => !SpellManager.HasSpell("Flight Master's License"),
-                                   new Action(r => Navigator.MoveTo(Me.CurrentTarget.Location))),
-                               new ActionAlwaysSucceed())
+                new Decorator(ret=> StyxWoW.Me.CurrentTarget != null,
+                    new PrioritySelector(
+                   new Decorator(ret => Me.CurrentTarget.IsAlive,
+                       new PrioritySelector(
+                           new Decorator(ret => Me.CurrentTarget.Distance <= 40 && RoutineManager.Current.PullBehavior != null, RoutineManager.Current.CombatBehavior),
+                           new Decorator(ret => Me.CurrentTarget.Distance > 40 && RoutineManager.Current.PullBehavior != null,
+                               new Sequence(
+                                   new Action(r => EC.log("MoveToUnit")),
+                                   new Action(r => TreeRoot.StatusText = String.Format("Moving to {0} to kill it and wear it's skin.", Me.CurrentTarget.Name)),
+                                   new Decorator(ret => SpellManager.HasSpell("Flight Master's License"),
+                                       new Action(r => Flightor.MoveTo(Me.CurrentTarget.Location))),
+                                   new Decorator(ret => !SpellManager.HasSpell("Flight Master's License"),
+                                       new Action(r => Navigator.MoveTo(Me.CurrentTarget.Location))),
+                                   new ActionAlwaysSucceed())
+                           )
+                       )),
+                   new Decorator(r => Me.CurrentTarget.IsDead && Me.CurrentTarget.Distance > Me.InteractRange && SanityCheck(),
+                       new Sequence(
+                           new Action(r => TreeRoot.StatusText = String.Format("Moving to {0} for some epic skinning action.", Me.CurrentTarget.Name)),
+                                   new Decorator(ret => SpellManager.HasSpell("Flight Master's License"),
+                                       new Action(r => Flightor.MoveTo(Me.CurrentTarget.Location)))
+                           )
+                       ),
+                   new Decorator(r => Me.CurrentTarget.IsDead && Me.CurrentTarget.Distance <= Me.InteractRange && Me.CurrentTarget.CanLoot,
+                       new Sequence(
+                           new Action(r => Me.CurrentTarget.Interact()),
+                           new Action(r => TreeRoot.StatusText = String.Format("Looting {0}", Me.CurrentTarget.Name))
+                       )),
+                   new Decorator(r => Me.CurrentTarget.IsDead && Me.CurrentTarget.Distance <= Me.InteractRange && isSkinnable(Me.CurrentTarget),
+                       new Sequence(
+                           new Action(r => Me.CurrentTarget.Interact()),
+                           new Action(r=> SkinningAttempts++),
+                           new Action(r => TreeRoot.StatusText = String.Format("Skinning {0}", Me.CurrentTarget.Name))
+                       )),
+                   new Decorator(r => Me.IsFlying && Me.CurrentTarget.IsDead && Me.CurrentTarget.Distance <= Me.InteractRange,
+                       new Sequence(
+                           new Action(context => Lua.DoString("Dismount()")),
+                           new Wait(4, new ActionAlwaysSucceed()))),
+                   new Decorator(r => isSkinnable(Me.CurrentTarget) && !Me.IsFlying,
+                       new Sequence(
+                           new Action(r => Me.CurrentTarget.Interact()),
+                           new Action(r => TreeRoot.StatusText = String.Format("Skinning {0}", Me.CurrentTarget.Name)),
+                           new Wait(4, new ActionAlwaysSucceed())
                        )
-                   )),
-               new Decorator(r => Me.CurrentTarget.IsDead && Me.CurrentTarget.Distance > Me.InteractRange,
-                   new Sequence(
-                       new Action(r => TreeRoot.StatusText = String.Format("Moving to {0} for some epic skinning action.", Me.CurrentTarget.Name)),
-                               new Decorator(ret => SpellManager.HasSpell("Flight Master's License"),
-                                   new Action(r => Flightor.MoveTo(Me.CurrentTarget.Location))),
-                               new Decorator(ret => !SpellManager.HasSpell("Flight Master's License"),
-                                   new Action(r => Navigator.MoveTo(Me.CurrentTarget.Location))),
-                                   new ActionAlwaysSucceed()
-                       )
-                   ),
-               new Decorator(r => Me.CurrentTarget.IsDead && Me.CurrentTarget.Distance <= Me.InteractRange && Me.CurrentTarget.CanLoot,
-                   new Sequence(
-                       new Action(r => Me.CurrentTarget.Interact()),
-                       new Action(r => TreeRoot.StatusText = String.Format("Looting {0}", Me.CurrentTarget.Name))
-                   )),
-               new Decorator(r => Me.CurrentTarget.IsDead && Me.CurrentTarget.Distance <= Me.InteractRange && isSkinnable(Me.CurrentTarget),
-                   new Sequence(
-                       new Action(r => Me.CurrentTarget.Interact()),
-                       new Action(r => TreeRoot.StatusText = String.Format("Skinning {0}", Me.CurrentTarget.Name))
-                   )),
-               new Decorator(r => Me.IsFlying && Me.CurrentTarget.IsDead && Me.CurrentTarget.Distance <= Me.InteractRange,
-                   new Sequence(
-                       new Action(context => Lua.DoString("Dismount()")),
-                       new Wait(4, new ActionAlwaysSucceed()))),
-               new Decorator(r => isSkinnable(Me.CurrentTarget) && !Me.IsFlying,
-                   new Sequence(
-                       new Action(r => Me.CurrentTarget.Interact()),
-                       new Action(r => TreeRoot.StatusText = String.Format("Skinning {0}", Me.CurrentTarget.Name)),
-                       new Wait(4, new ActionAlwaysSucceed())
-
                    )
                )
-           );
+           ));
+        }
+
+        private static bool SanityCheck()
+        {
+            if (SkinningAttempts > 5)
+            {
+                EC.log("Failed Sanity Check.");
+                SkinningAttempts = 0;
+                EC.AddMobToBlackList(Me.CurrentTarget);
+                Me.ClearTarget();
+                return false;
+            }
+            return true;
         }
         private static bool canIKillForSkin(WoWUnit woWUnit)
         {

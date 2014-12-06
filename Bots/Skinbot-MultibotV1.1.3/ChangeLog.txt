@@ -1,10 +1,13 @@
-﻿-- Ver 1.0.1 --
+﻿-- Ver 1.0.2 --
+Fixed bug where it would call skinning behaviour with a null target.
+Fixed ORM bug where it would always look for a column called ID instead of "entry".
+
+-- Ver 1.0.1 --
 Fixed blacklist where mobs added to the blacklist by name were not being ignored
 Fixed bug where if you close the bot config form and then clicked it again it wouldnt show up. (added is disposed check)
 Added questing mode (unfinished)
 Added detection of local quest givers
 Added auto navigation to quest givers.
-
 
 
 -- Ver 1.0.0.4 --

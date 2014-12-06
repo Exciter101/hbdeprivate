@@ -54,7 +54,6 @@ namespace ArachnidCreations
                 {
                     dbConn = new SQLiteConnection(@"Data Source=" + DBFile + ";Version=3;New=False;Compress=True;");
                 }
-                else dbConn = new SQLiteConnection(@"Data Source=" + DBFile + ";Version=3;New=True;Compress=True;");
             }
         }
         public static DataTable LoadSL3Data(string Commandtext, string FileName = null)
