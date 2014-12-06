@@ -43,6 +43,8 @@
             this.chQuestMode = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
+            this.btnSell = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbEclipse)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,9 +69,9 @@
             // 
             // btnTravel
             // 
-            this.btnTravel.Location = new System.Drawing.Point(567, 284);
+            this.btnTravel.Location = new System.Drawing.Point(572, 44);
             this.btnTravel.Name = "btnTravel";
-            this.btnTravel.Size = new System.Drawing.Size(122, 23);
+            this.btnTravel.Size = new System.Drawing.Size(193, 23);
             this.btnTravel.TabIndex = 2;
             this.btnTravel.Text = "Travel";
             this.btnTravel.UseVisualStyleBackColor = true;
@@ -160,9 +162,9 @@
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(564, 219);
+            this.label4.Location = new System.Drawing.Point(569, 11);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(120, 59);
+            this.label4.Size = new System.Drawing.Size(196, 30);
             this.label4.TabIndex = 4;
             this.label4.Text = "Go to a Mob an NPC or any Saved location on the continent! (Searchable!)";
             // 
@@ -195,7 +197,25 @@
             this.button3.TabIndex = 5;
             this.button3.Text = "Configure Questing";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button2_Click);
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // btnSell
+            // 
+            this.btnSell.Location = new System.Drawing.Point(572, 116);
+            this.btnSell.Name = "btnSell";
+            this.btnSell.Size = new System.Drawing.Size(193, 23);
+            this.btnSell.TabIndex = 2;
+            this.btnSell.Text = "Sell";
+            this.btnSell.UseVisualStyleBackColor = true;
+            this.btnSell.Click += new System.EventHandler(this.btnSell_Click);
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(569, 83);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(196, 30);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "Find the nearest vendor and go sell";
             // 
             // EclipseConfigForm
             // 
@@ -206,6 +226,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label5);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.chQuestMode);
             this.Controls.Add(this.label3);
@@ -214,6 +235,7 @@
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.btnSell);
             this.Controls.Add(this.btnTravel);
             this.Controls.Add(this.pbEclipse);
             this.Controls.Add(this.btnData);
@@ -243,6 +265,8 @@
         private System.Windows.Forms.CheckBox chQuestMode;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnSell;
+        private System.Windows.Forms.Label label6;
     }
 }
 

@@ -76,5 +76,19 @@ namespace Eclipse.WoWDatabase
             else return false;
         }
 
+
+        internal static void loadVendors()
+        {
+            DataTable dt = DAL.LoadSL3Data(string.Format("select * from  Vendors;"));
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    var vendor = (EclipseVendor)ORM.convertDataRowtoObject(new EclipseVendor(), row, "");
+                    Core.Vendors.Add(vendor);
+
+                }
+            }
+        }
     }
 }

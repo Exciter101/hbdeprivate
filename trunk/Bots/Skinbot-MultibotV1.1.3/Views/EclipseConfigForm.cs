@@ -71,7 +71,7 @@ namespace Eclipse.Bots.MultiBot
 
         private void button2_Click(object sender, EventArgs e)
         {
-            QuestingMode qm = new QuestingMode();
+            MobSelectionList qm = new MobSelectionList();
             qm.Show();
         }
 
@@ -94,6 +94,17 @@ namespace Eclipse.Bots.MultiBot
         {
             MobSelectionList qm = new MobSelectionList();
             qm.SkinMode = true;
+            qm.Show();
+        }
+
+        private void btnSell_Click(object sender, EventArgs e)
+        {
+            Core.BagsFull = true;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            QuestingMode qm = new QuestingMode();
             qm.Show();
         }
     }

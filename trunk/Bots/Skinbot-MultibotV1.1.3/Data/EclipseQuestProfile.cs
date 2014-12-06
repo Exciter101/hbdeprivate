@@ -197,8 +197,8 @@ namespace Eclipse
                 {
                     foreach (XElement ele in nodeTree.Where(i => i.NodeType != System.Xml.XmlNodeType.Comment))
                     {
-                        EclipseVendor vendor = new EclipseVendor { X = ele.Attribute("X").Value.Replace(",", "."), Y = ele.Attribute("Y").Value.Replace(",", "."), Z = ele.Attribute("Z").Value.Replace(",", "."), Type = ele.Attribute("Type").Value, Name = ele.Attribute("Name").Value };
-                        Vendors.Add(vendor);
+                        //EclipseVendor vendor = new EclipseVendor { X = ele.Attribute("X").Value.Replace(",", "."), Y = ele.Attribute("Y").Value.Replace(",", "."), Z = ele.Attribute("Z").Value.Replace(",", "."), Type = ele.Attribute("Type").Value, Name = ele.Attribute("Name").Value };
+                       // Vendors.Add(vendor);
                     }
                 }
             }
