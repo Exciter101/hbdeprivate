@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<YRB2>
+  <Version>4.5.08</Version>
+  <InterruptList>
+    <Spell Id="145171" Name="MC spell Garrosh (final phase empowered)" />
+    <Spell Id="145065" Name="MC spell Garrosh (P2)" />
+    <Spell Id="145175" Name="MC Spell Garrosh (unknown)" />
+    <Spell Id="145071" Name="MC Spell Garrosh (unknown)" />
+    <Spell Id="145599" Name="MC Spell Garrosh (unknown)" />
+    <Spell Id="136797" Name="Dino-Mending (ToT)" />
+    <Spell Id="136587" Name="Venom Bolt Volley (ToT)" />
+    <Spell Id="61909" Name="Fireball (ToT)" />
+    <Spell Id="136189" Name="Sandbolt (ToT)" />
+    <Spell Id="144583" Name="Wulf Healing (SoO)" />
+    <Spell Id="144018" Name="Corruption (SoO)" />
+    <Spell Id="144649" Name="Hurl Corruption (SoO)" />
+    <Spell Id="143473" Name="Empowered Chain Heal (SoO)" />
+    <Spell Id="145555" Name="Empowered Chain Heal (SoO)" />
+    <Spell Id="143432" Name="Arcane Shock (SoO)" />
+    <Spell Id="143431" Name="Magistrike (SoO)" />
+    <Spell Id="145230" Name="Forbidden Magic (SoO)" />
+    <Spell Id="144922" Name="Harden Flesh" />
+    <Spell Id="143958" Name="Corruption Shock" />
+    <Spell Id="145631" Name="Corruption Chain" />
+    <Spell Id="144923" Name="Earthen Shard" />
+    <Spell Id="144379" Name="Mocking Blast (Manifestation of Pride)" />
+    <Spell Id="144468" Name="Inspiring Song (Chi Ji Timeless Isle)" />
+    <Spell Id="146728" Name="Chain-Heal (SoO)" />
+    <Spell Id="146757" Name="Chain-Heal (SoO)" />
+    <Spell Id="143423" Name="Sha Sear" />
+    <Spell Id="123654" Name="Ming (5man HC instance)" />
+    <Spell Id="121284" Name="Wing Leader (5man HC instance)" />
+    <Spell Id="117833" Name="Crazy Thought (MSV)" />
+    <Spell Id="117628" Name="Shadow Blast (MSV)" />
+    <Spell Id="125877" Name="Dispatch (HoF)" />
+    <Spell Id="124077" Name="Dispatch (HoF)" />
+    <Spell Id="154415" Name="Soulbinder Nyami - Mind Spike" />
+    <Spell Id="154221" Name="Cackling Pyromanic - Felblast" />
+    <Spell Id="156854" Name="Teron'gor - Drain Life" />
+    <Spell Id="156975" Name="Teron'gor - Chaos Bolt" />
+    <Spell Id="149997" Name="Magmolatus Calamity, Servant of the Flame - Firestorm" />
+    <Spell Id="150055" Name="Molten Elemental - Volcanic Tantrum" />
+    <Spell Id="150759" Name="Slave Watcher Crushto - Ferocious Yell" />
+    <Spell Id="150677" Name="Gug'rokk - Molten Blast" />
+    <Spell Id="154396" Name="High Sage Viryx - Solar Burst" />
+    <Spell Id="168105" Name="Ancient Protectors, Life Warden Gola - Rapid Tides" />
+    <Spell Id="168041" Name="Anicent Protectors, Earthshaper Telu - Briarskin" />
+    <Spell Id="168885" Name="Archmage Sol - Parasitic Growth" />
+    <Spell Id="169375" Name="Xeri'tac - Stage Two: Spider Matriarch - Toxic Bolt" />
+    <Spell Id="161199" Name="Kyrak - Debilitating Fixation" />
+  </InterruptList>
+</YRB2>
