@@ -726,7 +726,7 @@ namespace Kitty
                 }
             }
 
-            if (gotTarget && Me.CurrentTarget.Guid != lastGuid && Me.CurrentTarget.Distance <= 40)
+            if (gotTarget && Me.CurrentTarget.Guid != lastGuid)
             {
                 fightTimer.Reset();
                 lastGuid = Me.CurrentTarget.Guid;
@@ -747,8 +747,7 @@ namespace Kitty
                 && lastGuid == Me.CurrentTarget.Guid
                 && !Me.CurrentTarget.IsPlayer 
                 && fightTimer.ElapsedMilliseconds > 30 * 1000 
-                && Me.CurrentTarget.HealthPercent > 95
-                && Me.CurrentTarget.Distance <= 40)
+                && Me.CurrentTarget.HealthPercent > 95)
             {
                 Logging.Write(Colors.CornflowerBlue," This " + Me.CurrentTarget.Name + " is a bugged mob.  Blacklisting for 30 min.");
 
