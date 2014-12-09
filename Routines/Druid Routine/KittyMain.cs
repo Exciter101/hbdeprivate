@@ -97,7 +97,13 @@ namespace Kitty
             catch (Exception e) { Logging.Write(Colors.Red, "Pulse: " + e); }
             return;
         }
-
+        public override bool NeedRest
+        {
+            get
+            {
+                return Me.HealthPercent <= 85;
+            }
+        }
         private static async Task<bool> RestCoroutine()
         {
             if (!AutoBot) return false;

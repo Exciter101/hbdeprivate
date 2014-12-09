@@ -58,22 +58,22 @@ namespace Kitty
             if (await Cast(TYPHOON, gotTarget && TyphoonConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(MIGHTY_BASH, gotTarget && MightyBashConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(WAR_STOMP, gotTarget && WarStompConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await CastBuff(HEALING_TOUCH, Me.HealthPercent <= 90 && IsOverlayed(HEALING_TOUCH_INT))) return true;
+            if (await CastBuff(HEALING_TOUCH, Me.HealthPercent <= 90 && IsOverlayed(5185))) return true;
             if (await CastBuff(FRENZIED_REGENERATION, BearFrenziedRegenerationConditions)) return true;
             if (await CastBuff(SURVIVAL_INSTINCTS, !spellOnCooldown(SURVIVAL_INSTINCTS) && Me.HealthPercent <= P.myPrefs.PercentSurvivalInstincts)) return true;
             if (await CastBuff(SAVAGE_DEFENSE, BearSavageDefenseConditions)) return true;
-            if (await CastBuff(BERSERK, gotTarget && BerserkBearConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await CastBuff(INCARNATION_BEAR, gotTarget && IncarnationBearConditions && Me.CurrentTarget.IsWithinMeleeRange))
+            if (await CastBuff(BERSERK, gotTarget && !spellOnCooldown(BERSERK) && BerserkBearConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await CastBuff(INCARNATION_BEAR, gotTarget && !spellOnCooldown(INCARNATION_BEAR) && IncarnationBearConditions && Me.CurrentTarget.IsWithinMeleeRange))
                 if (await Cast(FORCE_OF_NATURE, gotTarget && ForceOfNatureConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await NeedTrinket1(UseTrinket1 && nextTrinketTimeAllowed <= DateTime.Now && !P.myPrefs.Trinket1Use)) return true;
             if (await NeedTrinket2(UseTrinket2 && nextTrinketTimeAllowed <= DateTime.Now && !P.myPrefs.Trinket2Use)) return true;
             if (await CastGroundSpellTrinket(1, gotTarget && P.myPrefs.Trinket1Use && nextTrinketTimeAllowed <= DateTime.Now)) return true;
             if (await CastGroundSpellTrinket(2, gotTarget && P.myPrefs.Trinket2Use && nextTrinketTimeAllowed <= DateTime.Now)) return true;
+            if (await Cast(PULVERIZE, gotTarget && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(MANGLE, gotTarget && !spellOnCooldown(MANGLE) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(THRASH, gotTarget && BearThrashConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(MAUL, gotTarget && BearMaulConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(LACERATE, gotTarget && BearLacerateConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await Cast(PULVERIZE, gotTarget && !spellOnCooldown(PULVERIZE) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             return false;
         }
 
@@ -152,9 +152,9 @@ namespace Kitty
 
         public static async Task<bool> HealingRotationCoroutine()
         {
-            //if (await CastHeal(NATURES_CURE, dispelTargets, dispelTargets != null)) return true;
+            if (await CastHeal(NATURES_CURE, dispelTargets, dispelTargets != null)) return true;
             if (await CastHeal(LIFEBLOOM, LifebloomPlayer, LifebloomPlayer != null && !buffExists(LIFEBLOOM, LifebloomPlayer))) return true;
-            if (await CastMushroom(WILD_MUSHROOM, LifebloomPlayer, LifebloomPlayer != null && needMushroom)) return true;
+            if (await CastMushroom(WILD_MUSHROOM, mushRoomPlayer, mushRoomPlayer != null && needMushroom)) return true;
             if (await CastHeal(SWIFTMEND, swiftmendPlayers, swiftmendPlayers != null)) return true;
             if (await CastHeal(FORCE_OF_NATURE, fonTarget, fonTarget != null && lastFonGuid != null && (lastFonGuid != fonTarget.Guid || fonTimer <= DateTime.Now))) return true;
             if (await CastHeal(WILD_GROWTH, WildGrowthPlayer, WildGrowthPlayer != null && !spellOnCooldown(WILD_GROWTH))) return true;
@@ -179,9 +179,9 @@ namespace Kitty
         public static int Wildgrowthhealth = 85;
         public static int TranquilityCount = 4;
         public static int TranquilityHealth = 50;
-        public static int RejuvenationHealth = 95;
-        public static int RegrowthHealth = 85;
-        public static int HaelingTouchHealth = 45;
+        public static int RejuvenationHealth = 90;
+        public static int RegrowthHealth = 60;
+        public static int HaelingTouchHealth = 40;
         public static int SwiftmendCount = 3;
         public static int fonHealth = 75;
         public static int GenesisCount = 3;
@@ -232,16 +232,12 @@ namespace Kitty
             return targets;
         }
 
+
+
         public static WoWPlayer fonTarget
         {
             get
             {
-                if (MeIsSolo && Me.HealthPercent <= fonHealth)
-                {
-                    lastFonGuid = Me.Guid;
-                    SetNextForceOfNatureAllowed();
-                    return Me;
-                }
                 List<WoWPlayer> members = new List<WoWPlayer>();
                 members = getPartyMembers().Where(p => p.HealthPercent <= fonHealth).OrderBy(p => p.HealthPercent).ThenBy(p => p.Distance).ToList();
                 if (members.Count() >= SwiftmendCount)
@@ -251,6 +247,7 @@ namespace Kitty
                     SetNextForceOfNatureAllowed();
                     return healTarget;
                 }
+                if (members.Count() == 0 && Me.HealthPercent <= fonHealth) { return Me; }
                 return null;
             }
         }
@@ -268,8 +265,6 @@ namespace Kitty
         {
             get
             {
-                if (MeIsSolo && Me.GotTarget && ValidUnit(Me.CurrentTarget)) return Me.CurrentTarget;
-
                 List<WoWPlayer> members = new List<WoWPlayer>();
                 WoWPlayer myTank = null;
                 members = Tanks();
@@ -282,14 +277,29 @@ namespace Kitty
                     myTank = members.FirstOrDefault();
                     if (myTank.CurrentTarget != null && ValidUnit(myTank.CurrentTarget)) return myTank.CurrentTarget;
                 }
+                if (members.Count() == 0 && Me.CurrentTarget != null) { return Me.CurrentTarget; }
                 return null;
             }
         }
+        public static WoWPlayer mushRoomPlayer
+        {
+            get
+            {
+                List<WoWPlayer> members = new List<WoWPlayer>();
+                members = Tanks();
+                if (members.Count() > 0)
+                {
+                    return members.FirstOrDefault();
+                }
+                if (members.Count() == 0) { return Me; }
+                return null;
+            }
+        }
+
         public static WoWPlayer LifebloomPlayer
         {
             get
             {
-                if (MeIsSolo) return Me;
                 List<WoWPlayer> members = new List<WoWPlayer>();
                 members = Tanks();
                 if (members.Count() > 0)
@@ -300,6 +310,7 @@ namespace Kitty
                     }
                     return members.FirstOrDefault();
                 }
+                if (members.Count() == 0 && !buffExists(LIFEBLOOM, Me)) { return Me; }
                 return null;
             }
         }
@@ -307,7 +318,6 @@ namespace Kitty
         {
             get
             {
-                if (MeIsSolo) return null;
                 List<WoWPlayer> members = new List<WoWPlayer>();
                 members = getPartyMembers().Where(p => buffExists(REJUVENATION, p) || buffExists(REGROWTH, p)).OrderBy(p => p.HealthPercent).ThenBy(p => p.Distance).ToList();
                 if (members.Count() >= SwiftmendCount)
@@ -322,7 +332,6 @@ namespace Kitty
         {
             get
             {
-                if (MeIsSolo) return null;
                 List<WoWPlayer> members = new List<WoWPlayer>();
                 members = getPartyMembers().Where(p => p.HealthPercent <= Wildgrowthhealth).OrderBy(p => p.HealthPercent).ThenBy(p => p.Distance).ToList();
                 if (members.Count() >= WildGrowthCount)
@@ -337,7 +346,6 @@ namespace Kitty
         {
             get
             {
-                if (MeIsSolo && !buffExists(REJUVENATION, Me) && Me.HealthPercent <= RejuvenationHealth) return Me;
                 List<WoWPlayer> members = new List<WoWPlayer>();
                 members = getPartyMembers().Where(p => p.HealthPercent <= RejuvenationHealth && !buffExists(REJUVENATION, p)).OrderBy(p => p.HealthPercent).ThenBy(p => p.Distance).ToList();
                 if (members.Count() > 0)
@@ -345,6 +353,7 @@ namespace Kitty
                     WoWPlayer healTarget = members.FirstOrDefault();
                     return healTarget;
                 }
+                if (members.Count() == 0 && !buffExists(REJUVENATION, Me) && Me.HealthPercent <= RejuvenationHealth) { return Me; }
                 return null;
             }
         }
@@ -360,6 +369,7 @@ namespace Kitty
                     WoWPlayer healTarget = members.FirstOrDefault();
                     return healTarget;
                 }
+                if (members.Count() == 0 && Me.HealthPercent <= RegrowthHealth) { return Me; }
                 return null;
             }
         }
@@ -367,7 +377,6 @@ namespace Kitty
         {
             get
             {
-                if (MeIsSolo && Me.HealthPercent <= HaelingTouchHealth) return Me;
                 List<WoWPlayer> members = new List<WoWPlayer>();
                 members = getPartyMembers().Where(p => p.HealthPercent <= HaelingTouchHealth).OrderBy(p => p.HealthPercent).ThenBy(p => p.Distance).ToList();
                 if (members.Count() > 0)
@@ -375,6 +384,7 @@ namespace Kitty
                     WoWPlayer healTarget = members.FirstOrDefault();
                     return healTarget;
                 }
+                if (members.Count() == 0 && Me.HealthPercent <= HaelingTouchHealth) { return Me; }
                 return null;
             }
         }
@@ -382,7 +392,6 @@ namespace Kitty
         {
             get
             {
-                if (MeIsSolo && needDispel(Me)) return Me;
                 List<WoWPlayer> members = new List<WoWPlayer>();
                 members = getPartyMembers().Where(p => p != null && needDispel(p)).OrderBy(p => p.Distance).ToList();
                 if (members.Count() > 0)
@@ -390,6 +399,7 @@ namespace Kitty
                     WoWPlayer healTarget = members.FirstOrDefault();
                     return healTarget;
                 }
+                if (members.Count() == 0 && needDispel(Me)) { return Me; }
                 return null;
             }
         }

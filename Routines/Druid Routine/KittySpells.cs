@@ -389,7 +389,8 @@ namespace Kitty
         {
             get
             {
-                if (Me.EnergyPercent >= 50 && (addCount < 4 || !SpellManager.HasSpell(SWIPE))) { return true; }
+                if (Me.EnergyPercent >= 40 && !buffExists(SAVAGE_ROAR, Me) && (addCount < 4 || !SpellManager.HasSpell(SWIPE) || HKM.aoeStop)) { return true; }
+                if (Me.EnergyPercent >= 50 && buffExists(SAVAGE_ROAR, Me) && (addCount < 4 || !SpellManager.HasSpell(SWIPE) || HKM.aoeStop)) { return true; }
                 return false;
             }
         }
@@ -398,6 +399,7 @@ namespace Kitty
             get
             {
                 if(SpellManager.HasSpell(SWIPE)
+                    && !HKM.aoeStop
                     && addCount >= 4
                     && Me.EnergyPercent >= 45)
                 {

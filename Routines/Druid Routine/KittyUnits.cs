@@ -70,7 +70,7 @@ namespace Kitty
         {
             return ObjectManager.GetObjectsOfTypeFast<WoWUnit>().Where(u => u.IsAlive
                 && u.Combat
-                && u.IsTargetingMeOrPet || (u.IsTargetingMyPartyMember || u.IsTargetingMyRaidMember || u.IsTargetingAnyMinion)
+                && (u.IsTargetingMeOrPet || u.IsTargetingMyPartyMember || u.IsTargetingMyRaidMember)
                 && u.Distance <= 8 * 8).ToList();
         }
 
@@ -700,12 +700,26 @@ namespace Kitty
         #region check targets
         private static Stopwatch fightTimer = new Stopwatch();
         private static Stopwatch pullTimer = new Stopwatch();
-        public static bool MeIsmoving { get; set; }
+        private static Stopwatch moveTimer = new Stopwatch();
+        public static WoWPoint lastPoint { get; set; }
         public static void CheckMyCurrentTarget()
         {
-            if (gotTarget && Me.Combat && pullTimer.IsRunning) { pullTimer.Reset(); }
+            if (Me.CurrentTarget != null && ValidUnit(Me.CurrentTarget) && !pullTimer.IsRunning && Me.CurrentTarget.Guid != lastGuid) 
+            { 
+                pullTimer.Restart(); 
+                lastGuid = Me.CurrentTarget.Guid; 
+            }
+
+            if (Me.CurrentTarget != null && ValidUnit(Me.CurrentTarget) && Me.CurrentTarget.Guid == lastGuid && pullTimer.ElapsedMilliseconds > 120 * 1000)
+            {
+                Logging.Write(Colors.CornflowerBlue, "Cannot pull " + Me.CurrentTarget.Name + " Blacklisting for 3 min.");
+                Blacklist.Add(Me.CurrentTarget.Guid, BlacklistFlags.All, TimeSpan.FromMinutes(3.00));
+                Me.ClearTarget();
+            }
+
             if (gotTarget && (!fightTimer.IsRunning || Me.CurrentTarget.Guid != lastGuid) && Me.Combat)
             {
+                pullTimer.Reset();
                 fightTimer.Reset();
                 fightTimer.Start();
                 lastGuid = Me.CurrentTarget.Guid;
@@ -725,31 +739,13 @@ namespace Kitty
                     Me.ClearTarget();
                 }
             }
-
-            if (gotTarget && Me.CurrentTarget.Guid != lastGuid)
-            {
-                fightTimer.Reset();
-                lastGuid = Me.CurrentTarget.Guid;
-                Logging.Write(Colors.CornflowerBlue, "Killing " + Me.CurrentTarget.Name + " at distance " + System.Math.Round(Me.CurrentTarget.Distance, 0).ToString() + ".");
-                pullTimer.Reset();
-                pullTimer.Start();
-
-            }
-            else
-            {
-                if (gotTarget && pullTimer.ElapsedMilliseconds > 20 * 1000)
-                {
-                    Logging.Write(Colors.CornflowerBlue, "Cannot pull " + Me.CurrentTarget.Name + " now.  Blacklist for 3 minutes.");
-                    Blacklist.Add(Me.CurrentTarget.Guid, BlacklistFlags.All, System.TimeSpan.FromMinutes(3));
-                }
-            }
-            if (Me.CurrentTarget != null 
+            if (Me.CurrentTarget != null
                 && lastGuid == Me.CurrentTarget.Guid
-                && !Me.CurrentTarget.IsPlayer 
-                && fightTimer.ElapsedMilliseconds > 30 * 1000 
+                && !Me.CurrentTarget.IsPlayer
+                && fightTimer.ElapsedMilliseconds > 30 * 1000
                 && Me.CurrentTarget.HealthPercent > 95)
             {
-                Logging.Write(Colors.CornflowerBlue," This " + Me.CurrentTarget.Name + " is a bugged mob.  Blacklisting for 30 min.");
+                Logging.Write(Colors.CornflowerBlue, " This " + Me.CurrentTarget.Name + " is a bugged mob.  Blacklisting for 30 min.");
 
                 Blacklist.Add(Me.CurrentTarget.Guid, BlacklistFlags.All, TimeSpan.FromMinutes(30));
                 Me.ClearTarget();
