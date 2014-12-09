@@ -2,7 +2,7 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <!-- Originally contributed by Kickazz006 -->
-    <Name>[A - Quest] EK 12-58 [Kick] ($Rev: 3866 $)</Name>
+    <Name>[A - Quest] EK 12-58 [Kick] ($Rev: 3874 $)</Name>
     <MinLevel>5</MinLevel>
     <MaxLevel>1001</MaxLevel>
 
@@ -6201,7 +6201,7 @@
             </If>
             <If Condition="HasQuest(26629)">
                 <PickUp QuestName="Looks Like a Tauren Pirate to Me" QuestId="26630" GiverName="Fleet Master Seahorn"
-                        GiverId="2487" />
+                        GiverId="2487" X="-14444.71" Y="486.8144" Z="28.72312" />
                 <While Condition="HasQuest(26630) &amp;&amp; !IsQuestCompleted(26630)">
 
                     <If Condition="!IsObjectiveComplete(2, 26630)">
@@ -6958,7 +6958,7 @@
         </If>
         <SetGrindArea>
             <GrindArea>
-                <Name>Grind to Level 40($Rev: 3866 $)</Name>
+                <Name>Grind to Level 40($Rev: 3874 $)</Name>
                 <Factions>7 14 21</Factions>
                 <!-- [Grub, Bat, Gargolye, Hound] -->
                 <TargetMinLevel>38</TargetMinLevel>
