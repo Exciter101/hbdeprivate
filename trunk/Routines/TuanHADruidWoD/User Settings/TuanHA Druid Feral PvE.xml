@@ -20,7 +20,7 @@
   <CycloneAuto>False</CycloneAuto>
   <CycloneStopWatchTime>5</CycloneStopWatchTime>
   <DashandRoar>True</DashandRoar>
-  <DisorientingRoarInterrupt>True</DisorientingRoarInterrupt>
+  <DisorientingRoarInterrupt>False</DisorientingRoarInterrupt>
   <DispellMin>100</DispellMin>
   <DispellMax>200</DispellMax>
   <EntanglingRoots>False</EntanglingRoots>
@@ -43,10 +43,10 @@
   <HealingTouchRestoHP>70</HealingTouchRestoHP>
   <HealingTouchNS>False</HealingTouchNS>
   <HealingTouchNSHP>40</HealingTouchNSHP>
-  <HealMe>True</HealMe>
-  <HealMeHP>70</HealMeHP>
-  <HealFriend>True</HealFriend>
-  <HealFriendHP>50</HealFriendHP>
+  <HealMe>False</HealMe>
+  <HealMeHP>50</HealMeHP>
+  <HealFriend>False</HealFriend>
+  <HealFriendHP>30</HealFriendHP>
   <Hibernate>False</Hibernate>
   <Hurricane>False</Hurricane>
   <IncarnationCatBear>True</IncarnationCatBear>
@@ -86,6 +86,7 @@
   <MoonkinForm>True</MoonkinForm>
   <Moonfire>False</Moonfire>
   <MoonfireBalance>True</MoonfireBalance>
+  <MoonfireFeral>True</MoonfireFeral>
   <NaturesGrasp>True</NaturesGrasp>
   <NaturesSwiftnessHealingTouchBalance>True</NaturesSwiftnessHealingTouchBalance>
   <Nourish>True</Nourish>
@@ -102,6 +103,7 @@
   <RejuvenationNonResto>True</RejuvenationNonResto>
   <Rejuvenation>False</Rejuvenation>
   <RejuvenationHP>95</RejuvenationHP>
+  <RejuvenationGerminationHP>30</RejuvenationGerminationHP>
   <RejuvenationAll>False</RejuvenationAll>
   <RejuvenationAllMana>70</RejuvenationAllMana>
   <Renewal>True</Renewal>
@@ -121,6 +123,7 @@
   <StarfallBurst>False</StarfallBurst>
   <Starfire>True</Starfire>
   <Starsurge>True</Starsurge>
+  <StellarFlare>True</StellarFlare>
   <SunfireBalance>True</SunfireBalance>
   <SurvivalInstincts>True</SurvivalInstincts>
   <SurvivalInstinctsHP>40</SurvivalInstinctsHP>
@@ -155,13 +158,13 @@
   <AutoTarget>True</AutoTarget>
   <AutoWriteLog>True</AutoWriteLog>
   <BurstString></BurstString>
-  <BurstKey>2</BurstKey>
+  <BurstKey>3</BurstKey>
   <BurstHP>10</BurstHP>
   <CycloneHealerString></CycloneHealerString>
   <CycloneAnyUnitString></CycloneAnyUnitString>
   <DoNotHealAbove>95</DoNotHealAbove>
+  <FileandSettingCheckLast>0</FileandSettingCheckLast>
   <FlagReturnorPickup>False</FlagReturnorPickup>
-  <HotkeyPrintChat>False</HotkeyPrintChat>
   <HealBalancing>0</HealBalancing>
   <HealthStone>True</HealthStone>
   <HeartoftheWildCD>False</HeartoftheWildCD>

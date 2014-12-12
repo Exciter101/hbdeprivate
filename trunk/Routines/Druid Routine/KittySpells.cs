@@ -96,6 +96,7 @@ namespace Kitty
             LIFEBLOOM = "Lifebloom",
             NATURES_CURE = "Nature's Cure",
             LUNAR_INSPIRATION = "Lunar Inspiration",
+            IRONBARK = "Ironbark",
             EINDE = "The End";
 
 

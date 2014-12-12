@@ -1,6 +1,6 @@
 <HBProfile xsi:noNamespaceSchemaLocation="../../../Schemas/QuestProfileSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<!-- Original contribution by Kickazz006 -->
-	<Name>[A - Quest] 98-100 Nagrand [Kick] ($Rev: 3897 $)</Name>
+	<Name>[A - Quest] 98-100 Nagrand [Kick] ($Rev: 3928 $)</Name>
 
 	<MinLevel>98</MinLevel>
 	<MaxLevel>1001</MaxLevel>
@@ -939,6 +939,10 @@
 		<Objective Type="CollectItem" ItemId="119184" CollectCount="10">
 			<CollectFrom>
 				<GameObject Name="Ancient Snarlpaw Skull" Entry="238850" />
+				<Mob Name="Saberon Ambusher" Entry="88813" />
+				<Mob Name="Snarlpaw Bloodtracker" Entry="88365" />
+				<Mob Name="Snarlpaw Razortooth" Entry="88358" />
+				<Mob Name="Snarlpaw Shadowfang" Entry="88363" />
 			</CollectFrom>
 			<Hotspots>
 				<Hotspot X="3928.544" Y="4720.455" Z="178.1837" />
@@ -1215,20 +1219,19 @@
 		<TurnIn QuestName="They Call Him Lantresor of the Blade" QuestId="34951" TurnInName="Lantresor of the Blade" TurnInId="80161" X="2857.505" Y="4460.763" Z="175.8513" />
 		<PickUp QuestName="The Blade Itself" QuestId="34954" GiverName="Lantresor of the Blade" GiverId="80161" X="2857.505" Y="4460.763" Z="175.8513" />
 		<PickUp QuestName="Not Without My Honor" QuestId="34955" GiverName="Lantresor of the Blade" GiverId="80161" X="2857.505" Y="4460.763" Z="175.8513" />
-
-
-		<CustomBehavior File="InteractWith" QuestId="34955" MobIds="233814" Range="4" WaitTime="5000" NumOfTimes="1000" ProactiveCombatStrategy="ClearMobsThatWillAggro" >
-			<HuntingGrounds WaypointVisitStrategy="InOrder" >
-				<Hotspot Name="Hut 1 - NorthEast" X="2914.604" Y="4268.696" Z="188.4803" />
-				<Hotspot Name="Hut 2 - NorthWest" X="2915.558" Y="4450.765" Z="183.0954" />
-				<Hotspot Name="Hut 3 - Lantresor" X="2854.49" Y="4459.231" Z="175.685" />
-				<Hotspot Name="Hut 4 - SouthWest" X="2823.894" Y="4483.251" Z="179.86" />
-				<Hotspot Name="Hut 5 - South" X="2769.092" Y="4433.057" Z="179.4038" />
-				<Hotspot Name="Hut 6 - South" X="2718.265" Y="4356.642" Z="186.0973" />
-			</HuntingGrounds>
-		</CustomBehavior>
+		<While Condition="HasQuest(34850) &amp;&amp; !IsQuestCompleted(34850)" > <!-- Not Without My Honor -->
+			<CustomBehavior File="InteractWith" QuestId="34955" MobIds="233814" Range="4" WaitTime="2000" NumOfTimes="6" ProactiveCombatStrategy="ClearMobsThatWillAggro" >
+				<HuntingGrounds WaypointVisitStrategy="InOrder" >
+					<Hotspot Name="Hut 1 - NorthEast" X="2914.604" Y="4268.696" Z="188.4803" />
+					<Hotspot Name="Hut 2 - NorthWest" X="2915.558" Y="4450.765" Z="183.0954" />
+					<Hotspot Name="Hut 3 - Lantresor" X="2854.49" Y="4459.231" Z="175.685" />
+					<Hotspot Name="Hut 4 - SouthWest" X="2823.894" Y="4483.251" Z="179.86" />
+					<Hotspot Name="Hut 5 - South" X="2769.092" Y="4433.057" Z="179.4038" />
+					<Hotspot Name="Hut 6 - South" X="2718.265" Y="4356.642" Z="186.0973" />
+				</HuntingGrounds>
+			</CustomBehavior>
+		</While>
 		<Objective QuestName="The Blade Itself" QuestId="34954" Type="CollectItem" ItemId="111938" CollectCount="1" />
-		<Objective QuestName="Not Without My Honor" QuestId="34955" Type="CollectItem" ItemId="111947" CollectCount="1" />
 		<TurnIn QuestName="The Blade Itself" QuestId="34954" TurnInName="Lantresor of the Blade" TurnInId="80161" X="2857.505" Y="4460.763" Z="175.8513" />
 		<TurnIn QuestName="Not Without My Honor" QuestId="34955" TurnInName="Lantresor of the Blade" TurnInId="80161" X="2857.505" Y="4460.763" Z="175.8513" />
 		<PickUp QuestName="Meet Me in the Cavern" QuestId="34956" GiverName="Lantresor of the Blade" GiverId="80161" X="2857.505" Y="4460.763" Z="175.8513" />
@@ -1236,9 +1239,9 @@
 		<TurnIn QuestName="Meet Me in the Cavern" QuestId="34956" TurnInName="Lantresor of the Blade" TurnInId="80319" X="2806.654" Y="4200.726" Z="170.017" />
 		<PickUp QuestName="Challenge of the Masters" QuestId="34957" GiverName="Lantresor of the Blade" GiverId="80319" X="2806.654" Y="4200.726" Z="170.017" />
 		<While Condition="HasQuest(34957) &amp;&amp; !IsQuestCompleted(34957)" > <!-- Challenge of the Masters -->
-			<CustomBehavior File="InteractWith" QuestId="34957" MobId="231088" ObjectType="GameObject" TerminateWhen="IsObjectiveComplete(1, 34957)" WaitForNpcs="True" WaitTime="5000" X="2627.631" Y="4150.373" Z="166.1904" />
+			<CustomBehavior File="InteractWith" QuestId="34957" MobId="231088" ObjectType="GameObject" WaitForNpcs="True" WaitTime="5000" X="2627.631" Y="4150.373" Z="166.1904" />
 			<CustomBehavior File="KillUntilComplete" QuestId="34957" ImmediatelySwitchToHighestPriorityTarget="True" X="2627.631" Y="4150.373" Z="166.1904" 
-				TerminateWhen="IsObjectiveComplete(2, 34957) || (Unit(80326) == null &amp;&amp; Unit(80325) == null &amp;&amp; Unit(80324) == null &amp;&amp; Unit(80327) == null)" >	
+										TerminateWhen="IsObjectiveComplete(2, 34957) || Me.Combat == false" >	
 				<PursuitList>
 					<PursueUnit Id="80326" Priority="500" />
 					<PursueUnit Id="80325" Priority="100" />
@@ -1249,7 +1252,6 @@
 		</While>
 		<!-- End of Hallvalor -->
 
-		<!-- I may have gotten this all mixed up, but i needed to move missing caravan down here -->
 		<!-- Ring of Trials / Missing Caravan -->
 		<PickUp QuestName="The Missing Caravan" QuestId="34598" GiverName="Pyxni Pennypocket" GiverId="79310" X="3085.323" Y="4849.036" Z="128.3313" />
 		<PickUp QuestName="Declawing The Competition" QuestId="34512" GiverName="Pyxni Pennypocket" GiverId="79310" X="3085.323" Y="4849.036" Z="128.3313" />
@@ -1454,10 +1456,10 @@
 			<TurnIn QuestName="Nobundo Sends Word" QuestId="35332" TurnInName="Vindicator Nobundo" TurnInId="82138" X="4179.509" Y="5238.367" Z="65.45092" />
 		</If>
 		<PickUp QuestName="Called to the Throne" QuestId="35331" GiverName="Vindicator Nobundo" GiverId="82138" X="4179.509" Y="5238.367" Z="65.45092" />
-		<While Condition="HasQuest(35331) &amp;&amp; !IsQuestCompleted(35331)" >
-			<CustomBehavior File="InteractWith" QuestId="35331" MobId="82138" GossipOptions="1" NonCompeteDistance="0" Range="4" TerminateWhen="IsObjectiveComplete(1, 35331)" X="4179.509" Y="5238.367" Z="65.45092" />
-			<CustomBehavior File="WaitTimer" QuestId="35331" WaitTime="45000" GoalText="Waiting for quest to complete {TimeRemaining}" />
-		</While>
+			<While Condition="HasQuest(35331) &amp;&amp; !IsQuestCompleted(35331)" > <!-- Called to the Throne -->
+				<CustomBehavior File="InteractWith" QuestId="35331" MobId="82138" GossipOptions="1" NonCompeteDistance="0" Range="4" TerminateWhen="IsObjectiveComplete(1, 35331)" X="4179.509" Y="5238.367" Z="65.45092" />
+				<CustomBehavior File="WaitTimer" QuestId="35331" WaitTime="70000" GoalText="Waiting for quest to complete {TimeRemaining}" />
+			</While>
 		<TurnIn QuestName="Called to the Throne" QuestId="35331" TurnInName="Vindicator Nobundo" TurnInId="82138" X="4179.509" Y="5238.367" Z="65.45092" />
 		<PickUp QuestName="Elemental Attunement" QuestId="35333" GiverName="Vindicator Nobundo" GiverId="82138" X="4179.509" Y="5238.367" Z="65.45092" />
 		<PickUp QuestName="Earth, Wind and Fire...and Water" QuestId="34881" GiverName="Incineratus" GiverId="80593" X="4247.078" Y="5259.914" Z="66.14429" />
@@ -1465,68 +1467,68 @@
 		<PickUp QuestName="An Old Friend" QuestId="34943" GiverName="Kalandrios" GiverId="80595" X="4177.374" Y="5177.474" Z="64.45303" />
 		<TurnIn QuestName="An Old Friend" QuestId="34943" TurnInName="Garrok" TurnInId="80434" X="4062.486" Y="5047.749" Z="160.7077" />
 		<PickUp QuestName="A Rare Bloom" QuestId="34894" GiverName="Garrok" GiverId="80434" X="4062.486" Y="5047.749" Z="160.7077" />
-		<Objective QuestName="A Rare Bloom" QuestId="34894" Type="CollectItem" ItemId="112089" CollectCount="1" />
-		<While Condition="!HasQuest(33928) &amp;&amp; !IsQuestCompleted(33928) &amp;&amp; !HasItem(113080)"> <!-- A Wrong of Earth and Fire -->
-			<SetGrindArea>
-				<GrindArea>
-					<Factions>1965</Factions>
-					<Hotspots>
-						<!-- <Vendor Name="Magmire" Entry="80586" Type="Repair" X="4552.727" Y="5309.888" Z="133.5076" /> -->
-						<Hotspot X="4552.727" Y="5309.888" Z="133.5076" />
-					</Hotspots>
-				</GrindArea>
-			</SetGrindArea>
-			<GrindUntil Condition="HasItem(113080)" />
-		</While>
-		<If Condition="HasItem(113080)">
-			<PickUp QuestName="A Wrong of Earth and Fire" QuestId="33928" GiverType="Item" GiverId="113080" />
-		</If>
-		<!-- Fire -->
-		<Objective QuestName="Elemental Attunement" QuestId="35333" Type="UseObject" ObjectId="230963" UseCount="1" />
-		<Objective QuestName="Guardians of the Plateau" QuestId="34893" Type="KillMob" MobId="80376" KillCount="1" />
-		<Objective QuestName="Earth, Wind and Fire...and Water" QuestId="34881" Type="CollectItem" ItemId="112082" CollectCount="4" />
-		<!-- Water -->
-		<Objective QuestName="Elemental Attunement" QuestId="35333" Type="UseObject" ObjectId="230964" UseCount="1" />
-		<Objective QuestName="Guardians of the Plateau" QuestId="34893" Type="KillMob" MobId="80377" KillCount="1" />
-		<Objective QuestName="Earth, Wind and Fire...and Water" QuestId="34881" Type="CollectItem" ItemId="112083" CollectCount="4" />
-		<!-- Earth -->
-		<Objective QuestName="Elemental Attunement" QuestId="35333" Type="UseObject" ObjectId="230961" UseCount="1" />
-		<Objective QuestName="Guardians of the Plateau" QuestId="34893" Type="KillMob" MobId="80374" KillCount="1" />
-		<Objective QuestName="Earth, Wind and Fire...and Water" QuestId="34881" Type="CollectItem" ItemId="112084" CollectCount="4" />
-		<!-- Wind -->
-		<Objective QuestName="Elemental Attunement" QuestId="35333" Type="UseObject" ObjectId="230962" UseCount="1" />
-		<Objective QuestName="Guardians of the Plateau" QuestId="34893" Type="KillMob" MobId="80375" KillCount="1" />
-		<Objective QuestName="Earth, Wind and Fire...and Water" QuestId="34881" Type="CollectItem" ItemId="112085" CollectCount="4" />
+			<Objective QuestName="A Rare Bloom" QuestId="34894" Type="CollectItem" ItemId="112089" CollectCount="1" />
+			<While Condition="!HasQuest(33928) &amp;&amp; !IsQuestCompleted(33928) &amp;&amp; !HasItem(113080)"> <!-- A Wrong of Earth and Fire -->
+				<SetGrindArea>
+					<GrindArea>
+						<Factions>1965</Factions>
+						<Hotspots>
+							<!-- <Vendor Name="Magmire" Entry="80586" Type="Repair" X="4552.727" Y="5309.888" Z="133.5076" /> -->
+							<Hotspot X="4552.727" Y="5309.888" Z="133.5076" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+				<GrindUntil Condition="HasItem(113080)" />
+			</While>
+			<If Condition="HasItem(113080)">
+				<PickUp QuestName="A Wrong of Earth and Fire" QuestId="33928" GiverType="Item" GiverId="113080" />
+			</If>
+			<!-- Fire -->
+			<Objective QuestName="Elemental Attunement" QuestId="35333" Type="UseObject" ObjectId="230963" UseCount="1" />
+			<Objective QuestName="Guardians of the Plateau" QuestId="34893" Type="KillMob" MobId="80376" KillCount="1" />
+			<Objective QuestName="Earth, Wind and Fire...and Water" QuestId="34881" Type="CollectItem" ItemId="112082" CollectCount="4" />
+			<!-- Water -->
+			<Objective QuestName="Elemental Attunement" QuestId="35333" Type="UseObject" ObjectId="230964" UseCount="1" />
+			<Objective QuestName="Guardians of the Plateau" QuestId="34893" Type="KillMob" MobId="80377" KillCount="1" />
+			<Objective QuestName="Earth, Wind and Fire...and Water" QuestId="34881" Type="CollectItem" ItemId="112083" CollectCount="4" />
+			<!-- Earth -->
+			<Objective QuestName="Elemental Attunement" QuestId="35333" Type="UseObject" ObjectId="230961" UseCount="1" />
+			<Objective QuestName="Guardians of the Plateau" QuestId="34893" Type="KillMob" MobId="80374" KillCount="1" />
+			<Objective QuestName="Earth, Wind and Fire...and Water" QuestId="34881" Type="CollectItem" ItemId="112084" CollectCount="4" />
+			<!-- Wind -->
+			<Objective QuestName="Elemental Attunement" QuestId="35333" Type="UseObject" ObjectId="230962" UseCount="1" />
+			<Objective QuestName="Guardians of the Plateau" QuestId="34893" Type="KillMob" MobId="80375" KillCount="1" />
+			<Objective QuestName="Earth, Wind and Fire...and Water" QuestId="34881" Type="CollectItem" ItemId="112085" CollectCount="4" />
 		<TurnIn QuestName="Earth, Wind and Fire...and Water" QuestId="34881" TurnInName="Incineratus" TurnInId="80593" X="4247.078" Y="5259.914" Z="66.14429" />
 		<TurnIn QuestName="Guardians of the Plateau" QuestId="34893" TurnInName="Incineratus" TurnInId="80593" X="4247.078" Y="5259.914" Z="66.14429" />
-		<If Condition="HasQuest(33928)" >
-			<TurnIn QuestName="A Wrong of Earth and Fire" QuestId="33928" TurnInName="Incineratus" TurnInId="80593" X="4247.078" Y="5259.914" Z="66.14429" />
-		</If>
+			<If Condition="HasQuest(33928)" >
+		<TurnIn QuestName="A Wrong of Earth and Fire" QuestId="33928" TurnInName="Incineratus" TurnInId="80593" X="4247.078" Y="5259.914" Z="66.14429" />
+			</If>
 		<TurnIn QuestName="Elemental Attunement" QuestId="35333" TurnInName="Vindicator Nobundo" TurnInId="82138" X="4179.509" Y="5238.367" Z="65.45138" />
 		<TurnIn QuestName="A Rare Bloom" QuestId="34894" TurnInName="Garrok" TurnInId="80434" X="4062.486" Y="5047.749" Z="160.7077" />
 		<PickUp QuestName="Guise of the Deceiver" QuestId="34932" GiverName="Garrok" GiverId="80434" X="4062.486" Y="5047.749" Z="160.7077" />
-		<While Condition="HasQuest(34932) &amp;&amp; !IsQuestCompleted(34932)" > <!-- Guise of the Deceiver -->
-			<CustomBehavior File="InteractWith" QuestId="34932" MobId="80483" GossipOptions="1" NonCompeteDistance="0" Range="4" TerminateWhen="IsObjectiveComplete(1, 34932)" X="4040.778" Y="4884.305" Z="197.9846" />
-			<CustomBehavior File="InteractWith" QuestId="34932" MobId="80483" GossipOptions="1" NonCompeteDistance="0" Range="4" TerminateWhen="IsObjectiveComplete(2, 34932)" X="4040.778" Y="4884.305" Z="197.9846" />
-		</While>
+			<While Condition="HasQuest(34932) &amp;&amp; !IsQuestCompleted(34932)" > <!-- Guise of the Deceiver -->
+				<CustomBehavior File="InteractWith" QuestId="34932" MobId="80483" GossipOptions="1" NonCompeteDistance="0" Range="4" TerminateWhen="IsObjectiveComplete(1, 34932)" X="4040.778" Y="4884.305" Z="197.9846" />
+				<CustomBehavior File="InteractWith" QuestId="34932" MobId="80483" GossipOptions="1" NonCompeteDistance="0" Range="4" TerminateWhen="IsObjectiveComplete(2, 34932)" X="4040.778" Y="4884.305" Z="197.9846" />
+			</While>
 		<TurnIn QuestName="Guise of the Deceiver" QuestId="34932" TurnInName="Garrok" TurnInId="80434" X="4062.486" Y="5047.749" Z="160.7077" />
 		<PickUp QuestName="The Debt We Share" QuestId="34941" GiverName="Garrok" GiverId="80434" X="4062.486" Y="5047.749" Z="160.7077" />
-		<While Condition="HasQuest(34941) &amp;&amp; !IsQuestCompleted(34941)" > <!-- The Debt We Share -->
-			<CustomBehavior File="InteractWith" QuestId="34941" MobId="80434" GossipOptions="1" NonCompeteDistance="0" Range="4" TerminateWhen="IsObjectiveComplete(1, 34941)" X="4062.486" Y="5047.749" Z="160.7088" />
-		</While>
+			<While Condition="HasQuest(34941) &amp;&amp; !IsQuestCompleted(34941)" > <!-- The Debt We Share -->
+				<CustomBehavior File="InteractWith" QuestId="34941" MobId="80434" GossipOptions="1" NonCompeteDistance="0" Range="4" TerminateWhen="IsObjectiveComplete(1, 34941)" X="4062.486" Y="5047.749" Z="160.7088" />
+			</While>
 		<TurnIn QuestName="The Debt We Share" QuestId="34941" TurnInName="Kalandrios" TurnInId="80595" X="4177.374" Y="5177.474" Z="64.45306" />
 		<PickUp QuestName="The Ritual of Binding" QuestId="35330" GiverName="Vindicator Nobundo" GiverId="82138" X="4179.509" Y="5238.367" Z="65.45057" />
-		<While Condition="HasQuest(35330) &amp;&amp; !IsQuestCompleted(35330)" > <!-- The Ritual of Binding -->
-			<CustomBehavior File="InteractWith" QuestId="35330" MobId="80595" GossipOptions="1" NonCompeteDistance="0" Range="4" WaitTime="3000" X="4177.374" Y="5177.474" Z="64.45306" />
-			<CustomBehavior File="Misc\RunLua" Lua="if MovieFrame and MovieFrame:IsVisible() then MovieFrame:StopMovie() elseif CinematicFrame and CinematicFrame:IsVisible() then CinematicFrame_CancelCinematic() end" WaitTime="2000" />
-		</While>
+			<While Condition="HasQuest(35330) &amp;&amp; !IsQuestCompleted(35330)" > <!-- The Ritual of Binding -->
+				<CustomBehavior File="InteractWith" QuestId="35330" MobId="80595" GossipOptions="1" NonCompeteDistance="0" Range="4" WaitTime="3000" X="4177.374" Y="5177.474" Z="64.45306" />
+				<CustomBehavior File="Misc\RunLua" Lua="if MovieFrame and MovieFrame:IsVisible() then MovieFrame:StopMovie() elseif CinematicFrame and CinematicFrame:IsVisible() then CinematicFrame_CancelCinematic() end" WaitTime="2000" />
+			</While>
 		<TurnIn QuestName="The Ritual of Binding" QuestId="35330" TurnInName="Vindicator Nobundo" TurnInId="82138" X="4179.509" Y="5238.367" Z="65.45057" />
 		<PickUp QuestName="The Call of Oshu'gun" QuestId="35372" GiverName="Vindicator Nobundo" GiverId="82138" X="4179.509" Y="5238.367" Z="65.45057" />
 		<!-- End of Throne of the Elements -->
 
 		<!-- Snarlpaw Ledge / Spiteleaf Thicket -->
 		<PickUp QuestName="The Dead Do Not Forget..." QuestId="37318" GiverName="Murgok" GiverId="88500" X="3776.934" Y="4799.075" Z="95.38029" />
-		<Objective QuestName="The Dead Do Not Forget..." QuestId="37318" Type="CollectItem" ItemId="119184" CollectCount="10" />
+			<Objective QuestName="The Dead Do Not Forget..." QuestId="37318" Type="CollectItem" ItemId="119184" CollectCount="10" />
 		<TurnIn QuestName="The Dead Do Not Forget..." QuestId="37318" TurnInName="Boneseers Cauldron" TurnInId="237705" TurnInType="GameObject" X="3780.044" Y="4782.819" Z="95.65758" />
 
 		<While Condition="!HasQuest(37280) &amp;&amp; !IsQuestCompleted(37280)" > <!-- Pickup Bonus Objective: Snarlpaw Ledge -->

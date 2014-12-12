@@ -23,7 +23,7 @@
   <DisorientingRoarInterrupt>True</DisorientingRoarInterrupt>
   <DispellMin>100</DispellMin>
   <DispellMax>200</DispellMax>
-  <EntanglingRoots>True</EntanglingRoots>
+  <EntanglingRoots>False</EntanglingRoots>
   <FaerieFire>True</FaerieFire>
   <FerociousBite>True</FerociousBite>
   <FormPowerShift>True</FormPowerShift>
@@ -34,7 +34,7 @@
   <FrenziedRegeneration>False</FrenziedRegeneration>
   <FrenziedRegenerationHP>70</FrenziedRegenerationHP>
   <Genesis>True</Genesis>
-  <GenesisHP>80</GenesisHP>
+  <GenesisHP>70</GenesisHP>
   <GenesisTimeLeft>8</GenesisTimeLeft>
   <GenesisUnit>1</GenesisUnit>
   <GrowlTank>False</GrowlTank>
@@ -103,6 +103,7 @@
   <RejuvenationNonResto>True</RejuvenationNonResto>
   <Rejuvenation>True</Rejuvenation>
   <RejuvenationHP>95</RejuvenationHP>
+  <RejuvenationGerminationHP>80</RejuvenationGerminationHP>
   <RejuvenationAll>True</RejuvenationAll>
   <RejuvenationAllMana>70</RejuvenationAllMana>
   <Renewal>True</Renewal>
@@ -137,7 +138,7 @@
   <WildCharge>True</WildCharge>
   <WildGrowth>True</WildGrowth>
   <WildGrowthUnit>3</WildGrowthUnit>
-  <WildGrowthHP>95</WildGrowthHP>
+  <WildGrowthHP>80</WildGrowthHP>
   <WildMushroomPlacementKeys>D6</WildMushroomPlacementKeys>
   <WildMushroomPlacement>True</WildMushroomPlacement>
   <WildMushroomBalance>False</WildMushroomBalance>

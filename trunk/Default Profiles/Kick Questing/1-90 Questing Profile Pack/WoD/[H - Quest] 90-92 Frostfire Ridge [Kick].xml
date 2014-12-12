@@ -966,9 +966,11 @@
 
 		<CustomBehavior File="Message" Text="Compiling Org Quests" LogColor="CornflowerBlue" />
 
+		<!--
 		<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="3" ExpiryTime="9" ExpiryAction="InputEnabled_Continue" 
-			Text="We are now accepting bug reports against the 90-100 portion of this pack.  Please do NOT open new threads in the forum regarding bugs with these profiles--such threads will be deleted!  Use Kick's Profiles thread!" />
-
+			Text="We are now accepting bug reports against the 90-100 portion of this pack.  Please do NOT open new threads in the forum regarding bugs with these profiles-such threads will be deleted!  Use Kick's Profiles thread!" />
+		-->
+		
 		<If Condition="!IsQuestCompleted(34420)" > <!-- Pull Distance Modifier for high mob count areas -->
 			<TargetingDistance Value="5" /> <!-- Use LevelBot default -->
 		</If>
@@ -990,7 +992,7 @@
 						<Mailbox X="1550.458" Y="-4364.466" Z="17.52338" />
 					</Mailboxes>
 				</SetMailbox>
-				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True" DoMail="True" />
+				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True"  />
 				<ClearVendor />
 				<ClearMailbox />
 			</If>
@@ -1362,9 +1364,13 @@
 		<PickUp QuestName="Build Your Barracks" QuestId="34461" GiverName="Gazlowe" GiverId="78466" X="5564.242" Y="4517.042" Z="132.0609"/>
 		<While Condition="HasQuest(34461) &amp;&amp; !IsQuestCompleted(34461)" > <!-- Build Your Barracks -->
 			<MoveTo X="5592.792" Y="4484.454" Z="130.0325" />
-			<CustomBehavior File="InteractWith" QuestId="34461" MobId="231012" ObjectType="GameObject" TerminateWhen="IsObjectiveComplete(1, 34461)" NonCompeteDistance="0" WaitTime="7000" Range="2" X="5579.406" Y="4464.98" Z="132.1373" />
+			<While Condition="!IsObjectiveComplete(1, 34461)"> <!-- Learn Blueprint -->
+				<CustomBehavior File="InteractWith" QuestId="34461" MobId="231012" ObjectType="GameObject" TerminateWhen="IsObjectiveComplete(1, 34461)" NonCompeteDistance="0" WaitTime="10000" Range="2" X="5579.406" Y="4464.98" Z="132.1373" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for objective to complete {TimeRemaining}" />
+			</While>
 			<While Condition="!IsObjectiveComplete(2, 34461)"> <!-- Learn Blueprint -->
-				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:111956&quot;)" WaitTime="8000" /> <!-- Garrison Blueprint: Barracks, Level 1 -->
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:111956&quot;)" WaitTime="10000" /> <!-- Garrison Blueprint: Barracks, Level 1 -->
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for objective to complete {TimeRemaining}" />
 			</While>
 			<While Condition="!IsObjectiveComplete(3, 34461)"> <!-- Architect Table / Build Your Barracks -->
 				<CustomBehavior File="InteractWith" QuestId="34461" MobId="80600" Range="5" WaitTime="6000" X="5563.049" Y="4518.574" Z="131.976" /> <!-- Architect Table -->
@@ -1949,7 +1955,7 @@
 			<Objective QuestName="The Land Provides" QuestId="34960" Type="CollectItem" ItemId="112266" CollectCount="30" />
 			<TurnIn QuestName="The Land Provides" QuestId="34960" TurnInName="Gazlowe" TurnInId="78466" X="5587.91" Y="4482.172" Z="130.0531" />
 			<EnableBehavior Name="Pull" />
-			<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True" DoMail="True" />
+			<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True"  />
 		</If>
 		<!-- End of Grom'gar -->
 
@@ -2181,95 +2187,8 @@
 		<TurnIn QuestName="The Secrets of Gorgrond" QuestId="34867" TurnInName="Durotan" TurnInId="74594" X="5392.558" Y="2018.155" Z="175.3698" />
 
 
+		<CustomBehavior File="LoadProfile" RememberProfile="True" ProfileName="[H - Quest] 92-94 Gorgrond [Kick]" />
 
-		<!--
-
-
-
-
-
-
-	
-
-	-->
-
-		<!--
-			<While Condition="HasQuest() &amp;&amp; !IsQuestCompleted()" >
-			</While>
-				<CustomBehavior File="InteractWith" QuestId="" MobId="" Range="4" NonCompeteDistance="0" TerminateWhen="IsObjectiveComplete(1, )" 
-				<CustomBehavior File="InteractWith" QuestId="" MobId="" GossipOptions="1" NonCompeteDistance="0" Range="4" TerminateWhen="IsObjectiveComplete(1, )" 
-				<CustomBehavior File="InteractWith" QuestId="" MobId="" ObjectType="GameObject" NonCompeteDistance="0" Range="5" TerminateWhen="IsObjectiveComplete(1, )" 
-		
-			 <If Condition="!IsObjectiveComplete(1, )">
-			 </If>
-			<If Condition="HasQuest() &amp;&amp; !IsQuestCompleted()" >
-			</If>
-			 <While Condition="!IsObjectiveComplete(1, 00000)"> 
-			 </While>
-				<CustomBehavior File="InteractWith" QuestId="" MobId="" Range="5" 
-				<CustomBehavior File="InteractWith" QuestId="" MobId="" ObjectType="GameObject" WaitTime="2000" Range="3" 
-
-			<If Condition="HasQuest() &amp;&amp; !HasItem()" >
-			</If>
-			
-			<While Condition="HasQuest() &amp;&amp; !IsQuestCompleted()" >
-				<CustomBehavior File="InteractWith" QuestId="" MobId="" NumOfTimes="20" Range="4" TerminateWhen="IsObjectiveComplete(1, )" 
-											CollectionDistance="200" PreInteractMountStrategy="DismountOrCancelShapeshift" >
-				  <HuntingGrounds>
-					
-				  </HuntingGrounds>
-				</CustomBehavior>
-			</While>
-			
-			<While Condition="HasQuest() &amp;&amp; !IsQuestCompleted()" >
-				<CustomBehavior File="InteractWith" QuestId="" MobId="" ObjectType="GameObject" NumOfTimes="20" Range="5" 
-											TerminateWhen="IsObjectiveComplete(1, )" CollectionDistance="200" PreInteractMountStrategy="DismountOrCancelShapeshift" >
-				  <HuntingGrounds>
-					
-				  </HuntingGrounds>
-				</CustomBehavior>
-			</While>
-			
-			// bonus objectives quick copy
-			<If Condition="!HasQuest() &amp;&amp; !IsQuestCompleted()" >
-				<MoveTo 
-			</If>
-			<If Condition="HasQuest() &amp;&amp; !IsQuestCompleted()" >
-				<CustomBehavior File="InteractWith" QuestId="" MobId="" NumOfTimes="20" Range="4" CollectionDistance="200" TerminateWhen="IsObjectiveComplete(1, )" >
-				  <HuntingGrounds>
-				  </HuntingGrounds>
-				</CustomBehavior>
-				<CustomBehavior File="InteractWith" QuestId="" MobId="" NumOfTimes="20" Range="4" CollectionDistance="200" TerminateWhen="IsObjectiveComplete(2, )" >
-				  <HuntingGrounds>
-				  </HuntingGrounds>
-				</CustomBehavior>
-				<CustomBehavior File="WaitTimer" WaitTime="3000" GoalText="Waiting for quest to complete {TimeRemaining}" />
-			</If>
-			
-
-			-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" 
-										Text="End of Tested Profile. Development from here. \n
-										Yes, you read correctly.  There are no more quests after this message. Don't post on forums and ask." />
-
-		<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" StopOnContinue="True" SoundCueInterval="1" 
-										Text="I'm serious, there's no more quests." />
 
 	</QuestOrder>
 
