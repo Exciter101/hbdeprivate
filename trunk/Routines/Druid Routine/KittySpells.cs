@@ -37,6 +37,7 @@ namespace Kitty
             REJUVENATION = "Rejuvenation",
             RAKE = "Rake",
             RIP = "Rip",
+            WILD_CHARGE = "Wild Charge",
             FEROCIUOS_BITE = "Ferocious Bite",
             SAVAGE_ROAR = "Savage Roar",
             PREDATORY_SWIFTNESS = "Predatory Swiftness",
@@ -94,6 +95,7 @@ namespace Kitty
             TRANQUILITY = "Tranquility",
             LIFEBLOOM = "Lifebloom",
             NATURES_CURE = "Nature's Cure",
+            LUNAR_INSPIRATION = "Lunar Inspiration",
             EINDE = "The End";
 
 
@@ -106,6 +108,7 @@ namespace Kitty
             CRYSTAL_OF_ORALIUS_ITEM = 118922,
             DREAM_OF_CENARIUS_INT = 145162,
             HEALING_TOUCH_INT = 5185,
+            REGROWTH_INT = 8936,
             EIND = 0;
 
         public static string LSPELLCAST = string.Empty;
@@ -117,13 +120,26 @@ namespace Kitty
         {
             get
             {
-                if (P.myPrefs.Trinket1Use) return false;
-                if (P.myPrefs.Trinket1 == 1) return false;
-                if (P.myPrefs.Trinket1 == 2 && (HKM.cooldownsOn || (Targets.IsWoWBoss(Me.CurrentTarget) && AutoBot))) return true;
-                if (P.myPrefs.Trinket1 == 3 && IsCrowdControlledPlayer(Me)) return true;
-                if (P.myPrefs.Trinket1 == 4 && Me.EnergyPercent <= P.myPrefs.PercentTrinket1Energy) return true;
-                if (P.myPrefs.Trinket1 == 5 && Me.ManaPercent >= P.myPrefs.PercentTrinket1Mana) return true;
-                if (P.myPrefs.Trinket1 == 6 && Me.HealthPercent <= P.myPrefs.PercentTrinket1HP) return true;
+                if (MeIsResto)
+                {
+                    if (P.myPrefs.Trinket1UseResto) return false;
+                    if (P.myPrefs.Trinket1Resto == 1) return false;
+                    if (P.myPrefs.Trinket1Resto == 2 && (HKM.cooldownsOn || (Targets.IsWoWBoss(Me.CurrentTarget) && AutoBot))) return true;
+                    if (P.myPrefs.Trinket1Resto == 3 && IsCrowdControlledPlayer(Me)) return true;
+                    if (P.myPrefs.Trinket1Resto == 4 && Me.EnergyPercent <= P.myPrefs.PercentTrinket1EnergyResto) return true;
+                    if (P.myPrefs.Trinket1Resto == 5 && Me.ManaPercent >= P.myPrefs.PercentTrinket1ManaResto) return true;
+                    if (P.myPrefs.Trinket1Resto == 6 && Me.HealthPercent <= P.myPrefs.PercentTrinket1HPResto) return true;
+                }
+                else
+                {
+                    if (P.myPrefs.Trinket1Use) return false;
+                    if (P.myPrefs.Trinket1 == 1) return false;
+                    if (P.myPrefs.Trinket1 == 2 && (HKM.cooldownsOn || (Targets.IsWoWBoss(Me.CurrentTarget) && AutoBot))) return true;
+                    if (P.myPrefs.Trinket1 == 3 && IsCrowdControlledPlayer(Me)) return true;
+                    if (P.myPrefs.Trinket1 == 4 && Me.EnergyPercent <= P.myPrefs.PercentTrinket1Energy) return true;
+                    if (P.myPrefs.Trinket1 == 5 && Me.ManaPercent >= P.myPrefs.PercentTrinket1Mana) return true;
+                    if (P.myPrefs.Trinket1 == 6 && Me.HealthPercent <= P.myPrefs.PercentTrinket1HP) return true;
+                }
                 return false;
             }
         }
@@ -131,13 +147,26 @@ namespace Kitty
         {
             get
             {
-                if (P.myPrefs.Trinket2Use) return false;
-                if (P.myPrefs.Trinket2 == 1) return false;
-                if (P.myPrefs.Trinket2 == 2 && (HKM.cooldownsOn || (Targets.IsWoWBoss(Me.CurrentTarget) && AutoBot)))
-                if (P.myPrefs.Trinket2 == 3 && IsCrowdControlledPlayer(Me)) return true;
-                if (P.myPrefs.Trinket2 == 4 && Me.EnergyPercent <= P.myPrefs.PercentTrinket2Energy) return true;
-                if (P.myPrefs.Trinket2 == 5 && Me.ManaPercent >= P.myPrefs.PercentTrinket2Mana) return true;
-                if (P.myPrefs.Trinket2 == 6 && Me.HealthPercent <= P.myPrefs.PercentTrinket2HP) return true;
+                if (MeIsResto)
+                {
+                    if (P.myPrefs.Trinket2UseResto) return false;
+                    if (P.myPrefs.Trinket2Resto == 1) return false;
+                    if (P.myPrefs.Trinket2Resto == 2 && (HKM.cooldownsOn || (Targets.IsWoWBoss(Me.CurrentTarget) && AutoBot)))
+                    if (P.myPrefs.Trinket2Resto == 3 && IsCrowdControlledPlayer(Me)) return true;
+                    if (P.myPrefs.Trinket2Resto == 4 && Me.EnergyPercent <= P.myPrefs.PercentTrinket2EnergyResto) return true;
+                    if (P.myPrefs.Trinket2Resto == 5 && Me.ManaPercent >= P.myPrefs.PercentTrinket2ManaResto) return true;
+                    if (P.myPrefs.Trinket2Resto == 6 && Me.HealthPercent <= P.myPrefs.PercentTrinket2HPResto) return true;
+                }
+                else
+                {
+                    if (P.myPrefs.Trinket2Use) return false;
+                    if (P.myPrefs.Trinket2 == 1) return false;
+                    if (P.myPrefs.Trinket2 == 2 && (HKM.cooldownsOn || (Targets.IsWoWBoss(Me.CurrentTarget) && AutoBot)))
+                    if (P.myPrefs.Trinket2 == 3 && IsCrowdControlledPlayer(Me)) return true;
+                    if (P.myPrefs.Trinket2 == 4 && Me.EnergyPercent <= P.myPrefs.PercentTrinket2Energy) return true;
+                    if (P.myPrefs.Trinket2 == 5 && Me.ManaPercent >= P.myPrefs.PercentTrinket2Mana) return true;
+                    if (P.myPrefs.Trinket2 == 6 && Me.HealthPercent <= P.myPrefs.PercentTrinket2HP) return true;
+                }
                 return false;
             }
         }
@@ -264,16 +293,17 @@ namespace Kitty
                     && !Me.HasAura(ENHANCED_INTELLECT) 
                     && !Me.HasAura(ENHANCED_STRENGHT) 
                     && !Me.HasAura(CRYSTAL_OF_INSANITY_BUFF)
-                    && !Me.HasAura(CRYSTAL_OF_ORALIUS_BUFF);
+                    && !Me.HasAura(CRYSTAL_OF_ORALIUS_BUFF)
+                    && P.myPrefs.FlaskAlchemy;
             }
         }
         public static bool CrystalOfOraliusConditions
         {
-            get { return !Me.HasAura(CRYSTAL_OF_ORALIUS_BUFF); }
+            get { return !Me.HasAura(CRYSTAL_OF_ORALIUS_BUFF) && P.myPrefs.FlaskOraliusCrystal; }
         }
         public static bool CrystalOfInsanityConditions
         {
-            get { return !Me.HasAura(CRYSTAL_OF_ORALIUS_BUFF) && !Me.HasAura(CRYSTAL_OF_INSANITY_BUFF); }
+            get { return !Me.HasAura(CRYSTAL_OF_ORALIUS_BUFF) && !Me.HasAura(CRYSTAL_OF_INSANITY_BUFF) && P.myPrefs.FlaskCrystal; }
         }
         public static bool BerserkBearConditions
         {
@@ -304,6 +334,11 @@ namespace Kitty
         public static bool SR_BUFF_UP { get { return buffExists(SAVAGE_ROAR, Me); } }
 
         public static bool TigersFuryConditions { get { return !spellOnCooldown(TIGERS_FURY) && Me.EnergyPercent < 30; } }
+
+        public static bool WildChargeConditions(float min, float max)
+        {
+            return Me.CurrentTarget != null && (Me.CurrentTarget.Distance >= min && Me.CurrentTarget.Distance <= max);
+        }
 
         public static bool FerociousBiteConditions
         {

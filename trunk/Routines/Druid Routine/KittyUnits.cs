@@ -87,8 +87,7 @@ namespace Kitty
             return ObjectManager.GetObjectsOfType<WoWUnit>(true, false).Where(u => u != null
                 && ValidUnit(u)
                 && !Blacklist.Contains(u, BlacklistFlags.All))
-                .OrderBy(u => u.HealthPercent)
-                .ThenBy(u => u.Distance).ToList();
+                .OrderBy(u => u.Distance).ToList();
         }
         public static int FindTargetsCount { get { return FindTarget().Count(); } }
 
@@ -668,6 +667,14 @@ namespace Kitty
                         WoWApplyAuraType.ModPossess,
                         WoWApplyAuraType.ModRoot);
         }
+        public static bool MeIsSnared
+        {
+            get
+            {
+                Dictionary<string, WoWAura>.ValueCollection auras = Me.Auras.Values;
+                return HasAuraWithEffect(Me, WoWApplyAuraType.ModDecreaseSpeed);
+            }
+        }
         public static bool IsRooted(WoWUnit unit)
         {
             Dictionary<string, WoWAura>.ValueCollection auras = Me.Auras.Values;
@@ -750,6 +757,53 @@ namespace Kitty
                 Blacklist.Add(Me.CurrentTarget.Guid, BlacklistFlags.All, TimeSpan.FromMinutes(30));
                 Me.ClearTarget();
             }
+        }
+        #endregion
+
+        #region dispel
+        //name, rank, icon, count, dispelType
+        public static bool CanDispel(WoWUnit unit)
+        {
+                var s = Lua.GetReturnVal<string>(
+                "local index = 1 " +
+                "local canDispel " +
+                " local _, _, _, _, dispelType, _, expires, _, _, _, buffId = UnitBuff(\"target\", index) " +
+                "while expires do " +
+                " if (dispelType == \"Magic\") or (dispelType == \"Poison\") or (dispelType == \"Curse\") then " +
+                "canDispel = \"yes\" "+
+                "end " +
+                "index = index + 1 " +
+                "end, return canDispel" , 0);
+                return s == "yes" ? true : false;
+        }
+        public static bool CanDispelTarget(WoWUnit unit)
+        {
+            bool dis = false;
+            foreach (var debuff in unit.Debuffs.Values)
+            {
+                // abort if target has one of the auras we should be sure to leave alone
+                //if (CleanseBlacklist.Instance.SpellList.Contains(debuff.SpellId))
+                    //return DispelCapabilities.None;
+
+                switch (debuff.Spell.DispelType)
+                {
+                    case WoWDispelType.Magic:
+                        dis = true;
+                        break;
+                    case WoWDispelType.Curse:
+                        dis = true;
+                        break;
+                    /*case WoWDispelType.Disease:
+                        ret |= DispelCapabilities.Disease;
+                        break;*/
+                    case WoWDispelType.Poison:
+                        dis = true;
+                        break;
+                    default: dis = false;
+                        break;
+                }
+            }
+            return dis;
         }
         #endregion
     }

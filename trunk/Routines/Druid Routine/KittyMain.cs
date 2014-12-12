@@ -30,7 +30,7 @@ namespace Kitty
 {
     public partial class KittyMain : CombatRoutine
     {
-        public override string Name { get { return "Druid Routine (Kitty) by Pasterke"; } }
+        public override string Name { get { return "Druid Routine by Pasterke"; } }
         public override WoWClass Class { get { return WoWClass.Druid; } }
         public static LocalPlayer Me { get { return StyxWoW.Me; } }
 
@@ -65,7 +65,7 @@ namespace Kitty
         {
             Logging.Write("\r\n" + "-- Hello {0}", Me.Name);
             Logging.Write("-- Thanks for using");
-            Logging.Write("-- The Druid Feral Combat Routine");
+            Logging.Write("-- The Druid Combat Routine");
             Logging.Write("-- by Pasterke" + "\r\n");
             HKM.registerHotKeys();
             Lua.Events.AttachEvent("UI_ERROR_MESSAGE", CL.CombatLogErrorHandler);
@@ -79,10 +79,16 @@ namespace Kitty
             Lua.Events.DetachEvent("UI_ERROR_MESSAGE", CL.CombatLogErrorHandler);
         }
 
+        public static int lastPTSize { get; set; }
         public override void Pulse()
         {
             try
             {
+                if (partyCount != lastPTSize)
+                {
+                    Logging.Write(Colors.DarkTurquoise, "Current PartySize: " + partyCount);
+                    lastPTSize = partyCount;
+                }
                 if (Me.IsDead
                     && AutoBot)
                 {
@@ -97,17 +103,11 @@ namespace Kitty
             catch (Exception e) { Logging.Write(Colors.Red, "Pulse: " + e); }
             return;
         }
-        public override bool NeedRest
-        {
-            get
-            {
-                return Me.HealthPercent <= 85;
-            }
-        }
+
         private static async Task<bool> RestCoroutine()
         {
             if (!AutoBot) return false;
-            if (Me.IsCasting || HKM.pauseRoutineOn || HKM.manualOn) return false;
+            if (HKM.pauseRoutineOn || HKM.manualOn) return false;
             if (await EatFood(Me.HealthPercent <= 50 && !Me.IsSwimming)) return true;
             if (await CastBuff(HEALING_TOUCH, Me.HealthPercent <= 75)) return true;
             if (await CastBuff(REJUVENATION, Me.HealthPercent <= 85 && !buffExists(REJUVENATION, Me))) return true;
@@ -116,7 +116,7 @@ namespace Kitty
 
         private static async Task<bool> PreCombatBuffCoroutine()
         {
-            if (Me.IsCasting || HKM.pauseRoutineOn || HKM.manualOn) return false;
+            if (HKM.pauseRoutineOn || HKM.manualOn) return false;
             if (await CastBuff(MARK_OF_THE_WILD, MarkOfTheWildConditions && Canbuff)) return true;
             if (await UseItem(CRYSTAL_OF_ORALIUS_ITEM, CrystalOfOraliusConditions && Canbuff)) return true;
             if (await UseItem(CRYSTAL_OF_INSANITY_ITEM, CrystalOfInsanityConditions && Canbuff)) return true;
@@ -128,19 +128,22 @@ namespace Kitty
 
         private static async Task<bool> CombatBuffCoroutine()
         {
-            if (Me.IsCasting || HKM.pauseRoutineOn || HKM.manualOn) return false;
+            if (HKM.pauseRoutineOn || HKM.manualOn) return false;
             if (await CastBuff(MARK_OF_THE_WILD, MarkOfTheWildConditions && Canbuff)) return true;
             if (await UseItem(CRYSTAL_OF_ORALIUS_ITEM, CrystalOfOraliusConditions && Canbuff)) return true;
             if (await UseItem(CRYSTAL_OF_INSANITY_ITEM, CrystalOfInsanityConditions && Canbuff)) return true;
             if (await UseItem(ALCHEMYFLASK_ITEM, AlchemyFlaskConditions && Canbuff)) return true;
             if (await UseItem(HEALTHSTONE_ITEM, Me.HealthPercent <= 45 && Canbuff)) return true;
+            if (await CastHeal(REBIRTH, TankPlayerToRes, TankPlayerToRes != null && HKM.resTanks && !spellOnCooldown(REBIRTH))) return true;
+            if (await CastHeal(REBIRTH, HealerPlayerToRes, HealerPlayerToRes != null && HKM.resHealers && !spellOnCooldown(REBIRTH))) return true;
+            if (await CastHeal(REBIRTH, AllPlayerToRes, AllPlayerToRes != null && HKM.resAll && !spellOnCooldown(REBIRTH))) return true;
             return false;
         }
 
         private static async Task<bool> PullBuffCoroutine()
         {
             if (!AutoBot) return false;
-            if (Me.IsCasting || HKM.pauseRoutineOn || HKM.manualOn) return false;
+            if (HKM.pauseRoutineOn || HKM.manualOn) return false;
             if (await CastBuff(TRAVEL_FORM, !Me.Combat && Me.IsSwimming && !buffExists(TRAVEL_FORM, Me) && !buffExists(PROWL, Me) && Canbuff)) return true;
             if (await CastBuff(PROWL, gotTarget && MeIsFeral && (P.myPrefs.PullProwlAndRake || P.myPrefs.PullProwlAndShred) && Canbuff && !buffExists(PROWL, Me))) return true;
             return false;
@@ -148,7 +151,7 @@ namespace Kitty
 
         private static async Task<bool> PullCoroutine()
         {
-            if (Me.IsCasting || HKM.pauseRoutineOn || HKM.manualOn) return false;
+            if (HKM.pauseRoutineOn || HKM.manualOn) return false;
             if (await RemoveRooted(BEAR_FORM, MeIsRooted && MeIsGuardian && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await RemoveRooted(FERALFORM, MeIsFeral && MeIsRooted && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await CastBuff(CAT_FORM, Me.Shapeshift != ShapeshiftForm.Cat && MeIsFeral)) return true;
@@ -160,6 +163,8 @@ namespace Kitty
             if (await StopMovement(gotTarget && AllowMovement && Me.CurrentTarget.Distance <= 39f && (MeIsBoomkin || MeIsLowbie || MeIsResto))) return true;
             if (await FaceMyTarget(gotTarget && AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget))) return true;
             //feral
+            if (await Cast(WILD_CHARGE, gotTarget && P.myPrefs.PullWildCharge && !spellOnCooldown(WILD_CHARGE) && WildChargeConditions(8, 25) && MeIsFeral)) return true;
+            if (await Cast(MOONFIRE, gotTarget && SpellManager.HasSpell(LUNAR_INSPIRATION) && Me.CurrentTarget.Distance <= 35)) return true;
             if (await Cast(MOONFIRE, gotTarget 
                 && !SpellManager.HasSpell(FAERIE_FIRE) 
                 && !SpellManager.HasSpell(FAERIE_SWARM)
@@ -173,6 +178,7 @@ namespace Kitty
             if (await Cast(RAKE, gotTarget && Me.CurrentTarget.IsWithinMeleeRange && MeIsFeral && !P.myPrefs.PullProwlAndRake && spellOnCooldown(FF))) return true;
             if (await Cast(SHRED, gotTarget && Me.CurrentTarget.IsWithinMeleeRange && MeIsFeral && !P.myPrefs.PullProwlAndShred && spellOnCooldown(FF))) return true;
             //guardian
+            if (await Cast(WILD_CHARGE, gotTarget && P.myPrefs.PullWildCharge && !spellOnCooldown(WILD_CHARGE) && WildChargeConditions(8, 25) && MeIsGuardian)) return true;
             if (await Cast(FF, gotTarget && !spellOnCooldown(FF) && Me.CurrentTarget.Distance <= 30 && MeIsGuardian)) return true;
             if (await Cast(GROWL, gotTarget && spellOnCooldown(FF) && Me.CurrentTarget.Distance <= 30 && MeIsGuardian)) return true;
             if (await Cast(LACERATE, gotTarget && Me.CurrentTarget.IsWithinMeleeRange && MeIsGuardian)) return true;

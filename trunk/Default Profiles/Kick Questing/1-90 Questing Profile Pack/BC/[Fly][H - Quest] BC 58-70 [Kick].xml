@@ -2,7 +2,7 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<!-- Originally contributed by Kickazz006 -->
-	<Name>[Fly][H - Quest] BC 58-70 [Kick]($Rev: 3870 $)</Name>
+	<Name>[Fly][H - Quest] BC 58-70 [Kick]($Rev: 3888 $)</Name>
 	<MinLevel>58</MinLevel>
 	<MaxLevel>1001</MaxLevel>
 
@@ -3667,7 +3667,7 @@
 			</If>
 			<SetGrindArea>
 				<GrindArea>
-					<Name>Grind to Level 62($Rev: 3870 $)</Name>
+					<Name>Grind to Level 62($Rev: 3888 $)</Name>
 					<Factions>954</Factions>
 					<TargetMinLevel>58</TargetMinLevel>
 					<TargetMaxLevel>61</TargetMaxLevel>
@@ -5897,8 +5897,14 @@
 	    <While Condition="HasQuest(9856) &amp;&amp; !IsQuestCompleted(9856)" >
 	        <CustomBehavior File="RunCode" ><![CDATA[ 
 	            var waitAtLoc = WoWMathHelper.GetRandomPointInCircle(new WoWPoint(-710.2057, 8417.889, 37.70057), 10);
-	            while(!IsQuestCompleted(9856) && BotPoi.Current.Type == Styx.CommonBot.POI.PoiType.None)
+	            while(!IsQuestCompleted(9856) )
 	            {
+	                if (Styx.CommonBot.POI.BotPoi.Current.Type != Styx.CommonBot.POI.PoiType.None)
+	                    return;
+
+	                if (LootTargeting.Instance.FirstObject != null || Targeting.Instance.FirstUnit != null)
+	                    return;
+
 	                if (Me.Location.DistanceSqr(waitAtLoc) > 5*5)
 	                {                        
 	                    Flightor.MoveTo(waitAtLoc);
@@ -5909,7 +5915,11 @@
 	                    await CommonCoroutines.LandAndDismount(landPoint: waitAtLoc);
 	                    var gutRipper = Unit(18257, u => u.IsAlive);
 	                    if (gutRipper != null)
-	                        await Bots.DungeonBuddy.Helpers.ScriptHelpers.CastRangedAbility(gutRipper);
+                        {
+                            if (Me.CurrentTargetGuid != gutRipper.Guid)
+                                gutRipper.Target();
+                        	await Bots.DungeonBuddy.Helpers.ScriptHelpers.CastRangedAbility(gutRipper);
+                        }
 	                }
 	                await Coroutine.Yield();
 	            }

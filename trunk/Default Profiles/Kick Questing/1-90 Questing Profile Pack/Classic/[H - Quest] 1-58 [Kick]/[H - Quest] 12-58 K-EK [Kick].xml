@@ -4,7 +4,7 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <!-- Originally contributed by Kickazz006 -->
-    <Name>[H - Quest] 12-58 K and EK [Kick] ($Rev: 3547 $)</Name>
+    <Name>[H - Quest] 12-58 K and EK [Kick] ($Rev: 3884 $)</Name>
 
     <MinLevel>5</MinLevel>
     <MaxLevel>1001</MaxLevel>
@@ -4051,7 +4051,7 @@
             <EnableBehavior Name="Loot" />
             <CustomBehavior File="UserSettings" Preset="UserOriginal" />
             <PickUp QuestName="All Apologies" QuestId="13841" GiverName="Splintertree Demolisher" GiverId="33726" />
-            <TurnIn QuestName="All Apologies" QuestId="13841" TurnInName="Garrosh Hellscream" TurnInId="39605" />
+            <TurnIn QuestName="All Apologies" QuestId="13841" TurnInName="Vol'jin" TurnInId="86832" X="1669.59" Y="-4343.08" Z="28.36332" />
             <If Condition="!HasQuest(13842) &amp;&amp; !IsQuestCompleted(13842)">
                 <PickUp QuestName="Dread Head Redemption" QuestId="13842" GiverName="Garrosh Hellscream" GiverId="39605" />
                 <!-- Set Hearth to Orgrimmar -->
@@ -8832,13 +8832,13 @@
         <MoveTo DestName="The Spirits of Golakka Hot Springs" QuestId="24706" X="-7228.146" Y="-599.6198" Z="-271.2461" />
 
         <If Condition="HasQuest(24706)">
-            <DisableBehavior Name="All" />
+            <DisableBehavior Name="Pull" />
             <While Condition="HasQuest(24706) &amp;&amp; !IsQuestCompleted(24706)">
                 <CustomBehavior File="TargetAndMoveToMob" MobId="38254" TargetOnlyIfHealthPercentAbove="1" MoveWithinMaxRangeOfMob="2" />
                 <CustomBehavior File="WaitTimer" WaitTime="25000" />
             </While>
         </If>
-        <EnableBehavior Name="All" />
+        <EnableBehavior Name="Pull" />
 
         <If Condition="HasQuest(24706) &amp;&amp; IsQuestCompleted(24706)">
             <TurnIn QuestId="24706" />

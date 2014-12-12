@@ -26,7 +26,7 @@ namespace MasterBaiter
         private static string LogName { get { return "MasterBaiter"; } }
         public override string Author { get { return "FaceRollFTW"; } }
         public override Version Version { get { return _version; } }
-        private readonly Version _version = new Version(1, 0, 0, 1);
+        private readonly Version _version = new Version(1, 0, 0, 2);
         private static LocalPlayer Me { get { return StyxWoW.Me; } }
 
 
@@ -149,8 +149,8 @@ namespace MasterBaiter
 
                 if (CheckForBaits_Timer == null)
                 {  
-                    // This should never happen but you never say never.
-                    MyDebugging("Pulse: CurrentBait = null & CheckForBaits_Timer = null - How did this happen?");
+                    // This should never happen but you never say never. Or the addon was enabled with no baits set to true.
+                    MyDebugging("Pulse: CurrentBait = null & CheckForBaits_Timer = null - You may not have any baits enabled in the settings");
                     return;
                 }
 
@@ -298,6 +298,12 @@ namespace MasterBaiter
                 Baits.Enqueue(new Bait("Sea Scorpion Bait", "Sea Scorpion Bait", 110292, 158037, 9999, "Draenor Coast"));
             }
 
+            if (Baits.Count == 0)
+            {
+                MyLogging("No Baits Enabled");
+                Master_Settings.DumpSettings("No Baits Enabled");
+            }
+
             return;
         }
 
@@ -342,6 +348,16 @@ namespace MasterBaiter
                     retBait = Baits.Peek();  // Get the next.
                 }
             } while (firstBait != retBait);
+
+            //
+            // Just in case the first bait in the queue is the only one in your bags and SwitchBaits is set to true.
+            //
+            if (retBait.IsInBags)
+            {
+                MyDebugging("GetNextUsableBait: Returning = " + retBait.Name);
+                return retBait;
+            }
+
 
             MyLogging("No selected baits are in your bags.");
 
