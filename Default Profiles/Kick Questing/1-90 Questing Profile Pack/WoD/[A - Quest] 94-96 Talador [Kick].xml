@@ -1,6 +1,6 @@
 <HBProfile xsi:noNamespaceSchemaLocation="../../../Schemas/QuestProfileSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<!-- Original contribution by Kickazz006 -->
-	<Name>[A - Quest] 94-96 Talador [Kick] ($Rev: 3897 $)</Name>
+	<Name>[A - Quest] 94-96 Talador [Kick] ($Rev: 3925 $)</Name>
 
 	<MinLevel>94</MinLevel>
 	<MaxLevel>1001</MaxLevel>
@@ -37,6 +37,7 @@
 		<Blackspot X="798.1111" Y="2623.68" Z="164.7325" Radius="20" /> <!-- Stay away from this mob -->
 		<Blackspot X="4048.485" Y="2183.158" Z="75.64412" Radius="50" Height="30" /> <!-- Horde Base - N Talador -->
 		<Blackspot X="3189.836" Y="2887.071" Z="54.17657" Radius="55" /> <!-- Invis Wall -->
+		<Blackspot X="3690.457" Y="1196.113" Z="90.14668" Radius="2" /> <!-- Kuuro -->
 	</Blackspots>
 
 	<Blacklist>
@@ -862,6 +863,47 @@
 			</Hotspots>
 		</Objective>
 	</Quest>
+    <Quest Id="33872" Name="Dusk of the Dead">
+		<Objective Type="CollectItem" ItemId="108645" CollectCount="7">
+			<CollectFrom>
+				<Mob Name="Agitated Duskwing" Entry="76668" />
+				<Mob Name="Elder Duskwing" Entry="77328" />
+				<Mob Name="Duskwing Flutterer" Entry="77331" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="2497.026" Y="1945.304" Z="121.2419" />
+				<Hotspot X="2545.014" Y="1972.723" Z="113.1586" />
+				<Hotspot X="2526.083" Y="1921.456" Z="111.8927" />
+				<Hotspot X="2471.241" Y="1885.517" Z="114.4053" />
+				<Hotspot X="2425.039" Y="1906.96" Z="122.6696" />
+				<Hotspot X="2392.625" Y="1862.097" Z="118.5323" />
+				<Hotspot X="2401.078" Y="1785.827" Z="113.6824" />
+				<Hotspot X="2365.339" Y="1765.951" Z="119.6554" />
+				<Hotspot X="2322.829" Y="1745.192" Z="116.2446" />
+				<Hotspot X="2339.801" Y="1683.694" Z="110.3074" />
+				<Hotspot X="2288.522" Y="1632.133" Z="114.3559" />
+				<Hotspot X="2231.647" Y="1592.005" Z="119.5416" />
+				<Hotspot X="2203.699" Y="1668.793" Z="118.7444" />
+				<Hotspot X="2152.661" Y="1717.401" Z="110.5938" />
+				<Hotspot X="2193.757" Y="1775.197" Z="123.3585" />
+				<Hotspot X="2218.465" Y="1805.294" Z="126.667" />
+				<Hotspot X="2211.691" Y="1883.792" Z="112.4855" />
+				<Hotspot X="2226.419" Y="1940.622" Z="110.219" />
+				<Hotspot X="2256.973" Y="1918.741" Z="110.5913" />
+				<Hotspot X="2285.888" Y="1973.201" Z="118.1856" />
+				<Hotspot X="2324.988" Y="1874.97" Z="114.29" />
+				<Hotspot X="2379.442" Y="1910.54" Z="121.8426" />
+			</Hotspots>
+		</Objective>
+    </Quest>
+    <Quest Id="33874" Name="Aruumel's Rest">
+		<Objective Type="KillMob" MobId="76824" KillCount="1">
+			<Hotspots>
+				<Hotspot X="2242.269" Y="1723.604" Z="117.6763" />
+			</Hotspots>
+		</Objective>
+    </Quest>
+   
 
 
 
@@ -981,7 +1023,7 @@
 		</If>
 		<!-- END OF SANCTUM CHAIN - PARTIAL -->
 
-		<!-- START ARTILLERY QUESTS -->
+		<!-- START ARTILLERY QUESTS - ALL -->
 		<If Condition="IsQuestCompleted(34563) &amp;&amp; !IsQuestCompleted(34981)" > <!-- The Quarry Quandary / The Only Way to Travel -->
 			<PickUp QuestName="In Ared's Memory" QuestId="35045" GiverName="Apprentice Miall" GiverId="79159" X="3662.293" Y="1703.188" Z="183.8707" />
 			<If Condition="HasQuest(35045)" > <!-- In Ared's Memory -->
@@ -1057,7 +1099,7 @@
 			<If Condition="HasQuest(34578) &amp;&amp; !IsQuestCompleted(34578)" >
 				<If Condition="Unit(79329) != null" > <!-- Miall @ Camp -->
 					<MoveTo X="3597.285" Y="1680.157" Z="172.9388" />
-					<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True" DoMail="True" />
+					<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True"  />
 				</If>
 				<MoveTo X="1732.515" Y="2103.611" Z="140.8006" />
 			</If>
@@ -1142,7 +1184,7 @@
 				<TurnIn QuestName="The Only Way to Travel" QuestId="34981" TurnInName="Miall" TurnInId="80968" X="3604.526" Y="1672.939" Z="174.6657" />
 				<CustomBehavior File="WaitTimer" WaitTime="3000" GoalText="Waiting for quest to complete {TimeRemaining}" />
 				<CustomBehavior File="Misc\RunLua" Lua="QuestFrameCompleteQuestButton:Click()" WaitTime="5000" />
-				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True" DoMail="True" />
+				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True"  />
 			</If>
 			<If Condition="!HasQuest(34982) &amp;&amp; !IsQuestCompleted(34982)" > <!-- Armor Up / Miall Follower -->
 				<MoveTo X="3604.526" Y="1672.939" Z="174.6657" />
@@ -1549,6 +1591,7 @@
 				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for objective to complete {TimeRemaining}" />
 			</While>
 			<While Condition="Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.StageNumber == 5">
+					<CustomBehavior File="Hooks\Avoid" AvoidName="ClusterBomb" Command="Add" ObjectId="78427" Radius="3.5" />
 				<!-- 3 parts to stage 5 -->
 				<If Condition="!Bots.DungeonBuddy.Helpers.ScriptHelpers.CurrentScenarioInfo.CurrentStage.GetStep(1).IsComplete">
 					<MoveTo X="3603.865" Y="3049.384" Z="1.572707" /> <!-- 1 -->
@@ -1563,7 +1606,8 @@
 					<MoveTo X="3922.294" Y="2924.162" Z="18.86321" />
 					<MoveTo X="3918.945" Y="2947.194" Z="18.69538" />
 					<MoveTo X="3919.787" Y="2956.806" Z="21.0472" />
-					<CustomBehavior File="InteractWith" QuestId="34099" MobId="80962" WaitForNpcs="False" X="3919.787" Y="2956.806" Z="21.0472" /> <!-- Machinist B'randt -->
+					<CustomBehavior File="InteractWith" QuestId="34099" MobId="80962" WaitForNpcs="False" MobState="Alive" X="3919.787" Y="2956.806" Z="21.0472" /> <!-- Machinist B'randt -->
+					<CustomBehavior File="Hooks\Avoid" AvoidName="ClusterBomb" Command="Remove" />
 				</If>
 				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for objective to complete {TimeRemaining}" />
 			</While>
@@ -1609,7 +1653,7 @@
 		<Objective QuestName="What the Draenei Found" QuestId="33579" Type="UseObject" ObjectId="224825" UseCount="1" />
 		<If Condition="HasQuest(33579) &amp;&amp; IsQuestCompleted(33579)" > <!-- Turnin What the Draenei Found -->
 			<TurnIn QuestName="What the Draenei Found" QuestId="33579" TurnInName="Raksi" TurnInId="75469" X="2927.541" Y="906.059" Z="144.3228" />
-			<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Waiting for quest to complete {TimeRemaining}" />
+				<CustomBehavior File="WaitTimer" WaitTime="30000" GoalText="Waiting for quest to complete {TimeRemaining}" />
 		</If>
 		<!-- End of Aruuna -->
 
@@ -1647,7 +1691,7 @@
 		<TurnIn QuestName="Forbidden Knowledge" QuestId="33581" TurnInName="Darkscryer Raastok" TurnInId="75323" X="2149.842" Y="1629.007" Z="131.5271" />
 		<If Condition="HasQuest(33582) &amp;&amp; IsQuestCompleted(33582)" > <!-- Kura's Vengeance -->
 			<TurnIn QuestName="Kura's Vengeance" QuestId="33582" TurnInName="Kura the Blind" TurnInId="75324" X="2172.118" Y="1613.33" Z="132.08" />
-			<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True" DoMail="True" />
+			<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True"  />
 		</If>
 		<!-- End of Terrokar Refuge -->
 
@@ -1725,7 +1769,7 @@
 				<!--<Objective QuestName="Orbs of Power" QuestId="34911" Type="UseObject" ObjectId="230960" UseCount="5" /> bot keeps trying to get the first one -->
 				<CustomBehavior File="InteractWith" QuestId="34911" MobId="230960" WaitForNpcs="False" ObjectType="GameObject" NonCompeteDistance="0" NumOfTimes="20" WaitTime="2000" Range="5" PreInteractMountStrategy="DismountOrCancelShapeshift" >
 					<HuntingGrounds>
-						<Hotspot X="1553.752" Y="1645.648" Z="311.4187" />
+						<Hotspot X="1556.296" Y="1653.967" Z="305.7138" />
 						<Hotspot X="1392.044" Y="1765.341" Z="318.1375" />
 						<Hotspot X="1264.333" Y="1696.34" Z="314.2447" />
 						<Hotspot X="1328.266" Y="1808.996" Z="344.0413" />
@@ -1774,7 +1818,7 @@
 				<TurnIn QuestName="Due Cause to Celebrate" QuestId="34711" TurnInName="Magister Serena" TurnInId="80672" X="3602.99" Y="1675.129" Z="173.9749" />
 				<CustomBehavior File="WaitTimer" WaitTime="3000" GoalText="Waiting for quest to complete {TimeRemaining}" />
 				<CustomBehavior File="Misc\RunLua" Lua="QuestFrameCompleteQuestButton:Click()" WaitTime="5000" />
-				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True" DoMail="True" />
+				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True"  />
 			</If>
 			<If Condition="!HasQuest(34993) &amp;&amp; !IsQuestCompleted(34993)" > <!-- Get Serena / Follower -->
 				<MoveTo X="3602.99" Y="1675.129" Z="173.9749" />
@@ -1832,7 +1876,11 @@
 			<TargetingDistance Value="45" /> <!-- Use LevelBot default -->
 		</If>
 		<TurnIn QuestName="Holding the Line" QuestId="34407" TurnInName="Exarch Maladaar" TurnInId="75119" X="1737.653" Y="2514.695" Z="133.6592" />
+			<If Condition="HasQuest(34458)" > <!-- Powering the Defenses -->
+				<DisableBehavior Name="Combat" />
 		<TurnIn QuestName="Powering the Defenses" QuestId="34458" TurnInName="Soulbinder Tuulani" TurnInId="77737" X="1897.236" Y="2128.445" Z="76.93946" /> <!-- Tomb of Lights -->
+				<EnableBehavior Name="Combat" />
+			</If>
 		<PickUp QuestName="We Must Construct Additional Pylons" QuestId="34351" GiverName="Soulbinder Tuulani" GiverId="77737" X="1897.236" Y="2128.445" Z="76.93946" />
 		<PickUp QuestName="Nightmare in the Tomb" QuestId="33530" GiverName="Yuuri" GiverId="76790" X="1828.885" Y="2213.498" Z="79.53819" />
 		<If Condition="IsQuestCompleted(33917)" > <!-- Avoid Fires remove -->
@@ -2133,8 +2181,69 @@
 			<CustomBehavior File="InteractWith" MobId="78741" Nav="CTM" Range="5" GossipOptions="1" WaitTime="3000" X="2532.167" Y="2726.31" Z="234.9534" />
 		</If>
 		<TurnIn QuestName="Kaelynara Sunchaser" QuestId="34448" TurnInName="Vindicator Doruu" TurnInId="78538" X="2423.043" Y="2755.477" Z="115.0282" />
-		<!-- Possibly use garrison hearth and then fp to Fort Wrynn -->
 		<!-- End of Journe Mine / Auchindoun -->
+		
+		<PickUp QuestName="Clear!" QuestId="34761" GiverName="Ziz Fizziks" GiverId="79870" X="2532.503" Y="2004.615" Z="113.6074" />
+			<If Condition="HasQuest(34761) &amp;&amp; !IsQuestCompleted(34761)" >
+				   <UseMount Value="false" />
+					<Objective QuestName="Clear!" QuestId="34761" Type="CollectItem" ItemId="111637" CollectCount="6" />
+				   <UseMount Value="true" />
+			</If>
+			<If Condition="HasQuest(34761) &amp;&amp; IsQuestCompleted(34761)" >
+		<TurnIn QuestName="Clear!" QuestId="34761" TurnInName="Ziz Fizziks" TurnInId="79870" X="2532.503" Y="2004.615" Z="113.6074" />
+				<CustomBehavior File="WaitTimer" WaitTime="35000" GoalText="Waiting for quest to complete {TimeRemaining}" />
+			</If>
+			<While Condition="!HasQuest(35239) &amp;&amp; !IsQuestCompleted(35239)" > <!-- New Owner / Pleasure-Bot 8000 Follower -->
+				<MoveTo X="2529.18" Y="2002.89" Z="113.612" />
+				<CustomBehavior File="InteractWith" MobId="79853" WaitTime="3000" X="2529.18" Y="2002.89" Z="113.612" />
+				<CustomBehavior File="Misc\RunLua" Lua="QuestFrameCompleteQuestButton:Click()" />
+			</While>
+			
+			<!-- ADD IN THE ALLY VERSION OF QUESTS FROM DUSKFALL -
+			- there's a 'go to' quest called 'seek out the seer' that we never pick up 
+			-->
+	    <PickUp QuestName="Dusk of the Dead" QuestId="33872" GiverName="Seherin Malune" GiverId="76665" X="2412.587" Y="1932.405" Z="128.9913" />
+	    <PickUp QuestName="Cure of Aruunem" QuestId="33873" GiverName="Seherin Malune" GiverId="76665" X="2412.587" Y="1932.405" Z="128.9913" />
+			<While Condition="HasQuest(33873) &amp;&amp; !IsQuestCompleted(33873)"> <!-- Cure of Aruunem -->
+				<CustomBehavior File="InteractWith" QuestId="33873" MobId="226888" ObjectType="GameObject" Range="5" NumOfTimes="20" ProactiveCombatStrategy="ClearMobsTargetingUs" NonCompeteDistance="0" TerminateWhen="IsObjectiveComplete(1, 33873)" >
+					<HuntingGrounds>
+						<Hotspot X="2497.026" Y="1945.304" Z="121.2419" />
+						<Hotspot X="2545.014" Y="1972.723" Z="113.1586" />
+						<Hotspot X="2526.083" Y="1921.456" Z="111.8927" />
+						<Hotspot X="2471.241" Y="1885.517" Z="114.4053" />
+						<Hotspot X="2425.039" Y="1906.96" Z="122.6696" />
+						<Hotspot X="2392.625" Y="1862.097" Z="118.5323" />
+						<Hotspot X="2401.078" Y="1785.827" Z="113.6824" />
+						<Hotspot X="2365.339" Y="1765.951" Z="119.6554" />
+						<Hotspot X="2322.829" Y="1745.192" Z="116.2446" />
+						<Hotspot X="2339.801" Y="1683.694" Z="110.3074" />
+						<Hotspot X="2288.522" Y="1632.133" Z="114.3559" />
+						<Hotspot X="2231.647" Y="1592.005" Z="119.5416" />
+						<Hotspot X="2203.699" Y="1668.793" Z="118.7444" />
+						<Hotspot X="2152.661" Y="1717.401" Z="110.5938" />
+						<Hotspot X="2193.757" Y="1775.197" Z="123.3585" />
+						<Hotspot X="2218.465" Y="1805.294" Z="126.667" />
+						<Hotspot X="2211.691" Y="1883.792" Z="112.4855" />
+						<Hotspot X="2226.419" Y="1940.622" Z="110.219" />
+						<Hotspot X="2256.973" Y="1918.741" Z="110.5913" />
+						<Hotspot X="2285.888" Y="1973.201" Z="118.1856" />
+						<Hotspot X="2324.988" Y="1874.97" Z="114.29" />
+						<Hotspot X="2379.442" Y="1910.54" Z="121.8426" />
+					</HuntingGrounds>
+				</CustomBehavior>
+			</While>
+			<Objective QuestName="Dusk of the Dead" QuestId="33872" Type="CollectItem" ItemId="108645" CollectCount="7" />
+	    <TurnIn QuestName="Cure of Aruunem" QuestId="33873" TurnInName="Seherin Malune" TurnInId="76665" X="2412.587" Y="1932.405" Z="128.9913" />
+	    <TurnIn QuestName="Dusk of the Dead" QuestId="33872" TurnInName="Seherin Malune" TurnInId="76665" X="2412.587" Y="1932.405" Z="128.9913" />
+ 	    <PickUp QuestName="Aruumel's Rest" QuestId="33874" GiverName="Seherin Malune" GiverId="76665" X="2412.587" Y="1932.405" Z="128.9913" />
+			<If Condition="HasQuest(33874) &amp;&amp; !IsQuestCompleted(33874)"> <!-- Aruumel's Rest -->
+				<While Condition="!Me.HasAura(155161)">
+					<MoveTo X="2222.285" Y="1722.799" Z="117.6865" />
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(&quot;item:108749&quot;)" WaitTime="2000" />
+				</While>
+				<CustomBehavior File="KillUntilComplete" QuestId="33837" MobId="76824" TerminateWhen="IsObjectiveComplete(1, 33837) || Unit(76824) == null" X="2222.285" Y="1722.799" Z="117.6865" />
+			</If>
+	    <TurnIn QuestName="Aruumel's Rest" QuestId="33874" TurnInName="Seherin Malune" TurnInId="76665" X="2412.587" Y="1932.405" Z="128.9913" />
 
 		<!-- Grind to 96 -->
 		<SetGrindArea>

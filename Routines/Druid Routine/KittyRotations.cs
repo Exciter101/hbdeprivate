@@ -45,9 +45,11 @@ namespace Kitty
         public static async Task<bool> BearRotationCoroutine()
         {
             if (!AutoBot && Me.Mounted) return false;
+            if (Me.IsCasting || HKM.pauseRoutineOn || HKM.manualOn) return false;
+            if (pullTimer.IsRunning) { pullTimer.Stop(); }
             if (await RemoveRooted(BEAR_FORM, MeIsRooted && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await CastBuff(DASH, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await CastBuff(STAMPEDING_ROAR, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await CastBuff(DASH, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange && snareTimer <= DateTime.Now)) return true;
+            if (await CastBuff(STAMPEDING_ROAR, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange && snareTimer <= DateTime.Now)) return true;
             if (await CastBuff(BEAR_FORM, Me.Shapeshift != ShapeshiftForm.Bear)) return true;
             if (await findTargets(Me.CurrentTarget == null && AllowTargeting && FindTargetsCount >= 1)) return true;
             if (await clearTarget(Me.CurrentTarget != null && AutoBot && Me.CurrentTarget.IsDead || Me.CurrentTarget.IsFriendly)) return true;
@@ -88,11 +90,17 @@ namespace Kitty
 
         public static async Task<bool> FeralRotationCoroutine()
         {
-            if (Me.IsCasting || HKM.pauseRoutineOn || HKM.manualOn) return false;
-            if (!AutoBot && Me.Mounted) return false;
+            if (Me.IsCasting || HKM.pauseRoutineOn || HKM.manualOn || (!AutoBot && Me.Mounted)) return false;
+            if (pullTimer.IsRunning && AutoBot) 
+            { 
+                pullTimer.Stop(); 
+                Logging.Write(Colors.CornflowerBlue, "Stopping PullTimer => Combat"); 
+                lastGuid = Me.CurrentTarget.Guid; 
+                fightTimer.Restart(); 
+            }
             if (await RemoveRooted(FERALFORM, MeIsRooted && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await CastBuff(DASH, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await CastBuff(STAMPEDING_ROAR, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await CastBuff(DASH, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange && snareTimer <= DateTime.Now)) return true;
+            if (await CastBuff(STAMPEDING_ROAR, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange && snareTimer <= DateTime.Now)) return true;
             if (await CastBuff(CAT_FORM, Me.Shapeshift != ShapeshiftForm.Cat)) return true;
             if (await findTargets(Me.CurrentTarget == null && AutoBot && AllowTargeting && FindTargetsCount >= 1)) return true;
             if (await findMeleeAttackers(gotTarget && AllowTargeting && Me.CurrentTarget.Distance > 10 && MeleeAttackersCount >= 1)) return true;
@@ -126,6 +134,12 @@ namespace Kitty
             if (await Cast(THRASH, gotTarget && ThrashConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(SHRED, gotTarget && ShredConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(SWIPE, gotTarget && SwipeConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await CannotContinueFight(Me.CurrentTarget, Me.CurrentTarget != null 
+                && AutoBot
+                && Me.CurrentTarget.HealthPercent >= 95 
+                && !Me.CurrentTarget.IsPlayer
+                && lastGuid == Me.CurrentTarget.Guid
+                && fightTimer.ElapsedMilliseconds >= 30 * 1000)) return true;
             return false;
         }
 
@@ -135,6 +149,7 @@ namespace Kitty
 
         public static async Task<bool> BoomkinRotationCoroutine()
         {
+            if (pullTimer.IsRunning) { pullTimer.Stop(); }
             if (await CastBuff(MOONKIN_FORM, Me.Shapeshift != ShapeshiftForm.Moonkin)) return true;
 
             return false;
@@ -146,6 +161,7 @@ namespace Kitty
 
         public static async Task<bool> LowbieRotationCoroutine()
         {
+            if (pullTimer.IsRunning) { pullTimer.Stop(); }
             if (await MoveToTarget(gotTarget && AllowMovement && Me.CurrentTarget.Distance > 39f)) return true;
             if (await StopMovement(gotTarget && AllowMovement && Me.CurrentTarget.Distance <= 39f)) return true;
             if (await FaceMyTarget(gotTarget && AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget) && !Me.IsMoving)) return true;
@@ -163,6 +179,8 @@ namespace Kitty
         {
             if (await CastHeal(REGROWTH, regrowthProcPlayer, regrowthProcPlayer != null && IsOverlayed(REGROWTH_INT))) return true;
             if (await CastHeal(NATURES_CURE, dispelTargets, dispelTargets != null)) return true;
+            if (await CastBuff(BARKSKIN, !spellOnCooldown(BARKSKIN) && Me.HealthPercent <= P.myPrefs.PercentBarkskin)) return true;
+            if (await CastHeal(IRONBARK, LifebloomPlayer, LifebloomPlayer != null && !spellOnCooldown(IRONBARK) && LifebloomPlayer.HealthPercent <= 45)) return true;
             if (await CastBuff(NATURES_VIGIL, gotTarget && !spellOnCooldown(NATURES_VIGIL) && naturesVigil)) return true;
             if (await CastHeal(LIFEBLOOM, LifebloomPlayer, LifebloomPlayer != null && !buffExists(LIFEBLOOM, LifebloomPlayer))) return true;
             if (await CastMushroom(WILD_MUSHROOM, mushRoomPlayer, mushRoomPlayer != null && needMushroom && !Me.IsMoving)) return true;
@@ -175,7 +193,6 @@ namespace Kitty
             if (await CastHeal(FORCE_OF_NATURE, fonTarget, fonTarget != null && healfonTimer <= DateTime.Now)) return true;
             if (await CastHeal(WILD_GROWTH, WildGrowthPlayer, WildGrowthPlayer != null && !spellOnCooldown(WILD_GROWTH))) return true;
             if (await CastHeal(REJUVENATION, RejuvenationPlayer, RejuvenationPlayer != null)) return true;
-            if (await CastCombiHeal(HEALING_TOUCH, HealingTouchPlayer, HealingTouchPlayer != null)) return true;
             if (await CastHeal(HEALING_TOUCH, HealingTouchPlayer, HealingTouchPlayer != null)) return true;
             if (await CastHeal(REGROWTH, RegrowthPlayer, RegrowthPlayer != null)) return true;
             if (await CastDmgSpell(MOONFIRE, lifebloomCurrentTarget, lifebloomCurrentTarget != null
@@ -382,7 +399,6 @@ namespace Kitty
                 if (members.Count() > 0)
                 {
                     WoWPlayer healTarget = members.FirstOrDefault();
-                    SetNextForceOfNatureAllowed();
                     return healTarget;
                 }
                 if (members.Count() == 0 && Me.HealthPercent <= fonHealth) { return Me; }
@@ -616,6 +632,8 @@ namespace Kitty
             if (!reqs) return false;
             if (!SpellManager.CanCast(Spell, myTarget)) return false;
             if (!SpellManager.Cast(Spell, myTarget)) return false;
+            if (Spell == FORCE_OF_NATURE) { SetNextForceOfNatureAllowed(); }
+            if (Spell == HEALING_TOUCH && !spellOnCooldown(NATURES_SWIFTNESS)) { SpellManager.Cast(NATURES_SWIFTNESS); }
             Logging.Write(Colors.Yellow, "Casting: " + Spell + " on: " + myTarget.SafeName);
             await CommonCoroutines.SleepForLagDuration();
             return true;

@@ -685,9 +685,9 @@
 			</While>
 			<Objective QuestName="Eye Candy" QuestId="33563" Type="CollectItem" ItemId="114229" CollectCount="1" X="5628.933" Y="1682.872" Z="122.0979"/>
 			<Objective QuestName="Goren, Goren, Gone!" QuestId="33544" Type="KillMob" MobId="79416" KillCount="8" />
-		<TurnIn QuestName="Eye Candy" QuestId="33563" TurnInName="Limbflayer" TurnInId="74611" X="5668.525" Y="1756.094" Z="121.9646"/>
-		<TurnIn QuestName="Goren, Goren, Gone!" QuestId="33544" TurnInName="Ripfist" TurnInId="84176" X="5577.584" Y="1896.168" Z="131.0744" />
-		<TurnIn QuestName="We Die Laughing!" QuestId="33548" TurnInName="Kaz the Shrieker" TurnInId="74606" X="5577.584" Y="1896.168" Z="131.0744" />
+		<TurnIn QuestName="Goren, Goren, Gone!" QuestId="33544" /> <!-- CLQ -->
+		<TurnIn QuestName="Eye Candy" QuestId="33563" TurnInName="Limbflayer" TurnInId="74611" X="5549.031" Y="1675" Z="109.3974" />
+		<TurnIn QuestName="We Die Laughing!" QuestId="33548" TurnInName="Kaz the Shrieker" TurnInId="74606" X="5551.05" Y="1677.054" Z="109.6387" />
 		<PickUp QuestName="A Flare for the Dramatic" QuestId="33593" GiverName="Durotan" GiverId="74594" X="5552.747" Y="1674.054" Z="109.5336" />
 			<While Condition="HasQuest(33593) &amp;&amp; !IsQuestCompleted(33593)" >
 				<MoveTo QuestId="33593" X="5553.217" Y="1676.205" Z="109.7206" />
@@ -703,12 +703,13 @@
 			<!-- Beastwatch -->
 		<PickUp QuestName="Just Another Stick in the Wall" QuestId="36460" GiverName="Penny Clobberbottom" GiverId="85147" X="5742.079" Y="1331.092" Z="102.9358"/>
 			<While Condition="HasQuest(36460) &amp;&amp; !IsQuestCompleted(36460)" > <!-- Just Another Stick in the Wall -->
-				<CustomBehavior File="InteractWith" QuestId="35151" MobId="234558" ObjectType="GameObject" Range="4" NonCompeteDistance="0" TerminateWhen="IsObjectiveComplete(1, 35151)" X="5742.093" Y="1332.276" Z="102.8156" />
+				<CustomBehavior File="InteractWith" QuestId="36460" MobId="234558" ObjectType="GameObject" Range="4" NonCompeteDistance="0" TerminateWhen="IsObjectiveComplete(1, 35151)" X="5742.093" Y="1332.276" Z="102.8156" />
 			</While>
 		<TurnIn QuestName="Just Another Stick in the Wall" QuestId="36460" TurnInName="Durotan" TurnInId="74594" X="5758.469" Y="1316.151" Z="106.6153" />
 		<PickUp QuestName="Your Base, Your Choice" QuestId="35151" GiverName="Durotan" GiverId="74594" X="5758.469" Y="1316.151" Z="106.6153" />
 			<While Condition="HasQuest(35151) &amp;&amp; !IsQuestCompleted(35151)" > <!-- Your Base, Your Choice -->
-				<CustomBehavior File="InteractWith" QuestId="35151" MobId="74594" Range="5" GossipOptions="1" NonCompeteDistance="0" X="5758.469" Y="1316.151" Z="106.6152" />
+				<CustomBehavior File="Misc\RunLua" Lua="QuestChoiceFrame.CloseButton:Click()" WaitTime="2000" />
+				<CustomBehavior File="InteractWith" QuestId="35151" MobId="74594" Range="5" GossipOptions="1" NonCompeteDistance="0" KeepTargetSelected="True" X="5758.469" Y="1316.151" Z="106.6152" />
 				<!-- I chose the ARENA, option 2 - the Lumber yard has a vehicle that you have to jump in if you want to use it npc's are in the same exact place regardless of which camp you choose -->
 				<CustomBehavior File="UserDialog" QuestId="35151" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="2" ExpiryTime="300" ExpiryAction="InputEnabled_Continue" 
 											Text="Choose either Lumber Yard or Fight Club (Arena) - Only the Arena is completed for this zone - if you do not choose Arena, you will have the enjoyment of questing the entire zone by hand!" />
@@ -916,9 +917,9 @@
 		<TurnIn QuestName="Slave Hunters" QuestId="34698" TurnInName="Kash'drakor" TurnInId="79320" X="6152.761" Y="1570.297" Z="61.70557" />
 		<TurnIn QuestName="Nazgrel" QuestId="34700" TurnInName="Kash'drakor" TurnInId="79320" X="6152.761" Y="1570.297" Z="61.70557" />
 		<PickUp QuestName="The Sparring Arena" QuestId="35152" GiverName="Kash'drakor" GiverId="79320" X="6152.761" Y="1570.297" Z="61.70557" />
-			<If Condition="HasQuest(35152) &amp;&amp; !IsQuestCompleted(35152)" > <!-- The Sparring Arena -->
+			<If Condition="HasQuest(35152) &amp;&amp; IsQuestCompleted(35152)" > <!-- The Sparring Arena -->
 		<TurnIn QuestName="The Sparring Arena" QuestId="35152" TurnInName="Limbflayer" TurnInId="76688" X="5791.03" Y="1278.184" Z="109.0173" />
-                <CustomBehavior File="ForceSetVendor" DoSell="true" DoRepair="true" DoMail="false" />
+                <CustomBehavior File="ForceSetVendor" DoSell="true" DoRepair="true"  />
 			</If>
 		<!-- End of Stonemaul Arena -->		
 
@@ -961,7 +962,7 @@
 			</If>
 			<If Condition="HasQuest(36573) &amp;&amp; IsQuestCompleted(36573)" > <!-- Strike While the Iron is Hot -->
 		<TurnIn QuestName="Strike While the Iron is Hot" QuestId="36573" TurnInName="Durotan" TurnInId="74594" X="5763.857" Y="1297.016" Z="106.9531"/>
-                <CustomBehavior File="ForceSetVendor" DoSell="true" DoRepair="true" DoMail="false" />
+                <CustomBehavior File="ForceSetVendor" DoSell="true" DoRepair="true"  />
 			</If>
 			
 			</If>

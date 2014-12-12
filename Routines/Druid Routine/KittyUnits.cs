@@ -806,5 +806,33 @@ namespace Kitty
             return dis;
         }
         #endregion
+
+        #region cleartarget - pulltimer
+        public static async Task<bool> CannotPull(WoWUnit unit, bool reqs)
+        {
+            if (!reqs) return false;
+
+            Logging.Write(Colors.Yellow, "Cannot Pull: " + unit + " Blacklisting for 30 min ");
+            Blacklist.Add(unit, BlacklistFlags.All, TimeSpan.FromMinutes(30.00));
+            pullTimer.Stop();
+            Me.ClearTarget();
+            await CommonCoroutines.SleepForLagDuration();
+            return true;
+        }
+        #endregion
+
+        #region cleartarget - fighttimer
+        public static async Task<bool> CannotContinueFight(WoWUnit unit, bool reqs)
+        {
+            if (!reqs) return false;
+
+            Logging.Write(Colors.Yellow, "Cannot Continue Fight: " + unit + " Blacklisting for 30 min ");
+            Blacklist.Add(unit, BlacklistFlags.All, TimeSpan.FromMinutes(30.00));
+            fightTimer.Stop();
+            Me.ClearTarget();
+            await CommonCoroutines.SleepForLagDuration();
+            return true;
+        }
+        #endregion
     }
 }

@@ -27,6 +27,7 @@ namespace Kitty
 {
     public partial class KittyMain : CombatRoutine
     {
+        public static DateTime snareTimer;
         private static async Task<bool> CastGroundSpell(WoWSpell spell, WoWPoint targetLoc)
         {
             // If we cannot cast the spell, obviously
@@ -108,6 +109,7 @@ namespace Kitty
             if (!reqs) return false;
             if (!SpellManager.CanCast(Spell, Me)) return false;
             if (!SpellManager.Cast(Spell, Me)) return false;
+            if (Spell == DASH || Spell == STAMPEDING_ROAR) { snareTimer.AddSeconds(5); }
             Logging.Write(Colors.LightSeaGreen, "Casting: " + Spell + " on: " + Me.SafeName);
             await CommonCoroutines.SleepForLagDuration();
             return true;

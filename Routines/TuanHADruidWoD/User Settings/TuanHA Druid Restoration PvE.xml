@@ -15,12 +15,12 @@
   <CelestialAlignmentCD>False</CelestialAlignmentCD>
   <CelestialAlignmentBurst>False</CelestialAlignmentBurst>
   <CenarionWardFriend>True</CenarionWardFriend>
-  <CenarionWardFriendHP>80</CenarionWardFriendHP>
+  <CenarionWardFriendHP>90</CenarionWardFriendHP>
   <Cyclone>True</Cyclone>
-  <CycloneAuto>True</CycloneAuto>
+  <CycloneAuto>False</CycloneAuto>
   <CycloneStopWatchTime>5</CycloneStopWatchTime>
   <DashandRoar>True</DashandRoar>
-  <DisorientingRoarInterrupt>True</DisorientingRoarInterrupt>
+  <DisorientingRoarInterrupt>False</DisorientingRoarInterrupt>
   <DispellMin>100</DispellMin>
   <DispellMax>200</DispellMax>
   <EntanglingRoots>False</EntanglingRoots>
@@ -34,9 +34,9 @@
   <FrenziedRegeneration>False</FrenziedRegeneration>
   <FrenziedRegenerationHP>70</FrenziedRegenerationHP>
   <Genesis>True</Genesis>
-  <GenesisHP>80</GenesisHP>
-  <GenesisTimeLeft>8</GenesisTimeLeft>
-  <GenesisUnit>1</GenesisUnit>
+  <GenesisHP>90</GenesisHP>
+  <GenesisTimeLeft>3</GenesisTimeLeft>
+  <GenesisUnit>3</GenesisUnit>
   <GrowlTank>False</GrowlTank>
   <HealingTouchNonResto>True</HealingTouchNonResto>
   <HealingTouchResto>True</HealingTouchResto>
@@ -54,15 +54,15 @@
   <IncarnationBalanceCD>False</IncarnationBalanceCD>
   <IncarnationBalanceBurst>False</IncarnationBalanceBurst>
   <IncarnationResto>True</IncarnationResto>
-  <IncarnationRestoUnit>1</IncarnationRestoUnit>
+  <IncarnationRestoUnit>3</IncarnationRestoUnit>
   <IncarnationRestoHP>40</IncarnationRestoHP>
   <Innervate>True</Innervate>
   <InnervatePercent>60</InnervatePercent>
   <Ironbark>True</Ironbark>
   <IronbarkHP>60</IronbarkHP>
-  <InterruptAll>True</InterruptAll>
-  <InterruptTarget>True</InterruptTarget>
-  <InterruptFocus>True</InterruptFocus>
+  <InterruptAll>False</InterruptAll>
+  <InterruptTarget>False</InterruptTarget>
+  <InterruptFocus>False</InterruptFocus>
   <InterruptMinTimeToInterrupt>400</InterruptMinTimeToInterrupt>
   <InterruptMinChannelSpells>300</InterruptMinChannelSpells>
   <InterruptMinPercent>30</InterruptMinPercent>
@@ -70,7 +70,7 @@
   <Lifebloom>True</Lifebloom>
   <Lacerate>True</Lacerate>
   <Maul>True</Maul>
-  <MaimInterrupt>True</MaimInterrupt>
+  <MaimInterrupt>False</MaimInterrupt>
   <Maim>False</Maim>
   <MaimComboPoints>4</MaimComboPoints>
   <MaimHelpFriend>False</MaimHelpFriend>
@@ -80,11 +80,11 @@
   <MassEntanglement>True</MassEntanglement>
   <MightyBash>True</MightyBash>
   <MightyBashLowHP>30</MightyBashLowHP>
-  <MightyBashInterrupt>True</MightyBashInterrupt>
+  <MightyBashInterrupt>False</MightyBashInterrupt>
   <MightofUrsoc>True</MightofUrsoc>
   <MightofUrsocHP>30</MightofUrsocHP>
   <MoonkinForm>True</MoonkinForm>
-  <Moonfire>True</Moonfire>
+  <Moonfire>False</Moonfire>
   <MoonfireBalance>True</MoonfireBalance>
   <MoonfireFeral>True</MoonfireFeral>
   <NaturesGrasp>True</NaturesGrasp>
@@ -99,12 +99,13 @@
   <RakeAoE>True</RakeAoE>
   <Ravage>True</Ravage>
   <Regrowth>True</Regrowth>
-  <RegrowthHP>70</RegrowthHP>
+  <RegrowthHP>20</RegrowthHP>
   <RejuvenationNonResto>True</RejuvenationNonResto>
   <Rejuvenation>True</Rejuvenation>
-  <RejuvenationHP>95</RejuvenationHP>
+  <RejuvenationHP>60</RejuvenationHP>
+  <RejuvenationGerminationHP>30</RejuvenationGerminationHP>
   <RejuvenationAll>True</RejuvenationAll>
-  <RejuvenationAllMana>70</RejuvenationAllMana>
+  <RejuvenationAllMana>100</RejuvenationAllMana>
   <Renewal>True</Renewal>
   <RenewalHP>50</RenewalHP>
   <Rip>True</Rip>
@@ -116,7 +117,7 @@
   <SolarBeam>False</SolarBeam>
   <Soothe>True</Soothe>
   <Shred>True</Shred>
-  <SkullBashInterrupt>True</SkullBashInterrupt>
+  <SkullBashInterrupt>False</SkullBashInterrupt>
   <Starfall>True</Starfall>
   <StarfallCD>False</StarfallCD>
   <StarfallBurst>False</StarfallBurst>
@@ -134,14 +135,14 @@
   <ThrashBear>True</ThrashBear>
   <TigerFury>True</TigerFury>
   <Typhoon>True</Typhoon>
-  <WildCharge>True</WildCharge>
+  <WildCharge>False</WildCharge>
   <WildGrowth>True</WildGrowth>
   <WildGrowthUnit>3</WildGrowthUnit>
-  <WildGrowthHP>95</WildGrowthHP>
+  <WildGrowthHP>80</WildGrowthHP>
   <WildMushroomPlacementKeys>D6</WildMushroomPlacementKeys>
   <WildMushroomPlacement>True</WildMushroomPlacement>
   <WildMushroomBalance>False</WildMushroomBalance>
-  <Wrath>False</Wrath>
+  <Wrath>True</Wrath>
   <WrathBalance>True</WrathBalance>
   <AttackASAP>True</AttackASAP>
   <AttackOOC>True</AttackOOC>
@@ -152,13 +153,13 @@
   <AutoDetectManualCast>False</AutoDetectManualCast>
   <AutoDetectManualCastMS>300</AutoDetectManualCastMS>
   <AutoRacial>True</AutoRacial>
-  <AutoRez>False</AutoRez>
+  <AutoRez>True</AutoRez>
   <AutoSetFocus>False</AutoSetFocus>
-  <AutoTarget>False</AutoTarget>
+  <AutoTarget>True</AutoTarget>
   <AutoWriteLog>True</AutoWriteLog>
   <BurstString>ControlKey+B</BurstString>
   <BurstKey>7</BurstKey>
-  <BurstHP>60</BurstHP>
+  <BurstHP>50</BurstHP>
   <CycloneHealerString>ShiftKey+D5</CycloneHealerString>
   <CycloneAnyUnitString>D5</CycloneAnyUnitString>
   <DoNotHealAbove>95</DoNotHealAbove>
@@ -173,21 +174,21 @@
   <LastSavedMode></LastSavedMode>
   <NaturesCureASAP>True</NaturesCureASAP>
   <NaturesCureDebuff>True</NaturesCureDebuff>
-  <NaturesCureDebuffNumber>5</NaturesCureDebuffNumber>
+  <NaturesCureDebuffNumber>1</NaturesCureDebuffNumber>
   <NaturesVigil>True</NaturesVigil>
   <NaturesVigilCD>False</NaturesVigilCD>
   <NaturesVigilBurst>True</NaturesVigilBurst>
   <PausePressedKeys>D1|D2|D3</PausePressedKeys>
   <PauseToggleKeys>Pause</PauseToggleKeys>
-  <PounceInterrupt>True</PounceInterrupt>
+  <PounceInterrupt>False</PounceInterrupt>
   <PriorityHeal>70</PriorityHeal>
   <RemoveCorruption>False</RemoveCorruption>
-  <StartEating>60</StartEating>
+  <StartEating>70</StartEating>
   <Trinket1>0</Trinket1>
   <Trinket1HP>40</Trinket1HP>
-  <Trinket2>4</Trinket2>
+  <Trinket2>0</Trinket2>
   <Trinket2HP>60</Trinket2HP>
-  <TyphoonInterrupt>True</TyphoonInterrupt>
+  <TyphoonInterrupt>False</TyphoonInterrupt>
   <UrsolsVortex>True</UrsolsVortex>
   <UrgentHeal>40</UrgentHeal>
   <UseFoodDrink>True</UseFoodDrink>

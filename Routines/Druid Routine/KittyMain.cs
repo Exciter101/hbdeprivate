@@ -84,33 +84,42 @@ namespace Kitty
         {
             try
             {
-                if (partyCount != lastPTSize)
+                /*if (partyCount != lastPTSize)
                 {
                     Logging.Write(Colors.DarkTurquoise, "Current PartySize: " + partyCount);
                     lastPTSize = partyCount;
-                }
+                }*/
                 if (Me.IsDead
                     && AutoBot)
                 {
                     Lua.DoString(string.Format("RunMacroText(\"{0}\")", "/script RepopMe()"));
                 }
-                if (AutoBot)
+                /*if (AutoBot)
                 {
                     CheckMyCurrentTarget();
-                }
+                }*/
                 return;
             }
             catch (Exception e) { Logging.Write(Colors.Red, "Pulse: " + e); }
             return;
         }
-
+        public override bool NeedRest
+        {
+            get
+            {
+                if (Me.HealthPercent <= 50 && !Me.IsSwimming) return true;
+                if (Me.HealthPercent <= 85 && !buffExists(REJUVENATION, Me)) return true;
+                if (Me.HealthPercent <= 75) return true;
+                return false;
+            }
+        }
         private static async Task<bool> RestCoroutine()
         {
             if (!AutoBot) return false;
             if (HKM.pauseRoutineOn || HKM.manualOn) return false;
             if (await EatFood(Me.HealthPercent <= 50 && !Me.IsSwimming)) return true;
-            if (await CastBuff(HEALING_TOUCH, Me.HealthPercent <= 75)) return true;
-            if (await CastBuff(REJUVENATION, Me.HealthPercent <= 85 && !buffExists(REJUVENATION, Me))) return true;
+            if (await CastBuff(HEALING_TOUCH, Me.HealthPercent <= 75 && !Me.HasAura("Food"))) return true;
+            if (await CastBuff(REJUVENATION, Me.HealthPercent <= 85 && !buffExists(REJUVENATION, Me) && !Me.HasAura("Food"))) return true;
             return false;
         }
 
@@ -152,6 +161,15 @@ namespace Kitty
         private static async Task<bool> PullCoroutine()
         {
             if (HKM.pauseRoutineOn || HKM.manualOn) return false;
+            if (!pullTimer.IsRunning && AutoBot) 
+            { 
+                pullTimer.Restart();
+                lastGuid = Me.CurrentTarget.Guid;
+                Logging.Write(Colors.CornflowerBlue, "Starting PullTimer"); 
+            }
+            if (await CannotPull(Me.CurrentTarget, Me.CurrentTarget != null 
+                && pullTimer.ElapsedMilliseconds >= 30 * 1000 
+                && lastGuid == Me.CurrentTarget.Guid)) return true;
             if (await RemoveRooted(BEAR_FORM, MeIsRooted && MeIsGuardian && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await RemoveRooted(FERALFORM, MeIsFeral && MeIsRooted && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await CastBuff(CAT_FORM, Me.Shapeshift != ShapeshiftForm.Cat && MeIsFeral)) return true;
