@@ -18,6 +18,9 @@ namespace Kitty
         public static bool manualOn { get; set; }
         public static bool keysRegistered { get; set; }
         public static bool pauseRoutineOn { get; set; }
+        public static bool resTanks { get; set; }
+        public static bool resHealers { get; set; }
+        public static bool resAll { get; set; }
 
         private static ModifierKeys getPauseKey()
         {
@@ -67,14 +70,96 @@ namespace Kitty
                 default: return ModifierKeys.Alt;
             }
         }
-
+        private static ModifierKeys getResTankKey()
+        {
+            string usekey = P.myPrefs.ModifkeyResTanks;
+            switch (usekey)
+            {
+                case "Alt": return ModifierKeys.Alt;
+                case "Ctrl": return ModifierKeys.Control;
+                case "Shift": return ModifierKeys.Shift;
+                case "Windows": return ModifierKeys.Win;
+                default: return ModifierKeys.Alt;
+            }
+        }
+        private static ModifierKeys getResHealersKey()
+        {
+            string usekey = P.myPrefs.ModifkeyResHealers;
+            switch (usekey)
+            {
+                case "Alt": return ModifierKeys.Alt;
+                case "Ctrl": return ModifierKeys.Control;
+                case "Shift": return ModifierKeys.Shift;
+                case "Windows": return ModifierKeys.Win;
+                default: return ModifierKeys.Alt;
+            }
+        }
+        private static ModifierKeys getResAllKey()
+        {
+            string usekey = P.myPrefs.ModifkeyResAll;
+            switch (usekey)
+            {
+                case "Alt": return ModifierKeys.Alt;
+                case "Ctrl": return ModifierKeys.Control;
+                case "Shift": return ModifierKeys.Shift;
+                case "Windows": return ModifierKeys.Win;
+                default: return ModifierKeys.Alt;
+            }
+        }
 
         #region [Method] - Hotkey Registration
         public static void registerHotKeys()
         {
             if (keysRegistered)
                 return;
-
+            if (P.myPrefs.KeyResTanks != System.Windows.Forms.Keys.None)
+            {
+                HotkeysManager.Register("resTanks", P.myPrefs.KeyResTanks, getResTankKey(), ret =>
+                {
+                    resTanks = !resTanks;
+                    Lua.DoString(resTanks ? @"print('Ressing Tanks: \124cFF15E61C Enabled!')" : @"print('Ressing Tanks: \124cFFE61515 Disabled!')");
+                    string msgResTanksOn = "Ressing Tanks Enabled !, press Alt + " + P.myPrefs.KeyResTanks.ToString() + " in WOW to disable Ressing Tanks again";
+                    string msgResTanksOff = "Ressing Tanks Disabled !, press Alt + " + P.myPrefs.KeyResTanks.ToString() + " in WOW to enable Ressing Tanks again";
+                    if (P.myPrefs.PrintRaidstyleMsg)
+                        Lua.DoString(
+                            resTanks ?
+                            "RaidNotice_AddMessage(RaidWarningFrame, \"" + msgResTanksOn + "\", ChatTypeInfo[\"RAID_WARNING\"]);"
+                            :
+                            "RaidNotice_AddMessage(RaidWarningFrame, \"" + msgResTanksOff + "\", ChatTypeInfo[\"RAID_WARNING\"]);");
+                });
+            }
+            if (P.myPrefs.KeyReshealers != System.Windows.Forms.Keys.None)
+            {
+                HotkeysManager.Register("resHealers", P.myPrefs.KeyReshealers, getResHealersKey(), ret =>
+                {
+                    resHealers = !resHealers;
+                    Lua.DoString(resHealers ? @"print('Ressing Healers: \124cFF15E61C Enabled!')" : @"print('Ressing Healers: \124cFFE61515 Disabled!')");
+                    string msgResHealersOn = "Ressing Healers Enabled !, press Alt + " + P.myPrefs.KeyReshealers.ToString() + " in WOW to disable Ressing Healers again";
+                    string msgResHealersOff = "Ressing Healers Disabled !, press Alt + " + P.myPrefs.KeyReshealers.ToString() + " in WOW to enable Ressing Healers again";
+                    if (P.myPrefs.PrintRaidstyleMsg)
+                        Lua.DoString(
+                            resHealers ?
+                            "RaidNotice_AddMessage(RaidWarningFrame, \"" + msgResHealersOn + "\", ChatTypeInfo[\"RAID_WARNING\"]);"
+                            :
+                            "RaidNotice_AddMessage(RaidWarningFrame, \"" + msgResHealersOff + "\", ChatTypeInfo[\"RAID_WARNING\"]);");
+                });
+            }
+            if (P.myPrefs.KeyResAll != System.Windows.Forms.Keys.None)
+            {
+                HotkeysManager.Register("resAll", P.myPrefs.KeyResAll, getResAllKey(), ret =>
+                {
+                    resAll = !resAll;
+                    Lua.DoString(resAll ? @"print('Ressing All: \124cFF15E61C Enabled!')" : @"print('Ressing All: \124cFFE61515 Disabled!')");
+                    string msgResAllOn = "Ressing All Enabled !, press Alt + " + P.myPrefs.KeyResAll.ToString() + " in WOW to disable Ressing All again";
+                    string msgResAllOff = "Ressing All Disabled !, press Alt + " + P.myPrefs.KeyResAll.ToString() + " in WOW to enable Ressing All again";
+                    if (P.myPrefs.PrintRaidstyleMsg)
+                        Lua.DoString(
+                            resAll ?
+                            "RaidNotice_AddMessage(RaidWarningFrame, \"" + msgResAllOn + "\", ChatTypeInfo[\"RAID_WARNING\"]);"
+                            :
+                            "RaidNotice_AddMessage(RaidWarningFrame, \"" + msgResAllOff + "\", ChatTypeInfo[\"RAID_WARNING\"]);");
+                });
+            }
             if (P.myPrefs.KeyStopAoe != System.Windows.Forms.Keys.None)
             {
                 HotkeysManager.Register("aoeStop", P.myPrefs.KeyStopAoe, getStopAoeKey(), ret =>
@@ -147,6 +232,10 @@ namespace Kitty
             Logging.Write(Colors.Bisque, "Play Manual Key:  " + P.myPrefs.ModifkeyPlayManual + "+ " + P.myPrefs.KeyPlayManual);
             Logging.Write(Colors.Bisque, "Pause CR Key: " + P.myPrefs.ModifkeyPause + "+ " + P.myPrefs.KeyPauseCR);
             Logging.Write(Colors.Bisque, "Use Cooldowns Key: " + P.myPrefs.ModifkeyCooldowns + "+ " + P.myPrefs.KeyUseCooldowns);
+            Logging.Write(Colors.Bisque, "\r\n" + "Hotkeys to Res People:");
+            Logging.Write(Colors.Bisque, "Res Tanks Key: " + P.myPrefs.ModifkeyResTanks + "+ " + P.myPrefs.KeyResTanks);
+            Logging.Write(Colors.Bisque, "Res Healers Key: " + P.myPrefs.ModifkeyResHealers + "+ " + P.myPrefs.KeyReshealers);
+            Logging.Write(Colors.Bisque, "Res All Key: " + P.myPrefs.ModifkeyResAll + "+ " + P.myPrefs.KeyResAll);
             Logging.Write(Colors.OrangeRed, "Hotkeys: Registered!");
         }
         #endregion
@@ -160,10 +249,16 @@ namespace Kitty
             HotkeysManager.Unregister("cooldownsOn");
             HotkeysManager.Unregister("pauseRoutineOn");
             HotkeysManager.Unregister("manualOn");
+            HotkeysManager.Unregister("resTanks");
+            HotkeysManager.Unregister("reshealers");
+            HotkeysManager.Unregister("resAll");
             aoeStop = false;
             cooldownsOn = false;
             manualOn = false;
             pauseRoutineOn = false;
+            resTanks = false;
+            resHealers = false;
+            resAll = false;
             keysRegistered = false;
             Lua.DoString(@"print('Hotkeys: \124cFFE61515 Removed!')");
             Logging.Write(Colors.OrangeRed, "Hotkeys: Removed!");

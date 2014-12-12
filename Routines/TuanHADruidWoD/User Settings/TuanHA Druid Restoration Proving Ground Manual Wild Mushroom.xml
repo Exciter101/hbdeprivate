@@ -103,6 +103,7 @@
   <RejuvenationNonResto>True</RejuvenationNonResto>
   <Rejuvenation>True</Rejuvenation>
   <RejuvenationHP>70</RejuvenationHP>
+  <RejuvenationGerminationHP>40</RejuvenationGerminationHP>
   <RejuvenationAll>True</RejuvenationAll>
   <RejuvenationAllMana>100</RejuvenationAllMana>
   <Renewal>True</Renewal>

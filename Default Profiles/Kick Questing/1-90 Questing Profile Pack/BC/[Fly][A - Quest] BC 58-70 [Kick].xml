@@ -1,6 +1,6 @@
 <HBProfile xsi:noNamespaceSchemaLocation="../Schemas/QuestProfileSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<!-- Originally contributed by Kickazz006 -->
-	<Name>[Fly][A - Quest] BC 58-70 [Kick]($Rev: 3870 $)</Name>
+	<Name>[Fly][A - Quest] BC 58-70 [Kick]($Rev: 3889 $)</Name>
 
 	<MinLevel>58</MinLevel>
 	<MaxLevel>1001</MaxLevel>
@@ -2681,7 +2681,7 @@
 		<TurnIn QuestName="Zeth'Gor Must Burn!" TurnInName="Wing Commander Dabir'ee" QuestId="10895"
                 TurnInId="19409" X="-670.4001" Y="1852.102" Z="66.90979" />
 		<PickUp QuestName="Warlord of the Bleeding Hollow" GiverName="Corporal Ironridge" QuestId="10485"
-                GiverId="21133" />
+                GiverId="21133" X="-701.0214" Y="1874.662" Z="63.38803" />				
 		<If Condition="HasQuest(10485) &amp;&amp; !IsQuestCompleted(10485)">
 			<If Condition="CanFly()">
 				<CustomBehavior File="FlyTo" DestName="Warlord of the Bleeding Hollow"
@@ -5917,8 +5917,14 @@ X="-1945.773" Y="4687.774" Z="-2.231679" />
 		    <While Condition="HasQuest(9856) &amp;&amp; !IsQuestCompleted(9856)" >
 		        <CustomBehavior File="RunCode" ><![CDATA[ 
 		            var waitAtLoc = WoWMathHelper.GetRandomPointInCircle(new WoWPoint(-710.2057, 8417.889, 37.70057), 10);
-		            while(!IsQuestCompleted(9856) && BotPoi.Current.Type == Styx.CommonBot.POI.PoiType.None)
+		            while(!IsQuestCompleted(9856) )
 		            {
+		                if (Styx.CommonBot.POI.BotPoi.Current.Type != Styx.CommonBot.POI.PoiType.None)
+		                    return;
+
+		                if (LootTargeting.Instance.FirstObject != null || Targeting.Instance.FirstUnit != null)
+		                    return;
+
 		                if (Me.Location.DistanceSqr(waitAtLoc) > 5*5)
 		                {                        
 		                    Flightor.MoveTo(waitAtLoc);
@@ -5928,8 +5934,12 @@ X="-1945.773" Y="4687.774" Z="-2.231679" />
 		                    TreeRoot.StatusText="Waiting for Gutripper to show up";
 		                    await CommonCoroutines.LandAndDismount(landPoint: waitAtLoc);
 		                    var gutRipper = Unit(18257, u => u.IsAlive);
-		                    if (gutRipper != null)
-		                        await Bots.DungeonBuddy.Helpers.ScriptHelpers.CastRangedAbility(gutRipper);
+                            if (gutRipper != null)
+                            {
+                                if (Me.CurrentTargetGuid != gutRipper.Guid)
+                                        gutRipper.Target();
+                                await Bots.DungeonBuddy.Helpers.ScriptHelpers.CastRangedAbility(gutRipper);
+                            }
 		                }
 		                await Coroutine.Yield();
 		            }
