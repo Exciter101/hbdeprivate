@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <HBProfile xsi:noNamespaceSchemaLocation="../Schemas/QuestProfileSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <!-- Developed by Kickazz006 -->
-    <Name>[Fly][A - Quest] 68-80 [Kick] ($Rev: 3876 $)</Name>
+    <Name>[Fly][A - Quest] 68-80 [Kick] ($Rev: 3932 $)</Name>
 
     <MinLevel>68</MinLevel>
     <MaxLevel>1001</MaxLevel>
@@ -5031,7 +5031,7 @@
                 <CustomBehavior File="ForcedDismount" />
                 <While Condition="HasQuest(11876) &amp;&amp; !IsQuestCompleted(11876)">
                     <CustomBehavior File="InteractWith" QuestId="11876" MobId="25850" InteractByUsingItemId="35228"
-                                    NumOfTimes="8" CollectionDistance="150" PreInteractMountStrategy="Dismount">
+                                    Range="4" NumOfTimes="8" CollectionDistance="150" PreInteractMountStrategy="Dismount">
                         <HuntingGrounds>
                             <Hotspot X="3542.615" Y="5313.339" Z="26.04872" />
                             <Hotspot X="3552.07" Y="5325.34" Z="31.64348" />

@@ -1041,7 +1041,125 @@
 			</Hotspots>
 		</Objective>
 	</Quest>
+	<Quest Id="35144" Name="Dark Binding">
+		<Objective Type="KillMob" MobId="83662" KillCount="10">
+			<Hotspots>
+				<Hotspot X="2680.397" Y="6027.116" Z="46.49243" />
+				<Hotspot X="2724.563" Y="5964.419" Z="54.46404" />
+				<Hotspot X="2672.472" Y="5986.411" Z="42.08295" />
+				<Hotspot X="2624.89" Y="5977.867" Z="38.14643" />
+				<Hotspot X="2574.384" Y="6008.473" Z="35.16204" />
+				<Hotspot X="2577.866" Y="6066.419" Z="34.37848" />
+				<Hotspot X="2552.956" Y="6095.251" Z="34.75299" />
+				<Hotspot X="2519.916" Y="6064.664" Z="36.68627" />
+				<Hotspot X="2445.17" Y="6105.303" Z="53.14938" />
+				<Hotspot X="2537.606" Y="6264.824" Z="-61.9576" />
+				<Hotspot X="2564.82" Y="6297.636" Z="-54.4977" />
+				<Hotspot X="2600.719" Y="6287.575" Z="-51.3295" />
+				<Hotspot X="2619.883" Y="6322.148" Z="-52.56076" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="35145" Name="The Pale Threat">
+		<Objective Type="KillMob" MobId="81309" KillCount="1">
+			<Hotspots>
+				<Hotspot X="2651.252" Y="6277.632" Z="-67.40137" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="KillMob" MobId="83712" KillCount="6">
+			<Hotspots>
+				<Hotspot X="2680.397" Y="6027.116" Z="46.49243" />
+				<Hotspot X="2724.563" Y="5964.419" Z="54.46404" />
+				<Hotspot X="2672.472" Y="5986.411" Z="42.08295" />
+				<Hotspot X="2624.89" Y="5977.867" Z="38.14643" />
+				<Hotspot X="2574.384" Y="6008.473" Z="35.16204" />
+				<Hotspot X="2577.866" Y="6066.419" Z="34.37848" />
+				<Hotspot X="2552.956" Y="6095.251" Z="34.75299" />
+				<Hotspot X="2519.916" Y="6064.664" Z="36.68627" />
+				<Hotspot X="2445.17" Y="6105.303" Z="53.14938" />
+				<Hotspot X="2537.606" Y="6264.824" Z="-61.9576" />
+				<Hotspot X="2564.82" Y="6297.636" Z="-54.4977" />
+				<Hotspot X="2600.719" Y="6287.575" Z="-51.3295" />
+				<Hotspot X="2619.883" Y="6322.148" Z="-52.56076" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="34271" Name="The Fate of Gordawg">
+		<Objective Type="CollectItem" ItemId="113077" CollectCount="1">
+			<CollectFrom>
+				<Mob Name="Gordawg" Entry="80592" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="2560.497" Y="6428.417" Z="-40.64973" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="35317" Name="The Dark Heart of Oshu'gun">
+		<Objective Type="KillMob" MobId="82053" KillCount="1">
+			<Hotspots>
+				<Hotspot X="2451.406" Y="6583.835" Z="-20.96385" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="35084" Name="Silence the Call">
+		<Objective Type="KillMob" MobId="81142" KillCount="1">
+			<Hotspots>
+				
+			</Hotspots>
+		</Objective>
+		<Objective Type="KillMob" MobId="83477" KillCount="10">
+			<Hotspots>
+				<Hotspot X="2717.889" Y="6573.823" Z="37.99493" />
+				<Hotspot X="2739.134" Y="6642.348" Z="28.43566" />
+				<Hotspot X="2775.745" Y="6609.725" Z="33.35328" />
+				<Hotspot X="2766.253" Y="6531.094" Z="38.95253" />
+				<Hotspot X="2678.073" Y="6390.193" Z="46.19828" />
+				<Hotspot X="2592.042" Y="6349.283" Z="42.44997" />
+				<Hotspot X="2528.608" Y="6325.02" Z="46.19163" />
+				<Hotspot X="2298.174" Y="6349.629" Z="49.36816" />
+				<Hotspot X="2283.018" Y="6314.325" Z="50.42323" />
+				<Hotspot X="2313.069" Y="6378.273" Z="48.94466" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+    <Quest Id="35271" Name="The Warsong Threat" >
+		<Objective Type="CollectItem" ItemId="113550" CollectCount="1">
+			<CollectFrom>
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="2811.829" Y="6328.718" Z="51.41116" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="CollectItem" ItemId="113549" CollectCount="1">
+			<CollectFrom>
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="2803.482" Y="6636.551" Z="36.16773" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="CollectItem" ItemId="113551" CollectCount="1">
+			<CollectFrom>
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="2359.799" Y="6365.278" Z="57.15569" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="CollectItem" ItemId="113552" CollectCount="1">
+			<CollectFrom>
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="2385.42" Y="6211.614" Z="68.86607" />
+			</Hotspots>
+		</Objective>
+    </Quest>
 
+
+	
+	
+	
+	
+	
+	
 	<!-- END: Quest Overrides -->
    <!-- SMV - Gorgrond - Talador - Spires - Nagrand -->
 
@@ -1463,34 +1581,112 @@
 		<PickUp QuestName="The Pale Threat" QuestId="35145" GiverName="Farseer DrekThar" GiverId="81335" />
 		<PickUp QuestName="Silence the Call" QuestId="35084" GiverName="Shamanstone" GiverId="233263" GiverType="GameObject" X="2807.962" Y="6163.497" Z="56.88271" />
 		<PickUp QuestName="Disrupt the Rituals" QuestId="35083" GiverName="Shamanstone" GiverId="233263" GiverType="GameObject" X="2807.962" Y="6163.497" Z="56.88271" />
-
-
-
-
-
-		
-			<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="300" Text="I'm serious, there's no more quests." />
-
-		
-	<!--
-
-			<Objective QuestName="The Pale Threat" QuestId="35145" Type="KillMob" MobId="81309" KillCount="1" />
-			<Objective QuestName="The Pale Threat" QuestId="35145" Type="KillMob" MobId="83712" KillCount="6" />
-		<TurnIn QuestName="The Pale Threat" QuestId="35145" TurnInName="Farseer DrekThar" TurnInId="81953" />
-
-		<TurnIn QuestName="Spiritual Matters" QuestId="35231" TurnInName="Garrok" TurnInId="80864" />
-
 			<Objective QuestName="Dark Binding" QuestId="35144" Type="KillMob" MobId="83662" KillCount="10" />
-		<TurnIn QuestName="Dark Binding" QuestId="35144" TurnInName="Farseer DrekThar" TurnInId="81953" />
+			<Objective QuestName="The Pale Threat" QuestId="35145" Type="KillMob" MobId="83712" KillCount="6" />
+			<Objective QuestName="The Pale Threat" QuestId="35145" Type="KillMob" MobId="81309" KillCount="1" />
+		<TurnIn QuestName="The Pale Threat" QuestId="35145" TurnInName="Farseer DrekThar" TurnInId="81953" X="2591.377" Y="6398.95" Z="-39.84941" />
+		<TurnIn QuestName="Dark Binding" QuestId="35144" TurnInName="Farseer DrekThar" TurnInId="81953" X="2591.377" Y="6398.95" Z="-39.84941" />
+		<PickUp QuestName="The Fate of Gordawg" QuestId="34271" GiverName="Farseer DrekThar" GiverId="81953" X="2591.377" Y="6398.95" Z="-39.84941" />
+		<PickUp QuestName="The Dark Heart of Oshu'gun" QuestId="35317" GiverName="Farseer DrekThar" GiverId="81953" X="2591.377" Y="6398.95" Z="-39.84941" />
+			<Objective QuestName="The Fate of Gordawg" QuestId="34271" Type="CollectItem" ItemId="113077" CollectCount="1" />
+			<While Condition="HasQuest(35317) &amp;&amp; !IsQuestCompleted(35317)" > <!-- The Dark Heart of Oshu'gun -->
+				<CustomBehavior File="Hooks\DoWhen" ActivityName="SingularShoveOff" UseWhen="Unit(81989) != null &amp;&amp; Blacklist.Contains(Unit(81989), BlacklistFlags.Pull)" >
+					<CustomBehavior File="RunCode" Code="Blacklist.Clear(u =&gt; u.Entry == 81989)" />
+				</CustomBehavior>
+				<!--<CustomBehavior File="Hooks\DoWhen" ActivityName="GetInNeutralize" UseWhen="Unit(81989).CastingSpellId == 151766" >
+					<CustomBehavior File="RunCode" Code="Blacklist.Clear(u =&gt; u.Entry == 81989)" />
+				</CustomBehavior>
+				<CustomBehavior File="Hooks\Avoid" AvoidName="GetInNeutralize" Command="Remove" />
+				
+				AvoidWhen="Me.Combat &amp;&amp; Unit(81989).CastingSpellId != 151766" 
+				 This works for now, but we'll need a real behavior for this quest so that we can get into neutralize when he casts the spell -->
+				<CustomBehavior File="Hooks\Avoid" AvoidName="GetOutOfNeutralize" Command="Add" ObjectType="AreaTrigger" ObjectId="7931" Radius="5" LeashRadius="45" 
+											X="2451.406" Y="6583.835" Z="-20.96385" />
+											<!--
+				<CustomBehavior File="Hooks\Avoid" AvoidName="GetInNeutralize" ObjectId="7931" Radius="0.5" AvoidWhen="Unit(35317).CastingSpellId == 151766" 
+				AvoidLocationProducer="UNIT.Location.RayCast(UNIT.Rotation, WoWMathHelper.GetNearestPointOnLineSegment(Me.Location, UNIT.Location, UNIT.Location.RayCast(UNIT.Rotation, 0)).Distance(UNIT.Location) - 2)" />    
+											-->
 
+				<!--<Objective QuestName="The Dark Heart of Oshu'gun" QuestId="35317" Type="KillMob" MobId="82053" KillCount="1" />-->
+				<CustomBehavior File="KillUntilComplete" QuestId="35317" MobId="81989" TerminateWhen="IsObjectiveComplete(2, 35317)" X="2451.406" Y="6583.835" Z="-20.96385" />
+				
+				<CustomBehavior File="Hooks\Avoid" AvoidName="GetOutOfNeutralize" Command="Remove" />
+				<CustomBehavior File="Hooks\DoWhen" ActivityName="SingularShoveOff" Command="Remove" />
+				<!-- Go up the ramp and jump out the window -->
+			</While>
+		<PickUp QuestName="The Warsong Threat" QuestId="35271" GiverName="Warsong Attack Plans" GiverId="232024" GiverType="GameObject" X="2573.507" Y="6364.681" Z="43.65055" />
+			<Objective QuestName="The Warsong Threat" QuestId="35271" Type="CollectItem" ItemId="113549" CollectCount="1" /> <!-- 2 Mixed Unit Tactics -->
+			<Objective QuestName="The Warsong Threat" QuestId="35271" Type="CollectItem" ItemId="113550" CollectCount="1" /> <!-- 1 Warsong Command Brief -->
+			<While Condition="HasQuest(35083) &amp;&amp; !IsQuestCompleted(35083)" > <!-- Disrupt the Rituals -->
+				<CustomBehavior File="InteractWith" QuestId="35083" MobId="81190" NumOfTimes="20" Range="4" TerminateWhen="IsObjectiveComplete(1, 35083)" 
+											CollectionDistance="200" NonCompeteDistance="0" PreInteractMountStrategy="DismountOrCancelShapeshift" > <!-- Mok'gor -->
+				  <HuntingGrounds>
+					<Hotspot X="2701.682" Y="6558.542" Z="37.99578" />
+					<Hotspot X="2701.113" Y="6596.528" Z="37.99579" />
+				  </HuntingGrounds>
+				</CustomBehavior>
+				<CustomBehavior File="InteractWith" QuestId="35083" MobId="81705" NumOfTimes="20" Range="4" TerminateWhen="IsObjectiveComplete(2, 35083)" 
+											CollectionDistance="200" NonCompeteDistance="0" PreInteractMountStrategy="DismountOrCancelShapeshift" > <!-- Gra'ah -->
+				  <HuntingGrounds>
+					<Hotspot X="2540.892" Y="6346.757" Z="47.50848" />
+					<Hotspot X="2507.024" Y="6334.228" Z="48.26488" />
+				  </HuntingGrounds>
+				</CustomBehavior>
+				<CustomBehavior File="InteractWith" QuestId="35083" MobId="81706" NumOfTimes="20" Range="4" TerminateWhen="IsObjectiveComplete(3, 35083)" 
+											CollectionDistance="200" NonCompeteDistance="0" PreInteractMountStrategy="DismountOrCancelShapeshift" > <!-- Kag'ah -->
+				  <HuntingGrounds>
+					<Hotspot X="2274.351" Y="6444.056" Z="44.64495" />
+					<Hotspot X="2235.057" Y="6449.094" Z="43.04388" />
+				  </HuntingGrounds>
+				</CustomBehavior>
+			</While>
+			<Objective QuestName="The Warsong Threat" QuestId="35271" Type="CollectItem" ItemId="113551" CollectCount="1" /> <!-- 3 Warsong Outrider Orders -->
+			<Objective QuestName="The Warsong Threat" QuestId="35271" Type="CollectItem" ItemId="113552" CollectCount="1" /> <!-- 4  Nagrand Scouting Report -->
 			<Objective QuestName="Silence the Call" QuestId="35084" Type="KillMob" MobId="81142" KillCount="1" />
 			<Objective QuestName="Silence the Call" QuestId="35084" Type="KillMob" MobId="83477" KillCount="10" />
-		<TurnIn QuestName="Silence the Call" QuestId="35084" TurnInName="Shamanstone" TurnInId="233263" />
+			<Objective QuestName="King of the Breezestriders" QuestId="35378" Type="CollectItem" ItemId="113104" CollectCount="1" />
+		<TurnIn QuestName="Silence the Call" QuestId="35084" TurnInName="Shamanstone" TurnInId="233263" TurnInType="GameObject" X="2323.287" Y="6352.917" Z="48.82981" />
+		<TurnIn QuestName="Disrupt the Rituals" QuestId="35083" TurnInName="Shamanstone" TurnInId="233263" TurnInType="GameObject" X="2323.287" Y="6352.917" Z="48.82981" />
+		<PickUp QuestName="Through the Nether" QuestId="35085" GiverName="Shamanstone" GiverId="233263" GiverType="GameObject" X="2323.287" Y="6352.917" Z="48.82981" />
+			<!-- WE ARE USING THE EAST MOST SHAMANSTONE -->
 
-			<Objective QuestName="Disrupt the Rituals" QuestId="35083" Type="CollectItem" ItemId="81190" CollectCount="2" />
-			<Objective QuestName="Disrupt the Rituals" QuestId="35083" Type="CollectItem" ItemId="81705" CollectCount="2" />
-			<Objective QuestName="Disrupt the Rituals" QuestId="35083" Type="CollectItem" ItemId="81706" CollectCount="2" />
-		<TurnIn QuestName="Disrupt the Rituals" QuestId="35083" TurnInName="Shamanstone" TurnInId="233263" />
+		
+			
+			<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="300" Text="I'm serious, there's no more quests." />
+			
+		
+
+			
+			
+			
+			
+			<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="300" Text="I'm serious, there's no more quests." />
+			
+			
+
+
+
+
+
+
+
+
+	<!--
+
+		<TurnIn QuestName="The Fate of Gordawg" QuestId="34271" TurnInName="Kalandrios" TurnInId="80595" />
+
+		<TurnIn QuestName="The Dark Heart of Oshu'gun" QuestId="35317" TurnInName="Farseer DrekThar" TurnInId="82070" />
+
+			<Objective QuestName="Through the Nether" QuestId="35085" Type="UseObject" ObjectId="232147" UseCount="1" />
+		<TurnIn QuestName="Through the Nether" QuestId="35085" TurnInName="Shamanstone" TurnInId="233263" />
+
+	
+		<TurnIn QuestName="The Warsong Threat" QuestId="35271" TurnInName="Blood Guard Ehanes" TurnInId="81193" />
+	
+		<TurnIn QuestName="Spiritual Matters" QuestId="35231" TurnInName="Garrok" TurnInId="80864" />
+
+
+
 
 
 
@@ -1503,7 +1699,6 @@
 	
 
 
-			<Objective QuestName="King of the Breezestriders" QuestId="35378" Type="CollectItem" ItemId="113104" CollectCount="1" />
 		<TurnIn QuestName="King of the Breezestriders" QuestId="35378" TurnInName="Stalker Ogka" TurnInId="82080" />
 
 
