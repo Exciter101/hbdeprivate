@@ -22,6 +22,7 @@ using Action = Styx.TreeSharp.Action;
 
 using P = Kitty.KittySettings;
 using HKM = Kitty.KittyHotkeyManagers;
+using Styx.Common.Helpers;
 
 namespace Kitty
 {
@@ -110,11 +111,14 @@ namespace Kitty
             DREAM_OF_CENARIUS_INT = 145162,
             HEALING_TOUCH_INT = 5185,
             REGROWTH_INT = 8936,
+            SAVAGE_ROAR_GLYPH = 155836,
             EIND = 0;
 
         public static string LSPELLCAST = string.Empty;
         public static string FF { get { return !SpellManager.HasSpell(FAERIE_SWARM) ? FAERIE_FIRE : FAERIE_SWARM; } }
         public static string FERALFORM { get { return !SpellManager.HasSpell(CLAWS_OF_SHIRVALLAH) ? CAT_FORM : CLAWS_OF_SHIRVALLAH; } }
+
+        public static DateTime fonTimer;
 
         #region trinkets
         public static bool UseTrinket1
@@ -324,6 +328,7 @@ namespace Kitty
             get
             {
                 if(!buffExists(SAVAGE_ROAR, Me)
+                    && !SpellManager.HasSpell(SAVAGE_ROAR_GLYPH)
                     && Me.EnergyPercent >= 25
                     && Me.ComboPoints >= 1) 
                 { 
@@ -459,28 +464,6 @@ namespace Kitty
             {
                 if (!spellOnCooldown(INCARNATION_CAT)
                     && buffExists(BERSERK, Me)) return true;
-                return false;
-            }
-        }
-        public static DateTime fonTimer;
-        public static bool ForceOfNatureConditions
-        {
-            get
-            {
-                if (((Targets.IsWoWBoss(Me.CurrentTarget) && AutoBot) || HKM.cooldownsOn)
-                    && !spellOnCooldown(FORCE_OF_NATURE)
-                    && buffExists(BERSERK, Me))
-                {
-                    return true;
-                }
-
-                if ((!Targets.IsWoWBoss(Me.CurrentTarget) || !HKM.cooldownsOn)
-                    && !spellOnCooldown(FORCE_OF_NATURE)
-                    && fonTimer <= DateTime.Now)
-                {
-                    fonTimer.AddSeconds(15);
-                    return true;
-                }
                 return false;
             }
         }

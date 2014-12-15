@@ -22,7 +22,7 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using Action = Styx.TreeSharp.Action;
 using P = Kitty.KittySettings;
-
+using HKM = Kitty.KittyHotkeyManagers;
 namespace Kitty
 {
     public partial class KittyMain : CombatRoutine
@@ -98,6 +98,7 @@ namespace Kitty
             if (!reqs) return false;
             if (!SpellManager.CanCast(Spell, Me.CurrentTarget)) return false;
             if (!SpellManager.Cast(Spell, Me.CurrentTarget)) return false;
+            if (Spell == FORCE_OF_NATURE && !HKM.cooldownsOn) { fonTimer = DateTime.Now + new TimeSpan(0,0,0,30,0); }
             Logging.Write(Colors.Yellow, "Casting: " + Spell + " on: " + Me.CurrentTarget.SafeName);
             await CommonCoroutines.SleepForLagDuration();
             return true;

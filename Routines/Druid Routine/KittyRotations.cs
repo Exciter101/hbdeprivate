@@ -33,7 +33,8 @@ namespace Kitty
         public static async Task<bool> rotationSelector()
         {
             if (MeIsGuardian && await BearRotationCoroutine()) return true;
-            if (MeIsFeral && await FeralRotationCoroutine()) return true;
+            if (MeIsFeral && SpellManager.HasSpell(SAVAGE_ROAR_GLYPH) && await SavageRoarGlyphedCoroutine()) return true;
+            if (MeIsFeral && !SpellManager.HasSpell(SAVAGE_ROAR_GLYPH) && await FeralRotationCoroutine()) return true;
             if (MeIsBoomkin && await BoomkinRotationCoroutine()) return true;
             if (MeIsResto && await HealingRotationCoroutine()) return true;
             if (MeIsLowbie && await LowbieRotationCoroutine()) return true;
@@ -48,8 +49,8 @@ namespace Kitty
             if (Me.IsCasting || HKM.pauseRoutineOn || HKM.manualOn) return false;
             if (pullTimer.IsRunning) { pullTimer.Stop(); }
             if (await RemoveRooted(BEAR_FORM, MeIsRooted && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await CastBuff(DASH, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange && snareTimer <= DateTime.Now)) return true;
-            if (await CastBuff(STAMPEDING_ROAR, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange && snareTimer <= DateTime.Now)) return true;
+            if (await CastBuff(DASH, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange && DateTime.Now > snareTimer)) return true;
+            if (await CastBuff(STAMPEDING_ROAR, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange && DateTime.Now > snareTimer)) return true;
             if (await CastBuff(BEAR_FORM, Me.Shapeshift != ShapeshiftForm.Bear)) return true;
             if (await findTargets(Me.CurrentTarget == null && AllowTargeting && FindTargetsCount >= 1)) return true;
             if (await clearTarget(Me.CurrentTarget != null && AutoBot && Me.CurrentTarget.IsDead || Me.CurrentTarget.IsFriendly)) return true;
@@ -71,7 +72,7 @@ namespace Kitty
             if (await Cast(WILD_CHARGE, gotTarget && WildChargeConditions(8, 25))) return true;
             if (await CastBuff(BERSERK, gotTarget && !spellOnCooldown(BERSERK) && BerserkBearConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await CastBuff(INCARNATION_BEAR, gotTarget && !spellOnCooldown(INCARNATION_BEAR) && IncarnationBearConditions && Me.CurrentTarget.IsWithinMeleeRange))
-                if (await Cast(FORCE_OF_NATURE, gotTarget && ForceOfNatureConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(FORCE_OF_NATURE, gotTarget && DateTime.Now >= fonTimer && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await NeedTrinket1(UseTrinket1 && nextTrinketTimeAllowed <= DateTime.Now && !P.myPrefs.Trinket1Use)) return true;
             if (await NeedTrinket2(UseTrinket2 && nextTrinketTimeAllowed <= DateTime.Now && !P.myPrefs.Trinket2Use)) return true;
             if (await CastGroundSpellTrinket(1, gotTarget && P.myPrefs.Trinket1Use && nextTrinketTimeAllowed <= DateTime.Now)) return true;
@@ -87,6 +88,109 @@ namespace Kitty
         #endregion
 
         #region FeralRotation
+        public static async Task<bool> SavageRoarGlyphedCoroutine()
+        {
+            if (Me.IsCasting || HKM.pauseRoutineOn || HKM.manualOn || (!AutoBot && Me.Mounted)) return false;
+            if (pullTimer.IsRunning && AutoBot)
+            {
+                pullTimer.Stop();
+                Logging.Write(Colors.CornflowerBlue, "Stopping PullTimer => Combat");
+                lastGuid = Me.CurrentTarget.Guid;
+                fightTimer.Restart();
+            }
+            if (await RemoveRooted(FERALFORM, MeIsRooted && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await CastBuff(DASH, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange && DateTime.Now > snareTimer)) return true;
+            if (await CastBuff(STAMPEDING_ROAR, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange && DateTime.Now > snareTimer)) return true;
+            if (await CastBuff(CAT_FORM, Me.Shapeshift != ShapeshiftForm.Cat)) return true;
+            if (await findTargets(Me.CurrentTarget == null && AutoBot && AllowTargeting && FindTargetsCount >= 1)) return true;
+            if (await findMeleeAttackers(gotTarget && AllowTargeting && Me.CurrentTarget.Distance > 10 && MeleeAttackersCount >= 1)) return true;
+            if (await clearTarget(Me.CurrentTarget != null && (Me.CurrentTarget.IsDead || (AutoBot && Me.CurrentTarget.IsFriendly)))) return true;
+            if (await MoveToTarget(gotTarget && AllowMovement && Me.CurrentTarget.Distance > 4.5f)) return true;
+            if (await StopMovement(gotTarget && AllowMovement && Me.CurrentTarget.Distance <= 4.5f)) return true;
+            if (await FaceMyTarget(gotTarget && AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget) && !Me.IsMoving)) return true;
+
+            if (await CastBuff(REJUVENATION, Me.HealthPercent <= P.myPrefs.PercentRejuCombat && !buffExists(REJUVENATION, Me))) return true;
+            if (await CastBuff(SURVIVAL_INSTINCTS, !spellOnCooldown(SURVIVAL_INSTINCTS) && Me.HealthPercent <= P.myPrefs.PercentSurvivalInstincts)) return true;
+            if (await CastBuff(HEALING_TOUCH, IsOverlayed(HEALING_TOUCH_INT))) return true;
+            if (await Cast(SKULL_BASH, gotTarget && SkullBashConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(INCAPACITATING_ROAR, gotTarget && IncapacitatingRoarConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(TYPHOON, gotTarget && TyphoonConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(MIGHTY_BASH, gotTarget && MightyBashConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(WAR_STOMP, gotTarget && WarStompConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await CastBuff(TIGERS_FURY, gotTarget && TigersFuryConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(WILD_CHARGE, gotTarget && WildChargeConditions(8, 25))) return true;
+            if (await CastBuff(BERSERK, gotTarget 
+                && (Targets.IsWoWBoss(Me.CurrentTarget) || HKM.cooldownsOn)
+                && !spellOnCooldown(BERSERK)
+                && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await CastBuff(INCARNATION_CAT, gotTarget 
+                && !spellOnCooldown(INCARNATION_CAT)
+                && buffExists(BERSERK, Me)
+                && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(FORCE_OF_NATURE, gotTarget
+                && ((Targets.IsWoWBoss(Me.CurrentTarget) || HKM.cooldownsOn)
+                || (!Targets.IsWoWBoss(Me.CurrentTarget)
+                && !HKM.cooldownsOn
+                && DateTime.Now >= fonTimer))
+                && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(FEROCIUOS_BITE, gotTarget 
+                && (debuffExists(RIP, Me.CurrentTarget) 
+                && debuffTimeLeft(RIP, Me.CurrentTarget) > 6000 
+                && Me.EnergyPercent >= 25 
+                && Me.ComboPoints >= 5
+                && Me.CurrentTarget.IsWithinMeleeRange)
+                || (gotTarget && Me.CurrentTarget.MaxHealth < Me.MaxHealth * 1.5
+                && Me.EnergyPercent >= 25
+                && Me.ComboPoints >= 3
+                && Me.CurrentTarget.IsWithinMeleeRange))
+                || (gotTarget && Me.CurrentTarget.HealthPercent < 25)
+                && debuffExists(RIP, Me.CurrentTarget)
+                && debuffTimeLeft(RIP, Me.CurrentTarget) < 6000
+                && Me.EnergyPercent >= 25
+                && Me.ComboPoints >= 1
+                && Me.CurrentTarget.IsWithinMeleeRange) return true;
+            if (await NeedTrinket1(UseTrinket1 
+                && nextTrinketTimeAllowed <= DateTime.Now)
+                && Me.CurrentTarget.IsWithinMeleeRange) return true;
+            if (await NeedTrinket2(UseTrinket2 
+                && nextTrinketTimeAllowed <= DateTime.Now)
+                && Me.CurrentTarget.IsWithinMeleeRange) return true;
+            if (await CastGroundSpellTrinket(1, Me.CurrentTarget != null 
+                && P.myPrefs.Trinket1Use 
+                && nextTrinketTimeAllowed <= DateTime.Now)
+                && Me.CurrentTarget.IsWithinMeleeRange) return true;
+            if (await CastGroundSpellTrinket(2, Me.CurrentTarget != null 
+                && P.myPrefs.Trinket2Use 
+                && nextTrinketTimeAllowed <= DateTime.Now)
+                && Me.CurrentTarget.IsWithinMeleeRange) return true;
+            if (await Cast(RIP, gotTarget 
+                && Me.CurrentTarget.MaxHealth > Me.MaxHealth * 1.5
+                && (!debuffExists(RIP, Me.CurrentTarget)
+                || (debuffExists(RIP, Me.CurrentTarget) && debuffTimeLeft(RIP, Me.CurrentTarget) <= 4500))
+                && Me.ComboPoints >= 5
+                && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(RAKE, gotTarget 
+                && (!debuffExists(RAKE, Me.CurrentTarget)
+                || (debuffExists(RAKE, Me.CurrentTarget) && debuffTimeLeft(RAKE, Me.CurrentTarget) <= 4500))
+                && Me.EnergyPercent >= 35
+                && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(MOONFIRE, gotTarget && SpellManager.HasSpell(LUNAR_INSPIRATION) && !debuffExists(MOONFIRE, Me.CurrentTarget) && Me.CurrentTarget.Distance <= 35)) return true;
+            if (await Cast(THRASH, gotTarget 
+                && ThrashConditions 
+                && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(SHRED, gotTarget && ShredConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(SWIPE, gotTarget 
+                && Me.EnergyPercent >= 50
+                && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await CannotContinueFight(Me.CurrentTarget, Me.CurrentTarget != null
+                && AutoBot
+                && Me.CurrentTarget.HealthPercent >= 95
+                && !Me.CurrentTarget.IsPlayer
+                && lastGuid == Me.CurrentTarget.Guid
+                && fightTimer.ElapsedMilliseconds >= 30 * 1000)) return true;
+            return false;
+        }
+
 
         public static async Task<bool> FeralRotationCoroutine()
         {
@@ -99,8 +203,8 @@ namespace Kitty
                 fightTimer.Restart(); 
             }
             if (await RemoveRooted(FERALFORM, MeIsRooted && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await CastBuff(DASH, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange && snareTimer <= DateTime.Now)) return true;
-            if (await CastBuff(STAMPEDING_ROAR, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange && snareTimer <= DateTime.Now)) return true;
+            if (await CastBuff(DASH, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange && DateTime.Now > snareTimer)) return true;
+            if (await CastBuff(STAMPEDING_ROAR, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange && DateTime.Now > snareTimer)) return true;
             if (await CastBuff(CAT_FORM, Me.Shapeshift != ShapeshiftForm.Cat)) return true;
             if (await findTargets(Me.CurrentTarget == null && AutoBot && AllowTargeting && FindTargetsCount >= 1)) return true;
             if (await findMeleeAttackers(gotTarget && AllowTargeting && Me.CurrentTarget.Distance > 10 && MeleeAttackersCount >= 1)) return true;
@@ -122,7 +226,7 @@ namespace Kitty
             if (await Cast(WILD_CHARGE, gotTarget && WildChargeConditions(8, 25))) return true;
             if (await CastBuff(BERSERK, gotTarget && BerserkConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await CastBuff(INCARNATION_CAT, gotTarget && IncarnationCatConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await Cast(FORCE_OF_NATURE, gotTarget && ForceOfNatureConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(FORCE_OF_NATURE, gotTarget && DateTime.Now >= fonTimer && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(FEROCIUOS_BITE, gotTarget && FerociousBiteConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await NeedTrinket1(UseTrinket1 && nextTrinketTimeAllowed <= DateTime.Now)) return true;
             if (await NeedTrinket2(UseTrinket2 && nextTrinketTimeAllowed <= DateTime.Now)) return true;
@@ -190,15 +294,17 @@ namespace Kitty
             if (await CastGroundSpellTrinket(1, gotTarget && P.myPrefs.Trinket1Use && nextTrinketTimeAllowed <= DateTime.Now)) return true;
             if (await CastGroundSpellTrinket(2, gotTarget && P.myPrefs.Trinket2Use && nextTrinketTimeAllowed <= DateTime.Now)) return true;
             if (await CastHeal(GENESIS, GenesisPlayers, GenesisPlayers != null)) return true;
-            if (await CastHeal(FORCE_OF_NATURE, fonTarget, fonTarget != null && healfonTimer <= DateTime.Now)) return true;
+            if (await CastHeal(FORCE_OF_NATURE, fonTarget, fonTarget != null && (fonTarget.Guid != lastFonGuid || DateTime.Now > healfonTimer))) return true;
             if (await CastHeal(WILD_GROWTH, WildGrowthPlayer, WildGrowthPlayer != null && !spellOnCooldown(WILD_GROWTH))) return true;
             if (await CastHeal(REJUVENATION, RejuvenationPlayer, RejuvenationPlayer != null)) return true;
             if (await CastHeal(HEALING_TOUCH, HealingTouchPlayer, HealingTouchPlayer != null)) return true;
             if (await CastHeal(REGROWTH, RegrowthPlayer, RegrowthPlayer != null)) return true;
             if (await CastDmgSpell(MOONFIRE, lifebloomCurrentTarget, lifebloomCurrentTarget != null
+                && MeIsSolo
                 && Me.ManaPercent > 90
                 && !debuffExists(MOONFIRE, lifebloomCurrentTarget))) return true;
             if (await CastDmgSpell(WRATH, lifebloomCurrentTarget, lifebloomCurrentTarget != null
+                && MeIsSolo
                 && Me.ManaPercent > 90)) return true;
             Thread.Sleep(10);
             return false;
@@ -630,10 +736,10 @@ namespace Kitty
         {
             if (!SpellManager.HasSpell(Spell)) return false;
             if (!reqs) return false;
+            if (Spell == FORCE_OF_NATURE) { healfonTimer = DateTime.Now + new TimeSpan(0,0,0,30,0); lastFonGuid = myTarget.Guid; }
+            if (Spell == HEALING_TOUCH && !spellOnCooldown(NATURES_SWIFTNESS)) { SpellManager.Cast(NATURES_SWIFTNESS); }
             if (!SpellManager.CanCast(Spell, myTarget)) return false;
             if (!SpellManager.Cast(Spell, myTarget)) return false;
-            if (Spell == FORCE_OF_NATURE) { SetNextForceOfNatureAllowed(); }
-            if (Spell == HEALING_TOUCH && !spellOnCooldown(NATURES_SWIFTNESS)) { SpellManager.Cast(NATURES_SWIFTNESS); }
             Logging.Write(Colors.Yellow, "Casting: " + Spell + " on: " + myTarget.SafeName);
             await CommonCoroutines.SleepForLagDuration();
             return true;
