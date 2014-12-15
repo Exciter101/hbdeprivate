@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <HBProfile>
-	<Name>testing qo ($Rev: 3841 $)</Name>
+	<Name>testing qo ($Rev: 3968 $)</Name>
 	<MinLevel>1</MinLevel>
 	<MaxLevel>200</MaxLevel>
 	
@@ -24,8 +24,8 @@
 			
 
 
-				
-		<!--
+
+			<!--
 			<If Condition="HasQuest() &amp;&amp; !IsQuestCompleted()" >
 			</If>
 			<While Condition="HasQuest() &amp;&amp; !IsQuestCompleted()" >

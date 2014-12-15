@@ -1,3 +1,8 @@
+Version 6.0.5462
+Fix Issue Interrupt Channeling Spell Instantly (we are safe for PvP now)
+Advance Logic: Auto Scale Down Performance if WoW FPS drop below 15 (Lag)
+Many Minor Bugs Fix and Improvement
+
 Version 6.0.5451 (Update 2)
 Combat Routine now work with the new Honorbuddy Honorbuddy v2.5.12203.759
 
