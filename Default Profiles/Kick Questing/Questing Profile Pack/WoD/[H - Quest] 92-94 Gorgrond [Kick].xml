@@ -1180,12 +1180,12 @@
 		<PickUp QuestName="Super Seeds" QuestId="35406" GiverName="Enriched Seeds" GiverId="235129" GiverType="GameObject" X="5723.204" Y="1020.839" Z="79.57996" />
 			<Objective QuestName="The Infested" QuestId="35400" Type="KillMob" KillCount="6" MobId="81617" MobName="Infested Orc" />
 		<TurnIn QuestName="The Infested" QuestId="35400" TurnInName="Draka" TurnInId="74593" X="5693.852" Y="1257.575" Z="84.0595" />
-		<PickUp QuestName="Bushwhacker" QuestId="35432" GiverName="Draka" GiverId="74593" WaitTime="2000" X="5693.852" Y="1257.575" Z="84.0595" />
 		<TurnIn QuestName="Super Seeds" QuestId="35406" TurnInName="Kaz the Shrieker" TurnInId="74606" X="5691.138" Y="1257.413" Z="83.30887" />   
 		<TurnIn QuestName="Mossy Fate" QuestId="35399" TurnInName="Kaz the Shrieker" TurnInId="74606" X="5691.138" Y="1257.413" Z="83.30887" />
 		<TurnIn QuestName="The Voice of Iyu" QuestId="35402" TurnInName="Kaz the Shrieker" TurnInId="74606" X="5691.138" Y="1257.413" Z="83.30887" />
 		<PickUp QuestName="Pollen Power" QuestId="35429" GiverId="74606" GiverName="Kaz the Shrieker" X="5691.138" Y="1257.413" Z="83.30887" />
 		<PickUp QuestName="Cutter" QuestId="35430" GiverId="74606" GiverName="Kaz the Shrieker" X="5691.138" Y="1257.413" Z="83.30887" />
+		<PickUp QuestName="Bushwhacker" QuestId="35432" GiverName="Draka" GiverId="74593" WaitTime="2000" X="5693.852" Y="1257.575" Z="84.0595" />
 			<Objective QuestName="Pollen Power" QuestId="35429" Type="CollectItem" ItemName="Potent Pollen" ItemId="38082" CollectCount="20" /> 
 		<TurnIn QuestName="Cutter" QuestId="35430" TurnInName="Cutter" TurnInId="82254" X="5011.565" Y="1491.769" Z="106.2692" />
 		<PickUp QuestName="A Green Ogron?" QuestId="36482" GiverName="Cutter" GiverId="82274" X="5013.046" Y="1492.66" Z="106.2597" />
@@ -1297,8 +1297,11 @@
 		<TurnIn QuestName="Growing Wood" QuestId="35506" TurnInName="Penny Clobberbottom" TurnInId="82574" X="6059.319" Y="102.5851" Z="47.44405" />
 		<TurnIn QuestName="Chapter I: Plant Food" QuestId="35508" TurnInName="Penny Clobberbottom" TurnInId="82574" X="6059.319" Y="102.5851" Z="47.44405" />
 		<TurnIn QuestName="Chapter II: The Harvest" QuestId="35527" TurnInName="Penny Clobberbottom" TurnInId="82574" X="6059.319" Y="102.5851" Z="47.44405"/>
+            <If Condition="HasQuest(36812)" > <!-- Chapter III: Ritual of the Charred / Mole Machine -->
 		<TurnIn QuestName="Chapter III: Ritual of the Charred" QuestId="35524" TurnInName="Penny Clobberbottom" TurnInId="82574" X="6059.319" Y="102.5851" Z="47.44405" />
-			<!-- We should take the mole machine back to Beastwatch -->
+				<MoveTo X="6056.831" Y="103.1965" Z="47.18265" />
+				<CustomBehavior File="InteractWith" MobId="234425" NonCompeteDistance="0" WaitForNpcs="False" WaitTime="5000" Range="6" X="6052.97" Y="106.349" Z="46.97743" /> <!-- Mole Machine -->
+			</If>
 
 			<!-- Penny follower -->
             <If Condition="!HasQuest(36812) &amp;&amp; !IsQuestCompleted(36812)" > <!-- Penny / Follower -->
@@ -1560,6 +1563,8 @@
 					<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for quest to pickup {TimeRemaining}" />
 				</If>
 				<If Condition="HasQuest(36603) &amp;&amp; !IsQuestCompleted(36603)" > <!-- 'Complete' Bonus Objective: Brimstone Springs -->
+					<CustomBehavior File="Hooks\Avoid" AvoidName="AcidPool" Command="Add" ObjectType="AreaTrigger" ObjectId="8093" Radius="3" AvoidWhen="Me.Combat" />
+				
 					<SetGrindArea>
 						<GrindArea>
 							<Factions>2716 14 16</Factions>
@@ -1646,6 +1651,8 @@
 					</SetGrindArea>
 					<GrindTo Condition="Me.Level &gt;= 94" GoalText="Grinding to Level 94"  />
 				
+					<MoveTo X="5763.857" Y="1297.016" Z="106.9526" />
+					<CustomBehavior File="Hooks\Avoid" AvoidName="AcidPool" Command="Remove" />
 			</If>
 
 			<!-- Go To Talador -->
