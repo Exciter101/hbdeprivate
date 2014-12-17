@@ -5,7 +5,7 @@
   <Barkskin>True</Barkskin>
   <BarkskinHP>70</BarkskinHP>
   <BearForm>True</BearForm>
-  <BearFormAlways>50</BearFormAlways>
+  <BearFormAlways>30</BearFormAlways>
   <Berserk>True</Berserk>
   <BerserkCD>False</BerserkCD>
   <BerserkBurst>True</BerserkBurst>
@@ -103,6 +103,7 @@
   <RejuvenationNonResto>True</RejuvenationNonResto>
   <Rejuvenation>False</Rejuvenation>
   <RejuvenationHP>95</RejuvenationHP>
+  <RejuvenationGerminationHP>80</RejuvenationGerminationHP>
   <RejuvenationAll>False</RejuvenationAll>
   <RejuvenationAllMana>70</RejuvenationAllMana>
   <Renewal>True</Renewal>
@@ -154,10 +155,10 @@
   <AutoRacial>True</AutoRacial>
   <AutoRez>True</AutoRez>
   <AutoSetFocus>True</AutoSetFocus>
-  <AutoTarget>True</AutoTarget>
+  <AutoTarget>False</AutoTarget>
   <AutoWriteLog>True</AutoWriteLog>
   <BurstString></BurstString>
-  <BurstKey>3</BurstKey>
+  <BurstKey>9</BurstKey>
   <BurstHP>10</BurstHP>
   <CycloneHealerString></CycloneHealerString>
   <CycloneAnyUnitString></CycloneAnyUnitString>
@@ -177,7 +178,7 @@
   <NaturesVigil>True</NaturesVigil>
   <NaturesVigilCD>False</NaturesVigilCD>
   <NaturesVigilBurst>True</NaturesVigilBurst>
-  <PausePressedKeys></PausePressedKeys>
+  <PausePressedKeys>ShiftKey</PausePressedKeys>
   <PauseToggleKeys></PauseToggleKeys>
   <PounceInterrupt>True</PounceInterrupt>
   <PriorityHeal>70</PriorityHeal>
