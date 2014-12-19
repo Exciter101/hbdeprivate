@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DKPrefs>
+  <AutoMovement>True</AutoMovement>
+  <AutoTargeting>True</AutoTargeting>
+  <AutoFacing>True</AutoFacing>
+  <AutoMovementDisable>True</AutoMovementDisable>
+  <AutoTargetingDisable>True</AutoTargetingDisable>
+  <AutoFacingDisable>True</AutoFacingDisable>
+  <KeyStopAoe>None</KeyStopAoe>
+  <KeyUseCooldowns>None</KeyUseCooldowns>
+  <KeyPauseCR>None</KeyPauseCR>
+  <KeyPlayManual>None</KeyPlayManual>
+  <PrintRaidstyleMsg>True</PrintRaidstyleMsg>
+  <AutoInterrupt>True</AutoInterrupt>
+  <FoodHPOoC>50</FoodHPOoC>
+  <Trinket1>1</Trinket1>
+  <Trinket2>1</Trinket2>
+  <PercentTrinket1HP>45</PercentTrinket1HP>
+  <PercentTrinket2HP>45</PercentTrinket2HP>
+  <Gloves>1</Gloves>
+  <Racial>3</Racial>
+  <RaidFlask>1</RaidFlask>
+  <RaidFlaskKind>1</RaidFlaskKind>
+  <PercentHealthstone>45</PercentHealthstone>
+  <PercentNaaru>50</PercentNaaru>
+  <PercentFortitude>60</PercentFortitude>
+  <PercentVampiric>70</PercentVampiric>
+  <PercentRuneTap>50</PercentRuneTap>
+  <PercentConversion>85</PercentConversion>
+  <PercentDancing>90</PercentDancing>
+  <FlaskCrystal>False</FlaskCrystal>
+  <FlaskAlchemy>False</FlaskAlchemy>
+  <Presence>1</Presence>
+</DKPrefs>

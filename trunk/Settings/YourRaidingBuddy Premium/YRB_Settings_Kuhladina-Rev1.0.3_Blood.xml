@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<YbSettingsBD>
+  <BloodIceboundFortitudePercent>60</BloodIceboundFortitudePercent>
+  <EnableDeathAndDecayAuto>True</EnableDeathAndDecayAuto>
+  <EnableAutoGoreGrasp>False</EnableAutoGoreGrasp>
+  <UseDancingRuneWeapon>True</UseDancingRuneWeapon>
+  <CheckInterruptsList>True</CheckInterruptsList>
+  <LifebloodOffensive>OnBoss</LifebloodOffensive>
+  <ClassRacials>OnBoss</ClassRacials>
+  <DancingRuneWeaponPercent>80</DancingRuneWeaponPercent>
+  <UseLichborne>True</UseLichborne>
+  <LichbornePercent>60</LichbornePercent>
+  <DeathCoilHealPercent>60</DeathCoilHealPercent>
+  <UseVampiricBlood>True</UseVampiricBlood>
+  <EnableUnholyBlight>True</EnableUnholyBlight>
+  <UseEmpowerRuneWeapon>True</UseEmpowerRuneWeapon>
+  <UsePetSacrifice>True</UsePetSacrifice>
+  <UseIceboundFortitude>True</UseIceboundFortitude>
+  <UseAntiMagicShell>True</UseAntiMagicShell>
+  <VampiricBloodPercent>60</VampiricBloodPercent>
+  <UseRuneTapWoTN>True</UseRuneTapWoTN>
+  <RuneTapWoTNPercent>80</RuneTapWoTNPercent>
+  <PetSacrificePercent>30</PetSacrificePercent>
+  <UseRuneTap>True</UseRuneTap>
+  <RuneTapPercent>90</RuneTapPercent>
+  <DeathStrikeBloodShieldPercent>90</DeathStrikeBloodShieldPercent>
+  <DeathStrikeBloodShieldTimeRemaining>2</DeathStrikeBloodShieldTimeRemaining>
+  <DeathStrikePercent>60</DeathStrikePercent>
+  <DeathSiphonHP>80</DeathSiphonHP>
+  <Trinket1>OnBoss</Trinket1>
+  <Trinket2>OnBoss</Trinket2>
+  <TrinketAura>0</TrinketAura>
+  <UseTrinketOnCertainAura>False</UseTrinketOnCertainAura>
+  <AoECount>2</AoECount>
+  <EnableFacing>False</EnableFacing>
+  <CheckAoE>True</CheckAoE>
+  <CheckInterrupts>True</CheckInterrupts>
+  <CheckLifebloodNum>10</CheckLifebloodNum>
+</YbSettingsBD>

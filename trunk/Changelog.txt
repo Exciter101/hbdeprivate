@@ -1,0 +1,76 @@
+New features:
+--------------
+  * Core
+    - Protected Items: Now includes a few more tradeskill-related items. (HB-1699)
+
+    - Rewrote Honorbuddy's start up and initialization to be better multithreaded. (HB-1700)
+
+  * DungeonBuddy
+    - Dungeonbuddy profiles can now add vendors and mailboxes for use while farming. See the Lost City of the Tol'vir profile for an example. (HB-843)
+
+    - Finished dungeon script and profile for normal Grimrail Depot (HB-1616)
+
+  * UI
+    - Honorbuddy settings are now frames when printed to the log. (HB-1542)
+
+Api Changes:
+--------------
+    - SpellManager.CanCast will now work properly for spells that can be cast during spell casts (HB-1653)
+
+Bug fixes:
+--------------
+  * Character Manager
+    - AutoEquip will no longer assume equipped items have additional item info. (HB-1635)
+
+  * Core
+    - Updater should no longer create recursive backups of the backup folder (HB-1665)
+
+    - HB will now not update the spell manager when group/raid members change spec. (HB-1580)
+
+    - Log timestamps are now uniform regardless of culture. (HB-1660)
+
+    - Fixed an issue where starting the quest bot without a cache could take several minutes. (HB-1638)
+
+  * DungeonBuddy
+    - (Shado-Pan Monastery) Tanks will no longer try to skip the second last and last pack. Followers will also not try to avoid these areas when they aren't skipped. (HB-1196)
+
+    - Blackrock Spire script now uses the new  entrance location (HB-1567)
+
+    - (Gate of the Setting Sun) Fixed an issue where bots would get stuck after wiping on third boss/on the way to fourth boss. (HB-1603)
+
+    - (Hellfire Ramparts) Tank now also kills the last boss required to get end-of-dungeon rewards (HB-1673)
+
+    - (Siege of Niuzao Temple) Should no longer trigger stuck handler during the wind phase on the last boss (HB-1677)
+
+    - (Mogu'shan Palace) Jumping over the ledge to Gekkan should no longer fail. (HB-1679)
+
+    - (Blackfathom Deeps) Fixed an issue where the tank would not open the door to the last boss (HB-1683)
+
+    - Lost City of the Tol'vir: Fixed vendor runs while on farm mode. This is made possible by the newly added support of <Vendors> and <MailBoxes> elements in Dungeonbuddy profiles. (HB-1476)
+
+    - (Blackfathom Deeps) Fixed an issue where DungeonBuddy wouldn't perform the jumps correctly. (HB-1477)
+
+    - Gate of the Setting Sun: Fixed a stuck issue that occurred while jumping through the hole at the broken wall section while on the way to Raigonn (HB-1532)
+
+    - (Scarlett Halls) Should no longer sometimes run back and forth at Armsmaster Haglan when the tank continues without killing him (HB-1606)
+
+    - Query.GetNearestNpc will now ignore blacklisted NPCs with invalid locations. (HB-1608)
+
+    - StyxWoW.IsInWorld will now correctly return 'false' anytime a loading screen is shown or player is not in game. (HB-1586)
+
+  * Other
+    - WoWUnit.Attackable no-longer returns 'false' for attackable NPCs while player is flying. (HB-1636)
+
+  * Profile
+    - Repaired a profile error where toon would not defend itself while waiting for "The Spirits of Golakka Hot Springs" quest completion. (HB-1671)
+
+  * QuestBehaviour
+    - MrFishIt questbehavior no longer triple casts the fishing skill, and it no longer displays the warning "Did not see lootframe" sometimes. (HB-1632)
+
+    - ProfileCompatibilityInfo should no longer throw NullRefException's for items that do not have additional information available (HB-1645)
+
+  * Questing
+    - The profile helper functions HasItem and GetItemCount now work for quest items that are not contained in the player's bags. (HB-1325)
+
+    - Fixed a bug where HB would sometimes idle while doing a CollectItem objective with a single hotspot (HB-1634)
+
