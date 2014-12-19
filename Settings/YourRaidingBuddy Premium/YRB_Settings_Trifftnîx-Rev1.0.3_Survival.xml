@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<YbSettingsSV>
+  <MurderofCrows>Always</MurderofCrows>
+  <EnableFacing>False</EnableFacing>
+  <EnableTargeting>False</EnableTargeting>
+  <Lifeblood>Offensive</Lifeblood>
+  <LifebloodOffensive>OnBoss</LifebloodOffensive>
+  <UseOpenerOnBoss>True</UseOpenerOnBoss>
+  <LynxRush>Never</LynxRush>
+  <Rabid>Always</Rabid>
+  <RapidFire>Never</RapidFire>
+  <Stampede>Never</Stampede>
+  <ClassRacials>OnBoss</ClassRacials>
+  <UseBlackArrowFocusTarget>False</UseBlackArrowFocusTarget>
+  <EnablePetStuff>True</EnablePetStuff>
+  <SerpentStingCleave>True</SerpentStingCleave>
+  <MendPetHP>65</MendPetHP>
+  <AoEMultiShotCount>2</AoEMultiShotCount>
+  <AoECount>2</AoECount>
+  <TrinketAura>0</TrinketAura>
+  <UseTrinketOnCertainAura>False</UseTrinketOnCertainAura>
+  <Trinket1>OnBoss</Trinket1>
+  <Trinket2>OnBoss</Trinket2>
+  <CheckAoE>True</CheckAoE>
+  <CheckInterrupts>True</CheckInterrupts>
+  <CheckLifebloodNum>10</CheckLifebloodNum>
+</YbSettingsSV>

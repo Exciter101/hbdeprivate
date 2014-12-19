@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<YbSettingsSR>
+  <ShadowDance>OnBoss</ShadowDance>
+  <MarkedForDeath>OnBoss</MarkedForDeath>
+  <Preparation>OnBoss</Preparation>
+  <ShadowReflection>OnBoss</ShadowReflection>
+  <PoolForShadowDance>True</PoolForShadowDance>
+  <PoolForVanish>True</PoolForVanish>
+  <Lifeblood>Offensive</Lifeblood>
+  <LifebloodOffensive>OnBoss</LifebloodOffensive>
+  <Tier6Abilities>OnBoss</Tier6Abilities>
+  <Vanish>OnBoss</Vanish>
+  <AoECount>2</AoECount>
+  <EnableFacing>False</EnableFacing>
+  <ClassRacials>OnBoss</ClassRacials>
+  <CheckExposeArmor>False</CheckExposeArmor>
+  <EnableDefensive>False</EnableDefensive>
+  <EnableFeintUsage>False</EnableFeintUsage>
+  <CheckInterruptsList>True</CheckInterruptsList>
+  <NumShadowstep>50</NumShadowstep>
+  <NumRecuperate>70</NumRecuperate>
+  <EvasionHP>70</EvasionHP>
+  <CloakofShadowHP>70</CloakofShadowHP>
+  <CombatReadinessHP>70</CombatReadinessHP>
+  <FeintHP>70</FeintHP>
+  <NumRecuperateCombo>3</NumRecuperateCombo>
+  <TrinketAura>0</TrinketAura>
+  <UseTrinketOnCertainAura>False</UseTrinketOnCertainAura>
+  <Trinket1>OnBoss</Trinket1>
+  <Trinket2>OnBoss</Trinket2>
+  <PoisonSelectorM>Deadly</PoisonSelectorM>
+  <PoisonSelectorO>Leeching</PoisonSelectorO>
+  <CheckPoison>True</CheckPoison>
+  <CheckAoE>True</CheckAoE>
+  <CheckInterrupts>True</CheckInterrupts>
+  <CheckLifebloodNum>10</CheckLifebloodNum>
+</YbSettingsSR>

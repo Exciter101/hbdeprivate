@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<YbSettingsMM>
+  <MurderofCrows>Always</MurderofCrows>
+  <RapidFire>Always</RapidFire>
+  <Stampede>Always</Stampede>
+  <ClassRacials>OnBoss</ClassRacials>
+  <Lifeblood>Offensive</Lifeblood>
+  <LifebloodOffensive>OnBoss</LifebloodOffensive>
+  <AoEMultiShotCount>2</AoEMultiShotCount>
+  <AimedShotDumpToTHUp>65</AimedShotDumpToTHUp>
+  <AoECount>2</AoECount>
+  <EnableMultiShotAoE>False</EnableMultiShotAoE>
+  <GlaiveTossAoE>False</GlaiveTossAoE>
+  <GlaiveTossST>True</GlaiveTossST>
+  <BarrageST>True</BarrageST>
+  <BarrageSTFirst>False</BarrageSTFirst>
+  <BarrageAoE>True</BarrageAoE>
+  <ToggleMode>False</ToggleMode>
+  <ToggleMode1>False</ToggleMode1>
+  <EnableDefensive>False</EnableDefensive>
+  <CheckInterruptsList>True</CheckInterruptsList>
+  <DeterrenceHP>20</DeterrenceHP>
+  <MendPetHP>40</MendPetHP>
+  <UseMastersCall>False</UseMastersCall>
+  <DetterenceEnable>False</DetterenceEnable>
+  <UseFeignDeathOnAggro>False</UseFeignDeathOnAggro>
+  <EnableFacing>True</EnableFacing>
+  <TrinketAura>0</TrinketAura>
+  <UseTrinketOnCertainAura>False</UseTrinketOnCertainAura>
+  <Trinket1>OnBoss</Trinket1>
+  <Trinket2>OnBoss</Trinket2>
+  <CheckAoE>True</CheckAoE>
+  <CheckInterrupts>True</CheckInterrupts>
+</YbSettingsMM>

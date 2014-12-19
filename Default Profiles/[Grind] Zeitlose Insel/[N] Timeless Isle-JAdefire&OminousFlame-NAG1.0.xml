@@ -1,0 +1,67 @@
+<HBProfile>
+<Name>Timeless Isle Rev: 1.0#281113 - NAG</Name>
+<MinDurability>0.3</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+<MailGrey>false</MailGrey>
+<MailWhite>true</MailWhite>
+<MailGreen>true</MailGreen>
+<MailBlue>true</MailBlue>
+<MailPurple>true</MailPurple>
+
+<SellGrey>true</SellGrey>
+<SellWhite>true</SellWhite>
+<SellGreen>false</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+<Vendor Name="Crafter Kwon" Entry="0" Type="Repair" X="-511.3785" Y="-5008.741" Z="2.056449" />
+</Vendors>
+
+<Blackspots>
+<Blackspot X="-475.1418" Y="-5010.931" Z="5.240516" Radius="20" />
+<Blackspot X="-568.0515" Y="-4797.986" Z="5.837235" Radius="20" />
+<Blackspot X="-415.1175" Y="-4896.616" Z="5.941898" Radius="20" />
+</Blackspots>
+
+<AvoidMobs>
+<Mob Name="Great Turtle" Entry="72764" />
+<Mob Name="Eternal Kilnmaster" Entry="72896" />
+<Mob Name="Molten Guardian" Entry="72888" />
+<Mob Name="High Priest of Ordos" Entry="72898" /> 
+<Mob Name="Blazebound Chanter" Entry="72897" />
+<Mob Name="Eroded Cliffdweller" Entry="72809" />
+</AvoidMobs>
+
+<GrindArea>
+<MinLevel>89</MinLevel>
+<MaxLevel>91</MaxLevel>
+<Factions>16 2136</Factions>
+<MaxDistance>30</MaxDistance>
+
+<Hotspots>
+
+    <Hotspot X="-423.7191" Y="-5119.4092" Z="7.6187"  />
+    <Hotspot X="-396.8801" Y="-5136.0645" Z="6.4330"  />
+    <Hotspot X="-391.7901" Y="-5148.8647" Z="6.4333"  />
+    <Hotspot X="-370.8745" Y="-5134.2368" Z="7.2058"  />
+    <Hotspot X="-367.3689" Y="-5168.7456" Z="6.4331"  />
+    <Hotspot X="-356.2426" Y="-5193.0503" Z="6.9754"  />
+    <Hotspot X="-325.4360" Y="-5193.8447" Z="5.3828"  />
+    <Hotspot X="-309.2732" Y="-5214.3794" Z="-9.0798"  />
+    <Hotspot X="-259.2885" Y="-5219.9956" Z="-12.2782"  />
+    <Hotspot X="-247.2889" Y="-5208.7319" Z="-13.4294"  />
+    <Hotspot X="-248.3920" Y="-5178.8945" Z="-7.4077"  />
+    <Hotspot X="-258.3884" Y="-5161.8774" Z="-0.6197"  />
+    <Hotspot X="-272.3632" Y="-5133.2725" Z="1.2707"  />
+    <Hotspot X="-286.9196" Y="-5158.3706" Z="3.1288"  />
+    <Hotspot X="-293.9200" Y="-5186.7881" Z="8.7395"  />
+    <Hotspot X="-276.7868" Y="-5217.6978" Z="17.5510"  />
+    <Hotspot X="-267.2555" Y="-5198.6582" Z="13.1469"  />
+    <Hotspot X="-271.0118" Y="-5176.6133" Z="18.6063"  />
+
+</Hotspots>
+</GrindArea>
+
+</HBProfile>

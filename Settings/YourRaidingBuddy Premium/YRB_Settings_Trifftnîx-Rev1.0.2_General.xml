@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SettingsG>
+  <InterruptStart>700</InterruptStart>
+  <MinHPAbility>0</MinHPAbility>
+  <InterruptEnd>1800</InterruptEnd>
+  <InterruptList>WoD</InterruptList>
+  <DiagnosticLogging>None</DiagnosticLogging>
+  <TreePerformance>False</TreePerformance>
+  <TreePerformance1>False</TreePerformance1>
+  <PerformanceLogging>None</PerformanceLogging>
+  <PerformanceLoggingHotkey>False</PerformanceLoggingHotkey>
+  <BurstOfSpeedEnergy>60</BurstOfSpeedEnergy>
+  <BurstOfSpeedEnergyTimer>0</BurstOfSpeedEnergyTimer>
+  <AutoBurstofSpeed>False</AutoBurstofSpeed>
+  <EnableTrapsHunter>True</EnableTrapsHunter>
+  <DetectKeyPress>300</DetectKeyPress>
+  <AutoDetectManualCast>True</AutoDetectManualCast>
+  <AutoTautntingEnable>False</AutoTautntingEnable>
+  <CheckBossAmalgam>1</CheckBossAmalgam>
+  <CheckBossBlackfuse>1</CheckBossBlackfuse>
+  <CheckBossEarthBreakerHaromm>1</CheckBossEarthBreakerHaromm>
+  <CheckBossGalakras>1</CheckBossGalakras>
+  <CheckBossGarrosh1>1</CheckBossGarrosh1>
+  <CheckBossGarrosh2>1</CheckBossGarrosh2>
+  <CheckBossImmerseus>1</CheckBossImmerseus>
+  <CheckBossIronJuggernaut>1</CheckBossIronJuggernaut>
+  <CheckBossMalkorok>1</CheckBossMalkorok>
+  <CheckBossNazgrim>1</CheckBossNazgrim>
+  <CheckBossSha>1</CheckBossSha>
+  <CheckBossThok1>1</CheckBossThok1>
+  <CheckBossThok2>1</CheckBossThok2>
+  <CheckBossThok3>1</CheckBossThok3>
+  <CheckBossThok4>1</CheckBossThok4>
+  <CustomSpecialKeyText>Normal</CustomSpecialKeyText>
+  <PreCombatBuff>False</PreCombatBuff>
+  <PotionUsage>False</PotionUsage>
+  <EnableExperimentalPlacement>False</EnableExperimentalPlacement>
+  <ExperimentalPlacementDistance>8</ExperimentalPlacementDistance>
+  <Racials>OnBoss</Racials>
+  <RacialsHpValue>60</RacialsHpValue>
+  <RacialsMpValue>60</RacialsMpValue>
+  <Movement>False</Movement>
+  <HotkeyChatOutput>True</HotkeyChatOutput>
+  <LastStatCounted></LastStatCounted>
+  <CurrentRevision>0</CurrentRevision>
+</SettingsG>
