@@ -350,9 +350,8 @@ namespace Kitty
         {
             get
             {
-                if(Me.CurrentTarget.HealthPercent < 25
-                    && debuffExists(RIP, Me.CurrentTarget)
-                    && Me.EnergyPercent >= 50
+                if(debuffExists(RIP, Me.CurrentTarget)
+                    && Me.EnergyPercent >= 25
                     && Me.ComboPoints >= 5)
                 {
                     return true;
@@ -373,12 +372,6 @@ namespace Kitty
                 {
                     return true;
                 }
-                if(!needRip
-                    && Me.EnergyPercent >= 25
-                    && Me.ComboPoints >= 3)
-                {
-                    return true;
-                }
                 return false;
             }
         }
@@ -387,8 +380,7 @@ namespace Kitty
         {
             get
             {
-                if(needRip
-                    && (!debuffExists(RIP, Me.CurrentTarget)
+                if((!debuffExists(RIP, Me.CurrentTarget)
                     || (debuffExists(RIP, Me.CurrentTarget) && debuffTimeLeft(RIP, Me.CurrentTarget) <= 6000))
                     && Me.EnergyPercent >= 30
                     && Me.ComboPoints >= 5)
