@@ -44,9 +44,9 @@
   <HealingTouchNS>False</HealingTouchNS>
   <HealingTouchNSHP>40</HealingTouchNSHP>
   <HealMe>True</HealMe>
-  <HealMeHP>90</HealMeHP>
+  <HealMeHP>80</HealMeHP>
   <HealFriend>True</HealFriend>
-  <HealFriendHP>80</HealFriendHP>
+  <HealFriendHP>70</HealFriendHP>
   <Hibernate>False</Hibernate>
   <Hurricane>False</Hurricane>
   <IncarnationCatBear>True</IncarnationCatBear>
@@ -71,7 +71,7 @@
   <Lacerate>True</Lacerate>
   <Maul>True</Maul>
   <MaimInterrupt>True</MaimInterrupt>
-  <Maim>True</Maim>
+  <Maim>False</Maim>
   <MaimComboPoints>4</MaimComboPoints>
   <MaimHelpFriend>True</MaimHelpFriend>
   <MaimHelpFriendHP>40</MaimHelpFriendHP>

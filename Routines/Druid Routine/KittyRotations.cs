@@ -137,22 +137,24 @@ namespace Kitty
                 && !HKM.cooldownsOn
                 && DateTime.Now >= fonTimer))
                 && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(RIP, gotTarget
+                && (!debuffExists(RIP, Me.CurrentTarget)
+                || (debuffExists(RIP, Me.CurrentTarget) && debuffTimeLeft(RIP, Me.CurrentTarget) <= 4500))
+                && Me.ComboPoints >= 5
+                && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(FEROCIUOS_BITE, gotTarget 
                 && (debuffExists(RIP, Me.CurrentTarget) 
                 && debuffTimeLeft(RIP, Me.CurrentTarget) > 6000 
                 && Me.EnergyPercent >= 25 
                 && Me.ComboPoints >= 5
                 && Me.CurrentTarget.IsWithinMeleeRange)
-                || (gotTarget && Me.CurrentTarget.MaxHealth < Me.MaxHealth * 1.5
-                && Me.EnergyPercent >= 25
-                && Me.ComboPoints >= 3
-                && Me.CurrentTarget.IsWithinMeleeRange))
-                || (gotTarget && Me.CurrentTarget.HealthPercent < 25)
+                || (gotTarget 
+                && Me.CurrentTarget.HealthPercent < 25
                 && debuffExists(RIP, Me.CurrentTarget)
                 && debuffTimeLeft(RIP, Me.CurrentTarget) < 6000
                 && Me.EnergyPercent >= 25
                 && Me.ComboPoints >= 1
-                && Me.CurrentTarget.IsWithinMeleeRange) return true;
+                && Me.CurrentTarget.IsWithinMeleeRange))) return true;
             if (await NeedTrinket1(UseTrinket1 
                 && nextTrinketTimeAllowed <= DateTime.Now)
                 && Me.CurrentTarget.IsWithinMeleeRange) return true;
@@ -167,12 +169,6 @@ namespace Kitty
                 && P.myPrefs.Trinket2Use 
                 && nextTrinketTimeAllowed <= DateTime.Now)
                 && Me.CurrentTarget.IsWithinMeleeRange) return true;
-            if (await Cast(RIP, gotTarget 
-                && Me.CurrentTarget.MaxHealth > Me.MaxHealth * 1.5
-                && (!debuffExists(RIP, Me.CurrentTarget)
-                || (debuffExists(RIP, Me.CurrentTarget) && debuffTimeLeft(RIP, Me.CurrentTarget) <= 4500))
-                && Me.ComboPoints >= 5
-                && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(RAKE, gotTarget 
                 && (!debuffExists(RAKE, Me.CurrentTarget)
                 || (debuffExists(RAKE, Me.CurrentTarget) && debuffTimeLeft(RAKE, Me.CurrentTarget) <= 4500))
@@ -229,12 +225,13 @@ namespace Kitty
             if (await CastBuff(BERSERK, gotTarget && BerserkConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await CastBuff(INCARNATION_CAT, gotTarget && IncarnationCatConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(FORCE_OF_NATURE, gotTarget && DateTime.Now >= fonTimer && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(RIP, gotTarget && RipConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(FEROCIUOS_BITE, gotTarget && FerociousBiteConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await NeedTrinket1(UseTrinket1 && nextTrinketTimeAllowed <= DateTime.Now)) return true;
             if (await NeedTrinket2(UseTrinket2 && nextTrinketTimeAllowed <= DateTime.Now)) return true;
             if (await CastGroundSpellTrinket(1, Me.CurrentTarget != null && P.myPrefs.Trinket1Use && nextTrinketTimeAllowed <= DateTime.Now)) return true;
             if (await CastGroundSpellTrinket(2, Me.CurrentTarget != null && P.myPrefs.Trinket2Use && nextTrinketTimeAllowed <= DateTime.Now)) return true;
-            if (await Cast(RIP, gotTarget && RipConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            
             if (await Cast(RAKE, gotTarget && RakeConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(MOONFIRE, gotTarget && SpellManager.HasSpell(LUNAR_INSPIRATION) && !debuffExists(MOONFIRE, Me.CurrentTarget) && Me.CurrentTarget.Distance <= 35)) return true;
             if (await Cast(THRASH, gotTarget && ThrashConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
@@ -315,6 +312,7 @@ namespace Kitty
         #endregion
 
         #region healing variables
+        public static int checkHealth;
         public static int partyCount 
         { 
             get 
@@ -675,8 +673,17 @@ namespace Kitty
         {
             get
             {
+                if (RegrowthHealth == HaelingTouchHealth) { checkHealth = RegrowthHealth; }
+                if (RegrowthHealth > HaelingTouchHealth) { checkHealth = RegrowthHealth; }
+                if (RegrowthHealth < HaelingTouchHealth) { checkHealth = HaelingTouchHealth; }
                 List<WoWPlayer> members = new List<WoWPlayer>();
-                members = getPartyMembers().Where(p => p.HealthPercent <= RejuvenationHealth && !buffExists(REJUVENATION, p) && p.IsAlive && p.InLineOfSight && p.InLineOfSpellSight && p.Distance <= 40).OrderBy(p => p.HealthPercent).ToList();
+                members = getPartyMembers().Where(p => p.HealthPercent <= RejuvenationHealth 
+                    && p.HealthPercent > checkHealth
+                    && !buffExists(REJUVENATION, p) 
+                    && p.IsAlive 
+                    && p.InLineOfSight 
+                    && p.InLineOfSpellSight 
+                    && p.Distance <= 40).OrderBy(p => p.HealthPercent).ToList();
                 if (members.Count() > 0)
                 {
                     WoWPlayer healTarget = members.FirstOrDefault();
@@ -690,8 +697,16 @@ namespace Kitty
         {
             get
             {
+                if (RegrowthHealth == HaelingTouchHealth) { checkHealth = RegrowthHealth; }
+                if (RegrowthHealth > HaelingTouchHealth) { checkHealth = RegrowthHealth; }
+                if (RegrowthHealth < HaelingTouchHealth) { checkHealth = HaelingTouchHealth; }
                 List<WoWPlayer> members = new List<WoWPlayer>();
-                members = getPartyMembers().Where(p => p.HealthPercent <= RegrowthHealth && p.IsAlive && p.InLineOfSight && p.InLineOfSpellSight && p.Distance <= 40).OrderBy(p => p.HealthPercent).ToList();
+                members = getPartyMembers().Where(p => p.HealthPercent <= RegrowthHealth
+                    && p.HealthPercent > checkHealth
+                    && p.IsAlive 
+                    && p.InLineOfSight 
+                    && p.InLineOfSpellSight 
+                    && p.Distance <= 40).OrderBy(p => p.HealthPercent).ToList();
                 if (members.Count() > 0)
                 {
                     WoWPlayer healTarget = members.FirstOrDefault();
@@ -705,8 +720,16 @@ namespace Kitty
         {
             get
             {
+                if (RegrowthHealth == HaelingTouchHealth) { checkHealth = RegrowthHealth; }
+                if (RegrowthHealth > HaelingTouchHealth) { checkHealth = RegrowthHealth; }
+                if (RegrowthHealth < HaelingTouchHealth) { checkHealth = HaelingTouchHealth; }
                 List<WoWPlayer> members = new List<WoWPlayer>();
-                members = getPartyMembers().Where(p => p.HealthPercent <= HaelingTouchHealth && p.IsAlive && p.InLineOfSight && p.InLineOfSpellSight && p.Distance <= 40).OrderBy(p => p.HealthPercent).ToList();
+                members = getPartyMembers().Where(p => p.HealthPercent <= HaelingTouchHealth 
+                    && p.HealthPercent > checkHealth
+                    && p.IsAlive 
+                    && p.InLineOfSight 
+                    && p.InLineOfSpellSight 
+                    && p.Distance <= 40).OrderBy(p => p.HealthPercent).ToList();
                 if (members.Count() > 0)
                 {
                     WoWPlayer healTarget = members.FirstOrDefault();
