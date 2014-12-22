@@ -35,7 +35,7 @@
   <FrenziedRegenerationHP>70</FrenziedRegenerationHP>
   <Genesis>True</Genesis>
   <GenesisHP>90</GenesisHP>
-  <GenesisTimeLeft>3</GenesisTimeLeft>
+  <GenesisTimeLeft>8</GenesisTimeLeft>
   <GenesisUnit>3</GenesisUnit>
   <GrowlTank>False</GrowlTank>
   <HealingTouchNonResto>True</HealingTouchNonResto>
@@ -108,7 +108,7 @@
   <RejuvenationAllMana>100</RejuvenationAllMana>
   <Renewal>True</Renewal>
   <RenewalHP>50</RenewalHP>
-  <Rip>True</Rip>
+  <Rip>False</Rip>
   <RoarBashHelpFriend>True</RoarBashHelpFriend>
   <RoarBashHelpFriendHP>60</RoarBashHelpFriendHP>
   <SavageDefense>False</SavageDefense>

@@ -6738,73 +6738,34 @@
 				<CustomBehavior File="ForcedDismount" />
 				<PickUp QuestName="Elder Mana'loa" QuestId="12030" GiverName="Toalu'u the Mystic" GiverId="26595" />
 			</If>
-			<If Condition="HasQuest(12030) &amp;&amp; IsQuestCompleted(12030)">
-				<CustomBehavior File="FlyTo" DestName="Turnin Quest" X="3164.76" Y="1581.509" Z="170.1871" />
-				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
-				<CustomBehavior File="InteractWith" QuestId="12030" MobId="188419" NonCompeteDistance="0"
-                                PreInteractMountStrategy="DismountOrCancelShapeshift"
-                                X="3154.238" Y="1579.765" Z="163.4331" />
-				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />
-
-				<!-- guy is too big -->
-				<!-- <TurnIn QuestName="Elder Mana'loa" QuestId="12030" TurnInName="Elder Mana'loa" -->
-				<!--         TurnInId="188419" TurnInType="Object" -->
-				<!--         X="3131.187" Y="1569.624" Z="163.5229" /> -->
-				<!-- <PickUp QuestName="Freedom for the Lingering" QuestId="12031" GiverName="Elder Mana'loa" -->
-				<!--         GiverId="188419" /> -->
-
-				<CustomBehavior File="InteractWith" QuestId="12030" MobId="188419" NonCompeteDistance="0"
-                                PreInteractMountStrategy="DismountOrCancelShapeshift"
-                                X="3154.238" Y="1579.765" Z="163.4331" />
-				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" />
-			</If>
-			<If Condition="!HasQuest(12031) &amp;&amp; !IsQuestCompleted(12031)">
-				<CustomBehavior File="FlyTo" DestName="Pickup Quest" X="3164.76" Y="1581.509" Z="170.1871" />
-				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
-				<CustomBehavior File="InteractWith" QuestId="12030" MobId="188419" NonCompeteDistance="0"
-                                PreInteractMountStrategy="DismountOrCancelShapeshift"
-                                X="3154.238" Y="1579.765" Z="163.4331" />
-				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" />
-				<!-- <PickUp QuestName="Freedom for the Lingering" QuestId="12031" GiverName="Elder Mana'loa" -->
-				<!--         GiverId="188419" /> -->
-			</If>
+                        <If Condition="HasQuest(12030) &amp;&amp; IsQuestCompleted(12030)">
+                            <CustomBehavior File="FlyTo" DestName="Turnin Quest" X="3162.204" Y="1574.615" Z="162.9704" />
+                            <CustomBehavior File="ForcedDismount" />
+                            <TurnIn QuestName="Elder Mana'loa" QuestId="12030" TurnInName="Elder Mana'loa" TurnInId="188419" />
+                            <PickUp QuestName="Freedom for the Lingering" QuestId="12031" GiverName="Elder Mana'loa" GiverId="188419" />
+                        </If>
+                        <If Condition="!HasQuest(12031) &amp;&amp; !IsQuestCompleted(12031)">
+                            <CustomBehavior File="FlyTo" DestName="Pickup Quest" X="3162.204" Y="1574.615" Z="162.9704" />
+                            <CustomBehavior File="ForcedDismount" />
+                            <PickUp QuestName="Freedom for the Lingering" QuestId="12031" GiverName="Elder Mana'loa" GiverId="188419" />
+                        </If>
 			<If Condition="HasQuest(12031) &amp;&amp; !IsQuestCompleted(12031)">
 				<CustomBehavior File="FlyTo" DestName="Objective" X="3060.077" Y="1625.735" Z="158.1111" />
 				<CustomBehavior File="ForcedDismount" />
 				<Objective QuestName="Freedom for the Lingering" QuestId="12031" Type="KillMob" MobId="26343"
-                           KillCount="15" />
+                                           KillCount="15" />
 			</If>
-			<If Condition="HasQuest(12031) &amp;&amp; IsQuestCompleted(12031)">
-				<CustomBehavior File="FlyTo" DestName="Turnin Quest" X="3164.76" Y="1581.509" Z="170.1871" />
-				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
-				<CustomBehavior File="InteractWith" QuestId="12031" MobId="188419" NonCompeteDistance="0"
-                                PreInteractMountStrategy="DismountOrCancelShapeshift"
-                                X="3154.238" Y="1579.765" Z="163.4331" />
-				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />
-
-				<!-- <TurnIn QuestName="Freedom for the Lingering" QuestId="12031" TurnInName="Elder Mana'loa" -->
-				<!--         TurnInId="188419" /> -->
-				<!-- <PickUp QuestName="Conversing With the Depths" QuestId="12032" GiverName="Elder Mana'loa" -->
-				<!--         GiverId="188419" /> -->
-
-				<CustomBehavior File="InteractWith" MobId="188419" NonCompeteDistance="0"
-                                PreInteractMountStrategy="DismountOrCancelShapeshift"
-                                X="3154.238" Y="1579.765" Z="163.4331" />
-				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" />
-			</If>
-			<If Condition="!HasQuest(12032) &amp;&amp; !IsQuestCompleted(12032)">
-				<CustomBehavior File="FlyTo" DestName="Pickup Quest" X="3164.76" Y="1581.509" Z="170.1871" />
-				<CustomBehavior File="ForcedDismount" />
-
-				<MoveTo X="3154.238" Y="1579.765" Z="163.4331" />
-				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
-				<CustomBehavior File="InteractWith" MobId="188419" NonCompeteDistance="0"
-                                PreInteractMountStrategy="DismountOrCancelShapeshift"
-                                X="3154.238" Y="1579.765" Z="163.4331" />
-				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />
-				<!-- <PickUp QuestName="Conversing With the Depths" QuestId="12032" GiverName="Elder Mana'loa" -->
-				<!--         GiverId="188419" /> -->
-			</If>
+                        <If Condition="HasQuest(12031) &amp;&amp; IsQuestCompleted(12031)">
+                            <CustomBehavior File="FlyTo" DestName="Turnin Quest" X="3162.204" Y="1574.615" Z="162.9704" />
+                            <CustomBehavior File="ForcedDismount" />
+                            <TurnIn QuestName="Freedom for the Lingering" QuestId="12031" TurnInName="Elder Mana'loa" TurnInId="188419" />
+                            <PickUp QuestName="Conversing With the Depths" QuestId="12032" GiverName="Elder Mana'loa" GiverId="188419" />
+                        </If>
+                        <If Condition="!HasQuest(12032) &amp;&amp; !IsQuestCompleted(12032)">
+                            <CustomBehavior File="FlyTo" DestName="Pickup Quest" X="3162.204" Y="1574.615" Z="162.9704" />
+                            <CustomBehavior File="ForcedDismount" />
+                            <PickUp QuestName="Conversing With the Depths" QuestId="12032" GiverName="Elder Mana'loa" GiverId="188419" />
+                        </If>
 			<While Condition="HasQuest(12032) &amp;&amp; !IsQuestCompleted(12032)">
 				<CustomBehavior File="FlyTo" DestName="Objective" X="2457.292" Y="1723.715" Z="76.43291" />
 				<CustomBehavior File="InteractWith" QuestId="12032" MobId="188422" NonCompeteDistance="0"
@@ -7716,7 +7677,7 @@
 				<CustomBehavior File="FlyTo" DestName="bomb 5 ballista's" X="2751.594" Y="-224.4054" Z="138.778" />
 				<CustomBehavior File="ForcedDismount" />
 
-				<CustomBehavior File="UseItemTargetLocation" QuestId="12232" ItemId="37259" MobId="188673" NumOfTimes="10"
+				<CustomBehavior File="UseItemTargetLocation" QuestId="12232" ItemId="37259" MobId="188673" NumOfTimes="10" PreInteractMountStrategy="DismountOrCancelShapeshift" 
                                 UseType="ToObject" ObjectType="GameObject" WaitTime="1500" MinRange="10" Range="20"
                                 CollectionDistance="1000" X="2564.432" Y="-269.8682" Z="1.311315" />
 			</If>
@@ -8156,10 +8117,11 @@
 				<CustomBehavior File="ForcedDismount" />
 				<While Condition="!IsQuestCompleted(12453)">
 					<CustomBehavior File="InteractWith" QuestId="12453" MobId="26369" InteractByUsingItemId="37877"
-                                    NumOfTimes="6" WaitTime="6000" CollectionDistance="100" Range="55"
+                                    NumOfTimes="6" WaitTime="6000" CollectionDistance="500" Range="55"
                                     PreInteractMountStrategy="DismountOrCancelShapeshift"
                                     X="3449.359" Y="2995.806" Z="209.2073" />
 				</While>
+				<CustomBehavior File="WaitTimer" WaitTime="10000" />
 			</If>
 			<If Condition="HasQuest(12413) || HasQuest(12453)">
 				<CustomBehavior File="FlyTo" X="3254.155" Y="-2236.979" Z="115.6835" />
@@ -8915,8 +8877,8 @@
 				<CustomBehavior File="FlyTo" X="3529.33" Y="-5121.259" Z="233.628" />
 				<CustomBehavior File="ForcedDismount" />
 				<While Condition="HasQuest(12202) &amp;&amp; !IsQuestCompleted(12202)">
-					<CustomBehavior File="InteractWith" QuestId="12202" InteractByUsingItemId="37125"
-                                    NumOfTimes="50" WaitTime="2500" Range="3" MobState="Dead"
+					<CustomBehavior File="InteractWith" QuestId="12202" InteractByUsingItemId="37125" NonCompeteDistance="0"
+                                    NumOfTimes="50" WaitTime="2500" Range="3" MobState="Dead" PreInteractMountStrategy="DismountOrCancelShapeshift"
                                     MobId="26414" MobId2="26408" MobId3="27177" MobId4="26409" MobId5="26410"
                                     CollectionDistance="1000"
                                     X="3459.4" Y="-5102.615" Z="236.8459" />
@@ -11223,8 +11185,8 @@
 		</If>
 		<CustomBehavior File="FlyTo" QuestId="12605" DestName="collect Hatchlings" X="6403.826" Y="4943.531"
                             Z="-70.18993" />
-		<CustomBehavior File="InteractWith" QuestId="12605" MobId="28389" NumOfTimes="100"
-                            PreInteractMountStrategy="Dismount" ProactiveCombatStrategy="ClearMobsTargetingUs"
+		<CustomBehavior File="InteractWith" QuestId="12605" MobId="28389" NumOfTimes="100" 
+                            PreInteractMountStrategy="DismountOrCancelShapeshift" ProactiveCombatStrategy="ClearMobsTargetingUs"
                             WaitTime="500" CollectionDistance="25">
 			<HuntingGrounds>
 				<Hotspot X="6403.826" Y="4943.531" Z="-70.18993" />
@@ -11664,23 +11626,23 @@
 			<PickUp QuestName="Powering the Waygate - The Makers' Perch" QuestId="12559" GiverName="Avatar of Freya" GiverId="27801" />
 		</If>
 		<If Condition="HasQuest(12559) &amp;&amp; !IsQuestCompleted(12559)" >
-			<CustomBehavior File="FlyTo" DestName="Objective" X="5705.755" Y="3444.171" Z="300.8422" />
+			<CustomBehavior File="FlyTo" DestName="Objective" X="6116.741" Y="5663.464" Z="17.99642" />
 			<CustomBehavior File="ForcedDismount" />
 			<UseMount Value="false" />
 			<CustomBehavior File="InteractWith" QuestId="12559" MobId="190508" ObjectType="GameObject" NonCompeteDistance="0" Range="5" TerminateWhen="IsObjectiveComplete(1, 12559)" X="6254.906" Y="5785.817" Z="-6.130185" />
-			<MoveTo X="5705.755" Y="3444.171" Z="300.8422" />
+			<MoveTo X="6116.741" Y="5663.464" Z="17.99642" />
 			<UseMount Value="true" />
 		</If>
 		<If Condition="HasQuest(12559) &amp;&amp; IsQuestCompleted(12559)" >
 			<If Condition="Object(190508) != null" >
-				<MoveTo X="6116.741" Y="5663.464" Z="17.99642" />
+			    <MoveTo X="6116.741" Y="5663.464" Z="17.99642" />
 			</If>
 			<CustomBehavior File="FlyTo" DestName="Turnin Quest" X="5874.56" Y="4116.636" Z="-85.51167" />
 			<CustomBehavior File="ForcedDismount" />
 			<TurnIn QuestName="Powering the Waygate - The Makers' Perch" QuestId="12559" TurnInName="Avatar of Freya" TurnInId="27801" />
 			<!-- issues with IW always wanting to fly and be stupid 
-        <PickUp QuestName="Powering the Waygate - The Makers' Overlook" QuestId="12613" GiverName="Avatar of Freya" GiverId="27801" />
-          -->
+       			<PickUp QuestName="Powering the Waygate - The Makers' Overlook" QuestId="12613" GiverName="Avatar of Freya" GiverId="27801" />
+          		-->
 		</If>
 		<!--
             <If Condition="!HasQuest(12613) &amp;&amp; !IsQuestCompleted(12613)" >
