@@ -1,0 +1,52 @@
+<HBProfile creator="Headshother0" version="3.0">
+
+    <Name>Headshother0 85-90</Name>
+    <MinLevel>78</MinLevel>
+    <MaxLevel>91</MaxLevel>
+   
+    <MinDurability>0.01</MinDurability>
+    <MinFreeBagSlots>1</MinFreeBagSlots>
+   
+   	<SellGrey>True</SellGrey>
+   	<SellWhite>True</SellWhite>
+	<SellGreen>False</SellGreen>
+
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+	
+    <Vendors>
+<Vendor Name="Vendor Jambeezi" Entry="59583" Type="Repair" X="-150.9885" Y="509.9315" Z="207.1227" />
+<Vendor Name="Den Den" Entry="64319" Type="Food" X="-222.6754" Y="525.4271" Z="190.8914" />
+	</Vendors>
+   
+    <Mailboxes>
+<Mailbox X="-209.7626" Y="496.6556" Z="187.2196" />
+	</Mailboxes>
+
+    <GrindArea>
+		<TargetMinLevel>80</TargetMinLevel>
+		<TargetMaxLevel>89</TargetMaxLevel>
+<Factions>14 56462</Factions>
+		<LootRadius>10</LootRadius>
+<MaxDistance>10</MaxDistance>
+<Hotspots>
+<Hotspot X="363.9321" Y="-708.5969" Z="226.1785" />
+<Hotspot X="370.7983" Y="-684.5934" Z="210.0558" />
+<Hotspot X="383.5737" Y="-659.7813" Z="203.8679" />
+<Hotspot X="393.0677" Y="-645.6615" Z="202.3844" />
+<Hotspot X="402.2191" Y="-636.1495" Z="203.2306" />
+<Hotspot X="398.1862" Y="-730.8239" Z="233.0156" />
+        </Hotspots>
+<Blackspots>
+	<Blackspot X="367.1612" Y="-699.0712" Z="220.4356" Radius="17.2244" Height="14.49007" />
+</Blackspots>
+    </GrindArea>
+
+<AvoidMobs> 
+<Mob Name="Thieving Plainshawk" Entry="56034"/>
+<Mob Name="Monstrous Plainshawk" Entry="59641"/>
+</AvoidMobs>
+
+</HBProfile>

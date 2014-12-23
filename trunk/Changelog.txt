@@ -1,0 +1,5 @@
+Bug fixes:
+--------------
+  * Core
+    - All Quest Behaviors and Dungeon scripts should be properly compiling (HB-1732)
+
