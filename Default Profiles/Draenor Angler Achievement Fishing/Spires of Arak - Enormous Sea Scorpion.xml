@@ -1,0 +1,42 @@
+<HBProfile>
+
+    <Name>Spires of Arak - Enormous Sea Scorpion</Name>
+    <MinDurability>0.2</MinDurability>
+    <MinFreeBagSlots>1</MinFreeBagSlots>
+
+    <MinLevel>1</MinLevel>
+    <MaxLevel>1001</MaxLevel>
+
+
+    <MailGrey>False</MailGrey>
+    <MailWhite>True</MailWhite>
+    <MailGreen>True</MailGreen>
+    <MailBlue>True</MailBlue>
+    <MailPurple>True</MailPurple>
+
+    <SellGrey>True</SellGrey>
+    <SellWhite>False</SellWhite>
+    <SellGreen>False</SellGreen>
+    <SellBlue>False</SellBlue>
+    <SellPurple>False</SellPurple>
+
+    <TargetElites>False</TargetElites>
+
+
+    <AvoidMobs>
+    </AvoidMobs>
+
+    <Blackspots>
+    </Blackspots>
+
+<Mailboxes>
+<Hotspot X="-1568.425" Y="942.4814" Z="10.5792" />
+</Mailboxes>
+
+    <Vendors>
+    </Vendors>
+
+    <Hotspots>
+<Hotspot X="-1481.31" Y="899.1539" Z="0.0002972512" />
+    </Hotspots>
+</HBProfile>

@@ -1,0 +1,70 @@
+<HBProfile>
+
+<Name>Rep Farming</Name>
+<MinDurability>0.4</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+<MinLevel>100</MinLevel>
+<MaxLevel>101</MaxLevel>
+<Factions>99999</Factions>
+
+<MailGrey>false</MailGrey>
+<MailWhite>false</MailWhite>
+<MailGreen>false</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>true</SellGrey>
+<SellWhite>false</SellWhite>
+<SellGreen>true</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+<Vendor Name="Drix Blackwrench" Entry="32641" Type="Repair" X="6296.198" Y="2287.415" Z="186.8384" />
+</Vendors>
+
+<Mailboxes>
+</Mailboxes>
+
+<Blackspots>
+</Blackspots>
+
+<Hotspots>
+<Hotspot X="5842.644" Y="2334.318" Z="159.5995" />
+<Hotspot X="5845.835" Y="2293.679" Z="155.2095" />
+<Hotspot X="5860.659" Y="2256.307" Z="156.5287" />
+<Hotspot X="5897.892" Y="2239.792" Z="154.771" />
+<Hotspot X="5921.665" Y="2207.225" Z="155.541" />
+<Hotspot X="5961.03" Y="2214.456" Z="154.4845" />
+<Hotspot X="5981.129" Y="2179.876" Z="158.9563" />
+<Hotspot X="5987.056" Y="2219.834" Z="158.3338" />
+<Hotspot X="5979.693" Y="2179.82" Z="159.2304" />
+<Hotspot X="5954.002" Y="2148.798" Z="164.4992" />
+<Hotspot X="5914.703" Y="2136.578" Z="167.2766" />
+<Hotspot X="5879.619" Y="2153.429" Z="177.6069" />
+<Hotspot X="5858.887" Y="2188.388" Z="180.4888" />
+<Hotspot X="5824.426" Y="2208.876" Z="180.4496" />
+<Hotspot X="5857.564" Y="2184.177" Z="180.4357" />
+<Hotspot X="5890.656" Y="2150.361" Z="175.4133" />
+<Hotspot X="5934.912" Y="2127.251" Z="164.5175" />
+<Hotspot X="5971.013" Y="2108.76" Z="164.5002" />
+<Hotspot X="6007.481" Y="2092.172" Z="162.7419" />
+<Hotspot X="6045.711" Y="2102.323" Z="150.8808" />
+<Hotspot X="6081.89" Y="2119.3" Z="145.5575" />
+<Hotspot X="6106.552" Y="2153.694" Z="144.8602" />
+<Hotspot X="6139.265" Y="2129.469" Z="144.7213" />
+<Hotspot X="6172.233" Y="2105.498" Z="144.7058" />
+<Hotspot X="6196.84" Y="2137.858" Z="144.7147" />
+<Hotspot X="6222.764" Y="2168.562" Z="145.1243" />
+<Hotspot X="6230.054" Y="2128.99" Z="144.7774" />
+<Hotspot X="6195.498" Y="2107.688" Z="144.7135" />
+<Hotspot X="6144.815" Y="2126.629" Z="145.7411" />
+<Hotspot X="6148.985" Y="2180.401" Z="151.5953" />
+<Hotspot X="6172.782" Y="2212.442" Z="159.5974" />
+<Hotspot X="6195.362" Y="2245.301" Z="170.767" />
+<Hotspot X="6214.655" Y="2279.874" Z="177.6022" />
+<Hotspot X="6253.451" Y="2268.705" Z="181.7515" />
+<Hotspot X="6292.737" Y="2260.554" Z="186.5041" />
+</Hotspots>
+</HBProfile>

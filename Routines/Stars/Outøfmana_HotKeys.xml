@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MyHotkeys>
+  <TankHotKey>None</TankHotKey>
+  <CatHotkey>None</CatHotkey>
+  <AoEKey>None</AoEKey>
+  <CooldownKey>None</CooldownKey>
+  <OpenerKey>None</OpenerKey>
+  <BurstKey>None</BurstKey>
+  <Profile_1_Hotkey>None</Profile_1_Hotkey>
+  <Profile_2_Hotkey>None</Profile_2_Hotkey>
+  <Profile_3_Hotkey>None</Profile_3_Hotkey>
+  <Profile_1_Location></Profile_1_Location>
+  <Profile_2_Location></Profile_2_Location>
+  <Profile_3_Location></Profile_3_Location>
+  <CycloneFocus>None</CycloneFocus>
+  <RootFocus>None</RootFocus>
+  <CycloneTarget>None</CycloneTarget>
+  <RootTarget>None</RootTarget>
+  <TyphoonTarget>None</TyphoonTarget>
+  <TyphoonFocus>None</TyphoonFocus>
+  <VortexTarget>None</VortexTarget>
+  <VortexFocus>None</VortexFocus>
+  <SolarBeamFocus>None</SolarBeamFocus>
+  <SolarBeamTarget>None</SolarBeamTarget>
+  <MushroomOnmouse>None</MushroomOnmouse>
+  <MKeyForward>W</MKeyForward>
+  <MKeyBackward>S</MKeyBackward>
+  <MKeyLeft>A</MKeyLeft>
+  <MKeyRight>D</MKeyRight>
+</MyHotkeys>
