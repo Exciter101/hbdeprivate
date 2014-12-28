@@ -1,6 +1,6 @@
 <HBProfile xsi:noNamespaceSchemaLocation="../../../Schemas/QuestProfileSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 <!-- Honorbuddy Blank QO by Kick -->
-	<Name>Blank QO ($Rev: 3936 $)</Name>
+	<Name>Blank QO ($Rev: 4033 $)</Name>
 	<MinLevel>1</MinLevel>
 	<MaxLevel>200</MaxLevel>
 	
@@ -246,7 +246,7 @@ Log("Is Complete: {0}", result);
 				<CustomBehavior File="EjectVeh" />
 				<CustomBehavior File="AscendInWater" />
 				<CustomBehavior File="AbandonQuest" QuestId="" Type="Failed" />
-				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True"  />
+				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True" DoMail="True" />
 				<CustomBehavior File="ForceTrainRiding"  MobId="" />
 				<CustomBehavior File="ForcedDismount" />
 				<CustomBehavior File="UserSettings" UseMount="False" />
