@@ -3141,27 +3141,15 @@
 			<PickUp QuestName="Arelion's Mistress" QuestId="9472" GiverName="Magistrix Carinda" GiverId="16793" />
 
 			<While Condition="HasQuest(9472) &amp;&amp; !IsQuestCompleted(9472)">
-				<While Condition="!HasItem(29112)" >
-					<CustomBehavior File="FlyTo" DestName="Innkeeper Coryth Stoktron"
-                                    X="-216.1101" Y="5498.881" Z="21.79396" />
-					<CustomBehavior File="ForcedDismount" />
-					<CustomBehavior File="InteractWith" QuestId="9472" MobId="18907"
-                                    InteractByBuyingItemId="29112" WaitTime="3000" InteractByGossipOptions="2"
+                		<While Condition="!HasItem(29112)" >
+                    		    <CustomBehavior File="FlyTo" DestName="Innkeeper Coryth Stoktron"
+                                             X="-216.1101" Y="5498.881" Z="21.79396" />
+                                       <CustomBehavior File="ForcedDismount" />
+                                  <CustomBehavior File="InteractWith" QuestId="9472" MobId="18907"
+                                    InteractByBuyingItemId="29112" WaitTime="3000"
                                     CollectionDistance="20" X="-174.478" Y="5529.211" Z="29.40781" />
-					<CustomBehavior File="WaitTimer" WaitTime="2000"/>
-					<CustomBehavior File="InteractWith" QuestId="9472" MobId="18907"
-                                    InteractByBuyingItemId="29112" WaitTime="3000" InteractByGossipOptions="2"
-                                    CollectionDistance="20" X="-174.478" Y="5529.211" Z="29.40781" />
-					<CustomBehavior File="WaitTimer" WaitTime="2000"/>
-					<CustomBehavior File="InteractWith" QuestId="9472" MobId="18907"
-                                    InteractByBuyingItemId="29112" WaitTime="3000" InteractByGossipOptions="2"
-                                    CollectionDistance="20" X="-174.478" Y="5529.211" Z="29.40781" />
-					<CustomBehavior File="WaitTimer" WaitTime="2000"/>
-					<CustomBehavior File="InteractWith" QuestId="9472" MobId="18907"
-                                    InteractByBuyingItemId="29112" WaitTime="3000" InteractByGossipOptions="2"
-                                    CollectionDistance="20" X="-174.478" Y="5529.211" Z="29.40781" />
-					<CustomBehavior File="WaitTimer" WaitTime="2000"/>
-				</While>
+                    		<CustomBehavior File="WaitTimer" WaitTime="2000"/>
+                		</While>
 
 				<If Condition="HasItem(29112)" >
 					<CustomBehavior File="FlyTo" QuestId="9472" DestName="Viera Sunwhisper"
@@ -4894,7 +4882,7 @@
                            ItemId="31655" CollectCount="4" />
 				<CustomBehavior File="InteractWith" MobId="185202" MobId2="185203" MobId3="185204" MobId4="185205"
                                 PreInteractMountStrategy="Dismount" NumOfTimes="4" NonCompeteDistance="10"
-                                TerminateWhen="!HasItem(31655)"
+                                TerminateWhen="!HasItem(31655)" WaitTime="1500"
                                 X="-2521.825" Y="5444.137" Z="0.0509126" />
 			</While>
 			<UseMount Value="true"/>
@@ -6413,7 +6401,7 @@
                   Type="CollectItem" ItemId="25554" CollectCount="10" />
 		<While Condition="HasQuest(9927) &amp;&amp; !IsQuestCompleted(9927)" >
 			<CustomBehavior File="InteractWith" QuestId="9927" MobId="17148" MobId2="17146" MobId3="17147"
-                           MobState="Dead" InteractByUsingItemId="25552" NumOfTimes="400"
+                           PreInteractMountStrategy="DismountOrCancelShapeshift" MobState="Dead" InteractByUsingItemId="25552" NumOfTimes="400"
                            CollectionDistance="300" X="-2855.058" Y="6393.893" Z="79.41189" />
 		</While>
 		<If Condition="HasQuest(9927) &amp;&amp; IsQuestCompleted(9927)">

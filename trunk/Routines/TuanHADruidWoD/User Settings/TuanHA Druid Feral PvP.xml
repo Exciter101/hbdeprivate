@@ -44,9 +44,9 @@
   <HealingTouchNS>False</HealingTouchNS>
   <HealingTouchNSHP>40</HealingTouchNSHP>
   <HealMe>True</HealMe>
-  <HealMeHP>80</HealMeHP>
+  <HealMeHP>70</HealMeHP>
   <HealFriend>True</HealFriend>
-  <HealFriendHP>70</HealFriendHP>
+  <HealFriendHP>60</HealFriendHP>
   <Hibernate>False</Hibernate>
   <Hurricane>False</Hurricane>
   <IncarnationCatBear>True</IncarnationCatBear>
