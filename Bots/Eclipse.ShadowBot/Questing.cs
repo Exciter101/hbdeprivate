@@ -257,7 +257,7 @@ namespace Eclipse.ShadowBot
                 }
 
             }
-
+            QuestFrame.Instance.SelectQuestReward(0);
             QuestFrame.Instance.CompleteQuest();
 
         }

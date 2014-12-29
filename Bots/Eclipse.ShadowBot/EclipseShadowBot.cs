@@ -37,12 +37,17 @@ namespace Eclipse.ShadowBot
 
         public static LocalPlayer Me;
         public static WoWPlayer Leader;
+        public static bool LootMobs = true;
         public static bool AssistLeader = false;
         public static bool IgnoreAttackers = false;
         public static bool PickUpQuests = false;
         public static int FollowDistance = 8;
         public static bool HealBotMode = true;
+        public static bool SkinMobs = true;
+        public static string FollowName { get; set; }
         public static string DataPath = string.Empty;
+        public static bool FollowByName { get; set; }
+        public static bool LeaderInRange = false;
         public static ShadowBotSettings settings = null;
         private ShadowBotConfig _gui;
         private Composite _root;
@@ -50,7 +55,7 @@ namespace Eclipse.ShadowBot
         #region Overrides
         public override string Name
         {
-            get { return "Eclipse - ShadowBot 0.1"; }
+            get { return "Eclipse - ShadowBot 0.4"; }
         }
 
         public override PulseFlags PulseFlags
@@ -118,22 +123,42 @@ namespace Eclipse.ShadowBot
                     new PrioritySelector(
                         new Decorator(r => Me.IsDead, CreateDeadBehavior),
                         new Decorator(r=> HealBotMode,  CreateHealBehavior()),
+                        new Decorator(r => Leader == null && FollowByName, 
+                            new Decorator(r=> FindLeader(), 
+                                //this so that the runstatus doesnt return too soon
+                                new PrioritySelector())),
                         new Decorator(r => Leader != null && Me.IsAlive,
                             new PrioritySelector(
                                 new Decorator(r => Leader.Distance > FollowDistance,new Action(r => Flightor.MoveTo(Leader.Location))),
-                                new Decorator(r => TargetClosestLootableMob(), CreateLootingBehavior),
-                                new Decorator(r => TargetClosestSkinnableMob(), CreateSkinningBehavior),
-                                new Decorator(r => PickUpQuests && GetQuestGiver(), CreateQuestBehavior),
-                                new Decorator(r => AssistLeader && !HealBotMode && Leader.Combat && Leader.CurrentTarget != null,
+                                new Decorator(r => LootMobs, new Decorator(r => TargetClosestLootableMob(), CreateLootingBehavior)),
+                                new Decorator(r => SkinMobs, new Decorator(r => TargetClosestSkinnableMob(), CreateSkinningBehavior)),
+                                new Decorator(r => PickUpQuests, new Decorator(r => GetQuestGiver(), CreateQuestBehavior)),
+                                new Decorator(r => AssistLeader,  new Decorator(r => !HealBotMode && Leader.Combat && Leader.CurrentTarget != null,
                                     new Sequence(
-                                        new Action(a => Leader.CurrentTarget.Target()),          CreateCombatBehavior())
+                                        new Action(a => Leader.CurrentTarget.Target()), CreateCombatBehavior())
                                     )
-                                ))
+                                )
+                            )
                         )
-
-                        
+                    )
                 );
             }
+        }
+
+        private bool FindLeader()
+        {
+            Leader = (WoWPlayer)ObjectManager.ObjectList.Where(n => n.Type == WoWObjectType.Player && n.Name == FollowName).FirstOrDefault();
+            if (Leader == null)
+            {
+                TreeRoot.StatusText = "Waiting for leader to get in range";
+                return false;
+            }
+            else
+            {
+                log("Leader Now in range!");
+                return true;
+            }
+            
         }
         private static bool TargetClosestLootableMob()
         {
@@ -342,11 +367,9 @@ namespace Eclipse.ShadowBot
             ).ToList().Where(n =>
                 ((WoWUnit)n).QuestGiverStatus == QuestGiverStatus.Available
                 && ((WoWUnit)n).IsFriendly
-                && ((WoWUnit)n).Distance <= FollowDistance
                 || ((WoWUnit)n).QuestGiverStatus == QuestGiverStatus.TurnIn
-                && ((WoWUnit)n).Distance <= FollowDistance
+                && ((WoWUnit)n).IsFriendly
                 || ((WoWUnit)n).QuestGiverStatus == QuestGiverStatus.TurnInRepeatable
-                && ((WoWUnit)n).Distance <= FollowDistance
                 && ((WoWUnit)n).IsFriendly
             ).OrderBy(m => m.Distance).ToList();
 
@@ -397,5 +420,7 @@ namespace Eclipse.ShadowBot
         }
 
         #endregion
+
+
     }
 }
