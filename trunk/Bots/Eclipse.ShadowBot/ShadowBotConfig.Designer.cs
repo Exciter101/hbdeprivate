@@ -40,26 +40,30 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.tbFollowName = new System.Windows.Forms.TextBox();
+            this.boolFollowByName = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.boolSkinMobs = new System.Windows.Forms.CheckBox();
+            this.boolLootMobs = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(78, 312);
+            this.button1.Location = new System.Drawing.Point(173, 361);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 24);
+            this.button1.Size = new System.Drawing.Size(117, 24);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Follow Target";
+            this.button1.Text = "Start Following";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(51, 282);
+            this.label1.Location = new System.Drawing.Point(140, 333);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(54, 13);
             this.label1.TabIndex = 1;
@@ -68,7 +72,7 @@
             // lblTarget
             // 
             this.lblTarget.AutoSize = true;
-            this.lblTarget.Location = new System.Drawing.Point(111, 282);
+            this.lblTarget.Location = new System.Drawing.Point(200, 333);
             this.lblTarget.Name = "lblTarget";
             this.lblTarget.Size = new System.Drawing.Size(109, 13);
             this.lblTarget.TabIndex = 1;
@@ -97,6 +101,8 @@
             // boolAssistLeader
             // 
             this.boolAssistLeader.AutoSize = true;
+            this.boolAssistLeader.Checked = true;
+            this.boolAssistLeader.CheckState = System.Windows.Forms.CheckState.Checked;
             this.boolAssistLeader.Location = new System.Drawing.Point(115, 42);
             this.boolAssistLeader.Name = "boolAssistLeader";
             this.boolAssistLeader.Size = new System.Drawing.Size(89, 17);
@@ -106,7 +112,7 @@
             // 
             // tbFollowDistance
             // 
-            this.tbFollowDistance.Location = new System.Drawing.Point(109, 85);
+            this.tbFollowDistance.Location = new System.Drawing.Point(100, 74);
             this.tbFollowDistance.Name = "tbFollowDistance";
             this.tbFollowDistance.Size = new System.Drawing.Size(61, 20);
             this.tbFollowDistance.TabIndex = 3;
@@ -115,7 +121,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 88);
+            this.label2.Location = new System.Drawing.Point(12, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 13);
             this.label2.TabIndex = 4;
@@ -156,44 +162,91 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.tbFollowName);
+            this.groupBox1.Controls.Add(this.boolFollowByName);
             this.groupBox1.Controls.Add(this.tbFollowDistance);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(23, 97);
+            this.groupBox1.Location = new System.Drawing.Point(23, 149);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(215, 109);
+            this.groupBox1.Size = new System.Drawing.Size(215, 162);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Ranges";
+            this.groupBox1.Text = "Following";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(14, 136);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(71, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Follow Name:";
+            // 
+            // tbFollowName
+            // 
+            this.tbFollowName.Enabled = false;
+            this.tbFollowName.Location = new System.Drawing.Point(100, 133);
+            this.tbFollowName.Name = "tbFollowName";
+            this.tbFollowName.Size = new System.Drawing.Size(100, 20);
+            this.tbFollowName.TabIndex = 11;
+            // 
+            // boolFollowByName
+            // 
+            this.boolFollowByName.AutoSize = true;
+            this.boolFollowByName.Location = new System.Drawing.Point(13, 110);
+            this.boolFollowByName.Name = "boolFollowByName";
+            this.boolFollowByName.Size = new System.Drawing.Size(102, 17);
+            this.boolFollowByName.TabIndex = 2;
+            this.boolFollowByName.Text = "Follow By Name";
+            this.boolFollowByName.UseVisualStyleBackColor = true;
+            this.boolFollowByName.CheckedChanged += new System.EventHandler(this.boolFollowByName_CheckedChanged);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.checkBox1);
+            this.groupBox2.Controls.Add(this.boolSkinMobs);
+            this.groupBox2.Controls.Add(this.boolLootMobs);
             this.groupBox2.Controls.Add(this.boolGetQuests);
             this.groupBox2.Controls.Add(this.boolAssistLeader);
             this.groupBox2.Controls.Add(this.checkboxHealBotMode);
             this.groupBox2.Location = new System.Drawing.Point(23, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(215, 79);
+            this.groupBox2.Size = new System.Drawing.Size(215, 105);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Settings";
             // 
-            // label3
+            // boolSkinMobs
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(312, 296);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(104, 13);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Not yet Implemented";
+            this.boolSkinMobs.AutoSize = true;
+            this.boolSkinMobs.Checked = true;
+            this.boolSkinMobs.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.boolSkinMobs.Location = new System.Drawing.Point(115, 65);
+            this.boolSkinMobs.Name = "boolSkinMobs";
+            this.boolSkinMobs.Size = new System.Drawing.Size(76, 17);
+            this.boolSkinMobs.TabIndex = 2;
+            this.boolSkinMobs.Text = "Skin Mobs";
+            this.boolSkinMobs.UseVisualStyleBackColor = true;
+            // 
+            // boolLootMobs
+            // 
+            this.boolLootMobs.AutoSize = true;
+            this.boolLootMobs.Checked = true;
+            this.boolLootMobs.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.boolLootMobs.Location = new System.Drawing.Point(9, 65);
+            this.boolLootMobs.Name = "boolLootMobs";
+            this.boolLootMobs.Size = new System.Drawing.Size(76, 17);
+            this.boolLootMobs.TabIndex = 2;
+            this.boolLootMobs.Text = "Loot Mobs";
+            this.boolLootMobs.UseVisualStyleBackColor = true;
             // 
             // ShadowBotConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(451, 345);
-            this.Controls.Add(this.label3);
+            this.ClientSize = new System.Drawing.Size(451, 402);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button2);
@@ -227,7 +280,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox boolLootMobs;
+        private System.Windows.Forms.CheckBox boolSkinMobs;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tbFollowName;
+        private System.Windows.Forms.CheckBox boolFollowByName;
     }
 }
 

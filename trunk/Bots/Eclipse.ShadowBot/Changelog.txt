@@ -19,3 +19,15 @@ Added updating of settings or inserting of new settings data.
 Added UI elements for new functionality.
 Added new bot communication client/server code (not included in release)
 Reorganized UI elements. 
+
+--- Ver 0.4 ---
+Added Skinning Toggleable option
+Added Looting Toggleable option
+Added Follow By Name Toggleable option
+Added Follow By Name Functionality
+Added a layer of abstraction between behaviors and settings (so it's not doing unneccessary things)
+Added save and load settings for Skinning, looting, followbyname and leadername.
+Rearranged UI Elements.
+Deleted status text for Leader Mode (Not yet implemented).
+Added functionality to wait for leader if the bot isnt started with the leader around.
+Bot will now WAIT till the leader is in range and automatically follow them when they get in range again.

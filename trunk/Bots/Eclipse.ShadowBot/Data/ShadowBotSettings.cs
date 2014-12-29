@@ -17,6 +17,9 @@ namespace Eclipse.ShadowBot.Data
         public int FollowDistance { get; set; }
         public bool HealBotMode { get; set; }
         public string CharacterName { get; set; }
+        public string FollowName { get; set; }
+        public bool LootMobs { get; set; }
+        public bool SkinMobs { get; set; }
         internal static void SaveOrCreate(ShadowBotSettings settings)
         {
             DataTable dt = DAL.getTableStructure("ShadowBotSettings"); //check to see if the table exists.
@@ -46,5 +49,9 @@ namespace Eclipse.ShadowBot.Data
             var sql = ORM.generateCreateSQL(new ShadowBotSettings(), "ShadowBotSettings");
             DAL.ExecuteSL3Query(sql);
         }
+
+
+
+        public bool FollowByName { get; set; }
     }
 }
