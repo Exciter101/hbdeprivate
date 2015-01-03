@@ -75,6 +75,7 @@ namespace Kitty
             HKM.registerHotKeys();
             Lua.Events.AttachEvent("UI_ERROR_MESSAGE", CL.CombatLogErrorHandler);
             EH.AttachCombatLogEvent();
+            Lua.Events.AttachEvent("MODIFIER_STATE_CHANGED", HKM.HandleModifierStateChanged);
         }
 
         public override void ShutDown()
@@ -82,6 +83,7 @@ namespace Kitty
             HKM.removeHotkeys();
             EH.DetachCombatLogEvent();
             Lua.Events.DetachEvent("UI_ERROR_MESSAGE", CL.CombatLogErrorHandler);
+            Lua.Events.DetachEvent("MODIFIER_STATE_CHANGED", HKM.HandleModifierStateChanged);
         }
 
         public static int lastPTSize { get; set; }

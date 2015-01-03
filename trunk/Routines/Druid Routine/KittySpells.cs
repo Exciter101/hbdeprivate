@@ -482,6 +482,18 @@ namespace Kitty
         #region interrupts
         public static DateTime interruptTimer;
         public static DateTime stunTimer;
+        public static Stopwatch interruptChecker;
+
+        public static bool timeToInterrupt
+        {
+            get
+            {
+                if (!interruptChecker.IsRunning) { interruptChecker.Restart(); return false; }
+                if (interruptChecker.IsRunning && interruptChecker.ElapsedMilliseconds > 1000) { interruptChecker.Stop(); return true; }
+                return false;
+            }
+        }
+
         public static bool SkullBashConditions(WoWUnit unit)
         {
           if(P.myPrefs.AutoInterrupt

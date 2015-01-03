@@ -84,6 +84,20 @@ namespace Kitty
             Windows
         }
 
+        public enum PressBearFormKey
+        {
+            None,
+            RSHIFT,
+            LSHIFT,
+            LCTRL,
+            RCTRL,
+            LALT,
+            RALT
+        }
+
+        [Setting, DefaultValue(PressBearFormKey.None)]
+        public PressBearFormKey SwitchBearKey { get; set; }
+
         [Setting, DefaultValue(KeyModifier.Alt)]
         public Keys Modkey { get; set; }
 

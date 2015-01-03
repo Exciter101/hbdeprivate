@@ -60,9 +60,9 @@ namespace Kitty
             if (await FaceMyTarget(gotTarget && AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget) && !Me.IsMoving)) return true;
 
             if (await CastBuff(BARKSKIN, gotTarget && Me.HealthPercent <= P.myPrefs.PercentBarkskin && !spellOnCooldown(BARKSKIN))) return true;
-            if (await Cast(SKULL_BASH, gotTarget && SkullBashConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await Cast(INCAPACITATING_ROAR, gotTarget && IncapacitatingRoarConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await Cast(TYPHOON, gotTarget && TyphoonConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(SKULL_BASH, gotTarget && timeToInterrupt && SkullBashConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(INCAPACITATING_ROAR, gotTarget && timeToInterrupt && IncapacitatingRoarConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(TYPHOON, gotTarget && timeToInterrupt && TyphoonConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(MIGHTY_BASH, gotTarget && MightyBashConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(WAR_STOMP, gotTarget && WarStompConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await CastBuff(HEALING_TOUCH, Me.HealthPercent <= 90 && IsOverlayed(5185))) return true;
@@ -111,9 +111,9 @@ namespace Kitty
             if (await CastBuff(REJUVENATION, Me.HealthPercent <= P.myPrefs.PercentRejuCombat && !buffExists(REJUVENATION, Me))) return true;
             if (await CastBuff(SURVIVAL_INSTINCTS, !spellOnCooldown(SURVIVAL_INSTINCTS) && Me.HealthPercent <= P.myPrefs.PercentSurvivalInstincts)) return true;
             if (await CastBuff(HEALING_TOUCH, IsOverlayed(HEALING_TOUCH_INT))) return true;
-            if (await Cast(SKULL_BASH, gotTarget && SkullBashConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await Cast(INCAPACITATING_ROAR, gotTarget && IncapacitatingRoarConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await Cast(TYPHOON, gotTarget && TyphoonConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(SKULL_BASH, gotTarget && timeToInterrupt && SkullBashConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(INCAPACITATING_ROAR, gotTarget && timeToInterrupt && IncapacitatingRoarConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(TYPHOON, gotTarget && timeToInterrupt && TyphoonConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(MIGHTY_BASH, gotTarget && MightyBashConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(WAR_STOMP, gotTarget && WarStompConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await CastBuff(TIGERS_FURY, gotTarget && TigersFuryConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
@@ -214,9 +214,9 @@ namespace Kitty
             if (await CastBuff(REJUVENATION, Me.HealthPercent <= P.myPrefs.PercentRejuCombat && !buffExists(REJUVENATION, Me))) return true;
             if (await CastBuff(SURVIVAL_INSTINCTS, !spellOnCooldown(SURVIVAL_INSTINCTS) && Me.HealthPercent <= P.myPrefs.PercentSurvivalInstincts)) return true;
             if (await CastBuff(HEALING_TOUCH, IsOverlayed(HEALING_TOUCH_INT))) return true;
-            if (await Cast(SKULL_BASH, gotTarget && SkullBashConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await Cast(INCAPACITATING_ROAR, gotTarget && IncapacitatingRoarConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await Cast(TYPHOON, gotTarget && TyphoonConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(SKULL_BASH, gotTarget && timeToInterrupt && SkullBashConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(INCAPACITATING_ROAR, gotTarget && timeToInterrupt && IncapacitatingRoarConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(TYPHOON, gotTarget && timeToInterrupt && TyphoonConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(MIGHTY_BASH, gotTarget && MightyBashConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(WAR_STOMP, gotTarget && WarStompConditions(Me.CurrentTarget) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await CastBuff(SAVAGE_ROAR, gotTarget && SavageRoarConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
@@ -318,7 +318,7 @@ namespace Kitty
             if (await StopMovement(gotTarget && AllowMovement && Me.CurrentTarget.Distance <= 4.5f)) return true;
             if (await FaceMyTarget(gotTarget && AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget) && !Me.IsMoving)) return true;
             if (await CastHeal(REGROWTH, regrowthProcPlayer, regrowthProcPlayer != null && IsOverlayed(REGROWTH_INT))) return true;
-            if (await CastHeal(NATURES_CURE, dispelTargets, dispelTargets != null)) return true;
+            if (await CastHeal(NATURES_CURE, dispelTargets, timeToInterrupt && dispelTargets != null)) return true;
             if (await CastBuff(BARKSKIN, !spellOnCooldown(BARKSKIN) && Me.HealthPercent <= P.myPrefs.PercentBarkskin)) return true;
             if (await CastHeal(IRONBARK, LifebloomPlayer, LifebloomPlayer != null && !spellOnCooldown(IRONBARK) && LifebloomPlayer.ToPlayer().HealthPercent <= 45)) return true;
             if (await CastBuff(NATURES_VIGIL, gotTarget && !spellOnCooldown(NATURES_VIGIL) && naturesVigil)) return true;

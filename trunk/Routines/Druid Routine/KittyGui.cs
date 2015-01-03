@@ -346,6 +346,14 @@ namespace Kitty
             if (P.myPrefs.KeyResAll == Keys.X) cmbHotkeyResAll.SelectedIndex = 24;
             if (P.myPrefs.KeyResAll == Keys.Y) cmbHotkeyResAll.SelectedIndex = 25;
             if (P.myPrefs.KeyResAll == Keys.Z) cmbHotkeyResAll.SelectedIndex = 26;
+            //bearform
+            if (P.myPrefs.SwitchBearKey == P.PressBearFormKey.None) comboBox1.SelectedIndex = 0;
+            if (P.myPrefs.SwitchBearKey == P.PressBearFormKey.RSHIFT) comboBox1.SelectedIndex = 1;
+            if (P.myPrefs.SwitchBearKey == P.PressBearFormKey.LSHIFT) comboBox1.SelectedIndex = 2;
+            if (P.myPrefs.SwitchBearKey == P.PressBearFormKey.LCTRL) comboBox1.SelectedIndex = 3;
+            if (P.myPrefs.SwitchBearKey == P.PressBearFormKey.RCTRL) comboBox1.SelectedIndex = 4;
+            if (P.myPrefs.SwitchBearKey == P.PressBearFormKey.LALT) comboBox1.SelectedIndex = 5;
+            if (P.myPrefs.SwitchBearKey == P.PressBearFormKey.RALT) comboBox1.SelectedIndex = 6;
             #endregion
 
             #region trinkets
@@ -1183,6 +1191,18 @@ namespace Kitty
         private void numericUpDown55_ValueChanged(object sender, EventArgs e)
         {
             P.myPrefs.AoeMoonkin = (int)numericUpDown55.Value;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex == 0) P.myPrefs.SwitchBearKey = P.PressBearFormKey.None;
+            if (comboBox1.SelectedIndex == 1) P.myPrefs.SwitchBearKey = P.PressBearFormKey.RSHIFT;
+            if (comboBox1.SelectedIndex == 2) P.myPrefs.SwitchBearKey = P.PressBearFormKey.LSHIFT;
+            if (comboBox1.SelectedIndex == 3) P.myPrefs.SwitchBearKey = P.PressBearFormKey.LCTRL;
+            if (comboBox1.SelectedIndex == 4) P.myPrefs.SwitchBearKey = P.PressBearFormKey.RCTRL;
+            if (comboBox1.SelectedIndex == 5) P.myPrefs.SwitchBearKey = P.PressBearFormKey.LALT;
+            if (comboBox1.SelectedIndex == 6) P.myPrefs.SwitchBearKey = P.PressBearFormKey.RALT;
+
         }
 
         
