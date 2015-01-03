@@ -18,6 +18,7 @@ namespace Kitty
         public static bool manualOn { get; set; }
         public static bool keysRegistered { get; set; }
         public static bool pauseRoutineOn { get; set; }
+        public static bool switchBearOn { get; set; }
         public static bool resTanks { get; set; }
         public static bool resHealers { get; set; }
         public static bool resAll { get; set; }
@@ -104,6 +105,37 @@ namespace Kitty
                 case "Shift": return ModifierKeys.Shift;
                 case "Windows": return ModifierKeys.Win;
                 default: return ModifierKeys.Alt;
+            }
+        }
+
+        public static bool SwitchBearForm = false;
+
+        public static void HandleModifierStateChanged(object sender, LuaEventArgs args)
+        {
+            if (P.myPrefs.SwitchBearKey == P.PressBearFormKey.None) return;
+            if (Convert.ToInt32(args.Args[1]) == 1)
+            {
+                if (args.Args[0].ToString() == P.myPrefs.SwitchBearKey.ToString())
+                {
+                    SwitchBearForm = !SwitchBearForm;
+                    if (SwitchBearForm)
+                    {
+                        string backBear = "Switching to Bear Form, press " + P.myPrefs.SwitchBearKey.ToString() + " in WOW again to switch back to Cat Form";
+
+                        Logging.Write("Switching to Bear Form, press {0} in WOW again to switch back to Cat Form",
+                                     P.myPrefs.SwitchBearKey.ToString());
+                        if (P.myPrefs.PrintRaidstyleMsg)
+                            Lua.DoString(
+                                "RaidNotice_AddMessage(RaidWarningFrame, \"" + backBear + "\", ChatTypeInfo[\"RAID_WARNING\"]);");
+                    }
+                    else
+                    {
+                        Logging.Write("Switching back to Cat Form !");
+                        if (P.myPrefs.PrintRaidstyleMsg)
+                            Lua.DoString(
+                                "RaidNotice_AddMessage(RaidWarningFrame, \"Switching back to Cat Form !\", ChatTypeInfo[\"RAID_WARNING\"]);");
+                    }
+                }
             }
         }
 
@@ -236,6 +268,7 @@ namespace Kitty
             Logging.Write(Colors.Bisque, "Res Tanks Key: " + P.myPrefs.ModifkeyResTanks + "+ " + P.myPrefs.KeyResTanks);
             Logging.Write(Colors.Bisque, "Res Healers Key: " + P.myPrefs.ModifkeyResHealers + "+ " + P.myPrefs.KeyReshealers);
             Logging.Write(Colors.Bisque, "Res All Key: " + P.myPrefs.ModifkeyResAll + "+ " + P.myPrefs.KeyResAll);
+            Logging.Write(Colors.Bisque, "Special Key Switch Bear Form: " + P.myPrefs.SwitchBearKey);
             Logging.Write(Colors.OrangeRed, "Hotkeys: Registered!");
         }
         #endregion

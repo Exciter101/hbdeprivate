@@ -31,6 +31,11 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.numericUpDown55 = new System.Windows.Forms.NumericUpDown();
+            this.textBox58 = new System.Windows.Forms.TextBox();
+            this.numericUpDown54 = new System.Windows.Forms.NumericUpDown();
+            this.textBox57 = new System.Windows.Forms.TextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.checkBox15 = new System.Windows.Forms.CheckBox();
             this.radioButton12 = new System.Windows.Forms.RadioButton();
@@ -60,6 +65,8 @@
             this.checkBox13 = new System.Windows.Forms.CheckBox();
             this.checkBox12 = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.numericUpDown53 = new System.Windows.Forms.NumericUpDown();
+            this.textBox56 = new System.Windows.Forms.TextBox();
             this.numericUpDown9 = new System.Windows.Forms.NumericUpDown();
             this.textBox13 = new System.Windows.Forms.TextBox();
             this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
@@ -212,15 +219,14 @@
             this.textBox49 = new System.Windows.Forms.TextBox();
             this.textBox48 = new System.Windows.Forms.TextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.textBox56 = new System.Windows.Forms.TextBox();
-            this.numericUpDown53 = new System.Windows.Forms.NumericUpDown();
-            this.groupBox15 = new System.Windows.Forms.GroupBox();
-            this.textBox57 = new System.Windows.Forms.TextBox();
-            this.numericUpDown54 = new System.Windows.Forms.NumericUpDown();
-            this.textBox58 = new System.Windows.Forms.TextBox();
-            this.numericUpDown55 = new System.Windows.Forms.NumericUpDown();
+            this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.textBox59 = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox15.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown55)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown54)).BeginInit();
             this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).BeginInit();
@@ -231,6 +237,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown53)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
@@ -289,10 +296,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown53)).BeginInit();
-            this.groupBox15.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown54)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown55)).BeginInit();
+            this.groupBox16.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -318,6 +322,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBox16);
             this.tabPage1.Controls.Add(this.groupBox15);
             this.tabPage1.Controls.Add(this.groupBox8);
             this.tabPage1.Controls.Add(this.groupBox7);
@@ -334,6 +339,52 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox15
+            // 
+            this.groupBox15.Controls.Add(this.numericUpDown55);
+            this.groupBox15.Controls.Add(this.textBox58);
+            this.groupBox15.Controls.Add(this.numericUpDown54);
+            this.groupBox15.Controls.Add(this.textBox57);
+            this.groupBox15.Location = new System.Drawing.Point(9, 407);
+            this.groupBox15.Name = "groupBox15";
+            this.groupBox15.Size = new System.Drawing.Size(322, 39);
+            this.groupBox15.TabIndex = 11;
+            this.groupBox15.TabStop = false;
+            // 
+            // numericUpDown55
+            // 
+            this.numericUpDown55.Location = new System.Drawing.Point(268, 13);
+            this.numericUpDown55.Name = "numericUpDown55";
+            this.numericUpDown55.Size = new System.Drawing.Size(42, 20);
+            this.numericUpDown55.TabIndex = 17;
+            this.numericUpDown55.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown55.ValueChanged += new System.EventHandler(this.numericUpDown55_ValueChanged);
+            // 
+            // textBox58
+            // 
+            this.textBox58.Location = new System.Drawing.Point(162, 13);
+            this.textBox58.Name = "textBox58";
+            this.textBox58.Size = new System.Drawing.Size(100, 20);
+            this.textBox58.TabIndex = 16;
+            this.textBox58.Text = "AOE adds Moonkin";
+            // 
+            // numericUpDown54
+            // 
+            this.numericUpDown54.Location = new System.Drawing.Point(112, 13);
+            this.numericUpDown54.Name = "numericUpDown54";
+            this.numericUpDown54.Size = new System.Drawing.Size(42, 20);
+            this.numericUpDown54.TabIndex = 15;
+            this.numericUpDown54.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown54.ValueChanged += new System.EventHandler(this.numericUpDown54_ValueChanged);
+            // 
+            // textBox57
+            // 
+            this.textBox57.Location = new System.Drawing.Point(6, 13);
+            this.textBox57.Name = "textBox57";
+            this.textBox57.Size = new System.Drawing.Size(100, 20);
+            this.textBox57.TabIndex = 0;
+            this.textBox57.Text = "AOE adds Cat";
             // 
             // groupBox8
             // 
@@ -686,6 +737,23 @@
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Protection";
+            // 
+            // numericUpDown53
+            // 
+            this.numericUpDown53.Location = new System.Drawing.Point(216, 198);
+            this.numericUpDown53.Name = "numericUpDown53";
+            this.numericUpDown53.Size = new System.Drawing.Size(42, 20);
+            this.numericUpDown53.TabIndex = 20;
+            this.numericUpDown53.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown53.ValueChanged += new System.EventHandler(this.numericUpDown53_ValueChanged);
+            // 
+            // textBox56
+            // 
+            this.textBox56.Location = new System.Drawing.Point(36, 200);
+            this.textBox56.Name = "textBox56";
+            this.textBox56.Size = new System.Drawing.Size(161, 20);
+            this.textBox56.TabIndex = 19;
+            this.textBox56.Text = "Healing Touch (Moonkin) HP %";
             // 
             // numericUpDown9
             // 
@@ -2348,7 +2416,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(712, 429);
+            this.tabPage2.Size = new System.Drawing.Size(712, 452);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Info";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -2429,68 +2497,40 @@
     " AFK bot, cd\'s will be used on Bosses, \n\n      Players and targets who Max HP%  " +
     ">= 3 x your Max HP%";
             // 
-            // textBox56
+            // groupBox16
             // 
-            this.textBox56.Location = new System.Drawing.Point(36, 200);
-            this.textBox56.Name = "textBox56";
-            this.textBox56.Size = new System.Drawing.Size(161, 20);
-            this.textBox56.TabIndex = 19;
-            this.textBox56.Text = "Healing Touch (Moonkin) HP %";
+            this.groupBox16.Controls.Add(this.comboBox1);
+            this.groupBox16.Controls.Add(this.textBox59);
+            this.groupBox16.Location = new System.Drawing.Point(337, 407);
+            this.groupBox16.Name = "groupBox16";
+            this.groupBox16.Size = new System.Drawing.Size(367, 39);
+            this.groupBox16.TabIndex = 12;
+            this.groupBox16.TabStop = false;
             // 
-            // numericUpDown53
+            // textBox59
             // 
-            this.numericUpDown53.Location = new System.Drawing.Point(216, 198);
-            this.numericUpDown53.Name = "numericUpDown53";
-            this.numericUpDown53.Size = new System.Drawing.Size(42, 20);
-            this.numericUpDown53.TabIndex = 20;
-            this.numericUpDown53.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown53.ValueChanged += new System.EventHandler(this.numericUpDown53_ValueChanged);
+            this.textBox59.Location = new System.Drawing.Point(19, 13);
+            this.textBox59.Name = "textBox59";
+            this.textBox59.Size = new System.Drawing.Size(175, 20);
+            this.textBox59.TabIndex = 0;
+            this.textBox59.Text = "Special HotKey Switch Bear Form";
             // 
-            // groupBox15
+            // comboBox1
             // 
-            this.groupBox15.Controls.Add(this.numericUpDown55);
-            this.groupBox15.Controls.Add(this.textBox58);
-            this.groupBox15.Controls.Add(this.numericUpDown54);
-            this.groupBox15.Controls.Add(this.textBox57);
-            this.groupBox15.Location = new System.Drawing.Point(9, 407);
-            this.groupBox15.Name = "groupBox15";
-            this.groupBox15.Size = new System.Drawing.Size(322, 39);
-            this.groupBox15.TabIndex = 11;
-            this.groupBox15.TabStop = false;
-            // 
-            // textBox57
-            // 
-            this.textBox57.Location = new System.Drawing.Point(6, 13);
-            this.textBox57.Name = "textBox57";
-            this.textBox57.Size = new System.Drawing.Size(100, 20);
-            this.textBox57.TabIndex = 0;
-            this.textBox57.Text = "AOE adds Cat";
-            // 
-            // numericUpDown54
-            // 
-            this.numericUpDown54.Location = new System.Drawing.Point(112, 13);
-            this.numericUpDown54.Name = "numericUpDown54";
-            this.numericUpDown54.Size = new System.Drawing.Size(42, 20);
-            this.numericUpDown54.TabIndex = 15;
-            this.numericUpDown54.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown54.ValueChanged += new System.EventHandler(this.numericUpDown54_ValueChanged);
-            // 
-            // textBox58
-            // 
-            this.textBox58.Location = new System.Drawing.Point(162, 13);
-            this.textBox58.Name = "textBox58";
-            this.textBox58.Size = new System.Drawing.Size(100, 20);
-            this.textBox58.TabIndex = 16;
-            this.textBox58.Text = "AOE adds Moonkin";
-            // 
-            // numericUpDown55
-            // 
-            this.numericUpDown55.Location = new System.Drawing.Point(268, 13);
-            this.numericUpDown55.Name = "numericUpDown55";
-            this.numericUpDown55.Size = new System.Drawing.Size(42, 20);
-            this.numericUpDown55.TabIndex = 17;
-            this.numericUpDown55.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown55.ValueChanged += new System.EventHandler(this.numericUpDown55_ValueChanged);
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "None",
+            "RSHIFT",
+            "LSHIFT",
+            "LCTRL",
+            "RCTRL",
+            "LALT",
+            "RALT"});
+            this.comboBox1.Location = new System.Drawing.Point(223, 11);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 1;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // KittyGui
             // 
@@ -2503,6 +2543,10 @@
             this.Text = "KittyGui";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.groupBox15.ResumeLayout(false);
+            this.groupBox15.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown55)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown54)).EndInit();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown13)).EndInit();
@@ -2517,6 +2561,7 @@
             this.groupBox6.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown53)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
@@ -2586,11 +2631,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown53)).EndInit();
-            this.groupBox15.ResumeLayout(false);
-            this.groupBox15.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown54)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown55)).EndInit();
+            this.groupBox16.ResumeLayout(false);
+            this.groupBox16.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2788,5 +2830,8 @@
         private System.Windows.Forms.TextBox textBox58;
         private System.Windows.Forms.NumericUpDown numericUpDown54;
         private System.Windows.Forms.TextBox textBox57;
+        private System.Windows.Forms.GroupBox groupBox16;
+        private System.Windows.Forms.TextBox textBox59;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
