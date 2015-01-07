@@ -34,7 +34,7 @@
   <FrenziedRegeneration>False</FrenziedRegeneration>
   <FrenziedRegenerationHP>70</FrenziedRegenerationHP>
   <Genesis>True</Genesis>
-  <GenesisHP>70</GenesisHP>
+  <GenesisHP>40</GenesisHP>
   <GenesisTimeLeft>8</GenesisTimeLeft>
   <GenesisUnit>1</GenesisUnit>
   <GrowlTank>False</GrowlTank>
@@ -150,7 +150,7 @@
   <AutoMove>False</AutoMove>
   <AutoFace>True</AutoFace>
   <AutoBuff>True</AutoBuff>
-  <AutoDetectManualCast>False</AutoDetectManualCast>
+  <AutoDetectManualCast>True</AutoDetectManualCast>
   <AutoDetectManualCastMS>300</AutoDetectManualCastMS>
   <AutoRacial>True</AutoRacial>
   <AutoRez>False</AutoRez>
@@ -184,9 +184,9 @@
   <PriorityHeal>70</PriorityHeal>
   <RemoveCorruption>False</RemoveCorruption>
   <StartEating>60</StartEating>
-  <Trinket1>5</Trinket1>
+  <Trinket1>0</Trinket1>
   <Trinket1HP>40</Trinket1HP>
-  <Trinket2>4</Trinket2>
+  <Trinket2>0</Trinket2>
   <Trinket2HP>60</Trinket2HP>
   <TyphoonInterrupt>True</TyphoonInterrupt>
   <UrsolsVortex>True</UrsolsVortex>

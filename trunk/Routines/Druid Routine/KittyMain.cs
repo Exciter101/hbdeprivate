@@ -180,10 +180,10 @@ namespace Kitty
             if (await CannotPull(Me.CurrentTarget, Me.CurrentTarget != null 
                 && pullTimer.ElapsedMilliseconds >= 30 * 1000 
                 && lastGuid == Me.CurrentTarget.Guid)) return true;
-            if (await RemoveRooted(BEAR_FORM, MeIsRooted && MeIsGuardian && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await RemoveRooted(FERALFORM, MeIsFeral && MeIsRooted && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await CastBuff(CAT_FORM, Me.Shapeshift != ShapeshiftForm.Cat && MeIsFeral)) return true;
-            if (await CastBuff(BEAR_FORM, Me.Shapeshift != ShapeshiftForm.Bear && MeIsGuardian)) return true;
+            if (await RemoveRooted(BEAR_FORM, MeIsRooted && (MeIsGuardian || MeIsFeralBear) && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await RemoveRooted(CAT_FORM, MeIsFeral && !MeIsFeralBear && MeIsRooted && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await CastBuff(CAT_FORM, Me.Shapeshift != ShapeshiftForm.Cat && MeIsFeral && !MeIsFeralBear)) return true;
+            if (await CastBuff(BEAR_FORM, Me.Shapeshift != ShapeshiftForm.Bear && (MeIsGuardian || MeIsFeralBear))) return true;
             if (await clearTarget(Me.CurrentTarget == null && AllowTargeting && (Me.CurrentTarget.IsDead || Me.CurrentTarget.IsFriendly))) return true;
             if (await MoveToTarget(gotTarget && AllowMovement && Me.CurrentTarget.Distance > 4.5f && (MeIsFeral || MeIsGuardian))) return true;
             if (await StopMovement(gotTarget && AllowMovement && Me.CurrentTarget.Distance <= 4.5f && (MeIsFeral || MeIsGuardian))) return true;
@@ -228,8 +228,9 @@ namespace Kitty
         #endregion
 
         #region spec
-        public static bool MeIsFeral { get { return Me.Specialization == WoWSpec.DruidFeral || (Me.Level < 10 && SpellManager.HasSpell(CAT_FORM)); } }
-        public static bool MeIsGuardian { get { return Me.Specialization == WoWSpec.DruidGuardian; } }
+        public static bool MeIsFeralBear { get { return Me.Specialization == WoWSpec.DruidFeral && (HKM.SwitchBearForm || Me.HealthPercent <= P.myPrefs.PercentSwitchBearForm); } }
+        public static bool MeIsFeral { get { return (Me.Specialization == WoWSpec.DruidFeral && !MeIsFeralBear) || (Me.Level < 10 && SpellManager.HasSpell(CAT_FORM)); } }
+        public static bool MeIsGuardian { get { return Me.Specialization == WoWSpec.DruidGuardian || MeIsFeralBear; } }
         public static bool MeIsBoomkin { get { return Me.Specialization == WoWSpec.DruidBalance; } }
         public static bool MeIsResto { get { return Me.Specialization == WoWSpec.DruidRestoration; } }
         public static bool MeIsLowbie { get { return Me.Level < 10 && !SpellManager.HasSpell(CAT_FORM); } }
