@@ -151,6 +151,22 @@ namespace Kitty
         }
         #endregion
 
+        #region attackers without thrash
+        public static List<WoWUnit> noBearThrash()
+        {
+            List<WoWUnit> newThrash = new List<WoWUnit>();
+            newThrash = ObjectManager.GetObjectsOfType<WoWUnit>(true, false).Where(u => u != null
+                && (u.Combat
+                && (u.IsTargetingMeOrPet || u.IsTargetingMyPartyMember || u.IsTargetingMyRaidMember || u.IsTargetingAnyMinion))
+                && ValidUnit(u)
+                && !debuffExists(THRASH, u)
+                && !Blacklist.Contains(u, BlacklistFlags.All)
+                && u.DistanceSqr <= 10 * 10).ToList();
+            return newThrash;
+        }
+        public static int noBearThrashCount { get { return noBearThrash().Count(); } }
+        #endregion
+
         #region MeleeRange
         public static bool IsInMeleeRange(WoWUnit unit) { return unit != null && unit.Distance <= 4.5f; }
         #endregion

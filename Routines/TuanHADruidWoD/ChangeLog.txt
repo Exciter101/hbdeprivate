@@ -1,3 +1,8 @@
+Version 6.0.5485
+Added Full DR Tracker System
+We are now 1st step on PvP for WoD
+Minor bug fix and code optimization
+
 Version 6.0.5462
 Fix Issue Interrupt Channeling Spell Instantly (we are safe for PvP now)
 Advance Logic: Auto Scale Down Performance if WoW FPS drop below 15 (Lag)

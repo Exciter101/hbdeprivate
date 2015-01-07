@@ -150,8 +150,8 @@
   <AutoMove>False</AutoMove>
   <AutoFace>True</AutoFace>
   <AutoBuff>True</AutoBuff>
-  <AutoDetectManualCast>False</AutoDetectManualCast>
-  <AutoDetectManualCastMS>100</AutoDetectManualCastMS>
+  <AutoDetectManualCast>True</AutoDetectManualCast>
+  <AutoDetectManualCastMS>300</AutoDetectManualCastMS>
   <AutoRacial>True</AutoRacial>
   <AutoRez>True</AutoRez>
   <AutoSetFocus>True</AutoSetFocus>

@@ -175,7 +175,7 @@ namespace Kitty
                     if (P.myPrefs.Trinket2UseResto) return false;
                     if (P.myPrefs.Trinket2Resto == 1) return false;
                     if (P.myPrefs.Trinket2Resto == 2 && (HKM.cooldownsOn || (Targets.IsWoWBoss(Me.CurrentTarget) && AutoBot)))
-                    if (P.myPrefs.Trinket2Resto == 3 && IsCrowdControlledPlayer(Me)) return true;
+                        if (P.myPrefs.Trinket2Resto == 3 && IsCrowdControlledPlayer(Me)) return true;
                     if (P.myPrefs.Trinket2Resto == 4 && Me.EnergyPercent <= P.myPrefs.PercentTrinket2EnergyResto) return true;
                     if (P.myPrefs.Trinket2Resto == 5 && Me.ManaPercent >= P.myPrefs.PercentTrinket2ManaResto) return true;
                     if (P.myPrefs.Trinket2Resto == 6 && Me.HealthPercent <= P.myPrefs.PercentTrinket2HPResto) return true;
@@ -185,7 +185,7 @@ namespace Kitty
                     if (P.myPrefs.Trinket2Use) return false;
                     if (P.myPrefs.Trinket2 == 1) return false;
                     if (P.myPrefs.Trinket2 == 2 && (HKM.cooldownsOn || (Targets.IsWoWBoss(Me.CurrentTarget) && AutoBot)))
-                    if (P.myPrefs.Trinket2 == 3 && IsCrowdControlledPlayer(Me)) return true;
+                        if (P.myPrefs.Trinket2 == 3 && IsCrowdControlledPlayer(Me)) return true;
                     if (P.myPrefs.Trinket2 == 4 && Me.EnergyPercent <= P.myPrefs.PercentTrinket2Energy) return true;
                     if (P.myPrefs.Trinket2 == 5 && Me.ManaPercent >= P.myPrefs.PercentTrinket2Mana) return true;
                     if (P.myPrefs.Trinket2 == 6 && Me.HealthPercent <= P.myPrefs.PercentTrinket2HP) return true;
@@ -242,6 +242,8 @@ namespace Kitty
         {
             get
             {
+                if (!spellOnCooldown(THRASH)
+                    && noBearThrashCount > 1) return true;
                 if (!spellOnCooldown(THRASH)
                 && !debuffExists(THRASH, Me.CurrentTarget) || (debuffExists(THRASH, Me.CurrentTarget) && debuffTimeLeft(THRASH, Me.CurrentTarget) <= 4000))
                 {
@@ -312,9 +314,9 @@ namespace Kitty
         {
             get
             {
-                return !Me.HasAura(ENHANCED_AGILITY) 
-                    && !Me.HasAura(ENHANCED_INTELLECT) 
-                    && !Me.HasAura(ENHANCED_STRENGHT) 
+                return !Me.HasAura(ENHANCED_AGILITY)
+                    && !Me.HasAura(ENHANCED_INTELLECT)
+                    && !Me.HasAura(ENHANCED_STRENGHT)
                     && !Me.HasAura(CRYSTAL_OF_INSANITY_BUFF)
                     && !Me.HasAura(CRYSTAL_OF_ORALIUS_BUFF)
                     && P.myPrefs.FlaskAlchemy;
@@ -345,12 +347,12 @@ namespace Kitty
         {
             get
             {
-                if(!buffExists(SAVAGE_ROAR, Me)
+                if (!buffExists(SAVAGE_ROAR, Me)
                     && !SpellManager.HasSpell(SAVAGE_ROAR_GLYPH)
                     && Me.EnergyPercent >= 25
-                    && Me.ComboPoints >= 1) 
-                { 
-                    return true; 
+                    && Me.ComboPoints >= 1)
+                {
+                    return true;
                 }
                 return false;
             }
@@ -368,7 +370,7 @@ namespace Kitty
         {
             get
             {
-                if(debuffExists(RIP, Me.CurrentTarget)
+                if (debuffExists(RIP, Me.CurrentTarget)
                     && Me.EnergyPercent >= 25
                     && Me.ComboPoints >= 5)
                 {
@@ -398,7 +400,7 @@ namespace Kitty
         {
             get
             {
-                if((!debuffExists(RIP, Me.CurrentTarget)
+                if ((!debuffExists(RIP, Me.CurrentTarget)
                     || (debuffExists(RIP, Me.CurrentTarget) && debuffTimeLeft(RIP, Me.CurrentTarget) <= 6000))
                     && Me.EnergyPercent >= 30
                     && Me.ComboPoints >= 5)
@@ -412,7 +414,7 @@ namespace Kitty
         {
             get
             {
-                if((!debuffExists(RAKE, Me.CurrentTarget)
+                if ((!debuffExists(RAKE, Me.CurrentTarget)
                     || (debuffExists(RAKE, Me.CurrentTarget) && debuffTimeLeft(RAKE, Me.CurrentTarget) <= 5000))
                     && Me.EnergyPercent >= 35
                     && (addCount < 2 || !SpellManager.HasSpell(THRASH)))
@@ -427,7 +429,7 @@ namespace Kitty
             get
             {
                 if (!debuffExists(THRASH, Me.CurrentTarget)
-                    && addCount > 1 
+                    && addCount > 1
                     && SpellManager.HasSpell(THRASH)
                     && Me.EnergyPercent >= 50 || buffExists(CLEARCASTING, Me))
                 {
@@ -449,7 +451,7 @@ namespace Kitty
         {
             get
             {
-                if(SpellManager.HasSpell(SWIPE)
+                if (SpellManager.HasSpell(SWIPE)
                     && !HKM.aoeStop
                     && addCount >= 4
                     && Me.EnergyPercent >= 45)
@@ -482,30 +484,19 @@ namespace Kitty
         #region interrupts
         public static DateTime interruptTimer;
         public static DateTime stunTimer;
-        public static Stopwatch interruptChecker;
-
-        public static bool timeToInterrupt
-        {
-            get
-            {
-                if (!interruptChecker.IsRunning) { interruptChecker.Restart(); return false; }
-                if (interruptChecker.IsRunning && interruptChecker.ElapsedMilliseconds > 1000) { interruptChecker.Stop(); return true; }
-                return false;
-            }
-        }
 
         public static bool SkullBashConditions(WoWUnit unit)
         {
-          if(P.myPrefs.AutoInterrupt
-              && unit.IsCasting
-              && Me.CanInterruptCurrentSpellCast
-              && !spellOnCooldown(SKULL_BASH)
-              && interruptTimer <= DateTime.Now)
-          {
-              interruptTimer.AddSeconds(5);
-              return true;
-          }
-          return false;
+            if (P.myPrefs.AutoInterrupt
+                && unit.IsCasting
+                && Me.CanInterruptCurrentSpellCast
+                && !spellOnCooldown(SKULL_BASH)
+                && DateTime.Now >= interruptTimer)
+            {
+                interruptTimer = DateTime.Now + new TimeSpan(0, 0, 0, 0, 2500);
+                return true;
+            }
+            return false;
         }
         public static bool TyphoonConditions(WoWUnit unit)
         {
@@ -513,9 +504,9 @@ namespace Kitty
                 && unit.IsCasting
                 && Me.CanInterruptCurrentSpellCast
                 && !spellOnCooldown(TYPHOON)
-                && interruptTimer <= DateTime.Now)
+                && DateTime.Now >= interruptTimer)
             {
-                interruptTimer.AddSeconds(5);
+                interruptTimer = DateTime.Now + new TimeSpan(0, 0, 0, 0, 2500);
                 return true;
             }
             return false;
@@ -526,9 +517,9 @@ namespace Kitty
                 && unit.IsCasting
                 && Me.CanInterruptCurrentSpellCast
                 && !spellOnCooldown(INCAPACITATING_ROAR)
-                && interruptTimer <= DateTime.Now)
+                && DateTime.Now >= interruptTimer)
             {
-                interruptTimer.AddSeconds(5);
+                interruptTimer = DateTime.Now + new TimeSpan(0, 0, 0, 0, 2500);
                 return true;
             }
             return false;
@@ -539,12 +530,13 @@ namespace Kitty
                 && unit.IsCasting
                 && !Me.CanInterruptCurrentSpellCast
                 && !spellOnCooldown(MIGHTY_BASH)
-                && stunTimer <= DateTime.Now)
+                && DateTime.Now >= stunTimer)
             {
-                stunTimer.AddSeconds(5);
+                stunTimer = DateTime.Now + new TimeSpan(0, 0, 0, 0, 2500);
                 return true;
             }
             return false;
+            
         }
         public static bool WarStompConditions(WoWUnit unit)
         {
@@ -552,9 +544,9 @@ namespace Kitty
                 && unit.IsCasting
                 && !Me.CanInterruptCurrentSpellCast
                 && !spellOnCooldown(WAR_STOMP)
-                && stunTimer <= DateTime.Now)
+                && DateTime.Now >= stunTimer)
             {
-                stunTimer.AddSeconds(5);
+                stunTimer = DateTime.Now + new TimeSpan(0, 0, 0, 0, 2500);
                 return true;
             }
             return false;
