@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="KittyCombatLogHandlers.cs" />
     <Compile Include="KittyEventHandlers.cs" />
+    <Compile Include="KittyGroups.cs" />
     <Compile Include="KittyGui.cs">
       <SubType>Form</SubType>
     </Compile>

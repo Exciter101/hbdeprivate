@@ -306,7 +306,7 @@ namespace Kitty
         [Setting, DefaultValue(45)]
         public int Tranquility5 { get; set; }
 
-        [Setting, DefaultValue(85)]
+        [Setting, DefaultValue(40)]
         public int Genesis5 { get; set; }
 
         [Setting, DefaultValue(2)]
@@ -340,7 +340,7 @@ namespace Kitty
         [Setting, DefaultValue(45)]
         public int Tranquility510 { get; set; }
 
-        [Setting, DefaultValue(65)]
+        [Setting, DefaultValue(35)]
         public int Genesis510 { get; set; }
 
         [Setting, DefaultValue(3)]
@@ -374,7 +374,7 @@ namespace Kitty
         [Setting, DefaultValue(45)]
         public int Tranquility50 { get; set; }
 
-        [Setting, DefaultValue(65)]
+        [Setting, DefaultValue(30)]
         public int Genesis50 { get; set; }
 
         [Setting, DefaultValue(4)]
