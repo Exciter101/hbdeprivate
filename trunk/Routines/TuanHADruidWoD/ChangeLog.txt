@@ -1,4 +1,16 @@
 Version 6.0.5485
+Added Smart Interrupt Cooldown Tracker and Juke logic for PvP. (Auto Activate in Arena/BG so there's no setting needed)
+When there's enemy unit that can interrupt around, CR will randomly try to Cast Regrowth(random interval 3-5 seconds) and StopCasting right away (randome between 300-500ms) to trick enemy using Pummel, Kick, Counter-Shot...
+CR also never try to Juke/Stop Casting if you are under uninterrupted aura
+Zen Focus
+Enchanted Bark
+Devotion Aura
+Divine Shield
+Spiritwalkers Aegis
+The logic soon will be added to other Healing Class as well.
+
+
+Version 6.0.5485
 Added Full DR Tracker System
 We are now 1st step on PvP for WoD
 Minor bug fix and code optimization

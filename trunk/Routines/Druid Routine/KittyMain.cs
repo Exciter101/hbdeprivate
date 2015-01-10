@@ -59,7 +59,7 @@ namespace Kitty
             nextCheckTimer = DateTime.Now + new TimeSpan(0, 0, 0, 30, 0);
         }
         public bool checkTarget { get; set; }
-
+        public static bool _init = false;
         public override bool WantButton { get { return true; } }
         public override void OnButtonPress()
         {
@@ -76,6 +76,7 @@ namespace Kitty
             Lua.Events.AttachEvent("UI_ERROR_MESSAGE", CL.CombatLogErrorHandler);
             EH.AttachCombatLogEvent();
             Lua.Events.AttachEvent("MODIFIER_STATE_CHANGED", HKM.HandleModifierStateChanged);
+            _init = true;
         }
 
         public override void ShutDown()
@@ -91,15 +92,25 @@ namespace Kitty
         {
             try
             {
-                if (partyCount != lastPTSize)
-                {
-                    //Logging.Write(Colors.DarkTurquoise, "Current PartySize: " + partyCount);
-                    lastPTSize = partyCount;
-                }
+                
                 if (Me.IsDead
                     && AutoBot)
                 {
                     Lua.DoString(string.Format("RunMacroText(\"{0}\")", "/script RepopMe()"));
+                }
+                if (_init)
+                {
+                    Logging.Write(Colors.DarkTurquoise, "[init] Current PartySize: " + partyCount);
+                    updatePartyMembers();
+                    lastPTSize = partyCount;
+                    _init = false;
+                }
+                if (partyCount != lastPTSize)
+                {
+                    Logging.Write(Colors.DarkTurquoise, "[partyCount] Current PartySize: " + partyCount);
+                    updatePartyMembers();
+                    lastPTSize = partyCount;
+                    _init = false;
                 }
                 return;
             }
