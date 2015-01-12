@@ -1,56 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommonBehaviors.Actions;
 using Styx;
+using Styx.Common;
 using Styx.CommonBot;
+using Styx.CommonBot.Coroutines;
 using Styx.CommonBot.Routines;
 using Styx.Helpers;
+using Styx.Pathing;
 using Styx.TreeSharp;
 using Styx.WoWInternals;
 using Styx.WoWInternals.WoWObjects;
-using Action = Styx.TreeSharp.Action;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
-using Styx.Pathing;
-using Styx.Common;
-using System.Windows.Media;
-using Styx.CommonBot.Frames;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using NewMixedMode;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Media;
+using Action = Styx.TreeSharp.Action;
 
-#region methods
-using Form1 = DeathKnight.GUI.Form1;
-using HKM = DeathKnight.Helpers.HotkeyManager;
-using S = DeathKnight.DKSpells.DKSpells;
-using CL = DeathKnight.Handlers.CombatLogEventArgs;
-using EH = DeathKnight.Handlers.EventHandlers;
-using L = DeathKnight.Helpers.Logs;
-using T = DeathKnight.Helpers.targets;
-using U = DeathKnight.Helpers.Unit;
-using UI = DeathKnight.Helpers.UseItems;
-using P = DeathKnight.DKSettings.DKPrefs;
-using M = DeathKnight.Helpers.Movement;
-using I = DeathKnight.Helpers.Interrupts;
-#endregion
+using P = DK.DKSettings;
 
-namespace DeathKnight.Helpers
+namespace DK
 {
-    class Movement
+    public partial class DKMain : CombatRoutine
     {
         #region movement targeting facing
 
         [DllImport("user32.dll")]
         private static extern short GetAsyncKeyState(Keys vKey);
-        private static LocalPlayer Me { get { return StyxWoW.Me; } }
 
         public static bool AllowFacing
         {
             get
             {
-                if (HKM.manualOn) { return false; }
-                else if (P.myPrefs.AutoFacingDisable
+                /*if (HKM.manualOn) { return false; }*/
+                if (P.myPrefs.AutoFacingDisable
                     && (Me.CurrentMap.IsDungeon || Me.CurrentMap.IsInstance || Me.CurrentMap.IsRaid || Me.CurrentMap.IsScenario || Me.GroupInfo.IsInRaid))
                 {
                     return false;
@@ -72,8 +59,8 @@ namespace DeathKnight.Helpers
         {
             get
             {
-                if (HKM.manualOn) { return false; }
-                else if (P.myPrefs.AutoTargetingDisable
+                /*if (HKM.manualOn) { return false; }*/
+                if (P.myPrefs.AutoTargetingDisable
                     && (Me.CurrentMap.IsDungeon || Me.CurrentMap.IsInstance || Me.CurrentMap.IsRaid || Me.CurrentMap.IsScenario || Me.GroupInfo.IsInRaid))
                 {
                     return false;
@@ -94,11 +81,11 @@ namespace DeathKnight.Helpers
         {
             get
             {
-                if (HKM.manualOn)
+                /*if (HKM.manualOn)
                 {
                     return false;
-                }
-                else if (P.myPrefs.AutoMovementDisable
+                }*/
+                if (P.myPrefs.AutoMovementDisable
                     && (Me.CurrentMap.IsDungeon || Me.CurrentMap.IsInstance || Me.CurrentMap.IsRaid || Me.CurrentMap.IsScenario || Me.GroupInfo.IsInRaid))
                 {
                     return false;
@@ -117,59 +104,41 @@ namespace DeathKnight.Helpers
                 return P.myPrefs.AutoMovement;
             }
         }
-        public static Composite CreateMovement()
-        {
-            return new Action(ret =>
-            {
-                if (CL.IsNotInLineOfSight)
-                {
-                    Navigator.MoveTo(Me.CurrentTarget.Location);
-                }
+        #endregion
 
-                Navigator.MoveTo(Me.CurrentTarget.Location);
-                return RunStatus.Failure;
-            });
-        }
-        public static Composite CreateStopMovement()
+        #region facing
+        public static async Task<bool> FaceMyTarget(bool reqs)
         {
-            return new Action(ret =>
-            {
-                Navigator.PlayerMover.MoveStop();
-                return RunStatus.Failure;
-            });
-        }
-        public static Composite FacingTarget()
-        {
-            return new Action(ret =>
-            {
-                if (!Me.IsSafelyFacing(Me.CurrentTarget))
-                {
-                    Me.CurrentTarget.Face();
-                }
-                return RunStatus.Failure;
-            });
+            if (!reqs) return false;
+            Me.CurrentTarget.Face();
+            await CommonCoroutines.SleepForLagDuration();
+            return false;
         }
         #endregion
 
-        public static float MeleeRange
+        #region move to and stop movement
+        public static async Task<bool> MoveToTarget(bool reqs)
         {
-            get { return StyxWoW.Me.CurrentTarget == null ? 0 : MeleeDistance(Me.CurrentTarget); }
+            if (!reqs) return false;
+            Navigator.MoveTo(Me.CurrentTarget.Location);
+            await CommonCoroutines.SleepForLagDuration();
+            return false;
         }
-
-        public static float MeleeDistance(WoWUnit mob)
+        public static async Task<bool> StopMovement(bool reqs)
         {
-            return mob.IsPlayer ? 3.5f : Math.Max(5f, StyxWoW.Me.CombatReach + 1.3333334f + mob.CombatReach);
+            if (!reqs) return false;
+            Navigator.PlayerMover.MoveStop();
+            await CommonCoroutines.SleepForLagDuration();
+            return false;
         }
-
-        public static float HeightOffTheGround(WoWUnit u)
+        public static async Task<bool> MoveBack(bool reqs)
         {
-            var unitLoc = new WoWPoint(u.Location.X, u.Location.Y, u.Location.Z);
-            IEnumerable<float> listMeshZ = Navigator.FindHeights(unitLoc.X, unitLoc.Y).Where(h => h <= unitLoc.Z + 2f);
-            if (listMeshZ.Any())
-                return unitLoc.Z - listMeshZ.Max();
-
-            return float.MaxValue;
+            if (!reqs) return false;
+            moveBackTimer = DateTime.Now + new TimeSpan(0, 0, 0, 0, 2000);
+            WoWMovement.Move(WoWMovement.MovementDirection.Backwards);
+            await CommonCoroutines.SleepForLagDuration();
+            return false;
         }
+        #endregion
     }
 }
-

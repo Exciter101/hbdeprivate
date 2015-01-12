@@ -1,41 +1,195 @@
-﻿using Styx;
+﻿using CommonBehaviors.Actions;
+using Styx;
+using Styx.Common;
 using Styx.CommonBot;
+using Styx.CommonBot.Coroutines;
+using Styx.CommonBot.POI;
+using Styx.CommonBot.Routines;
+using Styx.Helpers;
+using Styx.Pathing;
+using Styx.TreeSharp;
 using Styx.WoWInternals;
 using Styx.WoWInternals.WoWObjects;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Media;
+using Action = Styx.TreeSharp.Action;
 
-#region methods
-using Form1 = DeathKnight.GUI.Form1;
-using HKM = DeathKnight.Helpers.HotkeyManager;
-using S = DeathKnight.DKSpells.DKSpells;
-using CL = DeathKnight.Handlers.CombatLogEventArgs;
-using EH = DeathKnight.Handlers.EventHandlers;
-using L = DeathKnight.Helpers.Logs;
-using T = DeathKnight.Helpers.targets;
-using U = DeathKnight.Helpers.Unit;
-using UI = DeathKnight.Helpers.UseItems;
-using P = DeathKnight.DKSettings.DKPrefs;
-using M = DeathKnight.Helpers.Movement;
-using I = DeathKnight.Helpers.Interrupts;
-#endregion
-
-namespace DeathKnight.Helpers
+namespace DK
 {
-    class Unit
+    public partial class DKMain : CombatRoutine
     {
-        private static LocalPlayer Me { get { return StyxWoW.Me; } }
+        public static string usedBot { get { return BotManager.Current.Name.ToUpper(); } }
 
-        #region ValidUnits
-        
-        
+        public static bool IsInRange(WoWUnit unit)
+        {
+            return Me.CurrentTarget != null && Me.CurrentTarget.Distance <= 39f;
+        }
+
+        #region solo
+        public static bool MeIsSolo
+        {
+            get { return !Me.GroupInfo.IsInParty && !Me.GroupInfo.IsInRaid && !Me.GroupInfo.IsInLfgParty && !Me.GroupInfo.IsInBattlegroundParty; }
+        }
+        #endregion
+
+        #region gotTarget
+        public static bool gotTarget
+        {
+            get
+            {
+                return Me.CurrentTarget != null && Me.CurrentTarget.IsAlive && Me.CurrentTarget.Attackable && Me.CurrentTarget.CanSelect;
+            }
+        }
+        #endregion
+
+        #region can buff and eat
+        public static bool Canbuff
+        {
+            get
+            {
+                return !Me.Mounted && !Me.IsFlying && !Me.OnTaxi && !Me.IsDead && !Me.IsGhost;
+            }
+        }
+        #endregion
+
+        #region AutoBot
+        public static bool AutoBot
+        {
+            get
+            {
+                return usedBot.Contains("QUEST") || usedBot.Contains("GRIND") || usedBot.Contains("GATHER") || usedBot.Contains("ANGLER") || usedBot.Contains("ARCHEO");
+
+            }
+        }
+        #endregion
+
+        #region addcount
+        public static List<WoWUnit> UnfriendlyTargets()
+        {
+            return ObjectManager.GetObjectsOfTypeFast<WoWUnit>().Where(u => u.IsAlive
+                && u.Combat
+                && (u.IsTargetingMeOrPet || (u.IsTargetingMyPartyMember || u.IsTargetingMyRaidMember || u.IsTargetingAnyMinion))
+                && u.Distance <= 8).ToList();
+        }
+
+        public static int addCountMelee
+        {
+            get { return UnfriendlyTargets().Count(); }
+        }
+        public static List<WoWUnit> UnfriendlyTargetsRange()
+        {
+            return ObjectManager.GetObjectsOfTypeFast<WoWUnit>().Where(u => u.IsAlive
+                && u.Combat
+                && (u.IsTargetingMeOrPet || (u.IsTargetingMyPartyMember || u.IsTargetingMyRaidMember || u.IsTargetingAnyMinion))
+                && u.Distance <= 39).ToList();
+        }
+
+        public static int addCountRange
+        {
+            get { return UnfriendlyTargetsRange().Count(); }
+        }
+        #endregion
+
+        #region adds without diseases
+        public static List<WoWUnit> noDisease
+        {
+            get
+            {
+                List<WoWUnit> targets = new List<WoWUnit>();
+                targets = ObjectManager.GetObjectsOfTypeFast<WoWUnit>().Where(u => u != null
+                    && (u.Combat
+                    && u.IsTargetingMeOrPet || (u.IsTargetingMyPartyMember || u.IsTargetingMyRaidMember))
+                    && !debuffExists(BLOOD_PLAGUE, u)
+                    && !debuffExists(FROST_FEVER, u)
+                    && u.DistanceSqr <= 10 * 10).ToList();
+                return targets;
+            }
+        }
+        #endregion
+
+        #region findTarget
+
+        public static List<WoWUnit> FindTarget()
+        {
+            return ObjectManager.GetObjectsOfType<WoWUnit>(true, false).Where(u => u != null
+                && ValidUnit(u)
+                && !Blacklist.Contains(u, BlacklistFlags.All))
+                .OrderBy(u => u.HealthPercent)
+                .ThenBy(u => u.Distance).ToList();
+        }
+        public static int FindTargetsCount { get { return FindTarget().Count(); } }
+
+        public static async Task<bool> findTargets(bool reqs)
+        {
+            if (!reqs) return false;
+            WoWUnit unit = FindTarget().FirstOrDefault();
+            if (unit != null && unit.IsPet && unit.OwnedByRoot.IsPlayer)
+            {
+                Logging.Write(Colors.Red, "Blacklisting " + unit.Name + " beacause it's a Player's Pet");
+                Blacklist.Add(Me.CurrentTarget, BlacklistFlags.All, TimeSpan.FromDays(1)); return false;
+            }
+            Logging.Write(Colors.CornflowerBlue, "Found new Target " + unit.SafeName);
+            unit.Target();
+            await CommonCoroutines.SleepForLagDuration();
+            return true;
+        }
+        public static async Task<bool> clearTarget(bool reqs)
+        {
+            if (!reqs) return false;
+            Logging.Write(Colors.CornflowerBlue, "Clearing Dead Target " + Me.CurrentTarget.SafeName);
+            Me.ClearTarget();
+            await CommonCoroutines.SleepForLagDuration();
+            return true;
+        }
+        #endregion
+
+        #region MeleeAttackers
+        public static List<WoWUnit> MeleeAttackers()
+        {
+            return ObjectManager.GetObjectsOfType<WoWUnit>(true, false).Where(u => u != null
+                && (u.Combat
+                && (u.IsTargetingMeOrPet || u.IsTargetingMyPartyMember || u.IsTargetingMyRaidMember || u.IsTargetingAnyMinion))
+                && ValidUnit(u)
+                && !Blacklist.Contains(u, BlacklistFlags.All)
+                && u.Distance < 10).OrderBy(u => u.Distance).ToList();
+        }
+        public static int MeleeAttackersCount { get { return MeleeAttackers().Count(); } }
+
+        public static async Task<bool> findMeleeAttackers(bool reqs)
+        {
+            if (!reqs) return false;
+            if (Me.CurrentTarget != null && Me.CurrentTarget.IsPet && Me.CurrentTarget.OwnedByRoot.IsPlayer)
+            {
+                Blacklist.Add(Me.CurrentTarget, BlacklistFlags.All, TimeSpan.FromDays(1)); return false;
+            }
+            WoWUnit unit = MeleeAttackers().FirstOrDefault();
+            Logging.Write(Colors.CornflowerBlue, "Changing target to closest attacker " + unit.SafeName);
+            unit.Target();
+            await CommonCoroutines.SleepForLagDuration();
+            return true;
+        }
+        #endregion
+
+        #region MeleeRange
+        public static bool IsInMeleeRange(WoWUnit unit) { return unit != null && unit.Distance <= 4.5f; }
+        #endregion
+
+        #region valid unit
         public static bool ValidUnit(WoWUnit p, bool showReason = false)
         {
             if (p == null || !p.IsValid)
                 return false;
+
+            if (Blacklist.Contains(p, BlacklistFlags.All) && p.Combat && (p.IsTargetingMeOrPet || p.IsTargetingAnyMinion || p.IsTargetingMyPartyMember
+                || p.IsTargetingMyRaidMember)) return true;
 
             // Ignore shit we can't select
             if (!p.CanSelect)
@@ -517,6 +671,247 @@ namespace DeathKnight.Helpers
             if (current_life == first_life_max)
                 return 9999;
             return -1;
+        }
+        #endregion
+
+        #region crowdcontrol
+
+        public static bool IsCrowdControlledTarget(WoWUnit unit)
+        {
+            Dictionary<string, WoWAura>.ValueCollection auras = unit.Auras.Values;
+
+            return unit.Fleeing
+                || HasAuraWithEffect(unit,
+                        WoWApplyAuraType.ModConfuse,
+                        WoWApplyAuraType.ModCharm,
+                        WoWApplyAuraType.ModFear,
+                        WoWApplyAuraType.ModPossess);
+        }
+
+        public static bool IsCrowdControlledPlayer(WoWUnit unit)
+        {
+            Dictionary<string, WoWAura>.ValueCollection auras = unit.Auras.Values;
+
+            return unit.Rooted
+                || unit.Fleeing
+                || HasAuraWithEffect(unit,
+                        WoWApplyAuraType.ModConfuse,
+                        WoWApplyAuraType.ModCharm,
+                        WoWApplyAuraType.ModFear,
+                        WoWApplyAuraType.ModDecreaseSpeed,
+                        WoWApplyAuraType.ModPacify,
+                        WoWApplyAuraType.ModPacifySilence,
+                        WoWApplyAuraType.ModPossess,
+                        WoWApplyAuraType.ModRoot);
+        }
+        public static bool IsRooted(WoWUnit unit)
+        {
+            Dictionary<string, WoWAura>.ValueCollection auras = Me.Auras.Values;
+
+            return unit.Rooted;
+        }
+        public static bool MeIsRooted
+        {
+            get
+            {
+                Dictionary<string, WoWAura>.ValueCollection auras = Me.Auras.Values;
+                return HasAuraWithEffect(Me, WoWApplyAuraType.ModRoot);
+            }
+
+        }
+        // this one optimized for single applytype lookup
+
+        public static bool HasAuraWithEffect(WoWUnit unit, WoWApplyAuraType applyType)
+        {
+            return unit.Auras.Values.Any(a => a.Spell != null && a.Spell.SpellEffects.Any(se => applyType == se.AuraType));
+        }
+
+        public static bool HasAuraWithEffect(WoWUnit unit, params WoWApplyAuraType[] applyType)
+        {
+            var hashes = new HashSet<WoWApplyAuraType>(applyType);
+            return unit.Auras.Values.Any(a => a.Spell != null && a.Spell.SpellEffects.Any(se => hashes.Contains(se.AuraType)));
+        }
+        #endregion
+
+        #region check targets
+        private static Stopwatch fightTimer = new Stopwatch();
+        private static Stopwatch pullTimer = new Stopwatch();
+        public static bool MeIsmoving { get; set; }
+        public static void CheckMyCurrentTarget()
+        {
+            if (gotTarget && Me.Combat && pullTimer.IsRunning) { pullTimer.Reset(); }
+            if (gotTarget && (!fightTimer.IsRunning || Me.CurrentTarget.Guid != lastGuid) && Me.Combat)
+            {
+                fightTimer.Reset();
+                fightTimer.Start();
+                lastGuid = Me.CurrentTarget.Guid;
+            }
+            if (Battlegrounds.IsInsideBattleground)
+            {
+                if (Me.GotTarget &&
+                    Me.CurrentTarget.IsPet)
+                {
+                    Blacklist.Add(Me.CurrentTarget, BlacklistFlags.All, TimeSpan.FromDays(1));
+                    Me.ClearTarget();
+                }
+
+                if (Me.GotTarget && Me.CurrentTarget.Mounted)
+                {
+                    Blacklist.Add(Me.CurrentTarget, BlacklistFlags.All, TimeSpan.FromMinutes(1));
+                    Me.ClearTarget();
+                }
+            }
+
+            if (gotTarget && Me.CurrentTarget.Guid != lastGuid && Me.CurrentTarget.Distance <= 40)
+            {
+                fightTimer.Reset();
+                lastGuid = Me.CurrentTarget.Guid;
+                Logging.Write(Colors.CornflowerBlue, "Killing " + Me.CurrentTarget.Name + " at distance " + System.Math.Round(Me.CurrentTarget.Distance, 0).ToString() + ".");
+                pullTimer.Reset();
+                pullTimer.Start();
+
+            }
+            else
+            {
+                if (gotTarget && pullTimer.ElapsedMilliseconds > 20 * 1000)
+                {
+                    Logging.Write(Colors.CornflowerBlue, "Cannot pull " + Me.CurrentTarget.Name + " now.  Blacklist for 3 minutes.");
+                    Blacklist.Add(Me.CurrentTarget.Guid, BlacklistFlags.All, System.TimeSpan.FromMinutes(3));
+                }
+            }
+            if (Me.CurrentTarget != null
+                && lastGuid == Me.CurrentTarget.Guid
+                && !Me.CurrentTarget.IsPlayer
+                && fightTimer.ElapsedMilliseconds > 30 * 1000
+                && Me.CurrentTarget.HealthPercent > 95
+                && Me.CurrentTarget.Distance <= 40)
+            {
+                Logging.Write(Colors.CornflowerBlue, " This " + Me.CurrentTarget.Name + " is a bugged mob.  Blacklisting for 30 min.");
+
+                Blacklist.Add(Me.CurrentTarget.Guid, BlacklistFlags.All, TimeSpan.FromMinutes(30));
+                Me.ClearTarget();
+            }
+        }
+        #endregion
+
+        #region cleartarget - pulltimer
+        public static async Task<bool> CannotPull(WoWUnit unit, bool reqs)
+        {
+            if (!reqs) return false;
+
+            Logging.Write(Colors.Yellow, "Cannot Pull: " + unit + " Blacklisting for 30 min ");
+            Blacklist.Add(unit, BlacklistFlags.All, TimeSpan.FromMinutes(30.00));
+            pullTimer.Stop();
+            Me.ClearTarget();
+            await CommonCoroutines.SleepForLagDuration();
+            return true;
+        }
+        #endregion
+
+        #region cleartarget - fighttimer
+        public static async Task<bool> CannotContinueFight(WoWUnit unit, bool reqs)
+        {
+            if (!reqs) return false;
+
+            Logging.Write(Colors.Yellow, "Cannot Continue Fight: " + unit + " Blacklisting for 30 min ");
+            Blacklist.Add(unit, BlacklistFlags.All, TimeSpan.FromMinutes(30.00));
+            fightTimer.Stop();
+            Me.ClearTarget();
+            await CommonCoroutines.SleepForLagDuration();
+            return true;
+        }
+        #endregion
+
+        #region dispel
+        //name, rank, icon, count, dispelType
+        public static bool CanDispel(WoWUnit unit)
+        {
+            var s = Lua.GetReturnVal<string>(
+            "local index = 1 " +
+            "local canDispel " +
+            " local _, _, _, _, dispelType, _, expires, _, _, _, buffId = UnitBuff(\"target\", index) " +
+            "while expires do " +
+            " if (dispelType == \"Magic\") then " +
+            "canDispel = \"yes\" " +
+            "end " +
+            "index = index + 1 " +
+            "end, return canDispel", 0);
+            return s == "yes" ? true : false;
+        }
+        public static bool CanDispelMe(WoWUnit unit)
+        {
+            var s = Lua.GetReturnVal<string>(
+            "local index = 1 " +
+            "local canDispel " +
+            " local _, _, _, _, dispelType, _, expires, _, _, _, buffId = UnitBuff(\"player\", index) " +
+            "while expires do " +
+            " if (dispelType == \"Magic\") then " +
+            "canDispel = \"yes\" " +
+            "end " +
+            "index = index + 1 " +
+            "end, return canDispel", 0);
+            return s == "yes" ? true : false;
+        }
+        public static bool CanDispelMagic(WoWUnit unit)
+        {
+            bool dis = false;
+            foreach (var debuff in unit.Debuffs.Values)
+            {
+                // abort if target has one of the auras we should be sure to leave alone
+                //if (CleanseBlacklist.Instance.SpellList.Contains(debuff.SpellId))
+                //return DispelCapabilities.None;
+
+                switch (debuff.Spell.DispelType)
+                {
+                    case WoWDispelType.Magic:
+                        if (!debuff.IsHarmful)
+                        {
+                            dis = true;
+                        }
+                        break;
+                    //case WoWDispelType.Curse:
+                    //dis = true;
+                    //break;
+                    /*case WoWDispelType.Disease:
+                        ret |= DispelCapabilities.Disease;
+                        break;*/
+                    //case WoWDispelType.Poison:
+                    //dis = true;
+                    //break;
+                    default: dis = false;
+                        break;
+                }
+            }
+            return dis;
+        }
+        public static bool CanPurifyTarget(WoWPlayer unit)
+        {
+            bool dis = false;
+            foreach (var debuff in unit.Debuffs.Values)
+            {
+
+                switch (debuff.Spell.DispelType)
+                {
+                    case WoWDispelType.Magic:
+                        if (debuff.IsHarmful)
+                        {
+                            dis = true;
+                        }
+                        break;
+                    //case WoWDispelType.Curse:
+                    //dis = true;
+                    //break;
+                    case WoWDispelType.Disease:
+                        dis = true;
+                        break;
+                    //case WoWDispelType.Poison:
+                    //dis = true;
+                    //break;
+                    default: dis = false;
+                        break;
+                }
+            }
+            return dis;
         }
         #endregion
     }

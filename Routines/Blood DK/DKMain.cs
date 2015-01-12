@@ -2,6 +2,7 @@
 using Styx;
 using Styx.Common;
 using Styx.CommonBot;
+using Styx.CommonBot.Coroutines;
 using Styx.CommonBot.Routines;
 using Styx.Helpers;
 using Styx.Pathing;
@@ -20,325 +21,153 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using Action = Styx.TreeSharp.Action;
 
+using HKM = DK.DKHotkeyManagers;
+using EH = DK.EventHandlers;
+using CL = DK.CombatLogEventArgs;
+using P = DK.DKSettings;
 
-
-
-#region methods
-using Form1 = DeathKnight.GUI.Form1;
-using HKM = DeathKnight.Helpers.HotkeyManager;
-using S = DeathKnight.DKSpells.DKSpells;
-using CL = DeathKnight.Handlers.CombatLogEventArgs;
-using EH = DeathKnight.Handlers.EventHandlers;
-using L = DeathKnight.Helpers.Logs;
-using T = DeathKnight.Helpers.targets;
-using U = DeathKnight.Helpers.Unit;
-using UI = DeathKnight.Helpers.UseItems;
-using P = DeathKnight.DKSettings.DKPrefs;
-using M = DeathKnight.Helpers.Movement;
-using I = DeathKnight.Helpers.Interrupts;
-using R = DeathKnight.DKRotations.BloodRot;
-#endregion
-
-
-
-
-namespace DeathKnight
+namespace DK
 {
-    public class Main : CombatRoutine
+    public partial class DKMain : CombatRoutine
     {
-        public override string Name { get { return "DeathKnight by Pasterke"; } }
-        public override WoWClass Class { get { return Me.Specialization == WoWSpec.DeathKnightBlood ? WoWClass.DeathKnight : WoWClass.None; } }
+        public override string Name { get { return "DK [new] Routine by Pasterke"; } }
+        public override WoWClass Class { get { return WoWClass.DeathKnight; } }
+        public static LocalPlayer Me { get { return StyxWoW.Me; } }
 
-        public LocalPlayer Me { get { return StyxWoW.Me; } }
+        public override Composite CombatBehavior { get { return new ActionRunCoroutine(ctx => rotationSelector()); } }
+        public override Composite PreCombatBuffBehavior { get { return new ActionRunCoroutine(ctx => PreCombatBuffCoroutine()); } }
+        public override Composite CombatBuffBehavior { get { return new ActionRunCoroutine(ctx => CombatBuffCoroutine()); } }
+        public override Composite PullBehavior { get { return new ActionRunCoroutine(ctx => PullCoroutine()); } }
 
-        public override Composite CombatBehavior { get { return Combat(); } }
-        public override Composite PreCombatBuffBehavior { get { return PreCombatBuffs(); } }
-        public override Composite CombatBuffBehavior { get { return CombatBuffs(); } }
-        public override Composite PullBehavior { get { return Pull(); } }
-        public override Composite PullBuffBehavior { get { return PullBuffs(); } }
-
-        public string usedBot { get { return BotManager.Current.Name.ToUpper(); } }
-
-        private static bool IsInGame
+        public static WoWGuid lastGuid;
+        public static bool checkInCombat { get; set; }
+        public static DateTime nextCheckTimer;
+        public static DateTime combatTimer;
+        public static DateTime moveBackTimer;
+        public static void setNextCombatTimer()
         {
-            get { return StyxWoW.IsInGame; }
+            combatTimer = DateTime.Now + new TimeSpan(0, 0, 0, 0, 30 * 1000);
         }
-        public Stopwatch mountTimer = new Stopwatch();
+        public static void setNextCheckTimer()
+        {
+            nextCheckTimer = DateTime.Now + new TimeSpan(0, 0, 0, 30, 0);
+        }
+        public bool checkTarget { get; set; }
+
         public override bool WantButton { get { return true; } }
         public override void OnButtonPress()
         {
-            Form1 ConfigForm = new Form1();
-            ConfigForm.ShowDialog();
+            new DKGui().ShowDialog();
         }
+
         public override void Initialize()
         {
-            Logging.Write("\r\n");
-            Logging.Write("-------------------------------------");
-            Logging.Write("-- Hello {0}                       --", Me.Name);
-            Logging.Write("--        Thanks for using         --");
-            Logging.Write("-- The DeathKnight Combat Routine  --");
-            Logging.Write("--          by Pasterke            --");
-            Logging.Write("-------------------------------------" + "\r\n");
+            Logging.Write("\r\n" + "-- Hello {0}", Me.Name);
+            Logging.Write("-- Thanks for using");
+            Logging.Write("-- The DK Combat Routine");
+            Logging.Write("-- by Pasterke" + "\r\n");
             HKM.registerHotKeys();
-
             Lua.Events.AttachEvent("UI_ERROR_MESSAGE", CL.CombatLogErrorHandler);
             EH.AttachCombatLogEvent();
-
-            if (Me.Specialization != WoWSpec.DeathKnightBlood)
+            //svnUpdates.CheckForUpdate();
+            if (!P.myPrefs.MsgBoxShown)
             {
-                MessageBox.Show("Sorry, Only Blood DeathKnight Supported" 
-                    + "\r\n", "Wrong Specialization");
+                MessageBox.Show("Only Blood DeathKnight Supported !\r\nThis Message won't be shown again.", "Spec Warning");
+                P.myPrefs.MsgBoxShown = true;
+                P.myPrefs.Save();
             }
-            
         }
+
         public override void ShutDown()
         {
             HKM.removeHotkeys();
             EH.DetachCombatLogEvent();
             Lua.Events.DetachEvent("UI_ERROR_MESSAGE", CL.CombatLogErrorHandler);
         }
-
-        #region Pulse
+        public static List<WoWUnit> partyMembers = new List<WoWUnit>();
         public override void Pulse()
         {
-            if (!StyxWoW.IsInWorld || Me == null || !Me.IsValid || Me.IsGhost)
+            try
             {
+                if (Me.IsDead
+                    && AutoBot)
+                {
+                    Lua.DoString(string.Format("RunMacroText(\"{0}\")", "/script RepopMe()"));
+                }
                 return;
             }
-            if (Me.IsDead
-                && AutoBot)
-            {
-                Lua.DoString(string.Format("RunMacroText(\"{0}\")", "/script RepopMe()"));
-            }
+            catch (Exception e) { Logging.Write(Colors.Red, "Pulse: " + e); }
+            return;
         }
-        #endregion
         public override bool NeedRest
         {
             get
             {
-                return CanBuff
-                    && !HKM.pauseRoutineOn
-                    && !HKM.manualOn
-                    && !Me.GroupInfo.IsInParty
-                    && Me.HealthPercent <= P.myPrefs.FoodHPOoC;
-            }
-        }
-
-        public override void Rest()
-        {
-            if (CanBuff
-                && !Me.IsSwimming
-                && Me.HealthPercent <= P.myPrefs.FoodHPOoC)
-            {
-                Styx.CommonBot.Rest.Feed();
-            }
-
-        }
-
-        Composite PreCombatBuffs()
-        {
-            return new PrioritySelector(
-                new Decorator(ret => CanBuff 
-                    && !Me.HasAura(S.CRYSTAL_OF_INSANITY_BUFF)
-                    && S.NotHaveFlaskBuff
-                    && P.myPrefs.FlaskCrystal
-                    && UI.HasItem(crystal), UI.UseItem(crystal)),
-                new Decorator(ret => CanBuff
-                    && !Me.HasAura(S.CRYSTAL_OF_INSANITY_BUFF)
-                    && S.NotHaveFlaskBuff
-                    && S.NotHaveAlchemyBuff
-                    && P.myPrefs.FlaskAlchemy
-                    && UI.HasItem(AlchemyFlask), UI.UseItem(AlchemyFlask)),
-                S.castHornOfWinter(),
-                S.castPresence()
-                );
-        }
-
-        Composite PullBuffs()
-        {
-            return new PrioritySelector(
-
-                );
-        }
-
-        Composite Pull()
-        {
-            return new PrioritySelector(
-                new Decorator(ret => ((Me.Mounted && !AutoBot) || HKM.pauseRoutineOn || HKM.manualOn), Hold()),
-                new Decorator(ret => (Me.CurrentTarget == null || (Me.GotTarget && Me.CurrentTarget.IsDead)) && M.AllowTargeting, T.FindTarget()),
-                new Decorator(ret => Me.GotTarget
-                    && M.AllowTargeting
-                    && !Me.CurrentTarget.IsWithinMeleeRange
-                    && T.MeleeAddCount >= 1, T.FindMeleeAttackers()),
-                new Decorator(ret => Me.CurrentTarget != null
-                    && AutoBot
-                    && Me.CurrentTarget.IsFriendly, new Action(ret => { Me.ClearTarget(); return RunStatus.Failure; })),
-                new Decorator(ret => Me.GotTarget && M.AllowMovement && !Me.CurrentTarget.IsWithinMeleeRange, M.CreateMovement()),
-                new Decorator(ret => Me.GotTarget && M.AllowMovement && Me.CurrentTarget.IsWithinMeleeRange, M.CreateStopMovement()),
-                new Decorator(ret => Me.GotTarget && M.AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget), M.FacingTarget()),
-                S.castDeathGrip(),
-                S.castDarkCommand(),
-                S.castDeathCoilPull(),
-                S.castDeathIcyTouchPull()
-                );
-        }
-        Composite CombatBuffs()
-        {
-            return new PrioritySelector(
-                new Decorator(ret => CanBuff
-                    && S.NotHaveFlaskBuff
-                    && canUseRaidFlask
-                    && UI.HasItem(myRaidFlask), UI.UseItem(myRaidFlask)),
-                new Decorator(ret => CanBuff
-                    && !Me.HasAura(S.CRYSTAL_OF_INSANITY_BUFF)
-                    && S.NotHaveFlaskBuff
-                    && P.myPrefs.FlaskCrystal
-                    && UI.HasItem(crystal), UI.UseItem(crystal)),
-                new Decorator(ret => CanBuff
-                    && !Me.HasAura(S.CRYSTAL_OF_INSANITY_BUFF)
-                    && S.NotHaveFlaskBuff
-                    && S.NotHaveAlchemyBuff
-                    && P.myPrefs.FlaskAlchemy
-                    && UI.HasItem(AlchemyFlask), UI.UseItem(AlchemyFlask)),
-                new Decorator(ret => CanBuff && Me.HealthPercent <= P.myPrefs.PercentHealthstone && UI.HasItem(healthstone), UI.UseItem(healthstone)),
-                new Decorator(ret => CanBuff && Me.HealthPercent <= P.myPrefs.PercentTrinket1HP, UI.useTrinket1()),
-                new Decorator(ret => CanBuff && Me.HealthPercent <= P.myPrefs.PercentTrinket2HP, UI.useTrinket2()),
-                S.castIceboundFortitude(),
-                S.castRuneTap(),
-                S.castVampiricBlood(),
-                S.castGiftOfTheNaaru(),
-                S.castHornOfWinter(),
-                S.castPresence(),
-                S.castBoneShield(),
-                S.castConversion(),
-                S.cancelConversion()
-                );
-        }
-        Composite Combat()
-        {
-            return new PrioritySelector(
-                new Decorator(ret => ((Me.Mounted && !AutoBot) || HKM.pauseRoutineOn || HKM.manualOn), Hold()),
-                new Decorator(ret => (Me.CurrentTarget == null || (Me.GotTarget && Me.CurrentTarget.IsDead)) && M.AllowTargeting, T.FindTarget()),
-                new Decorator(ret => Me.GotTarget
-                    && M.AllowTargeting
-                    && !Me.CurrentTarget.IsWithinMeleeRange
-                    && T.MeleeAddCount >= 1, T.FindMeleeAttackers()),
-                new Decorator(ret => Me.CurrentTarget != null
-                    && AutoBot
-                    && Me.CurrentTarget.IsFriendly, new Action(ret => { Me.ClearTarget(); return RunStatus.Failure; })),
-                new Decorator(ret => Me.GotTarget && M.AllowMovement && !Me.CurrentTarget.IsWithinMeleeRange, M.CreateMovement()),
-                new Decorator(ret => Me.GotTarget && M.AllowMovement && Me.CurrentTarget.IsWithinMeleeRange, M.CreateStopMovement()),
-                new Decorator(ret => Me.GotTarget && M.AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget), M.FacingTarget()),
-                new Decorator(ret => S.gotTarget && Me.CurrentTarget.IsWithinMeleeRange && !Me.IsAutoAttacking, AutoAttack()),
-                new Decorator(ret => S.gotTarget && P.myPrefs.Trinket1 == 3 && HKM.cooldownsOn && Me.CurrentTarget.IsWithinMeleeRange, UI.useTrinket1()),
-                new Decorator(ret => S.gotTarget && P.myPrefs.Trinket2 == 3 && HKM.cooldownsOn && Me.CurrentTarget.IsWithinMeleeRange, UI.useTrinket2()),
-                new Decorator(ret => S.gotTarget && P.myPrefs.Gloves == 2 && HKM.cooldownsOn && Me.CurrentTarget.IsWithinMeleeRange, UI.useGloves()),
-                S.castEmpowerRuneWeapon(),
-                S.castDancingRuneWeapon(),
-                S.castRacial(),
-                S.castWarStomp(),
-                S.castMindFreeze(),
-                S.castAxphyxiate(),
-                S.castStrangulate(),
-                S.castBloodTap(),
-                S.castOutbreak(),
-                S.castIcyTouch(),
-                S.castPlagueStrike(),
-                S.castDeathAndDecay(),
-                S.castRemorselesWinter(),
-                S.castBloodBoil(),
-                S.castSoulReaper(),
-                S.castDeathStrike(),
-                S.castDeathCoil()
-                );
-        }
-
-
-
-
-
-
-
-        #region autoattack
-        Composite AutoAttack()
-        {
-            return new Action(ret =>
-            {
-                Lua.DoString("StartAttack()");
-                return RunStatus.Failure;
-            });
-        }
-        #endregion
-
-        #region AutoBot
-        bool AutoBot
-        {
-            get
-            {
-                return usedBot.Contains("QUEST") || usedBot.Contains("GRIND") || usedBot.Contains("GATHER") || usedBot.Contains("ANGLER") || usedBot.Contains("ARCHEO");
-
-            }
-        }
-        #endregion
-
-        #region can buff
-        public bool CanBuff
-        {
-            get
-            {
-                return !Me.Mounted && !Me.IsFlying && !Me.OnTaxi && !Me.IsDead && !Me.IsGhost && !Me.IsCasting;
-            }
-        }
-        #endregion
-
-        #region Hold
-        Composite Hold()
-        {
-            return new Action(ret =>
-            {
-                return;
-            });
-        }
-        #endregion
-
-        #region use flasks, healthstone and others
-        public uint myRaidFlask = (uint)P.myPrefs.RaidFlaskKind;
-        public uint crystal = 86569;
-        public uint RaidFlaskAgility = 76084;
-        public uint RaidFlaskStamina = 76084;
-        public uint RaidFlaskStrenght = 76084;
-        public uint RaidFlaskSpirit = 76084;
-        public uint RaidFlaskIntellect = 76084;
-        public uint AlchemyFlask = 75525;
-        public uint healthstone = 5512;
-        public uint CRYSTAL_OF_INSANITY_BUFF = 127230;
-
-        public bool canUseRaidFlask
-        {
-            get
-            {
-                if (P.myPrefs.RaidFlask == 1) 
-                { 
-                    return false; 
-                }
-                if (P.myPrefs.RaidFlask == 2 && (Me.CurrentMap.IsRaid || Me.GroupInfo.IsInRaid))
-                { 
-                    return true; 
-                }
-                if (P.myPrefs.RaidFlask == 3 && (Me.CurrentMap.IsRaid || Me.GroupInfo.IsInRaid) && !Me.GroupInfo.IsInLfgParty) 
-                { 
-                    return true; 
-                }
-                if (P.myPrefs.RaidFlask == 4 && (Me.CurrentMap.IsDungeon || Me.CurrentMap.IsInstance))
-                { 
-                    return true; 
-                }
+                if (Me.HealthPercent <= 50 && !Me.IsSwimming && Canbuff) return true;
                 return false;
             }
         }
+        public override void Rest()
+        {
+            base.Rest();
+            if (Me.HealthPercent <= 50 && !Me.IsSwimming && Canbuff && AutoBot) { Styx.CommonBot.Rest.Feed(); }
+        }
 
+        private static async Task<bool> PreCombatBuffCoroutine()
+        {
+            if (Me.IsCasting || HKM.pauseRoutineOn || HKM.manualOn) return false;
+            if (await UseItem(CRYSTAL_OF_ORALIUS_ITEM, CrystalOfOraliusConditions && Canbuff)) return true;
+            if (await UseItem(CRYSTAL_OF_INSANITY_ITEM, CrystalOfInsanityConditions && Canbuff)) return true;
+            if (await UseItem(ALCHEMYFLASK_ITEM, AlchemyFlaskConditions && Canbuff)) return true;
+            return false;
+        }
 
+        private static async Task<bool> CombatBuffCoroutine()
+        {
+            if (Me.IsCasting || HKM.pauseRoutineOn || HKM.manualOn) return false;
+            if (await UseItem(CRYSTAL_OF_ORALIUS_ITEM, CrystalOfOraliusConditions && Canbuff)) return true;
+            if (await UseItem(CRYSTAL_OF_INSANITY_ITEM, CrystalOfInsanityConditions && Canbuff)) return true;
+            if (await UseItem(ALCHEMYFLASK_ITEM, AlchemyFlaskConditions && Canbuff)) return true;
+            if (await UseItem(HEALTHSTONE_ITEM, Me.HealthPercent <= 45 && Canbuff)) return true;
+            return false;
+        }
+
+        private static DateTime pullingTimer;
+        private static async Task<bool> PullCoroutine()
+        {
+            if (Me.IsCasting || HKM.pauseRoutineOn || HKM.manualOn) return false;
+            if (!pullTimer.IsRunning && AutoBot)
+            {
+                pullTimer.Restart();
+                lastGuid = Me.CurrentTarget.Guid;
+                Logging.Write(Colors.CornflowerBlue, "Starting PullTimer");
+            }
+            if (await CannotPull(Me.CurrentTarget, Me.CurrentTarget != null
+                && pullTimer.ElapsedMilliseconds >= 30 * 1000
+                && lastGuid == Me.CurrentTarget.Guid)) return true;
+            if (await clearTarget(Me.CurrentTarget == null && AllowTargeting && (Me.CurrentTarget.IsDead || Me.CurrentTarget.IsFriendly) && !Me.CurrentTarget.Lootable)) return true;
+            if (await MoveToTarget(Me.CurrentTarget != null && AllowMovement && Me.CurrentTarget.Distance > 4.5f)) return true;
+            if (await StopMovement(Me.CurrentTarget != null && AllowMovement && Me.CurrentTarget.Distance <= 4.5f && Me.IsMoving)) return true;
+            if (await FaceMyTarget(Me.CurrentTarget != null && AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget) && !Me.IsMoving)) return true;
+
+            if (await CastPull(DARK_COMMAND, gotTarget && Range30 && !spellOnCooldown(DARK_COMMAND) && DateTime.Now >= pullingTimer)) return true;
+            if (await CastPull(DEATH_GRIP, gotTarget && Range30 && !spellOnCooldown(DEATH_GRIP) && DateTime.Now >= pullingTimer)) return true;
+            if (await CastPull(OUTBREAK, gotTarget && Range30 && !spellOnCooldown(OUTBREAK) && DateTime.Now >= pullingTimer)) return true;
+            if (await CastPull(DEATH_COIL, gotTarget && Range30 && !spellOnCooldown(DEATH_COIL) && DateTime.Now >= pullingTimer)) return true;
+            if (await CastPull(ICY_TOUCH, gotTarget && Range30 && !spellOnCooldown(ICY_TOUCH) && DateTime.Now >= pullingTimer)) return true;
+            if (await CastPull(PLAGUE_STRIKE, gotTarget && Me.CurrentTarget.IsWithinMeleeRange && DateTime.Now >= pullingTimer)) return true;
+
+            return false;
+        }
+
+        #region rest
+        private static async Task<bool> EatFood(bool req)
+        {
+            if (!req) return false;
+            Styx.CommonBot.Rest.Feed();
+            await CommonCoroutines.SleepForLagDuration();
+            return Canbuff;
+        }
         #endregion
-
     }
 }

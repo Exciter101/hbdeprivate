@@ -1,184 +1,17 @@
-﻿using System;
+﻿using Styx;
+using Styx.WoWInternals;
+using Styx.WoWInternals.WoWObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Styx;
-using Styx.CommonBot;
-using Styx.CommonBot.Routines;
-using Styx.Helpers;
-using Styx.TreeSharp;
-using Styx.WoWInternals;
-using Styx.WoWInternals.WoWObjects;
-using Action = Styx.TreeSharp.Action;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
-using Styx.Pathing;
-using Styx.Common;
-using System.Windows.Media;
-using Styx.CommonBot.Frames;
-using System.Diagnostics;
 
-#region methods
-using Form1 = DeathKnight.GUI.Form1;
-using HKM = DeathKnight.Helpers.HotkeyManager;
-using S = DeathKnight.DKSpells.DKSpells;
-using CL = DeathKnight.Handlers.CombatLogEventArgs;
-using EH = DeathKnight.Handlers.EventHandlers;
-using L = DeathKnight.Helpers.Logs;
-using T = DeathKnight.Helpers.targets;
-using U = DeathKnight.Helpers.Unit;
-using UI = DeathKnight.Helpers.UseItems;
-using P = DeathKnight.DKSettings.DKPrefs;
-using M = DeathKnight.Helpers.Movement;
-using I = DeathKnight.Helpers.Interrupts;
-#endregion
-
-namespace DeathKnight.Helpers
+namespace DK
 {
-    class targets
+    public class Targets
     {
-        private static LocalPlayer Me { get { return StyxWoW.Me; } }
-
-        #region FindTarget
-        private static IEnumerable<WoWUnit> NearByEnemies() { return ObjectManager.GetObjectsOfTypeFast<WoWUnit>(); }
-        private static List<WoWUnit> enemyCountRange = new List<WoWUnit>();
-        private static List<WoWUnit> enemyCountMelee = new List<WoWUnit>();
-        private static List<WoWUnit> enemyMeleeAttackers = new List<WoWUnit>();
-
-        public static void addEnemiesRange()
-        {
-            enemyCountRange.Clear();
-            foreach (var u in NearByEnemies())
-            {
-                if (u.DistanceSqr > 40 * 40)
-                    continue;
-                if (!U.ValidUnit(u))
-                    continue;
-                if(Me.CurrentTarget.Name.Contains("Dummy"))
-                    continue;
-                if (u.Combat && (!u.IsTargetingMeOrPet || !u.IsTargetingMyPartyMember || !u.IsTargetingMyRaidMember))
-                    continue;
-                if (!u.Combat)
-                    continue;
-                if (Blacklist.Contains(u, BlacklistFlags.All))
-                    continue;
-                enemyCountRange.Add(u);
-            }
-        }
-        public static void addEnemiesMelee()
-        {
-            enemyCountMelee.Clear();
-            foreach (var u in NearByEnemies())
-            {
-                if (u.DistanceSqr > 10 * 10)
-                    continue;
-                if (!U.ValidUnit(u))
-                    continue;
-                enemyCountMelee.Add(u);
-            }
-        }
-        public static void addMeleeAttackers()
-        {
-            enemyMeleeAttackers.Clear();
-            foreach (var u in NearByEnemies())
-            {
-                if (u.Guid == Me.CurrentTargetGuid)
-                    continue;
-                if (u.DistanceSqr > 10 * 10)
-                    continue;
-                if (!U.ValidUnit(u))
-                    continue;
-                if (!u.Combat)
-                    continue;
-                if (u.Combat && (!u.IsTargetingMeOrPet || !u.IsTargetingMyPartyMember || !u.IsTargetingMyRaidMember))
-                    continue;
-                enemyMeleeAttackers.Add(u);
-            }
-        }
-        public static Composite FindTarget()
-        {
-            return
-                new Action(ret =>
-                {
-                    
-                    addEnemiesRange();
-                    WoWUnit myTarget = enemyCountRange
-                        .OrderBy(u => u.Distance)
-                        .FirstOrDefault();
-
-                    if (myTarget != null)
-                    {
-                        myTarget.Target();
-                        Logging.Write(Colors.PaleGreen, "Found new Target " + myTarget.Name);
-                    }
-                    return RunStatus.Failure;
-                });
-        }
-        public static Composite FindMeleeTarget()
-        {
-            return
-                new Action(ret =>
-                {
-                    addEnemiesMelee();
-                    WoWUnit myTarget = enemyCountMelee
-                        .OrderBy(u => u.Distance)
-                        .FirstOrDefault();
-
-                    if (myTarget != null)
-                    {
-                        myTarget.Target();
-                        Logging.Write(Colors.PaleGreen, "Found new Target " + myTarget.Name);
-                    }
-                    return RunStatus.Failure;
-                });
-        }
-        public static Composite FindMeleeAttackers()
-        {
-            return
-                new Action(ret =>
-                {
-                    addMeleeAttackers();
-                    WoWUnit myTarget = enemyMeleeAttackers
-                        .OrderBy(u => u.Distance)
-                        .FirstOrDefault();
-
-                    if (myTarget != null)
-                    {
-                        myTarget.Target();
-                        Logging.Write(Colors.PaleGreen, "Found new Target " + myTarget.Name);
-                    }
-                    return RunStatus.Failure;
-                });
-        }
-        #endregion
-
-        #region addCount
-        public static int MeleeAddCount 
-        {
-            get
-            {
-                addEnemiesMelee();
-                return enemyCountMelee.Count();
-            }
-        }
-        public static int RangeAddCount
-        {
-            get
-            {
-                addEnemiesRange();
-                return enemyCountRange.Count();
-            }
-        }
-        public static int MeleeAttackers
-        {
-            get
-            {
-                addMeleeAttackers();
-                return enemyMeleeAttackers.Count();
-            }
-        }
-        #endregion
+        public static LocalPlayer Me { get { return StyxWoW.Me; } }
 
         #region Kind of target
         public static bool CanAttackCurrentTarget
@@ -209,7 +42,7 @@ namespace DeathKnight.Helpers
             }
             return false;
         }
-        public static bool IsWoWBoss(WoWUnit mytarget)
+        public static bool IsWoWBoss(WoWUnit myTarget)
         {
             if (StyxWoW.Me.CurrentTarget != null)
             {
@@ -217,11 +50,12 @@ namespace DeathKnight.Helpers
                 {
                     return true;
                 }
-                else if (IsBoss(mytarget))
+                else if (myTarget.IsBoss) return true;
+                else if (IsBoss(myTarget))
                 {
                     return true;
                 }
-                else if (Me.CurrentTarget.MaxHealth > Me.MaxHealth * 4
+                else if (myTarget.MaxHealth > Me.MaxHealth * 3
                     && !Me.CurrentMap.IsDungeon
                     && !Me.CurrentMap.IsRaid
                     && !Me.CurrentMap.IsInstance
@@ -230,11 +64,11 @@ namespace DeathKnight.Helpers
                 {
                     return true;
                 }
-                else if (Me.CurrentTarget.Name.Contains("Dummy"))
+                else if (myTarget.Name.Contains("Dummy"))
                 {
                     return true;
                 }
-                else if (EnemyPlayer(Me.CurrentTarget))
+                else if (EnemyPlayer(myTarget))
                 {
                     return true;
                 }
@@ -388,7 +222,7 @@ namespace DeathKnight.Helpers
                 8127, //Antu'sul
                 7271, //Witch Doctor Zum'rah
                 7274, //Sandfury Executioner
-                7275, //Shadowpriest Sezz'ziz
+                7275, //ShadowDK Sezz'ziz
                 7796, //Nekrum Gutchewer
                 7797, //Ruuzlu
                 7267, //Chief Ukorz Sandscalp
@@ -482,7 +316,7 @@ namespace DeathKnight.Helpers
                 9038, //Seeth'rel
                 9036, //Vile'rel
                 9938, //Magmus
-                10076, //High Priestess of Thaurissan
+                10076, //High DKess of Thaurissan
                 8929, //Princess Moira Bronzebeard
                 9019, //Emperor Dagran Thaurissan
 
@@ -604,13 +438,13 @@ namespace DeathKnight.Helpers
                 10363, //General Drakkisath
 
                 //Zul'Gurub
-                14517, //High Priestess Jeklik
-                14507, //High Priest Venoxis
-                14510, //High Priestess Mar'li
+                14517, //High DKess Jeklik
+                14507, //High DK Venoxis
+                14510, //High DKess Mar'li
                 11382, //Bloodlord Mandokir
                 15114, //Gahz'ranka
-                14509, //High Priest Thekal
-                14515, //High Priestess Arlokk
+                14509, //High DK Thekal
+                14515, //High DKess Arlokk
                 11380, //Jin'do the Hexxer
                 14834, //Hakkar
                 15082, //Gri'lek
@@ -798,7 +632,7 @@ namespace DeathKnight.Helpers
                 //Magisters' Terrace
                 24723, //Selin Fireheart
                 24744, //Vexallus
-                24560, //Priestess Delrissa
+                24560, //DKess Delrissa
                 24664, //Kael'thas Sunstrider
 
                 //Karazhan
@@ -1122,8 +956,8 @@ namespace DeathKnight.Helpers
                 34468, //Noozle Whizzlestick <Mage>
                 34465, //Velanaa <Paladin>
                 34471, //Baelnor Lightbearer <Paladin>
-                34466, //Anthar Forgemender <Priest>
-                34473, //Brienna Nightfell <Priest>
+                34466, //Anthar Forgemender <DK>
+                34473, //Brienna Nightfell <DK>
                 34472, //Irieth Shadowstep <Rogue>
                 34470, //Saamul <Shaman>
                 34463, //Shaabad <Shaman>
@@ -1137,8 +971,8 @@ namespace DeathKnight.Helpers
                 34449, //Ginselle Blightslinger <Mage>
                 34445, //Liandra Suncaller <Paladin>
                 34456, //Malithas Brightblade <Paladin>
-                34447, //Caiphus the Stern <Priest>
-                34441, //Vivienne Blackwhisper <Priest>
+                34447, //Caiphus the Stern <DK>
+                34441, //Vivienne Blackwhisper <DK>
                 34454, //Maz'dinah <Rogue>
                 34444, //Thrakgar   <Shaman>
                 34455, //Broln Stouthorn <Shaman>
@@ -1204,7 +1038,7 @@ namespace DeathKnight.Helpers
                 43438, //Corborus
                 43214, //Slabhide
                 42188, //Ozruk
-                42333, //High Priestess Azil
+                42333, //High DKess Azil
 
                 //The Vortex Pinnacle
                 43878, //Grand Vizier Ertan
@@ -1299,10 +1133,10 @@ namespace DeathKnight.Helpers
                 18402, //Warmaul Champion
 
                 // Cata Zul'gurub
-                52155, //High Priest Venoxis
+                52155, //High DK Venoxis
                 52151, //Bloodlord Mandokir
                 52271, //Hazza'ra
-                52059, //High Priestess Kilnara
+                52059, //High DKess Kilnara
                 52053, //Zanzil
                 52148, //Jin'do the Godbreaker
 
@@ -1361,7 +1195,7 @@ namespace DeathKnight.Helpers
                 58826, // Zao Sunseeker <Champion of the Five Suns>
                 59051, // Strife
                 59726, // Peril
-                56732, // Liu Flameheart <Priestess of the Jade Serpent>
+                56732, // Liu Flameheart <DKess of the Jade Serpent>
                 56762, // Yu'lon <The Jade Serpent>
                 56439, // Sha of Doubt
                        
@@ -1427,7 +1261,7 @@ namespace DeathKnight.Helpers
             58826, // Zao Sunseeker <Champion of the Five Suns>
             59051, // Strife
             59726, // Peril
-            56732, // Liu Flameheart <Priestess of the Jade Serpent>
+            56732, // Liu Flameheart <DKess of the Jade Serpent>
             56762, // Yu'lon <The Jade Serpent>
             56439, // Sha of Doubt
                        
@@ -1646,5 +1480,6 @@ namespace DeathKnight.Helpers
         {
             return _bosses.Contains(unit.Entry);
         }
+
     }
 }
