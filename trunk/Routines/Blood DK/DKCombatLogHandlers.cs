@@ -1,40 +1,17 @@
-﻿#region Revision Info
-
-// This file is part of Singular - A community driven Honorbuddy CC
-// $Author: apoc $
-// $Date: 2012-09-05 16:16:37 +0000 (Mi, 05 Sep 2012) $
-// $HeadURL: https://subversion.assembla.com/svn/singular_v3/trunk/Singular/Utilities/CombatLog.cs $
-// $LastChangedBy: apoc $
-// $LastChangedDate: 2012-09-05 16:16:37 +0000 (Mi, 05 Sep 2012) $
-// $LastChangedRevision: 653 $
-// $Revision: 653 $
-
-#endregion
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Styx.WoWInternals;
 using Styx.WoWInternals.WoWObjects;
 using Styx.Common;
 using System.Windows.Media;
+using Styx;
+using Styx.CommonBot;
+using System;
 
-#region methods
-using Form1 = DeathKnight.GUI.Form1;
-using HKM = DeathKnight.Helpers.HotkeyManager;
-using S = DeathKnight.DKSpells.DKSpells;
-using CL = DeathKnight.Handlers.CombatLogEventArgs;
-using EH = DeathKnight.Handlers.EventHandlers;
-using L = DeathKnight.Helpers.Logs;
-using T = DeathKnight.Helpers.targets;
-using U = DeathKnight.Helpers.Unit;
-using UI = DeathKnight.Helpers.UseItems;
-using P = DeathKnight.DKSettings.DKPrefs;
-using M = DeathKnight.Helpers.Movement;
-using I = DeathKnight.Helpers.Interrupts;
-#endregion
 
-namespace DeathKnight.Handlers
+
+namespace DK
 {
     internal class CombatLogEventArgs : LuaEventArgs
     {
@@ -57,6 +34,13 @@ namespace DeathKnight.Handlers
                     IsNotInLineOfSight = true;
                 }
                 else { IsNotInLineOfSight = false; }
+                if (errorLog == "YOUR TARGET IS DEAD" && StyxWoW.Me.CurrentTarget != null)
+                {
+                    
+                    Blacklist.Add(StyxWoW.Me.CurrentTarget, BlacklistFlags.All, TimeSpan.FromMinutes(3));
+                    StyxWoW.Me.ClearTarget();
+                }
+
             }
         }
         #endregion

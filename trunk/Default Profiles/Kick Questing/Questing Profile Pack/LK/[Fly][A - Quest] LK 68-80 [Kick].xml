@@ -3092,19 +3092,19 @@
 				<CustomBehavior File="ForcedDismount" />
 				<PickUp QuestName="The Emissary" QuestId="11626" GiverName="Veehja" GiverId="25450" />
 			</If>
-			<If Condition="HasQuest(11626) &amp;&amp; !IsQuestCompleted(11626)">
+			<While Condition="HasQuest(11626) &amp;&amp; !IsQuestCompleted(11626)">
 				<CustomBehavior File="FlyTo" DestName="The Emissary" X="1542.075" Y="5688.641" Z="2.430351" />
 				<CustomBehavior File="ForcedDismount" />
 				<CustomBehavior File="MyCTM" X="1574.487" Y="5593.496" Z="-3.269196" />
 				<CustomBehavior File="MyCTM" X="1526.592" Y="5574.666" Z="-2.2967691" />
 				<CustomBehavior File="MyCTM" X="1494.106" Y="5583.749" Z="-64.5859" />
-				<CustomBehavior File="InteractWith" QuestId="11626" MobId="26452" InteractByUsingItemId="35850"
-                                Range="20" CollectionDistance="50" X="1494.106" Y="5583.749" Z="-64.5859" />
+				<CustomBehavior File="InteractWith" QuestId="11626" MobId="26452" InteractByUsingItemId="35850" MobState="Alive" 
+                                Range="20" CollectionDistance="50" X="1494.106" Y="5583.749" Z="-64.5859" Nav="CTM" />
 				<CustomBehavior File="WaitTimer" WaitTime="3000"
                                 GoalText="Waiting for quest to complete {TimeRemaining}" />
 				<CustomBehavior File="MyCTM" X="1532.314" Y="5552.445" Z="-1.841549" />
 				<CustomBehavior File="MyCTM" X="1802.628" Y="5795.152" Z="-0.01941342" />
-			</If>
+			</While>
 			<If Condition="HasQuest(11626) &amp;&amp; IsQuestCompleted(11626)">
 				<CustomBehavior File="FlyTo" DestName="Turnin: The Emissary" X="2003.32" Y="5853.793" Z="36.1144" />
 				<CustomBehavior File="ForcedDismount" />
@@ -7900,17 +7900,17 @@
 				<PickUp QuestName="Conversing With the Depths" QuestId="12032" GiverName="Elder Mana'loa" GiverId="188419" />
 			</If>
 			<While Condition="HasQuest(12032) &amp;&amp; !IsQuestCompleted(12032)">
-				<CustomBehavior File="FlyTo" DestName="The Pearl of the Depths" X="2457.471" Y="1722.686" Z="59.88806" />
-
-				<CustomBehavior File="InteractWith" QuestId="12032" MobId="188422" Range="8"
-                                PreInteractMountStrategy="Dismount" NonCompeteDistance="0" X="2457.471" Y="1722.686"
-                                Z="59.88806" />
-				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for event {TimeRemaining}" />
+				<CustomBehavior File="FlyTo" DestName="Pearl of the Depths" X="2457.292" Y="1723.715" Z="76.43291" />
+				<CustomBehavior File="InteractWith" QuestId="12032" MobId="188422" NonCompeteDistance="0" PreInteractMountStrategy="DismountOrCancelShapeshift" 
+                                 Range="8" X="2456.661" Y="1719.555" Z="59.93533" />
 				<MoveTo X="2455.553" Y="1717.125" Z="59.9511" />
 				<CustomBehavior File="WaitTimer" WaitTime="55000" GoalText="Waiting for event {TimeRemaining}" />
+				<DisableBehavior Name="Combat" />
 				<CustomBehavior File="Message" Text="Geronimo!" LogColor="Orange" />
+				<MoveTo X="2455.553" Y="1717.125" Z="59.9511" />
 				<CustomBehavior File="MyCTM" X="2434.546" Y="1709.331" Z="-1.577231" />
 				<MoveTo X="2438.683" Y="1654.85" Z="0.3224503" />
+				<EnableBehavior Name="Combat" />
 			</While>
 			<If Condition="HasQuest(12032) &amp;&amp; IsQuestCompleted(12032)">
 				<CustomBehavior File="FlyTo" DestName="Turnin: Conversing With the Depths" X="2734.914" Y="887.6769" Z="6.624989" />

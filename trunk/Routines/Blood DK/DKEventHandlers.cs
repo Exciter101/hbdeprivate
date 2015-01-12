@@ -11,24 +11,11 @@ using System.Collections.Generic;
 using System.Windows.Media;
 
 
-#region methods
-using Form1 = DeathKnight.GUI.Form1;
-using HKM = DeathKnight.Helpers.HotkeyManager;
-using S = DeathKnight.DKSpells.DKSpells;
-using CL = DeathKnight.Handlers.CombatLogEventArgs;
-using EH = DeathKnight.Handlers.EventHandlers;
-using L = DeathKnight.Helpers.Logs;
-using T = DeathKnight.Helpers.targets;
-using U = DeathKnight.Helpers.Unit;
-using UI = DeathKnight.Helpers.UseItems;
-using P = DeathKnight.DKSettings.DKPrefs;
-using M = DeathKnight.Helpers.Movement;
-using I = DeathKnight.Helpers.Interrupts;
-#endregion
+
 
 #endregion
 
-namespace DeathKnight.Handlers
+namespace DK
 {
     public static class EventHandlers
     {
