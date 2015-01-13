@@ -51,7 +51,7 @@ namespace DK
             DEATH_GRIP = "Death Grip",
             BLOOD_PRESENCE = "Blood Presence",
             UNHOLY_PRESENCE = "Unholy Presence",
-            FROSR_PRESENCE = "Frost Presence",
+            FROST_PRESENCE = "Frost Presence",
             ANTI_MAGIC_SHELL = "Anti-Magic Shell",
             ICEBOUND_FORTITUDE = "Icebound Fortitude",
             DANCING_RUNE_WEAPON ="Dancing Rune Weapon",
@@ -74,7 +74,7 @@ namespace DK
             MIND_FREEZE = "Mind Freeze",
             CHAINS_OF_ICE = "Chains of Ice",
             ASPHYXIATE = "Asphyxiate",
-
+            RAISE_ALLY = "Raise Ally",
             EINDE = "The End";
 
 
@@ -104,6 +104,132 @@ namespace DK
         #endregion
 
         #region spellConditions
+        public static IEnumerable<WoWPartyMember> WoWPartyMembers { get { return StyxWoW.Me.GroupInfo.RaidMembers.Union(StyxWoW.Me.GroupInfo.PartyMembers).Distinct(); } }
+        public static WoWPlayer playerToRes = null;
+
+        public static bool canCastDeathStrike
+        {
+            get
+            {
+                if (DeathRuneCount >= 2
+                || (UnholyRuneCount >= 1 && FrostRuneCount >= 1)
+                || (DeathRuneCount == 1 && UnholyRuneCount >= 1)
+                || (DeathRuneCount == 1 && FrostRuneCount >= 1)) return true;
+                return false;
+            }
+        }
+        public static bool needResPeople
+        {
+            get
+            {
+                if (Me.RunicPowerPercent < 30) return false;
+                if (spellOnCooldown(RAISE_ALLY)) return false;
+                if (HKM.resTanks)
+                {
+                    WoWPlayer target = WoWPartyMembers.Where(p => p.HasRole(WoWPartyMember.GroupRole.Tank)
+                        && p.ToPlayer().IsDead
+                        && p.ToPlayer().Location.Distance(Me.Location) <= 40).Select(p => p.ToPlayer()).FirstOrDefault();
+                    if (target != null) playerToRes = target; return true;
+                }
+                if (HKM.resHealers)
+                {
+                    WoWPlayer target = WoWPartyMembers.Where(p => p.HasRole(WoWPartyMember.GroupRole.Healer)
+                        && p.ToPlayer().IsDead
+                        && p.ToPlayer().Location.Distance(Me.Location) <= 40).Select(p => p.ToPlayer()).FirstOrDefault();
+                    if (target != null) playerToRes = target; return true;
+                }
+                if (HKM.resDPS)
+                {
+                    WoWPlayer target = WoWPartyMembers.Where(p => p.HasRole(WoWPartyMember.GroupRole.Damage)
+                        && p.ToPlayer().IsDead
+                        && p.ToPlayer().Location.Distance(Me.Location) <= 40).Select(p => p.ToPlayer()).FirstOrDefault();
+                    if (target != null) playerToRes = target; return true;
+                }
+                return false;
+            }
+        }
+
+        public static bool needDeathrunesForDeathAndDecay
+        {
+            get
+            {
+                if (P.myPrefs.UseDeathAndDecayRunes && DeathRuneCount > P.myPrefs.DeathAndDecayRunes) return true;
+                return false;
+            }
+        }
+        public static bool needDeathrunesForDefile
+        {
+            get
+            {
+                if (P.myPrefs.UseDefileRunes && DeathRuneCount > P.myPrefs.DefileRunes) return true;
+                return false;
+            }
+        }
+        public static bool needDeathAndDecay
+        {
+            get
+            {
+                if (SpellManager.HasSpell(DEFILE)) return false;
+                if (spellOnCooldown(DEATH_AND_DECAY)) return false;
+                if (addCountMelee < P.myPrefs.AddsDeathAndDecay) return false;
+                if (UnholyRuneCount >= 1) return true;
+                if (needDeathrunesForDeathAndDecay) return true;
+                return !spellOnCooldown(DEATH_AND_DECAY) ? true : false;
+            }
+        }
+        public static bool needDefile
+        {
+            get
+            {
+                if (!SpellManager.HasSpell(DEFILE)) return false;
+                if (spellOnCooldown(DEFILE)) return false;
+                if (addCountMelee < P.myPrefs.AddsDefile) return false;
+                if (UnholyRuneCount >= 1) return true;
+                if (needDeathrunesForDefile) return true;
+                return !spellOnCooldown(DEFILE) ? true : false;
+            }
+        }
+        public static bool needPresence
+        {
+            get
+            {
+                if (checkPresence == "none") return false;
+                PRESENCE = checkPresence;
+                return true;
+            }
+        }
+        public static string PRESENCE { get; set; }
+        public static string checkPresence
+        {
+            get
+            {
+                if (P.myPrefs.Presence == 1 && !Me.HasAura(BLOOD_PRESENCE)) return BLOOD_PRESENCE;
+                if (P.myPrefs.Presence == 2 && !Me.HasAura(FROST_PRESENCE)) return FROST_PRESENCE;
+                if (P.myPrefs.Presence == 3 && !Me.HasAura(UNHOLY_PRESENCE)) return UNHOLY_PRESENCE;
+                return "none";
+            }
+        }
+        public static bool needSoulReaper
+        {
+            get
+            {
+                if (Me.CurrentTarget.HealthPercent > 35) return false;
+                if (spellOnCooldown(SOUL_REAPER)) return false;
+                if (Me.CurrentTarget.HealthPercent < 35 && Me.CurrentTarget.IsWithinMeleeRange) return true;
+                return false;
+            }
+        }
+        public static bool needBloodBoil
+        {
+            get
+            {
+                if (Me.CurrentTarget.Location.Distance(Me.Location) > 5f) return false;
+                if (BloodRuneCount >= 1 && Me.CurrentTarget.HealthPercent >= 35 && Me.CurrentTarget.IsWithinMeleeRange) return true;
+                if (IsOverlayed(BLOOD_BOIL_INT) && Me.CurrentTarget.IsWithinMeleeRange) return true;
+                return false;
+            }
+        }
+
         public static bool needEmpoweredRuneWeapon
         {
             get

@@ -30,7 +30,7 @@ namespace DK
 {
     public partial class DKMain : CombatRoutine
     {
-        public override string Name { get { return "DK [new] Routine by Pasterke"; } }
+        public override string Name { get { return "DK Routine by Pasterke"; } }
         public override WoWClass Class { get { return WoWClass.DeathKnight; } }
         public static LocalPlayer Me { get { return StyxWoW.Me; } }
 
@@ -119,6 +119,7 @@ namespace DK
             if (await UseItem(CRYSTAL_OF_ORALIUS_ITEM, CrystalOfOraliusConditions && Canbuff)) return true;
             if (await UseItem(CRYSTAL_OF_INSANITY_ITEM, CrystalOfInsanityConditions && Canbuff)) return true;
             if (await UseItem(ALCHEMYFLASK_ITEM, AlchemyFlaskConditions && Canbuff)) return true;
+            if (await CastBuff(PRESENCE, P.myPrefs.Presence != 0 && needPresence && Canbuff)) return true;
             return false;
         }
 
@@ -129,6 +130,7 @@ namespace DK
             if (await UseItem(CRYSTAL_OF_INSANITY_ITEM, CrystalOfInsanityConditions && Canbuff)) return true;
             if (await UseItem(ALCHEMYFLASK_ITEM, AlchemyFlaskConditions && Canbuff)) return true;
             if (await UseItem(HEALTHSTONE_ITEM, Me.HealthPercent <= 45 && Canbuff)) return true;
+            if (await CastBuff(PRESENCE, P.myPrefs.Presence != 0 && needPresence && Canbuff)) return true;
             return false;
         }
 

@@ -99,6 +99,14 @@ namespace DK
         [Setting, DefaultValue("Alt")]
         public string ModifkeyPlayManual { get; set; }
 
+        [Setting, DefaultValue("Shift")]
+        public string ModifkeyResTanks { get; set; }
+
+        [Setting, DefaultValue("Shift")]
+        public string ModifkeyResHealers { get; set; }
+
+        [Setting, DefaultValue("Shift")]
+        public string ModifkeyResDPS { get; set; }
 
         [Setting, DefaultValue(KeyPress.None)]
         public Keys KeyStopAoe { get; set; }
@@ -114,6 +122,15 @@ namespace DK
 
         [Setting, DefaultValue(KeyPress.None)]
         public Keys KeySwitchBearform { get; set; }
+
+        [Setting, DefaultValue(KeyPress.None)]
+        public Keys KeyResTanks { get; set; }
+
+        [Setting, DefaultValue(KeyPress.None)]
+        public Keys KeyResHealers { get; set; }
+
+        [Setting, DefaultValue(KeyPress.None)]
+        public Keys KeyResDps { get; set; }
 
         [Setting, DefaultValue(true)]
         public bool PrintRaidstyleMsg { get; set; }
@@ -208,7 +225,26 @@ namespace DK
         [Setting, DefaultValue(false)]
         public bool MsgBoxShown { get; set; }
 
-        
+        [Setting, DefaultValue(1)]
+        public int Presence { get; set; }
+
+        [Setting, DefaultValue(2)]
+        public int AddsDeathAndDecay { get; set; }
+
+        [Setting, DefaultValue(2)]
+        public int DeathAndDecayRunes { get; set; }
+
+        [Setting, DefaultValue(false)]
+        public bool UseDeathAndDecayRunes { get; set; }
+
+        [Setting, DefaultValue(2)]
+        public int AddsDefile { get; set; }
+
+        [Setting, DefaultValue(2)]
+        public int DefileRunes { get; set; }
+
+        [Setting, DefaultValue(false)]
+        public bool UseDefileRunes { get; set; }
 
     }
 }
