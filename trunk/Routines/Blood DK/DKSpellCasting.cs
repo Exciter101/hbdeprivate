@@ -92,7 +92,17 @@ namespace DK
             await CommonCoroutines.SleepForLagDuration();
             return true;
         }
-
+        public static async Task<bool> CastRes(string Spell, bool reqs, WoWPlayer myTarget)
+        {
+            if (!SpellManager.HasSpell(Spell)) return false;
+            if (!reqs) return false;
+            if (spellOnCooldown(Spell)) return false;
+            if (!SpellManager.CanCast(Spell, Me.CurrentTarget)) return false;
+            if (!SpellManager.Cast(Spell, Me.CurrentTarget)) return false;
+            Logging.Write(Colors.Yellow, "Casting: " + Spell + " on: " + myTarget.SafeName);
+            await CommonCoroutines.SleepForLagDuration();
+            return true;
+        }
         public static async Task<bool> CastPull(string Spell, bool reqs)
         {
             if (!SpellManager.HasSpell(Spell)) return false;
