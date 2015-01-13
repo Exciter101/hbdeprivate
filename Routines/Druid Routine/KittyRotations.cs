@@ -316,30 +316,33 @@ namespace Kitty
             if (await findTargets(Me.CurrentTarget == null && AllowTargeting && FindTargetsCount >= 1)) return true;
             if (await findMeleeAttackers(gotTarget && AllowTargeting && Me.CurrentTarget.Distance > 40 && MeleeAttackersCount >= 1)) return true;
             if (await clearTarget(Me.CurrentTarget != null && AllowTargeting && (Me.CurrentTarget.IsDead || Me.CurrentTarget.IsFriendly))) return true;
-            if (await MoveToTarget(gotTarget && AllowMovement && Me.CurrentTarget.Distance > 4.5f)) return true;
-            if (await StopMovement(gotTarget && AllowMovement && Me.CurrentTarget.Distance <= 4.5f)) return true;
+            if (await MoveToTarget(gotTarget && AllowMovement && Me.CurrentTarget.Distance > 40f)) return true;
+            if (await StopMovement(gotTarget && AllowMovement && Me.CurrentTarget.Distance <= 40f)) return true;
             if (await FaceMyTarget(gotTarget && AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget) && !Me.IsMoving)) return true;
-            //if (await CastHeal(REGROWTH, regrowthProcPlayer, regrowthProcPlayer != null && IsOverlayed(REGROWTH_INT))) return true;
-            //if (await CastHeal(NATURES_CURE, dispelTargets, dispelTargets != null)) return true;
+            if (await CastHeal(REGROWTH, _regrowthProcPlayer, _regrowthProcPlayer != null && IsOverlayed(REGROWTH_INT))) return true;
+            if (await CastHeal(REGROWTH, _regrowthPlayerCritical, _regrowthPlayerCritical != null)) return true;
+            if (await CastHeal(NATURES_CURE, dispelTargets, dispelTargets != null)) return true;
             if (await CastBuff(BARKSKIN, !spellOnCooldown(BARKSKIN) && Me.HealthPercent <= P.myPrefs.PercentBarkskin)) return true;
-            //if (await CastHeal(IRONBARK, LifebloomPlayer, LifebloomPlayer != null && !spellOnCooldown(IRONBARK) && LifebloomPlayer.ToPlayer().HealthPercent <= 45)) return true;
-            //if (await CastBuff(NATURES_VIGIL, gotTarget && !spellOnCooldown(NATURES_VIGIL) && naturesVigil)) return true;
-            //if (await CastHeal(LIFEBLOOM, LifebloomPlayer, LifebloomPlayer != null && !buffExists(LIFEBLOOM, LifebloomPlayer.ToPlayer()))) return true;
-            //if (await CastMushroom(WILD_MUSHROOM, mushRoomPlayer, mushRoomPlayer != null && needMushroom && !Me.IsMoving)) return true;
-            //if (await CastHeal(SWIFTMEND, SwiftmendPlayer, SwiftmendPlayer != null)) return true;
+            if (await CastHeal(IRONBARK, _ironbarkPlayer, _ironbarkPlayer != null && !spellOnCooldown(IRONBARK))) return true;
+            if (await CastBuff(NATURES_VIGIL, gotTarget && !spellOnCooldown(NATURES_VIGIL) && needNaturesVigil)) return true;
+            if (await CastHeal(LIFEBLOOM, _lifebloomPlayer, _lifebloomPlayer != null && !buffExists(LIFEBLOOM, _lifebloomPlayer))) return true;
+            if (await CastMushroom(WILD_MUSHROOM, _mushroomPlayer, _mushroomPlayer != null && needMushroom && !Me.IsMoving)) return true;
+            if (await CastHeal(SWIFTMEND, _swiftmendPlayer, _swiftmendPlayer != null)) return true;
             if (await NeedTrinket1(UseTrinket1 && nextTrinketTimeAllowed <= DateTime.Now && !P.myPrefs.Trinket1Use)) return true;
             if (await NeedTrinket2(UseTrinket2 && nextTrinketTimeAllowed <= DateTime.Now && !P.myPrefs.Trinket2Use)) return true;
             if (await CastGroundSpellTrinket(1, gotTarget && P.myPrefs.Trinket1Use && nextTrinketTimeAllowed <= DateTime.Now)) return true;
             if (await CastGroundSpellTrinket(2, gotTarget && P.myPrefs.Trinket2Use && nextTrinketTimeAllowed <= DateTime.Now)) return true;
-            //if (await CastHeal(FORCE_OF_NATURE, fonTarget, fonTarget != null && (fonTarget.Guid != lastFonGuid || DateTime.Now > healfonTimer))) return true;
-            //if (await CastHeal(WILD_GROWTH, WildGrowthPlayer, WildGrowthPlayer != null && !spellOnCooldown(WILD_GROWTH))) return true;
-            //if (await CastHeal(REGROWTH, RegrowthPlayer, RegrowthPlayer != null)) return true;
-            //if (await CastHeal(HEALING_TOUCH, HealingTouchPlayer, HealingTouchPlayer != null)) return true;
-            //if (await CastHeal(REJUVENATION, RejuvenationPlayer, RejuvenationPlayer != null)) return true;
-            //if (await CastHeal(GENESIS, GenesisPlayers, GenesisPlayers != null)) return true;
+            if (await CastHeal(FORCE_OF_NATURE, _forceofnaturePlayer, _forceofnaturePlayer != null && (_forceofnaturePlayer.Guid != lastFonGuid || DateTime.Now > healfonTimer))) return true;
+            if (await CastHeal(WILD_GROWTH, _wildgrowthPlayer, _wildgrowthPlayer != null && !spellOnCooldown(WILD_GROWTH))) return true;
+            if (await CastHeal(REGROWTH, _regrowthPlayer, _regrowthPlayer != null)) return true;
+            if (await CastHeal(HEALING_TOUCH, _healingtouchPlayer, _healingtouchPlayer != null)) return true;
+            if (await CastHeal(GERMINATION, _germinationPlayer, _germinationPlayer != null)) return true;
+            if (await CastHeal(REJUVENATION, _rejuvenationPlayer, _rejuvenationPlayer != null)) return true;
+            if (await CastHeal(WRATH, _wrathTarget, _wrathTarget != null && Me.IsSafelyFacing(_wrathTarget))) return true;
+            if (await CastHeal(GENESIS, _genesisPlayer, _genesisPlayer != null)) return true;
             if (await CastDmgSpell(MOONFIRE, gotTarget && !debuffExists(MOONFIRE, Me.CurrentTarget) && partyCount == 0, Me.CurrentTarget)) return true;
             if (await CastDmgSpell(WRATH, gotTarget && partyCount == 0, Me.CurrentTarget)) return true;
-            if (await NeedHeals(true)) return true;
+
             await CommonCoroutines.SleepForLagDuration();
             return false;
         }
@@ -348,38 +351,30 @@ namespace Kitty
 
         #region healing variables
 
-        #region check healthcount
-        public static int checkHealthCount(int minHealth)
-        {
-            var results = newPartyMembers.Where(p => p != null
-                && p.HealthPercent <= minHealth
-                && p.IsAlive
-                && p.InLineOfSight
-                && p.InLineOfSpellSight
-                && p.Distance <= 40).OrderBy(p => p.HealthPercent).ToList();
-            return results.Count();
-        }
+        #region fill party
+
+        #region proving grounds
+        public static bool InProvingGrounds { get { return Me.MinimapZoneText == "Proving Grounds"; } }
         #endregion
 
-        #region fill party
-        //public static IEnumerable<WoWUnit> partyMembers;
-        public static IEnumerable<WoWUnit> newPartyMembers;
         public static WoWUnit healTarget;
         public static WoWUnit aoeTarget;
-
-        public static void updatePartyMembers()
+        public static IEnumerable<WoWUnit> getPartyMembers()
         {
-            if (Me.MinimapZoneText == "Proving Grounds")
+            if (InProvingGrounds)
             {
-                newPartyMembers = new List<WoWUnit>();
-                newPartyMembers = Group.PulsePartyMembersPG();
-                ObjectManager.Update();
+                return Group.PulsePartyMembersPG().ToList();
             }
             else
             {
-                newPartyMembers = new List<WoWUnit>();
-                newPartyMembers = Group.PulsePartyMembers();
-                ObjectManager.Update();
+                return StyxWoW.Me.GroupInfo.RaidMembers.Union(StyxWoW.Me.GroupInfo.PartyMembers).Select(p => p.ToPlayer()).Distinct();
+            }
+        }
+        public static IEnumerable<WoWUnit> newPartyMembers
+        {
+            get
+            {
+                return getPartyMembers();
             }
         }
         #endregion
@@ -402,6 +397,47 @@ namespace Kitty
         }
         #endregion
 
+        #region _wrathTarget
+        public static WoWUnit _wrathTarget
+        {
+            get
+            {
+                if (!SpellManager.HasSpell(DREAM_OF_CENARIUS)) { return null; }
+
+                if (partyCount == 0) return null;
+
+                var myTanks = Tanks().Where(p => p != null && p.InLineOfSight && p.InLineOfSpellSight && p.Distance <= 40).FirstOrDefault();
+
+                if (myTanks != null && myTanks.IsDead && gotTarget) return Me.CurrentTarget;
+
+                return myTanks != null ? myTanks.CurrentTarget : null;
+            }
+        }
+        public static bool IsAttackingTank(WoWUnit unit)
+        {
+            return unit.Combat;
+        }
+        #endregion
+
+        #region ironbark
+        public static WoWUnit _ironbarkPlayer
+        {
+            get
+            {
+                if (partyCount == 0 && Me.HealthPercent <= 45) return Me;
+
+                var result = Tanks().Where(p => p != null
+                && p.IsAlive
+                && p.InLineOfSight
+                && p.InLineOfSpellSight
+                && p.HealthPercent <= 45
+                && p.Distance <= 40);
+
+                return result != null ? result.FirstOrDefault() : null;
+            }
+        }
+        #endregion
+
         #region natures vigil
         public static int naturesVigilCount
         {
@@ -413,6 +449,20 @@ namespace Kitty
             }
         }
         public static int naturesVigilHealth = 85;
+        public static bool needNaturesVigil
+        {
+            get
+            {
+                var result = newPartyMembers.Where(p => p != null
+                && p.IsAlive
+                && p.InLineOfSight
+                && p.InLineOfSpellSight
+                && p.HealthPercent <= naturesVigilHealth
+                && p.Distance <= 40);
+
+                return result.Count() >= naturesVigilCount ? true : false;
+            }
+        }
         #endregion
 
         #region wild growth
@@ -432,6 +482,19 @@ namespace Kitty
                 if (partyCount > 5 && partyCount <= 10) return P.myPrefs.WildGrowth510;
                 if (partyCount > 10) return P.myPrefs.WildGrowth50;
                 return P.myPrefs.WildGrowth5;
+            }
+        }
+        public static WoWUnit _wildgrowthPlayer
+        {
+            get
+            {
+                var result = newPartyMembers.Where(p => p != null
+                    && p.IsAlive
+                    && p.InLineOfSight
+                    && p.InLineOfSpellSight
+                    && p.Distance <= 40
+                    && p.HealthPercent <= Wildgrowthhealth);
+                return result.Count() >= WildGrowthCount ? result.FirstOrDefault() : null;
             }
         }
         #endregion
@@ -455,6 +518,19 @@ namespace Kitty
                 return P.myPrefs.Tranquility5;
             }
         }
+        public static WoWUnit _tranquilityPlayer
+        {
+            get
+            {
+                var result = newPartyMembers.Where(p => p != null
+                    && p.IsAlive
+                    && p.InLineOfSight
+                    && p.InLineOfSpellSight
+                    && p.Distance <= 40
+                    && p.HealthPercent <= TranquilityHealth);
+                return result.Count() >= TranquilityCount ? result.FirstOrDefault() : null;
+            }
+        }
         #endregion
 
         #region rejuvenation
@@ -465,6 +541,48 @@ namespace Kitty
                 if (partyCount > 5 && partyCount <= 10) return P.myPrefs.Rejuvenation510;
                 if (partyCount > 10) return P.myPrefs.Rejuvenation50;
                 return P.myPrefs.Rejuvenation5;
+            }
+        }
+        public static WoWUnit _germinationPlayer 
+        {
+            get
+            {
+                if (partyCount == 0 && buffExists(REJUVENATION, Me) && !buffExists(GERMINATION, Me) && Me.HealthPercent <= RejuvenationHealth) return Me;
+                var results = newPartyMembers.Where(p => p != null
+                        && p.IsAlive
+                        && p.InLineOfSight
+                        && p.InLineOfSpellSight
+                        && buffExists(REJUVENATION, p)
+                        && !buffExists(GERMINATION, p)
+                        && p.Distance <= 40
+                        && p.HealthPercent <= RejuvenationHealth).FirstOrDefault();
+
+                return results != null ? results : null;
+            }
+        }
+        public static WoWUnit _rejuvenationPlayer
+        {
+            get
+            {
+                if(partyCount == 0 && !buffExists(REJUVENATION, Me) && Me.HealthPercent <= RejuvenationHealth) return Me;
+
+                WoWUnit target = null;
+
+                if (SpellManager.HasSpell(RAMPANT_GROWTH) && !buffExists(REJUVENATION, Me))
+                {
+                    return Me;
+                }
+                else
+                {
+                    target = newPartyMembers.Where(p => p != null
+                        && p.IsAlive
+                        && p.InLineOfSight
+                        && p.InLineOfSpellSight
+                        && !buffExists(REJUVENATION, p)
+                        && p.Distance <= 40
+                        && p.HealthPercent <= RejuvenationHealth).FirstOrDefault();
+                }
+                return target != null ? target : null;
             }
         }
         #endregion
@@ -479,6 +597,47 @@ namespace Kitty
                 return P.myPrefs.Regrowth5;
             }
         }
+        public static WoWUnit _regrowthPlayerCritical
+        {
+            get
+            {
+                if (partyCount == 0 && Me.HealthPercent <= RegrowthHealth) return Me;
+                var result = newPartyMembers.Where(p => p != null
+                    && p.IsAlive
+                    && p.InLineOfSight
+                    && p.InLineOfSpellSight
+                    && p.Distance <= 40
+                    && p.HealthPercent <= 40);
+                return result != null ? result.FirstOrDefault() : null;
+            }
+        }
+        public static WoWUnit _regrowthProcPlayer
+        {
+            get
+            {
+                if (partyCount == 0 && (Me.HealthPercent <= RegrowthHealth || IsOverlayed(REGROWTH_INT))) return Me;
+                var result = newPartyMembers.Where(p => p != null
+                    && p.IsAlive
+                    && p.InLineOfSight
+                    && p.InLineOfSpellSight
+                    && p.Distance <= 40).OrderBy(p => p.HealthPercent).FirstOrDefault();
+                return result != null ? result : null;
+            }
+        }
+        public static WoWUnit _regrowthPlayer
+        {
+            get
+            {
+                if (partyCount == 0 && Me.HealthPercent <= RegrowthHealth) return Me;
+                var result = newPartyMembers.Where(p => p != null
+                    && p.IsAlive
+                    && p.InLineOfSight
+                    && p.InLineOfSpellSight
+                    && p.Distance <= 40
+                    && p.HealthPercent <= RegrowthHealth);
+                return result != null ? result.FirstOrDefault() : null;
+            }
+        }
         #endregion
 
         #region healing touch
@@ -489,6 +648,20 @@ namespace Kitty
                 if (partyCount > 5 && partyCount <= 10) return P.myPrefs.HealingTouch510;
                 if (partyCount > 10) return P.myPrefs.HealingTouch50;
                 return P.myPrefs.HealingTouch5;
+            }
+        }
+        public static WoWUnit _healingtouchPlayer
+        {
+            get
+            {
+                if (partyCount == 0 && Me.HealthPercent <= HaelingTouchHealth) return Me;
+                var result = newPartyMembers.Where(p => p != null
+                    && p.IsAlive
+                    && p.InLineOfSight
+                    && p.InLineOfSpellSight
+                    && p.Distance <= 40
+                    && p.HealthPercent <= HaelingTouchHealth);
+                return result != null ? result.FirstOrDefault() : null;
             }
         }
         #endregion
@@ -512,20 +685,46 @@ namespace Kitty
                 return P.myPrefs.Genesis5;
             }
         }
-        #endregion
-
-        #region swiftmend
-        public static WoWUnit swiftMendTarget
+        public static WoWUnit _genesisPlayer
         {
             get
             {
-                var target = newPartyMembers.Where(p => p != null
-                       && p.IsAlive
-                       && p.InLineOfSight
-                       && p.InLineOfSpellSight
-                       && p.Distance <= 40
-                       && (buffExists(REJUVENATION, p) || buffExists(REGROWTH, p))
-                       && p.HealthPercent <= SwiftmendHealth).OrderBy(p => p.HealthPercent).FirstOrDefault();
+                var result = newPartyMembers.Where(p => p != null
+                    && p.IsAlive
+                    && p.InLineOfSight
+                    && p.InLineOfSpellSight
+                    && p.Distance <= 40
+                    && p.HealthPercent <= GenesisHealth);
+                return result.Count() >= GenesisCount ? result.FirstOrDefault() : null;
+            }
+        }
+        #endregion
+
+        #region swiftmend
+        public static WoWUnit _swiftmendPlayer
+        {
+            get
+            {
+                WoWUnit target = null;
+                if (SpellManager.HasSpell(RAMPANT_GROWTH) && buffExists(REJUVENATION, Me))
+                {
+                    target = newPartyMembers.Where(p => p != null
+                           && p.IsAlive
+                           && p.InLineOfSight
+                           && p.InLineOfSpellSight
+                           && p.Distance <= 40
+                           && p.HealthPercent <= SwiftmendHealth).OrderBy(p => p.HealthPercent).FirstOrDefault();
+                }
+                else
+                {
+                    target = newPartyMembers.Where(p => p != null
+                           && p.IsAlive
+                           && p.InLineOfSight
+                           && p.InLineOfSpellSight
+                           && p.Distance <= 40
+                           && (buffExists(REJUVENATION, p) || buffExists(REGROWTH, p))
+                           && p.HealthPercent <= SwiftmendHealth).OrderBy(p => p.HealthPercent).FirstOrDefault();
+                }
                 return target != null ? target : null;
             }
         }
@@ -552,6 +751,19 @@ namespace Kitty
                 return P.myPrefs.ForceOfNature5;
             }
         }
+        public static WoWUnit _forceofnaturePlayer
+        {
+            get
+            {
+                var result = newPartyMembers.Where(p => p != null
+                    && p.IsAlive
+                    && p.InLineOfSight
+                    && p.InLineOfSpellSight
+                    && p.Distance <= 40
+                    && p.HealthPercent <= fonHealth);
+                return result != null ? result.FirstOrDefault() : null;
+            }
+        }
         #endregion
 
         #region mushroom
@@ -560,6 +772,7 @@ namespace Kitty
         public static DateTime mushroomTimer;
         public static WoWPoint mushroomLocation { get; set; }
         private static WoWUnit mushroomTarget { get; set; }
+
         public static bool needMushroom
         {
             get
@@ -570,14 +783,27 @@ namespace Kitty
                 return false;
             }
         }
-
-        #endregion
-
-        #region lifebloom
-        public static WoWUnit lifebloomPlayer
+        public static WoWUnit _mushroomPlayer
         {
             get
             {
+                var result = newPartyMembers.Where(p => p != null
+                    && p.IsAlive
+                    && p.InLineOfSight
+                    && p.InLineOfSpellSight
+                    && p.Distance <= 40
+                    && p.HealthPercent <= mushroomHealth);
+                return result.Count() >= 3 ? result.FirstOrDefault() : null;
+            }
+        }
+        #endregion
+
+        #region lifebloom
+        public static WoWUnit _lifebloomPlayer
+        {
+            get
+            {
+                if (partyCount == 0 && !buffExists(LIFEBLOOM, Me)) return Me;
                 if (Me.MinimapZoneText == "Proving Grounds") return newPartyMembers.Where(p => p.Name == "Oto the Protector").FirstOrDefault(); //.Select(p => p.ToUnit()).FirstOrDefault();
                 var results = Tanks().Where(p => p != null 
                     && p.IsAlive 
@@ -585,7 +811,7 @@ namespace Kitty
                     && !buffExists(LIFEBLOOM, p) 
                     && p.InLineOfSight 
                     && p.InLineOfSpellSight).OrderBy(p => p.Distance).ToList();
-                return results.Count() > 0 ? results.FirstOrDefault() : Me;
+                return results.Count() > 0 ? results.FirstOrDefault() : null;
 
             }
         }
@@ -674,6 +900,10 @@ namespace Kitty
         {
             if (!SpellManager.HasSpell(Spell)) return false;
             if (!reqs) return false;
+            if (myTarget.IsDead) return false;
+            if (spellOnCooldown(Spell)) return false;
+            if (!myTarget.InLineOfSpellSight && !myTarget.InLineOfSight) return false;
+            if (myTarget.Distance > 40) return false;
             if (Spell == FORCE_OF_NATURE) { healfonTimer = DateTime.Now + new TimeSpan(0, 0, 0, 30, 0); lastFonGuid = myTarget.Guid; }
             if (Spell == HEALING_TOUCH && !spellOnCooldown(NATURES_SWIFTNESS)) { SpellManager.Cast(NATURES_SWIFTNESS); }
             if (!SpellManager.CanCast(Spell, myTarget)) return false;
@@ -686,233 +916,34 @@ namespace Kitty
         {
             if (!SpellManager.HasSpell(Spell)) return false;
             if (!reqs) return false;
+            if (myTarget.IsDead) return false;
+            if (spellOnCooldown(Spell)) return false;
+            if (!myTarget.InLineOfSpellSight && !myTarget.InLineOfSight) return false;
+            if (myTarget.Distance > 40) return false;
             if (!SpellManager.CanCast(Spell, myTarget)) return false;
             if (!SpellManager.Cast(Spell, myTarget)) return false;
             Logging.Write(Colors.Yellow, "Casting: " + Spell + " on: " + myTarget.SafeName);
             await CommonCoroutines.SleepForLagDuration();
             return true;
         }
-        public static async Task<bool> CastMushroom(string Spell, WoWPlayer myTarget, bool reqs)
+        public static async Task<bool> CastMushroom(string Spell, WoWUnit myTarget, bool reqs)
         {
             if (!SpellManager.HasSpell(Spell)) return false;
             if (!reqs) return false;
+            if (myTarget.IsDead) return false;
+            if (spellOnCooldown(Spell)) return false;
+            if (!myTarget.InLineOfSpellSight && !myTarget.InLineOfSight) return false;
+            if (myTarget.Distance > 40) return false;
             if (!SpellManager.CanCast(Spell, myTarget)) return false;
             if (!SpellManager.Cast(Spell, myTarget)) return false;
             Logging.Write(Colors.Yellow, "Casting: " + Spell + " on: " + myTarget.SafeName);
+            mushroomTimer = DateTime.Now + new TimeSpan(0, 0, 0, 30, 0);
             mushroomLocation = myTarget.Location;
             mushroomTarget = myTarget;
             await CommonCoroutines.SleepForLagDuration();
             return true;
         }
-        public static async Task<bool> needGroupUdate(bool reqs)
-        {
-            if (!reqs) return false;
-            updatePartyMembers();
-            _init = false;
-            Logging.Write(Colors.DarkTurquoise, "[Init] Current PartySize: " + partyCount);
-            ObjectManager.Update();
-            await CommonCoroutines.SleepForLagDuration();
-            return true;
-        }
-        public static async Task<bool> PartyCountChanged(bool reqs)
-        {
-            if (!reqs) return false;
-            updatePartyMembers();
-            Logging.Write(Colors.DarkTurquoise, "[Party] Current PartySize: " + partyCount);
-            lastPTSize = partyCount;
-            ObjectManager.Update();
-            await CommonCoroutines.SleepForLagDuration();
-            return true;
-        }
-        private static async Task<bool> NeedHeals(bool reqs)
-        {
-            if (!reqs) return false;
-            ObjectManager.Update();
-
-            if (partyCount > 0)
-            {
-                ObjectManager.Update();
-                int countWildGrowth = checkHealthCount(Wildgrowthhealth);
-                int countTranquility = checkHealthCount(TranquilityHealth);
-                int countNaturesVigil = checkHealthCount(naturesVigilHealth);
-                int countGenesis = checkHealthCount(GenesisHealth);
-                int countMushroom = checkHealthCount(mushroomHealth);
-
-                healTarget = newPartyMembers.Where(p => p != null
-                    && p.IsAlive
-                    && p.InLineOfSight
-                    && p.InLineOfSpellSight
-                    && p.Distance <= 40).OrderBy(p => p.HealthPercent).FirstOrDefault();
-
-                if (lifebloomPlayer != null
-                    && !buffExists(LIFEBLOOM, lifebloomPlayer)
-                    && canCast
-                    && SpellManager.CanCast(LIFEBLOOM))
-                {
-                    SpellManager.Cast(LIFEBLOOM, lifebloomPlayer);
-                }
-                if (countNaturesVigil >= naturesVigilCount
-                    && canCast
-                    && !spellOnCooldown(NATURES_VIGIL)
-                    && SpellManager.CanCast(NATURES_VIGIL))
-                {
-                    SpellManager.Cast(NATURES_VIGIL);
-                }
-                if (healTarget != null && healTarget.HealthPercent <= RejuvenationHealth
-                    && !buffExists(REJUVENATION, healTarget)
-                    && canCast
-                    && SpellManager.CanCast(REJUVENATION))
-                {
-                    SpellManager.Cast(REJUVENATION, healTarget);
-                }
-                if (countGenesis >= GenesisCount
-                    && canCast
-                    && SpellManager.CanCast(GENESIS))
-                {
-                    aoeTarget = newPartyMembers.Where(p => p != null
-                        && p.IsAlive
-                        && p.InLineOfSight
-                        && p.InLineOfSpellSight
-                        && p.Distance <= 40
-                        && buffExists(REJUVENATION, p)
-                        && p.HealthPercent <= GenesisHealth).OrderBy(p => p.HealthPercent).FirstOrDefault();
-                    if (aoeTarget != null)
-                    {
-                        SpellManager.Cast(GENESIS, aoeTarget);
-                    }
-                }
-                if (countWildGrowth >= WildGrowthCount
-                    && canCast
-                    && !spellOnCooldown(WILD_GROWTH)
-                    && SpellManager.CanCast(WILD_GROWTH))
-                {
-                    aoeTarget = newPartyMembers.Where(p => p != null
-                        && p.IsAlive
-                        && p.InLineOfSight
-                        && p.InLineOfSpellSight
-                        && p.Distance <= 40
-                        && p.HealthPercent <= Wildgrowthhealth).OrderBy(p => p.HealthPercent).FirstOrDefault();
-                    if (aoeTarget != null)
-                    {
-                        SpellManager.Cast(WILD_GROWTH, aoeTarget);
-                    }
-                }
-                if (countTranquility >= TranquilityCount
-                    && canCast
-                    && !spellOnCooldown(TRANQUILITY)
-                    && SpellManager.CanCast(TRANQUILITY))
-                {
-                    SpellManager.Cast(TRANQUILITY);
-                }
-                if (dispelTargets != null
-                    && !spellOnCooldown(NATURES_CURE)
-                    && SpellManager.CanCast(NATURES_CURE))
-                {
-                    SpellManager.Cast(NATURES_CURE, dispelTargets);
-                }
-                if (countMushroom >= 3
-                    && canCast
-                    && needMushroom
-                    && SpellManager.CanCast(WILD_MUSHROOM))
-                {
-                    aoeTarget = newPartyMembers.Where(p => p != null
-                        && p.IsAlive
-                        && p.InLineOfSight
-                        && p.InLineOfSpellSight
-                        && p.Distance <= 40
-                        && p.HealthPercent <= mushroomHealth).OrderBy(p => p.HealthPercent).FirstOrDefault();
-                    if (aoeTarget != null)
-                    {
-                        SpellManager.Cast(WILD_MUSHROOM, aoeTarget);
-                        SpellManager.ClickRemoteLocation(aoeTarget.Location);
-                        mushroomTarget = aoeTarget;
-                        mushroomLocation = aoeTarget.Location;
-                        mushroomTimer = DateTime.Now + new TimeSpan(0, 0, 0, 30, 0);
-                    }
-                }
-                if (healTarget != null && healTarget.HealthPercent <= SwiftmendHealth
-                    && (buffExists(REJUVENATION, healTarget) || buffExists(REGROWTH, healTarget))
-                    && canCast
-                    && SpellManager.CanCast(SWIFTMEND))
-                {
-                    SpellManager.Cast(SWIFTMEND, healTarget);
-                }
-                if (healTarget != null
-                    && healTarget.HealthPercent <= fonHealth
-                    && !spellOnCooldown(FORCE_OF_NATURE)
-                    && canCast
-                    && SpellManager.CanCast(FORCE_OF_NATURE)
-                    && (lastGuid != healTarget.Guid || DateTime.Now >= fonTimer))
-                {
-                    SpellManager.Cast(FORCE_OF_NATURE, healTarget);
-                    fonTimer = DateTime.Now + new TimeSpan(0, 0, 0, 15, 0);
-                    lastGuid = healTarget.Guid;
-                }
-                if (healTarget != null
-                    && IsOverlayed(REGROWTH_INT)
-                    && canCast
-                    && SpellManager.CanCast(REGROWTH))
-                {
-                    SpellManager.Cast(REGROWTH, healTarget);
-                }
-                if (healTarget != null && healTarget.HealthPercent <= RegrowthHealth
-                    && canCast
-                    && SpellManager.CanCast(REGROWTH))
-                {
-                    SpellManager.Cast(REGROWTH, healTarget);
-                }
-                if (healTarget != null && healTarget.HealthPercent <= HaelingTouchHealth
-                    && canCast
-                    && SpellManager.CanCast(HEALING_TOUCH))
-                {
-                    SpellManager.Cast(HEALING_TOUCH, healTarget);
-                }
-                
-            }
-            if (partyCount == 0)
-            {
-                if (!buffExists(LIFEBLOOM, Me)
-                    && canCast
-                    && SpellManager.CanCast(LIFEBLOOM))
-                {
-                    SpellManager.Cast(LIFEBLOOM, Me);
-                }
-                if (dispelTargets != null
-                    && !spellOnCooldown(NATURES_CURE)
-                    && SpellManager.CanCast(NATURES_CURE))
-                {
-                    SpellManager.Cast(NATURES_CURE, dispelTargets);
-                }
-                if (Me.HealthPercent <= RejuvenationHealth
-                    && !buffExists(REJUVENATION, Me)
-                    && canCast
-                    && SpellManager.CanCast(REJUVENATION))
-                {
-                    SpellManager.Cast(REJUVENATION, Me);
-                }
-                if (Me.HealthPercent <= SwiftmendHealth
-                    && (buffExists(REJUVENATION, Me) || buffExists(REGROWTH, Me))
-                    && canCast
-                    && SpellManager.CanCast(SWIFTMEND))
-                {
-                    SpellManager.Cast(SWIFTMEND, Me);
-                }
-                if (Me.HealthPercent <= HaelingTouchHealth
-                    && canCast
-                    && SpellManager.CanCast(HEALING_TOUCH))
-                {
-                    SpellManager.Cast(HEALING_TOUCH, Me);
-                }
-                if (Me.HealthPercent <= RegrowthHealth
-                    && canCast
-                    && SpellManager.CanCast(REGROWTH))
-                {
-                    SpellManager.Cast(REGROWTH, Me);
-                }
-            }
-            await CommonCoroutines.SleepForLagDuration();
-            return true;
-        }
+        
         #endregion
 
         #region proving grounds

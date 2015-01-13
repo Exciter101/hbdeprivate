@@ -98,6 +98,8 @@ namespace Kitty
             NATURES_CURE = "Nature's Cure",
             LUNAR_INSPIRATION = "Lunar Inspiration",
             IRONBARK = "Ironbark",
+            RAMPANT_GROWTH = "Rampant Growth",
+            GERMINATION = "Germination",
 
             STARFIRE = "Starfire",
             STARSURGE = "Starsurge",

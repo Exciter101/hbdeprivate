@@ -29,6 +29,9 @@
 	<Blackspots>
 	</Blackspots>
 	<PullBlackspots>
+		<PullBlackspot X="539.8788" Y="1560.198" Z="92.15884" Radius="12.34711" />
+		<PullBlackspot X="600.2413" Y="1328.273" Z="82.69798" Radius="14.38105" />
+		<PullBlackspot X="586.5389" Y="1407.787" Z="90.29335" Radius="14.22874" />
 		<PullBlackspot X="627.2769" Y="1392.528" Z="89.15912" Radius="20.06016" />
 		<PullBlackspot X="634.7068" Y="1337.825" Z="80.28246" Radius="10.45599" />
 		<PullBlackspot X="768.1265" Y="1374.996" Z="86.01797" Radius="12.99721" />

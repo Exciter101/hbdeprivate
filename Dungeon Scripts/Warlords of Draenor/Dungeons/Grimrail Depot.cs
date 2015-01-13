@@ -5,20 +5,14 @@ using System.Threading.Tasks;
 using Bots.DungeonBuddy.Attributes;
 using Bots.DungeonBuddy.Helpers;
 using Buddy.Coroutines;
-using Bots.DungeonBuddy.Enums;
-using Bots.DungeonBuddy.Helpers;
 using Styx;
-using Styx.Common;
 using Styx.Common.Helpers;
 using Styx.CommonBot;
 using Styx.CommonBot.Bars;
 using Styx.CommonBot.Coroutines;
-using Styx.CommonBot.Frames;
-using Styx.CommonBot.POI;
 using Styx.Helpers;
 using Styx.Pathing;
 using Styx.WoWInternals;
-using Styx.WoWInternals.World;
 using Styx.WoWInternals.WoWObjects;
 
 // ReSharper disable CheckNamespace
@@ -69,6 +63,7 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 	    public override void WeighTargetsFilter(List<Targeting.TargetPriority> units)
 	    {
 	        var isDps = Me.IsDps();
+		    var isRangedDps = isDps && Me.IsRange();
 			foreach (var priority in units)
 			{
 				var unit = priority.Object as WoWUnit;
@@ -98,6 +93,27 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
                             break;
 				    }
 
+					if (unit.Entry == MobId_BorkatheBrute && isDps)
+					{
+						if (ScriptHelpers.IsViable(_borka) && ScriptHelpers.IsViable(_rocketspark) && _rocketspark.IsAlive)
+						{
+							priority.Score = _borka.HealthPercent - _rocketspark.HealthPercent;
+						}
+					}
+
+					// try to take Borka and Rocketspark's health at the same time.
+					if (unit.Entry == MobId_BorkatheBrute && isDps && ScriptHelpers.IsViable(_rocketspark) && _rocketspark.IsAlive)
+					{
+						priority.Score = _borka.HealthPercent - _rocketspark.HealthPercent;
+					}
+
+					if (unit.Entry == MobId_RailmasterRocketspark && isDps && ScriptHelpers.IsViable(_borka) && _borka.IsAlive)
+					{
+						if (!isRangedDps && unit.ZDiff > 4)
+							priority.Score = -400;
+						else
+							priority.Score = _rocketspark.HealthPercent - _borka.HealthPercent;
+					}
 				}
 			}
 		}
@@ -188,22 +204,27 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 	    #endregion
 
 	    private const int SpellId_MadDash = 161090;
+		private const int SpellId_Slam = 161087;
         private const uint MobId_RailmasterRocketspark = 77803;
         private const uint MobId_BorkatheBrute = 77816;
 
 	    private readonly int[] MissileSpellIds_VX18BTargetEliminator = {162494, 162509};
-
+		private WoWUnit _rocketspark, _borka;
         // http://www.wowhead.com/guide=2666/grimrail-depot-dungeon-strategy-guide#rocketspark-and-borka
         [EncounterHandler((int)MobId_RailmasterRocketspark, "Railmaster Rocketspark")]
         public Func<WoWUnit, Task<bool>> RailmasterRocketsparkEncounter()
         {
-            AddAvoidLocation(
-                ctx => true,
-                3,
-                o => ((WoWMissile) o).ImpactPosition,
-                () => WoWMissile.InFlightMissiles.Where(m => MissileSpellIds_VX18BTargetEliminator.Contains(m.SpellId)));
+	        AddAvoidLocation(
+		        ctx => true,
+		        3,
+		        o => ((WoWMissile) o).ImpactPosition,
+		        () => WoWMissile.InFlightMissiles.Where(m => MissileSpellIds_VX18BTargetEliminator.Contains(m.SpellId)));
 
-            return async boss => false;
+	        return async boss =>
+			{
+				_rocketspark = boss;
+				return false;
+			};
         }
 
         [EncounterHandler((int)MobId_BorkatheBrute, "Borka the Brute")]
@@ -212,14 +233,61 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
             var tankLoc = new WoWPoint(1718.657, 1542.948, 7.71374);
             AddAvoidObject(
                 ctx => true,
-                5,
+                7,
                 o => o.Entry == MobId_BorkatheBrute && o.ToUnit().CastingSpellId == SpellId_MadDash && o.ToUnit().CurrentTargetGuid != Me.Guid,
-                o => Me.Location.GetNearestPointOnSegment(o.Location.RayCast(o.Rotation, 4), o.Location.RayCast(o.Rotation, 30)));
+                o => Me.Location.GetNearestPointOnSegment(o.Location.RayCast(o.Rotation, 4), o.Location.RayCast(o.Rotation, 40)));
 
             // force range to stay away since they sometimes end up stacking on boss after avoiding missiles
             AddAvoidObject(ctx => Me.IsRange(), 10, o => o.Entry == MobId_BorkatheBrute && o.ToUnit().Combat);
 
-            return async boss => Me.CurrentTargetGuid == boss.Guid && await ScriptHelpers.TankUnitAtLocation(tankLoc, 1);
+	        var madDashAimLocation = new PerFrameCachedValue<WoWPoint>(
+		        () =>
+				{
+					if (!ScriptHelpers.IsViable(_borka) || !ScriptHelpers.IsViable(_rocketspark))
+						return WoWPoint.Zero;
+
+					if (_borka.CastingSpellId != SpellId_MadDash || _borka.CurrentTargetGuid != Me.Guid)
+						return WoWPoint.Zero;
+
+					var start = WoWMathHelper.CalculatePointFrom(_rocketspark.Location, _borka.Location, 3);
+					var end = WoWMathHelper.CalculatePointFrom(_rocketspark.Location, _borka.Location, _borka.MeleeRange());
+
+					WoWPoint traceHit;
+					var traceRet = Avoidance.Helpers.MeshTraceline(start, end, out traceHit);
+
+					if (!traceRet.HasValue)
+						return WoWPoint.Zero;
+
+					if (traceRet.Value)
+						end = traceHit;
+
+					return Me.Location.GetNearestPointOnSegment(start, end);
+				});
+
+            return async boss =>
+			{
+				_borka = boss;
+
+				if (boss.HealthPercent >= 97 && boss.HealthPercent > 50 && await ScriptHelpers.CastHeroism())
+					return true;
+
+				// Aim the mad dash at Rocket Spark to caue him to get stunned.
+				if (madDashAimLocation != WoWPoint.Zero)
+				{
+					return await ScriptHelpers.StayAtLocationWhile(() => madDashAimLocation != WoWPoint.Zero, madDashAimLocation, null, 1);
+				}
+
+				if (boss.CastingSpellId == SpellId_Slam && Me.PowerType == WoWPowerType.Mana 
+					&& boss.CurrentCastTimeLeft < TimeSpan.FromMilliseconds(500) && Me.IsCasting)
+				{
+					SpellManager.StopCasting();
+					Logger.Write("Canceling cast to avoid getting interupted by Slam");
+					await Coroutine.Sleep(boss.CurrentCastTimeLeft);
+					return true;
+				}
+
+				return false;
+			};
         }
 
         #endregion
@@ -509,26 +577,31 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 	        return true;
 	    }
 
-	    private PerFrameCachedValue<WoWUnit> _lootExplosive;
-	    private WoWUnit LootExplosive
-	    {
-	        get
-	        {
-                // only dps should loot the boomers.
-	            var isTank = Me.IsTank();
-	            return _lootExplosive ?? (_lootExplosive =
-	                new PerFrameCachedValue<WoWUnit>(
-	                    () => ObjectManager.GetObjectsOfType<WoWUnit>()
-	                        .Where(
-	                            u => (u.Entry == MobId_GromkarGrenadier || u.Entry == MobId_GromkarBoomer && !isTank)
-                                     && u.IsDead && u.HasAura("Blackrock Munitions"))
-	                        .OrderBy(u => u.DistanceSqr)
-	                        .FirstOrDefault()));
-	        }
-	    }
+		private PerFrameCachedValue<WoWUnit> _lootExplosive;
+
+		private WoWUnit LootExplosive
+		{
+			get
+			{
+				return _lootExplosive ?? (_lootExplosive = new PerFrameCachedValue<WoWUnit>(() =>
+						{
+							// only dps should loot the boomers.
+							var isTank = Me.IsTank();
+							return ObjectManager.GetObjectsOfType<WoWUnit>()
+								.Where(
+									u => (u.Entry == MobId_GromkarGrenadier || u.Entry == MobId_GromkarBoomer && !isTank)
+										 && u.IsDead && u.HasAura("Blackrock Munitions"))
+								.OrderBy(u => u.DistanceSqr)
+								.FirstOrDefault();
+						}));
+			}
+		}
 
 	    private async Task<bool> LootExplosivesOnCorpse()
 	    {
+			if (Me.HasAura("Blackrock Mortar Shells"))
+				return false;
+
             if (LootExplosive == null)
 	            return false;
 

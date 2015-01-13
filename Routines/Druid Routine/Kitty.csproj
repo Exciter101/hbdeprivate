@@ -82,6 +82,7 @@
     <Compile Include="KittySettings.cs" />
     <Compile Include="KittySpellCasting.cs" />
     <Compile Include="KittySpells.cs" />
+    <Compile Include="KittyTalents.cs" />
     <Compile Include="KittyTargets.cs" />
     <Compile Include="KittyUnits.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

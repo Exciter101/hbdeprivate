@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Styx;
 using Styx.Common;
 using Styx.CommonBot;
+using Styx.CommonBot.Coroutines;
 using Styx.Pathing;
 using Styx.WoWInternals;
 using Styx.WoWInternals.WoWObjects;
@@ -10,6 +13,8 @@ using Styx.TreeSharp;
 using Bots.DungeonBuddy.Profiles;
 using Bots.DungeonBuddy.Attributes;
 using Bots.DungeonBuddy.Helpers;
+using Action = Styx.TreeSharp.Action;
+
 namespace Bots.DungeonBuddy.Dungeon_Scripts.Wrath_of_the_Lich_King
 {
 	public class AzjolNerub : Dungeon
@@ -30,9 +35,12 @@ namespace Bots.DungeonBuddy.Dungeon_Scripts.Wrath_of_the_Lich_King
 			get { return new WoWPoint(3670.406, 2174.702, 36.43874); }
 		}
 
+		readonly WoWPoint _exitByEntrace = new WoWPoint(408.9006, 799.6625, 832.2418);
+		readonly WoWPoint _exitByLastBoss = new WoWPoint(406.2608, 55.04592, 251.8863);
+
 		public override WoWPoint ExitLocation
 		{
-			get { return new WoWPoint (408.9006, 799.6625, 832.2418); }
+			get { return ScriptHelpers.IsBossAlive("Anub'arak") ? _exitByEntrace : _exitByLastBoss; }
 		}
 
 		public override void RemoveTargetsFilter(List<WoWObject> units)
@@ -92,7 +100,7 @@ namespace Bots.DungeonBuddy.Dungeon_Scripts.Wrath_of_the_Lich_King
 				Navigator.PlayerMover.MoveTowards(_middleLevelCtmLoc);
 				return MoveResult.Moved;
 			}
-			if (myLevel < destinationLevel)
+			if (myLevel < destinationLevel && Me.GroupInfo.LfgDungeonId !=0)
 			{
 				// we can't travel to a higher level so we need to port out and back in.
 				ScriptHelpers.TelportOutsideLfgInstance();
@@ -158,48 +166,82 @@ namespace Bots.DungeonBuddy.Dungeon_Scripts.Wrath_of_the_Lich_King
 		}
 
 		[EncounterHandler(28921, "Hadronox", Mode = CallBehaviorMode.Proximity, BossRange = 150)]
-		public Composite HadronoxEncounter()
+		public Func<WoWUnit, Task<bool>> HadronoxEncounter()
 		{
-			WoWUnit boss = null;
-			WoWUnit trash = null;
 			const uint acidCloudId = 53400;
 
 			var trashTankSpot = new WoWPoint(507.6383, 515.5826, 748.325);
 			var trashLoc = new WoWPoint(529.6913, 547.1257, 731.8326);
 			AddAvoidObject(ctx => !Me.IsCasting, 5, o => o.Entry == acidCloudId && o.ZDiff < 10);
-			var trashIds = new uint[] { 29117, 28922, 29118 };
+			var trashIds = new uint[] {29117, 28922, 29118};
 
-			return new PrioritySelector(
-				ctx =>
+			return async boss =>
+			{
+				if (ScriptHelpers.IsBossAlive("Krik'thir the Gatewatcher") )
+					return false;
+
+				if (Me.IsFollower() && !Me.Combat)
+					return false;
+
+				WoWUnit trash =
+					ScriptHelpers.GetUnfriendlyNpsAtLocation(trashLoc, 17, u => trashIds.Contains(u.Entry)).FirstOrDefault();
+				if (!boss.TaggedByMe && !boss.IsTargetingMeOrPet && !boss.IsTargetingMyPartyMember)
 				{
-					trash = ScriptHelpers.GetUnfriendlyNpsAtLocation(trashLoc, 17, u => trashIds.Contains(u.Entry)).FirstOrDefault();
-					return boss = ctx as WoWUnit;
-				},
-				new Decorator(
-					ctx => !boss.TaggedByMe && !boss.IsTargetingMeOrPet && !boss.IsTargetingMyPartyMember,
-					new PrioritySelector(
-						ScriptHelpers.CreatePullNpcToLocation(
-							ctx => trash != null && trash != boss,
-							ctx => Targeting.Instance.FirstUnit == null || !Me.IsActuallyInCombat && trash != null ,
-							ctx => trash,
-							ctx => trashTankSpot,
-							ctx => trashTankSpot,
-							10),
-						new Decorator(
-							ctx => StyxWoW.Me.Location.DistanceSqr(trashTankSpot) > 25 * 25 && ScriptHelpers.GroupMembers.All(p => p.IsAlive && p.Location.DistanceSqr(Me.Location) < 70 * 70) ,
-							new Action(ctx => Navigator.MoveTo(trashTankSpot))))),
-				ScriptHelpers.CreatePullNpcToLocation(
-					ctx => boss != null, ctx => boss.IsTargetingMeOrPet || boss.IsTargetingMyPartyMember, ctx => boss, ctx => StyxWoW.Me.Location, ctx => trashTankSpot, 10));
+					if (trash != null && trash != boss)
+					{
+						if (await ScriptHelpers.PullNpcToLocation(
+							() => ScriptHelpers.IsViable(trash) && trash != boss,
+							() => !Me.IsActuallyInCombat,
+							trash,
+							trashTankSpot,
+							trashTankSpot,
+							10000,
+							2))
+						{
+							return true;
+						}
+					}
+
+					if (Targeting.Instance.IsEmpty() && trash == null)
+					{
+						// Move to the top of slope while waiting for trash pulls to become ready
+						if (Me.Location.DistanceSqr(trashTankSpot) > 15*15)
+						{
+							var tank = ScriptHelpers.Tank;
+							if (tank != null && (tank.IsMe || tank.Location.DistanceSqr(trashTankSpot) <= 15 * 15))
+							{
+								return (await CommonCoroutines.MoveTo(trashTankSpot)).IsSuccessful();
+							}
+						}
+
+						// tank should do nothing while waiting for trash pulls to become ready.
+						return Me.IsTank();
+					}
+				}
+
+				if (await ScriptHelpers.PullNpcToLocation(
+					() => ScriptHelpers.IsViable(boss),
+					() => boss.IsTargetingMeOrPet || boss.IsTargetingMyPartyMember,
+					boss,
+					Me.Location,
+					trashTankSpot,
+					10000,
+					2))
+				{
+					return true;
+				}
+				return false;
+			};
 		}
 
 
 		[EncounterHandler(29120, "Anub'arak", Mode = CallBehaviorMode.Proximity)]
-		public Composite AnubarakEncounter()
+		public Func<WoWUnit, Task<bool>> AnubarakEncounter()
 		{
-			WoWUnit boss = null;
 			const uint anubarakId = 29120;
 			var startLoc = new WoWPoint(550.2374, 275, 223.8891);
 			const uint impaleTargetId = 29184;
+			var roomCenter = new WoWPoint(550.9367, 255.0832, 224.2939);
 
 			AddAvoidObject(ctx => true, 4, impaleTargetId);
 			AddAvoidObject(
@@ -207,12 +249,20 @@ namespace Bots.DungeonBuddy.Dungeon_Scripts.Wrath_of_the_Lich_King
 				15,
 				o => o.Entry == anubarakId && o.ToUnit().CurrentTargetGuid != Me.Guid && !o.ToUnit().IsMoving && o.ToUnit().IsAlive);
 
-			return new PrioritySelector(
-				ctx => boss = ctx as WoWUnit,
-				new Decorator(ctx => StyxWoW.Me.Y > 277, new Action(ctx => Navigator.MoveTo(startLoc))),
-				ScriptHelpers.CreateAvoidUnitAnglesBehavior(
-					ctx => Me.IsFollower() && boss.CurrentTargetGuid != Me.Guid && !boss.IsMoving && boss.Distance < 8, ctx => boss, new ScriptHelpers.AngleSpan(0, 180)),
-				new Decorator(ctx => Me.IsTank() && Me.CurrentTargetGuid == boss.Guid && boss.CurrentTargetGuid == Me.Guid, ScriptHelpers.CreateTankFaceAwayGroupUnit(15)));
+			// avoid anub'arak's frontal cone.
+			AddAvoidObject(
+				ctx => Me.IsFollower(),
+				9,
+				o => o.Entry == 29120 && o.ToUnit().CurrentTargetGuid != Me.Guid,
+				o => o.Location.RayCast(o.Rotation, 8));
+
+			return async boss =>
+			{
+				if (await ScriptHelpers.GetInsideCircularBossRoom(boss, roomCenter, 25, startLoc))
+					return true;
+
+				return false;
+			};
 		}
 	}
 }

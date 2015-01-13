@@ -37,6 +37,8 @@ namespace Singular.ClassSpecific.Druid
         private static EclipseType eclipseLastCheck = EclipseType.None;
         public static bool newEclipseDotNeeded;
 
+        private static bool glyphFlappingOwl { get; set; }
+
         private static int StarfallRange { get { return TalentManager.HasGlyph("Focus") ? 20 : 40; } }
 
         private static int CurrentEclipse { get { return BitConverter.ToInt32(BitConverter.GetBytes(StyxWoW.Me.CurrentEclipse), 0); } }
@@ -66,6 +68,16 @@ namespace Singular.ClassSpecific.Druid
 
         private static WoWUnit _CrowdControlTarget;
 
+        [Behavior(BehaviorType.Initialize, WoWClass.Druid, WoWSpec.DruidBalance)]
+        public static Composite CreateDruidBalanceInitialize()
+        {
+            glyphFlappingOwl = TalentManager.HasGlyph("Flapping Owl");
+            if (glyphFlappingOwl)
+                Logger.Write(LogColor.Init, "Glyph of Flapping Owl: will [Flap] when falling");
+
+            return null;
+        }
+
         [Behavior(BehaviorType.Heal, WoWClass.Druid, WoWSpec.DruidBalance)]
         public static Composite CreateDruidBalanceHeal()
         {
@@ -87,7 +99,7 @@ namespace Singular.ClassSpecific.Druid
 
                     new Decorator(
                         ret => Unit.NearbyUnitsInCombatWithMeOrMyStuff.Any(u => u.SpellDistance() < 8)
-                            && (SingularRoutine.CurrentWoWContext == WoWContext.Battlegrounds || (SingularRoutine.CurrentWoWContext == WoWContext.Normal && Me.HealthPercent < 50)),
+                            && (SingularRoutine.CurrentWoWContext == WoWContext.Battlegrounds || SingularRoutine.CurrentWoWContext == WoWContext.Normal),
                         CreateDruidAvoidanceBehavior(CreateSlowMeleeBehavior(), null, null)
                         ),
 
@@ -215,11 +227,6 @@ namespace Singular.ClassSpecific.Druid
                     ret => !Spell.IsGlobalCooldown(),
                     new PrioritySelector(
 
-                        new Decorator(
-                            ret => Me.HealthPercent < 40 && Unit.NearbyUnitsInCombatWithMeOrMyStuff.Any(u => u.IsWithinMeleeRange),
-                            CreateDruidAvoidanceBehavior(CreateSlowMeleeBehavior(), null, null)
-                            ),
-
                         // Spell.Buff("Entangling Roots", ret => Me.CurrentTarget.Distance > 12),
                         Spell.Buff("Faerie Swarm", ret => Me.CurrentTarget.IsMoving && Me.CurrentTarget.Distance > 20),
 
@@ -244,7 +251,7 @@ namespace Singular.ClassSpecific.Druid
                                     ctx => Unit.NearbyUnfriendlyUnits.Where(u => u.Combat && !u.IsCrowdControlled() && Me.IsSafelyFacing(u)).ToList(),
                                     Spell.Cast("Sunfire", on => ((List<WoWUnit>)on).FirstOrDefault(u => u.HasAuraExpired("Sunfire", 2)), req => Me.CurrentEclipse > 0 && Me.CurrentTarget.HasKnownAuraExpired("Sunfire", 3)),
                                     Spell.Cast("Moonfire", on => ((List<WoWUnit>)on).FirstOrDefault(u => u.HasAuraExpired("Moonfire", 2)), req => Me.CurrentEclipse > 0 && Me.CurrentTarget.HasKnownAuraExpired("Moonfire", 3)),
-                                    Common.CastHurricaneBehavior( on => Me.CurrentTarget)
+                                    Common.CastHurricaneBehavior(on => Me.CurrentTarget)
                                     )
                                 )
                             ),
@@ -258,13 +265,40 @@ namespace Singular.ClassSpecific.Druid
                                     3,
                                     new PrioritySelector(
                                         //  1 Starsurge when Lunar Empowerment is down and Eclipse energy is > 20.
-                                        Spell.Cast( "Starsurge", req => Me.CurrentEclipse < -20 && !Me.HasAura("Lunar Empowerment")),
+                                        Spell.Cast("Starsurge", req =>
+                                        {
+                                            if (Me.CurrentEclipse < -20 && !Me.HasAura("Lunar Empowerment"))
+                                            {
+                                                if (SingularSettings.Debug && Spell.CanCastHack("Starsurge", Me.CurrentTarget))
+                                                    Logger.WriteDebug(LogColor.Hilite, "Starsurge: buffing Lunar Empowerment ");
+                                                return true;
+                                            }
+                                            return false;
+                                        }),
 
                                         //  2 Starsurge when Solar Empowerment is down and Eclipse energy is > 20.
-                                        Spell.Cast( "Starsurge", req => Me.CurrentEclipse > 20 && !Me.HasAura("Solar Empowerment")),
+                                        Spell.Cast("Starsurge", req =>
+                                        {
+                                            if (Me.CurrentEclipse > 20 && !Me.HasAura("Solar Empowerment"))
+                                            {
+                                                if (SingularSettings.Debug && Spell.CanCastHack("Starsurge", Me.CurrentTarget))
+                                                    Logger.WriteDebug(LogColor.Hilite, "Starsurge: buffing Solar Empowerment ");
+                                                return true;
+                                            }
+                                            return false;
+                                        }),
 
                                         //  3 Starsurge with 3 charges. Watch for Shooting Stars procs.
-                                        Spell.Cast("Starsurge", req => Spell.GetCharges("Starsurge") >= 3)
+                                        Spell.Cast("Starsurge", req =>
+                                        {
+                                            if (Spell.GetCharges("Starsurge") >= 3 && SpellManager.HasSpell("Shooting Stars"))
+                                            {
+                                                if (SingularSettings.Debug && Spell.CanCastHack("Starsurge", Me.CurrentTarget))
+                                                    Logger.WriteDebug(LogColor.Hilite, "Starsurge: dumping excess Starsurge Charge");
+                                                return true;
+                                            }
+                                            return false;
+                                        })
                                         )
                                     ),
 
@@ -273,6 +307,13 @@ namespace Singular.ClassSpecific.Druid
 
                                 //  5 Moonfire to maintain DoT and consume Lunar Peak buff.
                                 Spell.Cast("Moonfire", req => Me.CurrentEclipse <= 0 && (Me.CurrentTarget.HasAuraExpired("Moonfire", 3) || Me.HasAura("Lunar Peak"))),
+
+                                // multi-mob dotting
+                                new PrioritySelector(
+                                    ctx => Unit.UnitsInCombatWithUsOrOurStuff(40).Where(u => u.Combat && !u.IsCrowdControlled() && Me.IsSafelyFacing(u)).ToList(),
+                                    Spell.Cast("Sunfire", on => ((List<WoWUnit>)on).FirstOrDefault(u => u.HasAuraExpired("Sunfire", 0)), req => Me.CurrentEclipse > 0 && Me.CurrentTarget.HasKnownAuraExpired("Sunfire", 0)),
+                                    Spell.Cast("Moonfire", on => ((List<WoWUnit>)on).FirstOrDefault(u => u.HasAuraExpired("Moonfire", 0)), req => Me.CurrentEclipse > 0 && Me.CurrentTarget.HasKnownAuraExpired("Moonfire", 0))
+                                    ),
 
                                 //  6 Wrath as a filler when in a Solar Eclipse.
                                 Spell.Cast("Wrath", req => Me.CurrentEclipse > 0),
@@ -299,8 +340,6 @@ namespace Singular.ClassSpecific.Druid
                 Helpers.Common.EnsureReadyToAttackFromLongRange(),
 
                 // Ensure we do /petattack if we have treants up.
-                Helpers.Common.CreateAutoAttack(true),
-
                 Spell.WaitForCast(FaceDuring.Yes),
 
                 new Decorator(
@@ -319,7 +358,7 @@ namespace Singular.ClassSpecific.Druid
                                     new ActionAlwaysSucceed()
                                     ),
                                 new PrioritySelector(
-                                    Spell.CastOnGround("Ursol's Vortex", on => (WoWUnit)on, req => Me.GotTarget, false),
+                                    Spell.CastOnGround("Ursol's Vortex", on => (WoWUnit)on, req => Me.GotTarget(), false),
                                     Spell.Cast("Entangling Roots", on => (WoWUnit)on),
                                     new ActionAlwaysSucceed()
                                     )
@@ -526,6 +565,14 @@ namespace Singular.ClassSpecific.Druid
         #endregion
 
 
+        [Behavior(BehaviorType.PreCombatBuffs, WoWClass.Druid, WoWSpec.DruidBalance, WoWContext.All, 9)]
+        public static Composite CreateBalancePreCombatBuffs()
+        {
+            return new PrioritySelector(
+                Spell.BuffSelf("Flap", req => glyphFlappingOwl && Me.Shapeshift == ShapeshiftForm.Moonkin && Me.IsFalling)
+                );
+        }
+
         [Behavior(BehaviorType.PreCombatBuffs, WoWClass.Druid, WoWSpec.DruidBalance, WoWContext.Battlegrounds | WoWContext.Instances, 2)]
         public static Composite CreateBalancePreCombatBuffBattlegrounds()
         {
@@ -557,7 +604,8 @@ namespace Singular.ClassSpecific.Druid
         public static Composite CreateBalanceCombatBuffNormal()
         {
             return new PrioritySelector(
-                Common.CastForm("Moonkin Form", req => !Utilities.EventHandlers.IsShapeshiftSuppressed)
+                Common.CastForm("Moonkin Form", req => !Utilities.EventHandlers.IsShapeshiftSuppressed),
+                Spell.BuffSelf("Flap", req => glyphFlappingOwl && Me.Shapeshift == ShapeshiftForm.Moonkin && Me.IsFalling)
                 );
         }
 
@@ -565,8 +613,8 @@ namespace Singular.ClassSpecific.Druid
         public static Composite CreateBalanceCombatBuffBattlegrounds()
         {
             return new PrioritySelector(
-                Common.CastForm("Moonkin Form", req => !Utilities.EventHandlers.IsShapeshiftSuppressed)
-
+                Common.CastForm("Moonkin Form", req => !Utilities.EventHandlers.IsShapeshiftSuppressed),
+                Spell.BuffSelf("Flap", req => glyphFlappingOwl && Me.Shapeshift == ShapeshiftForm.Moonkin && Me.IsFalling)
                 );
         }
 
@@ -583,7 +631,7 @@ namespace Singular.ClassSpecific.Druid
         /// <returns></returns>
         public static Composite CreateDruidAvoidanceBehavior(Composite slowAttack, Composite nonfacingAttack, Composite jumpturnAttack)
         {
-            return Avoidance.CreateAvoidanceBehavior( "Wild Charge", 20, Disengage.Direction.Backwards, new ActionAlwaysSucceed() );
+            return Avoidance.CreateAvoidanceBehavior( "Wild Charge", 20, Disengage.Direction.Backwards, slowAttack ?? new ActionAlwaysSucceed() );
         }
 
         private static Composite CreateSlowMeleeBehavior()
@@ -599,7 +647,7 @@ namespace Singular.ClassSpecific.Druid
                                     req => (req as WoWUnit).IsCrowdControlled(),
                                     new Action(r => Logger.WriteDebug("SlowMelee: closest mob already crowd controlled"))
                                     ),
-                                Spell.CastOnGround("Ursol's Vortex", on => (WoWUnit)on, req => Me.GotTarget, false),
+                                Spell.CastOnGround("Ursol's Vortex", on => (WoWUnit)on, req => Me.GotTarget(), false),
                                 Spell.Buff("Disorienting Roar", onUnit => (WoWUnit)onUnit, req => true),
                                 Spell.Buff("Mass Entanglement", onUnit => (WoWUnit)onUnit, req => true),
                                 Spell.Buff("Mighty Bash", onUnit => (WoWUnit)onUnit, req => true),

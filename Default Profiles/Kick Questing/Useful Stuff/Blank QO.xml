@@ -1,6 +1,6 @@
 <HBProfile xsi:noNamespaceSchemaLocation="../../../Schemas/QuestProfileSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 <!-- Honorbuddy Blank QO by Kick -->
-	<Name>Blank QO ($Rev: 4033 $)</Name>
+	<Name>Blank QO ($Rev: 4092 $)</Name>
 	<MinLevel>1</MinLevel>
 	<MaxLevel>200</MaxLevel>
 	
@@ -81,7 +81,7 @@ Log("Is Complete: {0}", result);
 			 </If>
 			 
 				<CustomBehavior File="RunMacro" Macro="/run for i=1,GetNumQuestLogEntries() do SelectQuestLogEntry(i); SetAbandonQuest(); AbandonQuest(); end" />
-				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True"  />
+				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True" DoMail="True" />
 				<CustomBehavior File="Misc\RunLua" Lua="for i=1,40 do local id=select(11,UnitAura('player',i)) if id == ###### then CancelUnitBuff('player',i) break end end" WaitTime="1000" />
 			<If Condition="((!HasQuest()) &amp;&amp; (!IsQuestCompleted()))" >
 			</If>

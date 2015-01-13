@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Markup;
@@ -19,6 +21,8 @@ using Styx.Helpers;
 using Styx.Pathing;
 using Styx.WoWInternals;
 using Styx.WoWInternals.WoWObjects;
+
+using Vector2 = Tripper.Tools.Math.Vector2;
 
 // ReSharper disable CheckNamespace
 namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
@@ -55,6 +59,8 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 					if (unit == null)
 						return false;
 
+					if (unit.Entry == MobId_AqueousGlobule)
+						return true;
 					return false;
 				});
 		}
@@ -67,10 +73,9 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
                 var unit = obj as WoWUnit;
                 if (unit != null)
                 {
-					if (isDps && unit.Entry == MobId_Entanglement )
+					if (isDps && unit.Entry == MobId_Entanglement)
 		                outgoingunits.Add(obj);
-					else if (unit.Entry == MobId_AqueousGlobule)
-						outgoingunits.Add(obj);
+
                 }
             }
 	    }
@@ -139,35 +144,33 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 
         public override void OnEnter()
         {
-			// Because of Wall climbing we will have script leave group when not in a full group of bots.
-			var numberOfFollowersInGroup = DungeonBuddySettings.Instance.PartyMembers.Count(s => GroupMember.GroupMembers.Any(g => g.NameEquals(s)));
-			// need to include self when comparing to maxInstanceSize
-			var inFullGroupOfBots = GroupMember.GroupMembers.Count == 5 && (numberOfFollowersInGroup + 1) == 5;
+	        _pathToFirstBossBlackspot = new DynamicBlackspot(
+		        () => _shouldBlackspotMainPathToFirstBoss,
+			        () => _pathToFirstBossBlackspotLoc,
+			        LfgDungeon.MapId,
+			        50,
+			        20,
+			        "Main path to first boss");
 
-	        var shouldLeave = DungeonBuddySettings.Instance.PartyMode == PartyMode.Off
-							|| (DungeonBuddySettings.Instance.PartyMode == PartyMode.Leader && !inFullGroupOfBots);
-
-			// Followrs will leave if leader leaves.
-			if (shouldLeave)
-			{
-
-				Alert.Show(
-					"Dungeonbuddy: Script only works when in a full group of bots.",
-					string.Format(
-						"The {0} dungeon cannot be AFKed while not in a full group of your own bots because of wall climbing ATM. If you wish to stay in group and play manually then press 'Cancel'. Otherwise Dungeonbuddy will automatically leave group.",
-						Name),
-					30,
-					true,
-					true,
-					() => Lua.DoString("LeaveParty()"),
-					null,
-					"Leave",
-					"Cancel");
-			}
+			DynamicBlackspotManager.AddBlackspot(_pathToFirstBossBlackspot);
         }
+
+		public override void OnExit()
+		{
+			DynamicBlackspotManager.RemoveBlackspot(_pathToFirstBossBlackspot);
+			_pathToFirstBossBlackspot = null;
+		}
 
 		public override async Task<bool> HandleMovement(WoWPoint location)
 		{
+			var myLoc = Me.Location;
+
+			if (ShouldHandleShortcut1ToFirstBoss(myLoc, location))
+				return await TakeShortcut1ToFirstBoss();
+
+			if (ShouldHandleShortcutToSecondBoss(myLoc, location))
+				return await TakeShortcutToSecondBoss();
+
 			// move through portal to final boss.
 			if (AtYalnuEncounter(location) && !AtYalnuEncounter(Me.Location))
 				return (await CommonCoroutines.MoveTo(_portalToValnuLoc)).IsSuccessful();
@@ -192,6 +195,7 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 		#region Trash
 
 		private const uint MobId_Dreadpetal = 81864;
+		private const uint MobId_VerdantMandragora = 81983;
 		private const uint MobId_Gnarlroot = 81984;
 
 		private const uint AreaTriggerId_LivingLeaves = 7607;
@@ -212,6 +216,191 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 
 		#endregion
 
+		#region Shortcut
+
+		private readonly Vector2[] _boss1Area =
+		{
+			new Vector2(490.8828f, 1453.919f),
+			new Vector2(500.1278f, 1445.825f),
+			new Vector2(517.169f, 1445.405f),
+			new Vector2(566.2526f, 1563.096f),
+			new Vector2(465.5888f, 1633.071f),
+			new Vector2(392.0648f, 1644.537f),
+			new Vector2(371.7909f, 1597.915f),
+		};
+
+		readonly WoWPoint _trashPackAtShortcutToFirstBoss = new WoWPoint(458.3217, 1463.744, 104.2181);
+		readonly WoWPoint _topOfShortcut1ToFirstBoss= new WoWPoint(516.7039, 1448.762, 109.6434);
+		readonly WoWPoint _bottomOfShortcut1ToFirstBoss = new WoWPoint(510.2285, 1438.621, 103.0686);
+
+		readonly WoWPoint _shortcut1ToFirstBossMidpointMoveTo = new WoWPoint(528.7039, 1448.762, 109.6434);
+		readonly WoWPoint _shortcut1ToFirstBossTopMoveTo = new WoWPoint(516.0667, 1448.829, 109.7493);
+		readonly WoWPoint _shortcut1ToFristBossPassengerMountLoc = new WoWPoint(516.0903f, 1448.145f, 109.5488f);
+		readonly WoWPoint _pathToFirstBossBlackspotLoc = new WoWPoint(384.6688, 1498.319, 94.07461);
+
+		private readonly TimeCachedValue<bool> _shouldBlackspotMainPathToFirstBoss = new TimeCachedValue<bool>(
+			TimeSpan.FromSeconds(2),
+			() => ObjectManager.GetObjectsOfType<WoWUnit>().Any(u => u.Entry == MobId_VerdantMandragora && u.IsAlive));
+
+		private DynamicBlackspot _pathToFirstBossBlackspot;
+
+		private bool ShouldHandleShortcut1ToFirstBoss(WoWPoint myLoc, WoWPoint destination)
+		{
+			if (!LootTargeting.Instance.IsEmpty() || BotPoi.Current.Type != PoiType.None)
+				return false;
+
+			if (Me.IsActuallyInCombat)
+				return false;
+
+			if (WoWMathHelper.IsPointInPoly(myLoc, _boss1Area))
+				return false;
+
+			var tank = ScriptHelpers.GroupMembers.FirstOrDefault(g => g.IsTank);
+
+			if (tank == null)
+				return false;
+
+			// try take shortuct if tank is a fool and attempting it
+			if (tank.Guid != Me.Guid && tank.Location.Distance2DSqr(_topOfShortcut1ToFirstBoss) < 15 * 15)
+				return true;
+
+			if (!WoWMathHelper.IsPointInPoly(destination, _boss1Area))
+				return false;
+
+
+			if (Me.IsTank())
+				return false;
+
+			// if this trash pack is pulled then we use the other easier shortcut.
+			if (ScriptHelpers.UnfriendlyNpcsArePulledOrGone(_trashPackAtShortcutToFirstBoss, 10))
+				return false;
+
+			return _shouldBlackspotMainPathToFirstBoss;
+		}
+
+		private readonly int[] _passengerMountSpellId = {
+												   121820, // Obsidian Nightwing
+													75973, // X-53 Touring Rocket
+												};
+
+		[LocationHandler(492.4296, 1422.413, 103.2917, 40)]
+		public async Task<bool> HandleShortcut1ToFirstBoss(WoWPoint loc)
+		{
+			if (!ScriptHelpers.IsBossAlive("Witherbark") || Me.IsTank())
+				return false;
+
+			if (!LootTargeting.Instance.IsEmpty() || BotPoi.Current.Type != PoiType.None)
+				return false;
+
+			if (Me.IsActuallyInCombat)
+				return false;
+
+			if (WoWMathHelper.IsPointInPoly(Me.Location, _boss1Area))
+			{
+				var partyMembersNotAtTop = Me.PartyMembers
+					.FirstOrDefault(p => !p.IsMe && p.DistanceSqr < 40 * 40 && !WoWMathHelper.IsPointInPoly(p.Location, _boss1Area));
+
+				if (partyMembersNotAtTop == null)
+					return false;
+
+				if (SpellManager.CanCast("Leap of Faith"))
+				{
+					partyMembersNotAtTop.Target();
+					await Coroutine.Wait(2000, () => Me.CurrentTarget == partyMembersNotAtTop);
+					SpellManager.Cast("Leap of Faith");
+					return true;
+				}
+
+				var currentMount = Mount.Current;
+				if (currentMount == null || !_passengerMountSpellId.Contains(currentMount.CreatureSpellId))
+				{
+					var passengerMount = Mount.Mounts.FirstOrDefault(m => _passengerMountSpellId.Contains(m.CreatureSpellId));
+					if (passengerMount != null)
+					{
+						if (Me.Mounted)
+							await CommonCoroutines.Dismount();
+						Mount.SummonMount(passengerMount.CreatureSpellId);
+						await Coroutine.Wait(2000, () => Me.Mounted);
+						return true;
+					}
+				}
+				else if (_passengerMountSpellId.Contains(currentMount.CreatureSpellId))
+				{
+					await CommonCoroutines.MoveTo(_shortcut1ToFristBossPassengerMountLoc);
+					return true;
+				}
+
+				return false;
+			}
+
+			var tank = ScriptHelpers.GroupMembers.FirstOrDefault(g => g.IsTank);
+
+			if (tank == null)
+				return false;
+
+			// try take shortuct if tank is a fool and attempting it
+			if (tank.Location.Distance2DSqr(_topOfShortcut1ToFirstBoss) > 10 * 10)
+				return false;
+
+			return await TakeShortcut1ToFirstBoss();
+		}
+
+		private async Task<bool> TakeShortcut1ToFirstBoss()
+		{
+			if (Me.Location.DistanceSqr(_bottomOfShortcut1ToFirstBoss) > 4*4)
+				return (await CommonCoroutines.MoveTo(_bottomOfShortcut1ToFirstBoss)).IsSuccessful();
+
+			var maxTryTimer = Stopwatch.StartNew();
+
+			while (true)
+			{
+				var myLoc = Me.Location;
+
+				var partyMemberWithPassengerMount =
+					Me.PartyMembers.FirstOrDefault(
+						p => p.CanInteractNow && p.WithinInteractRange && WoWMathHelper.IsPointInPoly(p.Location, _boss1Area));
+
+				if (partyMemberWithPassengerMount != null)
+				{
+					partyMemberWithPassengerMount.Interact();
+					await Coroutine.Sleep(3000);
+					Lua.DoString("VehicleExit()");
+				}
+
+				if (WoWMathHelper.IsPointInPoly(Me.Location, _boss1Area))
+					break;
+
+				await CommonCoroutines.SummonGroundMount(WoWPoint.Zero);
+				var moveTo = myLoc.Z < 105.4 ? _shortcut1ToFirstBossMidpointMoveTo : _shortcut1ToFirstBossTopMoveTo;
+				Navigator.PlayerMover.MoveTowards(moveTo);
+				try
+				{
+					WoWMovement.Move(WoWMovement.MovementDirection.JumpAscend);
+					await Coroutine.Sleep(120);
+				}
+				finally
+				{
+					WoWMovement.MoveStop(WoWMovement.MovementDirection.JumpAscend);
+				}
+
+				var tank = ScriptHelpers.GroupMembers.FirstOrDefault(g => g.IsTank);
+				if (tank == null || !ShouldHandleShortcut1ToFirstBoss(myLoc, tank.Location))
+					return false;
+
+				if (maxTryTimer.ElapsedMilliseconds > 600000)
+				{
+					Logger.Write("Failed to take shortcut, leaving group.");
+					Lua.DoString("LeaveParty()");
+					return false;
+				}
+				await Coroutine.Yield();
+			}
+
+			return true;
+		}
+
+		#endregion
+
 		private const int SpellId_ParchedGasp = 164357;
 
 		private const uint MobId_Witherbark = 81522;
@@ -223,8 +412,8 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 		{
 			var tankLoc = new WoWPoint(417.7986, 1615.377, 89.29382);
 
-			var uncheckedGrowthDropStart = new WoWPoint(455.7579, 1590.944, 86.28169);
-			var uncheckedGrowthDropEnd = new WoWPoint(401.3669, 1572.452, 87.6643);
+			var uncheckedGrowthDropStart = new WoWPoint(398.6838, 1593.925, 88.45592);
+			var uncheckedGrowthDropEnd = new WoWPoint(437.8936, 1604.33, 88.48502);
 
 			// Left by Unchecked Growth
 			AddAvoidObject(5, AreaTriggerId_NoxiousVines);
@@ -263,6 +452,7 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 		private const int SpellId_NoxiousEruption_Trash = 169445;
 
 		private const uint MobId_TwistedAbomination = 84767;
+		private const uint MobId_EverbloomNaturalist = 81819;
 
 		[EncounterHandler((int)MobId_TwistedAbomination, "Twisted Abomination")]
 		public Func<WoWUnit, Task<bool>> TwistedAbominationEncounter()
@@ -279,6 +469,218 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 		}
 
 		#endregion
+
+		#region Shortcut
+
+		private readonly WoWPoint _packAtShortcutToSecondBossLoc = new WoWPoint(644.4979, 1352.761, 80.03185);
+		private readonly WoWPoint _packInHutAtShortcutToSecondBossLoc = new WoWPoint(625.0367, 1399.632, 89.00101);
+		readonly WoWPoint _bottomOfShortcutToSecondBossLoc = new WoWPoint(637.825, 1420.862, 86.09888);
+
+		private readonly Vector2[] _boss2To4Area =
+		{
+			new Vector2(553.9598f, 1443.522f),
+			new Vector2(674.1066f, 1437.386f),
+			new Vector2(714.3946f, 1383.961f),
+			new Vector2(785.665f, 1354.546f),
+			new Vector2(1014.405f, 1399.983f),
+			new Vector2(943.2585f, 1663.478f),
+			new Vector2(537.8443f, 1779.033f),
+		};
+
+		private readonly Vector2[] _shortcut2ToBoss2Area = 
+		{
+			new Vector2(549.2135f, 1537.049f),
+			new Vector2(554.2559f, 1532.708f),
+			new Vector2(563.2415f, 1514.594f),
+			new Vector2(555.1516f, 1490.635f),
+			new Vector2(529.9198f, 1481.171f),
+			new Vector2(524.8267f, 1487.626f),
+			new Vector2(529.188f, 1508.215f),
+			new Vector2(545.1208f, 1523.572f),
+		};
+
+		private readonly static WoWPoint ShortcutToSecondBossMoveTo1 = new WoWPoint(641.5132f, 1430.823f, 95.36393f);
+		private readonly static WoWPoint ShortcutToSecondBossMoveTo2 = new WoWPoint(650.1648f, 1429.35f, 103.0789f);
+		private readonly static WoWPoint ShortcutToSecondBossMoveTo3 = new WoWPoint(655.723f, 1434.124f, 109.476f);
+		private readonly static WoWPoint ShortcutToSecondBossMoveTo4 = new WoWPoint(655.353, 1444.739, 117.0462);
+
+		private static readonly WoWPoint[] ShortcutToSecondBossPath = 
+		{
+			ShortcutToSecondBossMoveTo1,ShortcutToSecondBossMoveTo2,ShortcutToSecondBossMoveTo3,
+		};
+
+		private bool ShouldHandleShortcutToSecondBoss(WoWPoint myLoc, WoWPoint destination)
+		{
+			if (!LootTargeting.Instance.IsEmpty() || BotPoi.Current.Type != PoiType.None)
+				return false;
+
+			if (Me.IsActuallyInCombat)
+				return false;
+
+			if (WoWMathHelper.IsPointInPoly(myLoc, _boss2To4Area) || AtYalnuEncounter(myLoc))
+				return false;
+
+			var tank = ScriptHelpers.GroupMembers.FirstOrDefault(g => g.IsTank);
+
+			if (tank == null)
+				return false;
+
+			if (tank.Guid != Me.Guid && (IsAlongShortcutToSecondBoss(tank.Location) || IsAlongShortcutToSecondBoss(Me.Location)))
+				return true;
+
+			if (!WoWMathHelper.IsPointInPoly(destination, _boss2To4Area) && !AtYalnuEncounter(destination))
+				return false;
+
+			if (Me.IsTank() && !ScriptHelpers.IsBossAlive("Witherbark"))
+				return true;
+
+			if (ScriptHelpers.UnfriendlyNpcsArePulledOrGone(_packAtShortcutToSecondBossLoc, 10)
+				&& !ScriptHelpers.UnfriendlyNpcsArePulledOrGone(_packInHutAtShortcutToSecondBossLoc, 10))
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		// handles the shortcut that goes through a hut and up a slope near Archmage Sol
+		[LocationHandler(637.825, 1420.862, 86.09888, 40)]
+		public async Task<bool> HandleShortcutToSecondBoss(WoWPoint loc)
+		{
+			if ( Me.IsTank())
+				return false;
+
+			if (!LootTargeting.Instance.IsEmpty() || BotPoi.Current.Type != PoiType.None)
+				return false;
+
+			if (Me.IsActuallyInCombat)
+				return false;
+
+			if (WoWMathHelper.IsPointInPoly(Me.Location, _boss1Area))
+				return false;
+
+			var tank = ScriptHelpers.GroupMembers.FirstOrDefault(g => g.IsTank);
+			if (tank == null)
+				return false;
+
+			if (!IsAlongShortcutToSecondBoss(tank.Location) && !IsAlongShortcutToSecondBoss(Me.Location))
+				return false;
+
+			return await TakeShortcutToSecondBoss();
+		}
+
+		private bool IsAlongShortcutToSecondBoss(WoWPoint loc)
+		{
+			for (int i = 0, j = ShortcutToSecondBossPath.Length - 1; i < ShortcutToSecondBossPath.Length; j = i++)
+			{
+				var start = ShortcutToSecondBossPath[j];
+				var end = ShortcutToSecondBossPath[i];
+				if (loc.GetNearestPointOnSegment(start, end).DistanceSqr(loc) < 6*6)
+					return true;
+			}
+			return false;
+		}
+
+
+		private async Task<bool> TakeShortcutToSecondBoss()
+		{
+			if (Me.Location.DistanceSqr(_bottomOfShortcutToSecondBossLoc) > 4 * 4 && !IsAlongShortcutToSecondBoss(Me.Location))
+				return (await CommonCoroutines.MoveTo(_bottomOfShortcutToSecondBossLoc)).IsSuccessful();
+
+			var maxTryTimer = Stopwatch.StartNew();
+
+			while (true)
+			{
+				var myLoc = Me.Location;
+
+				if (myLoc.Z < 88 && myLoc.DistanceSqr(_bottomOfShortcutToSecondBossLoc) > 4*4)
+				{
+					await CommonCoroutines.MoveTo(_bottomOfShortcutToSecondBossLoc);
+				}
+				else if (myLoc.Z < 94f)
+				{
+					Navigator.PlayerMover.MoveTowards(ShortcutToSecondBossMoveTo1);
+					if (WoWMathHelper.IsFacing(myLoc, Me.Rotation, ShortcutToSecondBossMoveTo1, WoWMathHelper.DegreesToRadians(30)))
+					{
+						try
+						{
+							WoWMovement.Move(WoWMovement.MovementDirection.JumpAscend);
+						}
+						finally
+						{
+							WoWMovement.MoveStop(WoWMovement.MovementDirection.JumpAscend);
+						}
+					}
+				}
+				else if (myLoc.Z < 102.5)
+				{
+					Navigator.PlayerMover.MoveTowards(ShortcutToSecondBossMoveTo2);
+				}
+				else if (myLoc.Z < 109)
+				{
+					Navigator.PlayerMover.MoveTowards(ShortcutToSecondBossMoveTo3);
+				}
+				else
+				{
+					Navigator.PlayerMover.MoveTowards(ShortcutToSecondBossMoveTo4); 
+				}
+
+				if (WoWMathHelper.IsPointInPoly(Me.Location, _boss2To4Area))
+					break;
+
+
+				if (maxTryTimer.ElapsedMilliseconds > 300000)
+				{
+					Logger.Write("Failed to take shortcut, leaving group.");
+					Lua.DoString("LeaveParty()");
+					return false;
+				}
+				await Coroutine.Yield();
+			}
+
+			return true;
+		}
+
+
+		// handles the shortcut that starts by jumping up a bank with tree root sticking out, well it handles it by leaving group
+		[LocationHandler(521.1617, 1518.794, 97.18973, 60)]
+		public Func<WoWPoint, Task<bool>> HandleShortcut2ToSecondBoss()
+		{
+			var showedAlert = false;
+
+			return async loc =>
+			{
+				if (showedAlert || Me.IsTank())
+					return false;
+
+				if (!LootTargeting.Instance.IsEmpty() || BotPoi.Current.Type != PoiType.None)
+					return false;
+
+				if (Me.IsActuallyInCombat)
+					return false;
+
+				if (!Me.PartyMembers.Any(p => WoWMathHelper.IsPointInPoly(p.Location, _shortcut2ToBoss2Area)))
+					return false;
+
+				var showTimeSec = StyxWoW.Random.Next(20, 30);
+
+				Alert.Show(
+					"Dungeonbuddy: Unsupported shortcut",
+					"Party members are attempting to take a shortcut that the dungeon script does not support. If you wish to stay in group and manually take the shortcut then press 'Cancel'. Otherwise Dungeonbuddy will automatically leave group.",
+					showTimeSec,
+					true,
+					true,
+					() => Lua.DoString("LeaveParty()"),
+					null,
+					"Leave",
+					"Cancel");
+				showedAlert = true;
+				return true;
+			};
+		}
+
+		#endregion
+
 
 		private const int SpellId_NoxiousEruption = 175997;
 		private const int SpellId_Slash = 168383;

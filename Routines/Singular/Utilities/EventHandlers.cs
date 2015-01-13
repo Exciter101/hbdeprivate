@@ -150,6 +150,13 @@ namespace Singular.Utilities
                     " ("
                     + " args[8] == UnitGUID('player')"
                     + " and args[8] ~= args[4]"
+                    + " and bit.band(args[6], COMBATLOG_OBJECT_CONTROL_PLAYER) > 0"
+                    + " and 'Player' == args[4]:sub(1,6))"
+                    + " ("
+                    + " args[2] == 'SPELL_DAMAGE'"
+                    + " or args[2] == 'RANGE_DAMAGE'"
+                    + " or args[2] == 'SWING_DAMAGE'"
+                    + " )"
                     + ")"
                     + " or";
                 // filterCriteria += " (args[8] == UnitGUID('player') and args[8] ~= args[4] and 0x000 == bit.band(tonumber('0x'..strsub(guid, 3,5)),0x00f)) or";
@@ -210,6 +217,7 @@ namespace Singular.Utilities
 
             if (e.DestGuid == StyxWoW.Me.Guid)
             {
+                Logger.WriteDiagnostic("GankDetect: received {0} src={1} dst={2}", args.EventName, e.SourceGuid, e.DestGuid);
                 if (e.SourceGuid != StyxWoW.Me.Guid)
                 {
                     WoWUnit enemy = e.SourceUnit;
@@ -276,7 +284,14 @@ namespace Singular.Utilities
                     {
                         LastNoPathFailure = DateTime.Now;
                         LastNoPathTarget = StyxWoW.Me.CurrentTargetGuid;
-                        Logger.WriteFile("[CombatLog] cast failed due to no path available to current target");
+                        if (!StyxWoW.Me.GotTarget())
+                            Logger.WriteFile("[CombatLog] cast failed - no path available to current target");
+                        else
+                            Logger.WriteFile("[CombatLog] cast failed - no path available to {0}, heightOffGround={1}, pos={2}", 
+                                StyxWoW.Me.CurrentTarget.SafeName(),
+                                StyxWoW.Me.CurrentTarget.HeightOffTheGround(),
+                                StyxWoW.Me.CurrentTarget.Location
+                                );
                     }
                     else if (!SingularRoutine.IsManualMovementBotActive && (StyxWoW.Me.Class == WoWClass.Druid || StyxWoW.Me.Class == WoWClass.Shaman))
                     {
@@ -404,7 +419,7 @@ namespace Singular.Utilities
             WoWUnit unit = e.DestUnit;
             WoWGuid guid = e.DestGuid;
 
-            if (unit == null && StyxWoW.Me.CurrentTarget != null)
+            if (unit == null && StyxWoW.Me.GotTarget())
             {
                 unit = StyxWoW.Me.CurrentTarget;
                 guid = StyxWoW.Me.CurrentTargetGuid;
@@ -429,11 +444,12 @@ namespace Singular.Utilities
                         Logger.Write(Color.LightGoldenrodYellow, "Mob {0} has evaded {1} times. Previously blacklisted {2:X0} for {3} minutes!", unit.SafeName(), MobsThatEvaded[unit.Guid], unit.Guid, MinutesToBlacklist);
                     else
                     {
-                        Logger.Write(Color.LightGoldenrodYellow, "Mob {0} has evaded {1} times. Blacklisting {2:X0} for {3} minutes!", unit.SafeName(), MobsThatEvaded[unit.Guid], unit.Guid, MinutesToBlacklist);
-                        Blacklist.Add(unit.Guid, BlacklistFlags.Combat, TimeSpan.FromMinutes(MinutesToBlacklist));
+                        string fragment = string.Format("Mob {0} has evaded {1} times", unit.SafeName(), MobsThatEvaded[unit.Guid]);
+                        Logger.Write(Color.LightGoldenrodYellow, "{0}. Blacklisting {1:X0} for {2} minutes!", fragment, unit.Guid, MinutesToBlacklist);
+                        Blacklist.Add(unit.Guid, BlacklistFlags.Combat, TimeSpan.FromMinutes(MinutesToBlacklist), "Singular - " + fragment);
                         if (!Blacklist.Contains(unit.Guid, BlacklistFlags.Combat))
                         {
-                            Logger.Write(Color.Pink, "error: blacklist does not contain entry for {0} so adding {1}", unit.SafeName(), unit.Guid);
+                            Logger.Write(Color.Pink, "error: blacklist does not contain entry for {0} after Blacklist.Add", unit.SafeName());
                         }
                     }
 
@@ -493,7 +509,7 @@ namespace Singular.Utilities
 
             if (StyxWoW.Me.Class == WoWClass.Rogue && SingularSettings.Instance.Rogue().UsePickPocket && args.Args[0].ToString() == LocalizedAlreadyPickPocketedError)
             {
-                if (StyxWoW.Me.GotTarget)
+                if (StyxWoW.Me.GotTarget())
                 {
                     WoWUnit unit = StyxWoW.Me.CurrentTarget;
                     Logger.WriteDebug("WowRedError Handler: already pick pocketed {0}, blacklisting from pick pocket for 2 minutes", unit.SafeName());

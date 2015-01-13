@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Bots.DungeonBuddy.Attributes;
 using Bots.DungeonBuddy.Avoidance;
 using Bots.DungeonBuddy.Helpers;
 using Bots.DungeonBuddy.Enums;
 using Buddy.Coroutines;
-using CommonBehaviors.Actions;
 using Styx;
 using Styx.Common;
 using Styx.Common.Helpers;
@@ -111,8 +113,6 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 
 			DynamicBlackspotManager.AddBlackspots(_dynamicBlackspots);
 			Lua.Events.AttachEvent("RAID_BOSS_EMOTE", OnRaidBossEmote);
-			_backStepCancelBehavior = new ActionRunCoroutine(ctx => CancelBackstep());
-			TreeHooks.Instance.InsertHook("Dungeonbuddy_Main", 0, _backStepCancelBehavior);
 		}
 
 		public override void OnExit()
@@ -186,15 +186,6 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 				ignoreIfBlocking: true);
 
 			return async boss => await ScriptHelpers.CancelCinematicIfPlaying();
-		}
-
-		private async Task<bool> CancelBackstep()
-		{
-			if (Me.Combat || !_isBacksteping)
-				return false;
-			
-			StopBackstepping();
-			return true;
 		}
 
 		[LocationHandler(1912.797, -26.04675, 286.9844, 10)]
@@ -346,6 +337,7 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 
 			var inDarkEclipsePhase =
 				new PerFrameCachedValue<bool>(() => ScriptHelpers.IsViable(_sadana) && _sadana.HasAura(SpellId_DarkEclipse));
+
 			Func<bool> handleDarkEclipse = () => inDarkEclipsePhase;
 
 			return async boss =>
@@ -522,6 +514,7 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 		private const uint MobId_WaterBurst = 77676;
 
 		private const uint GameObjectId_BonemawEntranceDoor = 233990;
+		WoWPoint _bonemawStartPosition = new WoWPoint(1849.425, -551.4028, 201.3045);
 
 		[EncounterHandler((int) MobId_Bonemaw, "Bonemaw")]
 		public Func<WoWUnit, Task<bool>> BonemawEncounter()
@@ -530,6 +523,10 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 			const float bodySlamAvoidLineWidth = 7;
 
 			WoWUnit boss = null;
+
+			var isInhaling =
+				new PerFrameCachedValue<bool>(
+					() => ScriptHelpers.IsViable(boss) && (boss.HasAura(SpellId_Inhale) || ! _inhaleEmoteTimer.IsFinished));
 
 			var isDoorClosed = new PerFrameCachedValue<bool>(
 				() =>
@@ -560,13 +557,13 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 					bodySlamAvoidLineWidth/2).OfType<object>());
 
 			AddAvoidLocation(
-				ctx => !ScriptHelpers.IsViable(boss) || !boss.HasAura(SpellId_Inhale) && _inhaleEmoteTimer.IsFinished,
+				ctx => !isInhaling,
 				4.5f,
 				o => ((WoWMissile) o).ImpactPosition,
 				() => WoWMissile.InFlightMissiles.Where(m => m.SpellId == MissileSpellId_NecroticPitch));
 
 			AddAvoidObject(
-				ctx => !ScriptHelpers.IsViable(boss) || !boss.HasAura(SpellId_Inhale) && _inhaleEmoteTimer.IsFinished,
+				ctx => !isInhaling,
 				4.5f,
 				AreaTriggerId_NecroticPitch);
 
@@ -579,6 +576,9 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 					leftDoorEdge,
 					rightDoorEdge,
 					doorAvoidLineWidth/2).OfType<object>());
+
+			// Range need to stay away from boss so the necrotic pitch isn't placed near boss.
+			AddAvoidObject(ctx => Me.IsRange() && !isInhaling, 30, o => o.Entry == MobId_Bonemaw && o.ToUnit().IsAlive);
 
 			var noMovebehind = ScriptHelpers.CombatRoutineCapabilityManager.CreateNewHandle();
 			
@@ -618,24 +618,31 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 					return true;
 				}
 
-				if (!_inhaleEmoteTimer.IsFinished || boss.HasAura(SpellId_Inhale))
+				if (!Me.IsSwimming && (!_inhaleEmoteTimer.IsFinished || boss.HasAura(SpellId_Inhale)))
 				{
 					TreeRoot.StatusText = "Standing on top of Necrotic Pitch to avoid getting inhaled";
 								
 					Navigator.NavigationProvider.StuckHandler.Reset();
 								
 					// Stand in pitch to prevent getting sucked into Bonemaw's mouth during inhale.
-					var pitch = ObjectManager.GetObjectsOfType<WoWAreaTrigger>()
-						.Where(a => a.Entry == AreaTriggerId_NecroticPitch)
-						.OrderBy(a => a.DistanceSqr).FirstOrDefault();
+					var pitchList = ObjectManager.GetObjectsOfType<WoWAreaTrigger>()
+						.Where(a => a.Entry == AreaTriggerId_NecroticPitch && a.ZDiff < 5)
+						.OrderBy(a => a.DistanceSqr).ToList();
 
-					if (pitch != null)
+					if (pitchList.Any())
 					{
-						return await ScriptHelpers.StayAtLocationWhile(
-							() => !_inhaleEmoteTimer.IsFinished  || (ScriptHelpers.IsViable(boss) && boss.HasAura(SpellId_Inhale)),
-							pitch.Location,
-							"Necrotic Pitch",
-							4);
+						// try find a pirch that is further then 25 yards from boss. You can still get sucked off if too close to boss.
+						var pitch = pitchList.FirstOrDefault(p => p.Location.DistanceSqr(boss.Location) > 25*25) ??
+									pitchList.OrderByDescending(p => p.Location.DistanceSqr(boss.Location)).First();
+
+						if (pitch != null)
+						{
+							return await ScriptHelpers.StayAtLocationWhile(
+								() => isInhaling && ScriptHelpers.IsViable(pitch),
+								pitch.Location,
+								"Necrotic Pitch",
+								4);
+						}
 					}
 				}
 				return false;
@@ -655,19 +662,19 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 
 		#region Ner'zhul
 
-		// Leave after killing all the fully scripted bosses that way user doesn't get deserter and has a chance at some loot.
-		[ScenarioStage(1, "Leave group stage", 4)]
-		public Func<ScenarioStage, Task<bool>> LeaveDungeonAtLastBoss()
+		[EncounterHandler((int) MobId_Nerzhul, "Ner'zhul", Mode = CallBehaviorMode.CurrentBoss)]
+		public Func<WoWUnit, Task<bool>> LeaveDungeonBehavior()
 		{
-			var showedAlart = false;
-			return async stage =>
+			bool ranOnce = false;
+			return async boss =>
 			{
-				if (showedAlart || DungeonBuddySettings.Instance.PartyMode == PartyMode.Follower)
+				if (ranOnce || DungeonBuddySettings.Instance.PartyMode == PartyMode.Follower || !LootTargeting.Instance.IsEmpty())
 					return false;
 
 				Alert.Show(
-					"Dungeonbuddy: Last boss is not fully functional",
-					"The script for the Ner'zhul encounter is not fully functional. If you wish to stay in group then press 'Cancel'. Otherwise Dungeonbuddy will automatically leave group.",
+					"Dungeonbuddy: Skip the Ner'zhul boss",
+					"Dungeonbuddy has a difficult time completing the Ner'zhul boss encounter due to complex mechanics. " +
+					"If you wish to stay in group and play manually then press 'Cancel'. Otherwise Dungeonbuddy will automatically leave group.",
 					30,
 					true,
 					true,
@@ -676,10 +683,11 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 					"Leave",
 					"Cancel");
 
-				showedAlart = true;
-				return true;
+				ranOnce = true;
+				return false;
 			};
 		}
+
 
 		private const int SpellId_Malevolence = 154442;
 		private const uint MobId_OmenofDeath = 76462;
@@ -691,10 +699,10 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 		private readonly WoWPoint _nerzhulRoomCenterLoc = new WoWPoint(1712.156, -820.2639, 73.73562);
 
 		private WoWUnit _selectedRitualOfBonesTarget;
-		private WoWGuid _selectedRitualOfBonesTargetGuid;
+		private WaitTimer _updateRitualOfBonesTimer = WaitTimer.OneSecond;
 		// used for calculating the safe zone to stand at/move through when dealing with skeletons.
 		private WoWPoint _selectedRitualOfBonesStartLoc, _selectedRitualOfBonesEndLoc;
-
+		
 		// http://www.wowhead.com/guide=2668/shadowmoon-burial-grounds-dungeon-strategy-guide#nerzhul
 		[EncounterHandler((int) MobId_Nerzhul, "Ner'zhul")]
 		public Func<WoWUnit, Task<bool>> NerzhulEncounter()
@@ -702,20 +710,17 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 			bool skeletonPhase = false;
 			bool skeletonKillPhase = false;
 			bool skeletonSurvivePhase = false;
+			WoWUnit boss = null;
 
+			// Don't bother avoiding the Omen of Death during kill phase it interfers with positioning
 			AddAvoidObject(
-				ctx => Me.IsFollower(),
-				15,
-				o => o.Entry == MobId_Nerzhul && !o.ToUnit().Combat && o.ToUnit().IsAlive);
-
-			AddAvoidObject(
-				ctx => true,
-				o => !skeletonPhase ? 15 : 8,
-				MobId_OmenofDeath);
+				ctx => !skeletonKillPhase,
+				o => skeletonPhase ? 10 : 15,
+				o => o.Entry == MobId_OmenofDeath);
 
 			AddAvoidObject(
 				ctx => true,
-				5,
+				6,
 				o => o.Entry == AreaTriggerId_RitualofBones || o.Entry == MobId_RitualofBones && !skeletonKillPhase,
 				o => WoWMathHelper.CalculatePointAtSide(o.Location, o.Rotation, 6, true));
 
@@ -738,45 +743,47 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 
 			AddAvoidObject(
 				ctx => true,
-				5,
+				6,
 				o => o.Entry == AreaTriggerId_RitualofBones || o.Entry == MobId_RitualofBones && !skeletonKillPhase,
 				o => WoWMathHelper.CalculatePointAtSide(o.Location, o.Rotation, 6, false));
 
+			// Force ranged to stay away from center of room to prevent getting Omens of Death placed in center.
+			AddAvoidObject(ctx => Me.IsRange() && !skeletonPhase, 15, o => o.Entry == MobId_Nerzhul && o.ToUnit().Combat);
 			#region Malevolence Avoidance
 
 			// line up a bunch of avoids to make a lone narrow cone.
 			AddAvoidObject(
-				ctx =>!skeletonPhase || !Me.IsTank(),
+				ctx => !skeletonKillPhase || Me.IsTank(),
 				o => 4,
 				o => o.Entry == MobId_Nerzhul && o.ToUnit().CastingSpellId == SpellId_Malevolence,
 				o => o.Location.RayCast(o.Rotation, 2));
 
 			AddAvoidObject(
-				ctx => !skeletonPhase || !Me.IsTank(),
+				ctx => !skeletonKillPhase || Me.IsTank(),
 				o => 5.5f,
 				o => o.Entry == MobId_Nerzhul && o.ToUnit().CastingSpellId == SpellId_Malevolence,
 				o => o.Location.RayCast(o.Rotation, 6));
 
 			AddAvoidObject(
-				ctx => !skeletonPhase || !Me.IsTank(),
+				ctx => !skeletonKillPhase || Me.IsTank(),
 				o => 7f,
 				o => o.Entry == MobId_Nerzhul && o.ToUnit().CastingSpellId == SpellId_Malevolence,
 				o => o.Location.RayCast(o.Rotation, 11));
 
 			AddAvoidObject(
-				ctx => !skeletonPhase || !Me.IsTank(),
+				ctx => !skeletonKillPhase || Me.IsTank(),
 				o => 8.5f,
 				o => o.Entry == MobId_Nerzhul && o.ToUnit().CastingSpellId == SpellId_Malevolence,
 				o => o.Location.RayCast(o.Rotation, 17));
 
 			AddAvoidObject(
-				ctx => !skeletonPhase || !Me.IsTank(),
+				ctx => !skeletonKillPhase || Me.IsTank(),
 				o => 10,
 				o => o.Entry == MobId_Nerzhul && o.ToUnit().CastingSpellId == SpellId_Malevolence,
 				o => o.Location.RayCast(o.Rotation, 24));
 
 			AddAvoidObject(
-				ctx => !skeletonPhase || !Me.IsTank(),
+				ctx => !skeletonKillPhase || Me.IsTank(),
 				o => 11.5f,
 				o => o.Entry == MobId_Nerzhul && o.ToUnit().CastingSpellId == SpellId_Malevolence,
 				o => o.Location.RayCast(o.Rotation, 32));
@@ -784,18 +791,36 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 			#endregion
 
 			var unitPathDistanceSqrToRoomCenter = new Func<WoWUnit, float>(
-				u => _nerzhulRoomCenterLoc.GetNearestPointOnLine(u.Location, u.Location.RayCast(u.Rotation, 10))
+				u => _nerzhulRoomCenterLoc.GetNearestPointOnLine(u.Location, u.Location.RayCast(u.Rotation, 100))
 					.DistanceSqr(_nerzhulRoomCenterLoc));
 
-			return async boss =>
+
+			var unitDoesntPathNearOmenOfDeath = new Func<WoWUnit, bool>(
+				u =>
+				{
+					var start = u.Location;
+					var end = start.RayCast(u.Rotation, 30);
+
+					return !ObjectManager.GetObjectsOfType<WoWUnit>()
+							.Any(v => v.Entry == MobId_OmenofDeath && v.Location.GetNearestPointOnSegment(start, end).DistanceSqr(v.Location) < 10*10);
+				});
+
+			var skeletonTimer = new WaitTimer(TimeSpan.FromSeconds(8));
+
+			return async npc =>
 			{
+				boss = npc;
 				var ritualOfBones = ObjectManager.GetObjectsOfType<WoWUnit>()
 					.Where(u => u.Entry == MobId_RitualofBones && u.IsAlive)
 					.OrderBy(u => u.HealthPercent)
 					.ToList();
 
-				skeletonPhase = ritualOfBones.Any();
-				skeletonKillPhase = skeletonPhase && ritualOfBones.Count == 6;
+				// skeletons leave behind stuff on ground athat still needs to be avoided for some time after they despawn
+				if (ritualOfBones.Any())
+					skeletonTimer.Reset();
+
+				skeletonPhase = !skeletonTimer.IsFinished;
+				skeletonKillPhase = ritualOfBones.Count == 6;
 				skeletonSurvivePhase = skeletonPhase && !skeletonKillPhase;
 
 				// cast heroism at start of fight after 
@@ -805,50 +830,68 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 				if (skeletonKillPhase)
 				{
 					// select the lowest HP skeleton or the one pathing the nearest to room center.
-					_selectedRitualOfBonesTarget = ritualOfBones.Any(u => u.Entry == MobId_RitualofBones && u.HealthPercent < 99.9)
-						? ritualOfBones.First()
-						: ritualOfBones.OrderBy(unitPathDistanceSqrToRoomCenter).First();
+					// When selecting a new one, pick one that doesn't path near an Omen of Death.
 
-					if (_selectedRitualOfBonesTarget.Guid != _selectedRitualOfBonesTargetGuid)
+					_selectedRitualOfBonesTarget = ritualOfBones
+						.FirstOrDefault(u => u.HealthPercent < 99 && unitPathDistanceSqrToRoomCenter(u) < 25*25)
+						//?? ritualOfBones.Where(unitDoesntPathNearOmenOfDeath).OrderBy(unitPathDistanceSqrToRoomCenter).FirstOrDefault()
+						?? ritualOfBones.OrderBy(unitPathDistanceSqrToRoomCenter).First();
+
+					if (_updateRitualOfBonesTimer.IsFinished)
 					{
-						_selectedRitualOfBonesStartLoc = _selectedRitualOfBonesTarget.Location;
-						// Any distance will work, just need a start and end point along a line
-						_selectedRitualOfBonesEndLoc = _selectedRitualOfBonesStartLoc.RayCast(_selectedRitualOfBonesTarget.Rotation, 1);
-						_selectedRitualOfBonesTargetGuid = _selectedRitualOfBonesTarget.Guid;
-					}
+						var start = _selectedRitualOfBonesTarget.Location;
+						_selectedRitualOfBonesEndLoc = start.RayCast(_selectedRitualOfBonesTarget.Rotation, 120);
 
+						WoWPoint hitLoc;
+						var hitResult = Avoidance.Helpers.MeshTraceline(start, _selectedRitualOfBonesEndLoc, out hitLoc);
+
+						if (!hitResult.HasValue)
+							return false;
+
+						if (hitResult.Value)
+							_selectedRitualOfBonesEndLoc = hitLoc;
+
+						_selectedRitualOfBonesStartLoc = WoWMathHelper.CalculatePointBehind(start, _selectedRitualOfBonesTarget.Rotation, 120);
+
+						hitResult = Avoidance.Helpers.MeshTraceline(start, _selectedRitualOfBonesStartLoc, out hitLoc);
+						if (!hitResult.HasValue)
+							return false;
+
+						if (hitResult.Value)
+							_selectedRitualOfBonesStartLoc = hitLoc;
+
+						_updateRitualOfBonesTimer.Reset();
+					}
+										
 					if (Me.IsMeleeDps())
 						return await HandleMeleeDpsRitualOfBones(_selectedRitualOfBonesTarget);
 
 					if (Me.IsRange())
 						return await HandleRangeRitualOfBones(_selectedRitualOfBonesTarget);
 
-					// Commented out since tank seems to have better luck tanking towards center of room 
-					// rather then run towards edge of room opposite of skeltons and take a lot of damage from 
-					// getting hit from behind. Might adjust the behavior later to have tank back up towards
-					// edge if if it helps any.
-					if (Me.IsTank() )
+					if (Me.IsTank())
 						return await HandleTankRitualOfBones(_selectedRitualOfBonesTarget);
-				} 
-				else if (_isBacksteping)
-				{
-					// Make sure any melee DPS isn't still backing up.. 
-					StopBackstepping();
-					return true;
-				}
-				else if (skeletonSurvivePhase)
-				{
-					// if one (or more) of the skeletons is dead then stay along the line cleared by killing a skeleton.
-					// Tank will stay at edge of room and continue faceing boss away from group 
-					var nearestPoint = Me.Location.GetNearestPointOnLine(_selectedRitualOfBonesStartLoc, _selectedRitualOfBonesEndLoc);
-					if (Me.Location.DistanceSqr(nearestPoint) > 6*6)
-						return (await CommonCoroutines.MoveTo(nearestPoint)).IsSuccessful();
 				}
 
 
-				if (!skeletonPhase && await ScriptHelpers.TankUnitAtLocation(_nerzhulRoomCenterLoc, 10))
-					return true;
+				if (Me.IsTank())
+				{
+					var tankLoc = skeletonPhase
+						? Me.Location.GetNearestPointOnSegment(_selectedRitualOfBonesStartLoc, _selectedRitualOfBonesEndLoc)
+						: _nerzhulRoomCenterLoc;
 
+					var precision = skeletonPhase ? 3 : 15;
+
+					if (!AvoidanceManager.IsRunningOutOfAvoid)
+					{
+						//return await ScriptHelpers.TankUnitAtLocation(tankLoc, precision);
+						return await ScriptHelpers.StayAtLocationWhile(
+									() => ScriptHelpers.IsViable(boss) && boss.Aggro,
+									tankLoc,
+									"Tank location",
+									precision);
+					}
+				}
 				return false;
 			};
 		}
@@ -856,31 +899,25 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 
 		#region Tank
 
-		private async Task<bool> HandleTankRitualOfBones(WoWUnit target)
+		private async Task<bool> HandleTankRitualOfBones(WoWUnit currentTarget)
 		{
-			WoWPoint hitLoc;
-			var targetLoc = target.Location;
-			var furthestLoc = targetLoc.RayCast(target.Rotation, 120);
+			var targetLoc = currentTarget.Location;
 
-			var hitResult = Avoidance.Helpers.MeshTraceline(targetLoc, furthestLoc,out hitLoc);
-
-			if (!hitResult.HasValue)
-				return false;
-
-			if (hitResult.Value)
-				furthestLoc = hitLoc;
-			
 			// if the skeletions have crossed the room do nothing. we're fuked
-			if (furthestLoc.DistanceSqr(targetLoc) <= 5*5)
+			if (_selectedRitualOfBonesEndLoc.DistanceSqr(targetLoc) <= 5 * 5)
 				return false;
 
-			foreach (var point in ScriptHelpers.GetPointsAlongLineSegment(hitLoc, targetLoc, 2))
+			foreach (var point in ScriptHelpers.GetPointsAlongLineSegment(_selectedRitualOfBonesEndLoc, targetLoc, 2))
 			{
 				if (AvoidanceManager.Avoids.Any(a => a.IsPointInAvoid(point)))
 					continue;
 
-				MoveToLocationWhileFacingUnit(point, Me.CurrentTarget, () => ScriptHelpers.IsViable(target), "Moving boss to room edge");
-				//return await ScriptHelpers.StayAtLocationWhile(() => ScriptHelpers.IsViable(target), point, precision: 6);
+				MoveToLocationWhileFacingUnit(
+					point,
+					Me.CurrentTarget,
+					() => ScriptHelpers.IsViable(currentTarget) && Me.CurrentTarget != null && Me.CurrentTarget.CastingSpellId != SpellId_Malevolence,
+					"Moving boss to room edge");
+
 				break;
 			}
 
@@ -895,29 +932,15 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 			var myLoc = Me.Location;
 			var unitLoc = target.Location;
 
-			WoWPoint hitLoc;
-			var start = unitLoc.RayCast(target.Rotation, 10);
-			var furthestLoc = unitLoc.RayCast(target.Rotation, 120);
+			var nearestPoint = myLoc.GetNearestPointOnSegment(unitLoc, _selectedRitualOfBonesEndLoc);
 
-			var hitResult = Avoidance.Helpers.MeshTraceline(start, furthestLoc, out hitLoc);
-
-			if (!hitResult.HasValue)
-				return false;
-
-			if (hitResult.Value)
-				furthestLoc = hitLoc;
-
-			var nearestPoint = myLoc.GetNearestPointOnSegment(start, furthestLoc);
-
-			if (myLoc.Distance(nearestPoint) > 3*3)
+			if (myLoc.Distance(nearestPoint) > 3*3 || unitLoc.DistanceSqr(myLoc) < 10*10)
 			{
 				var moveTo = nearestPoint.DistanceSqr(unitLoc) >= 30*30
 					? nearestPoint
-					: unitLoc.RayCast(target.Rotation, Math.Min(30, unitLoc.Distance(furthestLoc)));
+					: unitLoc.RayCast(target.Rotation, Math.Min(30, unitLoc.Distance(_selectedRitualOfBonesEndLoc)));
 
-				var moveTimer = new WaitTimer(TimeSpan.FromMilliseconds(StyxWoW.Random.Next(3000, 4000)));
-				moveTimer.Reset();
-				await ScriptHelpers.MoveToContinue(() => moveTo, () => !moveTimer.IsFinished);
+				await ScriptHelpers.MoveToContinue(() => moveTo, ignoreCombat:true);
 				
 			}
 			return false;
@@ -930,7 +953,7 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 		private async Task<bool> HandleMeleeDpsRitualOfBones(WoWUnit target)
 		{
 			MoveToLocationWhileFacingUnit(
-				target.Location.RayCast(target.Rotation, 10),
+				target.Location.RayCast(target.Rotation, 6),
 				target,
 				() => ScriptHelpers.IsViable(target),
 				string.Format("Staying in front of skeleton" ));
@@ -943,28 +966,12 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 		#region Backstep
 
 		private CapabilityManagerHandle _backstepNoMoveCapabilityHandle;
-		private bool _isBacksteping;
-
-		private void StopBackstepping()
-		{
-			// Using LUA instead of WoWMovement API due to having issues with the later.
-			if (StyxWoW.Me.MovementInfo.MovingBackward)
-				Lua.DoString("MoveBackwardStop()");
-			if (StyxWoW.Me.MovementInfo.MovingStrafeLeft)
-				Lua.DoString("StrafeLeftStop()");
-			if (StyxWoW.Me.MovementInfo.MovingStrafeRight)
-				Lua.DoString("StrafeRightStop()");
-			if (StyxWoW.Me.MovementInfo.MovingForward)
-				Lua.DoString("MoveForwardStop()");
-			_isBacksteping = false;
-		}
 
 		private void MoveToLocationWhileFacingUnit(WoWPoint destination, WoWUnit unit, Func<bool> conditon, string reason = null)
 		{
-			_isBacksteping = true;
-			// todo: undo 'true' assignment once issues with facing in Singular are resolved
+			DungeonBuddySettings.Instance.DungeonType = DungeonType.Specific;
 
-			var dumbCR = true; // RoutineManager.Current.SupportedCapabilities == CapabilityFlags.None;
+			var dumbCR = RoutineManager.Current.SupportedCapabilities == CapabilityFlags.None;
 			if (dumbCR && ScriptHelpers.MovementEnabled)
 			{
 				ScriptHelpers.DisableMovement(conditon);
@@ -981,61 +988,7 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 					reason);
 			}
 
-			var unitLoc = unit.Location;
-			var myLoc = Me.Location;
-
-			var unitToDestinationDistance = unitLoc.Distance(destination);
-			var meToDestinationDistance = myLoc.Distance(destination);
-
-			var maxMeleeRange = unit.MeleeRange();
-			//float minMeleeRange = maxMeleeRange;
-			var me2Unit = myLoc - unit.Location;
-			var unit2End = unit.Location - destination;
-			me2Unit.Normalize();
-			unit2End.Normalize();
-
-			if (!WoWMovement.IsFacing)
-				WoWMovement.ConstantFace(unit.Guid);
-
-			if (unit.Distance > maxMeleeRange || meToDestinationDistance >= unitToDestinationDistance)
-			{
-				if (StyxWoW.Me.MovementInfo.MovingBackward)
-					Lua.DoString("MoveBackwardStop()");
-				if (StyxWoW.Me.MovementInfo.MovingStrafeLeft)
-					Lua.DoString("StrafeLeftStop()");
-				if (StyxWoW.Me.MovementInfo.MovingStrafeRight)
-					Lua.DoString("StrafeRightStop()");
-
-				if (!StyxWoW.Me.MovementInfo.MovingForward)
-					Lua.DoString("MoveForwardStart()");
-				return;
-			}
-
-			if (StyxWoW.Me.MovementInfo.MovingForward)
-				Lua.DoString("MoveForwardStop()");
-
-			if (myLoc.DistanceSqr(unitLoc) <= maxMeleeRange * maxMeleeRange && !StyxWoW.Me.MovementInfo.MovingBackward)
-				Lua.DoString("MoveBackwardStart()");
-			else if (StyxWoW.Me.MovementInfo.MovingBackward)
-				Lua.DoString("MoveBackwardStop()");
-
-
-			var dot = Math.Abs(me2Unit.Dot(unit2End));
-			// strife left or right around mob if not between mob and destination
-			if (dot < 0.9f)
-			{
-				var isLeft = myLoc.IsPointLeftOfLine(unit.Location, destination);
-
-				if (!StyxWoW.Me.MovementInfo.MovingStrafeLeft && isLeft)
-					Lua.DoString("StrafeLeftStart()");
-
-				if (!StyxWoW.Me.MovementInfo.MovingStrafeRight && !isLeft)
-					Lua.DoString("StrafeRightStart()");
-			}
-			else if (StyxWoW.Me.MovementInfo.MovingStrafeLeft)
-				Lua.DoString("StrafeLeftStop()");
-			else if (StyxWoW.Me.MovementInfo.MovingStrafeRight)
-				Lua.DoString("StrafeRightStop()");
+			ScriptHelpers.StrafeManager.Move(() => destination, () => unit.Location, () =>ScriptHelpers.IsViable(unit) && conditon(), reason);
 		}
 
 		#endregion

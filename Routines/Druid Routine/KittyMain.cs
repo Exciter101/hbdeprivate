@@ -98,20 +98,6 @@ namespace Kitty
                 {
                     Lua.DoString(string.Format("RunMacroText(\"{0}\")", "/script RepopMe()"));
                 }
-                if (_init)
-                {
-                    Logging.Write(Colors.DarkTurquoise, "[init] Current PartySize: " + partyCount);
-                    updatePartyMembers();
-                    lastPTSize = partyCount;
-                    _init = false;
-                }
-                if (partyCount != lastPTSize)
-                {
-                    Logging.Write(Colors.DarkTurquoise, "[partyCount] Current PartySize: " + partyCount);
-                    updatePartyMembers();
-                    lastPTSize = partyCount;
-                    _init = false;
-                }
                 return;
             }
             catch (Exception e) { Logging.Write(Colors.Red, "Pulse: " + e); }
