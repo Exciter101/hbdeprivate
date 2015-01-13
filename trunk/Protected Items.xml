@@ -10,7 +10,10 @@
     -->
 
 	<!-- ========== Basic Items (alphabetically) ========== -->
+	<Item Name="Dust of Disappearance" Id="63388" />
 	<Item Name="Hearthstone" Id="6948" />
+	<Item Name="Tome of the Clear Mind" Id="79249" />
+	<Item Name="Vanishing Powder" Id="64670" />
 
 	<!-- Basic Items: Bandages (ordered by skill to make) -->
 	<Item Name="Antiseptic Bandage" Id="111603" />
@@ -49,6 +52,7 @@
 	<Item Name="Windwool Bandage" Id="72985" />
 	<Item Name="Heavy Windwool Bandage" Id="72986" />
 	<Item Name="Ashran Bandage" Id="115497" />
+
 	
 	<!-- Basic Items: Containers (BoE or unbound only; ordered by size) -->
 	<!-- 6 slots -->
@@ -180,6 +184,8 @@
 	<Item Name="Cobo Cola" Id="81923" />
 	<Item Name="Golden Carp Consomme" Id="74636" />
 	<Item Name="Lotus Water" Id="88532" />
+	<!-- ILevel: 100 -->
+	<Item Name="Gorgrond Mineral Water" Id="117452" />
 
 	<!-- Basic Items: Drink & Food with Stats (ordered by level to use) -->
 	<Item Name="Enriched Manna Biscuit" Id="13724" />
@@ -282,38 +288,45 @@
 	<Item Name="Thick-Cut Bacon" Id="90135" />
 	<Item Name="Root Veggie Stew" Id="88398" />
 	<Item Name="Tangy Yogurt" Id="81409" />
+	<!-- iLevel:100 -->
+	<Item Name="&quot;Rylak Claws&quot;" Id="115351" />
+	<Item Name="Marbled Clefthoof Steak" Id="115355" />
+	<Item Name="Sliced Zangar Buttons" Id="115354" />
+	<Item Name="Tanaan Sweetmelon" Id="115353" />
+	<Item Name="Telmor-Aruuna Hard Cheese" Id="115352" />
 
-  <!-- WoD Garrison Support -->
-  <Item Name="Anguished Voodoo Doll" Id="113331" />
-  <Item Name="Timber" Id="114781" />
-  <Item Name="Crate of Salvage" Id="114119" />
-  <Item Name="Big Crate of Salvage" Id="114120" />
+    <!-- WoD Garrison Support -->
+    <Item Name="Anguished Voodoo Doll" Id="113331" />
+    <Item Name="Timber" Id="114781" />
+    <Item Name="Crate of Salvage" Id="114119" />
+    <Item Name="Big Crate of Salvage" Id="114120" />
   
-  <!-- Weapon Enhancements -->
-  <Item Name="Balanced Weapon Enhancement" Id="114128" />
-  <Item Name="Striking Weapon Enhancement" Id="114129" />
-  <Item Name="Power Overrun Weapon Enhancement" Id="114131" />
-  <Item Name="War Ravaged Weaponry" Id="114616" />
-  <Item Name="Blackrock Weaponry" Id="114081" />
-  <Item Name="Goredrenched Weaponry" Id="114622" />
+    <!-- Weapon Enhancements -->
+    <Item Name="Balanced Weapon Enhancement" Id="114128" />
+    <Item Name="Striking Weapon Enhancement" Id="114129" />
+    <Item Name="Power Overrun Weapon Enhancement" Id="114131" />
+    <Item Name="War Ravaged Weaponry" Id="114616" />
+    <Item Name="Blackrock Weaponry" Id="114081" />
+    <Item Name="Goredrenched Weaponry" Id="114622" />
   
-  <!-- Armor Enhancements -->
-  <Item Name="Braced Armor Enhancement" Id="114745" />
-  <Item Name="Fortified Armor Enhancement" Id="114808" />
-  <Item Name="Heavily Reinforced Armor Enhancement" Id="114822" />
-  <Item Name="War Ravaged Armor Set" Id="114807" />
-  <Item Name="Blackrock Armor Set" Id="114806" />
-  <Item Name="Goredrenched Armor Set" Id="114746" />
+    <!-- Armor Enhancements -->
+    <Item Name="Braced Armor Enhancement" Id="114745" />
+    <Item Name="Fortified Armor Enhancement" Id="114808" />
+    <Item Name="Heavily Reinforced Armor Enhancement" Id="114822" />
+    <Item Name="War Ravaged Armor Set" Id="114807" />
+    <Item Name="Blackrock Armor Set" Id="114806" />
+    <Item Name="Goredrenched Armor Set" Id="114746" />
 
   
-  <!-- Basic Items: Food, Hunter's Exotic Pet  (ordered by level to use) -->
-  <Item Name="Kibler's Bits" Id="33874" />
+    <!-- Basic Items: Food, Hunter's Exotic Pet  (ordered by level to use) -->
+    <Item Name="Kibler's Bits" Id="33874" />
 
-  <!-- Basic Items: Potions, Flasks  (ordered by level, then alphabetical) -->
-  <!-- iLevel:100 -->
-  <Item Name="Draenic Armor Potion" Id="109220" />
-  <Item Name="Draenic Agility Potion" Id="109217" />
-  <!-- iLevel:60 -->
+    <!-- Basic Items: Potions, Flasks  (ordered by level, then alphabetical) -->
+    <!-- iLevel:100 -->
+    <Item Name="Draenic Armor Potion" Id="109220" />
+    <Item Name="Draenic Agility Potion" Id="109217" />
+  
+    <!-- iLevel:60 -->
 	<Item Name="Flask of Distilled Wisdom" Id="13511" />
 	<Item Name="Flask of Petrification" Id="13506" />
 	<Item Name="Flask of Supreme Power" Id="13512" />
@@ -659,19 +672,21 @@
 	<Item Name="Wild Jade" Id="76139" />
 	<Item Name="Vermilion Onyx" Id="76140" />
 	<Item Name="Imperial Amethyst" Id="76141" />
-  <!-- Warlords of Draenor -->
-  <Item Name="Stamina Taladite" Id="115808" />
-  <Item Name="Greater Stamina Taladite" Id="115815" />
-  <Item Name="Multistrike Taladite" Id="115806" />
-  <Item Name="Greater Multistrike Taladite" Id="115813" />
-  <Item Name="Critical Strike Taladite" Id="115803" />
-  <Item Name="Greater Critical Strike Taladite" Id="115809" />
-  <Item Name="Mastery Taladite" Id="115805" />
-  <Item Name="Greater Mastery Taladite" Id="115812" />
-  <Item Name="Versatility Taladite" Id="115807" />
-  <Item Name="Greater Versatility Taladite" Id="115814" />
-  <Item Name="Haste Taladite" Id="115804" />
-  <Item Name="Greater Haste Taladite" Id="115811" />
+	
+    <!-- Warlords of Draenor -->
+	<Item Name="Stamina Taladite" Id="115808" />
+	<Item Name="Greater Stamina Taladite" Id="115815" />
+	<Item Name="Multistrike Taladite" Id="115806" />
+	<Item Name="Greater Multistrike Taladite" Id="115813" />
+	<Item Name="Critical Strike Taladite" Id="115803" />
+	<Item Name="Greater Critical Strike Taladite" Id="115809" />
+	<Item Name="Mastery Taladite" Id="115805" />
+	<Item Name="Greater Mastery Taladite" Id="115812" />
+	<Item Name="Versatility Taladite" Id="115807" />
+	<Item Name="Greater Versatility Taladite" Id="115814" />
+	<Item Name="Haste Taladite" Id="115804" />
+	<Item Name="Greater Haste Taladite" Id="115811" />
+	
 	<!-- Harvests: Herbs (ordered by level) -->
 	<!-- Classic -->
 	<Item Name="Bloodthistle" Id="22710" />
@@ -990,7 +1005,7 @@
 	<Item Name="Uncatalogued Species" Id="24407" />
 	<Item Name="Unidentified Plant Parts" Id="24401" />
 
-	  <!-- Reputation: Darkmoon Faire -->
+	<!-- Reputation: Darkmoon Faire -->
 	<Item Name="Ace of Iron" Id="112278" />
 	<Item Name="Two of Iron" Id="112277" />
 	<Item Name="Three of Iron" Id="112276" />
@@ -1265,6 +1280,7 @@
 	<Item Name="Philsopher's Stone" Id="9149" />
 	<Item Name="Pyrium-Laced Crystalline Vial" Id="65892" />
 	<Item Name="Living Steel" Id="72104" />
+	<Item Name="Cracked Potion Vial" Id="113295" />
 
 	<!-- Trade: Archeology Items (alphabetical) -->
 	<Item Name="Draenei Tome" Id="64394" />
@@ -1281,6 +1297,7 @@
 
 	<!-- Trade: Blacksmithing Tools ( (alphabetical; also see Trade Tools: Multi-purpose) -->
 	<Item Name="Blacksmith Hammer" Id="5956" />
+	<Item Name="Battered Shield" Id="113321" />
 
 	<!-- Trade: Cooking Tools (alphabetical)-->
 	<Item Name="Apron" Id="86468" />
@@ -1801,6 +1818,7 @@
 	<Item Name="Standard Survey Bot" Id="113455" />
 	<Item Name="Stealthman 54" Id="109184" />
 	<Item Name="Swapblaster" Id="111820" />
+	<Item Name="Tinker's Kit" Id="90146" />
 	<Item Name="Trampled Survey Bot" Id="113452" />
 	<Item Name="Ultra-Electrified Reflector" Id="117402" />
 	<Item Name="Ultrasafe Transporter: Gadgetzan" Id="18986" />
@@ -1814,6 +1832,9 @@
 	<Item Name="Wormhole Generator: Pandaria" Id="87215" />
 	<Item Name="Zapthrottle Mote Extractor" Id="23821" />
 
+	<!-- Trade: First Aid -->
+	<Item Name="Abandoned Medic Kit" Id="113478" />
+	
 	<!-- Trade: Fishing Tools (alphabetical) -->
 	<Item Name="Arcanite Fishing Pole" Id="19970" />
 	<Item Name="Big Iron Fishing Pole" Id="6367" />
@@ -1841,6 +1862,7 @@
 	<Item Name="Thruk's Fishing Rod" Id="120163" />
 	<Item Name="Underbelly Elixir" Id="44012" />
 	<Item Name="Weather-Beaten Fishing Hat" Id="33820" />
+	
 	<!-- Trade: Fishing Bait (WoD) -->
 	<Item Name="Jawless Skulker Bait" Id="110274" />
 	<Item Name="Fat Sleeper Bait" Id="110289" />
@@ -1901,18 +1923,38 @@
 	<Item Name="Violet Pigment" Id="39340" />
 	<Item Name="War Paints" Id="112377" />
 
-
 	<!-- Trade: Inscription Items (alphabetical) -->
 	<Item Name="Tome of the Clear Mind" Id="79249" />
 
 	<!-- Trade: Jewelcrafting Tools (alphabetical) -->
 	<Item Name="Jeweler's Kit" Id="20815" />
+	<Item Name="Crumbling Statue" Id="113381" />
 
 	<!-- Trade: Leatherworking Tools (alphabetical) -->
 	<Item Name="Salt Shaker" Id="15846" />
 
 	<!-- Trade: Leatherworking Items (alphabetical) -->
 	<Item Name="Lucky Charm" Id="5373" />
+	
+	<!-- Trade: Lockboxes (orderd by increasing difficulty) -->
+	<Item Name="Ornate Bronze Lockbox" Id="4632" />
+	<Item Name="Heavy Bronze Lockbox" Id="4633" />
+	<Item Name="Iron Lockbox" Id="4634" />
+	<Item Name="Strong Iron Lockbox" Id="4636" />
+	<Item Name="Steel Lockbox" Id="4637" />
+	<Item Name="Reinforced Steel Lockbox" Id="4638" />
+	<Item Name="Mithril Lockbox" Id="5758" />
+	<Item Name="Thorium Lockbox" Id="5759" />
+	<Item Name="Eternium Lockbox" Id="5760" />
+	<Item Name="Khorium Lockbox" Id="31952" />
+	<Item Name="Froststeel Lockbox" Id="43622" />
+	<Item Name="Titanium Lockbox" Id="43624" />
+	<Item Name="Tiny Titanium Lockbox" Id="45986" />
+	<Item Name="Elementium Lockbox" Id="68729" />
+	<Item Name="Ghost Iron Lockbox" Id="88567" />
+	<Item Name="True Steel Lockbox" Id="116920" />
+	<Item Name="Mysterious Shining Lockbox" Id="118193" />
+	<Item Name="Highmaul Lockbox" Id="119000" />
 
 	<!-- Trade: Mining Tools  (also see Trade Tools: Multi-purpose) -->
 	<Item Name="Brann's Trusty Pick" Id="20723" />
@@ -1991,7 +2033,31 @@
 	<!-- Mists of Panderia -->
 	<Item Name="Bolt of Windwool Cloth" Id="82441" />
 
-  
+	<!-- ========== Valuable Trading Post Auction House Parts (alphabetical) ========== -->
+	<Item Name="Arcane Crystal Amplifier" Id="118346" />
+	<Item Name="Arcane Crystal Casing" Id="118344" />
+	<Item Name="Arcane Crystal Conduit" Id="118345" />
+	<Item Name="Arcane Crystal Focusing Lens" Id="118347" />
+	<Item Name="Arcane Crystal Module" Id="118375" />
+	<Item Name="Auction A.D.D.O.N.S Installer" Id="118332" />
+	<Item Name="Auction Connecting Valve" Id="118331" />
+	<Item Name="Auction Control Module" Id="118376" />
+	<Item Name="Auction Memory Socket" Id="118197" />
+	<Item Name="Cyclical Power Converter" Id="118340" />
+	<Item Name="Cyclical Power Framing" Id="118342" />
+	<Item Name="Cyclical Power Housing" Id="118341" />
+	<Item Name="Cyclical Power Module" Id="118379" />
+	<Item Name="Cyclical Power Sequencer" Id="118343" />
+	<Item Name="Super Cooling Coolant" Id="118338" />
+	<Item Name="Super Cooling Module" Id="118378" />
+	<Item Name="Super Cooling Pump" Id="118339" />
+	<Item Name="Super Cooling Regulator" Id="118336" />
+	<Item Name="Super Cooling Tubing" Id="118337" />
+	<Item Name="Universal Language Compensator" Id="118333" />
+	<Item Name="Universal Language Filter" Id="118334" />
+	<Item Name="Universal Language Module" Id="118377" />
+	<Item Name="Universal Language Repository" Id="118335" />
+
 	<!-- ========== Valuable drops ========= -->
 	<Item Name="Battered Hilt (Alliance)" Id="50379" />
 	<Item Name="Battered Hilt (Horde)" Id="50380" />

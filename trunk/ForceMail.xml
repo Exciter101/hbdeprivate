@@ -623,4 +623,25 @@
 	<Item Name="Tiger Gourami" Entry="74861" />
 	<Item Name="Winter Squid" Entry="13755" />
 	<Item Name="Zangarian Sporefish" Entry="27429" />
+	
+	<!-- Trade: Lockboxes (orderd by increasing difficulty) -->
+	<Item Name="Ornate Bronze Lockbox" Id="4632" />
+	<Item Name="Heavy Bronze Lockbox" Id="4633" />
+	<Item Name="Iron Lockbox" Id="4634" />
+	<Item Name="Strong Iron Lockbox" Id="4636" />
+	<Item Name="Steel Lockbox" Id="4637" />
+	<Item Name="Reinforced Steel Lockbox" Id="4638" />
+	<Item Name="Mithril Lockbox" Id="5758" />
+	<Item Name="Thorium Lockbox" Id="5759" />
+	<Item Name="Eternium Lockbox" Id="5760" />
+	<Item Name="Khorium Lockbox" Id="31952" />
+	<Item Name="Froststeel Lockbox" Id="43622" />
+	<Item Name="Titanium Lockbox" Id="43624" />
+	<Item Name="Tiny Titanium Lockbox" Id="45986" />
+	<Item Name="Elementium Lockbox" Id="68729" />
+	<Item Name="Ghost Iron Lockbox" Id="88567" />
+	<Item Name="True Steel Lockbox" Id="116920" />
+	<Item Name="Mysterious Shining Lockbox" Id="118193" />
+	<Item Name="Highmaul Lockbox" Id="119000" />
+
 </ForceMail>

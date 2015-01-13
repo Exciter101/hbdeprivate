@@ -321,56 +321,45 @@ namespace Bots.DungeonBuddy.Dungeon_Scripts.Mists_of_Pandaria
 
 		#region Gu Cloudstrike
 
-		[EncounterHandler(56747, "Gu Cloudstrike", Mode = CallBehaviorMode.Proximity, BossRange = 100)]
-		public Composite GuCloudstrikeEncounter()
+		private const uint MobId_GuCloudstrike = 56747;
+
+		[EncounterHandler((int)MobId_GuCloudstrike, "Gu Cloudstrike", Mode = CallBehaviorMode.Proximity, BossRange = 100)]
+		public Func<WoWUnit,Task<bool>> GuCloudstrikeEncounter()
 		{
 			WoWUnit boss = null;
 			const uint staticFieldStalkerId = 56803;
 			const int invokeLightningSpellId = 106984;
 			const int staticFieldSpellId = 106923;
 
-			var swDoorSideLoc = new WoWPoint(3681.217, 2634.085, 771.2478);
-			var neDoorSideLoc = new WoWPoint(3686.494, 2624.75, 771.2479);
+			var leftDoorEdge = new WoWPoint(3680.837, 2633.943, 771.2503);
+			var rightDoorEdge = new WoWPoint(3685.094, 2624.101, 771.2479);
 
-			var insideDoorLoc = new WoWPoint(3688.689, 2632.12, 771.2478);
+			var randomPointInsideDoor = WoWMathHelper.GetRandomPointInCircle(new WoWPoint (3695.623, 2636.118, 770.0417), 3);
 
 			AddAvoidObject(ctx => true, 10, staticFieldStalkerId);
 			AddAvoidLocation(ctx => true, 10, m => ((WoWMissile)m).ImpactPosition, () => WoWMissile.InFlightMissiles.Where(m => m.SpellId == staticFieldSpellId));
 			AddAvoidObject(
 				ctx => true,
 				5,
-				u => boss != null && boss.IsValid && boss.CastingSpellId == invokeLightningSpellId && u.Guid == boss.CurrentTargetGuid && u.Guid != Me.Guid);
+				u => ScriptHelpers.IsViable(boss) && boss.CastingSpellId == invokeLightningSpellId && u.Guid == boss.CurrentTargetGuid && u.Guid != Me.Guid);
 
-			return new PrioritySelector(
-				ctx => boss = ctx as WoWUnit,
-				new Decorator(
-					ctx => !boss.Combat && !Me.Combat,
-					new PrioritySelector(
-						new Decorator(
-							ctx =>
-							{
-								var tank = ScriptHelpers.Tank;
-								return tank != null && !tank.IsMe && tank.Location.IsPointLeftOfLine(swDoorSideLoc, neDoorSideLoc) &&
-									   !Me.Location.IsPointLeftOfLine(swDoorSideLoc, neDoorSideLoc);
-							},
-							new Action(ctx => Navigator.MoveTo(insideDoorLoc))),
-				// if not all the followers are inside the door then wait..
-						new Decorator(
-							ctx =>
-								Me.IsTank() && Me.Location.IsPointLeftOfLine(swDoorSideLoc, neDoorSideLoc) &&
-								!Me.PartyMembers.All(p => p.Location.IsPointLeftOfLine(swDoorSideLoc, neDoorSideLoc)),
-							new PrioritySelector(
-								new ActionSetActivity("Waiting on followers to get inside door."),
-								new Decorator(ctx => Me.IsMoving, new Action(ctx => WoWMovement.MoveStop())),
-								new ActionAlwaysSucceed())))),
+			var chargingSoul = new PerFrameCachedValue<bool>(() => ScriptHelpers.IsViable(boss) && boss.HasAura("Charging Soul"));
+
+			return async npc =>
+			{
+				boss = npc;
+
+				if (await ScriptHelpers.MoveInsideBossRoom(boss, leftDoorEdge, rightDoorEdge, randomPointInsideDoor))
+					return true;
+
 				// stack up for aoe heals and to deal with the debuff in phase 2.
-				new Decorator(
-					ctx => boss.HasAura("Charging Soul"),
-					new PrioritySelector(
-						new Decorator(ctx => Me.IsTank() && Me.Location.DistanceSqr(_azureSerpentTankLoc) > 10 * 10, new Action(ctx => Navigator.MoveTo(_azureSerpentTankLoc))),
-						new Decorator(
-							ctx => !Me.IsTank() && Me.Location.DistanceSqr(_azureSerpentFollowerLoc) > 10 * 10,
-							new Action(ctx => Navigator.MoveTo(_azureSerpentFollowerLoc))))));
+				if (chargingSoul)
+				{
+					var loc = Me.IsTank() ? _azureSerpentTankLoc : _azureSerpentFollowerLoc;
+					return await ScriptHelpers.StayAtLocationWhile(() => chargingSoul, loc, "Charging Soul", 10);
+				}
+				return false;
+			};
 		}
 
 		#endregion

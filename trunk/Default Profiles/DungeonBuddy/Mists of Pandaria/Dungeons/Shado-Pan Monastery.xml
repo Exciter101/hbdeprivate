@@ -4,10 +4,18 @@
   <Name>Shado-Pan Monastery</Name>
   <DungeonId>466</DungeonId>
   <BossEncounters>
-    <Boss isFinal="false" entry="56747" name="Gu Cloudstrike" killOrder="1" optional="false" X="3722.51" Y="2674.14" Z="768.0359"/>
-    <Boss isFinal="false" entry="56541" name="Master Snowdrift" killOrder="2" optional="false" X="3713.436" Y="3091.417" Z="817.3194"/>
-    <Boss isFinal="false" entry="56719" name="Sha of Violence" killOrder="3" optional="false" X="3996.92" Y="2905.266" Z="770.3101"/>
-    <Boss isFinal="true" entry="56884" name="Corrupted Taran Zhu" killOrder="4" optional="false" X="3880.087" Y="2585.784" Z="757.2005"/>
+	  <Boss isFinal="false" entry="56747" name="Gu Cloudstrike"
+		  killOrder="1" step="1" optional="false" X="3722.51" Y="2674.14" Z="768.0359"/>
+
+	  <Boss isFinal="false" entry="56541" name="Master Snowdrift"
+		  killOrder="2" step="2" optional="false" X="3713.436" Y="3091.417" Z="817.3194"/>
+
+	  <Boss isFinal="false" entry="56719" name="Sha of Violence"
+		  killOrder="3" step="3" optional="false" X="3996.92" Y="2905.266" Z="770.3101"/>
+
+	  <Boss isFinal="true" entry="56884" name="Corrupted Taran Zhu"
+		  killOrder="4" step="4" optional="false" X="3880.087" Y="2585.784" Z="757.2005"/>
+
   </BossEncounters>
   <Blackspots>
     <!-- Temp Blackspot for when I come acrossed them

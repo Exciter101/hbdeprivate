@@ -2,10 +2,12 @@
 using System;
 using System.Collections;
 using System.Linq;
+using System.Threading.Tasks;
 using CommonBehaviors.Actions;
 using Styx.Common.Helpers;
 using Styx.CommonBot;
 using Styx.CommonBot.Coroutines;
+using Styx.CommonBot.POI;
 using Styx.Helpers;
 using Styx.Pathing;
 using Styx.WoWInternals;
@@ -30,37 +32,42 @@ namespace Bots.DungeonBuddy.Dungeon_Scripts.Classic
 
 		public override WoWPoint Entrance
 		{
-			get { return new WoWPoint(-4661.295, -2532.039, 82.10799); }
+			get { return new WoWPoint(-4661.441, -2531.453, 82.05106); }
 		}
 
 		public override WoWPoint ExitLocation
 		{
-			get { return new WoWPoint(2592.978, 1115.126, 50.73724); }
+			get { return new WoWPoint(2592.96, 1116.085, 50.44804); }
 		}
 
-		readonly WoWPoint _mordreshLoc = new WoWPoint(2466.618, 671.4426, 63.3871);
-		readonly WoWPoint _safeMordreshLoc = new WoWPoint(2477.332, 678.9361, 55.2272);
-		WaitTimer _jumpWaitTimer = new WaitTimer(TimeSpan.FromSeconds(3));
-		public override MoveResult MoveTo(WoWPoint location)
+		public override void IncludeTargetsFilter(List<WoWObject> incomingObjects, HashSet<WoWObject> outgoingObjects)
 		{
-			var myLoc = Me.Location;
-			var pointDistToMordresh = location.Distance(_mordreshLoc);
-			var myDistToMordresh = myLoc.Distance(_mordreshLoc);
-			if (myDistToMordresh < 20 || pointDistToMordresh < 20)
+			foreach (var unit in incomingObjects.OfType<WoWUnit>())
 			{
-				if (myDistToMordresh > 45)
-					return Navigator.MoveTo(_safeMordreshLoc);
-				Navigator.PlayerMover.MoveTowards(location);
-				if (_jumpWaitTimer.IsFinished)
-				{
-					WoWMovement.Move(WoWMovement.MovementDirection.JumpAscend);
-					WoWMovement.MoveStop(WoWMovement.MovementDirection.JumpAscend);
-					_jumpWaitTimer.Reset();
-				}
-				return MoveResult.Moved;
+				if (unit.Entry == MobId_BlazingServitor)
+					outgoingObjects.Add(unit);
 			}
-			return base.MoveTo(location);
 		}
+
+		public override void WeighTargetsFilter(List<Targeting.TargetPriority> objPriorities)
+		{
+			var isDps = Me.IsDps();
+			foreach (var targetPriority in objPriorities)
+			{
+				var unit = targetPriority.Object as WoWUnit;
+				if (unit == null)
+					continue;
+
+				if (unit.Entry == MobId_BlazingServitor)
+					targetPriority.Score += 4500;
+
+				// DPS should priortize adds above boss.
+				if (unit.Entry == MobId_DeathSpeakerBlackthorn && isDps)
+					targetPriority.Score -= 4500;
+
+			}
+		}
+
 		#endregion
 
 		private LocalPlayer Me
@@ -69,90 +76,167 @@ namespace Bots.DungeonBuddy.Dungeon_Scripts.Classic
 		}
 
 
+		#region Aarux
 
-		[EncounterHandler(44837, "Koristrasza", Mode = CallBehaviorMode.Proximity, BossRange = 40)]
-		public Composite KoristraszaEncounter()
+		const uint GameObjectId_Gong = 148917;
+
+		[ObjectHandler((int) GameObjectId_Gong, "Gong", ObjectRange = 100)]
+		public async Task<bool> GongHandler(WoWGameObject gong)
 		{
-			WoWUnit unit = null;
-			return new PrioritySelector(
-				ctx => unit = ctx as WoWUnit,
-				new Decorator(ctx => !Me.Combat && unit.QuestGiverStatus == QuestGiverStatus.Available, ScriptHelpers.CreatePickupQuest(ctx => unit)),
-				new Decorator(ctx => !Me.Combat && unit.QuestGiverStatus == QuestGiverStatus.TurnIn, ScriptHelpers.CreateTurninQuest(ctx => unit)));
+			if (!Me.IsTank() || !Targeting.Instance.IsEmpty() || !gong.CanUse())
+				return false;
+			
+			if (await ScriptHelpers.ClearArea(gong.Location, 40) || BotPoi.Current.Type != PoiType.None)
+				return false;
+			
+			return await ScriptHelpers.InteractWithObject(gong);
 		}
 
-		#region Tuten'kash
-
-		[EncounterHandler(7355, "Tuten'kash")]
-		public Composite TutenkashEncounter()
+		private const uint MobId_Aarux = 74412;
+		[EncounterHandler((int)MobId_Aarux, "Aarux")]
+		public Func<WoWUnit, Task<bool>> AaruxEncounter()
 		{
-			WoWUnit boss = null;
-			return new PrioritySelector(
-				ctx => boss = ctx as WoWUnit,
-				ScriptHelpers.CreateDispelGroup("Virulent Poison", ScriptHelpers.PartyDispelType.Poison),
-				ScriptHelpers.CreateDispelGroup("Curse of Tuten'kash", ScriptHelpers.PartyDispelType.Curse),
-				ScriptHelpers.CreateAvoidUnitAnglesBehavior(ctx => !Me.IsTank() && boss.Distance < 20, ctx => boss, new ScriptHelpers.AngleSpan(0, 180)),
-				ScriptHelpers.CreateTankFaceAwayGroupUnit(ctx => boss, 20));
-		}
+			AddAvoidObject(ctx => Me.HasAura("Web Strand"), 20, MobId_Aarux);
 
-		[ObjectHandler(148917, "Gong", ObjectRange = 75)]
-		public Composite GongHandler()
-		{
-			var waitForWaveTimer = new WaitTimer(TimeSpan.FromSeconds(5));
+			return async boss =>
+			{
+				if (Me.HasAura("Web Strand"))
+					Navigator.NavigationProvider.StuckHandler.Reset();
 
-			WoWGameObject gong = null;
-			return new PrioritySelector(
-				ctx => gong = ctx as WoWGameObject,
-				new Decorator(ctx => !waitForWaveTimer.IsFinished && Me.IsTank() && Targeting.Instance.IsEmpty(), new ActionAlwaysSucceed()),
-				new Decorator(
-					ctx =>
-					Targeting.Instance.IsEmpty() && !gong.InUse && gong.State == WoWGameObjectState.Ready && Me.IsTank() && gong.CanUse() &&
-					ScriptHelpers.IsBossAlive("Tuten'kash"),
-					new PrioritySelector(
-						new Decorator(ctx => gong.WithinInteractRange, new Sequence(new Action(ctx => waitForWaveTimer.Reset()), new Action(ctx => gong.Interact()))),
-						new Decorator(ctx => !gong.WithinInteractRange, new Action(ctx => Navigator.MoveTo(gong.Location))))));
+				return false;
+			};
 		}
 
 		#endregion
 
 		#region Mordresh Fire Eye
 
-		private const uint MordreshFireEyeId = 7357;
+		private const int SpellId_LavaBurst = 150001;
+		const uint MobId_BlazingServitor = 74548;
+		private const uint MobId_MordreshFireEye = 74347;
 
-		[EncounterHandler(7357, "Mordresh Fire Eye")]
-		public Composite MordreshFireEyeEncounter()
+		[EncounterHandler((int)MobId_MordreshFireEye, "Mordresh Fire Eye")]
+		public Func<WoWUnit, Task<bool>> MordreshFireEyeEncounter()
 		{
-			WoWUnit boss = null;
-			AddAvoidObject(ctx => Me.IsRange(), 10, o => o.Entry == MordreshFireEyeId && o.ToUnit().CurrentTargetGuid != Me.Guid);
-
-			const int fireNovaId = 12470;
-			return new PrioritySelector(ctx => boss = ctx as WoWUnit, ScriptHelpers.CreateInterruptCast(ctx => boss, fireNovaId));
+			return async boss => await ScriptHelpers.InterruptCast(boss, SpellId_LavaBurst);
 		}
 
 		#endregion
 
-		#region Glutton
+		#region Mushlump
 
-		private const uint GluttonId = 8567;
+		private const int SpellId_TummyAche = 149851;
+		private const uint SpellId_PutridFunk = 152136;
+		private const uint MobId_Mushlump = 74435;
 
-		[EncounterHandler(8567, "Glutton")]
-		public Composite GluttonEncounter()
+		[EncounterHandler((int)MobId_Mushlump, "Mushlump")]
+		public Func<WoWUnit, Task<bool>> MushlumpEncounter()
 		{
 			WoWUnit boss = null;
-			// range should keep thier distance because of the desease cloud
-			AddAvoidObject(ctx => Me.IsRange(), 5, o => o.Entry == GluttonId && o.ToUnit().IsAlive && o.ToUnit().CurrentTargetGuid != Me.Guid);
+			AddAvoidObject(5, SpellId_PutridFunk);
 
-			return new PrioritySelector(ctx => boss = ctx as WoWUnit);
+			// 5 degree cone that does damage up to 40 yds
+			AddAvoidLocation(
+				ctx => !Me.IsSwimming && ScriptHelpers.IsViable(boss) && boss.CastingSpellId == SpellId_TummyAche,
+				4 * 1.33f,
+				o => (WoWPoint)o,
+				() => ScriptHelpers.GetPointsAlongLineSegment(
+					boss.Location,
+					boss.Location.RayCast(boss.Rotation, 40),
+					4 / 2).OfType<object>());
+
+			return async npc =>
+			{
+				boss = npc;
+				return false;
+			};
+		}
+
+		#endregion
+
+
+		#region Death Speaker Blackthorn
+
+		private const int SpellId_Shockwave = 151962;
+		private const int SpellId_SearingShadows = 150616;
+		private const int SpellId_Shadowmend = 150550;
+		private const uint AreaTriggerId_BubonicPlague = 5584;
+		private const uint MobId_DeathSpeakerBlackthorn = 74875;
+
+		[EncounterHandler((int)MobId_DeathSpeakerBlackthorn, "Death Speaker Blackthorn")]
+		public Func<WoWUnit, Task<bool>> DeathSpeakerBlackthornEncounter()
+		{
+			// From one of the trash mobs I think
+			AddAvoidObject(4, AreaTriggerId_BubonicPlague);
+
+			#region Shockwave
+
+			AddAvoidObject(
+				3,
+				o => o.Entry == MobId_DeathSpeakerBlackthorn && o.ToUnit().CastingSpellId == SpellId_Shockwave,
+				o => o.Location.RayCast(o.Rotation, 2));
+			AddAvoidObject(
+				6,
+				o => o.Entry == MobId_DeathSpeakerBlackthorn && o.ToUnit().CastingSpellId == SpellId_Shockwave,
+				o => o.Location.RayCast(o.Rotation, 6));
+			AddAvoidObject(
+				8,
+				o => o.Entry == MobId_DeathSpeakerBlackthorn && o.ToUnit().CastingSpellId == SpellId_Shockwave,
+				o => o.Location.RayCast(o.Rotation, 12));
+			AddAvoidObject(
+				10,
+				o => o.Entry == MobId_DeathSpeakerBlackthorn && o.ToUnit().CastingSpellId == SpellId_Shockwave,
+				o => o.Location.RayCast(o.Rotation, 17));
+
+			#endregion
+
+
+			return async boss => await ScriptHelpers.InterruptCast(boss, SpellId_Shadowmend, SpellId_SearingShadows)
+								|| await ScriptHelpers.DispelGroup("Searing Shadows", ScriptHelpers.PartyDispelType.Magic);
 		}
 
 		#endregion
 
 		#region Amnennar the Coldbringer
 
-		[EncounterHandler(7358, "Amnennar the Coldbringer")]
-		public Composite AmnennarTheColdbringerEncounter()
+		const uint SpellId_FrozenBomb = 152190;
+		private const uint AreaTriggerId_RedeemedSoil = 5634;
+		private const uint SpellId_SoulLeech = 150679;
+
+		private const uint MobId_AmnennartheColdbringer = 74434;
+		[EncounterHandler((int)MobId_AmnennartheColdbringer, "Amnennar the Coldbringer")]
+		public Func<WoWUnit, Task<bool>> AmnennartheColdbringerEncounter()
 		{
 			WoWUnit boss = null;
-			return new PrioritySelector(ctx => boss = ctx as WoWUnit);
+
+			var soulLeech = new PerFrameCachedValue<bool>(
+				() => Me.HasAura("Soul Leech") || ScriptHelpers.IsViable(boss) && boss.CastingSpellId == SpellId_SoulLeech);
+
+			AddAvoidObject(ctx => !soulLeech, 2.75f, SpellId_FrozenBomb);
+
+			return async npc =>
+			{
+				boss = null;
+
+				if (soulLeech)
+				{
+					var redeemdSoil =
+						ObjectManager.GetObjectsOfType<WoWAreaTrigger>()
+							.Where(a => a.Entry == AreaTriggerId_RedeemedSoil)
+							.OrderBy(a => a.DistanceSqr)
+							.FirstOrDefault();
+
+					if (redeemdSoil != null)
+					{
+						return await ScriptHelpers.StayAtLocationWhile(() => soulLeech && ScriptHelpers.IsViable(redeemdSoil),
+									redeemdSoil.Location,
+									"Redeemed soil",
+									3.5f);
+					}
+
+				}
+				return false;
+			};
 		}
 
 		#endregion

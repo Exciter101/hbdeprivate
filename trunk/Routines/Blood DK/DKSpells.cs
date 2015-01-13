@@ -117,7 +117,8 @@ namespace DK
             get
             {
                 if (Me.CurrentTarget != null
-                    && DepletedCount >= 1
+                    && DeathRuneCount < 2
+                    && DepletedCount < 3
                     && buffExists(BLOOD_CHARGE_INT, Me) && buffStackCount(BLOOD_CHARGE_INT, Me) >= 5) { return true; }
                 return false;
             }
@@ -126,11 +127,17 @@ namespace DK
         {
             get
             {
-                if (Me.CurrentTarget != null 
-                    && debuffExists(BLOOD_PLAGUE, Me.CurrentTarget) 
-                    && debuffExists(FROST_FEVER, Me.CurrentTarget)
-                    && DepletedCount >= 2
-                    && !spellOnCooldown(OUTBREAK)) { return true; }
+                if (gotTarget
+                && SpellManager.HasSpell(PLAGUE_LEECH)
+                && SpellManager.CanCast(PLAGUE_LEECH)
+                && Me.CurrentTarget.IsWithinMeleeRange
+                && !spellOnCooldown(PLAGUE_LEECH)
+                && debuffExists(FROST_FEVER, Me.CurrentTarget)
+                && debuffExists(BLOOD_PLAGUE, Me.CurrentTarget)
+                && (DeathRuneCount + UnholyRuneCount + FrostRuneCount + BloodRuneCount) < 2)
+                {
+                    return true;
+                }
                 return false;
             }
         }

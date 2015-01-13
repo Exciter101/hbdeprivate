@@ -1,3 +1,7 @@
+Version 6.0.5491
+New build compartible with new Honorbuddy 2.5.12600.764
+Optimization and bug fix
+
 Version 6.0.5485
 Added Smart Interrupt Cooldown Tracker and Juke logic for PvP. (Auto Activate in Arena/BG so there's no setting needed)
 When there's enemy unit that can interrupt around, CR will randomly try to Cast Regrowth(random interval 3-5 seconds) and StopCasting right away (randome between 300-500ms) to trick enemy using Pummel, Kick, Counter-Shot...

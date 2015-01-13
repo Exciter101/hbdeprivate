@@ -85,7 +85,12 @@ namespace DK
             if (await Cast(SOUL_REAPER, gotTarget && BloodRuneCount >= 1 && Me.CurrentTarget.HealthPercent < 35 && !spellOnCooldown(SOUL_REAPER) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(BLOOD_BOIL, gotTarget && BloodRuneCount >= 1 && (Me.CurrentTarget.HealthPercent > 35) || IsOverlayed(BLOOD_BOIL_INT) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(DEATH_COIL, gotTarget && Me.RunicPowerPercent >= 40 && Range30)) return true;
-            if (await Cast(DEATH_STRIKE, gotTarget && (DeathRuneCount >= 2 || (UnholyRuneCount >= 1 && FrostRuneCount >= 1) && Me.CurrentTarget.IsWithinMeleeRange))) return true;
+            if (await Cast(DEATH_STRIKE, gotTarget 
+                && (DeathRuneCount >= 2 
+                || (UnholyRuneCount >= 1 && FrostRuneCount >= 1) 
+                || (DeathRuneCount == 1 && UnholyRuneCount >= 1)
+                || (DeathRuneCount == 1 && FrostRuneCount >= 1))
+                && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await CastBuff(BLOOD_TAP, needBloodTap)) return true;
             if (await Cast(ICY_TOUCH, gotTarget && !debuffExists(FROST_FEVER, Me.CurrentTarget) && FrostRuneCount >= 1 && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await Cast(PLAGUE_STRIKE, gotTarget && !debuffExists(PLAGUE_STRIKE, Me.CurrentTarget) && UnholyRuneCount >= 1 && Me.CurrentTarget.IsWithinMeleeRange)) return true;

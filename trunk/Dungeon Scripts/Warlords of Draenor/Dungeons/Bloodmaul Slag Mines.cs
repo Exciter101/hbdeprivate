@@ -78,6 +78,7 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
         public override void WeighTargetsFilter(List<Targeting.TargetPriority> units)
         {
             var isDps = Me.IsDps();
+	        var isTank = Me.IsTank();
             foreach (var priority in units)
             {
                 var unit = priority.Object as WoWUnit;
@@ -88,6 +89,7 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
                         case MobId_BloodmaulWarder:
                         case MobId_Ruination:
                         case MobId_MoltenElemental:
+						case MobId_MagmaLord:
                         case MobId_UnstableSlag:
                             if (isDps)
                                 priority.Score += 4000;
@@ -99,8 +101,13 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
                             break;
                     }
 
-                    if (isDps && MobIds_CapturedMiner.Contains(unit.Entry))
-                        priority.Score += 5000;
+                    if (MobIds_CapturedMiner.Contains(unit.Entry))
+                    {
+						if (isDps)
+							priority.Score += 5000;
+						else if (isTank)
+							priority.Score = unit.Aggro ? -5000: 5000 - unit.Distance;
+                    }
                 }
             }
         }
@@ -139,6 +146,7 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
         private const uint MobId_BloodmaulWarder = 75210;
         private const uint MobId_BloodmaulOverseer = 75193;
         private const uint MobId_BloodmaulGeomancer = 75198;
+	    private const uint MobId_MagmaLord = 75211;
         private const uint MobId_FleeingMiner = 75647;
         private const uint MobId_PillarOfFire = 75327;
         private const uint MobId_BloodmaulFlamespeaker = 81767;
@@ -274,12 +282,11 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
         {
             AddAvoidObject(ctx => true, 3, AreaTriggerId_MagmaBarrage);
 
-            // avoid the frontal cone aoe stun.
+            // avoid the PBaoe stun.
             AddAvoidObject(
                 ctx => true,
-                8,
-                o => o.Entry == MobId_Magmolatus && o.ToUnit().CastingSpellId == SpellId_SlagSmash,
-                o => o.Location.RayCast(o.Rotation, 7));
+                9,
+                o => o.Entry == MobId_Magmolatus && o.ToUnit().CastingSpellId == SpellId_SlagSmash);
 
             return async boss =>
             {
@@ -306,6 +313,7 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
 
         #endregion
 
+		// http://www.wowhead.com/guide=2664/bloodmaul-slag-mines-dungeon-strategy-guide#slave-watcher-crushto
         #region Slave Watcher Crushto
 
         private const int SpellId_FerociousYell = 150759;
@@ -317,15 +325,22 @@ namespace Bots.DungeonBuddy.DungeonScripts.WarlordsOfDraenor
         [EncounterHandler(74787, "Slave Watcher Crushto")]
         public Func<WoWUnit, Task<bool>> SlaveWatcherCrushtoEncounter()
         {
+	        WoWUnit crushto  = null;
+			const float earthCrushWidth = 8;
             // avoid the frontal cone aoe stun.
-            AddAvoidObject(
-                ctx => true,
-                8,
-                o => o.Entry == MobId_SlaveWatcherCrush && o.ToUnit().CastingSpellId == SpellId_EarthCrush,
-                o => o.Location.RayCast(o.Rotation, 7));
+
+	        AddAvoidLocation(
+		        ctx => !Me.IsSwimming && ScriptHelpers.IsViable(crushto) && crushto.CastingSpellId == SpellId_EarthCrush,
+		        earthCrushWidth*1.33f,
+		        o => (WoWPoint) o,
+		        () => ScriptHelpers.GetPointsAlongLineSegment(
+			        crushto.Location,
+			        crushto.Location.RayCast(crushto.Rotation, 37),
+			        earthCrushWidth/2).OfType<object>());
 
             return async boss =>
-            {
+				{
+					crushto = boss;
                 if (await ScriptHelpers.InterruptCast(boss, SpellId_FerociousYell))
                     return true;
 

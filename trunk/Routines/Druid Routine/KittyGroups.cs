@@ -33,16 +33,8 @@ namespace Kitty
         public static List<WoWUnit> PulsePartyMembersPG()
         {
             var results = new List<WoWUnit>();
-            foreach (var p in SearchAreaUnits())
-            {
-                if (!IsValidObject(p)) continue;
-                if (p.Name == "Proving Grounds") continue;
-                if (p.Name == "Xuen") continue;
-                if (p.Name == "Trial Master Rotun") continue;
-                if (p.Name == "Nadaga Soulweaver") continue;
-                if (p.Name == "Furnisher Echoroot") continue;
-                results.Add(p);
-            }
+            results = ObjectManager.GetObjectsOfTypeFast<WoWUnit>().Where(p => p != null
+                && p.IsFriendly).ToList();
             return results;
         }
         public static List<WoWUnit> PulsePartyMembers()

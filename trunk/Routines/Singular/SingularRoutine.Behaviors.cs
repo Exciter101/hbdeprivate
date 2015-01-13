@@ -31,6 +31,7 @@ using Singular.ClassSpecific.Monk;
 using Styx.WoWInternals.WoWCache;
 using Styx.CommonBot.Profiles;
 using Singular.Utilities;
+using Styx.CommonBot.Routines;
 
 
 namespace Singular
@@ -38,11 +39,11 @@ namespace Singular
     partial class SingularRoutine
     {
         private Composite _combatBehavior;
-        private Composite _combatBuffsBehavior;
-        private Composite _healBehavior;
+        public Composite _combatBuffsBehavior;
+        public Composite _healBehavior;
         private Composite _preCombatBuffsBehavior;
         private Composite _pullBehavior;
-        private Composite _pullBuffsBehavior;
+        public Composite _pullBuffsBehavior;
         private Composite _restBehavior;
         public Composite _lostControlBehavior;
         private Composite _deathBehavior;
@@ -88,31 +89,31 @@ namespace Singular
                 Logger.WriteFile("======================================================");
             }
 
+            // These are optional. If they're not implemented, we shouldn't stop because of it.
+            EnsureComposite(silent, false, CurrentWoWContext, BehaviorType.Death);
+            EnsureComposite(silent, false, CurrentWoWContext, BehaviorType.LossOfControl);
+            EnsureComposite(silent, false, CurrentWoWContext, BehaviorType.PreCombatBuffs);
+            EnsureComposite(silent, false, CurrentWoWContext, BehaviorType.Heal);
+            EnsureComposite(silent, false, CurrentWoWContext, BehaviorType.CombatBuffs);
+            EnsureComposite(silent, false, CurrentWoWContext, BehaviorType.PullBuffs);
+
             // If these fail, then the bot will be stopped. We want to make sure combat/pull ARE implemented for each class.
-            if (!EnsureComposite( silent, true, CurrentWoWContext, BehaviorType.Combat))
+            if (!EnsureComposite(silent, true, CurrentWoWContext, BehaviorType.Pull))
             {
-                return false;
+                return false;   // fail
             }
 
-            if (!EnsureComposite( silent, true, CurrentWoWContext, BehaviorType.Pull))
+            if (!EnsureComposite(silent, true, CurrentWoWContext, BehaviorType.Combat))
             {
-                return false;
+                return false;   // fail
             }
 
             // If there's no class-specific resting, just use the default, which just eats/drinks when low.
             EnsureComposite( silent, false, CurrentWoWContext, BehaviorType.Rest);
-            // if (TreeHooks.Instance.Hooks[HookName(BehaviorType.Rest)] == null)
             if (!TreeHooks.Instance.Hooks.ContainsKey(HookName(BehaviorType.Rest)) || TreeHooks.Instance.Hooks[HookName(BehaviorType.Rest)].Count <= 0)
+            {
                 TreeHooks.Instance.ReplaceHook(HookName(BehaviorType.Rest), Helpers.Rest.CreateDefaultRestBehaviour());
-
-            // These are optional. If they're not implemented, we shouldn't stop because of it.
-            EnsureComposite( silent, false, CurrentWoWContext, BehaviorType.CombatBuffs);
-            EnsureComposite( silent, false, CurrentWoWContext, BehaviorType.Heal);
-            EnsureComposite( silent, false, CurrentWoWContext, BehaviorType.PullBuffs);
-            EnsureComposite( silent, false, CurrentWoWContext, BehaviorType.PreCombatBuffs);
-            EnsureComposite( silent, false, CurrentWoWContext, BehaviorType.Death);
-
-            EnsureComposite(silent, false, CurrentWoWContext, BehaviorType.LossOfControl);
+            }
 
 #if SHOW_BEHAVIOR_LOAD_DESCRIPTION
             // display concise single line describing what behaviors we are loading
@@ -210,7 +211,7 @@ namespace Singular
             return "Singular." + typ.ToString();
         }
 
-        static bool _inQuestVehicle = false;
+        public static bool inQuestVehicle { get; set; }
 
         static bool _inPetCombat = false;
 
@@ -225,17 +226,18 @@ namespace Singular
             // disable if Questing and in a Quest Vehicle (now requires setting as well)
             if (IsQuestBotActive)
             {
-                if (_inQuestVehicle != Me.InVehicle)
+                bool CurrentlyInVehicle = Me.InVehicle;
+                if (inQuestVehicle != CurrentlyInVehicle)
                 {
-                    _inQuestVehicle = Me.InVehicle; 
-                    if (_inQuestVehicle )
+                    inQuestVehicle = CurrentlyInVehicle; 
+                    if (inQuestVehicle )
                     {
                         Logger.WriteDiagnostic( LogColor.Hilite, "Singular is {0} while in a Quest Vehicle", SingularSettings.Instance.DisableInQuestVehicle ? "Disabled" : "Enabled");
                         // Logger.Write( LogColor.Hilite, "Change [Disable in Quest Vehicle] setting to '{0}' to change", !SingularSettings.Instance.DisableInQuestVehicle);
                     }
                 }
 
-                if (_inQuestVehicle && SingularSettings.Instance.DisableInQuestVehicle)
+                if (inQuestVehicle && SingularSettings.Instance.DisableInQuestVehicle)
                     return false;
             }
 
@@ -511,18 +513,21 @@ namespace Singular
                     );
             }
 
-            if (behav == BehaviorType.CombatBuffs)
+            if (behav == BehaviorType.Pull)
             {
                 composite = new LockSelector(
-                    new CallWatch("CombatBuffs",
+                    new CallWatch("Pull",
                         new Decorator(
-                            ret => AllowBehaviorUsage() && OkToCallBehaviorsWithCurrentCastingStatus(),
+                            ret => AllowBehaviorUsage(), // && (!Me.GotTarget() || !Blacklist.Contains(Me.CurrentTargetGuid, BlacklistFlags.Combat)),
                             new PrioritySelector(
-                                new Decorator(ret => !HotkeyDirector.IsCombatEnabled, new ActionAlwaysSucceed()),
-                                Generic.CreateUseTrinketsBehaviour(),
-                                Generic.CreatePotionAndHealthstoneBehavior(),
-                                Generic.CreateRacialBehaviour(),
-                                Generic.CreateGarrisonAbilityBehaviour(),
+                                new Decorator(
+                                    ret => !HotkeyDirector.IsCombatEnabled,
+                                    new ActionAlwaysSucceed()
+                                    ),
+#if BOTS_NOT_CALLING_PULLBUFFS
+                            _pullBuffsBehavior,
+#endif
+ CreateLogTargetChanges(BehaviorType.Pull, "<<< PULL >>>"),
                                 composite ?? new ActionAlwaysFail()
                                 )
                             )
@@ -563,21 +568,18 @@ namespace Singular
                     );
             }
 
-            if (behav == BehaviorType.Pull)
+            if (behav == BehaviorType.CombatBuffs)
             {
                 composite = new LockSelector(
-                    new CallWatch("Pull",
+                    new CallWatch("CombatBuffs",
                         new Decorator(
-                            ret => AllowBehaviorUsage(), // && (!Me.GotTarget || !Blacklist.Contains(Me.CurrentTargetGuid, BlacklistFlags.Combat)),
+                            ret => AllowBehaviorUsage() && OkToCallBehaviorsWithCurrentCastingStatus(),
                             new PrioritySelector(
-                                new Decorator(
-                                    ret => !HotkeyDirector.IsCombatEnabled,
-                                    new ActionAlwaysSucceed()
-                                    ),
-#if BOTS_NOT_CALLING_PULLBUFFS
-                            _pullBuffsBehavior,
-#endif
- CreateLogTargetChanges(BehaviorType.Pull, "<<< PULL >>>"),
+                                new Decorator(ret => !HotkeyDirector.IsCombatEnabled, new ActionAlwaysSucceed()),
+                                Generic.CreateUseTrinketsBehaviour(),
+                                Generic.CreatePotionAndHealthstoneBehavior(),
+                                Generic.CreateRacialBehaviour(),
+                                Generic.CreateGarrisonAbilityBehaviour(),
                                 composite ?? new ActionAlwaysFail()
                                 )
                             )
@@ -590,7 +592,7 @@ namespace Singular
                 composite = new LockSelector(
                     new CallWatch("Combat",
                         new Decorator(
-                            ret => AllowBehaviorUsage(), // && (!Me.GotTarget || !Blacklist.Contains(Me.CurrentTargetGuid, BlacklistFlags.Combat)),
+                            ret => AllowBehaviorUsage(), // && (!Me.GotTarget() || !Blacklist.Contains(Me.CurrentTargetGuid, BlacklistFlags.Combat)),
                             new PrioritySelector(
                                 new Decorator(
                                     ret => !HotkeyDirector.IsCombatEnabled,
@@ -663,6 +665,52 @@ namespace Singular
                     )
                 );
         }
+
+        public static Composite MoveBehaviorInlineToCombat( BehaviorType bt )
+        {
+            string hookNameOrig = HookName(bt);
+            string hookNameInline = hookNameOrig + "-INLINE";
+
+            if (BehaviorType.Combat != Dynamics.CompositeBuilder.CurrentBehaviorType)
+            {
+                Logger.WriteDiagnostic("MoveBehaviorInline: suppressing Inline for {0} behavior", Dynamics.CompositeBuilder.CurrentBehaviorType);
+                return new ActionAlwaysFail();
+            }
+
+            if (Instance == null)
+            {
+                StopBot(string.Format("MoveBehaviorInline: PROGRAM ERROR - SingularRoutine.Instance not initialized yet for {0} !!!!", bt));
+                return null;
+            }
+
+            if (bt == Dynamics.CompositeBuilder.CurrentBehaviorType)
+            {
+                StopBot(string.Format("MoveBehaviorInline: PROGRAM ERROR - referenced behavior({0}) == current behavior({1}) !!!!", bt, bt));
+                return null;
+            }
+
+            // on creation, move hook composite (if exists) from default to inline hook
+            Composite composite = new ActionAlwaysFail();
+            if (TreeHooks.Instance.Hooks.ContainsKey(hookNameOrig))
+            {
+                if (TreeHooks.Instance.Hooks[hookNameOrig].Count() == 1)
+                {
+                    composite = TreeHooks.Instance.Hooks[hookNameOrig].First().Composite;
+                    if (composite == null)
+                    {
+                        StopBot(string.Format("MoveBehaviorInline: PROGRAM ERROR - not composite for behavior({0}) !!!!", bt));
+                        return null;
+                    }
+
+                    TreeHooks.Instance.ReplaceHook(hookNameInline, composite);
+                    TreeHooks.Instance.RemoveHook(hookNameOrig, composite);
+                    Logger.WriteFile("MoveBehaviorInline: moving {0} behavior within {1} {2}", bt, Dynamics.CompositeBuilder.CurrentBehaviorName, Dynamics.CompositeBuilder.CurrentBehaviorPriority);
+                }
+            }
+
+            return new HookExecutor(hookNameInline);
+        }
+
         public static void ResetCurrentTargetTimer()
         {
             _timerLastTarget.Reset();
@@ -685,7 +733,7 @@ namespace Singular
                     // .. tries to handle by only checking CurrentTarget reference and treating null as guid = 0
                     if (Me.CurrentTargetGuid != _guidLastTarget)
                     {
-                        if (!Me.CurrentTargetGuid.IsValid || Me.CurrentTarget == null)
+                        if (!Me.GotTarget())
                         {
                             if (_guidLastTarget.IsValid)
                             {
@@ -701,8 +749,8 @@ namespace Singular
                             LogTargetChanges(behav, sType);
                         }
                     }
-                    // testing for Me.CurrentTarget != null also to address objmgr not resolving guid yet to avoid NullRef
-                    else if (Me.CurrentTargetGuid.IsValid && Me.CurrentTarget != null && Me.CurrentTarget.IsValid && !MovementManager.IsMovementDisabled && SingularRoutine.CurrentWoWContext == WoWContext.Normal)  
+                    // testing for Me.GotTarget() also to address objmgr not resolving guid yet to avoid NullRef
+                    else if (Me.GotTarget() && Me.CurrentTarget.IsValid && !MovementManager.IsMovementDisabled && SingularRoutine.CurrentWoWContext == WoWContext.Normal)  
                     {       
                         // make sure we get into melee range within reasonable time
                         if ((!Me.IsMelee() || Me.CurrentTarget.IsWithinMeleeRange) && Movement.InLineOfSpellSight(Me.CurrentTarget, 5000))
@@ -711,22 +759,36 @@ namespace Singular
                         }
                         else if (_timerLastTarget.IsFinished)
                         {
-                            BlacklistFlags blf = Me.CurrentTarget.Aggro || (Me.GotAlivePet && Me.CurrentTarget.PetAggro) ? BlacklistFlags.Combat : BlacklistFlags.Pull;
-                            if (!Blacklist.Contains(_guidLastTarget, blf))
+                            bool haveAggro = Me.CurrentTarget.Aggro || (Me.GotAlivePet && Me.CurrentTarget.PetAggro);
+                            if (haveAggro && Me.CurrentTarget.SpellDistance() < 25)
                             {
-                                TimeSpan bltime = TimeSpan.FromMinutes(5);
+                                ResetCurrentTargetTimer();
+                            }
+                            else
+                            {
+                                BlacklistFlags blf = !haveAggro ? BlacklistFlags.Pull : BlacklistFlags.Pull | BlacklistFlags.Combat;
+                                if (!Blacklist.Contains(_guidLastTarget, blf))
+                                {
+                                    TimeSpan bltime = haveAggro
+                                        ? TimeSpan.FromSeconds(30)
+                                        : TimeSpan.FromSeconds(300);
 
-                                Logger.Write(Color.HotPink, "{0} Target {1} out of range/line of sight for {2:F1} seconds, blacklisting for {3:c} and clearing {4}", 
-                                    blf, 
-                                    Me.CurrentTarget.SafeName(), 
-                                    _timerLastTarget.WaitTime.TotalSeconds, 
-                                    bltime,
-                                    _guidLastTarget == BotPoi.Current.Guid ? "BotPoi" : "Current Target" );
+                                    string fragment = string.Format(
+                                        "{0} out of range/line of sight for {1:F1} seconds",
+                                        Me.CurrentTarget.SafeName(),
+                                        _timerLastTarget.WaitTime.TotalSeconds
+                                        );
+                                    Logger.Write(Color.HotPink, "{0} Target {1}, blacklisting for {2:c} and clearing {3}",
+                                        blf,
+                                        fragment,
+                                        bltime,
+                                        _guidLastTarget == BotPoi.Current.Guid ? "BotPoi" : "Current Target");
 
-                                Blacklist.Add(_guidLastTarget, blf, TimeSpan.FromMinutes(5));
-                                if (_guidLastTarget == BotPoi.Current.Guid)
-                                    BotPoi.Clear("Clearing Blacklisted BotPoi");
-                                Me.ClearTarget();
+                                    Blacklist.Add(_guidLastTarget, blf, bltime, "Singular - " + fragment);
+                                    if (_guidLastTarget == BotPoi.Current.Guid)
+                                        BotPoi.Clear("Clearing Blacklisted BotPoi");
+                                    Me.ClearTarget();
+                                }
                             }
                         }
                     }
@@ -839,13 +901,13 @@ namespace Singular
             if (false == IsPullMoreActive)
             {
                 if (Me.Specialization == WoWSpec.None)
-                    Logger.Write(LogColor.Init, "Pull More: not active, Singular disables until Specialization selected");
+                    Logger.Write(LogColor.Init, "Pull More: disabled until Specialization selected");
                 else if (string.IsNullOrEmpty(PullMoreNeedSpell))
                     Logger.Write(LogColor.Init, "Pull More: always disabled for{0}", SpecAndClassName());
                 else if (!SpellManager.HasSpell(PullMoreNeedSpell))
-                    Logger.Write(LogColor.Init, "Pull More: not active, Singular disables for{0} until learning '{1}'", SpecAndClassName(), PullMoreNeedSpell);
+                    Logger.Write(LogColor.Init, "Pull More: disabled for{0} until learning '{1}'", SpecAndClassName(), PullMoreNeedSpell);
                 else
-                    Logger.Write(LogColor.Init, "Pull More: not active, Singular will one mob at a time");
+                    Logger.Write(LogColor.Init, "Pull More: disabled, only {0} target will Pull targets", SingularRoutine.GetBotName());
             }
             else
             {
@@ -873,7 +935,8 @@ namespace Singular
             // force to allow pulling more when out of combat
             if (!Me.Combat && (!Me.GotAlivePet || !Me.Pet.Combat))
             {
-                _allowPullMoreUntil = DateTime.MinValue;
+                // MinValue == pull if criteria met,  Now or less == don't pull
+                _allowPullMoreUntil = IsAllowed(CapabilityFlags.MultiMobPull) ? DateTime.MinValue : DateTime.Now;
                 _timeoutPullMoreAt = DateTime.MaxValue;
             }
         }
@@ -881,6 +944,8 @@ namespace Singular
         private static string PullMoreNeedSpell { get; set; }
         private static bool IsPullMoreAllowed()
         {
+            SpellFindResults sfr;
+
             PullMoreNeedSpell = "";
             switch (TalentManager.CurrentSpec)
             {
@@ -891,7 +956,7 @@ namespace Singular
                     break;
 
                 case WoWSpec.DruidBalance:
-                    PullMoreNeedSpell = "Sunfire";          // 18
+                    PullMoreNeedSpell = "Moonkin Form";     // 16
                     break;
 
                 case WoWSpec.DruidFeral:
@@ -1024,10 +1089,15 @@ namespace Singular
                 allow = false;
                 Logger.WriteDiagnostic("Pull More: disabled for Lowbie characters (no specialization)");
             }
-            else if (string.IsNullOrEmpty(PullMoreNeedSpell) || !SpellManager.HasSpell(PullMoreNeedSpell))
+            else if (string.IsNullOrEmpty(PullMoreNeedSpell) )
             {
                 allow = false;
-                Logger.WriteDiagnostic("Pull More: disabled for{0} characters until [{1}] is learned", SpecName(), PullMoreNeedSpell);
+                Logger.WriteDiagnostic("Pull More: disabled for{0} characters (no enabling AoE spell identified)", SpecAndClassName());
+            }
+            else if (!SpellManager.FindSpell(PullMoreNeedSpell, out sfr))
+            {
+                allow = false;
+                Logger.WriteDiagnostic("Pull More: disabled for{0} characters until [{1}] is learned", SpecAndClassName(), PullMoreNeedSpell);
             }
 
             return allow;
@@ -1051,7 +1121,9 @@ namespace Singular
             _rangePullMore = Me.IsMelee() ? SingularSettings.Instance.PullMoreDistMelee : SingularSettings.Instance.PullMoreDistRanged;
 
             return new Decorator(
-                req => HotkeyDirector.IsPullMoreEnabled && (_allowPullMoreUntil == DateTime.MinValue || _allowPullMoreUntil > DateTime.Now),
+                req => HotkeyDirector.IsPullMoreEnabled 
+                    && (_allowPullMoreUntil == DateTime.MinValue || _allowPullMoreUntil > DateTime.Now)
+                    && !Spell.IsCastingOrChannelling(),
 
                 new Sequence(
 
@@ -1060,6 +1132,15 @@ namespace Singular
                         new Decorator(
                             req => SingularSettings.Instance.UsePullMore == PullMoreUsageType.Auto && SingularRoutine.IsQuestBotActive && !IsQuestProfileLoaded,
                             new ActionAlwaysFail()
+                            ),
+
+                        new Decorator(
+                            req => !IsAllowed( CapabilityFlags.MultiMobPull),
+                            new Action(r => {
+                                // disable pull more until we leave combat
+                                Logger.WriteDiagnostic(Color.White, "Pull More: CapabilityFlag.MultiMobPull set to Disallow, finishing these before pulling more");
+                                _allowPullMoreUntil = DateTime.Now;
+                                })
                             ),
 
                         new Decorator(
@@ -1164,7 +1245,7 @@ namespace Singular
                                             WoWUnit unit = (r as WoWUnit);
                                             Logger.WriteDebug("Pull More: waiting since current KillPoi {0} not attacking me yet (target={1}, combat={2}, tagged={3})",
                                                 unit.SafeName(),
-                                                unit.GotTarget ? unit.SafeName() : "(null)",
+                                                unit.GotTarget() ? unit.SafeName() : "(null)",
                                                 unit.Combat.ToYN(),
                                                 unit.IsTagged.ToYN()
                                                 );
@@ -1201,7 +1282,7 @@ namespace Singular
                                                 && !t.IsPet
                                                 && !t.IsPetBattleCritter
                                                 && !t.IsTagged
-                                                && (!t.Combat || (t.GotTarget && !t.CurrentTarget.IsPlayer && !t.CurrentTarget.IsPet))
+                                                && (!t.Combat || (t.GotTarget() && !t.CurrentTarget.IsPlayer && !t.CurrentTarget.IsPet))
                                                 && !Blacklist.Contains(t, BlacklistFlags.Pull | BlacklistFlags.Combat)
                                                 && Unit.ValidUnit(t)
                                                 && t.Level <= (Me.Level + 2)
@@ -1220,7 +1301,7 @@ namespace Singular
 
                                         Logger.WriteDebug("Pull More: more adds allowed since current KillPoi {0}, target={1}, combat={2}, tagged={3}",
                                             unit.SafeName(),
-                                            unit.GotTarget ? unit.SafeName() : "(null)",
+                                            unit.GotTarget() ? unit.SafeName() : "(null)",
                                             unit.Combat.ToYN(),
                                             unit.IsTagged.ToYN()
                                             );

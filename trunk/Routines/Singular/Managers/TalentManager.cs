@@ -28,14 +28,14 @@ namespace Singular.Managers
             Glyphs = new HashSet<string>();
             GlyphId = new int[6];
 
+            Update();
+
             Lua.Events.AttachEvent("PLAYER_LEVEL_UP", UpdateTalentManager);
             Lua.Events.AttachEvent("CHARACTER_POINTS_CHANGED", UpdateTalentManager);
             Lua.Events.AttachEvent("GLYPH_UPDATED", UpdateTalentManager);
             Lua.Events.AttachEvent("ACTIVE_TALENT_GROUP_CHANGED", UpdateTalentManager);
             Lua.Events.AttachEvent("PLAYER_SPECIALIZATION_CHANGED", UpdateTalentManager);
             Lua.Events.AttachEvent("LEARNED_SPELL_IN_TAB", UpdateTalentManager);
-
-            Update();
         }
 
         public static WoWSpec CurrentSpec 
@@ -76,7 +76,7 @@ namespace Singular.Managers
         {
             // return Talents.FirstOrDefault(t => t.Index == index).Selected;
             int tier = (index-1) / 3;
-            if (tier.Between(0, 5))
+            if (tier.Between(0, 6))
                 return TalentId[tier] == index;
             return false;
         }
