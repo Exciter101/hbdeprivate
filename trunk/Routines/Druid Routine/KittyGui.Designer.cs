@@ -31,6 +31,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox59 = new System.Windows.Forms.TextBox();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
             this.numericUpDown55 = new System.Windows.Forms.NumericUpDown();
             this.textBox58 = new System.Windows.Forms.TextBox();
@@ -219,11 +222,10 @@
             this.textBox49 = new System.Windows.Forms.TextBox();
             this.textBox48 = new System.Windows.Forms.TextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.groupBox16 = new System.Windows.Forms.GroupBox();
-            this.textBox59 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.checkBox20 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox16.SuspendLayout();
             this.groupBox15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown55)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown54)).BeginInit();
@@ -296,7 +298,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).BeginInit();
             this.tabPage2.SuspendLayout();
-            this.groupBox16.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -339,6 +340,41 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox16
+            // 
+            this.groupBox16.Controls.Add(this.comboBox1);
+            this.groupBox16.Controls.Add(this.textBox59);
+            this.groupBox16.Location = new System.Drawing.Point(337, 407);
+            this.groupBox16.Name = "groupBox16";
+            this.groupBox16.Size = new System.Drawing.Size(367, 39);
+            this.groupBox16.TabIndex = 12;
+            this.groupBox16.TabStop = false;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "None",
+            "RSHIFT",
+            "LSHIFT",
+            "LCTRL",
+            "RCTRL",
+            "LALT",
+            "RALT"});
+            this.comboBox1.Location = new System.Drawing.Point(223, 11);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 1;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // textBox59
+            // 
+            this.textBox59.Location = new System.Drawing.Point(19, 13);
+            this.textBox59.Name = "textBox59";
+            this.textBox59.Size = new System.Drawing.Size(175, 20);
+            this.textBox59.TabIndex = 0;
+            this.textBox59.Text = "Special HotKey Switch Bear Form";
             // 
             // groupBox15
             // 
@@ -646,6 +682,7 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.checkBox20);
             this.groupBox6.Controls.Add(this.checkBox17);
             this.groupBox6.Controls.Add(this.checkBox16);
             this.groupBox6.Controls.Add(this.checkBox11);
@@ -2497,40 +2534,16 @@
     " AFK bot, cd\'s will be used on Bosses, \n\n      Players and targets who Max HP%  " +
     ">= 3 x your Max HP%";
             // 
-            // groupBox16
+            // checkBox20
             // 
-            this.groupBox16.Controls.Add(this.comboBox1);
-            this.groupBox16.Controls.Add(this.textBox59);
-            this.groupBox16.Location = new System.Drawing.Point(337, 407);
-            this.groupBox16.Name = "groupBox16";
-            this.groupBox16.Size = new System.Drawing.Size(367, 39);
-            this.groupBox16.TabIndex = 12;
-            this.groupBox16.TabStop = false;
-            // 
-            // textBox59
-            // 
-            this.textBox59.Location = new System.Drawing.Point(19, 13);
-            this.textBox59.Name = "textBox59";
-            this.textBox59.Size = new System.Drawing.Size(175, 20);
-            this.textBox59.TabIndex = 0;
-            this.textBox59.Text = "Special HotKey Switch Bear Form";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "None",
-            "RSHIFT",
-            "LSHIFT",
-            "LCTRL",
-            "RCTRL",
-            "LALT",
-            "RALT"});
-            this.comboBox1.Location = new System.Drawing.Point(223, 11);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 1;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.checkBox20.AutoSize = true;
+            this.checkBox20.Location = new System.Drawing.Point(23, 107);
+            this.checkBox20.Name = "checkBox20";
+            this.checkBox20.Size = new System.Drawing.Size(111, 17);
+            this.checkBox20.TabIndex = 10;
+            this.checkBox20.Text = "Use Savage Roar";
+            this.checkBox20.UseVisualStyleBackColor = true;
+            this.checkBox20.CheckedChanged += new System.EventHandler(this.checkBox20_CheckedChanged);
             // 
             // KittyGui
             // 
@@ -2543,6 +2556,8 @@
             this.Text = "KittyGui";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.groupBox16.ResumeLayout(false);
+            this.groupBox16.PerformLayout();
             this.groupBox15.ResumeLayout(false);
             this.groupBox15.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown55)).EndInit();
@@ -2631,8 +2646,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.groupBox16.ResumeLayout(false);
-            this.groupBox16.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2833,5 +2846,6 @@
         private System.Windows.Forms.GroupBox groupBox16;
         private System.Windows.Forms.TextBox textBox59;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.CheckBox checkBox20;
     }
 }

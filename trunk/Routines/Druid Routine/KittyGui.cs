@@ -47,6 +47,7 @@ namespace Kitty
             checkBox17.Checked = P.myPrefs.AutoDispel;
             checkBox18.Checked = P.myPrefs.Trinket1UseResto;
             checkBox19.Checked = P.myPrefs.Trinket2UseResto;
+            checkBox20.Checked = P.myPrefs.UseSavageRoar;
 
             numericUpDown1.Value = new decimal(P.myPrefs.PercentBarkskin);
             numericUpDown2.Value = new decimal(P.myPrefs.PercentFrenziedRegeneration);
@@ -1203,6 +1204,11 @@ namespace Kitty
             if (comboBox1.SelectedIndex == 5) P.myPrefs.SwitchBearKey = P.PressBearFormKey.LALT;
             if (comboBox1.SelectedIndex == 6) P.myPrefs.SwitchBearKey = P.PressBearFormKey.RALT;
 
+        }
+
+        private void checkBox20_CheckedChanged(object sender, EventArgs e)
+        {
+            P.myPrefs.UseSavageRoar = checkBox20.Checked;
         }
 
         

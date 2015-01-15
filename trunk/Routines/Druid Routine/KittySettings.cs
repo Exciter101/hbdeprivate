@@ -425,5 +425,8 @@ namespace Kitty
 
         [Setting, DefaultValue(4)]
         public int AoeMoonkin { get; set; }
+
+        [Setting, DefaultValue(true)]
+        public bool UseSavageRoar { get; set; }
     }
 }

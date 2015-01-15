@@ -150,8 +150,8 @@ namespace Kitty
                 {
                     resTanks = !resTanks;
                     Lua.DoString(resTanks ? @"print('Ressing Tanks: \124cFF15E61C Enabled!')" : @"print('Ressing Tanks: \124cFFE61515 Disabled!')");
-                    string msgResTanksOn = "Ressing Tanks Enabled !, press Alt + " + P.myPrefs.KeyResTanks.ToString() + " in WOW to disable Ressing Tanks again";
-                    string msgResTanksOff = "Ressing Tanks Disabled !, press Alt + " + P.myPrefs.KeyResTanks.ToString() + " in WOW to enable Ressing Tanks again";
+                    string msgResTanksOn = "Ressing Tanks Enabled !, press " + P.myPrefs.ModifkeyResTanks + " + " + P.myPrefs.KeyResTanks.ToString() + " in WOW to disable Ressing Tanks again";
+                    string msgResTanksOff = "Ressing Tanks Disabled !, press " + P.myPrefs.ModifkeyResTanks + " + " + P.myPrefs.KeyResTanks.ToString() + " in WOW to enable Ressing Tanks again";
                     if (P.myPrefs.PrintRaidstyleMsg)
                         Lua.DoString(
                             resTanks ?
@@ -166,8 +166,8 @@ namespace Kitty
                 {
                     resHealers = !resHealers;
                     Lua.DoString(resHealers ? @"print('Ressing Healers: \124cFF15E61C Enabled!')" : @"print('Ressing Healers: \124cFFE61515 Disabled!')");
-                    string msgResHealersOn = "Ressing Healers Enabled !, press Alt + " + P.myPrefs.KeyReshealers.ToString() + " in WOW to disable Ressing Healers again";
-                    string msgResHealersOff = "Ressing Healers Disabled !, press Alt + " + P.myPrefs.KeyReshealers.ToString() + " in WOW to enable Ressing Healers again";
+                    string msgResHealersOn = "Ressing Healers Enabled !, press " + P.myPrefs.ModifkeyResHealers + " + " + P.myPrefs.KeyReshealers.ToString() + " in WOW to disable Ressing Healers again";
+                    string msgResHealersOff = "Ressing Healers Disabled !, press " + P.myPrefs.ModifkeyResHealers + " + " + P.myPrefs.KeyReshealers.ToString() + " in WOW to enable Ressing Healers again";
                     if (P.myPrefs.PrintRaidstyleMsg)
                         Lua.DoString(
                             resHealers ?
@@ -182,8 +182,8 @@ namespace Kitty
                 {
                     resAll = !resAll;
                     Lua.DoString(resAll ? @"print('Ressing All: \124cFF15E61C Enabled!')" : @"print('Ressing All: \124cFFE61515 Disabled!')");
-                    string msgResAllOn = "Ressing All Enabled !, press Alt + " + P.myPrefs.KeyResAll.ToString() + " in WOW to disable Ressing All again";
-                    string msgResAllOff = "Ressing All Disabled !, press Alt + " + P.myPrefs.KeyResAll.ToString() + " in WOW to enable Ressing All again";
+                    string msgResAllOn = "Ressing All Enabled !, press " + P.myPrefs.ModifkeyResAll + " + " + P.myPrefs.KeyResAll.ToString() + " in WOW to disable Ressing All again";
+                    string msgResAllOff = "Ressing All Disabled !, press " + P.myPrefs.ModifkeyResAll + " + " + P.myPrefs.KeyResAll.ToString() + " in WOW to enable Ressing All again";
                     if (P.myPrefs.PrintRaidstyleMsg)
                         Lua.DoString(
                             resAll ?
@@ -198,8 +198,8 @@ namespace Kitty
                 {
                     aoeStop = !aoeStop;
                     Lua.DoString(aoeStop ? @"print('AoE Mode: \124cFF15E61C Disabled!')" : @"print('AoE Mode: \124cFFE61515 Enabled!')");
-                    string msgStopAoe = "Aoe Disabled !, press Alt + " + P.myPrefs.KeyStopAoe.ToString() + " in WOW to enable Aoe again";
-                    string msgAoeBackOn = "Aoe Enabled !, press Alt + " + P.myPrefs.KeyStopAoe.ToString() + " in WOW to disable Aoe again";
+                    string msgStopAoe = "Aoe Disabled !, press " + P.myPrefs.ModifkeyStopAoe + " + " + P.myPrefs.KeyStopAoe.ToString() + " in WOW to enable Aoe again";
+                    string msgAoeBackOn = "Aoe Enabled !, press " + P.myPrefs.ModifkeyStopAoe + " + " + P.myPrefs.KeyStopAoe.ToString() + " in WOW to disable Aoe again";
                     if (P.myPrefs.PrintRaidstyleMsg)
                         Lua.DoString(
                             aoeStop ?
@@ -215,8 +215,8 @@ namespace Kitty
                 {
                     cooldownsOn = !cooldownsOn;
                     Lua.DoString(cooldownsOn ? @"print('Cooldowns: \124cFF15E61C Enabled!')" : @"print('Cooldowns: \124cFFE61515 Disabled!')");
-                    string msgStop = "Burst Mode Disabled !, press Alt + " + P.myPrefs.KeyUseCooldowns.ToString() + " in WOW to enable Burst Mode again";
-                    string msgOn = "Burst Mode Enabled !, press Alt + " + P.myPrefs.KeyUseCooldowns.ToString() + " in WOW to disable Burst Mode again";
+                    string msgStop = "Burst Mode Disabled !, press " + P.myPrefs.ModifkeyCooldowns + " + " + P.myPrefs.KeyUseCooldowns.ToString() + " in WOW to enable Burst Mode again";
+                    string msgOn = "Burst Mode Enabled !, press " + P.myPrefs.ModifkeyCooldowns + " + " + P.myPrefs.KeyUseCooldowns.ToString() + " in WOW to disable Burst Mode again";
                     if (P.myPrefs.PrintRaidstyleMsg)
                         Lua.DoString(
                             cooldownsOn ?
@@ -231,8 +231,8 @@ namespace Kitty
                 {
                     manualOn = !manualOn;
                     Lua.DoString(manualOn ? @"print('Manual Mode: \124cFF15E61C Enabled!')" : @"print('Manual Mode: \124cFFE61515 Disabled!')");
-                    string msgStop = "Manual Mode Disabled !, press Alt + " + P.myPrefs.KeyPlayManual.ToString() + " in WOW to enable Manual Mode again";
-                    string msgOn = "Manual Mode Enabled !, press Alt + " + P.myPrefs.KeyPlayManual.ToString() + " in WOW to disable Manual Mode again";
+                    string msgStop = "Manual Mode Disabled !, press " + P.myPrefs.ModifkeyPlayManual + " + " + P.myPrefs.KeyPlayManual.ToString() + " in WOW to enable Manual Mode again";
+                    string msgOn = "Manual Mode Enabled !, press " + P.myPrefs.ModifkeyPlayManual + " + " + P.myPrefs.KeyPlayManual.ToString() + " in WOW to disable Manual Mode again";
                     if (P.myPrefs.PrintRaidstyleMsg)
                         Lua.DoString(
                             manualOn ?
@@ -247,8 +247,8 @@ namespace Kitty
                     {
                         pauseRoutineOn = !pauseRoutineOn;
                         Lua.DoString(pauseRoutineOn ? @"print('Routine Paused: \124cFF15E61C Enabled!')" : @"print('Routine Paused: \124cFFE61515 Disabled!')");
-                        string msgStop = "Routine Running !, press Alt + " + P.myPrefs.KeyPauseCR.ToString() + " in WOW to Pause Routine again";
-                        string msgOn = "Routine Paused !, press Alt + " + P.myPrefs.KeyPauseCR.ToString() + " in WOW to enable Routine";
+                        string msgStop = "Routine Running !, press " + P.myPrefs.ModifkeyPause + " + " + P.myPrefs.KeyPauseCR.ToString() + " in WOW to Pause Routine again";
+                        string msgOn = "Routine Paused !, press " + P.myPrefs.ModifkeyPause + " + " + P.myPrefs.KeyPauseCR.ToString() + " in WOW to enable Routine";
                         if (P.myPrefs.PrintRaidstyleMsg)
                             Lua.DoString(
                                 pauseRoutineOn ?

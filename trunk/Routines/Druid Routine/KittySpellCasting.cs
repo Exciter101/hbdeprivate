@@ -27,6 +27,19 @@ namespace Kitty
 {
     public partial class KittyMain : CombatRoutine
     {
+        public static int rndInterrupt
+        {
+            get
+            {
+                Random random = new Random();
+                int randomNumber = random.Next(1000, 1501);
+                return randomNumber;
+            }
+        }
+        public static DateTime _interruptTimer;
+
+        public static WoWGuid lastInterruptCheck;
+
         public static DateTime snareTimer;
         private static async Task<bool> CastGroundSpell(string spell, bool reqs)
         {
@@ -93,14 +106,34 @@ namespace Kitty
             await CommonCoroutines.SleepForLagDuration();
             return true;
         }
-        public static async Task<bool> Cast(string Spell, bool reqs)
+        public static async Task<bool> Cast(string Spell, bool reqs, WoWUnit target)
         {
-            if (!SpellManager.HasSpell(Spell)) return false;
             if (!reqs) return false;
-            if (!SpellManager.CanCast(Spell, Me.CurrentTarget)) return false;
-            if (!SpellManager.Cast(Spell, Me.CurrentTarget)) return false;
-            if (Spell == FORCE_OF_NATURE && !HKM.cooldownsOn) { fonTimer = DateTime.Now + new TimeSpan(0,0,0,30,0); }
-            Logging.Write(Colors.Yellow, "Casting: " + Spell + " on: " + Me.CurrentTarget.SafeName);
+            if (!SpellManager.HasSpell(Spell)) return false;
+            if (spellOnCooldown(Spell)) return false;
+            if (!SpellManager.CanCast(Spell, target)) return false;
+            if (!SpellManager.Cast(Spell, target)) return false;
+
+            if (Spell == FORCE_OF_NATURE) { fonTimer = DateTime.Now + new TimeSpan(0, 0, 0, 16, 0); }
+            if (Spell == MIGHTY_BASH) { stunTimer = DateTime.Now + new TimeSpan(0, 0, 0, 3, 0); }
+            if (Spell == WAR_STOMP) { stunTimer = DateTime.Now + new TimeSpan(0, 0, 0, 3, 0); }
+
+            Logging.Write(Colors.Yellow, "Casting: " + Spell + " on: " + target.SafeName);
+            await CommonCoroutines.SleepForLagDuration();
+            return true;
+        }
+        public static async Task<bool> CastBuff(string Spell, bool reqs)
+        {
+            if (!reqs) return false;
+            if (!SpellManager.HasSpell(Spell)) return false;
+            if (spellOnCooldown(Spell)) return false;
+            if (!SpellManager.CanCast(Spell, Me)) return false;
+            if (!SpellManager.Cast(Spell, Me)) return false;
+
+            if (Spell == DASH || Spell == STAMPEDING_ROAR) { snareTimer = DateTime.Now + new TimeSpan(0, 0, 0, 5, 0); }
+
+            SpellManager.Cast(Spell, Me);
+            Logging.Write(Colors.LightSeaGreen, "Casting: " + Spell + " on: " + Me.SafeName);
             await CommonCoroutines.SleepForLagDuration();
             return true;
         }
@@ -114,14 +147,35 @@ namespace Kitty
             await CommonCoroutines.SleepForLagDuration();
             return true;
         }
-        public static async Task<bool> CastBuff(string Spell, bool reqs)
+        public static async Task<bool> GetRandomInterruptTimer(int rnd, bool reqs)
         {
-            if (!SpellManager.HasSpell(Spell)) return false;
             if (!reqs) return false;
-            if (!SpellManager.CanCast(Spell, Me)) return false;
-            if (!SpellManager.Cast(Spell, Me)) return false;
-            if (Spell == DASH || Spell == STAMPEDING_ROAR) { snareTimer.AddSeconds(5); }
-            Logging.Write(Colors.LightSeaGreen, "Casting: " + Spell + " on: " + Me.SafeName);
+            if (lastGuid == Me.CurrentTarget.Guid) return false;
+            _interruptTimer = DateTime.Now + new TimeSpan(0, 0, 0, 0, rnd);
+            lastGuid = guid;
+            await CommonCoroutines.SleepForLagDuration();
+            return true;
+        }
+        public static async Task<bool> stopPullTimer(bool reqs)
+        {
+            if (!reqs) return false;
+            pullTimer.Stop();
+            Logging.Write(Colors.CornflowerBlue, "Stopping PullTimer => We Are In Combat");
+            fightTimer.Restart();
+            Logging.Write(Colors.CornflowerBlue, "FightTimer started !");
+            await CommonCoroutines.SleepForLagDuration();
+            return true;
+        }
+        public static async Task<bool> blackListingUnit(bool reqs, WoWUnit unit)
+        {
+            if (!reqs) return false;
+            if (unit.IsPlayer) return false;
+            if (unit.HealthPercent < 95) return false;
+            Blacklist.Add(unit, BlacklistFlags.Combat, new TimeSpan(0, 0, 0, 30, 0));
+            Logging.Write(Colors.Red, "This is a bugged mob, Blacklisting for 30 sec !");
+            fightTimer.Stop();
+            pullTimer.Stop();
+            Me.ClearTarget();
             await CommonCoroutines.SleepForLagDuration();
             return true;
         }
