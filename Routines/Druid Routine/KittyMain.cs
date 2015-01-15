@@ -129,7 +129,6 @@ namespace Kitty
             if (await UseItem(CRYSTAL_OF_ORALIUS_ITEM, CrystalOfOraliusConditions && Canbuff)) return true;
             if (await UseItem(CRYSTAL_OF_INSANITY_ITEM, CrystalOfInsanityConditions && Canbuff)) return true;
             if (await UseItem(ALCHEMYFLASK_ITEM, AlchemyFlaskConditions && Canbuff)) return true;
-            if (await CastBuff(SAVAGE_ROAR, SavageRoarConditions && Me.Shapeshift == ShapeshiftForm.Cat) && Canbuff) return true;
             if (await CastBuff(TRAVEL_FORM, !Me.Combat && !Me.Mounted && Me.IsSwimming && !Me.HasAura(TRAVEL_FORM))) return true;
             if (await CastBuff(MOONKIN_FORM, MeIsBoomkin 
                 && Me.Shapeshift != ShapeshiftForm.Moonkin 
@@ -146,9 +145,7 @@ namespace Kitty
             if (await UseItem(CRYSTAL_OF_INSANITY_ITEM, CrystalOfInsanityConditions && Canbuff)) return true;
             if (await UseItem(ALCHEMYFLASK_ITEM, AlchemyFlaskConditions && Canbuff)) return true;
             if (await UseItem(HEALTHSTONE_ITEM, Me.HealthPercent <= 45 && Canbuff)) return true;
-            if (await CastHeal(REBIRTH, ResTanks(), ResTanks() != null && HKM.resTanks && !spellOnCooldown(REBIRTH))) return true;
-            if (await CastHeal(REBIRTH, ResHealers(), ResHealers() != null &&  HKM.resHealers && !spellOnCooldown(REBIRTH))) return true;
-            if (await CastHeal(REBIRTH, ResDamage(), ResDamage() != null && HKM.resAll && !spellOnCooldown(REBIRTH))) return true;
+            if (await CastHeal(REBIRTH, playerToRes, needResPeople && playerToRes != null)) return true;
             if (await CastBuff(BARKSKIN, Me.HealthPercent <= P.myPrefs.PercentBarkskin)) return true;
             if (await CastBuff(REJUVENATION, Me.HealthPercent <= P.myPrefs.PercentRejuCombat && !buffExists(REJUVENATION, Me))) return true;
             if (await CastBuff(HEALING_TOUCH, MeIsBoomkin && Me.HealthPercent <= P.myPrefs.PercentHealingTouchCombat)) return true;
@@ -188,28 +185,28 @@ namespace Kitty
             if (await StopMovement(gotTarget && AllowMovement && Me.CurrentTarget.Distance <= 39f && (MeIsBoomkin || MeIsLowbie || MeIsResto))) return true;
             if (await FaceMyTarget(gotTarget && AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget))) return true;
             //feral
-            if (await Cast(WILD_CHARGE, gotTarget && P.myPrefs.PullWildCharge && !spellOnCooldown(WILD_CHARGE) && WildChargeConditions(8, 25) && MeIsFeral)) return true;
-            if (await Cast(MOONFIRE, gotTarget && SpellManager.HasSpell(LUNAR_INSPIRATION) && Me.CurrentTarget.Distance <= 40)) return true;
+            if (await Cast(WILD_CHARGE, gotTarget && P.myPrefs.PullWildCharge && !spellOnCooldown(WILD_CHARGE) && WildChargeConditions(8, 25) && MeIsFeral, Me.CurrentTarget)) return true;
+            if (await Cast(MOONFIRE, gotTarget && SpellManager.HasSpell(LUNAR_INSPIRATION) && Me.CurrentTarget.Distance <= 40, Me.CurrentTarget)) return true;
             if (await Cast(MOONFIRE, gotTarget 
                 && !SpellManager.HasSpell(FAERIE_FIRE) 
                 && !SpellManager.HasSpell(FAERIE_SWARM)
                 && !P.myPrefs.PullProwlAndShred 
                 && !P.myPrefs.PullProwlAndRake 
                 && Me.CurrentTarget.Distance < 35 
-                && MeIsFeral)) return true;
-            if (await Cast(FF, gotTarget && !spellOnCooldown(FF) && !P.myPrefs.PullProwlAndShred && !P.myPrefs.PullProwlAndRake && Me.CurrentTarget.Distance < 35 && MeIsFeral)) return true;
-            if (await Cast(RAKE, gotTarget && Me.CurrentTarget.IsWithinMeleeRange && MeIsFeral && P.myPrefs.PullProwlAndRake)) return true;
-            if (await Cast(SHRED, gotTarget && Me.CurrentTarget.IsWithinMeleeRange && MeIsFeral && P.myPrefs.PullProwlAndShred)) return true;
-            if (await Cast(RAKE, gotTarget && Me.CurrentTarget.IsWithinMeleeRange && MeIsFeral && !P.myPrefs.PullProwlAndRake && spellOnCooldown(FF))) return true;
-            if (await Cast(SHRED, gotTarget && Me.CurrentTarget.IsWithinMeleeRange && MeIsFeral && !P.myPrefs.PullProwlAndShred && spellOnCooldown(FF))) return true;
+                && MeIsFeral, Me.CurrentTarget)) return true;
+            if (await Cast(FF, gotTarget && !spellOnCooldown(FF) && !P.myPrefs.PullProwlAndShred && !P.myPrefs.PullProwlAndRake && Me.CurrentTarget.Distance < 35 && MeIsFeral, Me.CurrentTarget)) return true;
+            if (await Cast(RAKE, gotTarget && Me.CurrentTarget.IsWithinMeleeRange && MeIsFeral && P.myPrefs.PullProwlAndRake, Me.CurrentTarget)) return true;
+            if (await Cast(SHRED, gotTarget && Me.CurrentTarget.IsWithinMeleeRange && MeIsFeral && P.myPrefs.PullProwlAndShred, Me.CurrentTarget)) return true;
+            if (await Cast(RAKE, gotTarget && Me.CurrentTarget.IsWithinMeleeRange && MeIsFeral && !P.myPrefs.PullProwlAndRake && spellOnCooldown(FF), Me.CurrentTarget)) return true;
+            if (await Cast(SHRED, gotTarget && Me.CurrentTarget.IsWithinMeleeRange && MeIsFeral && !P.myPrefs.PullProwlAndShred && spellOnCooldown(FF), Me.CurrentTarget)) return true;
             //guardian
-            if (await Cast(WILD_CHARGE, gotTarget && P.myPrefs.PullWildCharge && !spellOnCooldown(WILD_CHARGE) && WildChargeConditions(8, 25) && MeIsGuardian)) return true;
-            if (await Cast(FF, gotTarget && !spellOnCooldown(FF) && Me.CurrentTarget.Distance <= 30 && MeIsGuardian)) return true;
-            if (await Cast(GROWL, gotTarget && spellOnCooldown(FF) && Me.CurrentTarget.Distance <= 30 && MeIsGuardian)) return true;
-            if (await Cast(LACERATE, gotTarget && Me.CurrentTarget.IsWithinMeleeRange && MeIsGuardian)) return true;
+            if (await Cast(WILD_CHARGE, gotTarget && P.myPrefs.PullWildCharge && !spellOnCooldown(WILD_CHARGE) && WildChargeConditions(8, 25) && MeIsGuardian, Me.CurrentTarget)) return true;
+            if (await Cast(FF, gotTarget && !spellOnCooldown(FF) && Me.CurrentTarget.Distance <= 30 && MeIsGuardian, Me.CurrentTarget)) return true;
+            if (await Cast(GROWL, gotTarget && spellOnCooldown(FF) && Me.CurrentTarget.Distance <= 30 && MeIsGuardian, Me.CurrentTarget)) return true;
+            if (await Cast(LACERATE, gotTarget && Me.CurrentTarget.IsWithinMeleeRange && MeIsGuardian, Me.CurrentTarget)) return true;
             //moonkin - lowbie
-            if (await Cast(MOONFIRE, gotTarget && Me.CurrentTarget.Distance <= 39 && (MeIsBoomkin || MeIsLowbie || MeIsResto) && !debuffExists(MOONFIRE, Me.CurrentTarget))) return true;
-            if (await Cast(WRATH, gotTarget && Me.CurrentTarget.Distance <= 39 && (MeIsBoomkin || MeIsLowbie || MeIsResto))) return true;
+            if (await Cast(MOONFIRE, gotTarget && Me.CurrentTarget.Distance <= 39 && (MeIsBoomkin || MeIsLowbie || MeIsResto) && !debuffExists(MOONFIRE, Me.CurrentTarget), Me.CurrentTarget)) return true;
+            if (await Cast(WRATH, gotTarget && Me.CurrentTarget.Distance <= 39 && (MeIsBoomkin || MeIsLowbie || MeIsResto), Me.CurrentTarget)) return true;
 
             return false;
         }

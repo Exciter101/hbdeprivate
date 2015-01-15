@@ -111,7 +111,7 @@ namespace Kitty
             STARFALL = "Starfall",
             SUNFIRE = "Sunfire",
             HURRICANE = "Hurricane",
-
+            BERSERKING = "Berserking",
             EINDE = "The End";
 
 
@@ -139,6 +139,34 @@ namespace Kitty
         public static string FERALFORM { get { return !SpellManager.HasSpell(CLAWS_OF_SHIRVALLAH) ? CAT_FORM : CLAWS_OF_SHIRVALLAH; } }
 
         public static DateTime fonTimer;
+
+        public static WoWUnit playerToRes = null;
+        public static bool needResPeople
+        {
+            get
+            {
+                if (spellOnCooldown(REBIRTH)) return false;
+                if (HKM.resTanks)
+                {
+                    WoWUnit target = Tanks().Where(p => p.IsDead
+                        && p.Location.Distance(Me.Location) <= 40).FirstOrDefault();
+                    if (target != null) playerToRes = target; return true;
+                }
+                if (HKM.resHealers)
+                {
+                    WoWUnit target = Healers().Where(p => p.IsDead
+                        && p.Location.Distance(Me.Location) <= 40).FirstOrDefault();
+                    if (target != null) playerToRes = target; return true;
+                }
+                if (HKM.resAll)
+                {
+                    WoWUnit target = Damage().Where(p => p.IsDead
+                        && p.Location.Distance(Me.Location) <= 40).FirstOrDefault();
+                    if (target != null) playerToRes = target; return true;
+                }
+                return false;
+            }
+        }
 
         #region trinkets
         public static bool UseTrinket1
@@ -345,141 +373,310 @@ namespace Kitty
         #endregion
 
         #region feral conditions
-        public static bool SavageRoarConditions
+        public static bool needSavageRoar
         {
             get
             {
-                if (!buffExists(SAVAGE_ROAR, Me)
-                    && !SpellManager.HasSpell(SAVAGE_ROAR_GLYPH)
-                    && Me.EnergyPercent >= 25
-                    && Me.ComboPoints >= 1)
-                {
-                    return true;
-                }
-                return false;
+                if (!P.myPrefs.UseSavageRoar) return false;
+                if (buffExists(SAVAGE_ROAR, Me)) return false;
+                if (Me.EnergyPercent < 25) return false;
+                if (Me.ComboPoints < 1) return false;
+                if (buffExists(SAVAGE_ROAR, Me) && buffTimeLeft(SAVAGE_ROAR, Me) <= 4000) return true;
+                return true;
             }
         }
-        public static bool SR_BUFF_UP { get { return buffExists(SAVAGE_ROAR, Me); } }
+        public static uint _addsMaxHealth
+        {
+            get
+            {
+                uint maxHealth = 0;
+                if (Me.CurrentTarget != null)
+                {
+                    var result = ObjectManager.GetObjectsOfTypeFast<WoWUnit>().Where(p => p != null
+                        && p.IsAlive
+                        && (p.Combat
+                        && (p.IsTargetingMeOrPet || p.IsTargetingMyPartyMember || p.IsTargetingMyRaidMember))
+                        && p.DistanceSqr <= 10 * 10).OrderByDescending(p => p.MaxHealth);
+                    if (result.Count() > 0) maxHealth = result.FirstOrDefault().MaxHealth;
+                }
+                return maxHealth;
+            }
+        }
+        public static bool needBossRotation(WoWUnit unit)
+        {
+            if (unit.IsPlayer) return true;
+            if (unit.Name.Contains("Dummy")) return true;
+            if (unit.Classification == WoWUnitClassificationType.WorldBoss) return true;
+            if (unit.Classification == WoWUnitClassificationType.RareElite && partyCount == 0 && unit.MaxHealth > Me.MaxHealth * 1.5) return true;
+            if (unit.Classification == WoWUnitClassificationType.Rare && partyCount == 0 && unit.MaxHealth > Me.MaxHealth * 1.5) return true;
+            if (unit.Classification == WoWUnitClassificationType.Elite && partyCount == 0 && unit.MaxHealth > Me.MaxHealth * 1.5) return true;
+            if (unit.IsBoss) return true;
+            if (unit.HealthPercent >= Me.MaxHealth * 3 && partyCount == 0) return true;
+            if (HKM.cooldownsOn) return true;
+            return false;
+        }
+        public static bool validTarget(WoWUnit unit)
+        {
+            if (Blacklist.Contains(unit, BlacklistFlags.All)) return false;
+            if (unit.Name.Contains("Dummy")) return true;
+            if (!unit.CanSelect) return false;
+            if (unit.IsCritter) return false;
+            if (unit.IsNonCombatPet) return false;
+            if (unit.IsPet && unit.OwnedByRoot.IsPlayer) return false;
+            if (unit.IsDead) return false;
+            return true;
+        }
+        public static bool needRake(WoWUnit unit)
+        {
+            try
+            {
+                if (debuffExists(RAKE, unit) && debuffTimeLeft(RAKE, unit) > 4000) return false;
+                if (Me.EnergyPercent < 35) return false;
+                if (addCount >= 9) return false;
+                if (addCount >= 3 && addCount < 9 && _addsMaxHealth < Me.MaxHealth * 1.5) return false;
+                if (!Me.IsSafelyFacing(unit)) return false;
+                if (!unit.IsWithinMeleeRange) return false;
+                if (!unit.InLineOfSight) return false;
+            }
+            catch (Exception e) { Logging.Write(Colors.Violet, "Need Rake => " + e); }
+            return true;
+        }
+        public static WoWUnit _moonfireTarget
+        {
+            get
+            {
+                if (!SpellManager.HasSpell(LUNAR_INSPIRATION)) return null;
+                if (Me.CurrentTarget != null && !debuffExists(MOONFIRE, Me.CurrentTarget) && Me.CurrentTarget.Name.Contains("Dummy")) return Me.CurrentTarget;
+                if (addCount >= 9) return null;
+                var result = ObjectManager.GetObjectsOfTypeFast<WoWUnit>().Where(p => p != null
+                            && p.IsAlive
+                            && (p.Combat
+                            && (p.IsTargetingMeOrPet || p.IsTargetingMyPartyMember || p.IsTargetingMyRaidMember))
+                            && !buffExists(MOONFIRE, p)
+                            && p.DistanceSqr <= 20 * 20).OrderBy(p => p.Distance).ToList();
 
-        public static bool TigersFuryConditions { get { return !spellOnCooldown(TIGERS_FURY) && Me.EnergyPercent < 30; } }
+                return result.Count() > 0 ? result.FirstOrDefault() : null;
+            }
+        }
+        public static bool needShred(WoWUnit unit)
+        {
+            try
+            {
+                if (addCount > 2) return false;
+                if (!unit.InLineOfSight) return false;
+                if (!unit.IsWithinMeleeRange) return false;
+                if (Me.EnergyPercent < 55) return false;
+            }
+            catch (Exception e) { Logging.Write(Colors.Violet, "Need Shred => " + e); }
+            return true;
+        }
+        public static bool needSwipe(WoWUnit unit)
+        {
+            try
+            {
+                if (addCount < 3) return false;
+                if (!unit.InLineOfSight) return false;
+                if (!unit.IsWithinMeleeRange) return false;
+                if (Me.EnergyPercent < 45) return false;
+            }
+            catch (Exception e) { Logging.Write(Colors.Violet, "Need Swipe => " + e); }
+            return true;
+        }
+        public static bool needRip(WoWUnit unit)
+        {
+            try
+            {
+                if (debuffExists(RIP, unit) && debuffTimeLeft(RIP, unit) > 6000) return false;
+                if (Me.ComboPoints < 5) return false;
+                if (Me.EnergyPercent < 30) return false;
+                if (!unit.InLineOfSight) return false;
+                if (!unit.IsWithinMeleeRange) return false;
+                if (Me.EnergyPercent < 30) return false;
+                if (unit.MaxHealth <= Me.MaxHealth) return false;
+            }
+            catch (Exception e) { Logging.Write(Colors.Violet, "Need Rip => " + e); }
+            return true;
+        }
+        public static bool needFerociousBite(WoWUnit unit)
+        {
+            try
+            {
+                if (needRip(unit) && !debuffExists(RIP, unit)) return false;
+                if (debuffExists(RIP, unit) && debuffTimeLeft(RIP, unit) <= 6000) return false;
+                if (!unit.InLineOfSight) return false;
+                if (!unit.IsWithinMeleeRange) return false;
+                if (!Me.IsSafelyFacing(unit)) return false;
+                if (unit.HealthPercent <= 25 && debuffExists(RIP, unit) && debuffTimeLeft(RIP, unit) <= 5000 && Me.ComboPoints >= 1 && Me.EnergyPercent >= 25) return true;
+                if (P.myPrefs.UseSavageRoar && buffExists(SAVAGE_ROAR, Me) && buffTimeLeft(SAVAGE_ROAR, Me) <= 5000) return false;
+                if (Me.EnergyPercent < 50) return false;
+                if (Me.ComboPoints < 5) return false;
 
+            }
+            catch (Exception e) { Logging.Write(Colors.Violet, "Need Ferocious Bite => " + e); }
+            return true;
+        }
+        public static bool needThrash
+        {
+            get
+            {
+                try
+                {
+                    var result = ObjectManager.GetObjectsOfTypeFast<WoWUnit>().Where(p => p != null
+                        && (p.Combat
+                        && (p.IsTargetingMeOrPet || p.IsTargetingMyRaidMember || p.IsTargetingMyPartyMember))
+                        && !debuffExists(THRASH, p)
+                        && p.DistanceSqr <= 10 * 10).ToList();
+                    if (!SpellManager.HasSpell(THRASH)) return false;
+                    if (spellOnCooldown(THRASH)) return false;
+                    if (!SpellManager.CanCast(THRASH)) return false;
+                    if (addCount < 3) return false;
+                    if (Me.EnergyPercent < 50) return false;
+                    if (result.Count() >= 3) return true;
+
+                }
+                catch (Exception e) { Logging.Write(Colors.Violet, "Need Thrash => " + e); }
+                return true;
+            }
+        }
+        public static WoWUnit _feralHealingTouchUnit
+        {
+            get
+            {
+                if (!IsOverlayed(HEALING_TOUCH_INT)) return null;
+                if (Me.HealthPercent < 90) return Me;
+                if (partyCount > 0)
+                {
+                    var result = newPartyMembers.Where(p => p != null
+                        && p.IsAlive
+                        && p.Distance <= 40).OrderBy(p => p.HealthPercent).ToList();
+
+                    return result.Count() > 0 ? result.FirstOrDefault() : null;
+                }
+                return null;
+            }
+        }
+        public static bool needSkullBash(WoWUnit unit)
+        {
+            try
+            {
+                if (!Me.IsSafelyFacing(unit)) return false;
+                if (!unit.IsWithinMeleeRange) return false;
+                if (!unit.InLineOfSight) return false;
+                if (DateTime.Now < _interruptTimer) return false;
+            }
+            catch (Exception e) { Logging.Write(Colors.Violet, "Need Skull Bash => " + e); }
+            return Me.CurrentTarget.IsCasting && Me.CanInterruptCurrentSpellCast;
+        }
+        public static bool needIncapacitatingRoar(WoWUnit unit)
+        {
+            try
+            {
+                if (!unit.IsWithinMeleeRange) return false;
+                if (!unit.InLineOfSight) return false;
+                if (DateTime.Now < _interruptTimer) return false;
+            }
+            catch (Exception e) { Logging.Write(Colors.Violet, "Need Incapacitating Roar => " + e); }
+            return Me.CurrentTarget.IsCasting && Me.CanInterruptCurrentSpellCast;
+        }
+        public static bool needTyphoon(WoWUnit unit)
+        {
+            try
+            {
+                if (!unit.IsWithinMeleeRange) return false;
+                if (!unit.InLineOfSight) return false;
+                if (DateTime.Now < _interruptTimer) return false;
+            }
+            catch (Exception e) { Logging.Write(Colors.Violet, "Need Typhoon => " + e); }
+            return Me.CurrentTarget.IsCasting && Me.CanInterruptCurrentSpellCast;
+        }
+        public static bool needMightyBash(WoWUnit unit)
+        {
+            try
+            {
+                if (!unit.IsWithinMeleeRange) return false;
+                if (!unit.InLineOfSight) return false;
+                if (DateTime.Now < stunTimer) return false;
+            }
+            catch (Exception e) { Logging.Write(Colors.Violet, "Need Mighty Bash => " + e); }
+            return Me.CurrentTarget.IsCasting && !Me.CanInterruptCurrentSpellCast;
+        }
+        public static bool needWarStomp(WoWUnit unit)
+        {
+            try
+            {
+                if (!unit.IsWithinMeleeRange) return false;
+                if (!unit.InLineOfSight) return false;
+                if (DateTime.Now < stunTimer) return false;
+            }
+            catch (Exception e) { Logging.Write(Colors.Violet, "Need War Stomp => " + e); }
+            return Me.CurrentTarget.IsCasting && !Me.CanInterruptCurrentSpellCast;
+        }
+        public static bool needIncarnation(WoWUnit unit)
+        {
+            try
+            {
+                if (!unit.IsWithinMeleeRange) return false;
+                if (!unit.InLineOfSight) return false;
+                if (HKM.cooldownsOn) return true;
+            }
+            catch (Exception e) { Logging.Write(Colors.Violet, "Need incarnation => " + e); }
+            return true;
+        }
+        public static bool needBerserk(WoWUnit unit)
+        {
+            try
+            {
+                if (!needBossRotation(unit)) return false;
+                if (HaveHasteBuff) return false;
+                if (!Me.IsSafelyFacing(unit)) return false;
+                if (!unit.IsWithinMeleeRange) return false;
+                if (!unit.InLineOfSight) return false;
+            }
+            catch (Exception e) { Logging.Write(Colors.Violet, "Need Berserk => " + e); }
+            return true;
+        }
+        public static bool needBerserking(WoWUnit unit)
+        {
+            try
+            {
+                if (!needBossRotation(unit)) return false;
+                if (HaveHasteBuff) return false;
+                if (buffExists(BERSERK, Me)) return false;
+                if (!Me.IsSafelyFacing(unit)) return false;
+                if (!unit.IsWithinMeleeRange) return false;
+                if (!unit.InLineOfSight) return false;
+            }
+            catch (Exception e) { Logging.Write(Colors.Violet, "Need Berserking => " + e); }
+            return true;
+        }
+        public static bool needForceOfNature(WoWUnit unit)
+        {
+            try
+            {
+                if (!unit.IsWithinMeleeRange) return false;
+                if (!unit.InLineOfSight) return false;
+                if (!needBossRotation(unit) && DateTime.Now < fonTimer) return false;
+            }
+            catch (Exception e) { Logging.Write(Colors.Violet, "Force of Nature => " + e); }
+            return true;
+        }
+        public static bool needTigersFury
+        {
+            get
+            {
+                try
+                {
+                    if (!Me.CurrentTarget.IsWithinMeleeRange) return false;
+                    if (!Me.CurrentTarget.InLineOfSight) return false;
+                    if (Me.EnergyPercent > 30) return false;
+                }
+                catch (Exception e) { Logging.Write(Colors.Violet, "Tiger's Fury => " + e); }
+                return true;
+            }
+        }
         public static bool WildChargeConditions(float min, float max)
         {
             return Me.CurrentTarget != null && (Me.CurrentTarget.Distance >= min && Me.CurrentTarget.Distance <= max);
-        }
-
-        public static bool FerociousBiteConditions
-        {
-            get
-            {
-                if (debuffExists(RIP, Me.CurrentTarget)
-                    && Me.EnergyPercent >= 25
-                    && Me.ComboPoints >= 5)
-                {
-                    return true;
-                }
-                if (Me.CurrentTarget.HealthPercent < 25
-                    && debuffExists(RIP, Me.CurrentTarget)
-                    && debuffTimeLeft(RIP, Me.CurrentTarget) <= 4500
-                    && Me.EnergyPercent >= 25
-                    && Me.ComboPoints >= 1)
-                {
-                    return true;
-                }
-                if (debuffExists(RIP, Me.CurrentTarget)
-                    && debuffTimeLeft(RIP, Me.CurrentTarget) > 6000
-                    && debuffTimeLeft(SAVAGE_ROAR, Me) > 6000
-                    && Me.EnergyPercent >= 25
-                    && Me.ComboPoints >= 5)
-                {
-                    return true;
-                }
-                return false;
-            }
-        }
-        public static bool needRip { get { return SpellManager.HasSpell(RIP) && Me.CurrentTarget.MaxHealth > Me.MaxHealth * 1.5; } }
-        public static bool RipConditions
-        {
-            get
-            {
-                if ((!debuffExists(RIP, Me.CurrentTarget)
-                    || (debuffExists(RIP, Me.CurrentTarget) && debuffTimeLeft(RIP, Me.CurrentTarget) <= 6000))
-                    && Me.EnergyPercent >= 30
-                    && Me.ComboPoints >= 5)
-                {
-                    return true;
-                }
-                return false;
-            }
-        }
-        public static bool RakeConditions
-        {
-            get
-            {
-                if ((!debuffExists(RAKE, Me.CurrentTarget)
-                    || (debuffExists(RAKE, Me.CurrentTarget) && debuffTimeLeft(RAKE, Me.CurrentTarget) <= 5000))
-                    && Me.EnergyPercent >= 35
-                    && (addCount < 2 || !SpellManager.HasSpell(THRASH)))
-                {
-                    return true;
-                }
-                return false;
-            }
-        }
-        public static bool ThrashConditions
-        {
-            get
-            {
-                if (!debuffExists(THRASH, Me.CurrentTarget)
-                    && addCount > 1
-                    && SpellManager.HasSpell(THRASH)
-                    && Me.EnergyPercent >= 50 || buffExists(CLEARCASTING, Me))
-                {
-                    return true;
-                }
-                return false;
-            }
-        }
-        public static bool ShredConditions
-        {
-            get
-            {
-                if (Me.EnergyPercent >= 40 && !buffExists(SAVAGE_ROAR, Me) && (addCount < 4 || !SpellManager.HasSpell(SWIPE) || HKM.aoeStop)) { return true; }
-                if (Me.EnergyPercent >= 50 && buffExists(SAVAGE_ROAR, Me) && (addCount < 4 || !SpellManager.HasSpell(SWIPE) || HKM.aoeStop)) { return true; }
-                return false;
-            }
-        }
-        public static bool SwipeConditions
-        {
-            get
-            {
-                if (SpellManager.HasSpell(SWIPE)
-                    && !HKM.aoeStop
-                    && addCount >= 4
-                    && Me.EnergyPercent >= 45)
-                {
-                    return true;
-                }
-                return false;
-            }
-        }
-        public static bool BerserkConditions
-        {
-            get
-            {
-                if (!spellOnCooldown(BERSERK)
-                    && (Targets.IsWoWBoss(Me.CurrentTarget) && AutoBot) || HKM.cooldownsOn) return true;
-                return false;
-            }
-        }
-        public static bool IncarnationCatConditions
-        {
-            get
-            {
-                if (!spellOnCooldown(INCARNATION_CAT)
-                    && buffExists(BERSERK, Me)) return true;
-                return false;
-            }
         }
         #endregion
 
@@ -538,7 +735,7 @@ namespace Kitty
                 return true;
             }
             return false;
-            
+
         }
         public static bool WarStompConditions(WoWUnit unit)
         {
