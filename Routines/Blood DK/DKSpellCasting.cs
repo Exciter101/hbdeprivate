@@ -27,9 +27,13 @@ namespace DK
 {
     public partial class DKMain : CombatRoutine
     {
-        private static async Task<bool> CastGroundSpell(string spell, bool reqs, WoWPoint targetLoc)
+        private static async Task<bool> CastGroundSpell(string spell, bool reqs, WoWUnit target)
         {
             if (!reqs) return false;
+            if (!SpellManager.HasSpell(DEFILE)) return false;
+            if (spellOnCooldown(DEFILE)) return false;
+            if (!target.IsWithinMeleeRange) return false;
+            if (!target.InLineOfSight) return false;
             if (!SpellManager.CanCast(spell)) return false;
             if (!SpellManager.Cast(spell)) return false;
             if (!await Coroutine.Wait(1000, () => StyxWoW.Me.CurrentPendingCursorSpell != null))
@@ -38,7 +42,7 @@ namespace DK
                 return false;
             }
 
-            SpellManager.ClickRemoteLocation(targetLoc);
+            SpellManager.ClickRemoteLocation(target.Location);
 
             await CommonCoroutines.SleepForLagDuration();
             return true;
