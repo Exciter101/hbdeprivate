@@ -1,6 +1,6 @@
 <HBProfile xsi:noNamespaceSchemaLocation="../../../Schemas/QuestProfileSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 <!-- Honorbuddy Blank QO by Kick -->
-	<Name>Blank QO ($Rev: 4092 $)</Name>
+	<Name>Blank QO ($Rev: 4101 $)</Name>
 	<MinLevel>1</MinLevel>
 	<MaxLevel>200</MaxLevel>
 	
@@ -483,8 +483,8 @@ Log("Is Complete: {0}", result);
 				<CustomBehavior File="Misc\RunLua" Lua="AcceptQuest()" WaitTime="1000" />
 	
 				<CustomBehavior File="InteractWith" MobId="" />
-				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
-                <CustomBehavior File="Misc\RunLua" Lua="QuestFrameCompleteQuestButton:Click()" NumOfTimes="1" WaitTime="1000" />	
+				<CustomBehavior File="Misc\RunLua" Lua="GossipTitleButton1:Click()" WaitTime="1000" />
+                <CustomBehavior File="Misc\RunLua" Lua="QuestFrameCompleteQuestButton:Click()" WaitTime="1000" />	
 				<CustomBehavior File="RunMacro" Macro="/script GetQuestReward(3)" />	
 	
 				/script GetQuestReward(3)

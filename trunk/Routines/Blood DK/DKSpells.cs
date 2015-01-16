@@ -161,7 +161,7 @@ namespace DK
         {
             get
             {
-                if (P.myPrefs.UseDefileRunes && DeathRuneCount > P.myPrefs.DefileRunes) return true;
+                if (P.myPrefs.UseDefileRunes && DeathRuneCount >= P.myPrefs.DefileRunes) return true;
                 return false;
             }
         }
@@ -170,23 +170,20 @@ namespace DK
             get
             {
                 if (SpellManager.HasSpell(DEFILE)) return false;
-                if (spellOnCooldown(DEATH_AND_DECAY)) return false;
                 if (addCountMelee < P.myPrefs.AddsDeathAndDecay) return false;
                 if (UnholyRuneCount >= 1) return true;
                 if (needDeathrunesForDeathAndDecay) return true;
-                return !spellOnCooldown(DEATH_AND_DECAY) ? true : false;
+                return false;
             }
         }
         public static bool needDefile
         {
             get
             {
-                if (!SpellManager.HasSpell(DEFILE)) return false;
-                if (spellOnCooldown(DEFILE)) return false;
                 if (addCountMelee < P.myPrefs.AddsDefile) return false;
                 if (UnholyRuneCount >= 1) return true;
                 if (needDeathrunesForDefile) return true;
-                return !spellOnCooldown(DEFILE) ? true : false;
+                return false;
             }
         }
         public static bool needPresence
@@ -223,7 +220,6 @@ namespace DK
         {
             get
             {
-                if (Me.CurrentTarget.Location.Distance(Me.Location) > 5f) return false;
                 if (BloodRuneCount >= 1 && Me.CurrentTarget.HealthPercent >= 35 && Me.CurrentTarget.IsWithinMeleeRange) return true;
                 if (IsOverlayed(BLOOD_BOIL_INT) && Me.CurrentTarget.IsWithinMeleeRange) return true;
                 return false;
@@ -234,7 +230,7 @@ namespace DK
         {
             get
             {
-                if ((HKM.cooldownsOn || Targets.IsWoWBoss(Me.CurrentTarget)) && ZeroRunes) return true;
+                if ((HKM.cooldownsOn || Me.CurrentTarget.IsBoss) && ZeroRunes) return true;
                 return false;
             }
         }
