@@ -1,3 +1,6 @@
+Version 6.0.5497
+Add Option disable Juking in BG/Arena. Open setting and change <AutoJuke>True</AutoJuke> to <AutoJuke>False</AutoJuke>. Sorry no GUI for advanced users.
+
 Version 6.0.5491
 New build compartible with new Honorbuddy 2.5.12600.764
 Optimization and bug fix
