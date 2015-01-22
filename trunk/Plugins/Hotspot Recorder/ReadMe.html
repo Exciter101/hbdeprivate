@@ -1,0 +1,134 @@
+﻿<html>
+<head>
+<title>Hotspot Recorder</title>
+<style type="text/css">
+<!--
+.indented
+   {
+   margin-left: 50px;
+   margin-right: 50px;
+   }
+.nobullet
+   {
+   margin-left: 50px;
+   margin-right: 50px;
+   list-style-type: none;
+   }
+table.topalign td 
+   {
+   vertical-align:top;
+   margin-left: 50px;
+   }
+    .style1
+    {
+        height: 28px;
+    }
+-->
+</style>
+</head>
+<body>
+<div style="text-align: center";>
+<h1>Hotspot Recorder</h1>
+<h2>A profile creator for HonorBuddy.</h2>
+</div>
+
+<h3>What is it?</h3>
+Hotspot Recorder (HSR) is a profile-creation plugin for HonorBuddy. It lets you quickly and easily create gathering profiles.
+
+<h3>Why should I use this instead of another recorder?</h3>
+Here's what's great about HSR:
+
+<ol class="indented">
+    <li>It can automatically generate hotspots at the spacing you desire. Alternatively, you can hand-place every point, or do a combination of the two.</li>
+    <li>It can create new profiles, or modify existing profiles. This is useful if you want to spiff up an existing profile.</li>
+    <li>Built-in tracing capability. The hotspot you're closest to, will have a yellow background, so you can tell where you are in the profile. This built-in tracing capability, makes it easy to find and fix bad hotspots.
+    You can cause your character to  'go to' each hotspot individually - simply click the hotspot then click 'go to', or double-click the hotspot.</li>
+    <li>Built-in tracing capability. The hotspot you're closest to, will have a yellow background, so you can tell 'where you are in the profile, AND the world. This built-in tracing capability, makes it easy to find and fix bad hotspots.</li>
+    <li>Point-level control - you can remove single points or multiple points at once, and replace bad points individually.</li>
+    <li>Check all points for navigability using the 'Check Points' button. Points that fail the navigability check, will be commented out with the phrase BAD POINT. You can navigate to those points manually and replace them when you find them, or remove them entirely.</li>
+    <li>Reverse points using the 'Reverse Points' button.</li>
+    <li>Reorder points using the 'Set as top' button. This will make your currently selected point, the top point in the profile. This is useful for tuning grinding profiles to start near the teleporter, for instance.</li>
+    <li>Single-window - All the functions are on one screen, there's no need to tab between pages to access different functionality.</li>
+    <li>Well-thought-out user interface - the most important buttons are all at the top left, so you can resize the window really small and keep it out of the way.</li>
+    <li>Thread-safe - There will be no errors like 'Can't read memory at XXX' because it's multithreading safe. This means no hotspot dropouts or restarts.</li>
+</ol>
+
+<h3>Where can I get it?</h3>
+HSR is available via SVN <a href="http://hotspot-recorder.googlecode.com/svn/trunk/">here</a>.
+
+<h3>How do I install it?</h3>
+All the files go into your 'Honorbuddy/Plugins' folder, into a new folder called 'Hotspot Recorder'.
+Now, you could download the files one by one, but that would be tedious and time-consuming.
+An easier way is to install TortoiseSVN, and checkout the latest changes using the link above.
+Don't worry, it's not as hard as it sounds! Just follow these instructions:
+<br />
+<ol>
+<li>Download and install <a href="http://tortoisesvn.net/downloads.html">TortoiseSVN</a>.</li>
+<li>Create a folder called 'Hotspot Recorder' inside the 'Honorbuddy/Plugins' folder.</li>
+<li>Right-click the 'Hotspot Recorder' folder, and choose 'SVN Checkout...' from the popup menu.</li>
+<li>Enter this when it asks you for the URL, and click 'OK': <a href="http://hotspot-recorder.googlecode.com/svn/trunk/">http://hotspot-recorder.googlecode.com/svn/trunk/</a>.</li>
+</ol>
+You're done! To grab the latest version whenever there's an update, just redo step 3 above.
+<br /><br />
+After downloading the files via SVN, stop and restart HonorBuddy, if it's running.
+
+<h3>How it works:</h3>
+HSR is a plugin for HonorBuddy. To start it, click the 'Plugins' button, then place a checkmark on 'Hotspot Recorder.'
+Finally, select the line, and choose 'Show Recorder'.
+
+<h3>Common Problems and Resolutions</h3>
+<table class="topalign" border="1">
+<tr>
+<td width="25%">How do I start recording?</td>
+<td>Check the 'Generate Hotspots' checkbox. It will automatically enter a hotspot whenever you move more than 20 yards.</td>
+</tr>
+<tr>
+<td>How do I change the spacing?</td>
+<td>Enter a new number in the 'Hotspot spacing' textbox.</td>
+</tr>
+<tr>
+<td>How do I modify an existing profile?</td>
+<td>Click the '...' at the top right, and point to the existing profile. This will load it into HSR, and you can begin modifying it.</td>
+</tr>
+<tr>
+<td>How do I save my work?</td>
+<td>Click the 'Save...' button at the top right, and save it wherever you desire.</td>
+</tr>
+
+<tr><td>I'm having low framerates</td>
+<td>
+If you're having speed problems, check the following
+<ol>
+<li>Turn off unnecessary plugins. 
+<li>For older machines, speed up WoW by running it with higher priority.
+To do this, you have to run WoW from a batch file. 
+In Windows 7, open up Notepad, copy/paste this in, save as 'Hog.bat' somewhere nice, 
+and then double-click 'Hog.bat'.
+<br />
+<code>
+<table class="indented">
+<tr><td colspan="2" border="0">Start "WoW" /high "C:\Program Files (x86)\World of Warcraft\Wow.exe"</td></tr>
+<tr><td>REM /realtime</td><td>highest priority</td></tr>
+<tr><td>REM /high</td><td>high priority</td></tr>
+<tr><td>REM /normal</td><td>normal priority</td></tr>
+<tr><td>REM /belownormal</td><td>below normal priority</td></tr>
+<tr><td>REM /low</td><td>lowest priority</td></tr>
+</table>
+</code>
+<br />
+This would work for all programs, not just WoW.
+Replace the /high with whatever priority you want (try /high first though.)
+Replace the pathname to WoW.exe, with the pathname to whatever program you want to run at a different priority.
+Finally - remember to double-click the bat file, not the program itself! 
+</li>
+<li>The performance of HonorBuddy is directly linked to your frame rate. In WoW, under 'Game Menu', 'System', 'Advanced', you'll see a slider called 'Max Background FPS'. Make sure that is set to 30% or higher - you'll have to eyeball it, there's no numbers on it. If the framerate is set too low, and you swap to HonorBuddy to see what cool stuff is happening, your framerate will drop dramatically. To see this in action, drag 
+    the &#39;Max Background Slider&#39;&nbsp; all the way to the left, which sets it 8fps, 
+    and then bring HonorBuddy to the foreground. See how the WoW window has jerky 
+    animation, and HonorBuddy starts failing on a lot of spells? Drag it back up to 
+    30% or higher, and it will start working smoothly again. </li>
+</ol>
+</td>
+</tr>
+</table>
+</body>
+</html>

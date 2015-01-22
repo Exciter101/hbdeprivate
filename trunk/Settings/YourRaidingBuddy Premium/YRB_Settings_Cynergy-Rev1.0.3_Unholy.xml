@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<YbSettingsUD>
+  <SummonGargoyle>Always</SummonGargoyle>
+  <UseGargoyleInAoE>False</UseGargoyleInAoE>
+  <PrebuffPet>False</PrebuffPet>
+  <UseItems>False</UseItems>
+  <Lifeblood>Offensive</Lifeblood>
+  <LifebloodOffensive>OnBoss</LifebloodOffensive>
+  <EmpowerRuneWeapon>Always</EmpowerRuneWeapon>
+  <ClassRacials>OnBoss</ClassRacials>
+  <AoECount>2</AoECount>
+  <EnableFacing>False</EnableFacing>
+  <DeathAndDecayST>False</DeathAndDecayST>
+  <DeathAndDecayToggle>False</DeathAndDecayToggle>
+  <DeathAndDecayAoE>True</DeathAndDecayAoE>
+  <Trinket1>OnBoss</Trinket1>
+  <Trinket2>OnBoss</Trinket2>
+  <TrinketAura>0</TrinketAura>
+  <UseTrinketOnCertainAura>False</UseTrinketOnCertainAura>
+  <EnableDefensive>False</EnableDefensive>
+  <DeathSiphonHP>80</DeathSiphonHP>
+  <DeathPactHP>80</DeathPactHP>
+  <DeathStrikeHP>80</DeathStrikeHP>
+  <CheckInterruptsList>True</CheckInterruptsList>
+  <CheckAMS>False</CheckAMS>
+  <CheckAoE>True</CheckAoE>
+  <CheckInterrupts>True</CheckInterrupts>
+  <CheckLifebloodNum>10</CheckLifebloodNum>
+</YbSettingsUD>

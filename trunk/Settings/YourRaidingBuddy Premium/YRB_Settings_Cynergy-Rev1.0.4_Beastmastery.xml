@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<YbSettingsBM>
+  <MurderofCrows>Always</MurderofCrows>
+  <Stampede>Never</Stampede>
+  <BestialWrath>Always</BestialWrath>
+  <ClassRacials>OnBoss</ClassRacials>
+  <RecallPet>False</RecallPet>
+  <AoEMultiShotCount>2</AoEMultiShotCount>
+  <AoECount>2</AoECount>
+  <EnableMultiShotAoE>True</EnableMultiShotAoE>
+  <GlaiveTossAoE>False</GlaiveTossAoE>
+  <GlaiveTossST>True</GlaiveTossST>
+  <BarrageST>False</BarrageST>
+  <BarrageAoE>True</BarrageAoE>
+  <ToggleMode>False</ToggleMode>
+  <MendPetHP>70</MendPetHP>
+  <CheckInterruptsList>True</CheckInterruptsList>
+  <EnableDefensive>True</EnableDefensive>
+  <DeterrenceHP>35</DeterrenceHP>
+  <WhichPet>1</WhichPet>
+  <UseMastersCall>True</UseMastersCall>
+  <UseFeignDeathOnAggro>False</UseFeignDeathOnAggro>
+  <EnableFacing>False</EnableFacing>
+  <TrinketAura>0</TrinketAura>
+  <UseTrinketOnCertainAura>False</UseTrinketOnCertainAura>
+  <Trinket1>OnBoss</Trinket1>
+  <Trinket2>OnBoss</Trinket2>
+  <CheckAoE>True</CheckAoE>
+  <CheckInterrupts>True</CheckInterrupts>
+</YbSettingsBM>

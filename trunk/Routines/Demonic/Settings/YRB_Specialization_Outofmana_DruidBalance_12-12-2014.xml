@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<YbSettingsDB>
+  <Celestial>Always</Celestial>
+  <Incarnation>Always</Incarnation>
+  <ForceofNature>Always</ForceofNature>
+  <ClassRacials>OnBoss</ClassRacials>
+  <Lifeblood>Offensive</Lifeblood>
+  <LifebloodOffensive>OnBoss</LifebloodOffensive>
+  <WhenToUseAutoForm>EverywhereNonCombat</WhenToUseAutoForm>
+  <AoECount>2</AoECount>
+  <Dotbehavior>CurrentTargetAndMouseOver</Dotbehavior>
+  <EnableFacing>False</EnableFacing>
+  <BarkskinHP>45</BarkskinHP>
+  <HealingTouchHP>55</HealingTouchHP>
+  <RejuvenationHP>65</RejuvenationHP>
+  <NatureSwiftnessHP>40</NatureSwiftnessHP>
+  <RebrithLogic>Automatic</RebrithLogic>
+  <EnableDefensive>True</EnableDefensive>
+  <CheckInterruptsList>True</CheckInterruptsList>
+  <TrinketAura>0</TrinketAura>
+  <UseTrinketOnCertainAura>False</UseTrinketOnCertainAura>
+  <Trinket1>OnBoss</Trinket1>
+  <Trinket2>OnBoss</Trinket2>
+  <CheckAoE>True</CheckAoE>
+  <CheckInterrupts>True</CheckInterrupts>
+</YbSettingsDB>
