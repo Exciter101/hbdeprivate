@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<YbSettingsFire>
+  <ClassRacials>OnBoss</ClassRacials>
+  <AoECount>2</AoECount>
+  <IgniteValue>100000</IgniteValue>
+  <Lifeblood>Offensive</Lifeblood>
+  <LifebloodOffensive>OnBoss</LifebloodOffensive>
+  <EnableFacing>True</EnableFacing>
+  <EnableRejuvenation>False</EnableRejuvenation>
+  <EnableHealingTouch>False</EnableHealingTouch>
+  <EnableNatureSwiftness>False</EnableNatureSwiftness>
+  <EnableInnervate>False</EnableInnervate>
+  <EnableBarkskin>False</EnableBarkskin>
+  <BarkskinHP>40</BarkskinHP>
+  <InnervateMP>40</InnervateMP>
+  <HealingTouchHP>40</HealingTouchHP>
+  <RejuvenationHP>40</RejuvenationHP>
+  <NatureSwiftnessHP>40</NatureSwiftnessHP>
+  <RebrithLogic>FocusTarget</RebrithLogic>
+  <WhichEclipse>Solar</WhichEclipse>
+  <OnlyChangeIfNoEclipse>False</OnlyChangeIfNoEclipse>
+  <UseHands>OnBoss</UseHands>
+  <CheckHealthStone>False</CheckHealthStone>
+  <CheckHealthStonEnums>20</CheckHealthStonEnums>
+  <Trinket1>OnBoss</Trinket1>
+  <Trinket2>OnBoss</Trinket2>
+  <CheckAoE>True</CheckAoE>
+  <CheckAMZ>False</CheckAMZ>
+  <CheckAutoAttack>True</CheckAutoAttack>
+  <CheckDesyncTrinkHands>False</CheckDesyncTrinkHands>
+  <CheckInterrupts>True</CheckInterrupts>
+  <CheckLifeblood>False</CheckLifeblood>
+  <CheckLifebloodNum>10</CheckLifebloodNum>
+</YbSettingsFire>

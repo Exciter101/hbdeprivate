@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<YbSettingsRE>
+  <HolyAvenger>OnBoss</HolyAvenger>
+  <ExecutionSentence>Always</ExecutionSentence>
+  <LightsHammer>Always</LightsHammer>
+  <Seraphim>Always</Seraphim>
+  <AvengingWrath>Always</AvengingWrath>
+  <ClassRacials>OnBoss</ClassRacials>
+  <SealofRighteousnessCount>4</SealofRighteousnessCount>
+  <EnableAutoCleave>True</EnableAutoCleave>
+  <UseSealSwapping>True</UseSealSwapping>
+  <EnableFacing>False</EnableFacing>
+  <UseLightsHammerHotkey>False</UseLightsHammerHotkey>
+  <LightHammerLocation>OnMe</LightHammerLocation>
+  <AoENumber>2</AoENumber>
+  <EnableDefensive>True</EnableDefensive>
+  <EnableCleanse>True</EnableCleanse>
+  <DivineProtectionHP>85</DivineProtectionHP>
+  <DivineShieldHP>85</DivineShieldHP>
+  <WorldofGloryHP>5</WorldofGloryHP>
+  <FlashOfLightHP>80</FlashOfLightHP>
+  <LohHPSetting>10</LohHPSetting>
+  <WoGHP>95</WoGHP>
+  <SacredShieldEnable>True</SacredShieldEnable>
+  <SelflessHealingStacks>3</SelflessHealingStacks>
+  <CheckInterruptsList>True</CheckInterruptsList>
+  <EnableEmancipate>True</EnableEmancipate>
+  <EnableHandofFreedom>True</EnableHandofFreedom>
+  <TrinketAura>0</TrinketAura>
+  <UseTrinketOnCertainAura>False</UseTrinketOnCertainAura>
+  <Trinket1>OnBoss</Trinket1>
+  <Trinket2>OnBoss</Trinket2>
+  <CheckInterrupts>True</CheckInterrupts>
+</YbSettingsRE>
