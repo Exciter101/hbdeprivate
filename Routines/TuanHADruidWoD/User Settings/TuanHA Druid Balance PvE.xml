@@ -26,7 +26,7 @@
   <EntanglingRoots>False</EntanglingRoots>
   <FaerieFire>True</FaerieFire>
   <FerociousBite>True</FerociousBite>
-  <FormPowerShift>False</FormPowerShift>
+  <FormPowerShift>True</FormPowerShift>
   <ForceofNature>True</ForceofNature>
   <ForceofNatureBalance>True</ForceofNatureBalance>
   <ForceofNatureResto>False</ForceofNatureResto>
