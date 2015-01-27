@@ -23,7 +23,7 @@
   <DisorientingRoarInterrupt>True</DisorientingRoarInterrupt>
   <DispellMin>100</DispellMin>
   <DispellMax>200</DispellMax>
-  <EntanglingRoots>False</EntanglingRoots>
+  <EntanglingRoots>True</EntanglingRoots>
   <FaerieFire>True</FaerieFire>
   <FerociousBite>True</FerociousBite>
   <FormPowerShift>True</FormPowerShift>
@@ -103,6 +103,7 @@
   <RejuvenationNonResto>True</RejuvenationNonResto>
   <Rejuvenation>False</Rejuvenation>
   <RejuvenationHP>95</RejuvenationHP>
+  <RejuvenationGerminationHP>80</RejuvenationGerminationHP>
   <RejuvenationAll>False</RejuvenationAll>
   <RejuvenationAllMana>70</RejuvenationAllMana>
   <Renewal>True</Renewal>
@@ -151,6 +152,8 @@
   <AutoBuff>True</AutoBuff>
   <AutoDetectManualCast>False</AutoDetectManualCast>
   <AutoDetectManualCastMS>100</AutoDetectManualCastMS>
+  <AutoJuke>True</AutoJuke>
+  <AutoPotion>True</AutoPotion>
   <AutoRacial>True</AutoRacial>
   <AutoRez>False</AutoRez>
   <AutoSetFocus>True</AutoSetFocus>
