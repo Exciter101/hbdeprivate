@@ -1,3 +1,6 @@
+Version 6.0.5510
+Improv logic Auto Potion on Guardian Tank
+
 Version 6.0.5504
 Improve Moonkin DPS PvP and PvE
 Add option Auto Potion

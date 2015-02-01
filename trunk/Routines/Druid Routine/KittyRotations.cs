@@ -47,7 +47,7 @@ namespace Kitty
         {
             if (!AutoBot && Me.Mounted) return false;
             if (Me.IsCasting || HKM.pauseRoutineOn || HKM.manualOn) return false;
-            if (await stopPullTimer(pullTimer.IsRunning && AutoBot && lastGuid == Me.CurrentTarget.Guid)) return true;
+            if (await stopPullTimer(pullTimer.IsRunning && AutoBot)) return true;
             if (await RemoveRooted(BEAR_FORM, MeIsRooted && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await CastBuff(DASH, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange && DateTime.Now > snareTimer)) return true;
             if (await CastBuff(STAMPEDING_ROAR, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange && DateTime.Now > snareTimer)) return true;
@@ -89,7 +89,7 @@ namespace Kitty
             if (await Cast(THRASH, gotTarget && BearThrashConditions && Me.CurrentTarget.IsWithinMeleeRange, Me.CurrentTarget)) return true;
             if (await Cast(MAUL, gotTarget && BearMaulConditions && Me.CurrentTarget.IsWithinMeleeRange, Me.CurrentTarget)) return true;
             if (await Cast(LACERATE, gotTarget && BearLacerateConditions && Me.CurrentTarget.IsWithinMeleeRange, Me.CurrentTarget)) return true;
-            if (await blackListingUnit(Me.CurrentTarget != null && AutoBot && lastGuid == Me.CurrentTarget.Guid && fightTimer.ElapsedMilliseconds >= 30, Me.CurrentTarget)) return true;
+            //if (await blackListingUnit(Me.CurrentTarget != null && AutoBot && lastGuid == Me.CurrentTarget.Guid && fightTimer.ElapsedMilliseconds >= 30, Me.CurrentTarget)) return true;
             
             return false;
         }
@@ -103,7 +103,7 @@ namespace Kitty
         public static async Task<bool> FeralRotationCoroutine()
         {
             if (Me.IsCasting || HKM.pauseRoutineOn || HKM.manualOn || (!AutoBot && Me.Mounted)) return false;
-            if (await stopPullTimer(pullTimer.IsRunning && AutoBot && lastGuid == Me.CurrentTarget.Guid)) return true;
+            if (await stopPullTimer(pullTimer.IsRunning && AutoBot)) return true;
             if (await RemoveRooted(FERALFORM, MeIsRooted && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await CastBuff(DASH, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange && DateTime.Now >= snareTimer)) return true;
             if (await CastBuff(STAMPEDING_ROAR, MeIsSnared && gotTarget && !Me.CurrentTarget.IsWithinMeleeRange && DateTime.Now >= snareTimer)) return true;
@@ -151,7 +151,7 @@ namespace Kitty
             if (await Cast(THRASH, Me.CurrentTarget != null && validTarget(Me.CurrentTarget) && needThrash, Me.CurrentTarget)) return true;
             if (await Cast(SHRED, Me.CurrentTarget != null && validTarget(Me.CurrentTarget) && needShred(Me.CurrentTarget), Me.CurrentTarget)) return true;
             if (await Cast(SWIPE, Me.CurrentTarget != null && validTarget(Me.CurrentTarget) && needSwipe(Me.CurrentTarget), Me.CurrentTarget)) return true;
-            if (await blackListingUnit(Me.CurrentTarget != null && AutoBot && lastGuid == Me.CurrentTarget.Guid && fightTimer.ElapsedMilliseconds >= 30, Me.CurrentTarget)) return true;
+            //if (await blackListingUnit(Me.CurrentTarget != null && AutoBot && lastGuid == Me.CurrentTarget.Guid && fightTimer.ElapsedMilliseconds >= 30, Me.CurrentTarget)) return true;
             
             return false;
         }
@@ -162,7 +162,7 @@ namespace Kitty
 
         public static async Task<bool> BoomkinRotationCoroutine()
         {
-            if (await stopPullTimer(pullTimer.IsRunning && AutoBot && lastGuid == Me.CurrentTarget.Guid)) return true;
+            if (await stopPullTimer(pullTimer.IsRunning && AutoBot)) return true;
             if (await CastBuff(MOONKIN_FORM, Me.Shapeshift != ShapeshiftForm.Moonkin)) return true;
             if (await findTargets(Me.CurrentTarget == null && AllowTargeting && FindTargetsCount >= 1)) return true;
             if (await clearTarget(Me.CurrentTarget != null && AllowTargeting && (Me.CurrentTarget.IsDead || Me.CurrentTarget.IsFriendly))) return true;
@@ -186,7 +186,7 @@ namespace Kitty
             if (await Cast(STARFIRE, gotTarget && IsOverlayed(STARFIRE_INT), Me.CurrentTarget)) return true;
             if (await Cast(WRATH, gotTarget && IsOverlayed(WRATH_INT), Me.CurrentTarget)) return true;
             if (await Cast(STARFIRE, gotTarget && !IsOverlayed(WRATH_INT) && !IsOverlayed(STARFIRE_INT), Me.CurrentTarget)) return true;
-            if (await blackListingUnit(Me.CurrentTarget != null && AutoBot && lastGuid == Me.CurrentTarget.Guid && fightTimer.ElapsedMilliseconds >= 30, Me.CurrentTarget)) return true;
+            //if (await blackListingUnit(Me.CurrentTarget != null && AutoBot && lastGuid == Me.CurrentTarget.Guid && fightTimer.ElapsedMilliseconds >= 30, Me.CurrentTarget)) return true;
             
             return false;
         }
@@ -197,13 +197,13 @@ namespace Kitty
 
         public static async Task<bool> LowbieRotationCoroutine()
         {
-            if (await stopPullTimer(pullTimer.IsRunning && AutoBot && lastGuid == Me.CurrentTarget.Guid)) return true;
+            if (await stopPullTimer(pullTimer.IsRunning && AutoBot)) return true;
             if (await MoveToTarget(gotTarget && AllowMovement && Me.CurrentTarget.Distance > 39f)) return true;
             if (await StopMovement(gotTarget && AllowMovement && Me.CurrentTarget.Distance <= 39f)) return true;
             if (await FaceMyTarget(gotTarget && AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget) && !Me.IsMoving)) return true;
             if (await Cast(MOONFIRE, gotTarget && !debuffExists(MOONFIRE, Me.CurrentTarget) && Me.CurrentTarget.Distance <= 39, Me.CurrentTarget)) return true;
             if (await Cast(WRATH, gotTarget && Me.CurrentTarget.Distance <= 39, Me.CurrentTarget)) return true;
-            if (await blackListingUnit(Me.CurrentTarget != null && AutoBot && lastGuid == Me.CurrentTarget.Guid && fightTimer.ElapsedMilliseconds >= 30, Me.CurrentTarget)) return true;
+            //if (await blackListingUnit(Me.CurrentTarget != null && AutoBot && lastGuid == Me.CurrentTarget.Guid && fightTimer.ElapsedMilliseconds >= 30, Me.CurrentTarget)) return true;
             
             return false;
         }
