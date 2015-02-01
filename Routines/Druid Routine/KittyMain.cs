@@ -171,9 +171,6 @@ namespace Kitty
                 lastGuid = Me.CurrentTarget.Guid;
                 Logging.Write(Colors.CornflowerBlue, "Starting PullTimer"); 
             }
-            if (await CannotPull(Me.CurrentTarget, Me.CurrentTarget != null 
-                && pullTimer.ElapsedMilliseconds >= 30 * 1000 
-                && lastGuid == Me.CurrentTarget.Guid)) return true;
             if (await RemoveRooted(BEAR_FORM, MeIsRooted && (MeIsGuardian || MeIsFeralBear) && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await RemoveRooted(CAT_FORM, MeIsFeral && !MeIsFeralBear && MeIsRooted && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await CastBuff(CAT_FORM, Me.Shapeshift != ShapeshiftForm.Cat && MeIsFeral && !MeIsFeralBear)) return true;
