@@ -26,6 +26,8 @@ using EH = Kitty.EventHandlers;
 using CL = Kitty.CombatLogEventArgs;
 using P = Kitty.KittySettings;
 
+using resto = RestoDruid;
+
 namespace Kitty
 {
     public partial class KittyMain : CombatRoutine
@@ -38,11 +40,25 @@ namespace Kitty
         { 
             get 
             {
-                    return new ActionRunCoroutine(ctx => rotationSelector());
+                if (Me.Specialization == WoWSpec.DruidRestoration) { return new ActionRunCoroutine(ctx => resto.RMain.HealingRoutine()); }
+                return new ActionRunCoroutine(ctx => rotationSelector());
             } 
         }
-        public override Composite PreCombatBuffBehavior { get { return new ActionRunCoroutine(ctx => PreCombatBuffCoroutine()); } }
-        public override Composite CombatBuffBehavior { get { return new ActionRunCoroutine(ctx => CombatBuffCoroutine()); } }
+        public override Composite PreCombatBuffBehavior 
+        { 
+            get 
+            {
+                if (Me.Specialization == WoWSpec.DruidRestoration) { return new ActionRunCoroutine(ctx => resto.RMain.PreCombatBuffCoroutine()); }
+                return new ActionRunCoroutine(ctx => PreCombatBuffCoroutine()); 
+            } 
+        }
+        public override Composite CombatBuffBehavior 
+        { 
+            get 
+            {
+                return Me.Specialization != WoWSpec.DruidRestoration ? new ActionRunCoroutine(ctx => CombatBuffCoroutine()) : null;
+            } 
+        }
         public override Composite PullBehavior { get { return new ActionRunCoroutine(ctx => PullCoroutine()); } }
         public override Composite PullBuffBehavior { get { return new ActionRunCoroutine(ctx => PullBuffCoroutine()); } }
 
@@ -63,7 +79,14 @@ namespace Kitty
         public override bool WantButton { get { return true; } }
         public override void OnButtonPress()
         {
-            new KittyGui().ShowDialog();
+            if (Me.Specialization == WoWSpec.DruidRestoration)
+            {
+                new resto.RForm().ShowDialog();
+            }
+            if (Me.Specialization != WoWSpec.DruidRestoration)
+            {
+                new KittyGui().ShowDialog();
+            }
         }
 
         public override void Initialize()
@@ -76,6 +99,7 @@ namespace Kitty
             Lua.Events.AttachEvent("UI_ERROR_MESSAGE", CL.CombatLogErrorHandler);
             EH.AttachCombatLogEvent();
             Lua.Events.AttachEvent("MODIFIER_STATE_CHANGED", HKM.HandleModifierStateChanged);
+            StyxWoW.Overlay.Dispatcher.InvokeShutdown();
             _init = true;
         }
 
