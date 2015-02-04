@@ -111,7 +111,7 @@
   <Rip>True</Rip>
   <RoarBashHelpFriend>True</RoarBashHelpFriend>
   <RoarBashHelpFriendHP>40</RoarBashHelpFriendHP>
-  <SavageDefense>False</SavageDefense>
+  <SavageDefense>True</SavageDefense>
   <SavageDefenseHP>70</SavageDefenseHP>
   <SavageRoar>True</SavageRoar>
   <SolarBeam>False</SolarBeam>
@@ -152,6 +152,8 @@
   <AutoBuff>True</AutoBuff>
   <AutoDetectManualCast>True</AutoDetectManualCast>
   <AutoDetectManualCastMS>300</AutoDetectManualCastMS>
+  <AutoJuke>True</AutoJuke>
+  <AutoPotion>True</AutoPotion>
   <AutoRacial>True</AutoRacial>
   <AutoRez>True</AutoRez>
   <AutoSetFocus>True</AutoSetFocus>

@@ -1,3 +1,7 @@
+Version 6.0.5513
+Better Logic on Auto Healthstone - Potion - Battle Standard
+Slightly improve logic and performance
+
 Version 6.0.5510
 Improv logic Auto Potion on Guardian Tank
 
