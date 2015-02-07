@@ -59,7 +59,17 @@ namespace Kitty
                 return Me.Specialization != WoWSpec.DruidRestoration ? new ActionRunCoroutine(ctx => CombatBuffCoroutine()) : null;
             } 
         }
-        public override Composite PullBehavior { get { return new ActionRunCoroutine(ctx => PullCoroutine()); } }
+        public override Composite PullBehavior 
+        { 
+            get 
+            {
+                if (Me.Specialization == WoWSpec.DruidGuardian)
+                {
+                    return new ActionRunCoroutine(ctx => PullBearCoroutine()); 
+                }
+                return new ActionRunCoroutine(ctx => PullCoroutine()); 
+            } 
+        }
         public override Composite PullBuffBehavior { get { return new ActionRunCoroutine(ctx => PullBuffCoroutine()); } }
 
         public static WoWGuid lastGuid;
@@ -180,8 +190,39 @@ namespace Kitty
         {
             if (!AutoBot) return false;
             if (HKM.pauseRoutineOn || HKM.manualOn) return false;
+            if (await CastBuff("Bear Form", Me.Shapeshift != ShapeshiftForm.Bear && Me.Specialization == WoWSpec.DruidGuardian)) return true;
             if (await CastBuff(TRAVEL_FORM, !Me.Combat && Me.IsSwimming && !buffExists(TRAVEL_FORM, Me) && !buffExists(PROWL, Me) && Canbuff)) return true;
             if (await CastBuff(PROWL, gotTarget && MeIsFeral && (P.myPrefs.PullProwlAndRake || P.myPrefs.PullProwlAndShred) && Canbuff && !buffExists(PROWL, Me))) return true;
+            return false;
+        }
+
+        private static async Task<bool> PullBearCoroutine()
+        {
+            if (!AutoBot) return false;
+            if (HKM.pauseRoutineOn || HKM.manualOn) return false;
+            if (!pullTimer.IsRunning && AutoBot && Me.CurrentTarget != null)
+            {
+                pullTimer.Restart();
+                lastGuid = Me.CurrentTarget.Guid;
+                Logging.Write(Colors.CornflowerBlue, "Starting PullTimer");
+            }
+            if (await RemoveRooted(BEAR_FORM, MeIsRooted && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (gotTarget && AllowMovement && Me.CurrentTarget.Distance > SpellManager.Spells["Lacerate"].MaxRange) { Navigator.MoveTo(Me.CurrentTarget.Location); }
+            if (gotTarget && AllowMovement && Me.CurrentTarget.Distance <= SpellManager.Spells["Lacerate"].MaxRange) { Navigator.PlayerMover.MoveStop(); }
+
+            if (Me.CurrentTarget == null && AllowTargeting && (Me.CurrentTarget.IsDead || Me.CurrentTarget.IsFriendly)) { Me.ClearTarget(); }
+            if (Me.CurrentTarget != null && AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget)) { Me.CurrentTarget.Face(); }
+            if (await Cast(WILD_CHARGE, gotTarget && P.myPrefs.PullWildCharge && !spellOnCooldown(WILD_CHARGE) 
+                && WildChargeConditions(SpellManager.Spells["Wild Charge"].MinRange + 1, SpellManager.Spells["Wild Charge"].MaxRange -1) 
+                && MeIsGuardian, Me.CurrentTarget)) return true;
+            if (await Cast("Faerie Fire", gotTarget && !spellOnCooldown(FF) && Me.CurrentTarget.Distance <= SpellManager.Spells["Faerie Fire"].MaxRange -3 , Me.CurrentTarget)) return true;
+            if (await Cast("Faerie Swarm", gotTarget && !spellOnCooldown(FF) && Me.CurrentTarget.Distance <= SpellManager.Spells["Faerie Swarm"].MaxRange -3, Me.CurrentTarget)) return true;
+            
+            if (await Cast(GROWL, gotTarget && spellOnCooldown(FF) && Me.CurrentTarget.Distance <= SpellManager.Spells["Growl"].MaxRange -3, Me.CurrentTarget)) return true;
+            if (await Cast(LACERATE, gotTarget && Me.CurrentTarget.Distance <= SpellManager.Spells["Lacerate"].MaxRange, Me.CurrentTarget)) return true;
+
+            
+            await CommonCoroutines.SleepForLagDuration();
             return false;
         }
 
