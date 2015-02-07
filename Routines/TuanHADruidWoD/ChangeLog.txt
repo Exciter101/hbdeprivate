@@ -1,3 +1,9 @@
+Version 6.0.5516
+Introduce improved AoE Rotation, now user can use customized rotation on 1-9 target (Old version only have AoE On/Off)
+Auto = Combat Routine select best rotation, 1 = Single Target rotation, 2-9 = User FORCE AoE Rotation on 2-9 enemies
+http://i.imgur.com/7CCQmRj.png
+Moonkin farming can set AoE Rotation to 2-9 and it always use Starfall...
+
 Version 6.0.5513
 Better Logic on Auto Healthstone - Potion - Battle Standard
 Slightly improve logic and performance
