@@ -54,10 +54,10 @@ namespace Kitty
             if (await CastBuff(BEAR_FORM, Me.Shapeshift != ShapeshiftForm.Bear)) return true;
             if (await findTargets(Me.CurrentTarget == null && AllowTargeting && FindTargetsCount >= 1)) return true;
             if (await clearTarget(Me.CurrentTarget != null && AllowTargeting && (Me.CurrentTarget.IsDead || Me.CurrentTarget.IsFriendly))) return true;
-            if (await findMeleeAttackers(gotTarget && AutoBot && AllowTargeting && Me.CurrentTarget.Distance > 10 && MeleeAttackersCount >= 1)) return true;
-            if (await MoveToTarget(gotTarget && AllowMovement && Me.CurrentTarget.Distance > 4.5f)) return true;
-            if (await StopMovement(gotTarget && AllowMovement && Me.CurrentTarget.Distance <= 4.5f)) return true;
-            if (await FaceMyTarget(gotTarget && AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget) && !Me.IsMoving)) return true;
+            if (await findMeleeAttackers(gotTarget && AllowTargeting && Me.CurrentTarget.Distance > 10 && MeleeAttackersCount >= 1)) return true;
+            if (gotTarget && AllowMovement && Me.CurrentTarget.Distance > 4.5f) { Navigator.MoveTo(Me.CurrentTarget.Location); }
+            if (gotTarget && AllowMovement && Me.CurrentTarget.Distance <= 4.5f && Me.IsMoving) { Navigator.PlayerMover.MoveStop(); }
+            if (gotTarget && AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget)) { Me.CurrentTarget.Face(); }
 
             if (await CastBuff(BARKSKIN, gotTarget && Me.HealthPercent <= P.myPrefs.PercentBarkskin && !spellOnCooldown(BARKSKIN))) return true;
 
@@ -70,25 +70,27 @@ namespace Kitty
             if (await Cast(MIGHTY_BASH, Me.CurrentTarget != null && validTarget(Me.CurrentTarget) && needMightyBash(Me.CurrentTarget), Me.CurrentTarget)) return true;
             if (await Cast(WAR_STOMP, Me.CurrentTarget != null && validTarget(Me.CurrentTarget) && needWarStomp(Me.CurrentTarget), Me.CurrentTarget)) return true;
 
-            if (await CastBuff(HEALING_TOUCH, Me.HealthPercent <= 90 && IsOverlayed(5185))) return true;
-            if (await CastBuff(FRENZIED_REGENERATION, BearFrenziedRegenerationConditions)) return true;
-            if (await CastBuff(SURVIVAL_INSTINCTS, !spellOnCooldown(SURVIVAL_INSTINCTS) && Me.HealthPercent <= P.myPrefs.PercentSurvivalInstincts)) return true;
-            if (await CastBuff(SAVAGE_DEFENSE, BearSavageDefenseConditions)) return true;
+            if (await CastBuff(HEALING_TOUCH, Me.HealthPercent <= 90 && IsOverlayed(5185))) return true; // healing touch
+            if (await CastBuff(FRENZIED_REGENERATION, Me.HealthPercent <= P.myPrefs.PercentFrenziedRegeneration && Me.RagePercent >= 70)) return true;
+            if (await CastBuff(SURVIVAL_INSTINCTS, Me.HealthPercent <= P.myPrefs.PercentSurvivalInstincts)) return true;
+            if (await CastBuff(SAVAGE_DEFENSE, Me.HealthPercent < P.myPrefs.PercentSavageDefense)) return true;
 
 
             if (await Cast(WILD_CHARGE, gotTarget && WildChargeConditions(8, 25), Me.CurrentTarget)) return true;
-            if (await CastBuff(BERSERK, gotTarget && !spellOnCooldown(BERSERK) && BerserkBearConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await CastBuff(INCARNATION_BEAR, gotTarget && !spellOnCooldown(INCARNATION_BEAR) && IncarnationBearConditions && Me.CurrentTarget.IsWithinMeleeRange))
+            if (await CastBuff(BERSERK, gotTarget && BerserkBearConditions && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await CastBuff(INCARNATION_BEAR, gotTarget && IncarnationBearConditions && Me.CurrentTarget.IsWithinMeleeRange))
                 if (await Cast(FORCE_OF_NATURE, Me.CurrentTarget != null && validTarget(Me.CurrentTarget) && needForceOfNature(Me.CurrentTarget), Me.CurrentTarget)) return true;
             if (await NeedTrinket1(UseTrinket1 && nextTrinketTimeAllowed <= DateTime.Now && !P.myPrefs.Trinket1Use)) return true;
             if (await NeedTrinket2(UseTrinket2 && nextTrinketTimeAllowed <= DateTime.Now && !P.myPrefs.Trinket2Use)) return true;
             if (await CastGroundSpellTrinket(1, gotTarget && P.myPrefs.Trinket1Use && nextTrinketTimeAllowed <= DateTime.Now)) return true;
             if (await CastGroundSpellTrinket(2, gotTarget && P.myPrefs.Trinket2Use && nextTrinketTimeAllowed <= DateTime.Now)) return true;
             if (await Cast(PULVERIZE, gotTarget && Me.CurrentTarget.IsWithinMeleeRange, Me.CurrentTarget)) return true;
-            if (await Cast(MANGLE, gotTarget && !spellOnCooldown(MANGLE) && Me.CurrentTarget.IsWithinMeleeRange, Me.CurrentTarget)) return true;
-            if (await Cast(THRASH, gotTarget && BearThrashConditions && Me.CurrentTarget.IsWithinMeleeRange, Me.CurrentTarget)) return true;
+            if (await Cast(MANGLE, gotTarget && Me.CurrentTarget.IsWithinMeleeRange, Me.CurrentTarget)) return true;
             if (await Cast(MAUL, gotTarget && BearMaulConditions && Me.CurrentTarget.IsWithinMeleeRange, Me.CurrentTarget)) return true;
+            if (await Cast(THRASH, gotTarget && BearThrashConditions && Me.CurrentTarget.IsWithinMeleeRange, Me.CurrentTarget)) return true;
+            
             if (await Cast(LACERATE, gotTarget && BearLacerateConditions && Me.CurrentTarget.IsWithinMeleeRange, Me.CurrentTarget)) return true;
+
             //if (await blackListingUnit(Me.CurrentTarget != null && AutoBot && lastGuid == Me.CurrentTarget.Guid && fightTimer.ElapsedMilliseconds >= 30, Me.CurrentTarget)) return true;
             
             return false;
@@ -111,9 +113,9 @@ namespace Kitty
             if (await findTargets(Me.CurrentTarget == null && AllowTargeting && FindTargetsCount >= 1)) return true;
             if (await findMeleeAttackers(gotTarget && AllowTargeting && Me.CurrentTarget.Distance > 10 && MeleeAttackersCount >= 1)) return true;
             if (await clearTarget(Me.CurrentTarget != null && AllowTargeting && (Me.CurrentTarget.IsDead || Me.CurrentTarget.IsFriendly))) return true;
-            if (await MoveToTarget(gotTarget && AllowMovement && Me.CurrentTarget.Distance > 4.5f)) return true;
-            if (await StopMovement(gotTarget && AllowMovement && Me.CurrentTarget.Distance <= 4.5f)) return true;
-            if (await FaceMyTarget(gotTarget && AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget) && !Me.IsMoving)) return true;
+            if (gotTarget && AllowMovement && Me.CurrentTarget.Distance > 4.5f) { Navigator.MoveTo(Me.CurrentTarget.Location); }
+            if (gotTarget && AllowMovement && Me.CurrentTarget.Distance <= 4.5f && Me.IsMoving) { Navigator.PlayerMover.MoveStop(); }
+            if (gotTarget && AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget)) { Me.CurrentTarget.Face(); }
 
             
             if (await CastBuff(SURVIVAL_INSTINCTS, !spellOnCooldown(SURVIVAL_INSTINCTS) && Me.HealthPercent <= P.myPrefs.PercentSurvivalInstincts)) return true;

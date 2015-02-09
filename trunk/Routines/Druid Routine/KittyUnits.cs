@@ -95,8 +95,7 @@ namespace Kitty
         public static List<WoWUnit> FindTarget()
         {
             return ObjectManager.GetObjectsOfType<WoWUnit>(true, false).Where(u => u != null
-                && ValidUnit(u)
-                && !Blacklist.Contains(u, BlacklistFlags.All))
+                && ValidUnit(u))
                 .OrderBy(u => u.Distance).ToList();
         }
         public static int FindTargetsCount { get { return FindTarget().Count(); } }
@@ -160,11 +159,10 @@ namespace Kitty
                 && (u.IsTargetingMeOrPet || u.IsTargetingMyPartyMember || u.IsTargetingMyRaidMember || u.IsTargetingAnyMinion))
                 && ValidUnit(u)
                 && !debuffExists(THRASH, u)
-                && !Blacklist.Contains(u, BlacklistFlags.All)
                 && u.DistanceSqr <= 10 * 10).ToList();
             return newThrash;
         }
-        public static int noBearThrashCount { get { return noBearThrash().Count(); } }
+        public static int noBearThrashCount { get { return noBearThrash().Count() > 0 ? noBearThrash().Count() : 0; } }
         #endregion
 
         #region MeleeRange

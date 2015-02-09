@@ -272,13 +272,9 @@ namespace Kitty
         {
             get
             {
-                if (!spellOnCooldown(THRASH)
-                    && noBearThrashCount > 1) return true;
-                if (!spellOnCooldown(THRASH)
-                && !debuffExists(THRASH, Me.CurrentTarget) || (debuffExists(THRASH, Me.CurrentTarget) && debuffTimeLeft(THRASH, Me.CurrentTarget) <= 4000))
-                {
-                    return true;
-                }
+                if (!SpellManager.HasSpell(LACERATE)) return true;
+                if (noBearThrashCount > 0) return true;
+                if (!debuffExists(THRASH, Me.CurrentTarget)) return true;
                 return false;
             }
         }
@@ -322,7 +318,6 @@ namespace Kitty
             get
             {
                 if (!spellOnCooldown(SAVAGE_DEFENSE)
-                    && Me.RagePercent >= 60
                     && Me.HealthPercent <= P.myPrefs.PercentDavageDefense)
                 {
                     return true;

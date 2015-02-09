@@ -131,8 +131,6 @@ namespace Kitty
             if (!SpellManager.Cast(Spell, Me)) return false;
 
             if (Spell == DASH || Spell == STAMPEDING_ROAR) { snareTimer = DateTime.Now + new TimeSpan(0, 0, 0, 5, 0); }
-
-            SpellManager.Cast(Spell, Me);
             Logging.Write(Colors.LightSeaGreen, "Casting: " + Spell + " on: " + Me.SafeName);
             await CommonCoroutines.SleepForLagDuration();
             return true;
