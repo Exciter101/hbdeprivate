@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <THSettings>
-  <AutoAoE>True</AutoAoE>
   <AstralCommunion>False</AstralCommunion>
   <Barkskin>True</Barkskin>
   <BarkskinHP>70</BarkskinHP>
@@ -144,6 +143,7 @@
   <WildMushroomBalance>False</WildMushroomBalance>
   <Wrath>False</Wrath>
   <WrathBalance>True</WrathBalance>
+  <AoENumber>0</AoENumber>
   <AttackASAP>True</AttackASAP>
   <AttackOOC>True</AttackOOC>
   <AutoAttack>True</AutoAttack>
@@ -152,6 +152,8 @@
   <AutoBuff>True</AutoBuff>
   <AutoDetectManualCast>False</AutoDetectManualCast>
   <AutoDetectManualCastMS>100</AutoDetectManualCastMS>
+  <AutoJuke>True</AutoJuke>
+  <AutoPotion>True</AutoPotion>
   <AutoRacial>True</AutoRacial>
   <AutoRez>True</AutoRez>
   <AutoSetFocus>True</AutoSetFocus>

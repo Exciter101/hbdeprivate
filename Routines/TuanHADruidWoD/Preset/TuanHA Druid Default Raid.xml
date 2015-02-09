@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <THSettings>
-  <AutoAoE>True</AutoAoE>
   <AstralCommunion>True</AstralCommunion>
   <Barkskin>True</Barkskin>
   <BarkskinHP>70</BarkskinHP>
@@ -40,7 +39,7 @@
   <GrowlTank>True</GrowlTank>
   <HealingTouchNonResto>True</HealingTouchNonResto>
   <HealingTouchResto>True</HealingTouchResto>
-  <HealingTouchRestoHP>80</HealingTouchRestoHP>
+  <HealingTouchRestoHP>70</HealingTouchRestoHP>
   <HealingTouchNS>True</HealingTouchNS>
   <HealingTouchNSHP>40</HealingTouchNSHP>
   <HealMe>False</HealMe>
@@ -86,6 +85,7 @@
   <MoonkinForm>True</MoonkinForm>
   <Moonfire>False</Moonfire>
   <MoonfireBalance>True</MoonfireBalance>
+  <MoonfireFeral>True</MoonfireFeral>
   <NaturesGrasp>True</NaturesGrasp>
   <NaturesSwiftnessHealingTouchBalance>True</NaturesSwiftnessHealingTouchBalance>
   <Nourish>True</Nourish>
@@ -102,6 +102,7 @@
   <RejuvenationNonResto>True</RejuvenationNonResto>
   <Rejuvenation>True</Rejuvenation>
   <RejuvenationHP>50</RejuvenationHP>
+  <RejuvenationGerminationHP>30</RejuvenationGerminationHP>
   <RejuvenationAll>True</RejuvenationAll>
   <RejuvenationAllMana>70</RejuvenationAllMana>
   <Renewal>True</Renewal>
@@ -136,12 +137,13 @@
   <WildCharge>True</WildCharge>
   <WildGrowth>True</WildGrowth>
   <WildGrowthUnit>3</WildGrowthUnit>
-  <WildGrowthHP>90</WildGrowthHP>
+  <WildGrowthHP>60</WildGrowthHP>
   <WildMushroomPlacementKeys></WildMushroomPlacementKeys>
   <WildMushroomPlacement>True</WildMushroomPlacement>
   <WildMushroomBalance>True</WildMushroomBalance>
   <Wrath>False</Wrath>
   <WrathBalance>True</WrathBalance>
+  <AoENumber>0</AoENumber>
   <AttackASAP>False</AttackASAP>
   <AttackOOC>True</AttackOOC>
   <AutoAttack>True</AutoAttack>
@@ -150,6 +152,8 @@
   <AutoBuff>True</AutoBuff>
   <AutoDetectManualCast>False</AutoDetectManualCast>
   <AutoDetectManualCastMS>100</AutoDetectManualCastMS>
+  <AutoJuke>True</AutoJuke>
+  <AutoPotion>True</AutoPotion>
   <AutoRacial>True</AutoRacial>
   <AutoRez>True</AutoRez>
   <AutoSetFocus>True</AutoSetFocus>
@@ -168,7 +172,7 @@
   <HeartoftheWildCD>False</HeartoftheWildCD>
   <HeartoftheWildBurst>True</HeartoftheWildBurst>
   <HealthStoneHP>40</HealthStoneHP>
-  <LastSavedSpec>Balance</LastSavedSpec>
+  <LastSavedSpec>Restoration</LastSavedSpec>
   <LastSavedMode></LastSavedMode>
   <NaturesCureASAP>True</NaturesCureASAP>
   <NaturesCureDebuff>True</NaturesCureDebuff>
