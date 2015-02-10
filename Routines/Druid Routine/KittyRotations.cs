@@ -55,9 +55,9 @@ namespace Kitty
             if (await findTargets(Me.CurrentTarget == null && AllowTargeting && FindTargetsCount >= 1)) return true;
             if (await clearTarget(Me.CurrentTarget != null && AllowTargeting && (Me.CurrentTarget.IsDead || Me.CurrentTarget.IsFriendly))) return true;
             if (await findMeleeAttackers(gotTarget && AllowTargeting && Me.CurrentTarget.Distance > 10 && MeleeAttackersCount >= 1)) return true;
+            if (gotTarget && AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget)) { Me.CurrentTarget.Face(); }
             if (gotTarget && AllowMovement && Me.CurrentTarget.Distance > 4.5f) { Navigator.MoveTo(Me.CurrentTarget.Location); }
             if (gotTarget && AllowMovement && Me.CurrentTarget.Distance <= 4.5f && Me.IsMoving) { Navigator.PlayerMover.MoveStop(); }
-            if (gotTarget && AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget)) { Me.CurrentTarget.Face(); }
 
             if (await CastBuff(BARKSKIN, gotTarget && Me.HealthPercent <= P.myPrefs.PercentBarkskin && !spellOnCooldown(BARKSKIN))) return true;
 
