@@ -71,6 +71,7 @@ namespace RestoDruid
             _wrath = "Wrath";
 
         public const int
+            _dreamofcenariusINT = 158504,
             _forceofnaturehealth = 75,
             _germinationhealthtanks = 85,
             _germinationhealthhealers = 90,
@@ -784,6 +785,29 @@ namespace RestoDruid
         #region wild mushroom
         public static int MUSHROOM_ID = 47649;
         public static DateTime lastMushroomCast;
+        public static WoWPoint mushPlacement;
+        
+
+        public static bool resetMushroomTimer
+        {
+            get
+            {
+                if (partyCount == 0) return false;
+                if (mushroomCheck > 0)
+                {
+                    var list = new List<WoWUnit>();
+                    list = PartyMembers.Where(p => p != null
+                        && p.IsAlive
+                        && p.Location.Distance(mushPlacement) <= 15).ToList();
+                    if (list.Count == 0)
+                    {
+                        lastMushroomCast = DateTime.Now;
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
         public static int mushroomCheck
         {
             get
@@ -796,7 +820,6 @@ namespace RestoDruid
         {
             get
             {
-                WoWPoint mushPlacement;
                 var list = new List<WoWUnit>();
                 try
                 {
@@ -856,7 +879,8 @@ namespace RestoDruid
         }
         public static bool needDpsTarget()
         {
-            return SpellManager.HasSpell(_dreamofcenarius) && partyCount > 0 && Me.ManaPercent >= 60;
+            if (partyCount == 0) { return true; }
+            return SpellManager.HasSpell(_dreamofcenariusINT) && Me.ManaPercent >= 60;
         }
         #endregion
 
