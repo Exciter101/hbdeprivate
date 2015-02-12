@@ -263,8 +263,11 @@ namespace Kitty
             get
             {
                 if (spellOnCooldown(MAUL)) return false;
-                if (!SpellManager.HasSpell(TOOTH_AND_CLAW) && Me.RagePercent >= 20) return true;
-                if (SpellManager.HasSpell(TOOTH_AND_CLAW) && buffExists(TOOTH_AND_CLAW, Me) && Me.RagePercent >= 20) return true;
+                if (Me.RagePercent >= 80) return true;
+                if (!SpellManager.HasSpell(THRASH) && Me.RagePercent >= 30) return true;
+                if (!SpellManager.HasSpell(LACERATE) && Me.RagePercent >= 30) return true;
+                if (!SpellManager.HasSpell(TOOTH_AND_CLAW) && Me.RagePercent >= 65) return true;
+                if (SpellManager.HasSpell(TOOTH_AND_CLAW) && buffExists(TOOTH_AND_CLAW, Me) && Me.RagePercent >= 65) return true;
                 return false;
             }
         }
@@ -306,7 +309,7 @@ namespace Kitty
             {
                 if (!spellOnCooldown(FRENZIED_REGENERATION)
                     && Me.HealthPercent <= P.myPrefs.PercentFrenziedRegeneration
-                    && Me.RagePercent > 80)
+                    && Me.RagePercent >= 60)
                 {
                     return true;
                 }
