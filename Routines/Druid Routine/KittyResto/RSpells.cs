@@ -280,20 +280,22 @@ namespace RestoDruid
                 try
                 {
                     if (!Me.HasAura(_clearcasting)) return null;
-                    if (partyCount == 0 && Me.HasAura(_clearcasting)) return Me;
+                    if (partyCount == 0 && Me.HasAura(_clearcasting) && Me.HealthPercent <= 90) return Me;
 
                     if (InProvingGrounds && Me.HasAura(_clearcasting))
                     {
                          t = PartyMembers.Where(p => p != null
                             && p.InLineOfSight
-                            && p.Distance <= 40).OrderBy(p => p.HealthPercent).FirstOrDefault();
+                            && p.Distance <= 40
+                            && p.HealthPercent <= 95).OrderBy(p => p.HealthPercent).FirstOrDefault();
                          return t != null ? t : null;
                     }
                     if (!InProvingGrounds && partyCount > 0 && Me.HasAura(_clearcasting))
                     {
                         t = PartyMembers.Where(p => p != null
                              && p.InLineOfSight
-                             && p.Distance <= 40).OrderBy(p => p.HealthPercent).FirstOrDefault();
+                             && p.Distance <= 40
+                             && p.HealthPercent <= 95).OrderBy(p => p.HealthPercent).FirstOrDefault();
                         return t != null ? t : null;
                     }
                 }
@@ -879,8 +881,7 @@ namespace RestoDruid
         }
         public static bool needDpsTarget()
         {
-            if (partyCount == 0) { return true; }
-            return SpellManager.HasSpell(_dreamofcenariusINT) && Me.ManaPercent >= 60;
+            return SpellManager.HasSpell(_dreamofcenariusINT);
         }
         #endregion
 

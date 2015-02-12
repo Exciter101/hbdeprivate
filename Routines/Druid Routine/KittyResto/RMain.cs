@@ -81,7 +81,7 @@ namespace RestoDruid
 
             if (await CastNonTargetSpell(_tranquility, TranquilityUnit != null && !Me.IsMoving)) return true;
             if (await CastHeal(_wildgrowth, wildgrowthTarget != null, wildgrowthTarget)) return true;
-            if (await CastGroundSpell(_wildmushroom, MushroomTarget != null && DateTime.Now >= lastMushroomCast, MushroomTarget)) return true;
+            if (await CastGroundSpell(_wildmushroom, MushroomTarget != null && (DateTime.Now >= lastMushroomCast || resetMushroomTimer), MushroomTarget)) return true;
             if (await CastHeal(_genesis, genesisTarget != null, genesisTarget)) return true;
             if (await CastHeal(_swiftmend, SwiftMendTarget != null, SwiftMendTarget)) return true;
 
@@ -106,8 +106,8 @@ namespace RestoDruid
 
 
 
-            if (await CastHeal(_moonfire, Me.CurrentTarget != null && units.ValidUnit(Me.CurrentTarget) && !units.debuffExists(_moonfire, Me.CurrentTarget) && partyCount == 0, Me.CurrentTarget)) return true;
-            if (await CastHeal(_wrath, Me.CurrentTarget != null && units.ValidUnit(Me.CurrentTarget) && partyCount == 0, Me.CurrentTarget)) return true;
+            //if (await CastHeal(_moonfire, Me.CurrentTarget != null && units.ValidUnit(Me.CurrentTarget) && !units.debuffExists(_moonfire, Me.CurrentTarget) && partyCount == 0, Me.CurrentTarget)) return true;
+            //if (await CastHeal(_wrath, Me.CurrentTarget != null && units.ValidUnit(Me.CurrentTarget) && partyCount == 0, Me.CurrentTarget)) return true;
 
             await CommonCoroutines.SleepForLagDuration();
             return false;
