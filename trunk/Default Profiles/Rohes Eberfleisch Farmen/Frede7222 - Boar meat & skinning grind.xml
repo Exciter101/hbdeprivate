@@ -1,0 +1,83 @@
+<HBProfile>
+<Name>[N]Raw boar meat private profile</Name>
+<MinDurability>-1</MinDurability>
+<MinFreeBagSlots>-1</MinFreeBagSlots>
+
+<MinLevel>90</MinLevel>
+<MaxLevel>101</MaxLevel>
+
+     <MailGrey>false</MailGrey>
+     <MailWhite>false</MailWhite>
+     <MailGreen>false</MailGreen>
+     <MailBlue>false</MailBlue>
+     <MailPurple>false</MailPurple>
+
+     <SellGrey>True</SellGrey>
+     <SellWhite>false</SellWhite>
+     <SellGreen>True</SellGreen>
+     <SellBlue>false</SellBlue>
+     <SellPurple>false</SellPurple>
+
+     <ProtectedItems>
+     <Item Name="Raw Boar Meat" Entry="109136" />
+     </ProtectedItems>
+
+<AvoidMobs>
+	 <Mob Name="Ashemane Clefthoof" Entry="1887" />
+     <Mob Name="Ashemane Bull" Entry="1886" />
+     <Mob Name="Frostfang Howler" Entry="76705" />
+     <Mob Name="Frostfang Alpha" Entry="76707" />
+     <Mob Name="Son of Goramal" Entry="82620" />
+     <Mob Name="Goramal" Entry="88459" />
+     <Mob name="Bloodmaul Geomancer" Entry="78578" />
+</AvoidMobs>
+
+<Vendors>
+</Vendors>
+
+<QuestOrder>
+
+<CustomBehavior File="UserSettings" UseFlightPaths="False" LootMobs="True" SkinMobs="True" NinjaSkin="True" PullDistance="45" KillBetweenHotspots="True" LogoutForInactivity="True" />
+   
+<CustomBehavior File="Message" Text="Start" LogColor="Lime" />
+
+<While Condition="true" >
+	 
+	<CustomBehavior File="Message" Text="Go to farm" LogColor="Lime" /> 
+	
+     <If Condition="(Me.FreeBagSlots &gt; 5)" > 
+     <SetGrindArea>
+     <GrindArea>
+     <Factions>2136</Factions>
+     <MaxDistance>80</MaxDistance>
+     <TargetMinLevel>1</TargetMinLevel>
+     <TargetMaxLevel>101</TargetMaxLevel>
+     <Factions></Factions>
+	 
+     <Hotspots> 
+		<Hotspot X="7629.484" Y="5095.993" Z="133.6857" />
+		<Hotspot X="7610.442" Y="5116.266" Z="134.622" />
+		<Hotspot X="7584.009" Y="5149.65" Z="138.6874" />
+		<Hotspot X="7582.019" Y="5187.009" Z="142.7366" />
+		<Hotspot X="7565.083" Y="5203.435" Z="142.8216" />
+		<Hotspot X="7579.029" Y="5236.796" Z="143.0068" />
+		<Hotspot X="7548.66" Y="5209.717" Z="139.2103" />
+		<Hotspot X="7535.8" Y="5206.486" Z="138.2597" />
+		<Hotspot X="7531.242" Y="5210.872" Z="138.4501" />
+		<Hotspot X="7515.234" Y="5228.205" Z="142.2708" />
+		<Hotspot X="7499.476" Y="5205.915" Z="137.9067" />
+		<Hotspot X="7516.215" Y="5178.294" Z="136.2068" />
+		<Hotspot X="7486.004" Y="5133.888" Z="136.2047" />
+		<Hotspot X="7493.867" Y="5115.234" Z="136.2047" />     
+     </Hotspots>
+	 
+     </GrindArea>
+     </SetGrindArea>
+     <GrindTo Condition="Me.FreeBagSlots &lt;= 5" GoalText="Farming dem boars." />
+     </If>
+
+</While>
+
+
+</QuestOrder>
+</HBProfile>

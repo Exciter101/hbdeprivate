@@ -1,0 +1,76 @@
+<HBProfile>
+
+<!--
+Author:: HeisenFiles
+BotBase:: Questing
+StartFrom:: Draenor
+Goal:: Grind Boars
+Rep:: NA
+
+
+Website:: Heisenfiles dot com (Full Meat Pack)
+Email:: info at heisenfiles  dot com
+Skype:: HeisenFiles
+-->
+
+<Name>[N][QB]RawBoarMeatGrind by HeisenFiles</Name>
+
+<MinDurability>0.6</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+<MinLevel>100</MinLevel>
+<MaxLevel>101</MaxLevel>
+
+<MailGrey>false</MailGrey>
+<MailWhite>false</MailWhite>
+<MailGreen>false</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>true</SellGrey>
+<SellWhite>false</SellWhite>
+<SellGreen>true</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+</Vendors>
+
+<Mailboxes>
+</Mailboxes>
+
+<AvoidMobs>
+</AvoidMobs>
+
+<Blackspots>
+</Blackspots>
+
+ <QuestOrder>
+ <While Condition="true">
+	<While Condition="Me.Level == 100">
+		<CustomBehavior File="NoCombatMoveTo" X="7539.892" Y="5180.627" Z="137.6178"  />
+		<SetGrindArea>
+			<GrindArea>
+			<TargetMinLevel>99</TargetMinLevel>
+			<TargetMaxLevel>101</TargetMaxLevel>
+			<LootRadius>150</LootRadius>
+			<TargetElites>true</TargetElites>
+			<RandomizeHotspots>true</RandomizeHotspots>
+			<MobIds>77994</MobIds>
+				<Hotspots>
+					<Hotspot X="7539.892" Y="5180.627" Z="137.6178" />
+				</Hotspots>
+			</GrindArea>    
+		</SetGrindArea>
+	<GrindTo Condition="(Me.FreeBagslots &lt;=4) || (Me.LowestDurabilityPercent &lt; 0.4)" GoalText="Grind.Grind.Grind." />
+	<If Condition="(Me.FreeBagslots &lt;=4) || (Me.LowestDurabilityPercent &lt; 0.4)" >
+		<CustomBehavior File="RunCode" Code="Logging.Write(System.Windows.Media.Colors.OrangeRed, &quot;[HeisenFiles] Sell and Repair. &quot;);"/>
+		<CustomBehavior File="Message" Text="Repair" LogColor="OrangeRed" />
+		<CustomBehavior File="ForceSetVendor" DoSell="true" DoRepair="true" /> 
+		<GrindUntil Nav="Fly" Condition="Me.Level >= 9999" />			   
+	</If>
+	</While>
+</While>
+	   
+</QuestOrder>
+</HBProfile>
