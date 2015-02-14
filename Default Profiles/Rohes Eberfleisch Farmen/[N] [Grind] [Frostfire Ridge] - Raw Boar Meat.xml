@@ -1,0 +1,55 @@
+<HBProfile>
+<Name>Raw Boar Meat Farming</Name> 
+<MinDurability>0.1</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+<MailGrey>false</MailGrey>
+<MailWhite>false</MailWhite>
+<MailGreen>true</MailGreen>
+<MailBlue>true</MailBlue>
+<MailPurple>False</MailPurple>
+
+<SellGrey>true</SellGrey>
+<SellWhite>true</SellWhite>
+<SellGreen>false</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+</Vendors>
+
+<Mailboxes>
+</Mailboxes>
+
+<Blackspots>
+</Blackspots>
+
+<GrindArea>
+<TargetMinLevel>90</TargetMinLevel>
+<TargetMaxLevel>91</TargetMaxLevel>
+<MobIDs>75416 79756</MobIDs>
+
+
+<Blacklist>
+</Blacklist> 
+<Hotspots>
+<Hotspot X="6866.576" Y="6176.639" Z="133.765" />
+<Hotspot X="6861.214" Y="6269.328" Z="146.123" />
+<Hotspot X="6783.559" Y="6333.274" Z="142.6809" />
+<Hotspot X="6694.511" Y="6323.835" Z="140.1413" />
+<Hotspot X="6657.177" Y="6384.164" Z="143.688" />
+<Hotspot X="6669.327" Y="6476.46" Z="139.8027" />
+<Hotspot X="6648.583" Y="6518.494" Z="146.5664" />
+<Hotspot X="6598.119" Y="6576.825" Z="134.4812" />
+<Hotspot X="6521.631" Y="6585.906" Z="136.5315" />
+<Hotspot X="6506.981" Y="6666.966" Z="120.6207" />
+<Hotspot X="6474.439" Y="6719.571" Z="119.1604" />
+<Hotspot X="6390.733" Y="6642.288" Z="150.7367" />
+<Hotspot X="6322.801" Y="6601.954" Z="161.1462" />
+<Hotspot X="6259.378" Y="6554.611" Z="173.1723" />
+<Hotspot X="6191.537" Y="6537.469" Z="181.4586" />
+<Hotspot X="6132.063" Y="6495.043" Z="178.1191" />
+<Hotspot X="5906.767" Y="6514.006" Z="120.5571" />
+</Hotspots>
+</GrindArea>
+</HBProfile>

@@ -1,0 +1,67 @@
+<HBProfile>
+
+Premium Profiles @ WWW.DUALYIELD.BLOGSPOT.COM
+
+<Name>SKYPE: DVDRIP3103</Name>
+<MinDurability>0.4</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+
+<MinLevel>1</MinLevel>
+<MaxLevel>100</MaxLevel>
+<Factions>99999</Factions>
+
+<MailGrey>true</MailGrey>
+<MailWhite>true</MailWhite>
+<MailGreen>true</MailGreen>
+<MailBlue>true</MailBlue>
+<MailPurple>true</MailPurple>
+
+<SellGrey>true</SellGrey>
+<SellWhite>false</SellWhite>
+<SellGreen>false</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+</Vendors>
+
+<Mailboxes>
+</Mailboxes>
+
+<Blackspots>
+</Blackspots>
+
+
+<GrindArea>
+<Factions>2753 1999 78459 87020</Factions>
+<TargetMinLevel>0</TargetMinLevel>
+<TargetMaxLevel>100</TargetMaxLevel>
+<Hotspots>
+<Hotspot X="-1147.688" Y="1826.008" Z="11.27679" />
+<Hotspot X="-1168.729" Y="1839.551" Z="14.52056" />
+<Hotspot X="-1194.93" Y="1839.524" Z="14.64513" />
+<Hotspot X="-1217.425" Y="1818.412" Z="9.746964" />
+<Hotspot X="-1242.657" Y="1801.966" Z="9.929463" />
+<Hotspot X="-1270.118" Y="1788.805" Z="9.500767" />
+<Hotspot X="-1299.485" Y="1780.598" Z="6.865778" />
+<Hotspot X="-1326.933" Y="1767.177" Z="5.028052" />
+<Hotspot X="-1351.947" Y="1767.552" Z="3.943823" />
+<Hotspot X="-1369.822" Y="1749.794" Z="4.593309" />
+<Hotspot X="-1383.937" Y="1726.054" Z="6.702138" />
+<Hotspot X="-1391.47" Y="1696.625" Z="13.04394" />
+<Hotspot X="-1367.44" Y="1702.804" Z="9.733798" />
+<Hotspot X="-1341.405" Y="1718.491" Z="6.857509" />
+<Hotspot X="-1319.844" Y="1700.434" Z="9.488571" />
+<Hotspot X="-1303.569" Y="1676.791" Z="18.40235" />
+<Hotspot X="-1273.767" Y="1682.699" Z="18.72092" />
+<Hotspot X="-1250.642" Y="1702.336" Z="17.17668" />
+<Hotspot X="-1232.983" Y="1727.598" Z="16.81549" />
+<Hotspot X="-1211.468" Y="1749.222" Z="17.65042" />
+<Hotspot X="-1185.183" Y="1763.914" Z="17.1767" />
+<Hotspot X="-1155.966" Y="1772.998" Z="16.56006" />
+<Hotspot X="-1127.251" Y="1777.78" Z="16.75574" />
+</Hotspots>
+</GrindArea>
+</HBProfile>
+

@@ -1,0 +1,75 @@
+<HBProfile>
+   <!--
+
+    -->
+   
+   <Name>Skype: dvdrip3103</Name>
+   <MinLevel>90</MinLevel>
+   <MaxLevel>101</MaxLevel>
+   
+   <MinDurability>0.4</MinDurability>
+   <MinFreeBagSlots>1</MinFreeBagSlots>
+   
+   <MailGrey>false</MailGrey>
+   <MailWhite>true</MailWhite>
+   <MailGreen>true</MailGreen>
+   <MailBlue>true</MailBlue>
+   <MailPurple>true</MailPurple>
+   
+   <SellGrey>true</SellGrey>
+   <SellWhite>false</SellWhite>
+   <SellGreen>false</SellGreen>
+   <SellBlue>false</SellBlue>
+   <SellPurple>false</SellPurple>
+   
+   <TargetElites>false</TargetElites>	
+   
+   
+   <AvoidMobs>
+
+   </AvoidMobs>
+   
+   
+   <Blackspots>
+   </Blackspots>
+   
+   
+   <Mailboxes>
+   </Mailboxes>
+   
+   
+   <Vendors>
+   
+   </Vendors>
+   
+   <GrindArea>
+		<TargetMinLevel>89</TargetMinLevel>
+		<TargetMaxLevel>101</TargetMaxLevel>
+		<Factions> 1712 2753 1999 78459 87020 </Factions> 
+
+<Hotspots>
+<Hotspot X="6674.604" Y="6462.901" Z="136.944" />
+<Hotspot X="6654.546" Y="6428.028" Z="140.6312" />
+<Hotspot X="6666.593" Y="6388.642" Z="141.0727" />
+<Hotspot X="6681.251" Y="6350.543" Z="138.0427" />
+<Hotspot X="6710.429" Y="6321.712" Z="135.2904" />
+<Hotspot X="6696.442" Y="6284.979" Z="144.6739" />
+<Hotspot X="6676.97" Y="6248.605" Z="144.5483" />
+<Hotspot X="6688.671" Y="6209.835" Z="150.53" />
+<Hotspot X="6717.385" Y="6181.972" Z="142.847" />
+<Hotspot X="6757.752" Y="6177.813" Z="134.3551" />
+<Hotspot X="6779.469" Y="6211.495" Z="138.0237" />
+<Hotspot X="6813.455" Y="6188.505" Z="133.4009" />
+<Hotspot X="6853.991" Y="6189.648" Z="133.539" />
+<Hotspot X="6875.03" Y="6220.999" Z="147.542" />
+<Hotspot X="6865.532" Y="6260.07" Z="146.4858" />
+<Hotspot X="6851.278" Y="6298.934" Z="143.6606" />
+<Hotspot X="6847.708" Y="6340.141" Z="143.4655" />
+<Hotspot X="6833.439" Y="6378.278" Z="141.744" />
+<Hotspot X="6796.307" Y="6393.362" Z="135.5646" />
+<Hotspot X="6767.634" Y="6421.818" Z="136.9488" />
+<Hotspot X="6735.461" Y="6446.194" Z="142.2083" />
+			   </Hotspots>
+   </GrindArea>
+   
+</HBProfile>
