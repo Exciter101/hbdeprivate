@@ -1,3 +1,6 @@
+Version 6.0.5525
+Fix Stellar Flare in AoE rotation
+
 Version 6.0.5518
 Try to fix issue Routine don't Attack/Heal on Kromog's Grasping Earth
 
