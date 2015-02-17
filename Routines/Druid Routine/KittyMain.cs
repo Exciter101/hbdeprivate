@@ -109,7 +109,6 @@ namespace Kitty
             Lua.Events.AttachEvent("UI_ERROR_MESSAGE", CL.CombatLogErrorHandler);
             EH.AttachCombatLogEvent();
             Lua.Events.AttachEvent("MODIFIER_STATE_CHANGED", HKM.HandleModifierStateChanged);
-            StyxWoW.Overlay.Dispatcher.InvokeShutdown();
             _init = true;
         }
 
