@@ -6334,8 +6334,10 @@
 			<CustomBehavior File="WaitTimer" WaitTime="20000" GoalText="Waiting for Taerar {TimeRemaining}" />
 			<CustomBehavior File="InteractWith" QuestId="25379" MobId="39853" PreInteractMountStrategy="DismountOrCancelShapeshift" WaitForNpcs="False" X="-4337.523" Y="-211.8387" Z="125.1737" />
 			<CustomBehavior File="WaitTimer" WaitTime="8000" GoalText="Waiting for kill {TimeRemaining}" />
-			<AbandonQuest QuestId="25379" Type="Failed" />
-			<CustomBehavior File="WaitTimer" WaitTime="8000" GoalText="Waiting for cache {TimeRemaining}" />
+			<If Condition="!IsQuestCompleted(25379)">
+				<AbandonQuest QuestId="25379" Type="Failed" />
+				<CustomBehavior File="WaitTimer" WaitTime="8000" GoalText="Waiting for cache {TimeRemaining}" />
+			</If>
 		</While>
 
 		<TurnIn QuestName="Taerar's Fall" QuestId="25379" TurnInName="Ysondre" TurnInId="39407" />
@@ -6404,7 +6406,7 @@
 		<PickUp QuestName="Seaside Salvage" QuestId="24906" GiverName="Megs Dreadshredder" GiverId="38534" X="-7211.632" Y="-3757.743" Z="9.190064" />
 		<CustomBehavior File="Message" Text="Compiling Gadgetzan Quests" LogColor="Green" />
 		<PickUp QuestName="Puddle Stomping" QuestId="24907" GiverName="Megs Dreadshredder" GiverId="38534" />
-		<PickUp QuestName="Butcherbot" QuestId="25112" GiverName="Driz Plunkbow" GiverId="39178" />
+		<PickUp QuestName="Butcherbot" QuestId="25112" GiverName="Driz Plunkbow" GiverId="39178" X="-7120.835" Y="-3831.493" Z="9.009451" />
 
 		<!-- Get flight path from Bulkrek Ragefist -->
 		<CustomBehavior File="InteractWith" QuestId="25112" Range="5" MobId="7824" X="-7098.417" Y="-3816.016" Z="9.489635" />
@@ -9373,7 +9375,7 @@
 			<TurnIn QuestName="The Deserter" QuestId="8285" TurnInName="Hermit Ortell" TurnInId="15194" />
 		</If>
 
-		<If Condition="( Me.Level &lt; 56 ) &amp;&amp; ( Me.MapId == 0 )">
+		<If Condition="( Me.Level &lt; 58 ) &amp;&amp; ( Me.MapId == 0 )">
 			<SetGrindArea>
 				<GrindArea>
 					<Name>Grind to Level 58</Name>
@@ -9388,7 +9390,7 @@
 					</Hotspots>
 				</GrindArea>
 			</SetGrindArea>
-			<GrindUntil Level="56" />
+			<GrindUntil Level="58" />
 
 		</If>
 		<If Condition="( Me.Level &lt; 58 ) &amp;&amp; ( Me.MapId == 0 )">
@@ -9484,7 +9486,9 @@
 				<TurnIn QuestName="Call of the Warmatron" QuestId="28865" TurnInName="Okrilla" TurnInId="41124" />
 			</If>
 		</If>
-		<CustomBehavior File="LoadProfile" ProfileName="..\..\BC\[Fly][H - Quest] BC 58-70 [Kick]" RememberProfile="true" />
+		<If Condition="Me.Level &gt;= 58">
+			<CustomBehavior File="LoadProfile" ProfileName="..\..\BC\[Fly][H - Quest] BC 58-70 [Kick]" RememberProfile="true" />
+		</If>
 		<!-- BEGIN BLASTED LANDS QUESTING -->
 		<CustomBehavior File="Message" Text="Compiling Blasted Lands Quests" LogColor="Green" />
 

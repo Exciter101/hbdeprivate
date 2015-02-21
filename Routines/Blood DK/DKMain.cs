@@ -109,16 +109,12 @@ namespace DK
         }
         public override void Rest()
         {
-            base.Rest();
-            if (Me.HealthPercent <= 50 && !Me.IsSwimming && Canbuff && AutoBot) { Styx.CommonBot.Rest.Feed(); }
+            if (!Me.HasAura("Food") && Me.HealthPercent <= 50 && !Me.IsSwimming && Canbuff && AutoBot) { Styx.CommonBot.Rest.Feed(); }
         }
 
         private static async Task<bool> PreCombatBuffCoroutine()
         {
             if (Me.IsCasting || HKM.pauseRoutineOn || HKM.manualOn) return false;
-            if (await UseItem(CRYSTAL_OF_ORALIUS_ITEM, CrystalOfOraliusConditions && Canbuff)) return true;
-            if (await UseItem(CRYSTAL_OF_INSANITY_ITEM, CrystalOfInsanityConditions && Canbuff)) return true;
-            if (await UseItem(ALCHEMYFLASK_ITEM, AlchemyFlaskConditions && Canbuff)) return true;
             if (await CastBuff(PRESENCE, P.myPrefs.Presence != 0 && needPresence && Canbuff)) return true;
             return false;
         }
@@ -126,10 +122,6 @@ namespace DK
         private static async Task<bool> CombatBuffCoroutine()
         {
             if (Me.IsCasting || HKM.pauseRoutineOn || HKM.manualOn) return false;
-            if (await UseItem(CRYSTAL_OF_ORALIUS_ITEM, CrystalOfOraliusConditions && Canbuff)) return true;
-            if (await UseItem(CRYSTAL_OF_INSANITY_ITEM, CrystalOfInsanityConditions && Canbuff)) return true;
-            if (await UseItem(ALCHEMYFLASK_ITEM, AlchemyFlaskConditions && Canbuff)) return true;
-            if (await UseItem(HEALTHSTONE_ITEM, Me.HealthPercent <= 45 && Canbuff)) return true;
             if (await CastBuff(PRESENCE, P.myPrefs.Presence != 0 && needPresence && Canbuff)) return true;
             return false;
         }
@@ -149,7 +141,7 @@ namespace DK
                 && lastGuid == Me.CurrentTarget.Guid)) return true;
             if (await clearTarget(Me.CurrentTarget == null && AllowTargeting && (Me.CurrentTarget.IsDead || Me.CurrentTarget.IsFriendly) && !Me.CurrentTarget.Lootable)) return true;
             if (await MoveToTarget(Me.CurrentTarget != null && AllowMovement && Me.CurrentTarget.Distance > 4.5f)) return true;
-            if (await StopMovement(Me.CurrentTarget != null && AllowMovement && Me.CurrentTarget.Distance <= 4.5f && Me.IsMoving)) return true;
+            if (await StopMovement(Me.CurrentTarget != null && AllowMovement && Me.CurrentTarget.Distance <= 4.5f)) return true;
             if (await FaceMyTarget(Me.CurrentTarget != null && AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget) && !Me.IsMoving)) return true;
 
             if (await CastPull(DARK_COMMAND, gotTarget && Range30 && !spellOnCooldown(DARK_COMMAND) && DateTime.Now >= pullingTimer)) return true;

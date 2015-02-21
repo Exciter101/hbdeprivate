@@ -45,6 +45,18 @@ namespace DK
             numericUpDown1.Value = new decimal(P.myPrefs.AddsDeathAndDecay);
 
             numericUpDown3.Value = new decimal(P.myPrefs.AddsDefile);
+            numericUpDown5.Value = new decimal(P.myPrefs.IceBoundFortitude);
+            numericUpDown6.Value = new decimal(P.myPrefs.DancingRuneWeapon);
+            numericUpDown7.Value = new decimal(P.myPrefs.VampiricBlood);
+            numericUpDown8.Value = new decimal(P.myPrefs.DeathPact);
+            numericUpDown9.Value = new decimal(P.myPrefs.Conversion);
+            numericUpDown10.Value = new decimal(P.myPrefs.PercentHealthstone);
+            numericUpDown11.Value = new decimal(P.myPrefs.Trinket1HP);
+            numericUpDown12.Value = new decimal(P.myPrefs.Trinket2HP);
+            numericUpDown13.Value = new decimal(P.myPrefs.PercentNaaru);
+            numericUpDown14.Value = new decimal(P.myPrefs.RuneTap);
+            numericUpDown15.Value = new decimal(P.myPrefs.Gorefiend);
+
             #endregion
 
             #region radiobuttons
@@ -543,6 +555,66 @@ namespace DK
         private void checkBox9_CheckedChanged(object sender, EventArgs e)
         {
             P.myPrefs.PrintRaidstyleMsg = checkBox9.Checked;
+        }
+
+        private void numericUpDown5_ValueChanged(object sender, EventArgs e)
+        {
+            P.myPrefs.IceBoundFortitude = (int)numericUpDown5.Value;
+        }
+
+        private void textBox11_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void numericUpDown6_ValueChanged(object sender, EventArgs e)
+        {
+            P.myPrefs.DancingRuneWeapon = (int)numericUpDown6.Value;
+        }
+
+        private void numericUpDown7_ValueChanged(object sender, EventArgs e)
+        {
+            P.myPrefs.VampiricBlood = (int)numericUpDown7.Value;
+        }
+
+        private void numericUpDown8_ValueChanged(object sender, EventArgs e)
+        {
+            P.myPrefs.DeathPact = (int)numericUpDown8.Value;
+        }
+
+        private void numericUpDown9_ValueChanged(object sender, EventArgs e)
+        {
+            P.myPrefs.Conversion = (int)numericUpDown9.Value;
+        }
+
+        private void numericUpDown10_ValueChanged(object sender, EventArgs e)
+        {
+            P.myPrefs.PercentHealthstone = (int)numericUpDown10.Value;
+        }
+
+        private void numericUpDown11_ValueChanged(object sender, EventArgs e)
+        {
+            P.myPrefs.Trinket1HP = (int)numericUpDown11.Value;
+        }
+
+        private void numericUpDown12_ValueChanged(object sender, EventArgs e)
+        {
+            P.myPrefs.Trinket2HP = (int)numericUpDown12.Value;
+        }
+
+        private void numericUpDown13_ValueChanged(object sender, EventArgs e)
+        {
+            P.myPrefs.PercentNaaru = (int)numericUpDown13.Value;
+        }
+
+        private void numericUpDown14_ValueChanged(object sender, EventArgs e)
+        {
+            P.myPrefs.RuneTap = (int)numericUpDown14.Value;
+        }
+
+        private void numericUpDown15_ValueChanged(object sender, EventArgs e)
+        {
+            P.myPrefs.Gorefiend = (int)numericUpDown15.Value;
         }
 
     }

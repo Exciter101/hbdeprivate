@@ -75,6 +75,7 @@ namespace DK
             CHAINS_OF_ICE = "Chains of Ice",
             ASPHYXIATE = "Asphyxiate",
             RAISE_ALLY = "Raise Ally",
+            GOREFIEND_GRASP = "Gorefiend's Grasp",
             EINDE = "The End";
 
 
@@ -305,7 +306,7 @@ namespace DK
                     Lua.DoString("RunMacroText(\"/cancelaura Conversion\")");
                     return false;
                 }
-                if (Me.HealthPercent < 85 && Me.RunicPowerPercent > 30) { return true; }
+                if (Me.HealthPercent < P.myPrefs.Conversion && Me.RunicPowerPercent > 30) { return true; }
                 return false;
             }
         }
@@ -405,6 +406,10 @@ namespace DK
         }
         #endregion
 
-        
+        #region use items
+
+        #endregion
+
+
     }
 }
