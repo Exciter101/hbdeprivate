@@ -33,10 +33,32 @@ namespace DK
             return Me.CurrentTarget != null && Me.CurrentTarget.Distance <= 39f;
         }
 
+        #region gorefiends grasp
+        public static List<WoWUnit> gorefiendsAdds
+        {
+            get
+            {
+                var t = new List<WoWUnit>();
+                WoWPoint myLocation = Me.Location;
+                t = ObjectManager.GetObjectsOfTypeFast<WoWUnit>().Where(p => p != null
+                    && ValidUnit(p)
+                    && p.Location.Distance(myLocation) > 10
+                    && p.Location.Distance(myLocation) > 21).ToList();
+                return t;
+            }
+        }
+        public static int gorefiendCount { get { return gorefiendsAdds.Count(); } }
+        #endregion
+
         #region solo
         public static bool MeIsSolo
         {
-            get { return !Me.GroupInfo.IsInParty && !Me.GroupInfo.IsInRaid && !Me.GroupInfo.IsInLfgParty && !Me.GroupInfo.IsInBattlegroundParty; }
+            get 
+            {
+                var t = new List<WoWPartyMember>();
+                t = StyxWoW.Me.GroupInfo.RaidMembers.Union(StyxWoW.Me.GroupInfo.PartyMembers).Distinct().ToList();
+                return t.Count() == 0 ? true : false;
+            }
         }
         #endregion
 
@@ -45,7 +67,7 @@ namespace DK
         {
             get
             {
-                return Me.CurrentTarget != null && Me.CurrentTarget.IsAlive && Me.CurrentTarget.Attackable && Me.CurrentTarget.CanSelect;
+                return Me.CurrentTarget != null && ValidUnit(Me.CurrentTarget);
             }
         }
         #endregion

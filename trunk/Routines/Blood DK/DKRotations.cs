@@ -39,14 +39,20 @@ namespace DK
         public static async Task<bool> BloodRoutine()
         {
             if (!AutoBot && Me.Mounted && !buffExists(TELAARI_TALBUK_INT, Me)) return false;
+
             if (pullTimer.IsRunning) { pullTimer.Stop(); }
             if (buffExists("Hand of Protection", Me)) { Lua.DoString("RunMacroText(\"/cancelaura Hand Of Protection\")"); }
+
             if (await CastBuff(GIFT_OF_THE_NAARU, Me.HealthPercent <= P.myPrefs.PercentNaaru && !spellOnCooldown(GIFT_OF_THE_NAARU))) return true;
+            if (await UseItem(HEALTHSTONE_ITEM, Me.HealthPercent <= P.myPrefs.PercentHealthstone)) return true;
+            if (await NeedTrinket1(P.myPrefs.Trinket1HP > 0 && Me.HealthPercent <= P.myPrefs.Trinket1HP)) return true;
+            if (await NeedTrinket2(P.myPrefs.Trinket2HP > 0 && Me.HealthPercent <= P.myPrefs.Trinket2HP)) return true;
+
             if (await findTargets(Me.CurrentTarget == null && AllowTargeting && FindTargetsCount >= 1)) return true;
-            if (await clearTarget(Me.CurrentTarget != null && AllowTargeting && (Me.CurrentTarget.IsDead || Me.CurrentTarget.IsFriendly))) return true;
-            if (await findMeleeAttackers(Me.CurrentTarget != null && AutoBot && AllowTargeting && Me.CurrentTarget.Distance > 10 && MeleeAttackersCount >= 1)) return true;
-            if (await MoveToTarget(Me.CurrentTarget != null && AllowMovement && Me.CurrentTarget.Distance > 4.5f)) return true;
-            if (await StopMovement(Me.CurrentTarget != null && AllowMovement && Me.CurrentTarget.Distance <= 4.5f && Me.IsMoving)) return true;
+            if (await clearTarget(Me.CurrentTarget != null && AllowTargeting && (Me.CurrentTarget.IsDead || (AutoBot && Me.CurrentTarget.IsFriendly)))) return true;
+            if (await findMeleeAttackers(Me.CurrentTarget != null && AllowTargeting && Me.CurrentTarget.Distance > 10 && MeleeAttackersCount >= 1)) return true;
+            if (await MoveToTarget(Me.CurrentTarget != null && AllowMovement && !Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await StopMovement(Me.CurrentTarget != null && AllowMovement && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await FaceMyTarget(Me.CurrentTarget != null && AllowFacing && !Me.IsSafelyFacing(Me.CurrentTarget) && !Me.IsMoving)) return true;
             // res people
             if (await CastRes(RAISE_ALLY, needResPeople && playerToRes != null, playerToRes)) return true;
@@ -57,13 +63,13 @@ namespace DK
             //protection
             if (await CastBuff(BONE_SHIELD, !buffExists(BONE_SHIELD, Me) && !spellOnCooldown(BONE_SHIELD))) return true;
             if (await CastBuff(ANTI_MAGIC_SHELL, gotTarget && Me.CurrentTarget.IsCasting && !spellOnCooldown(ANTI_MAGIC_SHELL) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await CastBuff(ICEBOUND_FORTITUDE, gotTarget && Me.HealthPercent <= 65 && !spellOnCooldown(ICEBOUND_FORTITUDE) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await Cast(DANCING_RUNE_WEAPON, gotTarget && Me.HealthPercent <= 80 && !spellOnCooldown(DANCING_RUNE_WEAPON) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
-            if (await CastBuff(VAMPIRIC_BLOOD, gotTarget && Me.HealthPercent <= 45 && !spellOnCooldown(VAMPIRIC_BLOOD) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await CastBuff(ICEBOUND_FORTITUDE, gotTarget && Me.HealthPercent < P.myPrefs.IceBoundFortitude && !spellOnCooldown(ICEBOUND_FORTITUDE) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(DANCING_RUNE_WEAPON, gotTarget && Me.HealthPercent < P.myPrefs.DancingRuneWeapon && !spellOnCooldown(DANCING_RUNE_WEAPON) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await CastBuff(VAMPIRIC_BLOOD, gotTarget && Me.HealthPercent < P.myPrefs.VampiricBlood && !spellOnCooldown(VAMPIRIC_BLOOD) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await CastBuff(EMPOWER_RUNE_WEAPON, gotTarget && needEmpoweredRuneWeapon && !spellOnCooldown(EMPOWER_RUNE_WEAPON) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             
-            if (await CastBuff(RUNE_TAP, gotTarget && Me.HealthPercent < 30 && !spellOnCooldown(RUNE_TAP))) return true;
-            if (await CastBuff(DEATH_PACT, gotTarget && Me.HealthPercent < 45 && !spellOnCooldown(DEATH_PACT) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await CastBuff(RUNE_TAP, gotTarget && Me.HealthPercent < P.myPrefs.RuneTap && !spellOnCooldown(RUNE_TAP))) return true;
+            if (await CastBuff(DEATH_PACT, gotTarget && Me.HealthPercent < P.myPrefs.DeathPact && !spellOnCooldown(DEATH_PACT) && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await CastBuff(CONVERSION, gotTarget && needConversion)) return true;
             if (await CastBuff(HORN_OF_WINTER, gotTarget && !buffExists(HORN_OF_WINTER, Me))) return true;
 
@@ -74,6 +80,7 @@ namespace DK
             //dmg
             if (await Cast(ASPHYXIATE, gotTarget && Me.CurrentTarget.IsCasting && !Me.CanInterruptCurrentSpellCast && !spellOnCooldown(ASPHYXIATE) && Range30)) return true;
             if (await Cast(REMORSELESS_WINTER, gotTarget && !spellOnCooldown(REMORSELESS_WINTER) && addCountMelee >= 5 && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+            if (await Cast(GOREFIEND_GRASP, gotTarget && !spellOnCooldown(GOREFIEND_GRASP) && gorefiendCount > P.myPrefs.Gorefiend && Me.CurrentTarget.IsWithinMeleeRange)) return true;
             if (await CastGroundSpell(DEFILE, gotTarget && needDefile && Me.CurrentTarget.IsWithinMeleeRange && !Me.IsMoving, Me.CurrentTarget)) return true;
             if (await CastGroundSpell(DEATH_AND_DECAY, gotTarget && needDeathAndDecay && Me.CurrentTarget.IsWithinMeleeRange && !Me.IsMoving, Me.CurrentTarget)) return true;
             if (await Cast(PLAGUE_LEECH, gotTarget && needPlagueLeech && Range30)) return true;

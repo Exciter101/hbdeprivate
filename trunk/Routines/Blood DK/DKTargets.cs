@@ -55,12 +55,8 @@ namespace DK
                 {
                     return true;
                 }
-                else if (myTarget.MaxHealth > Me.MaxHealth * 3
-                    && !Me.CurrentMap.IsDungeon
-                    && !Me.CurrentMap.IsRaid
-                    && !Me.CurrentMap.IsInstance
-                    && !Me.CurrentMap.IsScenario
-                    && !Me.GroupInfo.IsInRaid)
+                else if (myTarget.MaxHealth > Me.MaxHealth * 3.5
+                    && DKMain.MeIsSolo)
                 {
                     return true;
                 }

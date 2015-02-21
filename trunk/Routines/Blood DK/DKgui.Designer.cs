@@ -39,6 +39,13 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
+            this.cmbHotkeyResDps = new System.Windows.Forms.ComboBox();
+            this.cmbHotkeyResHealers = new System.Windows.Forms.ComboBox();
+            this.cmbHotkeyResTanks = new System.Windows.Forms.ComboBox();
+            this.cmbHotkeyPlayManual = new System.Windows.Forms.ComboBox();
+            this.cmbHotkeyStopAoe = new System.Windows.Forms.ComboBox();
+            this.cmbHotkeyPause = new System.Windows.Forms.ComboBox();
             this.cmbHotkeyCooldowns = new System.Windows.Forms.ComboBox();
             this.cmbModifKeyResDps = new System.Windows.Forms.ComboBox();
             this.cmbModifKeyResHealers = new System.Windows.Forms.ComboBox();
@@ -72,13 +79,37 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.cmbHotkeyPause = new System.Windows.Forms.ComboBox();
-            this.cmbHotkeyStopAoe = new System.Windows.Forms.ComboBox();
-            this.cmbHotkeyPlayManual = new System.Windows.Forms.ComboBox();
-            this.cmbHotkeyResTanks = new System.Windows.Forms.ComboBox();
-            this.cmbHotkeyResHealers = new System.Windows.Forms.ComboBox();
-            this.cmbHotkeyResDps = new System.Windows.Forms.ComboBox();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown9 = new System.Windows.Forms.NumericUpDown();
+            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.numericUpDown10 = new System.Windows.Forms.NumericUpDown();
+            this.textBox16 = new System.Windows.Forms.TextBox();
+            this.textBox17 = new System.Windows.Forms.TextBox();
+            this.numericUpDown11 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown12 = new System.Windows.Forms.NumericUpDown();
+            this.textBox18 = new System.Windows.Forms.TextBox();
+            this.numericUpDown13 = new System.Windows.Forms.NumericUpDown();
+            this.textBox19 = new System.Windows.Forms.TextBox();
+            this.numericUpDown14 = new System.Windows.Forms.NumericUpDown();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.textBox20 = new System.Windows.Forms.TextBox();
+            this.numericUpDown15 = new System.Windows.Forms.NumericUpDown();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -86,12 +117,26 @@
             this.groupBox7.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).BeginInit();
+            this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown15)).BeginInit();
+            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -191,7 +236,7 @@
             this.tabControl1.Location = new System.Drawing.Point(1, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(638, 371);
+            this.tabControl1.Size = new System.Drawing.Size(555, 371);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -203,7 +248,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(630, 345);
+            this.tabPage1.Size = new System.Drawing.Size(547, 345);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -238,6 +283,239 @@
             this.groupBox7.TabIndex = 3;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Hotkeys [Using, Modfier, Key]";
+            // 
+            // checkBox9
+            // 
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Location = new System.Drawing.Point(65, 225);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(161, 17);
+            this.checkBox9.TabIndex = 21;
+            this.checkBox9.Text = "Enable Raid Style Messages";
+            this.checkBox9.UseVisualStyleBackColor = true;
+            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
+            // 
+            // cmbHotkeyResDps
+            // 
+            this.cmbHotkeyResDps.FormattingEnabled = true;
+            this.cmbHotkeyResDps.Items.AddRange(new object[] {
+            "None",
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "J",
+            "K",
+            "L",
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+            "T",
+            "U",
+            "V",
+            "W",
+            "X",
+            "Y",
+            "Z"});
+            this.cmbHotkeyResDps.Location = new System.Drawing.Point(203, 178);
+            this.cmbHotkeyResDps.Name = "cmbHotkeyResDps";
+            this.cmbHotkeyResDps.Size = new System.Drawing.Size(67, 21);
+            this.cmbHotkeyResDps.TabIndex = 20;
+            this.cmbHotkeyResDps.SelectedIndexChanged += new System.EventHandler(this.cmbHotkeyResDps_SelectedIndexChanged);
+            // 
+            // cmbHotkeyResHealers
+            // 
+            this.cmbHotkeyResHealers.FormattingEnabled = true;
+            this.cmbHotkeyResHealers.Items.AddRange(new object[] {
+            "None",
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "J",
+            "K",
+            "L",
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+            "T",
+            "U",
+            "V",
+            "W",
+            "X",
+            "Y",
+            "Z"});
+            this.cmbHotkeyResHealers.Location = new System.Drawing.Point(203, 152);
+            this.cmbHotkeyResHealers.Name = "cmbHotkeyResHealers";
+            this.cmbHotkeyResHealers.Size = new System.Drawing.Size(67, 21);
+            this.cmbHotkeyResHealers.TabIndex = 19;
+            this.cmbHotkeyResHealers.SelectedIndexChanged += new System.EventHandler(this.cmbHotkeyResHealers_SelectedIndexChanged);
+            // 
+            // cmbHotkeyResTanks
+            // 
+            this.cmbHotkeyResTanks.FormattingEnabled = true;
+            this.cmbHotkeyResTanks.Items.AddRange(new object[] {
+            "None",
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "J",
+            "K",
+            "L",
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+            "T",
+            "U",
+            "V",
+            "W",
+            "X",
+            "Y",
+            "Z"});
+            this.cmbHotkeyResTanks.Location = new System.Drawing.Point(203, 126);
+            this.cmbHotkeyResTanks.Name = "cmbHotkeyResTanks";
+            this.cmbHotkeyResTanks.Size = new System.Drawing.Size(67, 21);
+            this.cmbHotkeyResTanks.TabIndex = 18;
+            this.cmbHotkeyResTanks.SelectedIndexChanged += new System.EventHandler(this.cmbHotkeyResTanks_SelectedIndexChanged);
+            // 
+            // cmbHotkeyPlayManual
+            // 
+            this.cmbHotkeyPlayManual.FormattingEnabled = true;
+            this.cmbHotkeyPlayManual.Items.AddRange(new object[] {
+            "None",
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "J",
+            "K",
+            "L",
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+            "T",
+            "U",
+            "V",
+            "W",
+            "X",
+            "Y",
+            "Z"});
+            this.cmbHotkeyPlayManual.Location = new System.Drawing.Point(203, 100);
+            this.cmbHotkeyPlayManual.Name = "cmbHotkeyPlayManual";
+            this.cmbHotkeyPlayManual.Size = new System.Drawing.Size(67, 21);
+            this.cmbHotkeyPlayManual.TabIndex = 17;
+            this.cmbHotkeyPlayManual.SelectedIndexChanged += new System.EventHandler(this.cmbHotkeyPlayManual_SelectedIndexChanged);
+            // 
+            // cmbHotkeyStopAoe
+            // 
+            this.cmbHotkeyStopAoe.FormattingEnabled = true;
+            this.cmbHotkeyStopAoe.Items.AddRange(new object[] {
+            "None",
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "J",
+            "K",
+            "L",
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+            "T",
+            "U",
+            "V",
+            "W",
+            "X",
+            "Y",
+            "Z"});
+            this.cmbHotkeyStopAoe.Location = new System.Drawing.Point(203, 74);
+            this.cmbHotkeyStopAoe.Name = "cmbHotkeyStopAoe";
+            this.cmbHotkeyStopAoe.Size = new System.Drawing.Size(67, 21);
+            this.cmbHotkeyStopAoe.TabIndex = 16;
+            this.cmbHotkeyStopAoe.SelectedIndexChanged += new System.EventHandler(this.cmbHotkeyStopAoe_SelectedIndexChanged);
+            // 
+            // cmbHotkeyPause
+            // 
+            this.cmbHotkeyPause.FormattingEnabled = true;
+            this.cmbHotkeyPause.Items.AddRange(new object[] {
+            "None",
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "J",
+            "K",
+            "L",
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+            "T",
+            "U",
+            "V",
+            "W",
+            "X",
+            "Y",
+            "Z"});
+            this.cmbHotkeyPause.Location = new System.Drawing.Point(203, 48);
+            this.cmbHotkeyPause.Name = "cmbHotkeyPause";
+            this.cmbHotkeyPause.Size = new System.Drawing.Size(67, 21);
+            this.cmbHotkeyPause.TabIndex = 15;
+            this.cmbHotkeyPause.SelectedIndexChanged += new System.EventHandler(this.cmbHotkeyPause_SelectedIndexChanged);
             // 
             // cmbHotkeyCooldowns
             // 
@@ -491,25 +769,47 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox9);
+            this.tabPage2.Controls.Add(this.groupBox8);
             this.tabPage2.Controls.Add(this.groupBox6);
             this.tabPage2.Controls.Add(this.groupBox5);
             this.tabPage2.Controls.Add(this.groupBox4);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(630, 345);
+            this.tabPage2.Size = new System.Drawing.Size(547, 345);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Blood DK";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // groupBox6
             // 
-            this.groupBox6.Location = new System.Drawing.Point(259, 9);
+            this.groupBox6.Controls.Add(this.numericUpDown14);
+            this.groupBox6.Controls.Add(this.textBox19);
+            this.groupBox6.Controls.Add(this.numericUpDown13);
+            this.groupBox6.Controls.Add(this.textBox18);
+            this.groupBox6.Controls.Add(this.numericUpDown12);
+            this.groupBox6.Controls.Add(this.numericUpDown11);
+            this.groupBox6.Controls.Add(this.textBox17);
+            this.groupBox6.Controls.Add(this.textBox16);
+            this.groupBox6.Controls.Add(this.numericUpDown10);
+            this.groupBox6.Controls.Add(this.textBox15);
+            this.groupBox6.Controls.Add(this.numericUpDown9);
+            this.groupBox6.Controls.Add(this.numericUpDown8);
+            this.groupBox6.Controls.Add(this.numericUpDown7);
+            this.groupBox6.Controls.Add(this.numericUpDown6);
+            this.groupBox6.Controls.Add(this.numericUpDown5);
+            this.groupBox6.Controls.Add(this.textBox14);
+            this.groupBox6.Controls.Add(this.textBox13);
+            this.groupBox6.Controls.Add(this.textBox12);
+            this.groupBox6.Controls.Add(this.textBox11);
+            this.groupBox6.Controls.Add(this.textBox10);
+            this.groupBox6.Location = new System.Drawing.Point(284, 9);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(274, 330);
+            this.groupBox6.Size = new System.Drawing.Size(229, 283);
             this.groupBox6.TabIndex = 2;
             this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Protection";
+            this.groupBox6.Text = "Protection (Setings on 0 will never be used)";
             // 
             // groupBox5
             // 
@@ -671,7 +971,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(498, 378);
+            this.button1.Location = new System.Drawing.Point(426, 378);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(130, 21);
             this.button1.TabIndex = 3;
@@ -679,244 +979,289 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // cmbHotkeyPause
+            // textBox10
             // 
-            this.cmbHotkeyPause.FormattingEnabled = true;
-            this.cmbHotkeyPause.Items.AddRange(new object[] {
-            "None",
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "J",
-            "K",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "W",
-            "X",
-            "Y",
-            "Z"});
-            this.cmbHotkeyPause.Location = new System.Drawing.Point(203, 48);
-            this.cmbHotkeyPause.Name = "cmbHotkeyPause";
-            this.cmbHotkeyPause.Size = new System.Drawing.Size(67, 21);
-            this.cmbHotkeyPause.TabIndex = 15;
-            this.cmbHotkeyPause.SelectedIndexChanged += new System.EventHandler(this.cmbHotkeyPause_SelectedIndexChanged);
+            this.textBox10.Location = new System.Drawing.Point(6, 17);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(156, 20);
+            this.textBox10.TabIndex = 0;
+            this.textBox10.Text = "Icebound Fortitude HP%";
             // 
-            // cmbHotkeyStopAoe
+            // textBox11
             // 
-            this.cmbHotkeyStopAoe.FormattingEnabled = true;
-            this.cmbHotkeyStopAoe.Items.AddRange(new object[] {
-            "None",
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "J",
-            "K",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "W",
-            "X",
-            "Y",
-            "Z"});
-            this.cmbHotkeyStopAoe.Location = new System.Drawing.Point(203, 74);
-            this.cmbHotkeyStopAoe.Name = "cmbHotkeyStopAoe";
-            this.cmbHotkeyStopAoe.Size = new System.Drawing.Size(67, 21);
-            this.cmbHotkeyStopAoe.TabIndex = 16;
-            this.cmbHotkeyStopAoe.SelectedIndexChanged += new System.EventHandler(this.cmbHotkeyStopAoe_SelectedIndexChanged);
+            this.textBox11.Location = new System.Drawing.Point(6, 43);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(156, 20);
+            this.textBox11.TabIndex = 1;
+            this.textBox11.Text = "Dancing Rune Weapon HP%";
+            this.textBox11.TextChanged += new System.EventHandler(this.textBox11_TextChanged);
             // 
-            // cmbHotkeyPlayManual
+            // textBox12
             // 
-            this.cmbHotkeyPlayManual.FormattingEnabled = true;
-            this.cmbHotkeyPlayManual.Items.AddRange(new object[] {
-            "None",
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "J",
-            "K",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "W",
-            "X",
-            "Y",
-            "Z"});
-            this.cmbHotkeyPlayManual.Location = new System.Drawing.Point(203, 100);
-            this.cmbHotkeyPlayManual.Name = "cmbHotkeyPlayManual";
-            this.cmbHotkeyPlayManual.Size = new System.Drawing.Size(67, 21);
-            this.cmbHotkeyPlayManual.TabIndex = 17;
-            this.cmbHotkeyPlayManual.SelectedIndexChanged += new System.EventHandler(this.cmbHotkeyPlayManual_SelectedIndexChanged);
+            this.textBox12.Location = new System.Drawing.Point(6, 69);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(156, 20);
+            this.textBox12.TabIndex = 2;
+            this.textBox12.Text = "Vampiric Blood HP%";
             // 
-            // cmbHotkeyResTanks
+            // textBox13
             // 
-            this.cmbHotkeyResTanks.FormattingEnabled = true;
-            this.cmbHotkeyResTanks.Items.AddRange(new object[] {
-            "None",
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "J",
-            "K",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "W",
-            "X",
-            "Y",
-            "Z"});
-            this.cmbHotkeyResTanks.Location = new System.Drawing.Point(203, 126);
-            this.cmbHotkeyResTanks.Name = "cmbHotkeyResTanks";
-            this.cmbHotkeyResTanks.Size = new System.Drawing.Size(67, 21);
-            this.cmbHotkeyResTanks.TabIndex = 18;
-            this.cmbHotkeyResTanks.SelectedIndexChanged += new System.EventHandler(this.cmbHotkeyResTanks_SelectedIndexChanged);
+            this.textBox13.Location = new System.Drawing.Point(6, 96);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(156, 20);
+            this.textBox13.TabIndex = 3;
+            this.textBox13.Text = "Death Pact HP%";
             // 
-            // cmbHotkeyResHealers
+            // textBox14
             // 
-            this.cmbHotkeyResHealers.FormattingEnabled = true;
-            this.cmbHotkeyResHealers.Items.AddRange(new object[] {
-            "None",
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "J",
-            "K",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "W",
-            "X",
-            "Y",
-            "Z"});
-            this.cmbHotkeyResHealers.Location = new System.Drawing.Point(203, 152);
-            this.cmbHotkeyResHealers.Name = "cmbHotkeyResHealers";
-            this.cmbHotkeyResHealers.Size = new System.Drawing.Size(67, 21);
-            this.cmbHotkeyResHealers.TabIndex = 19;
-            this.cmbHotkeyResHealers.SelectedIndexChanged += new System.EventHandler(this.cmbHotkeyResHealers_SelectedIndexChanged);
+            this.textBox14.Location = new System.Drawing.Point(6, 123);
+            this.textBox14.Name = "textBox14";
+            this.textBox14.Size = new System.Drawing.Size(156, 20);
+            this.textBox14.TabIndex = 4;
+            this.textBox14.Text = "Conversion HP%";
             // 
-            // cmbHotkeyResDps
+            // numericUpDown5
             // 
-            this.cmbHotkeyResDps.FormattingEnabled = true;
-            this.cmbHotkeyResDps.Items.AddRange(new object[] {
-            "None",
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "J",
-            "K",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "W",
-            "X",
-            "Y",
-            "Z"});
-            this.cmbHotkeyResDps.Location = new System.Drawing.Point(203, 178);
-            this.cmbHotkeyResDps.Name = "cmbHotkeyResDps";
-            this.cmbHotkeyResDps.Size = new System.Drawing.Size(67, 21);
-            this.cmbHotkeyResDps.TabIndex = 20;
-            this.cmbHotkeyResDps.SelectedIndexChanged += new System.EventHandler(this.cmbHotkeyResDps_SelectedIndexChanged);
+            this.numericUpDown5.Location = new System.Drawing.Point(175, 17);
+            this.numericUpDown5.Name = "numericUpDown5";
+            this.numericUpDown5.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDown5.TabIndex = 5;
+            this.numericUpDown5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown5.ValueChanged += new System.EventHandler(this.numericUpDown5_ValueChanged);
             // 
-            // checkBox9
+            // numericUpDown6
             // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.Location = new System.Drawing.Point(65, 225);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(161, 17);
-            this.checkBox9.TabIndex = 21;
-            this.checkBox9.Text = "Enable Raid Style Messages";
-            this.checkBox9.UseVisualStyleBackColor = true;
-            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
+            this.numericUpDown6.Location = new System.Drawing.Point(175, 43);
+            this.numericUpDown6.Name = "numericUpDown6";
+            this.numericUpDown6.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDown6.TabIndex = 6;
+            this.numericUpDown6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown6.ValueChanged += new System.EventHandler(this.numericUpDown6_ValueChanged);
+            // 
+            // numericUpDown7
+            // 
+            this.numericUpDown7.Location = new System.Drawing.Point(175, 69);
+            this.numericUpDown7.Name = "numericUpDown7";
+            this.numericUpDown7.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDown7.TabIndex = 7;
+            this.numericUpDown7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown7.ValueChanged += new System.EventHandler(this.numericUpDown7_ValueChanged);
+            // 
+            // numericUpDown8
+            // 
+            this.numericUpDown8.Location = new System.Drawing.Point(175, 96);
+            this.numericUpDown8.Name = "numericUpDown8";
+            this.numericUpDown8.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDown8.TabIndex = 8;
+            this.numericUpDown8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown8.ValueChanged += new System.EventHandler(this.numericUpDown8_ValueChanged);
+            // 
+            // numericUpDown9
+            // 
+            this.numericUpDown9.Location = new System.Drawing.Point(175, 122);
+            this.numericUpDown9.Name = "numericUpDown9";
+            this.numericUpDown9.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDown9.TabIndex = 9;
+            this.numericUpDown9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown9.ValueChanged += new System.EventHandler(this.numericUpDown9_ValueChanged);
+            // 
+            // textBox15
+            // 
+            this.textBox15.Location = new System.Drawing.Point(6, 148);
+            this.textBox15.Name = "textBox15";
+            this.textBox15.Size = new System.Drawing.Size(156, 20);
+            this.textBox15.TabIndex = 10;
+            this.textBox15.Text = "Healthstone HP%";
+            // 
+            // numericUpDown10
+            // 
+            this.numericUpDown10.Location = new System.Drawing.Point(175, 148);
+            this.numericUpDown10.Name = "numericUpDown10";
+            this.numericUpDown10.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDown10.TabIndex = 11;
+            this.numericUpDown10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown10.ValueChanged += new System.EventHandler(this.numericUpDown10_ValueChanged);
+            // 
+            // textBox16
+            // 
+            this.textBox16.Location = new System.Drawing.Point(6, 174);
+            this.textBox16.Name = "textBox16";
+            this.textBox16.Size = new System.Drawing.Size(156, 20);
+            this.textBox16.TabIndex = 12;
+            this.textBox16.Text = "Trinket 1 HP%";
+            // 
+            // textBox17
+            // 
+            this.textBox17.Location = new System.Drawing.Point(6, 200);
+            this.textBox17.Name = "textBox17";
+            this.textBox17.Size = new System.Drawing.Size(156, 20);
+            this.textBox17.TabIndex = 13;
+            this.textBox17.Text = "Trinket 2 HP%";
+            // 
+            // numericUpDown11
+            // 
+            this.numericUpDown11.Location = new System.Drawing.Point(175, 175);
+            this.numericUpDown11.Name = "numericUpDown11";
+            this.numericUpDown11.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDown11.TabIndex = 14;
+            this.numericUpDown11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown11.ValueChanged += new System.EventHandler(this.numericUpDown11_ValueChanged);
+            // 
+            // numericUpDown12
+            // 
+            this.numericUpDown12.Location = new System.Drawing.Point(175, 200);
+            this.numericUpDown12.Name = "numericUpDown12";
+            this.numericUpDown12.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDown12.TabIndex = 15;
+            this.numericUpDown12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown12.ValueChanged += new System.EventHandler(this.numericUpDown12_ValueChanged);
+            // 
+            // textBox18
+            // 
+            this.textBox18.Location = new System.Drawing.Point(6, 226);
+            this.textBox18.Name = "textBox18";
+            this.textBox18.Size = new System.Drawing.Size(156, 20);
+            this.textBox18.TabIndex = 16;
+            this.textBox18.Text = "Gift of the Naaru HP%";
+            // 
+            // numericUpDown13
+            // 
+            this.numericUpDown13.Location = new System.Drawing.Point(175, 227);
+            this.numericUpDown13.Name = "numericUpDown13";
+            this.numericUpDown13.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDown13.TabIndex = 17;
+            this.numericUpDown13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown13.ValueChanged += new System.EventHandler(this.numericUpDown13_ValueChanged);
+            // 
+            // textBox19
+            // 
+            this.textBox19.Location = new System.Drawing.Point(6, 252);
+            this.textBox19.Name = "textBox19";
+            this.textBox19.Size = new System.Drawing.Size(156, 20);
+            this.textBox19.TabIndex = 18;
+            this.textBox19.Text = "Rune Tap HP%";
+            // 
+            // numericUpDown14
+            // 
+            this.numericUpDown14.Location = new System.Drawing.Point(175, 252);
+            this.numericUpDown14.Name = "numericUpDown14";
+            this.numericUpDown14.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDown14.TabIndex = 19;
+            this.numericUpDown14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown14.ValueChanged += new System.EventHandler(this.numericUpDown14_ValueChanged);
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.numericUpDown15);
+            this.groupBox8.Controls.Add(this.textBox20);
+            this.groupBox8.Location = new System.Drawing.Point(9, 165);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(244, 50);
+            this.groupBox8.TabIndex = 3;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Gorefiend\'s Grasp";
+            // 
+            // textBox20
+            // 
+            this.textBox20.Location = new System.Drawing.Point(8, 19);
+            this.textBox20.Name = "textBox20";
+            this.textBox20.Size = new System.Drawing.Size(165, 20);
+            this.textBox20.TabIndex = 0;
+            this.textBox20.Text = "Number of adds before use";
+            // 
+            // numericUpDown15
+            // 
+            this.numericUpDown15.Location = new System.Drawing.Point(192, 19);
+            this.numericUpDown15.Name = "numericUpDown15";
+            this.numericUpDown15.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDown15.TabIndex = 6;
+            this.numericUpDown15.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown15.ValueChanged += new System.EventHandler(this.numericUpDown15_ValueChanged);
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.label7);
+            this.groupBox9.Controls.Add(this.label6);
+            this.groupBox9.Controls.Add(this.label5);
+            this.groupBox9.Controls.Add(this.label4);
+            this.groupBox9.Controls.Add(this.label3);
+            this.groupBox9.Controls.Add(this.label2);
+            this.groupBox9.Controls.Add(this.label1);
+            this.groupBox9.Location = new System.Drawing.Point(9, 221);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(244, 107);
+            this.groupBox9.TabIndex = 4;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Suggested Talents";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "15: Plaguebearer";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 42);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "30: Purgatory";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 63);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(107, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "45: Death\'s Advance";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 84);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(74, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "60: Blood Tap";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(129, 21);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(79, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "75: Death Pact";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(129, 43);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(109, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "90: Gorefiend\'s Grasp";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(129, 64);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(58, 13);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "100: Defile";
             // 
             // DKGui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(640, 411);
+            this.ClientSize = new System.Drawing.Size(561, 411);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tabControl1);
             this.Name = "DKGui";
@@ -933,6 +1278,8 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
@@ -941,6 +1288,21 @@
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).EndInit();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown15)).EndInit();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -998,5 +1360,36 @@
         private System.Windows.Forms.ComboBox cmbHotkeyStopAoe;
         private System.Windows.Forms.ComboBox cmbHotkeyPause;
         private System.Windows.Forms.CheckBox checkBox9;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.NumericUpDown numericUpDown9;
+        private System.Windows.Forms.NumericUpDown numericUpDown8;
+        private System.Windows.Forms.NumericUpDown numericUpDown7;
+        private System.Windows.Forms.NumericUpDown numericUpDown6;
+        private System.Windows.Forms.NumericUpDown numericUpDown5;
+        private System.Windows.Forms.NumericUpDown numericUpDown10;
+        private System.Windows.Forms.TextBox textBox15;
+        private System.Windows.Forms.NumericUpDown numericUpDown12;
+        private System.Windows.Forms.NumericUpDown numericUpDown11;
+        private System.Windows.Forms.TextBox textBox17;
+        private System.Windows.Forms.TextBox textBox16;
+        private System.Windows.Forms.NumericUpDown numericUpDown13;
+        private System.Windows.Forms.TextBox textBox18;
+        private System.Windows.Forms.NumericUpDown numericUpDown14;
+        private System.Windows.Forms.TextBox textBox19;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.NumericUpDown numericUpDown15;
+        private System.Windows.Forms.TextBox textBox20;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

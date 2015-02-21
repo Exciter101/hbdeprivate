@@ -17,7 +17,7 @@ namespace DK
         public static readonly DKSettings myPrefs = new DKSettings();
         
         public DKSettings() 
-            :base(Path.Combine(Utilities.AssemblyDirectory, string.Format(@"Routines/Settings/DK/{0}-DKSettings-{1}.xml", StyxWoW.Me.RealmName, StyxWoW.Me.Name)))
+            :base(Path.Combine(Utilities.AssemblyDirectory, string.Format(@"Routines/DeathKnight/{0}/{1}/DKSettings.xml", StyxWoW.Me.RealmName, StyxWoW.Me.Name)))
         {
         }
 
@@ -246,5 +246,31 @@ namespace DK
         [Setting, DefaultValue(false)]
         public bool UseDefileRunes { get; set; }
 
+        [Setting, DefaultValue(65)]
+        public int IceBoundFortitude { get; set; }
+
+        [Setting, DefaultValue(80)]
+        public int DancingRuneWeapon { get; set; }
+
+        [Setting, DefaultValue(55)]
+        public int VampiricBlood { get; set; }
+
+        [Setting, DefaultValue(45)]
+        public int DeathPact { get; set; }
+
+        [Setting, DefaultValue(0)]
+        public int Conversion { get; set; }
+
+        [Setting, DefaultValue(0)]
+        public int Trinket1HP { get; set; }
+
+        [Setting, DefaultValue(0)]
+        public int Trinket2HP { get; set; }
+
+        [Setting, DefaultValue(30)]
+        public int RuneTap { get; set; }
+
+        [Setting, DefaultValue(0)]
+        public int Gorefiend { get; set; }
     }
 }
