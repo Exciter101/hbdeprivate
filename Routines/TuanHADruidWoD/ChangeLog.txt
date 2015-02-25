@@ -1,3 +1,7 @@
+Version 6.1.5535
+Druid is ready for 6.1
+Just svn update and enjoy. Sorry the free store version is not ready, it's still waiting for approvement.
+
 Version 6.0.5525
 Fix Stellar Flare in AoE rotation
 
