@@ -26,7 +26,7 @@ namespace MasterBaiter
         private static string LogName { get { return "MasterBaiter"; } }
         public override string Author { get { return "FaceRollFTW"; } }
         public override Version Version { get { return _version; } }
-        private readonly Version _version = new Version(1, 0, 0, 2);
+        private readonly Version _version = new Version(6, 1, 0, 0);
         private static LocalPlayer Me { get { return StyxWoW.Me; } }
 
 
@@ -97,7 +97,7 @@ namespace MasterBaiter
         private static Queue<Bait> Baits;
 
         private TimeSpan BaitCheckTime = new TimeSpan(0, 0, 30);  // 30 seconds
-        private TimeSpan ReBaitTime = new TimeSpan(0, 5, 5);  // 5 minutes, 5 seconds
+        private TimeSpan ReBaitTime = new TimeSpan(0, 10, 5);  // 10 minutes, 5 seconds - Changed to 10 minutes in 6.1
         private MyWaitTimer ReBait_Timer = null;
         private MyWaitTimer CheckForBaits_Timer = null;   // Used to throttle the check for having a bait in our bag.
 
@@ -131,7 +131,7 @@ namespace MasterBaiter
 
 
         //
-        // Executed evertime the Plugin is pulsed.
+        // Executed every time the Plugin is pulsed.
         //
         public override void Pulse()
         {
@@ -380,12 +380,12 @@ namespace MasterBaiter
         private bool IsFishingPoleEquipped()
         {
             //
-            // Check to see if we have a fishing pole equiped.
+            // Check to see if we have a fishing pole equipped.
             //
             WoWItem mainHand = StyxWoW.Me.Inventory.Equipped.MainHand;
             if (mainHand == null || mainHand.ItemInfo.WeaponClass != WoWItemWeaponClass.FishingPole)
             {
-                // we dont so return.
+                // we don't so return.
                 return false;
             }
 
