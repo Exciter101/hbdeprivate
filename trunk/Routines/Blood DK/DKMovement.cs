@@ -25,120 +25,137 @@ using P = DK.DKSettings;
 
 namespace DK
 {
-    public partial class DKMain : CombatRoutine
+    class Movement
     {
-        #region movement targeting facing
+        public static bool MeInParty
+        {
+            get
+            {
+                var t = new List<WoWPartyMember>();
+                t = StyxWoW.Me.GroupInfo.RaidMembers.Union(StyxWoW.Me.GroupInfo.PartyMembers).Distinct().ToList();
+                return t.Count() > 0 ? true : false;
+            }
+        }
 
+
+
+        private static LocalPlayer Me { get { return StyxWoW.Me; } }
+
+        /// <summary>
+        /// (Non-Blocking) Attempts to move to the player's current target.
+        /// </summary>
+        /// <returns>Returns true if we are able to move towards the target.</returns>
+        /// 
         [DllImport("user32.dll")]
         private static extern short GetAsyncKeyState(Keys vKey);
-
-        public static bool AllowFacing
+        public static async Task MoveToCombatTarget()
         {
-            get
-            {
-                /*if (HKM.manualOn) { return false; }*/
-                if (P.myPrefs.AutoFacingDisable
-                    && (Me.CurrentMap.IsDungeon || Me.CurrentMap.IsInstance || Me.CurrentMap.IsRaid || Me.CurrentMap.IsScenario || Me.GroupInfo.IsInRaid))
-                {
-                    return false;
-                }
-                else if ((GetAsyncKeyState(Keys.LButton) != 0
+            if (Me.CurrentTarget == null) return;
+
+            if (MeInParty && DKSettings.myPrefs.AutoMovementDisable) return;
+
+            if ((GetAsyncKeyState(Keys.LButton) != 0
                     && GetAsyncKeyState(Keys.RButton) != 0) ||
                     GetAsyncKeyState(Keys.W) != 0 ||
                     GetAsyncKeyState(Keys.S) != 0 ||
                     GetAsyncKeyState(Keys.D) != 0 ||
-                    GetAsyncKeyState(Keys.A) != 0)
-                {
-                    return false;
-                }
-                return P.myPrefs.AutoFacing;
-
-            }
-        }
-        public static bool AllowTargeting
-        {
-            get
+                    GetAsyncKeyState(Keys.A) != 0) return;
+            
+            try
             {
-                /*if (HKM.manualOn) { return false; }*/
-                if (P.myPrefs.AutoTargetingDisable
-                    && (Me.CurrentMap.IsDungeon || Me.CurrentMap.IsInstance || Me.CurrentMap.IsRaid || Me.CurrentMap.IsScenario || Me.GroupInfo.IsInRaid))
-                {
-                    return false;
-                }
-                else if ((GetAsyncKeyState(Keys.LButton) != 0
-                    && GetAsyncKeyState(Keys.RButton) != 0) ||
-                    GetAsyncKeyState(Keys.W) != 0 ||
-                    GetAsyncKeyState(Keys.S) != 0 ||
-                    GetAsyncKeyState(Keys.D) != 0 ||
-                    GetAsyncKeyState(Keys.A) != 0)
-                {
-                    return false;
-                }
-                return P.myPrefs.AutoTargeting;
+                await MoveToTarget(Me.CurrentTarget,
+                    () =>
+                        Me.CurrentTarget != null
+                        && DKSettings.myPrefs.AutoMovement
+                        && !Me.CurrentTarget.IsWithinMeleeRange);
+
+                await MoveStop(
+                    () =>
+                        Me.CurrentTarget != null
+                        && DKSettings.myPrefs.AutoMovement
+                        && Me.CurrentTarget.IsWithinMeleeRange);
             }
-        }
-        public static bool AllowMovement
-        {
-            get
+            catch (Exception ex)
             {
-                /*if (HKM.manualOn)
-                {
-                    return false;
-                }*/
-                if (P.myPrefs.AutoMovementDisable
-                    && (Me.CurrentMap.IsDungeon || Me.CurrentMap.IsInstance || Me.CurrentMap.IsRaid || Me.CurrentMap.IsScenario || Me.GroupInfo.IsInRaid))
-                {
-                    return false;
-                }
-                else if ((GetAsyncKeyState(Keys.LButton) != 0
-                    && GetAsyncKeyState(Keys.RButton) != 0) ||
-                    GetAsyncKeyState(Keys.W) != 0 ||
-                    GetAsyncKeyState(Keys.S) != 0 ||
-                    GetAsyncKeyState(Keys.D) != 0 ||
-                    GetAsyncKeyState(Keys.A) != 0)
-                {
-                    return false;
-                }
-
-
-                return P.myPrefs.AutoMovement;
+                Logging.Write(string.Format("Exception caught while trying to move: {0}", ex.Message));
             }
         }
-        #endregion
 
-        #region facing
-        public static async Task<bool> FaceMyTarget(bool reqs)
+        /// <summary>
+        /// (Non-Blocking) Attempts to move to the specified target.
+        /// </summary>
+        /// <returns>Returns true if we are able to move towards the target.</returns>
+        public static async Task MoveToTarget(WoWUnit target, Func<bool> conditionCheck = null)
         {
-            if (!reqs) return false;
-            Me.CurrentTarget.Face();
-            await CommonCoroutines.SleepForLagDuration();
-            return false;
-        }
-        #endregion
+            if (conditionCheck != null && !conditionCheck())
+                return;
 
-        #region move to and stop movement
-        public static async Task<bool> MoveToTarget(bool reqs)
+            if (target == null)
+                return;
+
+            if (target.IsDead)
+                return;
+
+            await CommonCoroutines.MoveTo(target.Location);
+        }
+
+        /// <summary>
+        /// (Non-Blocking) Stop the player from moving.
+        /// </summary>
+        /// <returns>Returns true if we are able to stop moving.</returns>
+        public static async Task MoveStop(Func<bool> conditionCheck = null)
         {
-            if (!reqs) return false;
-            Navigator.MoveTo(Me.CurrentTarget.Location);
+            if (conditionCheck != null && !conditionCheck())
+                return;
+
+            await CommonCoroutines.StopMoving();
+        }
+
+        /// <summary>
+        /// (Non-Blocking) Attempts to face the player's current target.
+        /// </summary>
+        /// <returns>Returns true if we are able to safely face the target</returns>
+        public static async Task FaceMyCurrentTarget()
+        {
+            if (Me.CurrentTarget == null)
+                return;
+
+            if (MeInParty && DKSettings.myPrefs.AutoFacingDisable) return;
+
+            await FaceTarget(Me.CurrentTarget,
+                () =>
+                    Me.CurrentTarget != null 
+                    && DKSettings.myPrefs.AutoFacing
+                    && !Me.IsMoving
+                    && !Me.IsSafelyFacing(Me.CurrentTarget));
+        }
+
+        /// <summary>
+        /// (Non-Blocking) Attempts to face the specified target.
+        /// </summary>
+        /// <returns>Returns true if we are able to safely face the target</returns>
+        public static async Task FaceTarget(WoWUnit target, Func<bool> conditionCheck = null)
+        {
+            if (conditionCheck != null && !conditionCheck())
+                return;
+
+            target.Face();
             await CommonCoroutines.SleepForLagDuration();
+        }
+
+        /// <summary>
+        /// (Non-Blocking) Attempts to clear the player's current target.
+        /// </summary>
+        /// <returns>Returns true if we are able to clear the target</returns>
+        public static async Task<bool> ClearMyDeadTarget()
+        {
+            if (Me.CurrentTarget != null && Me.CurrentTarget.IsDead)
+            {
+                Me.ClearTarget();
+                await CommonCoroutines.SleepForLagDuration();
+                return false;
+            }
             return false;
         }
-        public static async Task<bool> StopMovement(bool reqs)
-        {
-            if (!reqs) return false;
-            Navigator.PlayerMover.MoveStop();
-            await CommonCoroutines.SleepForLagDuration();
-            return false;
-        }
-        public static async Task<bool> MoveBack(bool reqs)
-        {
-            if (!reqs) return false;
-            moveBackTimer = DateTime.Now + new TimeSpan(0, 0, 0, 0, 2000);
-            WoWMovement.Move(WoWMovement.MovementDirection.Backwards);
-            await CommonCoroutines.SleepForLagDuration();
-            return false;
-        }
-        #endregion
     }
 }

@@ -27,6 +27,7 @@ namespace DK
 {
     public partial class DKMain : CombatRoutine
     {
+        public static string lstSpell = "";
         public const string
             //common
             BLOODLUST = "Bloodlust",
@@ -69,13 +70,14 @@ namespace DK
             CONVERSION = "Conversion",
             HORN_OF_WINTER = "Horn of Winter",
             ICY_TOUCH = "Icy Touch",
-            PLAGUE_STRIKE = "Plague Strik",
+            PLAGUE_STRIKE = "Plague Strike",
             REMORSELESS_WINTER = "Remorseless Winter",
             MIND_FREEZE = "Mind Freeze",
             CHAINS_OF_ICE = "Chains of Ice",
             ASPHYXIATE = "Asphyxiate",
             RAISE_ALLY = "Raise Ally",
             GOREFIEND_GRASP = "Gorefiend's Grasp",
+            STRANGULATE = "Strangulate",
             EINDE = "The End";
 
 
@@ -119,53 +121,41 @@ namespace DK
                 return false;
             }
         }
-        public static bool needResPeople
+        
+        public static WoWPlayer TankToRes
         {
             get
             {
-                if (Me.RunicPowerPercent < 30) return false;
-                if (spellOnCooldown(RAISE_ALLY)) return false;
-                if (HKM.resTanks)
-                {
-                    WoWPlayer target = WoWPartyMembers.Where(p => p.HasRole(WoWPartyMember.GroupRole.Tank)
-                        && p.ToPlayer().IsDead
-                        && p.ToPlayer().Location.Distance(Me.Location) <= 40).Select(p => p.ToPlayer()).FirstOrDefault();
-                    if (target != null) playerToRes = target; return true;
-                }
-                if (HKM.resHealers)
-                {
-                    WoWPlayer target = WoWPartyMembers.Where(p => p.HasRole(WoWPartyMember.GroupRole.Healer)
-                        && p.ToPlayer().IsDead
-                        && p.ToPlayer().Location.Distance(Me.Location) <= 40).Select(p => p.ToPlayer()).FirstOrDefault();
-                    if (target != null) playerToRes = target; return true;
-                }
-                if (HKM.resDPS)
-                {
-                    WoWPlayer target = WoWPartyMembers.Where(p => p.HasRole(WoWPartyMember.GroupRole.Damage)
-                        && p.ToPlayer().IsDead
-                        && p.ToPlayer().Location.Distance(Me.Location) <= 40).Select(p => p.ToPlayer()).FirstOrDefault();
-                    if (target != null) playerToRes = target; return true;
-                }
-                return false;
+                var list = new List<WoWPlayer>();
+                list = WoWPartyMembers.Where(p => p.HasRole(WoWPartyMember.GroupRole.Tank)
+                    && p.ToPlayer().IsDead
+                    && p.ToPlayer().Distance <= 40).Select(p => p.ToPlayer()).ToList();
+                return list.Count() > 0 ? list.FirstOrDefault() : null;
+            }
+        }
+        public static WoWPlayer HealerToRes
+        {
+            get
+            {
+                var list = new List<WoWPlayer>();
+                list = WoWPartyMembers.Where(p => p.HasRole(WoWPartyMember.GroupRole.Healer)
+                    && p.ToPlayer().IsDead
+                    && p.ToPlayer().Distance <= 40).Select(p => p.ToPlayer()).ToList();
+                return list.Count() > 0 ? list.FirstOrDefault() : null;
+            }
+        }
+        public static WoWPlayer DpsToRes
+        {
+            get
+            {
+                var list = new List<WoWPlayer>();
+                list = WoWPartyMembers.Where(p => p.HasRole(WoWPartyMember.GroupRole.Healer)
+                    && p.ToPlayer().IsDead
+                    && p.ToPlayer().Distance <= 40).Select(p => p.ToPlayer()).ToList();
+                return list.Count() > 0 ? list.FirstOrDefault() : null;
             }
         }
 
-        public static bool needDeathrunesForDeathAndDecay
-        {
-            get
-            {
-                if (P.myPrefs.UseDeathAndDecayRunes && DeathRuneCount > P.myPrefs.DeathAndDecayRunes) return true;
-                return false;
-            }
-        }
-        public static bool needDeathrunesForDefile
-        {
-            get
-            {
-                if (P.myPrefs.UseDefileRunes && DeathRuneCount >= P.myPrefs.DefileRunes) return true;
-                return false;
-            }
-        }
         public static bool needDeathAndDecay
         {
             get
@@ -173,7 +163,6 @@ namespace DK
                 if (SpellManager.HasSpell(DEFILE)) return false;
                 if (addCountMelee < P.myPrefs.AddsDeathAndDecay) return false;
                 if (UnholyRuneCount >= 1) return true;
-                if (needDeathrunesForDeathAndDecay) return true;
                 return false;
             }
         }
@@ -183,28 +172,14 @@ namespace DK
             {
                 if (addCountMelee < P.myPrefs.AddsDefile) return false;
                 if (UnholyRuneCount >= 1) return true;
-                if (needDeathrunesForDefile) return true;
                 return false;
             }
         }
-        public static bool needPresence
+        public static string PRESENCE 
         {
             get
             {
-                if (checkPresence == "none") return false;
-                PRESENCE = checkPresence;
-                return true;
-            }
-        }
-        public static string PRESENCE { get; set; }
-        public static string checkPresence
-        {
-            get
-            {
-                if (P.myPrefs.Presence == 1 && !Me.HasAura(BLOOD_PRESENCE)) return BLOOD_PRESENCE;
-                if (P.myPrefs.Presence == 2 && !Me.HasAura(FROST_PRESENCE)) return FROST_PRESENCE;
-                if (P.myPrefs.Presence == 3 && !Me.HasAura(UNHOLY_PRESENCE)) return UNHOLY_PRESENCE;
-                return "none";
+                return P.myPrefs.Presence.ToString().Trim() + " Presence";
             }
         }
         public static bool needSoulReaper
@@ -239,9 +214,11 @@ namespace DK
         {
             get
             {
+                if (buffExists(BLOOD_CHARGE_INT, Me) && buffStackCount(BLOOD_CHARGE_INT, Me) >= 12) { return true; }
                 if (Me.CurrentTarget != null
                     && DeathRuneCount < 2
                     && DepletedCount < 3
+                    && Me.HealthPercent < P.myPrefs.BloodTapHP
                     && buffExists(BLOOD_CHARGE_INT, Me) && buffStackCount(BLOOD_CHARGE_INT, Me) >= 5) { return true; }
                 return false;
             }
@@ -317,35 +294,7 @@ namespace DK
         #endregion
 
 
-        #region trinkets
-        public static bool UseTrinket1
-        {
-            get
-            {
-                if (P.myPrefs.Trinket1Use) return false;
-                if (P.myPrefs.Trinket1 == 1) return false;
-                if (P.myPrefs.Trinket1 == 2 && (HKM.cooldownsOn || (Targets.IsWoWBoss(Me.CurrentTarget) && AutoBot))) return true;
-                if (P.myPrefs.Trinket1 == 3 && IsCrowdControlledPlayer(Me)) return true;
-                if (P.myPrefs.Trinket1 == 4 && Me.EnergyPercent <= P.myPrefs.PercentTrinket1Energy) return true;
-                if (P.myPrefs.Trinket1 == 5 && Me.ManaPercent >= P.myPrefs.PercentTrinket1Mana) return true;
-                if (P.myPrefs.Trinket1 == 6 && Me.HealthPercent <= P.myPrefs.PercentTrinket1HP) return true;
-                return false;
-            }
-        }
-        public static bool UseTrinket2
-        {
-            get
-            {
-                if (P.myPrefs.Trinket2Use) return false;
-                if (P.myPrefs.Trinket2 == 1) return false;
-                if (P.myPrefs.Trinket2 == 2 && (HKM.cooldownsOn || (Targets.IsWoWBoss(Me.CurrentTarget) && AutoBot)))
-                if (P.myPrefs.Trinket2 == 3 && IsCrowdControlledPlayer(Me)) return true;
-                if (P.myPrefs.Trinket2 == 4 && Me.EnergyPercent <= P.myPrefs.PercentTrinket2Energy) return true;
-                if (P.myPrefs.Trinket2 == 5 && Me.ManaPercent >= P.myPrefs.PercentTrinket2Mana) return true;
-                if (P.myPrefs.Trinket2 == 6 && Me.HealthPercent <= P.myPrefs.PercentTrinket2HP) return true;
-                return false;
-            }
-        }
+        
         private static bool CanUseEquippedItem(WoWItem item)
         {
             string itemSpell = Lua.GetReturnVal<string>("return GetItemSpell(" + item.Entry + ")", 0);
@@ -353,7 +302,6 @@ namespace DK
                 return false;
             return item.Usable && item.Cooldown <= 0;
         }
-        #endregion
 
         #region hastebuffs
         public static bool HaveHasteBuff
