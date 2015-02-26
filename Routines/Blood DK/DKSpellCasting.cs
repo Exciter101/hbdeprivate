@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media;
 using Action = Styx.TreeSharp.Action;
+
 using P = DK.DKSettings;
 
 namespace DK
@@ -30,20 +31,12 @@ namespace DK
         private static async Task<bool> CastGroundSpell(string spell, bool reqs, WoWUnit target)
         {
             if (!reqs) return false;
-            if (!SpellManager.HasSpell(DEFILE)) return false;
-            if (spellOnCooldown(DEFILE)) return false;
-            if (!target.IsWithinMeleeRange) return false;
-            if (!target.InLineOfSight) return false;
             if (!SpellManager.CanCast(spell)) return false;
             if (!SpellManager.Cast(spell)) return false;
-            if (!await Coroutine.Wait(1000, () => StyxWoW.Me.CurrentPendingCursorSpell != null))
-            {
-                Logging.WriteDiagnostic("Cursor didn't turn into the spell!");
-                return false;
-            }
 
             SpellManager.ClickRemoteLocation(target.Location);
-
+            Logging.Write(Colors.OrangeRed, "Casting:" + spell + " on: " + Me.CurrentTarget.SafeName);
+            lstSpell = spell;
             await CommonCoroutines.SleepForLagDuration();
             return true;
         }
@@ -59,11 +52,6 @@ namespace DK
                     Trinket1.Use();
                     Logging.Write(Colors.OrangeRed, "Using 1st Trinket");
                 }
-                if (!await Coroutine.Wait(1000, () => StyxWoW.Me.CurrentPendingCursorSpell != null))
-                {
-                    Logging.WriteDiagnostic("Cursor didn't turn into the spell!");
-                    return false;
-                }
             }
             if (trinket == 2)
             {
@@ -73,11 +61,6 @@ namespace DK
                 {
                     Trinket2.Use();
                     Logging.Write(Colors.OrangeRed, "Using 2nd Trinket");
-                }
-                if (!await Coroutine.Wait(1000, () => StyxWoW.Me.CurrentPendingCursorSpell != null))
-                {
-                    Logging.WriteDiagnostic("Cursor didn't turn into the spell!");
-                    return false;
                 }
             }
             SpellManager.ClickRemoteLocation(Me.CurrentTarget.Location);
@@ -93,6 +76,7 @@ namespace DK
             if (!SpellManager.CanCast(Spell, Me.CurrentTarget)) return false;
             if (!SpellManager.Cast(Spell, Me.CurrentTarget)) return false;
             Logging.Write(Colors.Yellow, "Casting: " + Spell + " on: " + Me.CurrentTarget.SafeName);
+            lstSpell = Spell;
             await CommonCoroutines.SleepForLagDuration();
             return true;
         }
@@ -104,6 +88,7 @@ namespace DK
             if (!SpellManager.CanCast(Spell, Me.CurrentTarget)) return false;
             if (!SpellManager.Cast(Spell, Me.CurrentTarget)) return false;
             Logging.Write(Colors.Yellow, "Casting: " + Spell + " on: " + myTarget.SafeName);
+            lstSpell = Spell;
             await CommonCoroutines.SleepForLagDuration();
             return true;
         }
@@ -116,6 +101,7 @@ namespace DK
             if (!SpellManager.Cast(Spell, Me.CurrentTarget)) return false;
             pullingTimer = DateTime.Now + new TimeSpan(0, 0, 0, 0, 2500);
             Logging.Write(Colors.LightBlue, "Casting: " + Spell + " on: " + Me.CurrentTarget.SafeName);
+            lstSpell = Spell;
             await CommonCoroutines.SleepForLagDuration();
             return true;
         }
@@ -128,17 +114,7 @@ namespace DK
             if (!SpellManager.CanCast(Spell, Me)) return false;
             if (!SpellManager.Cast(Spell, Me)) return false;
             Logging.Write(Colors.LightSeaGreen, "Casting: " + Spell + " on: " + Me.SafeName);
-            await CommonCoroutines.SleepForLagDuration();
-            return true;
-        }
-        public static async Task<bool> CastMultiDot(string Spell, WoWUnit t, bool reqs)
-        {
-            if (!SpellManager.HasSpell(Spell)) return false;
-            if (!reqs) return false;
-            if (!SpellManager.CanCast(Spell, t)) return false;
-            if (!SpellManager.Cast(Spell, t)) return false;
-            if (addCountRange < DKSettings.myPrefs.MindSearAdds) return false;
-            Logging.Write(Colors.Yellow, "Multi-Dot: " + Spell + " on: " + t.SafeName);
+            lstSpell = Spell;
             await CommonCoroutines.SleepForLagDuration();
             return true;
         }

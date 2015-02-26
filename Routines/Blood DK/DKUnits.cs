@@ -30,7 +30,7 @@ namespace DK
 
         public static bool IsInRange(WoWUnit unit)
         {
-            return Me.CurrentTarget != null && Me.CurrentTarget.Distance <= 39f;
+            return Me.CurrentTarget != null && Me.CurrentTarget.Distance <= 30f;
         }
 
         #region gorefiends grasp
@@ -41,9 +41,10 @@ namespace DK
                 var t = new List<WoWUnit>();
                 WoWPoint myLocation = Me.Location;
                 t = ObjectManager.GetObjectsOfTypeFast<WoWUnit>().Where(p => p != null
+                    && (!p.TaggedByOther || p.Combat && (p.IsTargetingMeOrPet || p.IsTargetingMyPartyMember || p.IsTargetingMyRaidMember))
                     && ValidUnit(p)
-                    && p.Location.Distance(myLocation) > 10
-                    && p.Location.Distance(myLocation) > 21).ToList();
+                    && (p.Location.Distance(myLocation) > 10
+                    && p.Location.Distance(myLocation) < 21)).ToList();
                 return t;
             }
         }
@@ -142,6 +143,7 @@ namespace DK
         public static List<WoWUnit> FindTarget()
         {
             return ObjectManager.GetObjectsOfType<WoWUnit>(true, false).Where(u => u != null
+                && (!u.TaggedByOther || u.Combat && (u.IsTargetingMeOrPet || u.IsTargetingMyPartyMember || u.IsTargetingMyRaidMember))
                 && ValidUnit(u)
                 && !Blacklist.Contains(u, BlacklistFlags.All))
                 .OrderBy(u => u.HealthPercent)
