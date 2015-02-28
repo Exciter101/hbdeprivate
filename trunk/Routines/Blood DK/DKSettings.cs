@@ -124,7 +124,7 @@ namespace DK
 
         [Setting, DefaultValue(presence.Blood)]
         [Category("DeathKnight")]
-        [DisplayName("Gift of the Naaru HP %")]
+        [DisplayName("Presence")]
         public presence Presence { get; set; }
 
         [Setting, DefaultValue(2)]

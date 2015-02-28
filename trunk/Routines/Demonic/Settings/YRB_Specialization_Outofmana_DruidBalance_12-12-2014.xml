@@ -3,11 +3,10 @@
   <Celestial>Always</Celestial>
   <Incarnation>Always</Incarnation>
   <ForceofNature>Always</ForceofNature>
-  <ClassRacials>OnBoss</ClassRacials>
-  <Lifeblood>Offensive</Lifeblood>
-  <LifebloodOffensive>OnBoss</LifebloodOffensive>
+  <ClassRacials>Always</ClassRacials>
   <WhenToUseAutoForm>EverywhereNonCombat</WhenToUseAutoForm>
-  <AoECount>2</AoECount>
+  <StarfallAoE>True</StarfallAoE>
+  <AoECount>3</AoECount>
   <Dotbehavior>CurrentTargetAndMouseOver</Dotbehavior>
   <EnableFacing>False</EnableFacing>
   <BarkskinHP>45</BarkskinHP>
