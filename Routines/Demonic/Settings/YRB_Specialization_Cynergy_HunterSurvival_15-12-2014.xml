@@ -3,25 +3,29 @@
   <MurderofCrows>Always</MurderofCrows>
   <EnableFacing>False</EnableFacing>
   <EnableTargeting>False</EnableTargeting>
-  <Lifeblood>Offensive</Lifeblood>
-  <LifebloodOffensive>OnBoss</LifebloodOffensive>
-  <UseOpenerOnBoss>True</UseOpenerOnBoss>
-  <LynxRush>Never</LynxRush>
-  <Rabid>Always</Rabid>
-  <RapidFire>OnBoss</RapidFire>
+  <ExplosiveTrapSingleTarget>True</ExplosiveTrapSingleTarget>
+  <ExplosiveTrapAoE>True</ExplosiveTrapAoE>
+  <GlaiveTossAoE>False</GlaiveTossAoE>
+  <GlaiveTossST>True</GlaiveTossST>
+  <EnableDefensive>True</EnableDefensive>
+  <BarrageST>False</BarrageST>
+  <BarrageSTFirst>False</BarrageSTFirst>
+  <BarrageAoEToggle>True</BarrageAoEToggle>
+  <BarrageAoE>True</BarrageAoE>
+  <ToggleMode>False</ToggleMode>
+  <CheckInterruptsList>True</CheckInterruptsList>
+  <MultiDotArcaneShot>False</MultiDotArcaneShot>
+  <DireBeast>Never</DireBeast>
   <Stampede>Never</Stampede>
-  <ClassRacials>OnBoss</ClassRacials>
+  <ClassRacials>Always</ClassRacials>
   <UseBlackArrowFocusTarget>False</UseBlackArrowFocusTarget>
   <EnablePetStuff>True</EnablePetStuff>
-  <SerpentStingCleave>True</SerpentStingCleave>
-  <MendPetHP>65</MendPetHP>
-  <AoEMultiShotCount>2</AoEMultiShotCount>
-  <AoECount>2</AoECount>
+  <MendPetHP>70</MendPetHP>
+  <AoECount>3</AoECount>
   <TrinketAura>0</TrinketAura>
   <UseTrinketOnCertainAura>False</UseTrinketOnCertainAura>
   <Trinket1>OnBoss</Trinket1>
   <Trinket2>OnBoss</Trinket2>
   <CheckAoE>True</CheckAoE>
   <CheckInterrupts>True</CheckInterrupts>
-  <CheckLifebloodNum>10</CheckLifebloodNum>
 </YbSettingsSV>

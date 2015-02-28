@@ -16,21 +16,6 @@
   <DetectKeyPress>300</DetectKeyPress>
   <AutoDetectManualCast>True</AutoDetectManualCast>
   <AutoTautntingEnable>False</AutoTautntingEnable>
-  <CheckBossAmalgam>1</CheckBossAmalgam>
-  <CheckBossBlackfuse>1</CheckBossBlackfuse>
-  <CheckBossEarthBreakerHaromm>1</CheckBossEarthBreakerHaromm>
-  <CheckBossGalakras>1</CheckBossGalakras>
-  <CheckBossGarrosh1>1</CheckBossGarrosh1>
-  <CheckBossGarrosh2>1</CheckBossGarrosh2>
-  <CheckBossImmerseus>1</CheckBossImmerseus>
-  <CheckBossIronJuggernaut>1</CheckBossIronJuggernaut>
-  <CheckBossMalkorok>1</CheckBossMalkorok>
-  <CheckBossNazgrim>1</CheckBossNazgrim>
-  <CheckBossSha>1</CheckBossSha>
-  <CheckBossThok1>1</CheckBossThok1>
-  <CheckBossThok2>1</CheckBossThok2>
-  <CheckBossThok3>1</CheckBossThok3>
-  <CheckBossThok4>1</CheckBossThok4>
   <CustomSpecialKeyText>Normal</CustomSpecialKeyText>
   <PreCombatBuff>False</PreCombatBuff>
   <CheckHealthStone>True</CheckHealthStone>
@@ -41,10 +26,11 @@
   <EnableExperimentalPlacement>False</EnableExperimentalPlacement>
   <ExperimentalPlacementDistance>8</ExperimentalPlacementDistance>
   <Racials>Always</Racials>
-  <RacialsHpValue>60</RacialsHpValue>
-  <RacialsMpValue>60</RacialsMpValue>
+  <RacialsHpValue>100</RacialsHpValue>
+  <RacialsMpValue>99</RacialsMpValue>
   <Movement>False</Movement>
   <HotkeyChatOutput>True</HotkeyChatOutput>
+  <OverlayTesting>True</OverlayTesting>
   <LastStatCounted></LastStatCounted>
   <CurrentRevision>0</CurrentRevision>
 </SettingsG>

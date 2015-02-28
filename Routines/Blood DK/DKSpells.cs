@@ -75,7 +75,9 @@ namespace DK
             MIND_FREEZE = "Mind Freeze",
             CHAINS_OF_ICE = "Chains of Ice",
             ASPHYXIATE = "Asphyxiate",
+
             RAISE_ALLY = "Raise Ally",
+
             GOREFIEND_GRASP = "Gorefiend's Grasp",
             STRANGULATE = "Strangulate",
             EINDE = "The End";
@@ -149,7 +151,7 @@ namespace DK
             get
             {
                 var list = new List<WoWPlayer>();
-                list = WoWPartyMembers.Where(p => p.HasRole(WoWPartyMember.GroupRole.Healer)
+                list = WoWPartyMembers.Where(p => p.HasRole(WoWPartyMember.GroupRole.Damage)
                     && p.ToPlayer().IsDead
                     && p.ToPlayer().Distance <= 40).Select(p => p.ToPlayer()).ToList();
                 return list.Count() > 0 ? list.FirstOrDefault() : null;

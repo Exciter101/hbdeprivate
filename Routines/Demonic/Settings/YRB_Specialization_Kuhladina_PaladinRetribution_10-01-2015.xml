@@ -3,11 +3,9 @@
   <HolyAvenger>OnBoss</HolyAvenger>
   <ExecutionSentence>Always</ExecutionSentence>
   <LightsHammer>Always</LightsHammer>
-  <Seraphim>Always</Seraphim>
+  <Seraphim>Never</Seraphim>
   <AvengingWrath>Always</AvengingWrath>
-  <ClassRacials>OnBoss</ClassRacials>
-  <Lifeblood>Offensive</Lifeblood>
-  <LifebloodOffensive>OnBoss</LifebloodOffensive>
+  <ClassRacials>Always</ClassRacials>
   <SealofRighteousnessCount>4</SealofRighteousnessCount>
   <EnableAutoCleave>True</EnableAutoCleave>
   <UseSealSwapping>True</UseSealSwapping>
@@ -33,5 +31,4 @@
   <Trinket1>OnBoss</Trinket1>
   <Trinket2>OnBoss</Trinket2>
   <CheckInterrupts>True</CheckInterrupts>
-  <CheckLifebloodNum>10</CheckLifebloodNum>
 </YbSettingsRE>
