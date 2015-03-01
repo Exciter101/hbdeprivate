@@ -170,7 +170,9 @@ namespace DK
 
             //diseases
             if (await Cast(OUTBREAK, gotTarget
-                && needOutbreak
+                && !debuffExists(BLOOD_PLAGUE, Me.CurrentTarget)
+                && !debuffExists(FROST_FEVER, Me.CurrentTarget)
+                && SpellManager.CanCast(OUTBREAK)
                 && Range30
                 && lstSpell != OUTBREAK)) return true;
 
@@ -179,7 +181,7 @@ namespace DK
                 && lstSpell != UNHOLY_BLIGHT
                 && Me.CurrentTarget.IsWithinMeleeRange)) return true;
 
-            if (await Cast(ICY_TOUCH, gotTarget
+            /*if (await Cast(ICY_TOUCH, gotTarget
                 && lstSpell != ICY_TOUCH
                 && lstSpell != OUTBREAK
                 && lstSpell != UNHOLY_BLIGHT
@@ -191,7 +193,7 @@ namespace DK
                 && lstSpell != OUTBREAK
                 && lstSpell != UNHOLY_BLIGHT
                 && !debuffExists(PLAGUE_STRIKE, Me.CurrentTarget)
-                && UnholyRuneCount >= 1 && Me.CurrentTarget.IsWithinMeleeRange)) return true;
+                && UnholyRuneCount >= 1 && Me.CurrentTarget.IsWithinMeleeRange)) return true;*/
 
             if (await Cast(REMORSELESS_WINTER, gotTarget 
                 && lstSpell != REMORSELESS_WINTER 
@@ -222,8 +224,15 @@ namespace DK
                 && Range30 
                 && lstSpell != PLAGUE_LEECH)) return true;
 
+            if (await Cast(SOUL_REAPER, gotTarget
+                && (BloodRuneCount > 1 || (DeathRuneCount >= 3 && Me.HealthPercent > P.myPrefs.DeathStrikeHP))
+                && !debuffExists(SOUL_REAPER, Me.CurrentTarget)
+                && Me.CurrentTarget.HealthPercent >= 35)
+                && lstSpell != SOUL_REAPER) return true;
+
             if (await Cast(SOUL_REAPER, gotTarget 
-                && (BloodRuneCount >= 1 || Me.HealthPercent > P.myPrefs.DeathStrikeHP)
+                && BloodRuneCount >= 1
+                && !debuffExists(SOUL_REAPER, Me.CurrentTarget)
                 && Me.CurrentTarget.HealthPercent < 35 
                 && lstSpell != SOUL_REAPER)) return true;
 
