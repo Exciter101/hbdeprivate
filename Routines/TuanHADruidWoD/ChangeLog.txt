@@ -1,4 +1,7 @@
 Version 6.1.5535
+Fix issue sometime combat routine use 2 interrupt skill to stop 1 spell
+
+Version 6.1.5535
 Druid is ready for 6.1
 Just svn update and enjoy. Sorry the free store version is not ready, it's still waiting for approvement.
 
