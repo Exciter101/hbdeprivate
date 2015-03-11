@@ -478,6 +478,13 @@ namespace PluginTidyBags3
 //			111676, // Enormous Jawless Skulker
 //			111670, // Enormous Blackwater Whiptail
 //			118566,  // Enormous Savage Piranha
+			111668,  // Dicker Schläfer
+			111664,  // Riesiger Tiefseeschluckaal
+			111667,  // Blinder Seestör
+			111674,  // Riesiger Blinder Seestör
+			111601,  // Riesiger Sichelfisch
+			111595,  // Sichelfisch
+			111675,  // Riesiger Dicker Schläfer
             33567 // Borean Leather Scraps
         };
 

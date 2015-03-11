@@ -1,5 +1,0 @@
-New features:
---------------
-  * Core
-    - Updated for WoW Patch 6.1.0.19702 (HB-2032)
-
