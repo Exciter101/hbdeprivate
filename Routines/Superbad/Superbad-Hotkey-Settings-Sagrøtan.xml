@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HotkeySettings>
+  <PrintMsgUsage>DontPrint</PrintMsgUsage>
+  <UseManualCast>False</UseManualCast>
+  <ManualCastTimeOut>200</ManualCastTimeOut>
+  <UseBurst>False</UseBurst>
+  <UseBurstTigers>False</UseBurstTigers>
+  <UseBurstBerserk>False</UseBurstBerserk>
+  <UseBurstVigil>False</UseBurstVigil>
+  <UseBurstIncar>False</UseBurstIncar>
+  <UseBurstBerserking>False</UseBurstBerserking>
+  <UseBurstVirmens>False</UseBurstVirmens>
+  <UseBurstHotw>False</UseBurstHotw>
+  <UseBurstTrinket1>False</UseBurstTrinket1>
+  <UseBurstTrinket2>False</UseBurstTrinket2>
+  <CDDisableTF>False</CDDisableTF>
+  <CDDisableInca>True</CDDisableInca>
+  <CDDisableBerserk>True</CDDisableBerserk>
+  <CooldownsKey>None</CooldownsKey>
+  <PauseKey>None</PauseKey>
+  <BurstKey>None</BurstKey>
+  <GrowlKey>None</GrowlKey>
+  <TargetKey>None</TargetKey>
+  <ShapeShiftKey>None</ShapeShiftKey>
+  <InterruptHotkey>None</InterruptHotkey>
+  <SwipeHotkey>None</SwipeHotkey>
+  <MalmHotkey>None</MalmHotkey>
+  <SavageRoarHotkey>None</SavageRoarHotkey>
+  <DisableAOEHotkey>None</DisableAOEHotkey>
+  <CycloneHotkey>None</CycloneHotkey>
+  <Tier3Hotkey>None</Tier3Hotkey>
+  <Tier5Hotkey>None</Tier5Hotkey>
+</HotkeySettings>
