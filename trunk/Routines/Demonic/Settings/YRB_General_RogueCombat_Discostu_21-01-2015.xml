@@ -7,11 +7,12 @@
   <DiagnosticLogging>None</DiagnosticLogging>
   <TreePerformance>False</TreePerformance>
   <TreePerformance1>False</TreePerformance1>
+  <SpecialAoELogger>False</SpecialAoELogger>
   <PerformanceLogging>None</PerformanceLogging>
   <PerformanceLoggingHotkey>False</PerformanceLoggingHotkey>
   <BurstOfSpeedEnergy>60</BurstOfSpeedEnergy>
   <BurstOfSpeedEnergyTimer>0</BurstOfSpeedEnergyTimer>
-  <AutoBurstofSpeed>False</AutoBurstofSpeed>
+  <AutoBurstofSpeed>True</AutoBurstofSpeed>
   <EnableTrapsHunter>True</EnableTrapsHunter>
   <DetectKeyPress>300</DetectKeyPress>
   <AutoDetectManualCast>True</AutoDetectManualCast>
@@ -19,7 +20,7 @@
   <CustomSpecialKeyText>Normal</CustomSpecialKeyText>
   <PreCombatBuff>False</PreCombatBuff>
   <CheckHealthStone>True</CheckHealthStone>
-  <CheckHealthStoneNum>40</CheckHealthStoneNum>
+  <CheckHealthStoneNum>55</CheckHealthStoneNum>
   <CheckHealthTonic>False</CheckHealthTonic>
   <CheckHealthTonicNum>40</CheckHealthTonicNum>
   <PotionUsage>False</PotionUsage>
@@ -30,6 +31,7 @@
   <RacialsMpValue>60</RacialsMpValue>
   <Movement>False</Movement>
   <HotkeyChatOutput>True</HotkeyChatOutput>
+  <OverlayTesting>True</OverlayTesting>
   <LastStatCounted></LastStatCounted>
   <CurrentRevision>0</CurrentRevision>
 </SettingsG>
