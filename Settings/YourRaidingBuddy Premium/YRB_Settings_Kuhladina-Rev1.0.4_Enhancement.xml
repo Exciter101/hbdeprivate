@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <YbSettingsENS>
-  <MaelstormStacks>70</MaelstormStacks>
+  <MaelstormStacks>4</MaelstormStacks>
+  <MaelstormStacksHS>1</MaelstormStacksHS>
   <HealingRainOnMe>False</HealingRainOnMe>
   <LightningShieldUp>False</LightningShieldUp>
   <LBFillerEnable>False</LBFillerEnable>

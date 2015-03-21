@@ -2,10 +2,12 @@
 <YbSettingsPR>
   <GuardianofAncientKings>OnBoss</GuardianofAncientKings>
   <HolyAvenger>OnBoss</HolyAvenger>
+  <ExecutionSentence>OnBoss</ExecutionSentence>
   <Seraphim>OnBoss</Seraphim>
   <DivineProtection>OnBoss</DivineProtection>
   <ArdentDefender>OnBoss</ArdentDefender>
   <LightsHammer>OnBoss</LightsHammer>
+  <Mode>Survival</Mode>
   <GuardianofAncientKingsEnable>True</GuardianofAncientKingsEnable>
   <EnableHolyAvenger>True</EnableHolyAvenger>
   <EnableSeraphim>True</EnableSeraphim>
@@ -23,6 +25,8 @@
   <EnableFacing>False</EnableFacing>
   <UseSotRAuto>False</UseSotRAuto>
   <DivineProtectionHP>40</DivineProtectionHP>
+  <ArdentDefenderHP>40</ArdentDefenderHP>
+  <GuardianofAncientKingsHP>40</GuardianofAncientKingsHP>
   <DivineProtectionEnable>True</DivineProtectionEnable>
   <ClassRacials>OnBoss</ClassRacials>
   <LightHammerLocation>OnMe</LightHammerLocation>

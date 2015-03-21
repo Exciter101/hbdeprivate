@@ -15,7 +15,7 @@
   <UseTrinketOnCertainAura>False</UseTrinketOnCertainAura>
   <Trinket1>OnBoss</Trinket1>
   <Trinket2>OnBoss</Trinket2>
-  <PoisonSelectorM>Deadly</PoisonSelectorM>
+  <PoisonSelectorM>Instant</PoisonSelectorM>
   <PoisonSelectorO>Leeching</PoisonSelectorO>
   <CheckPoison>True</CheckPoison>
   <EnableDefensive>False</EnableDefensive>

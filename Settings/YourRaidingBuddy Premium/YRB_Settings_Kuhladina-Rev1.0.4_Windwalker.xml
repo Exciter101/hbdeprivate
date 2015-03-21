@@ -4,12 +4,17 @@
   <TigereyeBrew>Always</TigereyeBrew>
   <Serenity>Always</Serenity>
   <Chibrew>Always</Chibrew>
+  <ZenSphere>FocusTargetAndMe</ZenSphere>
   <ChiBurstEnable>False</ChiBurstEnable>
+  <EnableChiTorpedo>False</EnableChiTorpedo>
   <ChiWaveEnable>False</ChiWaveEnable>
   <TigereyeBrewStackCount>10</TigereyeBrewStackCount>
+  <ExpelHarmChi>False</ExpelHarmChi>
+  <ExpelHarmChiAmount>10</ExpelHarmChiAmount>
   <TrinketTEBUsage>False</TrinketTEBUsage>
   <FoFTebUsage>False</FoFTebUsage>
   <Xuen>Always</Xuen>
+  <OpenerUsage>OnBoss</OpenerUsage>
   <MaxChiSwitch>EmpoweredChi</MaxChiSwitch>
   <ToDUsage>Always</ToDUsage>
   <UseFortBrewToD>True</UseFortBrewToD>

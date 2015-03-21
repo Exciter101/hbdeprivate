@@ -4,6 +4,7 @@
   <EmpowerRuneWeapon>Always</EmpowerRuneWeapon>
   <ClassRacials>OnBoss</ClassRacials>
   <MasterSimple>False</MasterSimple>
+  <EnableUnholyBlight>False</EnableUnholyBlight>
   <DeathAndDecayST>False</DeathAndDecayST>
   <DeathAndDecayToggle>False</DeathAndDecayToggle>
   <DeathAndDecayAoE>True</DeathAndDecayAoE>
@@ -12,6 +13,7 @@
   <EnableDefensive>False</EnableDefensive>
   <DeathSiphonHP>80</DeathSiphonHP>
   <DeathstrikeHP>80</DeathstrikeHP>
+  <DeathStrikeHPEmergency>80</DeathStrikeHPEmergency>
   <DeathPactHP>80</DeathPactHP>
   <AoECount>2</AoECount>
   <EnableFacing>False</EnableFacing>

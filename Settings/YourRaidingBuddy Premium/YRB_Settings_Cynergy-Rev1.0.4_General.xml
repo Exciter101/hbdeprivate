@@ -7,6 +7,7 @@
   <DiagnosticLogging>None</DiagnosticLogging>
   <TreePerformance>False</TreePerformance>
   <TreePerformance1>False</TreePerformance1>
+  <SpecialAoELogger>False</SpecialAoELogger>
   <PerformanceLogging>None</PerformanceLogging>
   <PerformanceLoggingHotkey>False</PerformanceLoggingHotkey>
   <BurstOfSpeedEnergy>60</BurstOfSpeedEnergy>
@@ -30,6 +31,7 @@
   <RacialsMpValue>60</RacialsMpValue>
   <Movement>False</Movement>
   <HotkeyChatOutput>True</HotkeyChatOutput>
+  <OverlayTesting>True</OverlayTesting>
   <LastStatCounted></LastStatCounted>
   <CurrentRevision>0</CurrentRevision>
 </SettingsG>

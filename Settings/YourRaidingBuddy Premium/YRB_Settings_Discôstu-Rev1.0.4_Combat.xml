@@ -15,12 +15,12 @@
   <UseTrinketOnCertainAura>False</UseTrinketOnCertainAura>
   <Trinket1>OnBoss</Trinket1>
   <Trinket2>OnBoss</Trinket2>
-  <PoisonSelectorM>Deadly</PoisonSelectorM>
+  <PoisonSelectorM>Instant</PoisonSelectorM>
   <PoisonSelectorO>Leeching</PoisonSelectorO>
   <CheckPoison>True</CheckPoison>
-  <EnableDefensive>True</EnableDefensive>
+  <EnableDefensive>False</EnableDefensive>
   <CheckInterruptsList>True</CheckInterruptsList>
-  <EnableFeintUsage>True</EnableFeintUsage>
+  <EnableFeintUsage>False</EnableFeintUsage>
   <FeintHP>70</FeintHP>
   <NumRecuperateComboPoints>4</NumRecuperateComboPoints>
   <NumRecuperateHP>60</NumRecuperateHP>

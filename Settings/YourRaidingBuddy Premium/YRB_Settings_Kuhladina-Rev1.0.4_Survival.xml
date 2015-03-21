@@ -7,10 +7,14 @@
   <ExplosiveTrapAoE>True</ExplosiveTrapAoE>
   <GlaiveTossAoE>False</GlaiveTossAoE>
   <GlaiveTossST>True</GlaiveTossST>
+  <EnableDefensive>False</EnableDefensive>
   <BarrageST>True</BarrageST>
   <BarrageSTFirst>False</BarrageSTFirst>
+  <BarrageAoEToggle>False</BarrageAoEToggle>
   <BarrageAoE>True</BarrageAoE>
   <ToggleMode>False</ToggleMode>
+  <CheckInterruptsList>True</CheckInterruptsList>
+  <MultiDotArcaneShot>False</MultiDotArcaneShot>
   <DireBeast>Always</DireBeast>
   <Stampede>Always</Stampede>
   <ClassRacials>OnBoss</ClassRacials>
@@ -18,6 +22,7 @@
   <EnablePetStuff>False</EnablePetStuff>
   <MendPetHP>40</MendPetHP>
   <AoECount>2</AoECount>
+  <DumpMultiShot>70</DumpMultiShot>
   <TrinketAura>0</TrinketAura>
   <UseTrinketOnCertainAura>False</UseTrinketOnCertainAura>
   <Trinket1>OnBoss</Trinket1>

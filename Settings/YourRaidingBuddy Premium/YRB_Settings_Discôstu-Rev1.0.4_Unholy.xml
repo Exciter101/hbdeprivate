@@ -7,8 +7,11 @@
   <EmpowerRuneWeapon>Always</EmpowerRuneWeapon>
   <ClassRacials>OnBoss</ClassRacials>
   <AoECount>2</AoECount>
+  <AoECountNP>4</AoECountNP>
   <EnableFacing>False</EnableFacing>
   <DeathAndDecayST>False</DeathAndDecayST>
+  <FesteringstrikeMode>False</FesteringstrikeMode>
+  <FesteringstrikeTimer>2</FesteringstrikeTimer>
   <DeathAndDecayToggle>False</DeathAndDecayToggle>
   <DeathAndDecayAoE>True</DeathAndDecayAoE>
   <Trinket1>OnBoss</Trinket1>

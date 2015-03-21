@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BotSettings>
+  <ChatOutput>True</ChatOutput>
+  <ClickToMove>False</ClickToMove>
+  <ContinuesHealingMode>False</ContinuesHealingMode>
+  <ForcedCombatMode>False</ForcedCombatMode>
+  <PluginPulsing>True</PluginPulsing>
+  <RaidWarningOutput>False</RaidWarningOutput>
+  <UseSoftLock>False</UseSoftLock>
+  <PauseKeyChoice>X</PauseKeyChoice>
+  <ModKeyChoice>Alt</ModKeyChoice>
+  <LastStatCounted>65</LastStatCounted>
+</BotSettings>

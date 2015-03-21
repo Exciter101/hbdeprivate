@@ -4,10 +4,10 @@
   <ClickToMove>False</ClickToMove>
   <ContinuesHealingMode>False</ContinuesHealingMode>
   <ForcedCombatMode>False</ForcedCombatMode>
-  <PluginPulsing>True</PluginPulsing>
+  <PluginPulsing>False</PluginPulsing>
   <RaidWarningOutput>False</RaidWarningOutput>
   <UseSoftLock>False</UseSoftLock>
   <PauseKeyChoice>X</PauseKeyChoice>
   <ModKeyChoice>Alt</ModKeyChoice>
-  <LastStatCounted>21</LastStatCounted>
+  <LastStatCounted>64</LastStatCounted>
 </BotSettings>

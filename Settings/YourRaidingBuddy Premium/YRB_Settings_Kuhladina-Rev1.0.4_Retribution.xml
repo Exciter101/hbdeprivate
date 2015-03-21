@@ -3,12 +3,13 @@
   <HolyAvenger>OnBoss</HolyAvenger>
   <ExecutionSentence>Always</ExecutionSentence>
   <LightsHammer>Always</LightsHammer>
-  <Seraphim>Always</Seraphim>
+  <Seraphim>Never</Seraphim>
   <AvengingWrath>Always</AvengingWrath>
-  <ClassRacials>OnBoss</ClassRacials>
+  <ClassRacials>Always</ClassRacials>
   <SealofRighteousnessCount>4</SealofRighteousnessCount>
+  <HammeroftheRighteousCount>4</HammeroftheRighteousCount>
   <EnableAutoCleave>True</EnableAutoCleave>
-  <UseSealSwapping>True</UseSealSwapping>
+  <UseSealSwapping>False</UseSealSwapping>
   <EnableFacing>False</EnableFacing>
   <UseLightsHammerHotkey>False</UseLightsHammerHotkey>
   <LightHammerLocation>OnMe</LightHammerLocation>
