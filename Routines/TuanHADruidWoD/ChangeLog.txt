@@ -1,7 +1,8 @@
-Version 6.1.5555
-Improve Balance Rotation DPS
-Add hotkey for Force Rotation, this feature is really needed for high end PvP. For example use Guardian rotation in Resto Spec when you are being focused by melee dps...
-More hotkey feature for PvP is coming!
+Version 6.1.5569
+Improve Feral and Guardian DPS
+
+Version 6.1.5568
+Improve logic stop casting on Spell/Mass Spell Reflection
 
 Version 6.1.5555
 Fix issue sometime combat routine use 2 interrupt skill to stop 1 spell
