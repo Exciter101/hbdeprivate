@@ -1,0 +1,32 @@
+New features:
+--------------
+  * QuestBehaviour
+    - Avoid QB will no-longer prevent Combat Routines that use CombatRoutine Capabilities (http://wiki.thebuddyforum.com/index.php?title=Honorbuddy:Developer_Notebook:Combat_Routine_Capabilities) from executing while running out of bad stuff.  (HB-1900)
+
+Api Changes:
+--------------
+    - StyxWoW.BuildType has been added that can be used to check whether the client is a Regular, Beta or German build. (HB-1305)
+
+Bug fixes:
+--------------
+  * ArchaeologyBuddy
+    - Should be properly detecting all digsites in pre draenor maps now. This used to cause endless loading tiles loops. (HB-2101)
+
+  * DungeonBuddy
+    - Fixed an issue that cause 'Dungeon Type' to be changed to 'Specific' after completing Shadowmoon Burial Grounds (HB-2099)
+
+  * Navigation
+    - Added a Flightor indoor annotation for Westguard Keep, Howling Fjord  (HB-1207)
+
+  * QuestBehaviour
+    - TheGrandMelee: Fixed an issue that caused Taurens to not mount (HB-1185)
+
+    - AtTheEnemysGates: Bot will now stay far enough away from scouts for it to use the Shield-breaker ability (HB-1186)
+
+    - Vehicle quest behaviors now disable combat while riding a vehicle. (HB-1646)
+
+    - TaxiRide will now terminate after successfully taking a taxi ride (HB-1925)
+
+  * Questing
+    - The 'Now That We're Friends...' quest is no-longer marked as completed after quest is turned in. This allows the quest to be done multiple times. (HB-1148)
+
