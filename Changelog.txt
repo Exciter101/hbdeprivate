@@ -1,0 +1,30 @@
+New features:
+--------------
+  * Profile
+    - Mail and Sell properties of a profile can now be overriden in the settings window for each character individually (HB-2162)
+
+Api Changes:
+--------------
+    - Added QuestLog.IsFull API (HB-2180)
+
+    - AssemblyLoader no longer throws exceptions when encountering Dynamic assemblies, or assemblies stored in the GAC. These types of assemblies are now ignored completely. Also fixed ReflectionTypeLoad exceptions when dealing with certain assembly types. (HB-2181)
+
+Bug fixes:
+--------------
+  * Flightor
+    - Can now be used in Vashj'ir without underwater mounts. It used to throw exceptions when the toon didn't have any mounts. (HB-1968)
+
+  * Gatherbuddy
+    - Fixed a bug where it kept mounting and dismounting continuously during a guild vault run (HB-1033)
+
+    - Should no longer trigger anti stuck behavior while reaching nodes when Framelock is disabled (HB-1146)
+
+  * ProfessionBuddy
+    - CancelAuction is now faster (HB-1423)
+
+    - The professionbuddy log now makes it clear that it's loading tradekill recipes.  (HB-1460)
+
+    - Fixed a bug that caused BuyItemFromAhAction to either not bid or re-bid on items that toon is already highest bidder.  (HB-1513)
+
+    - MailItemAction will now properly handle splitting items before mailing them (HB-1761)
+
