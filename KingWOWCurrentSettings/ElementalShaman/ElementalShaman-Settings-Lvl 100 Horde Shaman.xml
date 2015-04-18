@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ElementalShamanSettings>
+  <ModKey>Alt</ModKey>
+  <PauseKey>X</PauseKey>
+  <Autocast_Spirit_Walk>True</Autocast_Spirit_Walk>
+  <Multidot_Flame_Shock_MIN>2</Multidot_Flame_Shock_MIN>
+  <Multidot_Flame_Shock_MAX>2</Multidot_Flame_Shock_MAX>
+  <MultidotEnabled>True</MultidotEnabled>
+  <MultidotAvoidCC>False</MultidotAvoidCC>
+  <AutoDismountOnCombat>True</AutoDismountOnCombat>
+  <UseDispell>False</UseDispell>
+  <UseResurrection>True</UseResurrection>
+  <ManaPercent>35</ManaPercent>
+  <AutoInterrupt>True</AutoInterrupt>
+  <HealthPercent>0</HealthPercent>
+  <AirTotemActive>CAPACITOR</AirTotemActive>
+  <Totemic_recall_OOC>True</Totemic_recall_OOC>
+  <AS_HP>50</AS_HP>
+  <FireElementalCD>COOLDOWN</FireElementalCD>
+  <EarthElementalCD>COOLDOWN</EarthElementalCD>
+  <ElementalMasteryCD>COOLDOWN</ElementalMasteryCD>
+  <AscendanceCD>COOLDOWN</AscendanceCD>
+  <ChainLightningCount>2</ChainLightningCount>
+  <AvoidAOE>False</AvoidAOE>
+  <ThunderstormNum>3</ThunderstormNum>
+  <Use_Thunderstorm>True</Use_Thunderstorm>
+  <UseEarthQuakeOnSingleTarget>True</UseEarthQuakeOnSingleTarget>
+  <EarthQuakeNum>5</EarthQuakeNum>
+  <QuakeOnlyOnImproved_chain_lightning>True</QuakeOnlyOnImproved_chain_lightning>
+  <AssistHealing>True</AssistHealing>
+  <FullMeOOC>True</FullMeOOC>
+  <AutofaceTarget>True</AutofaceTarget>
+  <TargetTypeSelected>AUTO</TargetTypeSelected>
+  <HealingTide_AncestralGuidanceHP>65</HealingTide_AncestralGuidanceHP>
+  <HealingTide_AncestralGuidanceNumber>4</HealingTide_AncestralGuidanceNumber>
+  <HealingRainHP>85</HealingRainHP>
+  <HealingRainNumber>5</HealingRainNumber>
+  <HealingStreamHP>80</HealingStreamHP>
+  <HealingStreamNumber>3</HealingStreamNumber>
+  <ShamanistcRageHP>80</ShamanistcRageHP>
+  <HealingSurgeHP>40</HealingSurgeHP>
+  <HealingSurgeOnlyOnMe>True</HealingSurgeOnlyOnMe>
+  <UseHex>False</UseHex>
+</ElementalShamanSettings>

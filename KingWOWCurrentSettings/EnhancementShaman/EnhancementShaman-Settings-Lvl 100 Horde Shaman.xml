@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EnhancementShamanSettings>
+  <ModKey>Alt</ModKey>
+  <PauseKey>X</PauseKey>
+  <AutoDismountOnCombat>True</AutoDismountOnCombat>
+  <UseDispell>False</UseDispell>
+  <UseResurrection>False</UseResurrection>
+  <ManaPercent>20</ManaPercent>
+  <AutoInterrupt>True</AutoInterrupt>
+  <HealthPercent>0</HealthPercent>
+  <Use_LB_or_CL_as_filler>True</Use_LB_or_CL_as_filler>
+  <maelstrom_filler_count>3</maelstrom_filler_count>
+  <AirTotemActive>MANUAL</AirTotemActive>
+  <Totemic_recall_OOC>True</Totemic_recall_OOC>
+  <EB_on_five>True</EB_on_five>
+  <AS_HP>50</AS_HP>
+  <FireElementalCD>COOLDOWN</FireElementalCD>
+  <EarthElementalCD>COOLDOWN</EarthElementalCD>
+  <FeralSpiritCD>COOLDOWN</FeralSpiritCD>
+  <ElementalMasteryCD>COOLDOWN</ElementalMasteryCD>
+  <AscendanceCD>COOLDOWN</AscendanceCD>
+  <ChainLightining_number>3</ChainLightining_number>
+  <MagmaTotem_number>2</MagmaTotem_number>
+  <FireNova_number>3</FireNova_number>
+  <AssistHealing>True</AssistHealing>
+  <FullMeOOC>True</FullMeOOC>
+  <AutofaceTarget>True</AutofaceTarget>
+  <TargetTypeSelected>AUTO</TargetTypeSelected>
+  <HealingTide_AncestralGuidanceHP>65</HealingTide_AncestralGuidanceHP>
+  <HealingTide_AncestralGuidanceNumber>4</HealingTide_AncestralGuidanceNumber>
+  <HealingRainHP>85</HealingRainHP>
+  <HealingRainNumber>5</HealingRainNumber>
+  <HealingStreamHP>80</HealingStreamHP>
+  <HealingStreamNumber>3</HealingStreamNumber>
+  <ShamanistcRageHP>80</ShamanistcRageHP>
+  <HealingSurgeHP>40</HealingSurgeHP>
+  <HealingSurgeOnlyOnMe>True</HealingSurgeOnlyOnMe>
+  <UseHex>False</UseHex>
+  <UseInstantHex>True</UseInstantHex>
+</EnhancementShamanSettings>

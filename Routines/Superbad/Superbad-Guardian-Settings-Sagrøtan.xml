@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GuardianSettings>
+  <UseFffBear>True</UseFffBear>
+  <UseThrashBear>True</UseThrashBear>
+  <UseTaunt>True</UseTaunt>
+  <UseSavageDefense>True</UseSavageDefense>
+  <UseFrenziedRegen>True</UseFrenziedRegen>
+  <GuardianIncaUse>True</GuardianIncaUse>
+  <GuardianIncaTTD>20</GuardianIncaTTD>
+  <GuardianIncaCOUNT>4</GuardianIncaCOUNT>
+  <GuardianIncaSaveBosses>True</GuardianIncaSaveBosses>
+  <GuardianBerserkUse>True</GuardianBerserkUse>
+  <GuardianBerserkTTD>20</GuardianBerserkTTD>
+  <GuardianBerserkCOUNT>4</GuardianBerserkCOUNT>
+  <GuardianBerserkSaveBosses>True</GuardianBerserkSaveBosses>
+  <BearAoe>3</BearAoe>
+  <PulverizeAOE>False</PulverizeAOE>
+  <Frenzied>80</Frenzied>
+  <Barkskin>70</Barkskin>
+  <BristlingFur>30</BristlingFur>
+  <UseTauntBosses>True</UseTauntBosses>
+  <BossImmerseus>1</BossImmerseus>
+  <BossAmalgam>3</BossAmalgam>
+  <BossSha>1</BossSha>
+  <BossGalakras>3</BossGalakras>
+  <BossIronJuggernaut>2</BossIronJuggernaut>
+  <BossEarthBreakerHaromm>5</BossEarthBreakerHaromm>
+  <BossNazgrim>3</BossNazgrim>
+  <BossMalkorok>12</BossMalkorok>
+  <BossThok>3</BossThok>
+  <BossBlackfuse>4</BossBlackfuse>
+  <BossGarrosh>3</BossGarrosh>
+</GuardianSettings>
