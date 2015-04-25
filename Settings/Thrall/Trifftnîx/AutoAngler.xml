@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AutoAnglerSettings>
+  <LastLoadedProfile></LastLoadedProfile>
+  <LootNPCs>False</LootNPCs>
+  <Hat>0</Hat>
+  <MainHand>0</MainHand>
+  <OffHand>0</OffHand>
+  <AbyssalGulperEelBait>True</AbyssalGulperEelBait>
+  <FireAmmoniteBait>True</FireAmmoniteBait>
+  <BlindLakeSturgeonBait>True</BlindLakeSturgeonBait>
+  <SeaScorpionBait>True</SeaScorpionBait>
+  <JawlessSkulkerBait>True</JawlessSkulkerBait>
+  <FatSleeperBait>True</FatSleeperBait>
+  <BlackwaterWhiptailBait>True</BlackwaterWhiptailBait>
+  <IcespineStingerBait>True</IcespineStingerBait>
+  <MoonshellClawBait>True</MoonshellClawBait>
+  <KaarpHuyarp>True</KaarpHuyarp>
+  <KaarpDelay>10</KaarpDelay>
+  <Poolfishing>True</Poolfishing>
+  <Fly>True</Fly>
+  <UseWaterWalking>True</UseWaterWalking>
+  <AvoidLava>False</AvoidLava>
+  <NinjaNodes>False</NinjaNodes>
+  <MaxTimeAtPool>5</MaxTimeAtPool>
+  <MaxFailedCasts>15</MaxFailedCasts>
+  <PathPrecision>15</PathPrecision>
+  <TraceStep>40</TraceStep>
+  <PoolRangeStep>0,5</PoolRangeStep>
+</AutoAnglerSettings>

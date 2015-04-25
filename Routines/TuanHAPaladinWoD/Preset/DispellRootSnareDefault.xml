@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<data_Table>
+  <data>
+    <SID>51485</SID>
+    <SpellName>Earthgrab Totem</SpellName>
+  </data>
+  <data>
+    <SID>339</SID>
+    <SpellName>Entangling Roots</SpellName>
+  </data>
+  <data>
+    <SID>113770</SID>
+    <SpellName>Entangling Roots (Force of Nature)</SpellName>
+  </data>
+  <data>
+    <SID>135373</SID>
+    <SpellName>Entrapment</SpellName>
+  </data>
+  <data>
+    <SID>33395</SID>
+    <SpellName>Freeze</SpellName>
+  </data>
+  <data>
+    <SID>63685</SID>
+    <SpellName>Freeze (Frozen Power)</SpellName>
+  </data>
+  <data>
+    <SID>102051</SID>
+    <SpellName>Frostjaw</SpellName>
+  </data>
+  <data>
+    <SID>122</SID>
+    <SpellName>FrostNova</SpellName>
+  </data>
+  <data>
+    <SID>87194</SID>
+    <SpellName>Glyph of Mind Blast</SpellName>
+  </data>
+  <data>
+    <SID>111340</SID>
+    <SpellName>Ice Ward</SpellName>
+  </data>
+  <data>
+    <SID>102359</SID>
+    <SpellName>Mass Entanglement</SpellName>
+  </data>
+  <data>
+    <SID>109298</SID>
+    <SpellName>Narrow Escape</SpellName>
+  </data>
+</data_Table>

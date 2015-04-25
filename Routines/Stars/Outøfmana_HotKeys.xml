@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MyHotkeys>
+  <AoEKey>None</AoEKey>
+  <BurstKey>None</BurstKey>
+  <CatHotkey>None</CatHotkey>
+  <CooldownKey>None</CooldownKey>
+  <CycloneFocus>None</CycloneFocus>
+  <CycloneTarget>None</CycloneTarget>
+  <MKeyBackward>S</MKeyBackward>
+  <MKeyForward>W</MKeyForward>
+  <MKeyLeft>A</MKeyLeft>
+  <MKeyRight>D</MKeyRight>
+  <MushroomOnmouse>None</MushroomOnmouse>
+  <OpenerKey>None</OpenerKey>
+  <Profile_1_Hotkey>None</Profile_1_Hotkey>
+  <Profile_1_Location></Profile_1_Location>
+  <Profile_2_Hotkey>None</Profile_2_Hotkey>
+  <Profile_2_Location></Profile_2_Location>
+  <Profile_3_Hotkey>None</Profile_3_Hotkey>
+  <Profile_3_Location></Profile_3_Location>
+  <Profile_4_Hotkey>None</Profile_4_Hotkey>
+  <Profile_4_Location></Profile_4_Location>
+  <Profile_5_Hotkey>None</Profile_5_Hotkey>
+  <Profile_5_Location></Profile_5_Location>
+  <RootFocus>None</RootFocus>
+  <RootTarget>None</RootTarget>
+  <SolarBeamFocus>None</SolarBeamFocus>
+  <SolarBeamTarget>None</SolarBeamTarget>
+  <TankHotKey>None</TankHotKey>
+  <TyphoonFocus>None</TyphoonFocus>
+  <TyphoonTarget>None</TyphoonTarget>
+  <VortexFocus>None</VortexFocus>
+  <VortexTarget>None</VortexTarget>
+</MyHotkeys>

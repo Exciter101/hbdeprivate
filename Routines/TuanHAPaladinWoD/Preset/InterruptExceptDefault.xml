@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<data_Table>
+  <data>
+    <SID>19434</SID>
+    <SpellName>Aimed Shot</SpellName>
+  </data>
+  <data>
+    <SID>120360</SID>
+    <SpellName>Barrage</SpellName>
+  </data>
+  <data>
+    <SID>10</SID>
+    <SpellName>Blizzard</SpellName>
+  </data>
+  <data>
+    <SID>77767</SID>
+    <SpellName>Cobra Shot</SpellName>
+  </data>
+  <data>
+    <SID>3408</SID>
+    <SpellName>Crippling Poison</SpellName>
+  </data>
+  <data>
+    <SID>2823</SID>
+    <SpellName>Deadly Poison</SpellName>
+  </data>
+  <data>
+    <SID>152245</SID>
+    <SpellName>Focusing Shot</SpellName>
+  </data>
+  <data>
+    <SID>51963</SID>
+    <SpellName>Gargoyle Strike (DK Pet)</SpellName>
+  </data>
+  <data>
+    <SID>8690</SID>
+    <SpellName>Hearthstone</SpellName>
+  </data>
+  <data>
+    <SID>108211</SID>
+    <SpellName>Leeching Poison</SpellName>
+  </data>
+  <data>
+    <SID>115294</SID>
+    <SpellName>Mana Tea</SpellName>
+  </data>
+  <data>
+    <SID>109259</SID>
+    <SpellName>Power Shot</SpellName>
+  </data>
+  <data>
+    <SID>56641</SID>
+    <SpellName>Steady Shot</SpellName>
+  </data>
+  <data>
+    <SID>31707</SID>
+    <SpellName>Waterbolt (Mage Pet)</SpellName>
+  </data>
+  <data>
+    <SID>8679</SID>
+    <SpellName>Wound Poison</SpellName>
+  </data>
+</data_Table>

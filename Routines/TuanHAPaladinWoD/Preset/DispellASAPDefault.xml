@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<data_Table>
+  <data>
+    <SID>30217</SID>
+    <Stack>1</Stack>
+    <SpellName>Adamantite Grenade</SpellName>
+  </data>
+  <data>
+    <SID>145206</SID>
+    <Stack>1</Stack>
+    <SpellName>Aqua Bomb</SpellName>
+  </data>
+  <data>
+    <SID>44572</SID>
+    <Stack>1</Stack>
+    <SpellName>Deep Freeze</SpellName>
+  </data>
+  <data>
+    <SID>31661</SID>
+    <Stack>1</Stack>
+    <SpellName>Dragon's Breath</SpellName>
+  </data>
+  <data>
+    <SID>5782</SID>
+    <Stack>1</Stack>
+    <SpellName>Fear</SpellName>
+  </data>
+  <data>
+    <SID>118699</SID>
+    <Stack>1</Stack>
+    <SpellName>Fear</SpellName>
+  </data>
+  <data>
+    <SID>130616</SID>
+    <Stack>1</Stack>
+    <SpellName>Fear (Glyph of Fear)</SpellName>
+  </data>
+  <data>
+    <SID>105593</SID>
+    <Stack>1</Stack>
+    <SpellName>Fist of Justice</SpellName>
+  </data>
+  <data>
+    <SID>3355</SID>
+    <Stack>1</Stack>
+    <SpellName>Freezing Trap</SpellName>
+  </data>
+  <data>
+    <SID>112948</SID>
+    <Stack>1</Stack>
+    <SpellName>Frost Bomb</SpellName>
+  </data>
+  <data>
+    <SID>32416</SID>
+    <Stack>1</Stack>
+    <SpellName>Hammer of Justice</SpellName>
+  </data>
+  <data>
+    <SID>51514</SID>
+    <Stack>1</Stack>
+    <SpellName>Hex</SpellName>
+  </data>
+  <data>
+    <SID>88625</SID>
+    <Stack>1</Stack>
+    <SpellName>Holy Word: Chastise</SpellName>
+  </data>
+  <data>
+    <SID>138562</SID>
+    <Stack>1</Stack>
+    <SpellName>Howl of Terror</SpellName>
+  </data>
+  <data>
+    <SID>115268</SID>
+    <Stack>1</Stack>
+    <SpellName>Mesmerize Shivarra</SpellName>
+  </data>
+  <data>
+    <SID>6789</SID>
+    <Stack>1</Stack>
+    <SpellName>Mortal Coil</SpellName>
+  </data>
+  <data>
+    <SID>118</SID>
+    <Stack>1</Stack>
+    <SpellName>Polymorph</SpellName>
+  </data>
+  <data>
+    <SID>61305</SID>
+    <Stack>1</Stack>
+    <SpellName>Polymorph (Black Cat)</SpellName>
+  </data>
+  <data>
+    <SID>28272</SID>
+    <Stack>1</Stack>
+    <SpellName>Polymorph (Pig)</SpellName>
+  </data>
+  <data>
+    <SID>61025</SID>
+    <Stack>1</Stack>
+    <SpellName>Polymorph (Serpent)</SpellName>
+  </data>
+  <data>
+    <SID>61780</SID>
+    <Stack>1</Stack>
+    <SpellName>Polymorph (Turkey)</SpellName>
+  </data>
+  <data>
+    <SID>28271</SID>
+    <Stack>1</Stack>
+    <SpellName>Polymorph (Turtle)</SpellName>
+  </data>
+  <data>
+    <SID>8122</SID>
+    <Stack>1</Stack>
+    <SpellName>Psychic Scream</SpellName>
+  </data>
+  <data>
+    <SID>108200</SID>
+    <Stack>3</Stack>
+    <SpellName>Remorseless Winter (Stack)</SpellName>
+  </data>
+  <data>
+    <SID>115001</SID>
+    <Stack>1</Stack>
+    <SpellName>Remorseless Winter (Stun)</SpellName>
+  </data>
+  <data>
+    <SID>20066</SID>
+    <Stack>1</Stack>
+    <SpellName>Repentance</SpellName>
+  </data>
+  <data>
+    <SID>6358</SID>
+    <Stack>1</Stack>
+    <SpellName>Seduction</SpellName>
+  </data>
+  <data>
+    <SID>126914</SID>
+    <Stack>1</Stack>
+    <SpellName>Shadowfury</SpellName>
+  </data>
+  <data>
+    <SID>118905</SID>
+    <Stack>1</Stack>
+    <SpellName>Static Charge</SpellName>
+  </data>
+  <data>
+    <SID>19386</SID>
+    <Stack>1</Stack>
+    <SpellName>Wyvern Sting</SpellName>
+  </data>
+</data_Table>

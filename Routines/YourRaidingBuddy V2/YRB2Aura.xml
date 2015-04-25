@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<YRB2>
+  <Version>4.5.08</Version>
+  <AuraList>
+    <Spell Id="145171" Name="MC spell Garrosh (final phase empowered)" />
+    <Spell Id="145065" Name="MC spell Garrosh (P2)" />
+    <Spell Id="145175" Name="MC Spell Garrosh (unknown)" />
+    <Spell Id="145071" Name="MC Spell Garrosh (unknown)" />
+  </AuraList>
+</YRB2>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<YbSettingsBMM>
+  <SummonBlackOxStatue>True</SummonBlackOxStatue>
+  <Serenity>OnBoss</Serenity>
+  <Xuen>OnBoss</Xuen>
+  <ChiWaveHP>60</ChiWaveHP>
+  <ResolveAmount>10</ResolveAmount>
+  <StaggerPercent>20</StaggerPercent>
+  <CheckInterruptsList>True</CheckInterruptsList>
+  <PurifyingModerateST>True</PurifyingModerateST>
+  <PurifyingHeavyST>True</PurifyingHeavyST>
+  <PurifyingLightST>True</PurifyingLightST>
+  <EnableGuardST>True</EnableGuardST>
+  <ChiBurstST>True</ChiBurstST>
+  <ChiWaveST>True</ChiWaveST>
+  <PurifyingModerateAoE>True</PurifyingModerateAoE>
+  <PurifyingHeavyAoE>True</PurifyingHeavyAoE>
+  <PurifyingLightAoE>True</PurifyingLightAoE>
+  <EnableGuardAoE>True</EnableGuardAoE>
+  <ChiBurstAoE>True</ChiBurstAoE>
+  <ChiWaveAoE>True</ChiWaveAoE>
+  <UseDizzyingHaze>False</UseDizzyingHaze>
+  <RJWCount>6</RJWCount>
+  <SCKCount>6</SCKCount>
+  <CheckBreathofFire>True</CheckBreathofFire>
+  <ZenSphere>FocusTargetAndMe</ZenSphere>
+  <DampenHarmPercent>80</DampenHarmPercent>
+  <FortifyingBrewPercent>40</FortifyingBrewPercent>
+  <ShuffleTimer>10</ShuffleTimer>
+  <ToDUsage>OnBoss</ToDUsage>
+  <UseFortBrewToD>True</UseFortBrewToD>
+  <ElusiveBrew>9</ElusiveBrew>
+  <BrewWithZenSphere>60</BrewWithZenSphere>
+  <ClassRacials>OnBoss</ClassRacials>
+  <TrinketAura>0</TrinketAura>
+  <UseTrinketOnCertainAura>False</UseTrinketOnCertainAura>
+  <Trinket1>OnBoss</Trinket1>
+  <Trinket2>OnBoss</Trinket2>
+  <AoECount>2</AoECount>
+  <EnableFacing>False</EnableFacing>
+  <CheckAoE>True</CheckAoE>
+  <CheckInterrupts>True</CheckInterrupts>
+</YbSettingsBMM>

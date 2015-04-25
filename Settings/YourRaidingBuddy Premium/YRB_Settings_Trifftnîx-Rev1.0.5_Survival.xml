@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<YbSettingsSV>
+  <MurderofCrows>Always</MurderofCrows>
+  <EnableFacing>False</EnableFacing>
+  <EnableTargeting>False</EnableTargeting>
+  <ExplosiveTrapSingleTarget>True</ExplosiveTrapSingleTarget>
+  <ExplosiveTrapAoE>True</ExplosiveTrapAoE>
+  <GlaiveTossAoE>False</GlaiveTossAoE>
+  <GlaiveTossST>True</GlaiveTossST>
+  <EnableDefensive>True</EnableDefensive>
+  <BarrageST>False</BarrageST>
+  <BarrageSTFirst>False</BarrageSTFirst>
+  <BarrageAoEToggle>True</BarrageAoEToggle>
+  <BarrageAoE>True</BarrageAoE>
+  <ToggleMode>False</ToggleMode>
+  <CheckInterruptsList>True</CheckInterruptsList>
+  <MultiDotArcaneShot>False</MultiDotArcaneShot>
+  <DireBeast>Never</DireBeast>
+  <Stampede>Never</Stampede>
+  <ClassRacials>Always</ClassRacials>
+  <UseBlackArrowFocusTarget>False</UseBlackArrowFocusTarget>
+  <EnablePetStuff>True</EnablePetStuff>
+  <MendPetHP>70</MendPetHP>
+  <AoECount>3</AoECount>
+  <DumpMultiShot>70</DumpMultiShot>
+  <TrinketAura>0</TrinketAura>
+  <UseTrinketOnCertainAura>False</UseTrinketOnCertainAura>
+  <Trinket1>OnBoss</Trinket1>
+  <Trinket2>OnBoss</Trinket2>
+  <CheckAoE>True</CheckAoE>
+  <CheckInterrupts>True</CheckInterrupts>
+</YbSettingsSV>

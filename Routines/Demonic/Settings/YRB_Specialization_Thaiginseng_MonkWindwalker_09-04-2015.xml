@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<YbSettingsWWM>
+  <EnergizingBrew>Always</EnergizingBrew>
+  <TigereyeBrew>Always</TigereyeBrew>
+  <Serenity>Always</Serenity>
+  <Chibrew>Always</Chibrew>
+  <ZenSphere>FocusTargetAndMe</ZenSphere>
+  <ChiBurstEnable>True</ChiBurstEnable>
+  <EnableChiTorpedo>False</EnableChiTorpedo>
+  <ChiWaveEnable>True</ChiWaveEnable>
+  <TigereyeBrewStackCount>10</TigereyeBrewStackCount>
+  <ExpelHarmChi>False</ExpelHarmChi>
+  <ExpelHarmChiAmount>10</ExpelHarmChiAmount>
+  <TrinketTEBUsage>False</TrinketTEBUsage>
+  <FoFTebUsage>False</FoFTebUsage>
+  <Xuen>OnBoss</Xuen>
+  <OpenerUsage>OnBoss</OpenerUsage>
+  <MaxChiSwitch>EmpoweredChi</MaxChiSwitch>
+  <ToDUsage>Always</ToDUsage>
+  <UseFortBrewToD>True</UseFortBrewToD>
+  <EnableExpelHarmST>False</EnableExpelHarmST>
+  <JabDamage>10000</JabDamage>
+  <TigereyeBrewStackFoF>8</TigereyeBrewStackFoF>
+  <EnableRJWSingleTarget>False</EnableRJWSingleTarget>
+  <ClassRacials>Always</ClassRacials>
+  <ExpelHarmHP>85</ExpelHarmHP>
+  <FortifyingBrewHP>75</FortifyingBrewHP>
+  <TouchofKarmaHP>35</TouchofKarmaHP>
+  <AoECount>2</AoECount>
+  <SpinningCraneCount>3</SpinningCraneCount>
+  <EnableFacing>False</EnableFacing>
+  <EnableDefensive>True</EnableDefensive>
+  <CheckInterruptsList>True</CheckInterruptsList>
+  <DetoxEnable>True</DetoxEnable>
+  <SurgingMistHP>60</SurgingMistHP>
+  <ZenMeditationHP>20</ZenMeditationHP>
+  <Trinket1>OnBoss</Trinket1>
+  <Trinket2>OnBoss</Trinket2>
+  <TrinketAura>0</TrinketAura>
+  <UseTrinketOnCertainAura>False</UseTrinketOnCertainAura>
+  <CheckInterrupts>True</CheckInterrupts>
+  <StormEarthandFireAutoCancel>True</StormEarthandFireAutoCancel>
+  <StormEarthandFireST>True</StormEarthandFireST>
+  <StormEarthandFireAoE>False</StormEarthandFireAoE>
+  <MinimumHPSEF>20000</MinimumHPSEF>
+</YbSettingsWWM>

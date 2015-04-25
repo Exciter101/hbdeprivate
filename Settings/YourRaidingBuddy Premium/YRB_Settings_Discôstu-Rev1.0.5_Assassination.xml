@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<YbSettingsAR>
+  <MarkedForDeath>Always</MarkedForDeath>
+  <Preparation>Always</Preparation>
+  <ShadowReflection>Always</ShadowReflection>
+  <Vanish>Never</Vanish>
+  <Vendetta>Always</Vendetta>
+  <Tier6Abilities>OnBoss</Tier6Abilities>
+  <AoECount>2</AoECount>
+  <EnableFacing>False</EnableFacing>
+  <HotkeyContinueMode>False</HotkeyContinueMode>
+  <ClassRacials>Always</ClassRacials>
+  <CheckExposeArmor>True</CheckExposeArmor>
+  <EnableDefensive>True</EnableDefensive>
+  <CheckInterruptsList>True</CheckInterruptsList>
+  <EvasionHP>70</EvasionHP>
+  <CloakofShadowHP>70</CloakofShadowHP>
+  <CombatReadinessHP>65</CombatReadinessHP>
+  <FeintHP>75</FeintHP>
+  <EnableFeintUsage>True</EnableFeintUsage>
+  <NumShadowstep>50</NumShadowstep>
+  <NumRecuperate>65</NumRecuperate>
+  <CheckRecuperate>True</CheckRecuperate>
+  <NumRecuperateCombo>3</NumRecuperateCombo>
+  <TrinketAura>0</TrinketAura>
+  <UseTrinketOnCertainAura>False</UseTrinketOnCertainAura>
+  <Trinket1>OnBoss</Trinket1>
+  <Trinket2>OnBoss</Trinket2>
+  <PoisonSelectorM>Deadly</PoisonSelectorM>
+  <PoisonSelectorO>Crippling</PoisonSelectorO>
+  <CheckPoison>True</CheckPoison>
+  <CheckAoE>True</CheckAoE>
+  <CheckInterrupts>True</CheckInterrupts>
+</YbSettingsAR>

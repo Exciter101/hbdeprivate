@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BotSettings>
+  <UseOverlayOutput>True</UseOverlayOutput>
+  <ClickToMove>True</ClickToMove>
+  <UseContinuesHealingMode>False</UseContinuesHealingMode>
+  <UseForcedCombatMode>False</UseForcedCombatMode>
+  <UsePluginPulsing>False</UsePluginPulsing>
+  <UseSoftLock>False</UseSoftLock>
+  <UseEnyoNavigator>False</UseEnyoNavigator>
+  <PauseKeyChoice>X</PauseKeyChoice>
+  <ModKeyChoice>Alt</ModKeyChoice>
+  <LastStatCounted></LastStatCounted>
+  <OverlayOutputTime>4</OverlayOutputTime>
+</BotSettings>
