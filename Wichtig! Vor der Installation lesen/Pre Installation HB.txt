@@ -1,2 +1,0 @@
-Für die Versionen, ab 757 DE, muss die Microsoft Visual C++ 2013 Redistributable Package (x86)
-installiert werden. Diese Datei, befindet sich in diesem Ordner!

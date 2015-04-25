@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<BlacklistDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <BlacklistedItems>
-    <BlacklistEntry Entry="86542" Name="Fliegender Tigergurami" />
-    <BlacklistEntry Entry="112377" Name="Kriegsbemalung" />
-    <BlacklistEntry Entry="111245" Name="Glitzernder Splitter" />
-    <BlacklistEntry Entry="104038" Name="Verfluchter Matrosenhelm" />
-  </BlacklistedItems>
-</BlacklistDatabase>
