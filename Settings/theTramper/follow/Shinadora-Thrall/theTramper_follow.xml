@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<settings>
-  <enable>False</enable>
-  <follow_mode>player_target</follow_mode>
-  <follow_player>player</follow_player>
-  <max_distance>10</max_distance>
-  <follow_out_of_combat_only>False</follow_out_of_combat_only>
-  <keep_maxed_distance>True</keep_maxed_distance>
-</settings>
